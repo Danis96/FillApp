@@ -51,7 +51,6 @@ class _DashboardPageState extends State<DashboardPage> {
   DocumentSnapshot snap, doc;
   int counter = 0, userSar = 0, sar, target, userLevel;
   String question, type, username, id, usernameSecond;
-  int isAnonymous;
   List<dynamic> choices;
   List<dynamic> snapi = [];
   List<dynamic> usernameThatAnswers;
@@ -105,7 +104,6 @@ class _DashboardPageState extends State<DashboardPage> {
                         userLevel = snap.data['level'];
                         username = snap.data['username'];
                         usernameSecond = snap.data['username_second'];
-                        isAnonymous = snap.data['is_anonymous'];
                         return EmptyContainer();
                       });
                 }

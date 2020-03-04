@@ -84,23 +84,15 @@ class _PasswordPageState extends State<PasswordPage> {
                     future: FirebaseCheck()
                         .getUserUsername(widget.arguments.usernameSecond),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      print('Prije provjere hasData: ' +
-                          widget.arguments.usernameSecond);
                       if (snapshot.hasData) {
-                        print('TRUE hasData: ' + widget.arguments.username);
-                        print('Length: ' + snapshot.data.length.toString());
                         return ListView.builder(
                             shrinkWrap: true,
                             physics: ClampingScrollPhysics(),
                             itemCount: snapshot.data.length,
                             itemBuilder: (context, index) {
-                              print(
-                                  'FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRr');
                               snap = snapshot.data[index];
                               isAnonymous = snap.data['is_anonymous'];
                               oldSar = snap.data['sar'];
-                              print(isAnonymous);
-                              print(snapshot.data[index].data['is_anonymous']);
                               return EmptyContainer();
                             });
                       }
@@ -257,14 +249,10 @@ class _PasswordPageState extends State<PasswordPage> {
       if (_btnCounter == 0) {
         loginUser(widget.arguments.username, isLoggedIn);
         if (isAnonymous != null) {
-          print('Da li je anonimni user: ' + isAnonymous.toString());
-          print('Username je: ' + widget.arguments.username);
           oldSar = oldSar + 5;
           FirebaseCrud().updateUser(snap, widget.arguments.email,
             widget.arguments.phone, widget.arguments.username, widget.arguments.usernameSecond, password, oldSar, 0);
         } else {
-          print('Nije anonimniii!!!');
-          print('Username je: ' + widget.arguments.username);
           FirebaseCrud().createUser(widget.arguments.email,
             widget.arguments.phone, widget.arguments.username, password, 5, 0);
         }
