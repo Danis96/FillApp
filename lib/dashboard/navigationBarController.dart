@@ -130,7 +130,7 @@ class _BottomNavigationBarControllerState
                 child: new Text(MyText().willNo),
               ),
               new FlatButton(
-                onPressed: () => Navigator.of(context).pushNamed(Register, arguments: RegisterArguments(username: widget.arguments.username)),
+                onPressed: () => Navigator.of(context).pushNamed(Register, arguments: AnonymRegisterArguments(username: widget.arguments.username)),
                 child: new Text(MyText().willYes),
               ),
             ],
