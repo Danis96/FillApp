@@ -122,16 +122,16 @@ class _BottomNavigationBarControllerState
       return showDialog(
           context: context,
           builder: (context) => new AlertDialog(
-            title: new Text(MyText().willQuestion),
-            content: new Text(MyText().willQuestion1),
+            title: new Text(MyText().registerQuestion),
+            content: new Text(MyText().registerQuestion1),
             actions: <Widget>[
               new FlatButton(
                 onPressed: () => Navigator.pop(context),
-                child: new Text(MyText().willNo),
+                child: new Text(MyText().registerNo),
               ),
               new FlatButton(
                 onPressed: () => Navigator.of(context).pushNamed(Register, arguments: RegisterArguments(username: widget.arguments.username)),
-                child: new Text(MyText().willYes),
+                child: new Text(MyText().registerYes),
               ),
             ],
           ),
