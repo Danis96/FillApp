@@ -36,10 +36,4 @@ class DidntRecievePinArguments {
   DidntRecievePinArguments({this.phone, this.username});
 }
 
-class AnonymRegisterArguments {
-   final String username;
-   final int isAnonymous;
-
-   AnonymRegisterArguments({this.username, this.isAnonymous});
-}
 
