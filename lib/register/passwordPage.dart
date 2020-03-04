@@ -14,6 +14,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/MyText.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/mySnackbar.dart';
@@ -27,11 +28,15 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../components/emptyCont.dart';
+import '../firebaseMethods/firebaseCheck.dart';
 // import 'package:url_launcher/url_launcher.dart';
 
 String password, username = "";
-int _btnCounter = 0;
+int _btnCounter = 0, isAnonymous, oldSar;
 bool isLoggedIn = false;
+DocumentSnapshot snap;
 
 class PasswordPage extends StatefulWidget {
   final RegisterArguments arguments;
@@ -75,8 +80,37 @@ class _PasswordPageState extends State<PasswordPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  FutureBuilder(
+                    future: FirebaseCheck()
+                        .getUserUsername(widget.arguments.usernameSecond),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      print('Prije provjere hasData: ' +
+                          widget.arguments.usernameSecond);
+                      if (snapshot.hasData) {
+                        print('TRUE hasData: ' + widget.arguments.username);
+                        print('Length: ' + snapshot.data.length.toString());
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              print(
+                                  'FRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRr');
+                              snap = snapshot.data[index];
+                              isAnonymous = snap.data['is_anonymous'];
+                              oldSar = snap.data['sar'];
+                              print(isAnonymous);
+                              print(snapshot.data[index].data['is_anonymous']);
+                              return EmptyContainer();
+                            });
+                      }
+                      return EmptyContainer();
+                    },
+                  ),
                   Padding(
-                    padding: EdgeInsets.only(top: ScreenUtil.instance.setWidth(28.0), bottom: ScreenUtil.instance.setWidth(35.0)),
+                    padding: EdgeInsets.only(
+                        top: ScreenUtil.instance.setWidth(28.0),
+                        bottom: ScreenUtil.instance.setWidth(35.0)),
                     child: MyTextComponent(text: MyText().passwordHeadline),
                   ),
                   Text(MyText().fiveSar,
@@ -88,7 +122,9 @@ class _PasswordPageState extends State<PasswordPage> {
                   Container(
                       width: ScreenUtil.instance.setWidth(316.0),
                       height: ScreenUtil.instance.setHeight(92.0),
-                      margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(19.0), top: ScreenUtil.instance.setWidth(28.0)),
+                      margin: EdgeInsets.only(
+                          bottom: ScreenUtil.instance.setWidth(19.0),
+                          top: ScreenUtil.instance.setWidth(28.0)),
                       child: Form(
                         key: _formKey,
                         child: TextFormField(
@@ -97,7 +133,8 @@ class _PasswordPageState extends State<PasswordPage> {
                           decoration: InputDecoration(
                             hasFloatingPlaceholder: false,
                             contentPadding: new EdgeInsets.symmetric(
-                                vertical: ScreenUtil.instance.setWidth(25.0), horizontal: ScreenUtil.instance.setWidth(35.0)),
+                                vertical: ScreenUtil.instance.setWidth(25.0),
+                                horizontal: ScreenUtil.instance.setWidth(35.0)),
                             labelText: MyText().labelPassword,
                             labelStyle: TextStyle(color: MyColor().white),
                             enabledBorder: OutlineInputBorder(
@@ -132,7 +169,10 @@ class _PasswordPageState extends State<PasswordPage> {
                         ),
                       )),
                   Container(
-                    margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(21.0), left: ScreenUtil.instance.setWidth(43.0), right: ScreenUtil.instance.setWidth(43.0)),
+                    margin: EdgeInsets.only(
+                        bottom: ScreenUtil.instance.setWidth(21.0),
+                        left: ScreenUtil.instance.setWidth(43.0),
+                        right: ScreenUtil.instance.setWidth(43.0)),
                     width: ScreenUtil.instance.setWidth(316.0),
                     child: RichText(
                       text: new TextSpan(children: [
@@ -188,8 +228,8 @@ class _PasswordPageState extends State<PasswordPage> {
                                   await InternetAddress.lookup('google.com');
                               if (result.isNotEmpty &&
                                   result[0].rawAddress.isNotEmpty) {
-                                onPressed(context);
-                                _save();
+                                  onPressed(context);
+                                  _save();
                               }
                             } on SocketException catch (_) {
                               MySnackbar().showSnackbar(
@@ -216,8 +256,18 @@ class _PasswordPageState extends State<PasswordPage> {
     if (_formState.validate()) {
       if (_btnCounter == 0) {
         loginUser(widget.arguments.username, isLoggedIn);
-        FirebaseCrud().createUser(widget.arguments.email,
+        if (isAnonymous != null) {
+          print('Da li je anonimni user: ' + isAnonymous.toString());
+          print('Username je: ' + widget.arguments.username);
+          oldSar = oldSar + 5;
+          FirebaseCrud().updateUser(snap, widget.arguments.email,
+            widget.arguments.phone, widget.arguments.username, widget.arguments.usernameSecond, password, oldSar, 0);
+        } else {
+          print('Nije anonimniii!!!');
+          print('Username je: ' + widget.arguments.username);
+          FirebaseCrud().createUser(widget.arguments.email,
             widget.arguments.phone, widget.arguments.username, password, 5, 0);
+        }
         Navigator.of(context).pushNamed(NavBar,
             arguments: PasswordArguments(
                 email: widget.arguments.email,

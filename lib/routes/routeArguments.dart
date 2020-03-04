@@ -11,8 +11,9 @@ class RegisterArguments {
   final String phone;
   final String username;
   final String verId;
+  final String usernameSecond;
 
-  RegisterArguments({this.email, this.phone, this.username, this.verId});
+  RegisterArguments({this.email, this.phone, this.username, this.verId, this.usernameSecond});
 }
 
 class PasswordArguments {

@@ -42,12 +42,12 @@ class FirebaseCrud {
   /// we only need to update specific fields, 
   /// we don't need to update user_id, 
   /// (ako vidis jos koju stvar da je viska izbaci)
-  updateUser(DocumentSnapshot doc, String email, String phone, String username,
+  updateUser(DocumentSnapshot doc, String email, String phone, String username, String usernameSecond,
       String password, int sar, int isAnonymous) async {
     await db.collection('Users').document(doc.documentID).updateData({
       'email': email,
       'username': username,
-      'username_second': username,
+      'username_second': usernameSecond,
       'password': password,
       'phone': phone,
       'is_anonymous': isAnonymous,
