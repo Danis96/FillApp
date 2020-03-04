@@ -97,7 +97,6 @@ class _BottomNavigationBarControllerState
     } else if (currentIndex == 2) {
       isTab1Selected = false;
       isTab2Selected = false;
-      print(isAnonymous);
       if(isAnonymous == 1) {
         askUserToRegister();
       }
