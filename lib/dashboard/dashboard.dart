@@ -83,7 +83,7 @@ class _DashboardPageState extends State<DashboardPage> {
       child: Center(
         child: ListView(
           children: <Widget>[
-            /// [getUserUsername] 
+            /// [getUserUsername]
             ///
             /// future function that executes first and get all User's info
             FutureBuilder(
@@ -142,12 +142,12 @@ class _DashboardPageState extends State<DashboardPage> {
                           ///
                           /// nakon sto se jednom napuni nepuni se vise
                           /// visible se seta na true
-                          // if (!visible) {
+                          if (!visible) {
                             snapi = snapshot.data
                                 .map((doc) => Question.fromDocument(doc))
                                 .toList();
-                          //   visible = true;
-                          // }
+                            visible = !visible;
+                          }
 
                           return ListView.builder(
                             controller: _controller,
@@ -170,7 +170,10 @@ class _DashboardPageState extends State<DashboardPage> {
                               /// after them show flash cards with questions
                               if (snapi[index].title != '') {
                                 if (usernameThatAnswers.contains(username) ==
-                                        false && usernameThatAnswers.contains(usernameSecond) == false &&
+                                        false &&
+                                    usernameThatAnswers
+                                            .contains(usernameSecond) ==
+                                        false &&
                                     target > usernameThatAnswers.length) {
                                   return type == 'checkbox'
                                       ? MyCardMCQ(
@@ -274,7 +277,9 @@ class _DashboardPageState extends State<DashboardPage> {
     _controller.addListener(() {
       if (_controller.position.haveDimensions && _physics == null) {
         setState(() {
-          _physics = CustomScrollPhysics(itemDimension: ScreenUtil.instance.setWidth(dimension),);
+          _physics = CustomScrollPhysics(
+            itemDimension: ScreenUtil.instance.setWidth(dimension),
+          );
           print(dimension);
         });
       }
