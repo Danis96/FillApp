@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "798318671912",
+    "firebase_url": "https://fill-c371b.firebaseio.com",
+    "project_id": "fill-c371b",
+    "storage_bucket": "fill-c371b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:798318671912:android:9e0a0edcac438c08ab5d1d",
+        "android_client_info": {
+          "package_name": "com.fill.fillproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "798318671912-quo6d26eo7rh5b6lh1bmtdgd1tcu499f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB66AwFX3ByDlJTXtp8qcb57Thh8oI_QdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "798318671912-quo6d26eo7rh5b6lh1bmtdgd1tcu499f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
