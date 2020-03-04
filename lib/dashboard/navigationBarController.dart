@@ -13,6 +13,7 @@
 /// Feb, 2020
 
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/imageConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/dashboard/dashboard.dart';
@@ -22,11 +23,15 @@ import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 
 import '../components/constants/myText.dart';
+import '../components/emptyCont.dart';
+import '../firebaseMethods/firebaseCheck.dart';
 import '../routes/routeConstants.dart';
 
 bool isTab1Selected = true;
 bool isTab2Selected = false;
 bool isLoading = true;
+DocumentSnapshot snap;
+int isAnonymous;
 
 class BottomNavigationBarController extends StatefulWidget {
   final PasswordArguments arguments;
@@ -92,7 +97,10 @@ class _BottomNavigationBarControllerState
     } else if (currentIndex == 2) {
       isTab1Selected = false;
       isTab2Selected = false;
-      askUserToRegister();
+      print(isAnonymous);
+      if(isAnonymous == 1) {
+        askUserToRegister();
+      }
     }
   }
 
@@ -109,7 +117,29 @@ class _BottomNavigationBarControllerState
           onTap: onTap),
       body: isLoading
           ? Center(
-              child: isLoadingCircular(),
+              child: Column(
+                children: <Widget>[
+                  isLoadingCircular(),
+                  FutureBuilder(
+                    future: FirebaseCheck()
+                        .getUserUsername(widget.arguments.username),
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (snapshot.hasData) {
+                        return ListView.builder(
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              snap = snapshot.data[index];
+                              isAnonymous = snap.data['is_anonymous'];
+                              return EmptyContainer();
+                            });
+                      }
+                      return EmptyContainer();
+                    },
+                  ),
+                ],
+              ),
             )
           : IndexedStack(
               index: currentIndex,

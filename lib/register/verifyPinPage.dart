@@ -49,7 +49,6 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
-    double pixelRatio = MediaQuery.of(context).devicePixelRatio;
     signIn(String smsCode) {
       final AuthCredential credential = PhoneAuthProvider.getCredential(
           verificationId: widget.arguments.verId, smsCode: smsCode);
@@ -57,6 +56,7 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
         Navigator.of(context).pushNamed(Email,
             arguments: RegisterArguments(
                 username: widget.arguments.username,
+                usernameSecond: widget.arguments.usernameSecond,
                 phone: widget.arguments.phone));
       }).catchError((e) {
         print('Auth Credential Error : $e');

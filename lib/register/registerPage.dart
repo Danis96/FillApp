@@ -50,15 +50,18 @@ class _RegisterPageState extends State<RegisterPage> {
   _RegisterPageState({this.arguments,});
 
   populateReg() async {
-    usernameController.text = widget.arguments.username;
-    phoneController.text = widget.arguments.phone;
+    if(widget.arguments.username != null) {
+      usernameController.text = widget.arguments.username;
+    }
+    if(widget.arguments.phone != null) {
+      phoneController.text = widget.arguments.phone;
+    }
   }
 
   @override
   void initState() {
     super.initState();
     populateReg();
-    print('Username koji je došao sa PROFILA: ' + arguments.username);
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -91,6 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
             arguments: RegisterArguments(
                 verId: verificationId,
                 username: usernameController.text,
+                usernameSecond: widget.arguments.username,
                 phone: phoneController.text));
       };
 

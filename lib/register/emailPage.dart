@@ -49,7 +49,6 @@ class _EmailPageState extends State<EmailPage> {
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
-    double pixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
       appBar: new AppBar(
         title: new Text(""),
@@ -200,6 +199,7 @@ class _EmailPageState extends State<EmailPage> {
               email: email,
               phone: widget.arguments.phone,
               username: widget.arguments.username,
+              usernameSecond: widget.arguments.usernameSecond,
             ));
         _btnCounter = 1;
         Timer(Duration(seconds: 2), () {
