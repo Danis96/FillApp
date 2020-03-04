@@ -50,7 +50,6 @@ class _PasswordPageState extends State<PasswordPage> {
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
-    double pixelRatio = MediaQuery.of(context).devicePixelRatio;
     return Scaffold(
       appBar: new AppBar(
         title: new Text(""),
@@ -218,7 +217,7 @@ class _PasswordPageState extends State<PasswordPage> {
       if (_btnCounter == 0) {
         loginUser(widget.arguments.username, isLoggedIn);
         FirebaseCrud().createUser(widget.arguments.email,
-            widget.arguments.phone, widget.arguments.username, password, 5);
+            widget.arguments.phone, widget.arguments.username, password, 5, 0);
         Navigator.of(context).pushNamed(NavBar,
             arguments: PasswordArguments(
                 email: widget.arguments.email,

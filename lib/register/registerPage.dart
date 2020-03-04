@@ -25,25 +25,28 @@ import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
-import 'package:fillproject/utils/screenUtils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../routes/routeArguments.dart';
+
 class RegisterPage extends StatefulWidget {
   final DidntRecievePinArguments arguments;
-  RegisterPage({this.arguments});
+  final RegisterArguments argumentsReg;
+  RegisterPage({this.arguments, this.argumentsReg});
 
   @override
-  _RegisterPageState createState() => _RegisterPageState(arguments: arguments);
+  _RegisterPageState createState() => _RegisterPageState(arguments: arguments, argumentsReg: argumentsReg);
 }
 
 class _RegisterPageState extends State<RegisterPage> {
   String phoneNo, smsCode, verificationId, username, name;
 
   final DidntRecievePinArguments arguments;
-  _RegisterPageState({this.arguments});
+  final RegisterArguments argumentsReg;
+  _RegisterPageState({this.arguments, this.argumentsReg});
 
   populateReg() async {
     usernameController.text = widget.arguments.username;
@@ -54,6 +57,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
     populateReg();
+    print('Username koji je došao sa PROFILA: ' + argumentsReg.username);
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

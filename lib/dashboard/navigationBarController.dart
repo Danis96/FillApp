@@ -21,6 +21,9 @@ import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 
+import '../components/constants/myText.dart';
+import '../routes/routeConstants.dart';
+
 bool isTab1Selected = true;
 bool isTab2Selected = false;
 bool isLoading = true;
@@ -41,14 +44,20 @@ class _BottomNavigationBarControllerState
 
   List<Widget> pages() => [
         DashboardPage(
-            arguments: PasswordArguments(
+          arguments: PasswordArguments(
           email: arguments.email,
           password: arguments.password,
           phone: arguments.phone,
           username: arguments.username,
         )),
         Survey(),
-        Profile(),
+        Profile(
+          arguments: PasswordArguments(
+          email: arguments.email,
+          password: arguments.password,
+          phone: arguments.phone,
+          username: arguments.username,
+        )),
       ];
 
   final items = [
@@ -83,6 +92,7 @@ class _BottomNavigationBarControllerState
     } else if (currentIndex == 2) {
       isTab1Selected = false;
       isTab2Selected = false;
+      askUserToRegister();
     }
   }
 
@@ -107,6 +117,26 @@ class _BottomNavigationBarControllerState
             ),
     );
   }
+
+  askUserToRegister() {
+      return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: new Text(MyText().willQuestion),
+            content: new Text(MyText().willQuestion1),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.pop(context),
+                child: new Text(MyText().willNo),
+              ),
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pushNamed(Register, arguments: RegisterArguments(username: widget.arguments.username)),
+                child: new Text(MyText().willYes),
+              ),
+            ],
+          ),
+        );
+    }
 
   /// function for loader
   ///
