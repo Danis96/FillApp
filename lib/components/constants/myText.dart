@@ -70,6 +70,12 @@ class MyText {
   final String willYes = 'Yes';
   final String willNo = 'No';
 
+//Register dialog box
+  final String registerQuestion = 'Do you want to earn money?';
+  final String registerQuestion1 = 'Do you want to register yourself?';
+  final String registerYes = 'Yes';
+  final String registerNo = 'No';
+
 // reset email email
   final String subject = 'Reset Password';
   final String msgSent = 'Message sent: ';
