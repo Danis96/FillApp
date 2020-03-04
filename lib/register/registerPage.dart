@@ -34,19 +34,21 @@ import '../routes/routeArguments.dart';
 
 class RegisterPage extends StatefulWidget {
   final DidntRecievePinArguments arguments;
-  final RegisterArguments argumentsReg;
-  RegisterPage({this.arguments, this.argumentsReg});
+  final AnonymRegisterArguments argument;
+
+  RegisterPage({this.arguments, this.argument });
 
   @override
-  _RegisterPageState createState() => _RegisterPageState(arguments: arguments, argumentsReg: argumentsReg);
+  _RegisterPageState createState() => _RegisterPageState(arguments: arguments, argument: argument);
 }
 
 class _RegisterPageState extends State<RegisterPage> {
   String phoneNo, smsCode, verificationId, username, name;
 
   final DidntRecievePinArguments arguments;
-  final RegisterArguments argumentsReg;
-  _RegisterPageState({this.arguments, this.argumentsReg});
+  final AnonymRegisterArguments argument;
+
+  _RegisterPageState({this.arguments, this.argument});
 
   populateReg() async {
     usernameController.text = widget.arguments.username;
@@ -57,7 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
     populateReg();
-    print('Username koji je došao sa PROFILA: ' + argumentsReg.username);
+    print('Username koji je došao sa PROFILA: ' + argument.username);
   }
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();

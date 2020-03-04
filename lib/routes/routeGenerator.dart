@@ -31,7 +31,7 @@ class RouteGenerator {
       case Home:
         return MaterialPageRoute(builder: (_) => SignUp());
       case Register:
-        return MaterialPageRoute(builder: (_) => RegisterPage(arguments: args));
+        return MaterialPageRoute(builder: (_) => RegisterPage(arguments: args, argument: args,));
       case VerifyPin:
         return MaterialPageRoute(
             builder: (_) => VerifyPinPage(arguments: args));
