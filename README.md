@@ -52,4 +52,4 @@ Very proud on team 2.
 	User story 3 - fixing bugs from previous sprint's US 3<br/>
 	Bugs that had to be fixed were: Updating cash balance, Auto-login, and Back button.<br/>*
 	User story 4 - fixing bugs from previous sprint's US 4<br/>
-	Bugs that had to be fixed were: No internet, Auto-login, and Back button.<br/>*
+	Bugs that had to be fixed were: No internet, Auto-login, and Back button.<br/>
