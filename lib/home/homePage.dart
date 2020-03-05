@@ -20,6 +20,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/mySnackbar.dart';
+import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/firebaseMethods/firebaseSignIn.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -84,7 +85,7 @@ class _SignUpState extends State<SignUp> {
                           borderRadius: new BorderRadius.circular(33.5),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamed(Register);
+                          Navigator.of(context).pushNamed(Register, arguments: DidntRecievePinArguments(phone: '', username: ''));
                         },
                         child: Text(MyText().btnSU)),
                   ),
@@ -108,16 +109,19 @@ class _SignUpState extends State<SignUp> {
                           child: FlatButton(
                               onPressed: () async {
                                 //  FirebaseJson().importJson();
+                                  username = randomAlphaNumeric(5);
+                                 FirebaseCrud().createUser('', '', username, '', 0, 1);
                                 try {
                                   final result = await InternetAddress.lookup(
                                       'google.com');
                                   if (result.isNotEmpty &&
                                       result[0].rawAddress.isNotEmpty) {
-                                    username = randomAlphaNumeric(5);
+                                  
                                     loginUser();
                                     FirebaseSignIn()
                                         .signInAnonymously(username);
-                                    Timer(Duration(milliseconds: 500), () {
+                                   
+                                    Timer(Duration(milliseconds: 800), () {
                                       Navigator.of(context).pushNamed(NavBar,
                                           arguments: PasswordArguments(
                                               email: '',

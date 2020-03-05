@@ -35,6 +35,8 @@ class FirebaseCrud {
       'level': 1,
       'sar': sar,
     });
+
+    print('KREIRANO');
   }
   
   /// update function for user that is anonymous and wants to become registered user

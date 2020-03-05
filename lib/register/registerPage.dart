@@ -50,12 +50,8 @@ class _RegisterPageState extends State<RegisterPage> {
   _RegisterPageState({this.arguments,});
 
   populateReg() async {
-    if(widget.arguments.username != null) {
       usernameController.text = widget.arguments.username;
-    }
-    if(widget.arguments.phone != null) {
       phoneController.text = widget.arguments.phone;
-    }
   }
 
   @override
@@ -84,6 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
 
     Future<void> verifyPhone() async {
+
       final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
         this.verificationId = verId;
       };
