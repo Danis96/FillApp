@@ -34,7 +34,7 @@ Update(17.2)
 The team successfully coded user story 3. During this period we had some changes from the investor design-wise. We have successfully adjusted designs and we are moving on to the next sprint planning. We added our own reset password screen and figured out all that process with our own solutions. 
 Very proud on team 2.
 
-**•	V2 – Sprint 2<br/>**
+**•	V2 – Sprint 2<br/>** *
   	User story 1 - fixing bugs from previous sprint<br/>
 	The bugs were on the SIGN UP screen and they are: Error text, Text repeat and verify PIN.<br/>*
   	User story 2 - As a USER I want to HAVE FLASH QUESTIONS so that I CAN EASILY EARN SOME MONEY FROM TAB 1 IN FILL APP<br/>
