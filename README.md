@@ -16,7 +16,7 @@ Get the project files, open the project from the IDE. After the device/emulator 
 After some time, the application will be built on the device/emulator connected and it will be usasble on the device.
 
 # Changes
-**•	V1 – Sprint 1<br/>**
+**•	V1 – Sprint 1<br/>** *
   	User story 1 - planning project, we have planned 
    planning of project architecture and structure.
    Arranging naming convention, code refactoring, class names, and class architectures.<br/>*
@@ -43,3 +43,13 @@ Very proud on team 2.
 	Firstly, when user registers to the app and login for the first time, 5 SAR gets added to his/her cash balance, so every registered user begins with 5 SAR. Every time users answers a question, the question's SAR value is added to users cash balance and it is displayed all the time on Tab 1.<br/>*
 	User story 4 - As a ANONYM USER I want to SKIP SIGN UP IN FILL APP so that I CAN EXPLORE FLASH QUESTION IN APP BEFORE REGISTRATION<br/>
 	Anonymus user is authenticated by clicking on SKIP. The user is able to answer questions and collect cash as he/she is a registered user. The difference is that anonymus user will not be able to make cash transfers (will be implemented later).
+	
+**•	V3 – Sprint 3<br/>** *
+	User story 1 - fixing bugs from previous sprint's US 1<br/>
+	Bugs that had to be fixed were: Error text for password field, Password and Username match, Didn't receive PIN, and Auto-login.<br/>*
+	User story 2 - fixing bugs from previous sprint's US 2<br/>
+	Bugs that had to be fixed were: Auto-login, Low internet connection, Updating target of a question and user answers, and Back button.<br/>*
+	User story 3 - fixing bugs from previous sprint's US 3<br/>
+	Bugs that had to be fixed were: Updating cash balance, Auto-login, and Back button.<br/>*
+	User story 4 - fixing bugs from previous sprint's US 4<br/>
+	Bugs that had to be fixed were: No internet, Auto-login, and Back button.<br/>*
