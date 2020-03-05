@@ -53,3 +53,12 @@ Very proud on team 2.
 	Bugs that had to be fixed were: Updating cash balance, Auto-login, and Back button.<br/>*
 	User story 4 - fixing bugs from previous sprint's US 4<br/>
 	Bugs that had to be fixed were: No internet, Auto-login, and Back button.<br/>
+
+**•	V4 – Sprint 4<br/>** *
+	User story 1 - fixing bugs from previous sprint's US 1<br/>
+	Bugs that had to be fixed were: Text fields' layout, Skip button's layout on Home Page, and repeating text on input in email input text field.<br/>*
+	User story 2 - fixing bugs from previous sprint's US 2<br/>
+	Bugs that had to be fixed were: Scroll, Range error, Layout.<br/>*
+	User story 3 - Registration from within the app for anonymous users<br/>
+	When anonymous user switches to Tab 3 (Profile), he is provided a dialog box which asks him if he wants to register. If the answer is 'No', he stays on Tab 3. If the answer is 'Yes', he is redirected to Register Page where he completes the registration process. After he registers, he is redirected to the app (Tab 2) and all his activities that he made until registration are saved, that is: he has the same cash balance (+5 for registration - NOT SURE YET), he won't be given question that he has answered before as anonymous user, and his level will remain as it was.<br/>*
+	User story 4 - implementation of Tab 2 (Surveys)<br/>
