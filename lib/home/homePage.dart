@@ -67,7 +67,8 @@ class _SignUpState extends State<SignUp> {
                         fontFamily: roboto),
                   )),
                   Padding(
-                      padding: EdgeInsets.only(top: ScreenUtil.instance.setWidth(85.0)),
+                      padding: EdgeInsets.only(
+                          top: ScreenUtil.instance.setWidth(85.0)),
                       child: Text(
                         MyText().subtitle,
                         style: TextStyle(
@@ -79,20 +80,28 @@ class _SignUpState extends State<SignUp> {
                     width: ScreenUtil.instance.setWidth(316.0),
                     height: ScreenUtil.instance.setHeight(67.0),
                     margin: EdgeInsets.only(
-                        top: ScreenUtil.instance.setWidth(27.0), bottom: ScreenUtil.instance.setWidth(15.0), left: ScreenUtil.instance.setWidth(49.0), right: ScreenUtil.instance.setWidth(49.0)),
+                        top: ScreenUtil.instance.setWidth(27.0),
+                        bottom: ScreenUtil.instance.setWidth(15.0),
+                        left: ScreenUtil.instance.setWidth(49.0),
+                        right: ScreenUtil.instance.setWidth(49.0)),
                     child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(33.5),
                         ),
                         onPressed: () {
-                          Navigator.of(context).pushNamed(Register, arguments: DidntRecievePinArguments(phone: '', username: ''));
+                          Navigator.of(context).pushNamed(Register,
+                              arguments: DidntRecievePinArguments(
+                                  phone: '', username: ''));
                         },
                         child: Text(MyText().btnSU)),
                   ),
                   Container(
                     width: ScreenUtil.instance.setWidth(316.0),
                     height: ScreenUtil.instance.setHeight(67.0),
-                    margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(33.0), left: ScreenUtil.instance.setWidth(49.0), right: ScreenUtil.instance.setWidth(49.0)),
+                    margin: EdgeInsets.only(
+                        bottom: ScreenUtil.instance.setWidth(33.0),
+                        left: ScreenUtil.instance.setWidth(49.0),
+                        right: ScreenUtil.instance.setWidth(49.0)),
                     child: RaisedButton(
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(33.5),
@@ -107,40 +116,15 @@ class _SignUpState extends State<SignUp> {
                       width: ScreenUtil.instance.setWidth(255.0),
                       child: Center(
                           child: FlatButton(
-                              onPressed: () async {
+                              onPressed: () {
                                 //  FirebaseJson().importJson();
-                                  username = randomAlphaNumeric(5);
-                                 FirebaseCrud().createUser('', '', username, '', 0, 1);
-                                try {
-                                  final result = await InternetAddress.lookup(
-                                      'google.com');
-                                  if (result.isNotEmpty &&
-                                      result[0].rawAddress.isNotEmpty) {
-                                  
-                                    loginUser();
-                                    FirebaseSignIn()
-                                        .signInAnonymously(username);
-                                   
-                                    Timer(Duration(milliseconds: 800), () {
-                                      Navigator.of(context).pushNamed(NavBar,
-                                          arguments: PasswordArguments(
-                                              email: '',
-                                              password: '',
-                                              phone: '',
-                                              username: username));
-                                    });
-                                  }
-                                } on SocketException catch (_) {
-                                  MySnackbar().showSnackbar(
-                                      MyText().checkConnection,
-                                      context,
-                                      MyText().snackUndo);
-                                }
+                                onPressed();
                               },
                               child: Text(
                                 MyText().skipThisStep,
                                 style: TextStyle(
-                                    color: MyColor().white, fontSize: ScreenUtil.instance.setSp(23.0)),
+                                    color: MyColor().white,
+                                    fontSize: ScreenUtil.instance.setSp(23.0)),
                               ))))
                 ],
               ),
@@ -149,6 +133,19 @@ class _SignUpState extends State<SignUp> {
         ),
       ),
     );
+  }
+
+  onPressed() async {
+    username = randomAlphaNumeric(5);
+    FirebaseCrud().createUser('', '', username, '', 0, 1);
+    loginUser();
+    FirebaseSignIn().signInAnonymously(username);
+
+    Timer(Duration(milliseconds: 800), () {
+      Navigator.of(context).pushNamed(NavBar,
+          arguments: PasswordArguments(
+              email: '', password: '', phone: '', username: username));
+    });
   }
 
   Future<bool> _onWillPop() async {
