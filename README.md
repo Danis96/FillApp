@@ -19,10 +19,10 @@ After some time, the application will be built on the device/emulator connected 
 **•	V1 – Sprint 1<br/>** *
   	User story 1 - planning project, we have planned 
    planning of project architecture and structure.
-   Arranging naming convention, code refactoring, class names, and class architectures.<br/>*
+   Arranging naming convention, code refactoring, class names, and class architectures.<br/><br/>*
    	User Story 2 – Create a registry screen, which consists of multiple sub-screens. On this screen, we need to pick up a set of information that is relevant to the user’s use of the application itself.
 Creating user registration using sms code and verifying the code itself.
-If all the prerequisites and / or all fields are filled in, the user can successfully use the application and earn money.<br/>*
+If all the prerequisites and / or all fields are filled in, the user can successfully use the application and earn money.<br/><br/>*
    	User Story 3 - Creating an login screen, which checks and validates user credentials. If everything is valid the user can successfully use the application.
 The user has the forget password option, which sends him a mail request to reset the password.
 
@@ -36,29 +36,29 @@ Very proud on team 2.
 
 **•	V2 – Sprint 2<br/>** *
   	User story 1 - fixing bugs from previous sprint<br/>
-	The bugs were on the SIGN UP screen and they are: Error text, Text repeat and verify PIN.<br/>*
+	The bugs were on the SIGN UP screen and they are: Error text, Text repeat and verify PIN.<br/><br/>*
   	User story 2 - As a USER I want to HAVE FLASH QUESTIONS so that I CAN EASILY EARN SOME MONEY FROM TAB 1 IN FILL APP<br/>
-	The user story was about to create Tab 1 screen on which flash questions are listed. Here, users are getting questions according to their level and every user can answer a question only once. Also, every question has its own target number which represents the maximum number of answers and a SAR value which is added to users cash balance (implemented as US 3). Questions may be of two types: Yes/No questions and MCQ. After a user answers a question, the answer gets recorder in database. Part of bottom navigation bar is implemented.<br/>*
+	The user story was about to create Tab 1 screen on which flash questions are listed. Here, users are getting questions according to their level and every user can answer a question only once. Also, every question has its own target number which represents the maximum number of answers and a SAR value which is added to users cash balance (implemented as US 3). Questions may be of two types: Yes/No questions and MCQ. After a user answers a question, the answer gets recorder in database. Part of bottom navigation bar is implemented.<br/><br/>*
 	User story 3 - As a USER I want to HAVE MY CASH BALANCE so that I CAN EASILY PREVIEW MONEY FROM TAB 1 IN FILL APP<br/>
-	Firstly, when user registers to the app and login for the first time, 5 SAR gets added to his/her cash balance, so every registered user begins with 5 SAR. Every time users answers a question, the question's SAR value is added to users cash balance and it is displayed all the time on Tab 1.<br/>*
+	Firstly, when user registers to the app and login for the first time, 5 SAR gets added to his/her cash balance, so every registered user begins with 5 SAR. Every time users answers a question, the question's SAR value is added to users cash balance and it is displayed all the time on Tab 1.<br/><br/>*
 	User story 4 - As a ANONYM USER I want to SKIP SIGN UP IN FILL APP so that I CAN EXPLORE FLASH QUESTION IN APP BEFORE REGISTRATION<br/>
 	Anonymus user is authenticated by clicking on SKIP. The user is able to answer questions and collect cash as he/she is a registered user. The difference is that anonymus user will not be able to make cash transfers (will be implemented later).
 	
 **•	V3 – Sprint 3<br/>** *
 	User story 1 - fixing bugs from previous sprint's US 1<br/>
-	Bugs that had to be fixed were: Error text for password field, Password and Username match, Didn't receive PIN, and Auto-login.<br/>*
+	Bugs that had to be fixed were: Error text for password field, Password and Username match, Didn't receive PIN, and Auto-login.<br/><br/>*
 	User story 2 - fixing bugs from previous sprint's US 2<br/>
-	Bugs that had to be fixed were: Auto-login, Low internet connection, Updating target of a question and user answers, and Back button.<br/>*
+	Bugs that had to be fixed were: Auto-login, Low internet connection, Updating target of a question and user answers, and Back button.<br/><br/>*
 	User story 3 - fixing bugs from previous sprint's US 3<br/>
-	Bugs that had to be fixed were: Updating cash balance, Auto-login, and Back button.<br/>*
+	Bugs that had to be fixed were: Updating cash balance, Auto-login, and Back button.<br/><br/>*
 	User story 4 - fixing bugs from previous sprint's US 4<br/>
 	Bugs that had to be fixed were: No internet, Auto-login, and Back button.<br/>
 
 **•	V4 – Sprint 4<br/>** *
 	User story 1 - fixing bugs from previous sprint's US 1<br/>
-	Bugs that had to be fixed were: Text fields' layout, Skip button's layout on Home Page, and repeating text on input in email input text field.<br/>*
+	Bugs that had to be fixed were: Text fields' layout, Skip button's layout on Home Page, and repeating text on input in email input text field.<br/><br/>*
 	User story 2 - fixing bugs from previous sprint's US 2<br/>
-	Bugs that had to be fixed were: Scroll, Range error, Layout.<br/>*
+	Bugs that had to be fixed were: Scroll, Range error, Layout.<br/><br/>*
 	User story 3 - Registration from within the app for anonymous users<br/>
-	When anonymous user switches to Tab 3 (Profile), he is provided a dialog box which asks him if he wants to register. If the answer is 'No', he stays on Tab 3. If the answer is 'Yes', he is redirected to Register Page where he completes the registration process. After he registers, he is redirected to the app (Tab 2) and all his activities that he made until registration are saved, that is: he has the same cash balance (+5 for registration - NOT SURE YET), he won't be given question that he has answered before as anonymous user, and his level will remain as it was.<br/>*
+	When anonymous user switches to Tab 3 (Profile), he is provided a dialog box which asks him if he wants to register. If the answer is 'No', he stays on Tab 3. If the answer is 'Yes', he is redirected to Register Page where he completes the registration process. After he registers, he is redirected to the app (Tab 2) and all his activities that he made until registration are saved, that is: he has the same cash balance (+5 for registration - NOT SURE YET), he won't be given question that he has answered before as anonymous user, and his level will remain as it was.<br/><br/>*
 	User story 4 - implementation of Tab 2 (Surveys)<br/>
