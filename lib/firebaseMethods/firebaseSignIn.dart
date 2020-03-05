@@ -9,7 +9,6 @@
 /// Authors: Sena Cikic, Danis Preldzic, Adi Cengic, Jusuf Elfarahati
 /// Tech387 - T2
 /// Feb, 2020
-import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseSignIn {
@@ -18,10 +17,11 @@ class FirebaseSignIn {
   /// on SKIP BUTTON
   Future<void> signInAnonymously(String username) async {
     try {
-      FirebaseCrud().createUser('', '', username, '', 0, 1);
       await FirebaseAuth.instance.signInAnonymously();
     } catch (e) {
       print(e);
     }
   }
+
+
 }
