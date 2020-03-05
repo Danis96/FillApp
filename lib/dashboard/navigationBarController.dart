@@ -117,11 +117,12 @@ class _BottomNavigationBarControllerState
       body: isLoading
           ? Center(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   isLoadingCircular(),
                   FutureBuilder(
                     future: FirebaseCheck()
-                        .getUserUsername(widget.arguments.username),
+                        .getUserUsername(arguments.username),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
