@@ -248,7 +248,7 @@ class _PasswordPageState extends State<PasswordPage> {
     if (_formState.validate()) {
       if (_btnCounter == 0) {
         loginUser(widget.arguments.username, isLoggedIn);
-        if (isAnonymous != null) {
+        if (isAnonymous == 1) {
           oldSar = oldSar + 5;
           FirebaseCrud().updateUser(
               snap,
@@ -260,7 +260,7 @@ class _PasswordPageState extends State<PasswordPage> {
               oldSar);
         } else {
           FirebaseCrud().createUser(widget.arguments.email,
-              widget.arguments.phone, widget.arguments.username, password, 5);
+              widget.arguments.phone, widget.arguments.username, password, 5, 0);
         }
         Navigator.of(context).pushNamed(NavBar,
             arguments: PasswordArguments(
