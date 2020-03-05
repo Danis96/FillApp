@@ -47,6 +47,23 @@ class _BottomNavigationBarControllerState
   final PasswordArguments arguments;
   _BottomNavigationBarControllerState({Key key, this.arguments});
 
+  /// [refresh]
+  ///
+  /// this is parent function that gets invoked when
+  /// changes occured in children of this dashboard widget.
+  /// It refresh the state and call [checkForInternet] function
+  refresh() {
+    setState(() {});
+  }
+
+  @override
+  void initState() { 
+    super.initState();
+    isLoading = true;
+    refresh();
+  }
+
+
   List<Widget> pages() => [
         DashboardPage(
           arguments: PasswordArguments(
@@ -88,6 +105,7 @@ class _BottomNavigationBarControllerState
     setState(() {
       currentIndex = index;
     });
+
     if (currentIndex == 0) {
       isTab1Selected = true;
       isTab2Selected = false;
@@ -101,6 +119,7 @@ class _BottomNavigationBarControllerState
         askUserToRegister();
       }
     }
+
   }
 
   @override
@@ -114,15 +133,16 @@ class _BottomNavigationBarControllerState
           items: items,
           currentIndex: currentIndex,
           onTap: onTap),
-      body: isLoading
-          ? Center(
+      body: 
+      isLoading
+          ? 
+          Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
+                children: <Widget>[   
                   isLoadingCircular(),
                   FutureBuilder(
-                    future: FirebaseCheck()
-                        .getUserUsername(arguments.username),
+                    future: FirebaseCheck().getUserUsername(arguments.username),
                     builder: (BuildContext context, AsyncSnapshot snapshot) {
                       if (snapshot.hasData) {
                         return ListView.builder(
@@ -132,6 +152,7 @@ class _BottomNavigationBarControllerState
                             itemBuilder: (context, index) {
                               snap = snapshot.data[index];
                               isAnonymous = snap.data['is_anonymous'];
+                              print(isAnonymous);
                               return EmptyContainer();
                             });
                       }
@@ -141,7 +162,8 @@ class _BottomNavigationBarControllerState
                 ],
               ),
             )
-          : IndexedStack(
+        : 
+          IndexedStack(
               index: currentIndex,
               children: pages(),
             ),
@@ -174,9 +196,7 @@ class _BottomNavigationBarControllerState
   /// and after 1 second the variable that controls indicator is set to false
   isLoadingCircular() {
     Timer(Duration(seconds: 1), () {
-      setState(() {
         isLoading = false;
-      });
     });
     return CircularProgressIndicator(
       backgroundColor: MyColor().black,

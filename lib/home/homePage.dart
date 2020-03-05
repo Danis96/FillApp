@@ -66,7 +66,7 @@ class _SignUpState extends State<SignUp> {
                         fontFamily: roboto),
                   )),
                   Padding(
-                      padding: EdgeInsets.only(top: ScreenUtil.instance.setWidth(120.0)),
+                      padding: EdgeInsets.only(top: ScreenUtil.instance.setWidth(85.0)),
                       child: Text(
                         MyText().subtitle,
                         style: TextStyle(
