@@ -23,14 +23,14 @@ class FirebaseCrud {
   ///
   /// upis u firestore collection
   createUser(String email, String phone, String username, String password,
-      int sar, int isAnonymous) async {
+      int sar) async {
     await db.collection('Users').add({
       'email': email,
       'username': username,
       'username_second': '',
       'password': password,
       'phone': phone,
-      'is_anonymous': isAnonymous,
+      'is_anonymous': 0,
       'user_id': randomAlphaNumeric(15),
       'level': 1,
       'sar': sar,
@@ -43,14 +43,14 @@ class FirebaseCrud {
   /// we don't need to update user_id, 
   /// (ako vidis jos koju stvar da je viska izbaci)
   updateUser(DocumentSnapshot doc, String email, String phone, String username, String usernameSecond,
-      String password, int sar, int isAnonymous) async {
+      String password, int sar) async {
     await db.collection('Users').document(doc.documentID).updateData({
       'email': email,
       'username': username,
       'username_second': usernameSecond,
       'password': password,
       'phone': phone,
-      'is_anonymous': isAnonymous,
+      'is_anonymous': 0,
       'sar': sar,
     });
   }

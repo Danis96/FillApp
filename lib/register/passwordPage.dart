@@ -220,8 +220,8 @@ class _PasswordPageState extends State<PasswordPage> {
                                   await InternetAddress.lookup('google.com');
                               if (result.isNotEmpty &&
                                   result[0].rawAddress.isNotEmpty) {
-                                  onPressed(context);
-                                  _save();
+                                onPressed(context);
+                                _save();
                               }
                             } on SocketException catch (_) {
                               MySnackbar().showSnackbar(
@@ -250,11 +250,17 @@ class _PasswordPageState extends State<PasswordPage> {
         loginUser(widget.arguments.username, isLoggedIn);
         if (isAnonymous != null) {
           oldSar = oldSar + 5;
-          FirebaseCrud().updateUser(snap, widget.arguments.email,
-            widget.arguments.phone, widget.arguments.username, widget.arguments.usernameSecond, password, oldSar, 0);
+          FirebaseCrud().updateUser(
+              snap,
+              widget.arguments.email,
+              widget.arguments.phone,
+              widget.arguments.username,
+              widget.arguments.usernameSecond,
+              password,
+              oldSar);
         } else {
           FirebaseCrud().createUser(widget.arguments.email,
-            widget.arguments.phone, widget.arguments.username, password, 5, 0);
+              widget.arguments.phone, widget.arguments.username, password, 5);
         }
         Navigator.of(context).pushNamed(NavBar,
             arguments: PasswordArguments(
