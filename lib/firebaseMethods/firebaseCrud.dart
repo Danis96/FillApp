@@ -23,14 +23,14 @@ class FirebaseCrud {
   ///
   /// upis u firestore collection
   createUser(String email, String phone, String username, String password,
-      int sar) async {
+      int sar, int isAnonymous) async {
     await db.collection('Users').add({
       'email': email,
       'username': username,
       'username_second': '',
       'password': password,
       'phone': phone,
-      'is_anonymous': 0,
+      'is_anonymous': isAnonymous,
       'user_id': randomAlphaNumeric(15),
       'level': 1,
       'sar': sar,
