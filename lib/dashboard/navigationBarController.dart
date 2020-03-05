@@ -47,9 +47,32 @@ class _BottomNavigationBarControllerState
   final PasswordArguments arguments;
   _BottomNavigationBarControllerState({Key key, this.arguments});
 
+  
+  Widget getIsAnonymous(String username) {
+    return FutureBuilder(
+      future: FirebaseCheck().getUserUsername(username),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        print('Iz future, ali prije hasData');
+        if (snapshot.hasData) {
+          return ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                snap = snapshot.data[index];
+                isAnonymous = snap.data['is_anonymous'];
+                print('If future anonimus: ' + isAnonymous.toString());
+                return EmptyContainer();
+              });
+        }
+        return EmptyContainer();
+      },
+    );
+  }
+
   List<Widget> pages() => [
         DashboardPage(
-          arguments: PasswordArguments(
+            arguments: PasswordArguments(
           email: arguments.email,
           password: arguments.password,
           phone: arguments.phone,
@@ -57,12 +80,13 @@ class _BottomNavigationBarControllerState
         )),
         Survey(),
         Profile(
-          arguments: PasswordArguments(
+            arguments: PasswordArguments(
           email: arguments.email,
           password: arguments.password,
           phone: arguments.phone,
           username: arguments.username,
         )),
+        getIsAnonymous(arguments.username)
       ];
 
   final items = [
@@ -78,8 +102,7 @@ class _BottomNavigationBarControllerState
           : ImageIcon(AssetImage(imageTab2)),
       title: Text(''),
     ),
-    BottomNavigationBarItem(
-        icon: Icon(Icons.account_circle), title: Text(''))
+    BottomNavigationBarItem(icon: Icon(Icons.account_circle), title: Text(''))
   ];
 
   int currentIndex = 1;
@@ -97,7 +120,10 @@ class _BottomNavigationBarControllerState
     } else if (currentIndex == 2) {
       isTab1Selected = false;
       isTab2Selected = false;
-      if(isAnonymous == 1) {
+      getIsAnonymous(arguments.username);
+      print(arguments.username);
+      print(isAnonymous);
+      if (isAnonymous == 1) {
         askUserToRegister();
       }
     }
@@ -120,24 +146,6 @@ class _BottomNavigationBarControllerState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   isLoadingCircular(),
-                  FutureBuilder(
-                    future: FirebaseCheck()
-                        .getUserUsername(arguments.username),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            physics: ClampingScrollPhysics(),
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) {
-                              snap = snapshot.data[index];
-                              isAnonymous = snap.data['is_anonymous'];
-                              return EmptyContainer();
-                            });
-                      }
-                      return EmptyContainer();
-                    },
-                  ),
                 ],
               ),
             )
@@ -149,24 +157,26 @@ class _BottomNavigationBarControllerState
   }
 
   askUserToRegister() {
-      return showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text(MyText().registerQuestion),
-            content: new Text(MyText().registerQuestion1),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.pop(context),
-                child: new Text(MyText().registerNo),
-              ),
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pushNamed(Register, arguments: DidntRecievePinArguments(username: widget.arguments.username)),
-                child: new Text(MyText().willYes),
-              ),
-            ],
+    return showDialog(
+      context: context,
+      builder: (context) => new AlertDialog(
+        title: new Text(MyText().registerQuestion),
+        content: new Text(MyText().registerQuestion1),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () => Navigator.pop(context),
+            child: new Text(MyText().registerNo),
           ),
-        );
-    }
+          new FlatButton(
+            onPressed: () => Navigator.of(context).pushNamed(Register,
+                arguments: DidntRecievePinArguments(
+                    username: widget.arguments.username)),
+            child: new Text(MyText().willYes),
+          ),
+        ],
+      ),
+    );
+  }
 
   /// function for loader
   ///
