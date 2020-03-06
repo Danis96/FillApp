@@ -12,6 +12,7 @@
 /// Feb, 2020
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/SurveyCardYesNo/myYesNoSurveyCard.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myProgressNumbers.dart';
 import 'package:fillproject/components/myQuestion.dart';
@@ -21,22 +22,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MySurveyGroupCard extends StatefulWidget {
-    final int sar;
-    final String name;
-    final int answered;
-    final int total;
-    final DocumentSnapshot snapshot;
+  final int sar;
+  final String name;
+  final int answered;
+  final int total;
+  final List<dynamic> snapQuestions;
 
   MySurveyGroupCard(
-      {this.sar, this.name, this.answered, this.total, this.snapshot});
+      {this.sar, this.name, this.answered, this.total, this.snapQuestions});
 
   @override
   _MySurveyGroupCard createState() => _MySurveyGroupCard();
 }
 
 class _MySurveyGroupCard extends State<MySurveyGroupCard> {
+ 
   @override
   Widget build(BuildContext context) {
+     print(widget.total);
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
     ScreenUtil.instance = ScreenUtil(
@@ -45,8 +48,11 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
       allowFontScaling: true,
     )..init(context);
     return GestureDetector(
-      //  onTap: () => FirebaseJson().importSurveyJson() ,
-          child: Container(
+      onTap: () => 
+      // FirebaseJson().importSurveyJson(),
+       Navigator.of(context)
+          .push(MaterialPageRoute(builder: (_) => YesNoSurvey(snapQuestions: widget.snapQuestions, total: widget.total))),
+      child: Container(
           key: widget.key,
           width: ScreenUtil.instance.setWidth(340.0),
           height: ScreenUtil.instance.setHeight(265.0),
@@ -70,7 +76,8 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
                         Container(
                           margin: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(5.0)),
-                          child: MyQuestionSAR(text: widget.sar.toString() + ' SAR'),
+                          child: MyQuestionSAR(
+                              text: widget.sar.toString() + ' SAR'),
                         ),
                         Container(
                           margin: EdgeInsets.only(
@@ -81,8 +88,8 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
                       ],
                     ),
                     Container(
-                      margin:
-                          EdgeInsets.only(top: ScreenUtil.instance.setWidth(120.0)),
+                      margin: EdgeInsets.only(
+                          top: ScreenUtil.instance.setWidth(120.0)),
                       child: MyQuestion(
                           question: widget.name,
                           containerHeight: ScreenUtil.instance.setHeight(80.0)),

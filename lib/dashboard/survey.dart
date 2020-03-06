@@ -19,7 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
 bool isVisible = false;
-List<dynamic> snapi = [];
+List<dynamic> snapi = [], snapQuestions = [];
 DocumentSnapshot snap, doc;
 int userLevel, sar, total;
 String name;
@@ -35,7 +35,7 @@ class SurveyPage extends StatefulWidget {
 class _SurveyState extends State<SurveyPage> {
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
+   
     return Scaffold(
         body: WillPopScope(
       onWillPop: _onWillPop,
@@ -74,7 +74,7 @@ class _SurveyState extends State<SurveyPage> {
             },
           ),
           Container(
-            height: ScreenUtil.instance.setHeight(height),
+            height: ScreenUtil.instance.setHeight(650.0),
             child: FutureBuilder(
                 /// [getQuestions]
                 ///
@@ -88,8 +88,7 @@ class _SurveyState extends State<SurveyPage> {
                     snapi = snapshot.data
                         .map((doc) => Survey.fromDocument(doc))
                         .toList();
-                         
-                        // return MySurveyGroupCard(sar: 10, answered: 3, total: 10, name: 'Sport survey',);
+
 
                     return PageView.builder(
                         pageSnapping: true,
@@ -101,10 +100,8 @@ class _SurveyState extends State<SurveyPage> {
                           sar = snapi[index].sarTotal;
                           total = snapi[index].numberOfQuestions;
                           name = snapi[index].name;
-
-                           
-
-                          return MySurveyGroupCard(sar: sar, name: name, total: total, snapshot: doc,);
+                          snapQuestions = snapi[index].questions;
+                          return MySurveyGroupCard(sar: sar, name: name, total: total, snapQuestions: snapQuestions,);
                         });
                   }
 
