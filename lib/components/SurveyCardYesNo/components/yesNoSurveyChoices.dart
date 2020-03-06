@@ -7,7 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class YesNoSurveyChoices extends StatefulWidget {
   final String choice1;
-  YesNoSurveyChoices({this.choice1});
+   final Function() notifyParent;
+  YesNoSurveyChoices({this.choice1, this.notifyParent});
 
   @override
   _YesNoSurveyChoicesState createState() => _YesNoSurveyChoicesState();
@@ -58,5 +59,6 @@ class _YesNoSurveyChoicesState extends State<YesNoSurveyChoices> {
     setState(() {
       isTapped = false;
     });
+    widget.notifyParent();
   }
 }
