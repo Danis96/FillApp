@@ -1,14 +1,18 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class YesNoSurveyChoices extends StatefulWidget {
-  final String choice1;
+  final String choice1, username;
    final Function() notifyParent;
-  YesNoSurveyChoices({this.choice1, this.notifyParent});
+   final String title;
+   final DocumentSnapshot doc;
+  YesNoSurveyChoices({this.choice1, this.notifyParent, this.username, this.title, this.doc});
 
   @override
   _YesNoSurveyChoicesState createState() => _YesNoSurveyChoicesState();
@@ -59,6 +63,7 @@ class _YesNoSurveyChoicesState extends State<YesNoSurveyChoices> {
     setState(() {
       isTapped = false;
     });
+    FirebaseCrud().updateListOfUsernamesAnswersSurvey(widget.doc, context, widget.username, widget.choice1, widget.title);
     widget.notifyParent();
   }
 }

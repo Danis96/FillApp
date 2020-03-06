@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
@@ -8,7 +9,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class YesNoSurvey extends StatefulWidget {
   final List<dynamic> snapQuestions;
   final int total;
-  YesNoSurvey({this.snapQuestions, this.total});
+  final String username;
+  final DocumentSnapshot doc;
+  YesNoSurvey({this.snapQuestions, this.total, this.username, this.doc});
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
@@ -45,11 +48,19 @@ class _YesNoSurveyState extends State<YesNoSurvey> {
                       YesNoSurveyChoices(
                           choice1: widget.snapQuestions[index]['choices'][0]
                               ['text'],
-                          notifyParent: refresh),
+                          notifyParent: refresh,
+                          username: widget.username,
+                          title: widget.snapQuestions[index]['title'],
+                          doc: widget.doc,
+                          ),
                       YesNoSurveyChoices(
                           choice1: widget.snapQuestions[index]['choices'][1]
                               ['text'],
-                          notifyParent: refresh),
+                          notifyParent: refresh,
+                           username: widget.username,
+                            title: widget.snapQuestions[index]['title'],
+                             doc: widget.doc,
+                          ),
                     ],
                   );
                 }),

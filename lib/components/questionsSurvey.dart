@@ -9,13 +9,13 @@ class QuestionsForSurvey {
       "target": 1000,
       "level": 1,
       "users_completed": [],
+      "list_of_username_answers": [],
       "questions": [
           {
               "title" : "Do you love football",
               "sar" : 10,
               "is_branching": "",
               "choice_to_exit": "",
-              "list_of_usernameAnswers": [],
               "choices": [
                  {"value": "item1", "text": "Yes"},
                  {"value": "item2", "text": "No"},
@@ -26,7 +26,6 @@ class QuestionsForSurvey {
               "sar" : 10,
               "is_branching": "",
               "choice_to_exit": "",
-              "list_of_usernameAnswers": [],
               "choices": [
                  {"value": "item1", "text": "Yes"},
                  {"value": "item2", "text": "No"},
@@ -37,7 +36,6 @@ class QuestionsForSurvey {
               "sar" : 10,
               "is_branching": "",
               "choice_to_exit": "",
-              "list_of_usernameAnswers": [],
               "choices": [
                  {"value": "item1", "text": "Yes"},
                  {"value": "item2", "text": "No"},
@@ -48,7 +46,6 @@ class QuestionsForSurvey {
               "sar" : 10,
               "is_branching": "",
               "choice_to_exit": "",
-              "list_of_usernameAnswers": [],
               "choices": [
                  {"value": "item1", "text": "Yes"},
                  {"value": "item2", "text": "No"},
@@ -59,7 +56,6 @@ class QuestionsForSurvey {
               "sar" : 10,
               "is_branching": "",
               "choice_to_exit": "",
-              "list_of_usernameAnswers": [],
               "choices": [
                  {"value": "item1", "text": "Yes"},
                  {"value": "item2", "text": "No"},

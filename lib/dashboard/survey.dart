@@ -101,7 +101,7 @@ class _SurveyState extends State<SurveyPage> {
                           total = snapi[index].numberOfQuestions;
                           name = snapi[index].name;
                           snapQuestions = snapi[index].questions;
-                          return MySurveyGroupCard(sar: sar, name: name, total: total, snapQuestions: snapQuestions,);
+                          return MySurveyGroupCard(doc: doc ,sar: sar, name: name, total: total, snapQuestions: snapQuestions,username: widget.arguments.username);
                         });
                   }
 
