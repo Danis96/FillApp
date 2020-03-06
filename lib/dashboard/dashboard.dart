@@ -28,7 +28,8 @@ import 'package:fillproject/components/mySAR.dart';
 
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
-import 'package:fillproject/models/Question/questionModel.dart';
+import 'package:fillproject/models/FlashQuestion/questionModel.dart';
+
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

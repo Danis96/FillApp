@@ -1,37 +1,47 @@
-import 'package:fillproject/components/SurveyCardYesNo/myYesNoSurveyCard.dart';
-import 'dart:io';
-import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
-import 'package:fillproject/components/customScroll.dart';
-import 'package:fillproject/components/mySurveyGroupCard.dart';
-
 /// Survey class
 ///
 /// This class contains methods and layout for survey page.
 ///
 /// Authors: Sena Cikic, Danis Preldzic, Adi Cengic, Jusuf Elfarahati
 /// Tech387 - T2
-/// Feb, 2020
+/// Feb, 2020import 'package:fillproject/components/SurveyCardYesNo/myYesNoSurveyCard.dart';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/components/mySurveyGroupCard.dart';
+import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/models/Survey/surveyModel.dart';
+import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
+bool isVisible = false;
+List<dynamic> snapi = [];
+DocumentSnapshot snap, doc;
+int userLevel, sar, total;
+String name;
 
-class Survey extends StatefulWidget {
-  Survey({Key key}) : super(key: key);
+class SurveyPage extends StatefulWidget {
+  final PasswordArguments arguments;
+  SurveyPage({Key key, this.arguments}) : super(key: key);
 
   @override
   _SurveyState createState() => _SurveyState();
 }
 
-class _SurveyState extends State<Survey> {
+class _SurveyState extends State<SurveyPage> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: WillPopScope(
       onWillPop: _onWillPop,
-      child: Column(
+      child: ListView(
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
         children: <Widget>[
           Center(
               child: Container(
@@ -46,20 +56,60 @@ class _SurveyState extends State<Survey> {
                     fontStyle: FontStyle.normal,
                     fontSize: ScreenUtil.instance.setSp(24.0))),
           )),
+          FutureBuilder(
+            future: FirebaseCheck().getUserUsername(widget.arguments.username),
+            builder: (BuildContext context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: ClampingScrollPhysics(),
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (context, index) {
+                      snap = snapshot.data[index];
+                      userLevel = snap.data['level'];
+                      return EmptyContainer();
+                    });
+              }
+              return EmptyContainer();
+            },
+          ),
           Container(
             height: ScreenUtil.instance.setHeight(height),
-            child: PageView(
-                pageSnapping: true,
-                controller: controller,
-                scrollDirection: Axis.vertical,
-                children: <Widget>[
-                  MySurveyGroupCard(),
-                  MySurveyGroupCard(),
-                  MySurveyGroupCard(),
-                  MySurveyGroupCard(),
-                  MySurveyGroupCard(),
-                  MySurveyGroupCard()
-                ]),
+            child: FutureBuilder(
+                /// [getQuestions]
+                ///
+                /// future function that executes 500 miliseconds after
+                /// [getUserUsername] function, & recieve [userLevel] ,
+                /// variable that we get from future function above
+                future: Future.delayed(Duration(milliseconds: 600)).then(
+                    (value) => FirebaseCheck().getSurveyGroups(userLevel)),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    snapi = snapshot.data
+                        .map((doc) => Survey.fromDocument(doc))
+                        .toList();
+                         
+                        // return MySurveyGroupCard(sar: 10, answered: 3, total: 10, name: 'Sport survey',);
+
+                    return PageView.builder(
+                        pageSnapping: true,
+                        controller: controller,
+                        scrollDirection: Axis.vertical,
+                        itemCount: snapi.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          doc = snapshot.data[index];
+                          sar = snapi[index].sarTotal;
+                          total = snapi[index].numberOfQuestions;
+                          name = snapi[index].name;
+
+                           
+
+                          return MySurveyGroupCard(sar: sar, name: name, total: total, snapshot: doc,);
+                        });
+                  }
+
+                  return CircularProgressIndicator();
+                }),
           ),
         ],
       ),

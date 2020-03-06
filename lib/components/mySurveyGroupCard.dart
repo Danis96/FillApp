@@ -16,32 +16,19 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myProgressNumbers.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
+import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MySurveyGroupCard extends StatefulWidget {
-  final String question, username;
-  final int sar, target, usersSar;
-  final List<dynamic> snapi;
-  final int index;
-  //final Function() notifyParent;
-  final DocumentSnapshot doc, snap;
-  final ValueKey key;
-  final bool isSar;
+    final int sar;
+    final String name;
+    final int answered;
+    final int total;
+    final DocumentSnapshot snapshot;
 
   MySurveyGroupCard(
-      {this.question,
-      this.key,
-      this.sar,
-      this.isSar,
-      this.usersSar,
-      this.index,
-      this.snapi,
-      this.snap,
-      //@required this.notifyParent,
-      this.target,
-      this.doc,
-      this.username});
+      {this.sar, this.name, this.answered, this.total, this.snapshot});
 
   @override
   _MySurveyGroupCard createState() => _MySurveyGroupCard();
@@ -57,47 +44,50 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
       height: defaultScreenHeight,
       allowFontScaling: true,
     )..init(context);
-    return Container(
-        key: widget.key,
-        width: ScreenUtil.instance.setWidth(340.0),
-        height: ScreenUtil.instance.setHeight(265.0),
-        margin: EdgeInsets.only(
-            left: ScreenUtil.instance.setWidth(30.0),
-            right: ScreenUtil.instance.setWidth(30.0),
-            bottom: ScreenUtil.instance.setWidth(25.0)),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
-            color: MyColor().black),
-        child: Padding(
-            padding: EdgeInsets.only(
-                left: ScreenUtil.instance.setWidth(37.0),
-                right: ScreenUtil.instance.setWidth(37.0),
-                top: ScreenUtil.instance.setWidth(15.0)),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil.instance.setWidth(5.0)),
-                        child: MyQuestionSAR(text: '45 SAR'),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil.instance.setWidth(5.0),
-                            left: ScreenUtil.instance.setWidth(83.0)),
-                        child: MyProgressNumbers(answered: 9, total: 10),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    margin:
-                        EdgeInsets.only(top: ScreenUtil.instance.setWidth(120.0)),
-                    child: MyQuestion(
-                        question: 'Survey Name Group',
-                        containerHeight: ScreenUtil.instance.setHeight(80.0)),
-                  ),
-                ])));
+    return GestureDetector(
+      //  onTap: () => FirebaseJson().importSurveyJson() ,
+          child: Container(
+          key: widget.key,
+          width: ScreenUtil.instance.setWidth(340.0),
+          height: ScreenUtil.instance.setHeight(265.0),
+          margin: EdgeInsets.only(
+              left: ScreenUtil.instance.setWidth(30.0),
+              right: ScreenUtil.instance.setWidth(30.0),
+              bottom: ScreenUtil.instance.setWidth(25.0)),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(30)),
+              color: MyColor().black),
+          child: Padding(
+              padding: EdgeInsets.only(
+                  left: ScreenUtil.instance.setWidth(37.0),
+                  right: ScreenUtil.instance.setWidth(37.0),
+                  top: ScreenUtil.instance.setWidth(15.0)),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.only(
+                              top: ScreenUtil.instance.setWidth(5.0)),
+                          child: MyQuestionSAR(text: widget.sar.toString() + ' SAR'),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(
+                              top: ScreenUtil.instance.setWidth(5.0),
+                              left: ScreenUtil.instance.setWidth(83.0)),
+                          child: MyProgressNumbers(answered: 9, total: 10),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      margin:
+                          EdgeInsets.only(top: ScreenUtil.instance.setWidth(120.0)),
+                      child: MyQuestion(
+                          question: widget.name,
+                          containerHeight: ScreenUtil.instance.setHeight(80.0)),
+                    ),
+                  ]))),
+    );
   }
 }

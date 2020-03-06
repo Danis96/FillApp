@@ -100,8 +100,18 @@ class FirebaseCheck {
   Future getSurveyQuestions(String name) async {
     var firestore = Firestore.instance;
     QuerySnapshot qn = await firestore
-        .collection('SurveyQuestions')
+        .collection('QuestionsSurvey')
         .where('name', isEqualTo: name)
+        .getDocuments();
+    return qn.documents;
+  }
+
+  /// with [getSurveyGroups] function , 
+  Future getSurveyGroups(int userLevel) async {
+    var firestore = Firestore.instance;
+    QuerySnapshot qn = await firestore
+        .collection('QuestionsSurvey')
+         .where('level', isEqualTo: userLevel)
         .getDocuments();
     return qn.documents;
   }
