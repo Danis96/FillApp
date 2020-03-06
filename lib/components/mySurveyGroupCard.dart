@@ -93,7 +93,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
                   ),
                   Container(
                     margin:
-                        EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
+                        EdgeInsets.only(top: ScreenUtil.instance.setWidth(120.0)),
                     child: MyQuestion(
                         question: 'Survey Name Group',
                         containerHeight: ScreenUtil.instance.setHeight(80.0)),
