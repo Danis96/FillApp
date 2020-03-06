@@ -76,7 +76,12 @@ class _BottomNavigationBarControllerState
           phone: arguments.phone,
           username: arguments.username,
         )),
-        Survey(),
+        SurveyPage(arguments: PasswordArguments(
+          email: arguments.email,
+          password: arguments.password,
+          phone: arguments.phone,
+          username: arguments.username,
+        )),
         Profile(
             arguments: PasswordArguments(
           email: arguments.email,

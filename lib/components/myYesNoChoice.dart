@@ -19,7 +19,8 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
-import 'package:fillproject/models/Question/questionSkelet.dart';
+import 'package:fillproject/models/FlashQuestion/questionSkelet.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

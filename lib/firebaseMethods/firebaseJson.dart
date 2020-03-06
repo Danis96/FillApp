@@ -12,12 +12,13 @@
 ///
 import 'package:fillproject/components/questionsLevel1.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/questionsSurvey.dart';
 
 final db = Firestore.instance;
 
 class FirebaseJson {
   importJson() {
-    QuestionsLevel1().questionLevel1.forEach((element) {
+     QuestionsFlash().questionsFlash.forEach((element) {
       db
           .collection('Questions')
           .add({
@@ -38,4 +39,25 @@ class FirebaseJson {
           });
     });
   }
+
+  /// import survey questions
+  /// 
+  importSurveyJson() {
+     QuestionsForSurvey().qSurvey.forEach((element) {
+      db.collection('QuestionsSurvey').add({
+         'level':element['level'],
+         'name': element['name'],
+         'sar_total': element['sar_total'], 
+         'target': element['target'],
+         'type': element['type'],
+         'questions': element['questions'],
+         'users_completed': element['users_completed'],
+         'number_of_questions': element['number_of_questions']
+      }).then((value) => {print('unos uspjesan')})
+          .catchError((err) {
+            print(err);
+          });
+     });
+  }
+
 }

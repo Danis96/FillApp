@@ -5,22 +5,8 @@
 /// Authors: Sena Cikic, Danis Preldzic, Adi Cengic, Jusuf Elfarahati
 /// Tech387 - T2
 /// Feb, 2020
-class QuestionsLevel1 {
-  final questionLevel1 = [
-    {
-      "type": "checkbox",
-      "name": "question1",
-      "title": "What is your favorite sport?",
-      "choices": [
-        {"value": "item1", "text": "Basketball"},
-        {"value": "item2", "text": "Soccer"},
-        {"value": "item3", "text": "Volleyball"}
-      ],
-      "target": 1000,
-      "sar": 3,
-      "listOfUsernameAnswers": [],
-      "listOfUsernamesThatGaveAnswers": [],
-    },
+class QuestionsFlash {
+  final questionsFlash = [
     {
       "type": "checkbox",
       "name": "question1",
