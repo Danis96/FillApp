@@ -94,4 +94,16 @@ class FirebaseCheck {
     return qn.documents;
   }
 
+
+  /// with [getSurveyQuestions] function , based on survey name 
+  /// we get users questions 
+  Future getSurveyQuestions(String name) async {
+    var firestore = Firestore.instance;
+    QuerySnapshot qn = await firestore
+        .collection('SurveyQuestions')
+        .where('name', isEqualTo: name)
+        .getDocuments();
+    return qn.documents;
+  }
+
 }

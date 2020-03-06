@@ -1,3 +1,5 @@
+
+import 'package:fillproject/components/SurveyCardYesNo/myYesNoSurveyCard.dart';
 /// Survey class
 ///
 /// This class contains methods and layout for survey page.
@@ -19,7 +21,8 @@ class _SurveyState extends State<Survey> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: Text('Ovdje će biti SURVEY-i !!!'),
+        child: GestureDetector(child: Container(child: Text('Ovdje će biti SURVEY-i !!!')), onTap: () =>   Navigator.of(context)
+                .push(MaterialPageRoute(builder: (_) => YesNoSurvey()))),
       ),
     );
   }

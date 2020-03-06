@@ -52,7 +52,6 @@ class _BottomNavigationBarControllerState
     return FutureBuilder(
       future: FirebaseCheck().getUserUsername(username),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        print('Iz future, ali prije hasData');
         if (snapshot.hasData) {
           return ListView.builder(
               shrinkWrap: true,
@@ -61,7 +60,6 @@ class _BottomNavigationBarControllerState
               itemBuilder: (context, index) {
                 snap = snapshot.data[index];
                 isAnonymous = snap.data['is_anonymous'];
-                print('If future anonimus: ' + isAnonymous.toString());
                 return EmptyContainer();
               });
         }
