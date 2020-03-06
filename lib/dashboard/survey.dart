@@ -1,11 +1,10 @@
-
-
 import 'package:fillproject/components/SurveyCardYesNo/myYesNoSurveyCard.dart';
 import 'dart:io';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/customScroll.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
+
 /// Survey class
 ///
 /// This class contains methods and layout for survey page.
@@ -16,10 +15,7 @@ import 'package:fillproject/components/mySurveyGroupCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-
-  ScrollPhysics _physics;
-  ScrollController _controller = new ScrollController();
-  var dimension = 5.7809523809524;
+var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
 
 class Survey extends StatefulWidget {
   Survey({Key key}) : super(key: key);
@@ -31,41 +27,43 @@ class Survey extends StatefulWidget {
 class _SurveyState extends State<Survey> {
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: WillPopScope(
-            onWillPop: _onWillPop,
-            child: ListView(
-              controller: _controller,
-              shrinkWrap: true,
-              physics: _physics,
-              scrollDirection: Axis.vertical,
-              children: <Widget>[
-              Center(
-                child: Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.instance.setWidth(35),
-                      bottom: ScreenUtil.instance.setWidth(29)),
-                  child: Text('Survey List',
-                      style: TextStyle(
-                          color: MyColor().black,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: "LoewNextArabic",
-                          fontStyle: FontStyle.normal,
-                          fontSize: ScreenUtil.instance.setSp(24.0))),
-                ),
-              ),
-              // PageView(
-              //   scrollDirection: Axis.vertical,
-              //   children: <Widget>[
+      onWillPop: _onWillPop,
+      child: Column(
+        children: <Widget>[
+          Center(
+              child: Container(
+            margin: EdgeInsets.only(
+                top: ScreenUtil.instance.setWidth(45.0),
+                bottom: ScreenUtil.instance.setWidth(15.0)),
+            child: Text('Survey List',
+                style: TextStyle(
+                    color: MyColor().black,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "LoewNextArabic",
+                    fontStyle: FontStyle.normal,
+                    fontSize: ScreenUtil.instance.setSp(24.0))),
+          )),
+          Container(
+            height: ScreenUtil.instance.setHeight(height),
+            child: PageView(
+                pageSnapping: true,
+                controller: controller,
+                scrollDirection: Axis.vertical,
+                children: <Widget>[
                   MySurveyGroupCard(),
                   MySurveyGroupCard(),
                   MySurveyGroupCard(),
                   MySurveyGroupCard(),
                   MySurveyGroupCard(),
                   MySurveyGroupCard()
-              //   ],
-              // )
-            ])));
+                ]),
+          ),
+        ],
+      ),
+    ));
   }
 
   /// [_onWillPop]
@@ -91,24 +89,5 @@ class _SurveyState extends State<Survey> {
           ),
         ) ??
         true;
-  }
-
-  /// [addPhysicsListenerController]
-  ///
-  /// function that creates a listener for out scroll controller
-  /// and checks for controller position
-  /// then add physics that recieve dimension
-  /// [dimension] =  361.7809523809524;
-  addPhysicsListenerController() {
-    _controller.addListener(() {
-      if (_controller.position.haveDimensions && _physics == null) {
-        setState(() {
-          _physics = CustomScrollPhysics(
-            itemDimension: ScreenUtil.instance.setWidth(dimension),
-          );
-          print(dimension);
-        });
-      }
-    });
   }
 }
