@@ -35,17 +35,15 @@ class FirebaseCrud {
       'level': 1,
       'sar': sar,
     });
-
-    print('KREIRANO');
   }
-  
+
   /// update function for user that is anonymous and wants to become registered user
-  /// 
-  /// we only need to update specific fields, 
-  /// we don't need to update user_id, 
+  ///
+  /// we only need to update specific fields,
+  /// we don't need to update user_id,
   /// (ako vidis jos koju stvar da je viska izbaci)
-  updateUser(DocumentSnapshot doc, String email, String phone, String username, String usernameSecond,
-      String password, int sar) async {
+  updateUser(DocumentSnapshot doc, String email, String phone, String username,
+      String usernameSecond, String password, int sar) async {
     await db.collection('Users').document(doc.documentID).updateData({
       'email': email,
       'username': username,
@@ -98,5 +96,15 @@ class FirebaseCrud {
         .collection('Users')
         .document(doc.documentID)
         .updateData({'sar': sar});
+  }
+
+  /// [updateListOfUsernamesAnswersSurvey]
+  ///
+  /// this function updates users that answer questions in db
+  updateListOfUsernamesAnswersSurvey(DocumentSnapshot doc, BuildContext context,
+      String username, String choice, String title) async {
+    await db.collection('QuestionsSurvey').document(doc.documentID).updateData({
+      'list_of_username_answers': FieldValue.arrayUnion(['$title : $choice : $username']),
+    });
   }
 }

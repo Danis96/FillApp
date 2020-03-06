@@ -23,13 +23,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MySurveyGroupCard extends StatefulWidget {
   final int sar;
-  final String name;
+  final String name, username;
   final int answered;
   final int total;
+  final DocumentSnapshot doc;
   final List<dynamic> snapQuestions;
 
   MySurveyGroupCard(
-      {this.sar, this.name, this.answered, this.total, this.snapQuestions});
+      {this.sar, this.name, this.answered, this.total, this.snapQuestions, this.username, this.doc});
 
   @override
   _MySurveyGroupCard createState() => _MySurveyGroupCard();
@@ -39,7 +40,6 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
  
   @override
   Widget build(BuildContext context) {
-     print(widget.total);
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
     ScreenUtil.instance = ScreenUtil(
@@ -51,7 +51,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
       onTap: () => 
       // FirebaseJson().importSurveyJson(),
        Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => YesNoSurvey(snapQuestions: widget.snapQuestions, total: widget.total))),
+          .push(MaterialPageRoute(builder: (_) => YesNoSurvey(doc: widget.doc,username: widget.username , snapQuestions: widget.snapQuestions, total: widget.total))),
       child: Container(
           key: widget.key,
           width: ScreenUtil.instance.setWidth(340.0),
