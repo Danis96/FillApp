@@ -83,7 +83,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
                           margin: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(5.0),
                               left: ScreenUtil.instance.setWidth(83.0)),
-                          child: MyProgressNumbers(answered: 9, total: 10),
+                          child: MyProgressNumbers(answered: 9, total: widget.total),
                         ),
                       ],
                     ),
