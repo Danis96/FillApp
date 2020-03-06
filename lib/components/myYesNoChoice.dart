@@ -72,7 +72,7 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
             hoverColor: isTapped ? MyColor().white : MyColor().black,
             elevation: 0,
             color: isTapped ? MyColor().white : MyColor().black,
-            onPressed: () async {
+            onPressed: ()  {
               setState(() {
                 isTapped = true;
               });

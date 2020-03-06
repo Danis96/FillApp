@@ -1,10 +1,11 @@
-import 'dart:io';
 
+
+import 'package:fillproject/components/SurveyCardYesNo/myYesNoSurveyCard.dart';
+import 'dart:io';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/customScroll.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
-
 /// Survey class
 ///
 /// This class contains methods and layout for survey page.
