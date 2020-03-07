@@ -1,10 +1,9 @@
 class QuestionsForSurvey {
   final qSurvey = [
     /// 1
-    {
-      "name": "Milka Survey",
-      "number_of_questions": 7,
-      "sar_total": 65,
+      "name": "SportSurvey",
+      "number_of_questions": 10,
+      "sar_total": 80,
       "target": 1000,
       "level": 1,
       "users_completed": [],

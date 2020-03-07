@@ -29,39 +29,41 @@ class _YesNoSurveyState extends State<SurveyCard> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: ListView(
-        physics: NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        children: <Widget>[
-          Container(
-            height: ScreenUtil.instance.setHeight(800),
-            child: PageView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                controller: _controller,
-                itemCount: widget.snapQuestions.length,
-                itemBuilder: (BuildContext context, int index) {
-                  type = widget.snapQuestions[index]['type'];
-                  if(type == 'mcq') {
-                    isSingle = widget.snapQuestions[index]['is_single'];
-                  }
-                  return Column(
-                    children: <Widget>[
-                      SurveyAppBar(
-                        percent: (index + 1.0) / widget.total,
-                      ),
-                      YesNoSurveySQP(
-                        type: type,
-                        answered: index + 1,
-                        answeredFrom: widget.total,
-                        sar: widget.snapQuestions[index]['sar'],
-                        question: widget.snapQuestions[index]['title'],
-                      ),
-                      typeContainerAnwers(widget, index, refresh, type),
-                    ],
-                  );
-                }),
-          ),
-        ],
+      body: GestureDetector(
+        onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+              child: ListView(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          children: <Widget>[
+            Container(
+              height: ScreenUtil.instance.setHeight(height),
+              child: PageView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  controller: _controller,
+                  itemCount: widget.snapQuestions.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    type = widget.snapQuestions[index]['type'];
+                    return Column(
+                      children: <Widget>[
+                        SurveyAppBar(
+                          percent: (index + 1.0) / widget.total,
+                        ),
+                        YesNoSurveySQP(
+                          type: type,
+                          answered: index + 1,
+                          answeredFrom: widget.total,
+                          sar: widget.snapQuestions[index]['sar'],
+                          question: widget.snapQuestions[index]['title'],
+                        ),
+                        typeContainerAnwers(widget, index, refresh, type),
+                      ],
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -89,7 +91,6 @@ Widget typeContainerAnwers(
       return inputWidget(widget, index, refresh);
     case 'mcq':
       return mcqWidget(widget, index, refresh, isSingle);
-
     default:
       return EmptyContainer();
   }
