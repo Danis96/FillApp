@@ -107,4 +107,14 @@ class FirebaseCrud {
       'list_of_username_answers': FieldValue.arrayUnion(['$title : $choice : $username']),
     });
   }
+
+  /// [updateListOfUsernamesThatGaveAnswersInSurvey]
+  ///
+  /// this function updates users that answer questions in db
+  updateListOfUsernamesThatGaveAnswersSurvey(
+      DocumentSnapshot doc, BuildContext context, String username) async {
+    await db.collection('QuestionsSurvey').document(doc.documentID).updateData({
+      'list_of_usernames_that_gave_answers': FieldValue.arrayUnion(['$username'])
+    });
+  }
 }

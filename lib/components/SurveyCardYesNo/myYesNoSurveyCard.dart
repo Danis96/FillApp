@@ -72,6 +72,6 @@ class _YesNoSurveyState extends State<YesNoSurvey> {
 
   refresh() {
     _controller.nextPage(
-        duration: Duration(milliseconds: 300), curve: Curves.easeIn);
+        duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
   }
 }

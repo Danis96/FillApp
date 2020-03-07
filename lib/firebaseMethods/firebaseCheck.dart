@@ -115,5 +115,4 @@ class FirebaseCheck {
         .getDocuments();
     return qn.documents;
   }
-
 }

@@ -10,6 +10,7 @@ class QuestionsForSurvey {
       "level": 1,
       "users_completed": [],
       "list_of_username_answers": [],
+      "list_of_usernames_that_gave_answers": [],
       "questions": [
           {
               "title" : "Do you love football",

@@ -9,10 +9,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class YesNoSurveyChoices extends StatefulWidget {
   final String choice1, username;
-   final Function() notifyParent;
-   final String title;
-   final DocumentSnapshot doc;
-  YesNoSurveyChoices({this.choice1, this.notifyParent, this.username, this.title, this.doc});
+  final Function() notifyParent;
+  final String title;
+  final DocumentSnapshot doc;
+  YesNoSurveyChoices(
+      {this.choice1, this.notifyParent, this.username, this.title, this.doc});
 
   @override
   _YesNoSurveyChoicesState createState() => _YesNoSurveyChoicesState();
@@ -63,7 +64,10 @@ class _YesNoSurveyChoicesState extends State<YesNoSurveyChoices> {
     setState(() {
       isTapped = false;
     });
-    FirebaseCrud().updateListOfUsernamesAnswersSurvey(widget.doc, context, widget.username, widget.choice1, widget.title);
+    FirebaseCrud().updateListOfUsernamesAnswersSurvey(
+        widget.doc, context, widget.username, widget.choice1, widget.title);
+    FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
+        widget.doc, context, widget.username);
     widget.notifyParent();
   }
 }

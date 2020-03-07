@@ -19,7 +19,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
 bool isVisible = false;
-List<dynamic> snapi = [], snapQuestions = [];
+List<dynamic> snapi = [], snapQuestions = [], usernamesThatAnswers = [], usernameFinal = [];
 DocumentSnapshot snap, doc;
 int userLevel, sar, total;
 String name;
@@ -35,7 +35,6 @@ class SurveyPage extends StatefulWidget {
 class _SurveyState extends State<SurveyPage> {
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
         body: WillPopScope(
       onWillPop: _onWillPop,
@@ -76,6 +75,7 @@ class _SurveyState extends State<SurveyPage> {
           Container(
             height: ScreenUtil.instance.setHeight(650.0),
             child: FutureBuilder(
+
                 /// [getQuestions]
                 ///
                 /// future function that executes 500 miliseconds after
@@ -89,7 +89,6 @@ class _SurveyState extends State<SurveyPage> {
                         .map((doc) => Survey.fromDocument(doc))
                         .toList();
 
-
                     return PageView.builder(
                         pageSnapping: true,
                         controller: controller,
@@ -101,7 +100,17 @@ class _SurveyState extends State<SurveyPage> {
                           total = snapi[index].numberOfQuestions;
                           name = snapi[index].name;
                           snapQuestions = snapi[index].questions;
-                          return MySurveyGroupCard(doc: doc ,sar: sar, name: name, total: total, snapQuestions: snapQuestions,username: widget.arguments.username);
+                          usernamesThatAnswers =
+                              snapi[index].usersThatGaveAnswers;
+
+                            return MySurveyGroupCard(
+                                doc: doc,
+                                sar: sar,
+                                name: name,
+                                total: total,
+                                snapQuestions: snapQuestions,
+                                username: widget.arguments.username);
+
                         });
                   }
 
