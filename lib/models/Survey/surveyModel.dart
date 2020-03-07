@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Survey {
   final int level, numberOfQuestions, target, sarTotal;
   final String name, type;
-  final List<dynamic> questions, usersCompleted;
+  final List<dynamic> questions, usersCompleted, usersAnswers, usersThatGaveAnswers;
 
   Survey(
       {this.level,
@@ -13,7 +13,10 @@ class Survey {
       this.sarTotal,
       this.target,
       this.type,
-      this.usersCompleted});
+      this.usersCompleted,
+      this.usersAnswers,
+      this.usersThatGaveAnswers,
+      });
 
 
     factory Survey.fromDocument(DocumentSnapshot doc) {
@@ -25,7 +28,9 @@ class Survey {
           target: doc['target'],
           type: doc['type'],
           questions: doc['questions'],
-          usersCompleted: doc['users_completed']
+          usersCompleted: doc['users_completed'],
+          usersAnswers: doc['list_of_username_answers'],
+          usersThatGaveAnswers: doc['list_of_usernames_that_gave_answers'],
         );
     }
 }

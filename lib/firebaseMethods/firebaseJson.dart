@@ -52,7 +52,8 @@ class FirebaseJson {
          'type': element['type'],
          'questions': element['questions'],
          'users_completed': element['users_completed'],
-         'number_of_questions': element['number_of_questions']
+         'number_of_questions': element['number_of_questions'],
+         'list_of_usernames_that_gave_answers': element['list_of_usernames_that_gave_answers'],
       }).then((value) => {print('unos uspjesan')})
           .catchError((err) {
             print(err);
