@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/dateSurveyChoice.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/inputSurveyChoice.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
@@ -110,6 +111,8 @@ Widget typeContainerAnwers(
       return inputWidget(widget, index, refresh);
     case 'mcq':
       return mcqWidget(widget, index, refresh, isSingle);
+    case 'date':
+      return dateWidget(widget, index, refresh);
     default:
       return EmptyContainer();
   }
@@ -234,6 +237,20 @@ Widget inputWidget(widget, int index, Function refresh) {
   return Column(
     children: <Widget>[
       InputChoice(
+        notifyParent: refresh,
+        username: widget.username,
+        title: widget.snapQuestions[index]['title'],
+        doc: widget.doc,
+      ),
+    ],
+  );
+}
+
+/// input widget
+Widget dateWidget(widget, int index, Function refresh) {
+  return Column(
+    children: <Widget>[
+      DateChoice(
         notifyParent: refresh,
         username: widget.username,
         title: widget.snapQuestions[index]['title'],

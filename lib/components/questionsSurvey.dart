@@ -112,6 +112,13 @@ class QuestionsForSurvey {
             {"value": "item3", "text": "PSG"},
           ]
         },
+        {
+          "title": "When is your birthday?",
+          "type": "date",
+          "sar": 35,
+          "is_branching": "",
+          "choice_to_exit": "",
+        },
       ]
     },
   ];
