@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
@@ -66,6 +67,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
                         left: ScreenUtil.instance.setWidth(57.0),
                         top: ScreenUtil.instance.setWidth(height)),
                     child: MyQuestionSAR(
+                      isCompleted: false,
                       text: '+' + widget.sar.toString() + ' SAR',
                     )),
                 Container(
@@ -88,6 +90,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
             ),
             Container(
               child: MyQuestion(
+                isCompleted: false,
                 question: widget.question,
                 containerHeight: ScreenUtil.instance.setHeight(126.0),
               ),

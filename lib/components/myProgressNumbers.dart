@@ -17,14 +17,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MyProgressNumbers extends StatelessWidget {
   final int total;
   final int answered;
-  MyProgressNumbers({this.total, this.answered});
+  final bool isCompleted;
+  MyProgressNumbers({this.total, this.answered, this.isCompleted});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         child: Text(answered.toString() + '/' + total.toString(),
             style: TextStyle(
-                color: MyColor().white,
+                color: isCompleted ? MyColor().black : MyColor().white,
                 fontWeight: FontWeight.w500,
                 fontFamily: "LoewNextArabic",
                 fontStyle: FontStyle.normal,

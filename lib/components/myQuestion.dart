@@ -17,7 +17,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MyQuestion extends StatelessWidget {
   final String question;
   final double containerHeight;
-  MyQuestion({this.question, this.containerHeight});
+  final bool isCompleted;
+  MyQuestion({this.question, this.containerHeight, this.isCompleted});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +28,10 @@ class MyQuestion extends StatelessWidget {
         height: ScreenUtil.instance.setHeight(containerHeight),
         child: Text(question,
             style: TextStyle(
-                color: MyColor().white,
-                fontWeight: FontWeight.w400,
+                color: isCompleted ? MyColor().black : MyColor().white,
+                fontWeight: FontWeight.w700,
                 fontFamily: "LoewNextArabic",
                 fontStyle: FontStyle.normal,
-                fontSize: ScreenUtil.instance.setSp(20.0))));
+                fontSize: ScreenUtil.instance.setSp(25.0))));
   }
 }

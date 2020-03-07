@@ -11,8 +11,14 @@ class SurveyChoices extends StatefulWidget {
   final Function() notifyParent;
   final String title;
   final DocumentSnapshot doc;
-  SurveyChoices(
-      {this.choice1, this.notifyParent, this.username, this.title, this.doc});
+
+  SurveyChoices({
+    this.choice1,
+    this.notifyParent,
+    this.username,
+    this.title,
+    this.doc,
+  });
 
   @override
   _YesNoSurveyChoicesState createState() => _YesNoSurveyChoicesState();
@@ -65,8 +71,6 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
-    FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
-        widget.doc, context, widget.username);
     widget.notifyParent();
   }
 }
