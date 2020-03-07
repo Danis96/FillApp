@@ -36,6 +36,10 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
         return {
           height = 30.0, 
           heightContainer = 210.0};
+      case 'mcq':
+        return {
+          height = 30.0, 
+          heightContainer = 210.0};
       default:
         return {
           height = 260.0,

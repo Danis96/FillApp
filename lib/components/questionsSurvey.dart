@@ -2,9 +2,9 @@ class QuestionsForSurvey {
   final qSurvey = [
     /// 1
     {
-      "name": "SportSurvey",
-      "number_of_questions": 10,
-      "sar_total": 80,
+      "name": "Milka Survey",
+      "number_of_questions": 7,
+      "sar_total": 65,
       "target": 1000,
       "level": 1,
       "users_completed": [],
@@ -57,6 +57,60 @@ class QuestionsForSurvey {
           "sar": 10,
           "is_branching": "",
           "choice_to_exit": "",
+        },
+        {
+          "title": "What is your favourite club?",
+          "type": "mcq",
+          "is_single": 1,
+          "sar": 5,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Real Madrid"},
+            {"value": "item2", "text": "Liverpool"},
+            {"value": "item3", "text": "PSG"},
+          ]
+        },
+        {
+          "title": "Who is/are your favourite player(s)?",
+          "type": "mcq",
+          "is_single": 0,
+          "sar": 10,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Cristiano Ronaldo"},
+            {"value": "item2", "text": "Lionel Messi"},
+            {"value": "item3", "text": "Mohamed Salah"},
+            {"value": "item4", "text": "Edin Džeko"},
+          ]
+        },
+        {
+          "title": "Who is/are your favourite player(s)?",
+          "type": "mcq",
+          "is_single": 1,
+          "sar": 15,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Cristiano Ronaldo"},
+            {"value": "item2", "text": "Lionel Messi"},
+            {"value": "item3", "text": "Mohamed Salah"},
+            {"value": "item4", "text": "Edin Džeko"},
+          ]
+        },
+        {
+          "title": "What is your favourite club?",
+          "type": "mcq",
+          "is_single": 0,
+          "sar": 20,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Real Madrid"},
+            {"value": "item2", "text": "Liverpool"},
+            {"value": "item3", "text": "PSG"},
+          ]
         },
       ]
     },
