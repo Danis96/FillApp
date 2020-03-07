@@ -295,6 +295,7 @@ class DateChoice extends StatelessWidget {
     //   default:
     // }
     Navigator.pop(context);
+    
   }
 
   onPressed(BuildContext context) {
