@@ -123,4 +123,12 @@ class MyValidation {
     }
     return null;
   }
+
+  String validateAnswer(String answer) {
+       if(answer == '') {
+          return MyText().emptyFieldSnack;
+       }
+
+       return null;
+  }
 }
