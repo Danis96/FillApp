@@ -37,6 +37,7 @@ class _MultipleChoiceSurveyChoices
     extends State<MultipleChoiceSurveyChoices> {
   @override
   Widget build(BuildContext context) {
+    print(widget.isSingle.toString() + ' ' + widget.length.toString() + ' ');
     return Column(
       children: <Widget>[
         Container(
@@ -74,12 +75,12 @@ class _MultipleChoiceSurveyChoices
                 if(isSingle == 1) {
                   singleOnTap();
                 } else {
-                  singleOnTa2();
+                  singleOnTap2();
                 }
               },
           )
         ),
-        isSingle == 1 ? EmptyContainer() : widget.length == 3 && widget.index == 'C' ?
+        widget.isSingle == 1 ? EmptyContainer() : widget.length == 3 && widget.index == 'C' ?
         Container(
           width: ScreenUtil.instance.setWidth(316.0),
                         height: ScreenUtil.instance.setHeight(55.0),
@@ -126,7 +127,7 @@ class _MultipleChoiceSurveyChoices
     });
   }
 
-  singleOnTa2() {
+  singleOnTap2() {
     setState(() {
       isTapped = true;
     });

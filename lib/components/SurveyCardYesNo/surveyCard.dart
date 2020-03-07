@@ -45,13 +45,16 @@ class _YesNoSurveyState extends State<SurveyCard> {
           shrinkWrap: true,
           children: <Widget>[
             Container(
-              height: ScreenUtil.instance.setHeight(height),
+              height: ScreenUtil.instance.setHeight(800.0),
               child: PageView.builder(
                   physics: NeverScrollableScrollPhysics(),
                   controller: _controller,
                   itemCount: widget.snapQuestions.length,
                   itemBuilder: (BuildContext context, int index) {
                     type = widget.snapQuestions[index]['type'];
+                    if(type == 'mcq') {
+                      isSingle = widget.snapQuestions[index]['is_single'];
+                    }
                     return Column(
                       children: <Widget>[
                         SurveyAppBar(
