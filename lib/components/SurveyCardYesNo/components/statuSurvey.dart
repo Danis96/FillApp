@@ -1,29 +1,34 @@
-/// Question SAR class
-///
-/// This class contains layout for question SAR.
-///
-/// Imports:
-///   MyColor constant class with all colors
-///   ScreenUtil class for respnsive desing
-///   FontsConstants for fonts
-///
-/// Authors: Sena Cikic, Danis Preldzic, Adi Cengic, Jusuf Elfarahati
-/// Tech387 - T2
-/// Feb, 2020
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class MyQuestionSAR extends StatelessWidget {
-  final String text;
-  final bool isCompleted;
-  MyQuestionSAR({this.text, this.isCompleted});
+class StatusSurvey extends StatelessWidget {
+
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:ScreenUtil.instance.setWidth(121.0),
+       height: 30.0,
+      //  width: 400.0,
+      //  margin: EdgeInsets.only(bottom: 40.0), 
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(child: Text('Status')),
+          Container(child: completedStatus('COMPLETED', arabic, true),),
+        ],
+      ),
+    );
+  }
+}
+
+
+
+Widget completedStatus(String text, String arabic, bool isCompleted) {
+  return Container(
+      width:  ScreenUtil.instance.setWidth(116.0) ,
       height: ScreenUtil.instance.setHeight(38.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
@@ -32,11 +37,10 @@ class MyQuestionSAR extends StatelessWidget {
       child: Text(text,
           style: TextStyle(
               color: isCompleted ? MyColor().white : MyColor().black,
-              fontWeight: FontWeight.w700,
+              fontWeight: isCompleted ? FontWeight.w400 : FontWeight.w700,
               fontFamily: arabic,
               fontStyle: FontStyle.normal,
-              fontSize: ScreenUtil.instance.setSp(22.0)),
+              fontSize: isCompleted ? ScreenUtil.instance.setSp(12.0) : ScreenUtil.instance.setSp(22.0)),
           textAlign: TextAlign.center),
     );
-  }
 }

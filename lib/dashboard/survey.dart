@@ -12,14 +12,19 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:random_string/random_string.dart';
 
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
-bool isVisible = false;
-List<dynamic> snapi = [], snapQuestions = [], usernamesThatAnswers = [], usernameFinal = [];
+bool isVisible = false, isCompleted = false;
+List<dynamic> snapi = [],
+    snapQuestions = [],
+    usernamesThatAnswers = [],
+    usernameFinal = [];
 DocumentSnapshot snap, doc;
 int userLevel, sar, total;
 String name, type;
@@ -85,9 +90,11 @@ class _SurveyState extends State<SurveyPage> {
                     (value) => FirebaseCheck().getSurveyGroups(userLevel)),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    snapi = snapshot.data
-                        .map((doc) => Survey.fromDocument(doc))
-                        .toList();
+
+                      snapi = snapshot.data
+                          .map((doc) => Survey.fromDocument(doc))
+                          .toList();
+
 
                     return PageView.builder(
                         pageSnapping: true,
@@ -100,17 +107,19 @@ class _SurveyState extends State<SurveyPage> {
                           total = snapi[index].numberOfQuestions;
                           name = snapi[index].name;
                           snapQuestions = snapi[index].questions;
+                          questionNumber = snapQuestions.length;
                           usernamesThatAnswers =
                               snapi[index].usersThatGaveAnswers;
+                          usernameFinal = snapi[index].usersCompleted;
 
-                            return MySurveyGroupCard(
-                                doc: doc,
-                                sar: sar,
-                                name: name,
-                                total: total,
-                                snapQuestions: snapQuestions,
-                                username: widget.arguments.username);
-
+                          return MySurveyGroupCard(
+                              usernameFinal: usernameFinal,
+                              doc: doc,
+                              sar: sar,
+                              name: name,
+                              total: total,
+                              snapQuestions: snapQuestions,
+                              username: widget.arguments.username);
                         });
                   }
 

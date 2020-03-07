@@ -5,20 +5,25 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String userAnswer;
 bool fieldColor = false;
-
+int total;
 
 class InputChoice extends StatefulWidget {
   final String username;
   final Function() notifyParent;
   final DocumentSnapshot doc;
   final String title;
-  InputChoice({this.doc, this.notifyParent, this.username, this.title});
-
+  InputChoice(
+      {this.doc,
+      this.notifyParent,
+      this.username,
+      this.title,
+      });
 
   @override
   _InputChoiceState createState() => _InputChoiceState();
@@ -36,7 +41,6 @@ class _InputChoiceState extends State<InputChoice> {
           height: ScreenUtil.instance.setWidth(65.0),
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
           child: TextFormField(
-
             enableSuggestions: false,
             style: TextStyle(color: Colors.black),
             controller: answerController,
@@ -49,16 +53,14 @@ class _InputChoiceState extends State<InputChoice> {
               labelStyle: TextStyle(color: MyColor().black),
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                borderSide: BorderSide(color: fieldColor
-                    ? MyColor().error
-                    : MyColor().black,),
+                borderSide: BorderSide(
+                  color: fieldColor ? MyColor().error : MyColor().black,
+                ),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(33.5)),
                 borderSide: BorderSide(
-                  color:fieldColor
-                    ? MyColor().error
-                    : MyColor().black),
+                    color: fieldColor ? MyColor().error : MyColor().black),
               ),
               focusedErrorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -78,13 +80,13 @@ class _InputChoiceState extends State<InputChoice> {
         ),
         Container(
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
-              child: fieldColor
-                  ? Text(
-                      MyText().emptyFieldSnack,
-                      style: TextStyle(color: MyColor().error),
-                    )
-                  : Text(''),
-            ),
+          child: fieldColor
+              ? Text(
+                  MyText().emptyFieldSnack,
+                  style: TextStyle(color: MyColor().error),
+                )
+              : Text(''),
+        ),
         Container(
             width: ScreenUtil.instance.setWidth(316.0),
             height: ScreenUtil.instance.setHeight(50.0),
@@ -107,7 +109,7 @@ class _InputChoiceState extends State<InputChoice> {
 
   onPressed(BuildContext context) {
     userAnswer = answerController.text;
-    if (userAnswer.length ==  0) {
+    if (userAnswer.length == 0) {
       setState(() {
         fieldColor = true;
       });
@@ -116,23 +118,19 @@ class _InputChoiceState extends State<InputChoice> {
           fieldColor = false;
         });
       });
-    } 
-     else {
+    } else {
       setState(() {
         fieldColor = false;
       });
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
-      FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
-          widget.doc, context, widget.username);
+          onTap(context);
       widget.notifyParent();
     }
 
-    onTap(context);
   }
 
   onTap(BuildContext context) {
     FocusScope.of(context).requestFocus(new FocusNode());
   }
 }
-

@@ -84,11 +84,12 @@ class _MyCardMCQState extends State<MyCardMCQ> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-            child: MyQuestionSAR(text: '${widget.sar} SAR'),
+            child: MyQuestionSAR(text: '${widget.sar} SAR', isCompleted: false,),
           ),
           Container(
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
             child: MyQuestion(
+              isCompleted: false,
               question: widget.question,
               containerHeight: ScreenUtil.instance.setHeight(100.0)),
           ),
