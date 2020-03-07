@@ -7,19 +7,19 @@ import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class YesNoSurveyChoices extends StatefulWidget {
+class SurveyChoices extends StatefulWidget {
   final String choice1, username;
   final Function() notifyParent;
   final String title;
   final DocumentSnapshot doc;
-  YesNoSurveyChoices(
+  SurveyChoices(
       {this.choice1, this.notifyParent, this.username, this.title, this.doc});
 
   @override
   _YesNoSurveyChoicesState createState() => _YesNoSurveyChoicesState();
 }
 
-class _YesNoSurveyChoicesState extends State<YesNoSurveyChoices> {
+class _YesNoSurveyChoicesState extends State<SurveyChoices> {
   @override
   Widget build(BuildContext context) {
     return Column(

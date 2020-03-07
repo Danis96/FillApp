@@ -49,7 +49,6 @@ class FirebaseJson {
          'name': element['name'],
          'sar_total': element['sar_total'], 
          'target': element['target'],
-         'type': element['type'],
          'questions': element['questions'],
          'users_completed': element['users_completed'],
          'number_of_questions': element['number_of_questions'],

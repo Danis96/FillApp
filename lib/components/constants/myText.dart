@@ -59,6 +59,10 @@ class MyText {
   final String repeatPassSnack = "Wrong input";
   final String emptyFieldSnack = "This field can't be empty";
 
+// Input Survey Choice
+  final String placeholderInput = 'Type the answer';
+   
+
 //LoginPage -> sendEmailPage
   final String emailReset = "Reset password";
   final String emailSub =

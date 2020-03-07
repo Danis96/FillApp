@@ -12,7 +12,7 @@
 /// Feb, 2020
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fillproject/components/SurveyCardYesNo/myYesNoSurveyCard.dart';
+import 'package:fillproject/components/SurveyCardYesNo/surveyCard.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myProgressNumbers.dart';
 import 'package:fillproject/components/myQuestion.dart';
@@ -30,14 +30,20 @@ class MySurveyGroupCard extends StatefulWidget {
   final List<dynamic> snapQuestions;
 
   MySurveyGroupCard(
-      {this.sar, this.name, this.answered, this.total, this.snapQuestions, this.username, this.doc});
+      {this.sar,
+      this.name,
+      this.answered,
+      this.total,
+      this.snapQuestions,
+      this.username,
+      this.doc,
+    });
 
   @override
   _MySurveyGroupCard createState() => _MySurveyGroupCard();
 }
 
 class _MySurveyGroupCard extends State<MySurveyGroupCard> {
- 
   @override
   Widget build(BuildContext context) {
     double defaultScreenWidth = 400.0;
@@ -48,10 +54,14 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
       allowFontScaling: true,
     )..init(context);
     return GestureDetector(
-      onTap: () => 
-      // FirebaseJson().importSurveyJson(),
-       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (_) => YesNoSurvey(doc: widget.doc,username: widget.username , snapQuestions: widget.snapQuestions, total: widget.total))),
+      onTap: () =>
+        //  FirebaseJson().importSurveyJson(),
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (_) => SurveyCard(
+                  doc: widget.doc,
+                  username: widget.username,
+                  snapQuestions: widget.snapQuestions,
+                  total: widget.total))),
       child: Container(
           key: widget.key,
           width: ScreenUtil.instance.setWidth(340.0),
@@ -83,7 +93,8 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
                           margin: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(5.0),
                               left: ScreenUtil.instance.setWidth(83.0)),
-                          child: MyProgressNumbers(answered: 0, total: widget.total),
+                          child: MyProgressNumbers(
+                              answered: 0, total: widget.total),
                         ),
                       ],
                     ),

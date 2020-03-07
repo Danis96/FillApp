@@ -22,7 +22,7 @@ bool isVisible = false;
 List<dynamic> snapi = [], snapQuestions = [], usernamesThatAnswers = [], usernameFinal = [];
 DocumentSnapshot snap, doc;
 int userLevel, sar, total;
-String name;
+String name, type;
 
 class SurveyPage extends StatefulWidget {
   final PasswordArguments arguments;

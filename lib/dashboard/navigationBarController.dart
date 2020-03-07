@@ -19,6 +19,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/dashboard/dashboard.dart';
 import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
+import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 
@@ -77,11 +78,11 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         SurveyPage(arguments: PasswordArguments(
-          email: arguments.email,
-          password: arguments.password,
-          phone: arguments.phone,
-          username: arguments.username,
-        )),
+            email: arguments.email,
+            password: arguments.password,
+            phone: arguments.phone,
+            username: arguments.username,
+          )),
         Profile(
             arguments: PasswordArguments(
           email: arguments.email,

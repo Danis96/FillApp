@@ -16,6 +16,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myMCQChoice.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
+import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -69,50 +70,50 @@ class _MyCardMCQState extends State<MyCardMCQ> {
       allowFontScaling: true,
     )..init(context);
     return Container(
-        key: widget.key,
-        width: ScreenUtil.instance.setWidth(340.0),
-        height: ScreenUtil.instance.setHeight(250.0),
-        margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(12.0), top: ScreenUtil.instance.setWidth(0.0), right: ScreenUtil.instance.setWidth(12.0)),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(30)),
-            color: MyColor().black),
-        child: Padding(
-          padding: EdgeInsets.only(left: ScreenUtil.instance.setWidth(40.0), right: ScreenUtil.instance.setWidth(40.0), top: ScreenUtil.instance.setWidth(15.0)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-                child: MyQuestionSAR(text: '${widget.sar} SAR'),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-                child: MyQuestion(
-                  question: widget.question,
-                  containerHeight: ScreenUtil.instance.setHeight(100.0)),
-              ),
-              Container(
-                height: ScreenUtil.instance.setHeight(240.0),
-                width: ScreenUtil.instance.setWidth(260.0),
-                margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-                child: Column(
-                      children: choicesEnd
-                          .map((item) => MyMCQChoice(
-                              choice: item,
-                              isSar: widget.isSar,
-                              snapi: widget.snapi,
-                              index: widget.index,
-                              notifyParent: widget.notifyParent,
-                              target: widget.target,
-                              doc: widget.doc,
-                              username: widget.username,
-                              sar: widget.sar,
-                              usersSar: widget.usersSar,
-                              snap: widget.snap))
-                          .toList()),
-                ),
-              ]),
-        ));
+    key: widget.key,
+    width: ScreenUtil.instance.setWidth(340.0),
+    height: ScreenUtil.instance.setHeight(250.0),
+    margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(12.0), top: ScreenUtil.instance.setWidth(0.0), right: ScreenUtil.instance.setWidth(12.0)),
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(30)),
+        color: MyColor().black),
+    child: Padding(
+      padding: EdgeInsets.only(left: ScreenUtil.instance.setWidth(40.0), right: ScreenUtil.instance.setWidth(40.0), top: ScreenUtil.instance.setWidth(15.0)),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
+            child: MyQuestionSAR(text: '${widget.sar} SAR'),
+          ),
+          Container(
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
+            child: MyQuestion(
+              question: widget.question,
+              containerHeight: ScreenUtil.instance.setHeight(100.0)),
+          ),
+          Container(
+            height: ScreenUtil.instance.setHeight(240.0),
+            width: ScreenUtil.instance.setWidth(260.0),
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
+            child: Column(
+                  children: choicesEnd
+                      .map((item) => MyMCQChoice(
+                          choice: item,
+                          isSar: widget.isSar,
+                          snapi: widget.snapi,
+                          index: widget.index,
+                          notifyParent: widget.notifyParent,
+                          target: widget.target,
+                          doc: widget.doc,
+                          username: widget.username,
+                          sar: widget.sar,
+                          usersSar: widget.usersSar,
+                          snap: widget.snap))
+                      .toList()),
+            ),
+          ]),
+    ));
   }
 
   getChoices(List<dynamic> choices) {
