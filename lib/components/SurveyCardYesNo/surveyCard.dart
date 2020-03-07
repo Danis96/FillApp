@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/inputSurveyChoice.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
 import 'package:flutter/material.dart';
@@ -9,14 +10,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../emptyCont.dart';
 
 String type;
+int isSingle;
 
 class SurveyCard extends StatefulWidget {
   final List<dynamic> snapQuestions;
   final int total;
   final String username;
   DocumentSnapshot doc;
-  SurveyCard(
-      {this.snapQuestions, this.total, this.username, this.doc});
+  SurveyCard({this.snapQuestions, this.total, this.username, this.doc});
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
@@ -88,8 +89,8 @@ Widget typeContainerAnwers(
       return yesnoWidget(widget, index, refresh);
     case 'input':
       return inputWidget(widget, index, refresh);
-    
-
+    case 'mcq':
+      return mcqWidget(widget, index, refresh, isSingle);
     default:
       return EmptyContainer();
   }
@@ -117,7 +118,94 @@ Widget yesnoWidget(widget, int index, Function refresh) {
   );
 }
 
-/// input widget 
+/// mcq widget choices
+Widget mcqWidget(widget, int index, Function refresh, int isSingle) {
+  List<dynamic> choicesList = widget.snapQuestions[index]['choices'];
+  int numberOfChoices = choicesList.length;
+  if (numberOfChoices == 3) {
+    return Column(
+      children: <Widget>[
+        MultipleChoiceSurveyChoices(
+          length: numberOfChoices,
+          isSingle: isSingle,
+          index: 'A',
+          choice1: widget.snapQuestions[index]['choices'][0]['text'],
+          notifyParent: refresh,
+          username: widget.username,
+          title: widget.snapQuestions[index]['title'],
+          doc: widget.doc,
+        ),
+        MultipleChoiceSurveyChoices(
+          length: numberOfChoices,
+          isSingle: isSingle,
+          index: 'B',
+          choice1: widget.snapQuestions[index]['choices'][1]['text'],
+          notifyParent: refresh,
+          username: widget.username,
+          title: widget.snapQuestions[index]['title'],
+          doc: widget.doc,
+        ),
+        MultipleChoiceSurveyChoices(
+          length: numberOfChoices,
+          isSingle: isSingle,
+          index: 'C',
+          choice1: widget.snapQuestions[index]['choices'][2]['text'],
+          notifyParent: refresh,
+          username: widget.username,
+          title: widget.snapQuestions[index]['title'],
+          doc: widget.doc,
+        ),
+      ],
+    );
+  } else {
+    return Column(
+      children: <Widget>[
+        MultipleChoiceSurveyChoices(
+          length: numberOfChoices,
+          isSingle: isSingle,
+          index: 'A',
+          choice1: widget.snapQuestions[index]['choices'][0]['text'],
+          notifyParent: refresh,
+          username: widget.username,
+          title: widget.snapQuestions[index]['title'],
+          doc: widget.doc,
+        ),
+        MultipleChoiceSurveyChoices(
+          length: numberOfChoices,
+          isSingle: isSingle,
+          index: 'B',
+          choice1: widget.snapQuestions[index]['choices'][1]['text'],
+          notifyParent: refresh,
+          username: widget.username,
+          title: widget.snapQuestions[index]['title'],
+          doc: widget.doc,
+        ),
+        MultipleChoiceSurveyChoices(
+          length: numberOfChoices,
+          isSingle: isSingle,
+          index: 'C',
+          choice1: widget.snapQuestions[index]['choices'][2]['text'],
+          notifyParent: refresh,
+          username: widget.username,
+          title: widget.snapQuestions[index]['title'],
+          doc: widget.doc,
+        ),
+        MultipleChoiceSurveyChoices(
+          length: numberOfChoices,
+          isSingle: isSingle,
+          index: 'D',
+          choice1: widget.snapQuestions[index]['choices'][3]['text'],
+          notifyParent: refresh,
+          username: widget.username,
+          title: widget.snapQuestions[index]['title'],
+          doc: widget.doc,
+        ),
+      ],
+    );
+  }
+}
+
+/// input widget
 Widget inputWidget(widget, int index, Function refresh) {
   return Column(
     children: <Widget>[
