@@ -3,7 +3,7 @@ class QuestionsForSurvey {
     /// 1
     {
       "name": "Milka Survey",
-      "number_of_questions": 7,
+      "number_of_questions": 10,
       "sar_total": 65,
       "target": 1000,
       "level": 1,
@@ -111,6 +111,13 @@ class QuestionsForSurvey {
             {"value": "item2", "text": "Liverpool"},
             {"value": "item3", "text": "PSG"},
           ]
+        },
+        {
+          "title": "When is your birthday?",
+          "type": "date",
+          "sar": 35,
+          "is_branching": "",
+          "choice_to_exit": "",
         },
       ]
     },

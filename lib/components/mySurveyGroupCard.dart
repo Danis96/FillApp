@@ -54,14 +54,14 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard> {
       allowFontScaling: true,
     )..init(context);
     return GestureDetector(
-      onTap: () =>
-        //  FirebaseJson().importSurveyJson()
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => SurveyCard(
-                  doc: widget.doc,
-                  username: widget.username,
-                  snapQuestions: widget.snapQuestions,
-                  total: widget.total))),
+      // onTap: () => FirebaseJson().importSurveyJson(),
+       onTap: () =>
+           Navigator.of(context).push(MaterialPageRoute(
+               builder: (_) => SurveyCard(
+                   doc: widget.doc,
+                   username: widget.username,
+                   snapQuestions: widget.snapQuestions,
+                   total: widget.total))),
       child: Container(
           key: widget.key,
           width: ScreenUtil.instance.setWidth(340.0),
