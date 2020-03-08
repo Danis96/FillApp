@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
@@ -7,9 +8,11 @@ import 'package:fillproject/components/SurveyCardYesNo/components/inputSurveyCho
 import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
+import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -19,12 +22,19 @@ String type;
 int isSingle;
 
 class SurveyCard extends StatefulWidget {
+  final PasswordArguments arguments;
   final List<dynamic> snapQuestions;
   final int total;
   final String username;
   final DocumentSnapshot doc;
   final Function isCompleted;
-  SurveyCard({this.snapQuestions, this.total, this.username, this.doc, this.isCompleted});
+  SurveyCard(
+      {this.arguments,
+      this.snapQuestions,
+      this.total,
+      this.username,
+      this.doc,
+      this.isCompleted});
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
@@ -36,52 +46,55 @@ class _YesNoSurveyState extends State<SurveyCard> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
-        },
-        child: ListView(
-          physics: NeverScrollableScrollPhysics(),
-          shrinkWrap: true,
-          children: <Widget>[
-            Container(
-              height: ScreenUtil.instance.setHeight(800.0),
-              child: PageView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  controller: _controller,
-                  itemCount: widget.snapQuestions.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    type = widget.snapQuestions[index]['type'];
-                    if(type == 'mcq') {
-                      isSingle = widget.snapQuestions[index]['is_single'];
-                      print(isSingle);
-                    }
-                    return Column(
-                      children: <Widget>[
-                        SurveyAppBar(
-                          percent: (index + 1.0) / widget.total,
-                        ),
-                        YesNoSurveySQP(
-                          type: type,
-                          answered: index + 1,
-                          answeredFrom: widget.total,
-                          sar: widget.snapQuestions[index]['sar'],
-                          question: widget.snapQuestions[index]['title'],
-                        ),
-                        typeContainerAnwers(
-                            widget, index, refresh, type),
-                      ],
-                    );
-                  }),
-            ),
-          ],
+      body: WillPopScope(
+        onWillPop: _onWillPop,
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).requestFocus(new FocusNode());
+          },
+          child: ListView(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            children: <Widget>[
+              Container(
+                height: ScreenUtil.instance.setHeight(800.0),
+                child: PageView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    controller: _controller,
+                    itemCount: widget.snapQuestions.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      type = widget.snapQuestions[index]['type'];
+                      if (type == 'mcq') {
+                        isSingle = widget.snapQuestions[index]['is_single'];
+                        print(isSingle);
+                      }
+                      return Column(
+                        children: <Widget>[
+                          SurveyAppBar(
+                            arguments: widget.arguments,
+                            percent: (index + 1.0) / widget.total,
+                          ),
+                          YesNoSurveySQP(
+                            type: type,
+                            answered: index + 1,
+                            answeredFrom: widget.total,
+                            sar: widget.snapQuestions[index]['sar'],
+                            question: widget.snapQuestions[index]['title'],
+                          ),
+                          typeContainerAnwers(widget, index, refresh, type),
+                        ],
+                      );
+                    }),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
   refresh() {
-      questionNumber--;
+    questionNumber--;
     print(questionNumber);
     if (questionNumber == 0) {
       widget.isCompleted();
@@ -95,7 +108,30 @@ class _YesNoSurveyState extends State<SurveyCard> {
     }
   }
 
-
+  /// [_onWillPop]
+  ///
+  /// async funstion that creates an exit dialog for our screen
+  /// YES / NO
+  Future<bool> _onWillPop() async {
+    return showDialog(
+          context: context,
+          builder: (context) => new AlertDialog(
+            title: Text('Are you sure?'),
+            content: new Text('Do you really want to exit the survey?'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: new Text(MyText().willNo),
+              ),
+              new FlatButton(
+                onPressed: () => exit(0),
+                child: new Text(MyText().willYes),
+              ),
+            ],
+          ),
+        ) ??
+        true;
+  }
 }
 
 /// widget koji provjerava tip i na osnovu toga vraca odgovarajuci widget
@@ -105,12 +141,15 @@ Widget typeContainerAnwers(
   int index,
   Function refresh,
   String type,
-
 ) {
   /// provjeriti tip
   switch (type) {
     case 'yesno':
-      return yesnoWidget(widget, index, refresh, );
+      return yesnoWidget(
+        widget,
+        index,
+        refresh,
+      );
     case 'input':
       return inputWidget(widget, index, refresh);
     case 'mcq':
@@ -127,7 +166,6 @@ Widget yesnoWidget(
   widget,
   int index,
   Function refresh,
-
 ) {
   return Column(
     children: <Widget>[
