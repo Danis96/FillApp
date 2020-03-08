@@ -27,13 +27,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MySurveyGroupCard extends StatefulWidget {
   final PasswordArguments arguments;
-  final int sar;
-  final String name, username;
-  final int answered;
-  final int total;
+  final String name, username, usernameSecond;
+  final int answered, total, sar;
   final DocumentSnapshot doc;
-  final List<dynamic> snapQuestions;
-  final List<dynamic> usernameFinal;
+  final List<dynamic> snapQuestions, usernameFinal;
 
   MySurveyGroupCard({
     this.arguments,
@@ -45,6 +42,7 @@ class MySurveyGroupCard extends StatefulWidget {
     this.username,
     this.doc,
     this.usernameFinal,
+    this.usernameSecond,
   });
 
   @override
@@ -58,7 +56,8 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
   @override
   void initState() {
     super.initState();
-    if (usernameFinal.contains(widget.username) == false) {
+    if (usernameFinal.contains(widget.username) == false &&
+        usernameFinal.contains(usernameSecond) == false) {
       isCompleted = false;
     } else {
       isCompleted = true;
@@ -80,7 +79,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
           // FirebaseJson().importSurveyJson(),
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
-                arguments: widget.arguments,
+                  arguments: widget.arguments,
                   isCompleted: setColor,
                   doc: widget.doc,
                   username: widget.username,
@@ -137,8 +136,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                           question: widget.name,
                           containerHeight: ScreenUtil.instance.setHeight(80.0)),
                     ),
-                       isCompleted ? StatusSurvey() : EmptyContainer(),
-                   
+                    isCompleted ? StatusSurvey() : EmptyContainer(),
                   ]))),
     );
   }
