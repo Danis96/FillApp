@@ -3,16 +3,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/routes/routeArguments.dart';
+import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SurveyChoices extends StatefulWidget {
-  final String choice1, username;
+  final PasswordArguments arguments;
+  final String choice1, username, branching;
   final Function() notifyParent;
   final String title;
   final DocumentSnapshot doc;
 
   SurveyChoices({
+    this.arguments,
+    this.branching,
     this.choice1,
     this.notifyParent,
     this.username,
@@ -71,6 +76,33 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
-    widget.notifyParent();
+    if (widget.choice1.toLowerCase() == widget.branching) {
+      showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("This survey is not compatible with your answers."),
+            content: Text("You will be redirected to Survey List."),
+            actions: [
+              FlatButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(NavBar, 
+                          arguments: PasswordArguments(
+                            email: widget.arguments.email,
+                            password: widget.arguments.password,
+                            phone: widget.arguments.phone,
+                            username: widget.arguments.username
+                          ));
+                },
+              )
+            ],
+          );
+        },
+      );
+    } else {
+      widget.notifyParent();
+    }
   }
 }
