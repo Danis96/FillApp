@@ -21,10 +21,12 @@ import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseJson.dart';
+import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MySurveyGroupCard extends StatefulWidget {
+  final PasswordArguments arguments;
   final int sar;
   final String name, username;
   final int answered;
@@ -34,6 +36,7 @@ class MySurveyGroupCard extends StatefulWidget {
   final List<dynamic> usernameFinal;
 
   MySurveyGroupCard({
+    this.arguments,
     this.sar,
     this.name,
     this.answered,
@@ -77,6 +80,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
           // FirebaseJson().importSurveyJson(),
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
+                arguments: widget.arguments,
                   isCompleted: setColor,
                   doc: widget.doc,
                   username: widget.username,

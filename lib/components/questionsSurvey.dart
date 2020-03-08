@@ -12,6 +12,13 @@ class QuestionsForSurvey {
       "list_of_usernames_that_gave_answers": [],
       "questions": [
         {
+          "title": "When is your birthday?",
+          "type": "date",
+          "sar": 35,
+          "is_branching": "",
+          "choice_to_exit": "",
+        },
+        {
           "title": "Do you love football",
           "type": "yesno",
           "sar": 10,
@@ -137,13 +144,6 @@ class QuestionsForSurvey {
             {"value": "item2", "text": "Liverpool"},
             {"value": "item3", "text": "PSG"},
           ]
-        },
-        {
-          "title": "When is your birthday?",
-          "type": "date",
-          "sar": 35,
-          "is_branching": "",
-          "choice_to_exit": "",
         },
       ]
     },

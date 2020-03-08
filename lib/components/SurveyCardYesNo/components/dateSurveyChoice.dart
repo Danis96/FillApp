@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String userAnswer;
+String day = '', month = '', year = '';
 
 class DateChoice extends StatelessWidget {
   final String username;
@@ -15,9 +16,9 @@ class DateChoice extends StatelessWidget {
   final String title;
   DateChoice({this.doc, this.notifyParent, this.username, this.title});
 
-  TextEditingController dayController = TextEditingController(text: '');
-  TextEditingController monthController = TextEditingController(text: '');
-  TextEditingController yearController = TextEditingController(text: '');
+  TextEditingController dayController = TextEditingController(text: day);
+  TextEditingController monthController = TextEditingController(text: month);
+  TextEditingController yearController = TextEditingController(text: year);
   String selectedDay, selectedMonth, selectedYear;
 
   @override
@@ -44,12 +45,13 @@ class DateChoice extends StatelessWidget {
                         builder: (BuildContext context) {
                           return GestureDetector(
                             onTap: () {
-                              Navigator.pop(context);
-                              if(selectedDay == null) {
+                              if (selectedDay == null) {
                                 selectedDay = '1';
                               }
                               print(selectedDay);
-                              dayController.text = selectedDay;
+                              day = selectedDay;
+                              dayController.text = day;
+                              Navigator.pop(context);
                             },
                             child: Container(
                                 height: ScreenUtil.instance.setHeight(265.0),
@@ -104,12 +106,13 @@ class DateChoice extends StatelessWidget {
                         builder: (BuildContext context) {
                           return GestureDetector(
                             onTap: () {
-                              Navigator.pop(context);
-                              if(selectedMonth == null) {
+                              if (selectedMonth == null) {
                                 selectedMonth = '1';
                               }
                               print(selectedMonth);
-                              monthController.text = selectedMonth;
+                              month = selectedMonth;
+                              monthController.text = month;
+                              Navigator.pop(context);
                             },
                             child: Container(
                                 height: ScreenUtil.instance.setHeight(265.0),
@@ -164,12 +167,13 @@ class DateChoice extends StatelessWidget {
                         builder: (BuildContext context) {
                           return GestureDetector(
                             onTap: () {
-                              Navigator.pop(context);
-                              if(selectedYear == null) {
+                              if (selectedYear == null) {
                                 selectedYear = '2020';
                               }
                               print(selectedYear);
-                              yearController.text = selectedYear;
+                              year = selectedYear;
+                              yearController.text = year;
+                              Navigator.pop(context);
                             },
                             child: Container(
                                 height: ScreenUtil.instance.setHeight(265.0),
@@ -255,12 +259,19 @@ class DateChoice extends StatelessWidget {
     return CupertinoPicker(
       itemExtent: 45.0,
       onSelectedItemChanged: (index) {
+        print(items[index]);
         if (field == 'year') {
           selectedYear = items[index];
+          year = selectedYear;
+          print(selectedYear);
         } else if (field == 'month') {
           selectedMonth = items[index];
+          month = selectedMonth;
+          print(selectedMonth);
         } else if (field == 'day') {
           selectedDay = items[index];
+          day = selectedDay;
+          print(selectedDay);
         }
       },
       looping: true,
@@ -269,14 +280,9 @@ class DateChoice extends StatelessWidget {
       children: List<Widget>.generate(items.length, (index) {
         return Container(
             alignment: Alignment.center,
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                items[index],
-                style: TextStyle(fontSize: ScreenUtil.instance.setSp(25.0)),
-              ),
+            child: Text(
+              items[index],
+              style: TextStyle(fontSize: ScreenUtil.instance.setSp(25.0)),
             ));
       }),
     );
@@ -288,11 +294,11 @@ class DateChoice extends StatelessWidget {
         monthController.text +
         '/' +
         yearController.text;
-        print(userAnswer);
-        FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-            doc, context, username, userAnswer, title);
-        FirebaseCrud()
-            .updateListOfUsernamesThatGaveAnswersSurvey(doc, context, username);
-        notifyParent();
-   }
+    print(userAnswer);
+    FirebaseCrud().updateListOfUsernamesAnswersSurvey(
+        doc, context, username, userAnswer, title);
+    FirebaseCrud()
+        .updateListOfUsernamesThatGaveAnswersSurvey(doc, context, username);
+    notifyParent();
+  }
 }
