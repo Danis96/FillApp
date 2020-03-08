@@ -145,8 +145,6 @@ class _MultipleChoiceSurveyChoices
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, answer, widget.title);
-    FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
-        widget.doc, context, widget.username);
     widget.notifyParent();
     multipleAnswers.removeRange(0, multipleAnswers.length);
   }

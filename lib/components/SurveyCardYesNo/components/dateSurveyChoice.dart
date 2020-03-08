@@ -297,8 +297,6 @@ class DateChoice extends StatelessWidget {
     print(userAnswer);
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         doc, context, username, userAnswer, title);
-    FirebaseCrud()
-        .updateListOfUsernamesThatGaveAnswersSurvey(doc, context, username);
     notifyParent();
   }
 }

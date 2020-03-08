@@ -11,8 +11,6 @@ class StatusSurvey extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
        height: 30.0,
-      //  width: 400.0,
-      //  margin: EdgeInsets.only(bottom: 40.0), 
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
