@@ -80,7 +80,8 @@ class _MultipleChoiceSurveyChoices
               },
           )
         ),
-        widget.isSingle == 1 ? EmptyContainer() : widget.length == 3 && widget.index == 'C' ?
+        widget.isSingle == 1 ? EmptyContainer() : widget.length == 3 && widget.index == 'C'
+         ?
         Container(
           width: ScreenUtil.instance.setWidth(316.0),
                         height: ScreenUtil.instance.setHeight(55.0),
@@ -95,7 +96,9 @@ class _MultipleChoiceSurveyChoices
           ),
           onPressed: () => submit(),
           child: Text(MyText().btnSubmit, style: TextStyle(fontSize: 18, color: MyColor().white)),
-        )) : widget.length == 4 && widget.index == 'D' ? Container(
+        ))  
+        :
+         widget.length == 4 && widget.index == 'D' ? Container(
           width: ScreenUtil.instance.setWidth(316.0),
                         height: ScreenUtil.instance.setHeight(55.0),
                         margin: EdgeInsets.only(
