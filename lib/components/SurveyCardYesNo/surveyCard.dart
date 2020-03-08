@@ -54,6 +54,7 @@ class _YesNoSurveyState extends State<SurveyCard> {
                     type = widget.snapQuestions[index]['type'];
                     if(type == 'mcq') {
                       isSingle = widget.snapQuestions[index]['is_single'];
+                      print(isSingle);
                     }
                     return Column(
                       children: <Widget>[
