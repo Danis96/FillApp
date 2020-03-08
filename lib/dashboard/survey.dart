@@ -1,3 +1,4 @@
+import 'dart:async';
 /// Survey class
 ///
 /// This class contains methods and layout for survey page.
@@ -28,7 +29,7 @@ List<dynamic> snapi = [],
     usernameFinal = [];
 DocumentSnapshot snap, doc;
 int userLevel, sar, total;
-String name, type;
+String name, type, usernameSecond;
 
 class SurveyPage extends StatefulWidget {
   final PasswordArguments arguments;
@@ -38,7 +39,17 @@ class SurveyPage extends StatefulWidget {
   _SurveyState createState() => _SurveyState();
 }
 
+
 class _SurveyState extends State<SurveyPage> {
+  
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(milliseconds: 600), () {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,6 +83,7 @@ class _SurveyState extends State<SurveyPage> {
                     itemBuilder: (context, index) {
                       snap = snapshot.data[index];
                       userLevel = snap.data['level'];
+                      usernameSecond = snap.data['username_second'];
                       return EmptyContainer();
                     });
               }
@@ -116,6 +128,7 @@ class _SurveyState extends State<SurveyPage> {
                           return MySurveyGroupCard(
                             arguments: widget.arguments,
                               usernameFinal: usernameFinal,
+                              usernameSecond: usernameSecond,
                               doc: doc,
                               sar: sar,
                               name: name,
