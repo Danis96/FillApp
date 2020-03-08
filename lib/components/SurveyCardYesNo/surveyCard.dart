@@ -14,6 +14,7 @@ import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
+import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -21,6 +22,7 @@ import '../emptyCont.dart';
 
 String type;
 int isSingle;
+String branching;
 String img;
 
 class SurveyCard extends StatefulWidget {
@@ -70,6 +72,7 @@ class _YesNoSurveyState extends State<SurveyCard> {
                         isSingle = widget.snapQuestions[index]['is_single'];
                         print(isSingle);
                       }
+                      branching =  widget.snapQuestions[index]['is_branching'];
                       return Column(
                         children: <Widget>[
                           SurveyAppBar(
@@ -151,6 +154,7 @@ Widget typeContainerAnwers(
         widget,
         index,
         refresh,
+        branching
       );
     case 'input':
       return inputWidget(widget, index, refresh);
@@ -170,10 +174,13 @@ Widget yesnoWidget(
   widget,
   int index,
   Function refresh,
+  String branching
 ) {
   return Column(
     children: <Widget>[
       SurveyChoices(
+        arguments: widget.arguments,
+        branching: branching,
         choice1: widget.snapQuestions[index]['choices'][0]['text'],
         notifyParent: refresh,
         username: widget.username,
@@ -181,6 +188,8 @@ Widget yesnoWidget(
         doc: widget.doc,
       ),
       SurveyChoices(
+        arguments: widget.arguments,
+        branching: branching,
         choice1: widget.snapQuestions[index]['choices'][1]['text'],
         notifyParent: refresh,
         username: widget.username,
