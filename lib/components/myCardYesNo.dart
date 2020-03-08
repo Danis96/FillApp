@@ -72,11 +72,12 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
             children: <Widget>[
             Container(
               margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-                child: MyQuestionSAR(text: widget.sar.toString() + ' SAR'),
+                child: MyQuestionSAR(text: widget.sar.toString() + ' SAR', isCompleted: false,),
               ),
               Container(
                 margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
                 child: MyQuestion(
+                  isCompleted: false,
                   question: widget.question,
                   containerHeight: ScreenUtil.instance.setHeight(90.0)),
               ),
