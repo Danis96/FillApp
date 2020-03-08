@@ -15,60 +15,10 @@ class DateChoice extends StatelessWidget {
   final String title;
   DateChoice({this.doc, this.notifyParent, this.username, this.title});
 
-  TextEditingController dayController = TextEditingController();
-  TextEditingController monthController = TextEditingController();
-  TextEditingController yearController = TextEditingController();
-
-  List<String> days = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-    "19",
-    "20",
-    "21",
-    "22",
-    "23",
-    "24",
-    "25",
-    "26",
-    "27",
-    "28",
-    "29",
-    "30",
-    "31",
-  ];
-
-  List<String> months = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-  ];
-
-  int selectedItem = 0;
+  TextEditingController dayController = TextEditingController(text: '');
+  TextEditingController monthController = TextEditingController(text: '');
+  TextEditingController yearController = TextEditingController(text: '');
+  String selectedDay, selectedMonth, selectedYear;
 
   @override
   Widget build(BuildContext context) {
@@ -92,19 +42,28 @@ class DateChoice extends StatelessWidget {
                     showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
-                          return Container(
-                              height: ScreenUtil.instance.setHeight(280.0),
-                              child: _buildItemPicker(days, 'day', context));
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                              if(selectedDay == null) {
+                                selectedDay = '1';
+                              }
+                              print(selectedDay);
+                              dayController.text = selectedDay;
+                            },
+                            child: Container(
+                                height: ScreenUtil.instance.setHeight(265.0),
+                                child: _buildItemPicker('day', context)),
+                          );
                         });
                   },
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
                   controller: dayController,
                   decoration: InputDecoration(
-                    // floati ngLabelBehavior: FloatingLabelBehavior.never,
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
-                        vertical: 25.0, horizontal: 35.0),
+                        vertical: 25.0, horizontal: 25.0),
                     labelText: 'Day',
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
@@ -141,13 +100,21 @@ class DateChoice extends StatelessWidget {
                   readOnly: true,
                   onTap: () {
                     showModalBottomSheet(
-                        elevation: 1.0,
                         context: context,
                         builder: (BuildContext context) {
-                          return Container(
-                              height: ScreenUtil.instance.setHeight(280.0),
-                              child:
-                                  _buildItemPicker(months, 'month', context));
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                              if(selectedMonth == null) {
+                                selectedMonth = '1';
+                              }
+                              print(selectedMonth);
+                              monthController.text = selectedMonth;
+                            },
+                            child: Container(
+                                height: ScreenUtil.instance.setHeight(265.0),
+                                child: _buildItemPicker('month', context)),
+                          );
                         });
                   },
                   enableSuggestions: false,
@@ -156,7 +123,7 @@ class DateChoice extends StatelessWidget {
                   decoration: InputDecoration(
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
-                        vertical: 25.0, horizontal: 35.0),
+                        vertical: 25.0, horizontal: 25.0),
                     labelText: 'Month',
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
@@ -195,9 +162,19 @@ class DateChoice extends StatelessWidget {
                     showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
-                          return Container(
-                              height: ScreenUtil.instance.setHeight(280.0),
-                              child: _buildItemPicker(days, 'year', context));
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                              if(selectedYear == null) {
+                                selectedYear = '2020';
+                              }
+                              print(selectedYear);
+                              yearController.text = selectedYear;
+                            },
+                            child: Container(
+                                height: ScreenUtil.instance.setHeight(265.0),
+                                child: _buildItemPicker('year', context)),
+                          );
                         });
                   },
                   enableSuggestions: false,
@@ -207,7 +184,7 @@ class DateChoice extends StatelessWidget {
                     // floati ngLabelBehavior: FloatingLabelBehavior.never,
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
-                        vertical: 25.0, horizontal: 35.0),
+                        vertical: 25.0, horizontal: 25.0),
                     labelText: 'Year',
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
@@ -257,45 +234,52 @@ class DateChoice extends StatelessWidget {
     );
   }
 
-  Widget _buildItemPicker(
-      List<dynamic> items, String field, BuildContext context) {
+  Widget _buildItemPicker(String field, BuildContext context) {
+    List<dynamic> items = [];
     if (field == 'year') {
       items.removeRange(0, items.length);
       for (int i = 2020; i >= 1900; i--) {
         items.add(i.toString());
       }
+    } else if (field == 'month') {
+      items.removeRange(0, items.length);
+      for (int i = 1; i <= 12; i++) {
+        items.add(i.toString());
+      }
+    } else if (field == 'day') {
+      items.removeRange(0, items.length);
+      for (int i = 1; i <= 31; i++) {
+        items.add(i.toString());
+      }
     }
     return CupertinoPicker(
       itemExtent: 45.0,
-      onSelectedItemChanged: null,
-      children: new List<Widget>.generate(items.length, (index) {
-        return ListTile(
-            title: Container(
-                alignment: Alignment.center, child: Text(items[index])),
-            onTap: () => print(items[index]));
+      onSelectedItemChanged: (index) {
+        if (field == 'year') {
+          selectedYear = items[index];
+        } else if (field == 'month') {
+          selectedMonth = items[index];
+        } else if (field == 'day') {
+          selectedDay = items[index];
+        }
+      },
+      looping: true,
+      useMagnifier: true,
+      magnification: 1.2,
+      children: List<Widget>.generate(items.length, (index) {
+        return Container(
+            alignment: Alignment.center,
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                items[index],
+                style: TextStyle(fontSize: ScreenUtil.instance.setSp(25.0)),
+              ),
+            ));
       }),
     );
-  }
-
-  selectItem(String item, BuildContext context, String field) {
-    print(field + ' ' + item);
-    // switch (field) {
-    //   case 'day':
-    //     dayController.text = item;
-    //     print(item);
-    //     break;
-    //   case 'month':
-    //     monthController.text = item;
-    //     print(item);
-    //     break;
-    //   case 'year':
-    //     yearController.text = item;
-    //     print(item);
-    //     break;
-    //   default:
-    // }
-    Navigator.pop(context);
-    
   }
 
   onPressed(BuildContext context) {
@@ -304,10 +288,11 @@ class DateChoice extends StatelessWidget {
         monthController.text +
         '/' +
         yearController.text;
-    FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-        doc, context, username, userAnswer, title);
-    FirebaseCrud()
-        .updateListOfUsernamesThatGaveAnswersSurvey(doc, context, username);
-    notifyParent();
-  }
+        print(userAnswer);
+        FirebaseCrud().updateListOfUsernamesAnswersSurvey(
+            doc, context, username, userAnswer, title);
+        FirebaseCrud()
+            .updateListOfUsernamesThatGaveAnswersSurvey(doc, context, username);
+        notifyParent();
+   }
 }
