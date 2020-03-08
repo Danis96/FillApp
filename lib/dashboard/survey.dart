@@ -12,6 +12,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
@@ -53,12 +54,12 @@ class _SurveyState extends State<SurveyPage> {
                 top: ScreenUtil.instance.setWidth(45.0),
                 bottom: ScreenUtil.instance.setWidth(15.0)),
             child: Text('Survey List',
-                style: TextStyle(
-                    color: MyColor().black,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "LoewNextArabic",
-                    fontStyle: FontStyle.normal,
-                    fontSize: ScreenUtil.instance.setSp(24.0))),
+                  style: TextStyle(
+                      color: MyColor().black,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "LoewNextArabic",
+                      fontStyle: FontStyle.normal,
+                      fontSize: ScreenUtil.instance.setSp(24.0))),
           )),
           FutureBuilder(
             future: FirebaseCheck().getUserUsername(widget.arguments.username),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/dateSurveyChoice.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/imageChoice.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/inputSurveyChoice.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
@@ -17,6 +18,7 @@ import '../emptyCont.dart';
 
 String type;
 int isSingle;
+String img;
 
 class SurveyCard extends StatefulWidget {
   final List<dynamic> snapQuestions;
@@ -24,7 +26,12 @@ class SurveyCard extends StatefulWidget {
   final String username;
   final DocumentSnapshot doc;
   final Function isCompleted;
-  SurveyCard({this.snapQuestions, this.total, this.username, this.doc, this.isCompleted});
+  SurveyCard(
+      {this.snapQuestions,
+      this.total,
+      this.username,
+      this.doc,
+      this.isCompleted});
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
@@ -52,7 +59,7 @@ class _YesNoSurveyState extends State<SurveyCard> {
                   itemCount: widget.snapQuestions.length,
                   itemBuilder: (BuildContext context, int index) {
                     type = widget.snapQuestions[index]['type'];
-                    if(type == 'mcq') {
+                    if (type == 'mcq') {
                       isSingle = widget.snapQuestions[index]['is_single'];
                     }
                     return Column(
@@ -67,8 +74,7 @@ class _YesNoSurveyState extends State<SurveyCard> {
                           sar: widget.snapQuestions[index]['sar'],
                           question: widget.snapQuestions[index]['title'],
                         ),
-                        typeContainerAnwers(
-                            widget, index, refresh, type),
+                        typeContainerAnwers(widget, index, refresh, type),
                       ],
                     );
                   }),
@@ -80,7 +86,7 @@ class _YesNoSurveyState extends State<SurveyCard> {
   }
 
   refresh() {
-      questionNumber--;
+    questionNumber--;
     print(questionNumber);
     if (questionNumber == 0) {
       widget.isCompleted();
@@ -93,8 +99,6 @@ class _YesNoSurveyState extends State<SurveyCard> {
           duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
   }
-
-
 }
 
 /// widget koji provjerava tip i na osnovu toga vraca odgovarajuci widget
@@ -104,18 +108,23 @@ Widget typeContainerAnwers(
   int index,
   Function refresh,
   String type,
-
 ) {
   /// provjeriti tip
   switch (type) {
     case 'yesno':
-      return yesnoWidget(widget, index, refresh, );
+      return yesnoWidget(
+        widget,
+        index,
+        refresh,
+      );
     case 'input':
       return inputWidget(widget, index, refresh);
     case 'mcq':
       return mcqWidget(widget, index, refresh, isSingle);
     case 'date':
       return dateWidget(widget, index, refresh);
+    case 'image':
+      return imageWidget(widget, index, refresh);
     default:
       return EmptyContainer();
   }
@@ -126,7 +135,6 @@ Widget yesnoWidget(
   widget,
   int index,
   Function refresh,
-
 ) {
   return Column(
     children: <Widget>[
@@ -257,6 +265,27 @@ Widget dateWidget(widget, int index, Function refresh) {
         notifyParent: refresh,
         username: widget.username,
         title: widget.snapQuestions[index]['title'],
+        doc: widget.doc,
+      ),
+    ],
+  );
+}
+
+Widget imageWidget(widget, int index, Function refresh) {
+  return Column(
+    children: <Widget>[
+      ImageChoice(
+        notifyParent: refresh,
+        title: widget.snapQuestions[index]['title'],
+        username: widget.username,
+        choice1: widget.snapQuestions[index]['choices'][0]['text'],
+        choice2: widget.snapQuestions[index]['choices'][1]['text'],
+        choice3: widget.snapQuestions[index]['choices'][2]['text'],
+        choice4: widget.snapQuestions[index]['choices'][3]['text'],
+        text1: widget.snapQuestions[index]['choices'][0]['value'],
+        text2: widget.snapQuestions[index]['choices'][1]['value'],
+        text3: widget.snapQuestions[index]['choices'][2]['value'],
+        text4: widget.snapQuestions[index]['choices'][3]['value'],
         doc: widget.doc,
       ),
     ],
