@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/dateSurveyChoice.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/imageChoice.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/inputSurveyChoice.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
@@ -22,6 +23,7 @@ import '../emptyCont.dart';
 String type;
 int isSingle;
 String branching;
+String img;
 
 class SurveyCard extends StatefulWidget {
   final PasswordArguments arguments;
@@ -160,6 +162,8 @@ Widget typeContainerAnwers(
       return mcqWidget(widget, index, refresh, isSingle);
     case 'date':
       return dateWidget(widget, index, refresh);
+    case 'image':
+      return imageWidget(widget, index, refresh);
     default:
       return EmptyContainer();
   }
@@ -310,3 +314,25 @@ Widget dateWidget(widget, int index, Function refresh) {
     ],
   );
 }
+
+Widget imageWidget(widget, int index, Function refresh) {
+  return Column(
+    children: <Widget>[
+      ImageChoice(
+        notifyParent: refresh,
+        title: widget.snapQuestions[index]['title'],
+        username: widget.username,
+        choice1: widget.snapQuestions[index]['choices'][0]['text'],
+        choice2: widget.snapQuestions[index]['choices'][1]['text'],
+        choice3: widget.snapQuestions[index]['choices'][2]['text'],
+        choice4: widget.snapQuestions[index]['choices'][3]['text'],
+        text1: widget.snapQuestions[index]['choices'][0]['value'],
+        text2: widget.snapQuestions[index]['choices'][1]['value'],
+        text3: widget.snapQuestions[index]['choices'][2]['value'],
+        text4: widget.snapQuestions[index]['choices'][3]['value'],
+        doc: widget.doc,
+      ),
+    ],
+  );
+}
+

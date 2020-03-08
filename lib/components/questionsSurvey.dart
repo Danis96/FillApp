@@ -1,7 +1,7 @@
 class QuestionsForSurvey {
   final qSurvey = [
     {
-    /// 1
+      /// 1
       "name": "SportSurvey",
       "number_of_questions": 10,
       "sar_total": 80,
@@ -30,6 +30,19 @@ class QuestionsForSurvey {
           ]
         },
         {
+          "title": "Choose the right image",
+          "type": "image",
+          "sar": 10,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": ""},
+            {"value": "item2", "text": ""},
+            {"value": "item1", "text": ""},
+            {"value": "item2", "text": ""},
+          ]
+        },
+        {
           "title": "Do you love beer",
           "type": "yesno",
           "sar": 10,
@@ -46,6 +59,19 @@ class QuestionsForSurvey {
           "sar": 10,
           "is_branching": "",
           "choice_to_exit": "",
+        },
+        {
+          "title": "Choose the appropriate image",
+          "type": "image",
+          "sar": 10,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": ""},
+            {"value": "item2", "text": ""},
+            {"value": "item3", "text": ""},
+            {"value": "item4", "text": ""},
+          ]
         },
         {
           "title": "Do you love flutter",

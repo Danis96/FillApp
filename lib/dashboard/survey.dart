@@ -1,3 +1,4 @@
+import 'dart:async';
 /// Survey class
 ///
 /// This class contains methods and layout for survey page.
@@ -12,6 +13,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
@@ -27,7 +29,7 @@ List<dynamic> snapi = [],
     usernameFinal = [];
 DocumentSnapshot snap, doc;
 int userLevel, sar, total;
-String name, type;
+String name, type, usernameSecond;
 
 class SurveyPage extends StatefulWidget {
   final PasswordArguments arguments;
@@ -37,7 +39,17 @@ class SurveyPage extends StatefulWidget {
   _SurveyState createState() => _SurveyState();
 }
 
+
 class _SurveyState extends State<SurveyPage> {
+  
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(milliseconds: 600), () {
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,12 +65,12 @@ class _SurveyState extends State<SurveyPage> {
                 top: ScreenUtil.instance.setWidth(45.0),
                 bottom: ScreenUtil.instance.setWidth(15.0)),
             child: Text('Survey List',
-                style: TextStyle(
-                    color: MyColor().black,
-                    fontWeight: FontWeight.w700,
-                    fontFamily: "LoewNextArabic",
-                    fontStyle: FontStyle.normal,
-                    fontSize: ScreenUtil.instance.setSp(24.0))),
+                  style: TextStyle(
+                      color: MyColor().black,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "LoewNextArabic",
+                      fontStyle: FontStyle.normal,
+                      fontSize: ScreenUtil.instance.setSp(24.0))),
           )),
           FutureBuilder(
             future: FirebaseCheck().getUserUsername(widget.arguments.username),
@@ -71,6 +83,7 @@ class _SurveyState extends State<SurveyPage> {
                     itemBuilder: (context, index) {
                       snap = snapshot.data[index];
                       userLevel = snap.data['level'];
+                      usernameSecond = snap.data['username_second'];
                       return EmptyContainer();
                     });
               }
@@ -115,6 +128,7 @@ class _SurveyState extends State<SurveyPage> {
                           return MySurveyGroupCard(
                             arguments: widget.arguments,
                               usernameFinal: usernameFinal,
+                              usernameSecond: usernameSecond,
                               doc: doc,
                               sar: sar,
                               name: name,
