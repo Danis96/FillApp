@@ -113,6 +113,7 @@ class _SurveyState extends State<SurveyPage> {
                           usernameFinal = snapi[index].usersCompleted;
 
                           return MySurveyGroupCard(
+                            arguments: widget.arguments,
                               usernameFinal: usernameFinal,
                               doc: doc,
                               sar: sar,
