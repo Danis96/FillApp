@@ -12,30 +12,36 @@ String userAnswer;
 bool fieldColor1 = false;
 bool fieldColor2 = false;
 bool fieldColor3 = false;
-String day = '', month = '', year = '';
 
 class DateChoice extends StatefulWidget {
   final String username;
   final Function() notifyParent;
   final DocumentSnapshot doc;
   final String title;
-  DateChoice({this.doc, this.notifyParent, this.username, this.title});
+  String day, month, year;
+  DateChoice({this.doc, this.notifyParent, this.username, this.title, this.day, this.month, this.year});
 
   @override
   _DateChoiceState createState() => _DateChoiceState();
 }
+  TextEditingController dayController = TextEditingController(text: '');
+  TextEditingController monthController = TextEditingController(text: '');
+  TextEditingController yearController = TextEditingController(text: '');
+  String selectedDay, selectedMonth, selectedYear;
 
 class _DateChoiceState extends State<DateChoice> {
-  TextEditingController dayController = TextEditingController(text: day);
-  TextEditingController monthController = TextEditingController(text: month);
-  TextEditingController yearController = TextEditingController(text: year);
-  String selectedDay, selectedMonth, selectedYear;
+
+  @override
+  void initState() { 
+    super.initState();
+    dayController.text = '';
+    monthController.text = '';
+    yearController.text = '';
+  }
 
   @override
   Widget build(BuildContext context) {
-    day = '';
-    month = '';
-    year = '';
+  
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
@@ -84,8 +90,8 @@ class _DateChoiceState extends State<DateChoice> {
                                       selectedDay = '1';
                                     }
                                     print(selectedDay);
-                                    day = selectedDay;
-                                    dayController.text = day;
+                                    widget.day = selectedDay;
+                                    dayController.text = widget.day;
                                     Navigator.pop(context);
                                   },
                                   child: Container(
@@ -177,8 +183,8 @@ class _DateChoiceState extends State<DateChoice> {
                                       selectedMonth = '1';
                                     }
                                     print(selectedMonth);
-                                    month = selectedMonth;
-                                    monthController.text = month;
+                                    widget.month = selectedMonth;
+                                    monthController.text = widget.month;
                                     Navigator.pop(context);
                                   },
                                   child: Container(
@@ -271,8 +277,8 @@ class _DateChoiceState extends State<DateChoice> {
                                       selectedYear = '2020';
                                     }
                                     print(selectedYear);
-                                    year = selectedYear;
-                                    yearController.text = year;
+                                    widget.year = selectedYear;
+                                    yearController.text = widget.year;
                                     Navigator.pop(context);
                                   },
                                   child: Container(
@@ -384,15 +390,15 @@ class _DateChoiceState extends State<DateChoice> {
         print(items[index]);
         if (field == 'year') {
           selectedYear = items[index];
-          year = selectedYear;
+          widget.year = selectedYear;
           print(selectedYear);
         } else if (field == 'month') {
           selectedMonth = items[index];
-          month = selectedMonth;
+          widget.month = selectedMonth;
           print(selectedMonth);
         } else if (field == 'day') {
           selectedDay = items[index];
-          day = selectedDay;
+          widget.day = selectedDay;
           print(selectedDay);
         }
       },
@@ -453,9 +459,9 @@ class _DateChoiceState extends State<DateChoice> {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       widget.notifyParent();
-      day = '';
-      month = '';
-      year = '';
+      dayController.text = '';
+      monthController.text = '';
+      yearController.text = '';
     }
   }
 }
