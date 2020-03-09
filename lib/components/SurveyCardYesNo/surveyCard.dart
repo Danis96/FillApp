@@ -42,6 +42,8 @@ class SurveyCard extends StatefulWidget {
     this.isCompleted,
     this.increaseAnswered,
     this.number,
+    this.userDoc,
+    this.userSar,
   });
 
 
