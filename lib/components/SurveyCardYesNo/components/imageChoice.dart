@@ -38,6 +38,16 @@ class ImageChoice extends StatefulWidget {
 }
 
 class _ImageChoiceState extends State<ImageChoice> {
+
+  @override
+  void initState() { 
+    super.initState();
+    isTapped1 = false;
+    isTapped2 = false;
+    isTapped3 = false;
+    isTapped4 = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -358,10 +368,6 @@ class _ImageChoiceState extends State<ImageChoice> {
   }
 
   multipleSubmit() {
-    isTapped1 = false;
-    isTapped2 = false;
-    isTapped3 = false;
-    isTapped4 = false;
     onPressed(widget.multipleChoices.toString());
   }
 
