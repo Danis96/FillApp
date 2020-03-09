@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class SurveyQuestionModel {
   final String choiceToExit, title;
   final List<dynamic> choices, listOfUsername;

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
@@ -7,18 +9,29 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String userAnswer;
+bool fieldColor1 = false;
+bool fieldColor2 = false;
+bool fieldColor3 = false;
 String day = '', month = '', year = '';
 
-class DateChoice extends StatelessWidget {
+class DateChoice extends StatefulWidget {
   final String username;
   final Function() notifyParent;
   final DocumentSnapshot doc;
   final String title;
   DateChoice({this.doc, this.notifyParent, this.username, this.title});
 
+  @override
+  _DateChoiceState createState() => _DateChoiceState();
+}
+
+class _DateChoiceState extends State<DateChoice> {
   TextEditingController dayController = TextEditingController(text: day);
+
   TextEditingController monthController = TextEditingController(text: month);
+
   TextEditingController yearController = TextEditingController(text: year);
+
   String selectedDay, selectedMonth, selectedYear;
 
   @override
@@ -70,11 +83,15 @@ class DateChoice extends StatelessWidget {
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(color: MyColor().black),
+                      borderSide: BorderSide(
+                        color: fieldColor1 ? MyColor().error : MyColor().black,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(color: MyColor().black),
+                      borderSide: BorderSide(
+                        color: fieldColor1 ? MyColor().error : MyColor().black,
+                      ),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -131,11 +148,15 @@ class DateChoice extends StatelessWidget {
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(color: MyColor().black),
+                      borderSide: BorderSide(
+                        color: fieldColor2 ? MyColor().error : MyColor().black,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(color: MyColor().black),
+                      borderSide: BorderSide(
+                        color: fieldColor2 ? MyColor().error : MyColor().black,
+                      ),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -193,11 +214,15 @@ class DateChoice extends StatelessWidget {
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(color: MyColor().black),
+                      borderSide: BorderSide(
+                        color: fieldColor3 ? MyColor().error : MyColor().black,
+                      ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(color: MyColor().black),
+                      borderSide: BorderSide(
+                        color: fieldColor3 ? MyColor().error : MyColor().black,
+                      ),
                     ),
                     focusedErrorBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -216,6 +241,15 @@ class DateChoice extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          Container(
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
+            child: fieldColor1 || fieldColor2 || fieldColor3
+                ? Text(
+                    MyText().emptyFieldSnack,
+                    style: TextStyle(color: MyColor().error),
+                  )
+                : Text(''),
           ),
           Container(
               width: ScreenUtil.instance.setWidth(316.0),
@@ -289,14 +323,51 @@ class DateChoice extends StatelessWidget {
   }
 
   onPressed(BuildContext context) {
-    userAnswer = dayController.text +
-        '/' +
-        monthController.text +
-        '/' +
-        yearController.text;
-    print(userAnswer);
-    FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-        doc, context, username, userAnswer, title);
-    notifyParent();
+    if (dayController.text.length == 0) {
+      setState(() {
+        fieldColor1 = true;
+      });
+      Timer(Duration(seconds: 3), () {
+        setState(() {
+          fieldColor1 = false;
+        });
+      });
+    } else if (monthController.text.length == 0) {
+      setState(() {
+        fieldColor2 = true;
+      });
+      Timer(Duration(seconds: 3), () {
+        setState(() {
+          fieldColor2 = false;
+        });
+      });
+    } else if (yearController.text.length == 0) {
+      setState(() {
+        fieldColor3 = true;
+      });
+      Timer(Duration(seconds: 3), () {
+        setState(() {
+          fieldColor3 = false;
+        });
+      });
+    } else {
+      setState(() {
+        fieldColor1 = false;
+        fieldColor2 = false;
+        fieldColor3 = false;
+      });
+      userAnswer = dayController.text +
+          '/' +
+          monthController.text +
+          '/' +
+          yearController.text;
+      print(userAnswer);
+      FirebaseCrud().updateListOfUsernamesAnswersSurvey(
+          widget.doc, context, widget.username, userAnswer, widget.title);
+      widget.notifyParent();
+      day = '';
+      month = '';
+      year = '';
+    }
   }
 }

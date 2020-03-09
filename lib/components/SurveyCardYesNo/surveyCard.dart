@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/dateSurveyChoice.dart';
@@ -10,11 +9,9 @@ import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoice
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
 import 'package:fillproject/components/constants/myText.dart';
-import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -48,7 +45,6 @@ class _YesNoSurveyState extends State<SurveyCard> {
   PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: WillPopScope(
         onWillPop: _onWillPop,

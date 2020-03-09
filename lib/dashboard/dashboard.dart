@@ -14,7 +14,6 @@
 /// Authors: Sena Cikic, Danis Preldzic, Adi Cengic, Jusuf Elfarahati
 /// Tech387 - T2
 /// Feb, 2020
-
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -25,12 +24,9 @@ import 'package:fillproject/components/myCardMCQ.dart';
 import 'package:fillproject/components/myCardYesNo.dart';
 import 'package:fillproject/components/myCashBalance.dart';
 import 'package:fillproject/components/mySAR.dart';
-
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
-import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/FlashQuestion/questionModel.dart';
-
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
