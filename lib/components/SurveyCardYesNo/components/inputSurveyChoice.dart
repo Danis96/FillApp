@@ -39,11 +39,12 @@ class _InputChoiceState extends State<InputChoice> {
           height: ScreenUtil.instance.setWidth(65.0),
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
           child: TextFormField(
+            maxLength: 60,
             enableSuggestions: false,
             style: TextStyle(color: Colors.black),
             controller: answerController,
             decoration: InputDecoration(
-              // floati ngLabelBehavior: FloatingLabelBehavior.never,
+              counterText: '',
               hasFloatingPlaceholder: false,
               contentPadding:
                   new EdgeInsets.symmetric(vertical: 25.0, horizontal: 35.0),

@@ -24,7 +24,7 @@ class SurveyAppBar extends StatelessWidget {
           /// backbtn and indicator
           Container(
             margin: EdgeInsets.only(
-                top: ScreenUtil.instance.setWidth(60.0),
+                top: ScreenUtil.instance.setWidth(20.0),
                 left: ScreenUtil.instance.setWidth(40.0)),
             child: IconButton(
                 icon: Icon(Icons.arrow_back_ios),
@@ -57,7 +57,7 @@ class SurveyAppBar extends StatelessWidget {
           ),
           Container(
               margin: EdgeInsets.only(
-                  top: ScreenUtil.instance.setWidth(60.0),
+                  top: ScreenUtil.instance.setWidth(20.0),
                   left: ScreenUtil.instance.setWidth(30.0)),
               child: LinearPercentIndicator(
                 width: 170.0,
