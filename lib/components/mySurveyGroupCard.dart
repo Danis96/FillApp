@@ -78,7 +78,21 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     return GestureDetector(
       onTap: () {
         if (!isCompleted) {
-          // FirebaseJson().importSurveyJson(),
+          // List<dynamic> lista = doc.data['questions'];
+          // // print(lista[1]['is_branching']);
+          // for(int i = 0; i < lista.length; i++) {
+          //   print(lista[i]['is_branching']);
+          //   if(lista[i]['is_branching'] == 'yes') {
+          //     lista.insert(0, lista[i]);
+          //     break;
+          //   }
+          // }
+          // print('Lista nakon pomjeranja!!!');
+          // for(int i = 0; i < lista.length; i++) {
+          //   print(lista[i]['is_branching']);
+          // }
+
+          //FirebaseJson().importSurveyJson(),
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
                 userDoc: widget.userDoc,

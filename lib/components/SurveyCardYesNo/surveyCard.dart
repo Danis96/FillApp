@@ -20,7 +20,7 @@ import '../emptyCont.dart';
 
 String type;
 int isSingle;
-String branching;
+String branching, branchingChoice;
 String img;
 
 class SurveyCard extends StatefulWidget {
@@ -80,6 +80,7 @@ class _YesNoSurveyState extends State<SurveyCard> {
                         isSingle = widget.snapQuestions[index]['is_single'];
                       }
                       branching =  widget.snapQuestions[index]['is_branching'];
+                      branchingChoice = widget.snapQuestions[index]['choice_to_exit'];
                       return Column(
                         children: <Widget>[
                           SurveyAppBar(
@@ -185,7 +186,8 @@ Widget typeContainerAnwers(
         widget,
         index,
         refresh,
-        branching
+        branching,
+        branchingChoice
       );
     case 'input':
       return inputWidget(widget, index, refresh);
@@ -205,13 +207,15 @@ Widget yesnoWidget(
   widget,
   int index,
   Function refresh,
-  String branching
+  String branching,
+  String branchingChoice
 ) {
   return Column(
     children: <Widget>[
       SurveyChoices(
         arguments: widget.arguments,
         branching: branching,
+        branchingChoice: branchingChoice,
         choice1: widget.snapQuestions[index]['choices'][0]['text'],
         notifyParent: refresh,
         username: widget.username,
@@ -221,6 +225,7 @@ Widget yesnoWidget(
       SurveyChoices(
         arguments: widget.arguments,
         branching: branching,
+        branchingChoice: branchingChoice,
         choice1: widget.snapQuestions[index]['choices'][1]['text'],
         notifyParent: refresh,
         username: widget.username,
