@@ -79,6 +79,8 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
         widget.doc, context, widget.username, widget.choice1, widget.title);
     if (widget.branching == 'yes') {
       if (widget.choice1.toLowerCase() == widget.branchingChoice) {
+        FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
+          widget.doc, context, widget.username);
         showDialog(
           barrierDismissible: false,
           context: context,
