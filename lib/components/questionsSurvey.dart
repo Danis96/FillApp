@@ -2,14 +2,19 @@ class QuestionsForSurvey {
   final qSurvey = [
     {
       /// 1
-      "name": "SportSurvey",
+      "name": "TestSurvey",
       "number_of_questions": 10,
       "sar_total": 80,
       "target": 1000,
       "level": 1,
       "users_completed": [],
       "list_of_username_answers": [],
-      "list_of_usernames_that_gave_answers": [],
+      "list_of_usernames_that_gave_answers": [
+         {
+            "user": "",
+            "answerProgress":  ""
+         }
+      ],
       "questions": [
         {
           "title": "When is your birthday?",

@@ -24,12 +24,15 @@ import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../firebaseMethods/firebaseJson.dart';
+import '../globals.dart';
+
 class MySurveyGroupCard extends StatefulWidget {
   final PasswordArguments arguments;
   final String name, username, usernameSecond;
   final int answered, total, sar;
   final DocumentSnapshot doc;
-  final List<dynamic> snapQuestions, usernameFinal;
+  final List<dynamic> snapQuestions, usernameFinal, userProgress;
 
   MySurveyGroupCard({
     this.arguments,
@@ -42,6 +45,7 @@ class MySurveyGroupCard extends StatefulWidget {
     this.doc,
     this.usernameFinal,
     this.usernameSecond,
+    this.userProgress,
   });
 
   @override
@@ -50,7 +54,9 @@ class MySurveyGroupCard extends StatefulWidget {
 
 class _MySurveyGroupCard extends State<MySurveyGroupCard>
     with AutomaticKeepAliveClientMixin<MySurveyGroupCard> {
-  bool isCompleted = false;
+  bool isCompleted = false, isFirst = false;
+  int number = 0;
+  List<dynamic> endProgress;
 
   @override
   void initState() {
@@ -75,10 +81,13 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     )..init(context);
     return GestureDetector(
       onTap: () {
+        //  FirebaseJson().importSurveyJson();
         if (!isCompleted) {
-          // FirebaseJson().importSurveyJson(),
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
+                  isFirst: isFirst,
+                  number: number,
+                  increaseAnswered: increaseAnswered,
                   arguments: widget.arguments,
                   isCompleted: setColor,
                   doc: widget.doc,
@@ -125,7 +134,9 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                               left: ScreenUtil.instance.setWidth(83.0)),
                           child: MyProgressNumbers(
                               isCompleted: isCompleted,
-                              answered: isCompleted ? widget.total : 0,
+                              answered: isCompleted
+                                  ? widget.total
+                                  : number,
                               total: widget.total),
                         ),
                       ],
@@ -148,6 +159,16 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       isCompleted = true;
     });
   }
+
+  increaseAnswered() {
+    setState(() {
+      number++;
+    });
+    print(number);
+  }
+
+
+
 
   @override
   bool get wantKeepAlive => true;

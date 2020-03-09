@@ -103,7 +103,6 @@ class _SurveyState extends State<SurveyPage> {
                     (value) => FirebaseCheck().getSurveyGroups(userLevel)),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-
                     if (!isVisible) {
                       snapi = snapshot.data
                           .map((doc) => Survey.fromDocument(doc))
@@ -131,6 +130,7 @@ class _SurveyState extends State<SurveyPage> {
                               arguments: widget.arguments,
                               usernameFinal: usernameFinal,
                               usernameSecond: usernameSecond,
+                              userProgress: usernamesThatAnswers,
                               doc: doc,
                               sar: sar,
                               name: name,
@@ -142,7 +142,6 @@ class _SurveyState extends State<SurveyPage> {
 
                   return Center(
                     child: Container(
-                      
                       child: CircularProgressIndicator(),
                     ),
                   );

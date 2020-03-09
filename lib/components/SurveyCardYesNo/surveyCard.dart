@@ -26,24 +26,38 @@ String img;
 class SurveyCard extends StatefulWidget {
   final PasswordArguments arguments;
   final List<dynamic> snapQuestions;
-  final int total;
+  final int total, number;
   final String username;
   final DocumentSnapshot doc;
   final Function isCompleted;
-  SurveyCard(
-      {this.arguments,
-      this.snapQuestions,
-      this.total,
-      this.username,
-      this.doc,
-      this.isCompleted});
+  final Function increaseAnswered;
+  SurveyCard({
+    this.arguments,
+    this.snapQuestions,
+    this.total,
+    this.username,
+    this.doc,
+    this.isCompleted,
+    this.increaseAnswered,
+    this.number,
+  });
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
 }
 
-class _YesNoSurveyState extends State<SurveyCard> {
+class _YesNoSurveyState extends State<SurveyCard>
+    with AutomaticKeepAliveClientMixin<SurveyCard> {
+  int number1;
   PageController _controller = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(
+        keepPage: true, initialPage: widget.number);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,14 +79,13 @@ class _YesNoSurveyState extends State<SurveyCard> {
                     itemCount: widget.snapQuestions.length,
                     itemBuilder: (BuildContext context, int index) {
                       type = widget.snapQuestions[index]['type'];
-
                       if (type == 'mcq') {
                         isSingle = widget.snapQuestions[index]['is_single'];
                       }
                       if (type == 'image') {
                         isSingle = widget.snapQuestions[index]['is_single'];
                       }
-                      branching =  widget.snapQuestions[index]['is_branching'];
+                      branching = widget.snapQuestions[index]['is_branching'];
                       return Column(
                         children: <Widget>[
                           SurveyAppBar(
@@ -100,7 +113,7 @@ class _YesNoSurveyState extends State<SurveyCard> {
 
   refresh() {
     questionNumber--;
-    print(questionNumber);
+    widget.increaseAnswered();
     if (questionNumber == 0) {
       widget.isCompleted();
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
@@ -128,13 +141,12 @@ class _YesNoSurveyState extends State<SurveyCard> {
                 child: new Text(MyText().willNo),
               ),
               new FlatButton(
-                onPressed: () => Navigator.of(context).pushNamed(NavBar, 
-                          arguments: PasswordArguments(
-                            email: widget.arguments.email,
-                            password: widget.arguments.password,
-                            phone: widget.arguments.phone,
-                            username: widget.arguments.username
-                          )),
+                onPressed: () => Navigator.of(context).pushNamed(NavBar,
+                    arguments: PasswordArguments(
+                        email: widget.arguments.email,
+                        password: widget.arguments.password,
+                        phone: widget.arguments.phone,
+                        username: widget.arguments.username)),
                 child: new Text(MyText().willYes),
               ),
             ],
@@ -142,6 +154,9 @@ class _YesNoSurveyState extends State<SurveyCard> {
         ) ??
         true;
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 /// widget koji provjerava tip i na osnovu toga vraca odgovarajuci widget
@@ -155,12 +170,7 @@ Widget typeContainerAnwers(
   /// provjeriti tip
   switch (type) {
     case 'yesno':
-      return yesnoWidget(
-        widget,
-        index,
-        refresh,
-        branching
-      );
+      return yesnoWidget(widget, index, refresh, branching);
     case 'input':
       return inputWidget(widget, index, refresh);
     case 'mcq':
@@ -175,12 +185,7 @@ Widget typeContainerAnwers(
 }
 
 /// yes no widget choices
-Widget yesnoWidget(
-  widget,
-  int index,
-  Function refresh,
-  String branching
-) {
+Widget yesnoWidget(widget, int index, Function refresh, String branching) {
   return Column(
     children: <Widget>[
       SurveyChoices(
@@ -341,4 +346,3 @@ Widget imageWidget(widget, int index, Function refresh, int isSingle) {
     ],
   );
 }
-
