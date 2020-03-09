@@ -27,19 +27,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MySurveyGroupCard extends StatefulWidget {
   final PasswordArguments arguments;
   final String name, username, usernameSecond;
-  final int answered, total, sar;
-  final DocumentSnapshot doc;
+  final int answered, total, sar, userSar;
+  final DocumentSnapshot doc, userDoc;
   final List<dynamic> snapQuestions, usernameFinal;
 
   MySurveyGroupCard({
     this.arguments,
     this.sar,
+    this.userSar,
     this.name,
     this.answered,
     this.total,
     this.snapQuestions,
     this.username,
     this.doc,
+    this.userDoc,
     this.usernameFinal,
     this.usernameSecond,
   });
@@ -79,6 +81,9 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
           // FirebaseJson().importSurveyJson(),
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
+                userDoc: widget.userDoc,
+                sarSurvey: widget.sar,
+                userSar: widget.userSar,
                   arguments: widget.arguments,
                   isCompleted: setColor,
                   doc: widget.doc,

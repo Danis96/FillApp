@@ -26,16 +26,20 @@ String img;
 class SurveyCard extends StatefulWidget {
   final PasswordArguments arguments;
   final List<dynamic> snapQuestions;
-  final int total;
+  final int total, sarSurvey;
+  int userSar;
   final String username;
-  final DocumentSnapshot doc;
+  final DocumentSnapshot doc, userDoc;
   final Function isCompleted;
   SurveyCard(
       {this.arguments,
       this.snapQuestions,
       this.total,
+      this.sarSurvey,
+      this.userSar,
       this.username,
       this.doc,
+      this.userDoc,
       this.isCompleted});
 
   @override
@@ -43,6 +47,9 @@ class SurveyCard extends StatefulWidget {
 }
 
 class _YesNoSurveyState extends State<SurveyCard> {
+
+  bool isSar = false;
+
   PageController _controller = PageController();
   @override
   Widget build(BuildContext context) {
@@ -99,9 +106,17 @@ class _YesNoSurveyState extends State<SurveyCard> {
   }
 
   refresh() {
+    checkForInternet();
     questionNumber--;
     print(questionNumber);
     if (questionNumber == 0) {
+      widget.userSar = widget.userSar + widget.sarSurvey;
+      saroviOffline = saroviOffline + widget.sarSurvey;
+      if(isSar) {
+        FirebaseCrud().updateUsersSars(widget.userDoc, context, saroviOffline);
+      } else {
+        FirebaseCrud().updateUsersSars(widget.userDoc, context, widget.userSar);
+      }
       widget.isCompleted();
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
           widget.doc, context, widget.username);
@@ -109,6 +124,20 @@ class _YesNoSurveyState extends State<SurveyCard> {
     } else {
       _controller.nextPage(
           duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+    }
+  }
+
+  /// [checkForInternet]
+  ///
+  /// function that checks for internet connection
+  checkForInternet() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        isSar = false;
+      }
+    } on SocketException catch (_) {
+      isSar = true;
     }
   }
 
@@ -128,13 +157,10 @@ class _YesNoSurveyState extends State<SurveyCard> {
                 child: new Text(MyText().willNo),
               ),
               new FlatButton(
-                onPressed: () => Navigator.of(context).pushNamed(NavBar, 
-                          arguments: PasswordArguments(
-                            email: widget.arguments.email,
-                            password: widget.arguments.password,
-                            phone: widget.arguments.phone,
-                            username: widget.arguments.username
-                          )),
+                onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                },
                 child: new Text(MyText().willYes),
               ),
             ],
