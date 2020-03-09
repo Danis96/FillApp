@@ -358,6 +358,10 @@ class _ImageChoiceState extends State<ImageChoice> {
   }
 
   multipleSubmit() {
+    isTapped1 = false;
+    isTapped2 = false;
+    isTapped3 = false;
+    isTapped4 = false;
     onPressed(widget.multipleChoices.toString());
   }
 
@@ -365,25 +369,37 @@ class _ImageChoiceState extends State<ImageChoice> {
     setState(() {
         isTapped1 = true;
     });
-    widget.multipleChoices.add(choice);
+    if(!widget.multipleChoices.contains(choice)) {
+      widget.multipleChoices.add(choice);
+    }
+    print(widget.multipleChoices);
   }
   saveMultiple2(String choice) {
     setState(() {
         isTapped2 = true;
     });
-    widget.multipleChoices.add(choice);
+    if(!widget.multipleChoices.contains(choice)) {
+      widget.multipleChoices.add(choice);
+    }
+    print(widget.multipleChoices);
   }
   saveMultiple3(String choice) {
     setState(() {
         isTapped3 = true;
     });
-    widget.multipleChoices.add(choice);
+    if(!widget.multipleChoices.contains(choice)) {
+      widget.multipleChoices.add(choice);
+    }
+    print(widget.multipleChoices);
   }
   saveMultiple4(String choice) {
     setState(() {
         isTapped4 = true;
     });
-    widget.multipleChoices.add(choice);
+    if(!widget.multipleChoices.contains(choice)) {
+      widget.multipleChoices.add(choice);
+    }
+    print(widget.multipleChoices);
   }
 
   onPressed(String answer) {

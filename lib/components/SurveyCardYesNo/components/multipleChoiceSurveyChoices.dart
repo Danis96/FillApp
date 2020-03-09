@@ -9,6 +9,8 @@ import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+bool tap = true;
+
 class MultipleChoiceSurveyChoices extends StatefulWidget {
   final String choice1, username;
   final Function() notifyParent;
@@ -70,13 +72,14 @@ class _MultipleChoiceSurveyChoices
                         fontSize: 20.0),
                     textAlign: TextAlign.center),
               ),
-              onTap: () {
+              onTap: () => tap ? {
                 if(isSingle == 1) {
-                  singleOnTap();
+                  tap = false,
+                  singleOnTap()
                 } else {
-                  singleOnTap2();
+                  singleOnTap2()
                 }
-              },
+              } : null,
           )
         ),
         widget.isSingle == 1 ? EmptyContainer() : widget.length == 3 && widget.index == 'C'
@@ -145,6 +148,7 @@ class _MultipleChoiceSurveyChoices
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, answer, widget.title);
     widget.notifyParent();
+    tap = true;
     multipleAnswers.removeRange(0, multipleAnswers.length);
   }
 
