@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SurveyChoices extends StatefulWidget {
   final PasswordArguments arguments;
-  final String choice1, username, branching;
+  final String choice1, username, branching, branchingChoice;
   final Function() notifyParent;
   final String title;
   final DocumentSnapshot doc;
@@ -18,6 +18,7 @@ class SurveyChoices extends StatefulWidget {
   SurveyChoices({
     this.arguments,
     this.branching,
+    this.branchingChoice,
     this.choice1,
     this.notifyParent,
     this.username,
@@ -76,26 +77,30 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
-    if (widget.choice1.toLowerCase() == widget.branching) {
-      showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text("This survey is not compatible with your answers."),
-            content: Text("You will be redirected to Survey List."),
-            actions: [
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () => {
-                            Navigator.of(context).pop(),
-                            Navigator.of(context).pop(),
-                },
-              )
-            ],
-          );
-        },
-      );
+    if (widget.branching == 'yes') {
+      if (widget.choice1.toLowerCase() == widget.branchingChoice) {
+        showDialog(
+          barrierDismissible: false,
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("This survey is not compatible with your answers."),
+              content: Text("You will be redirected to Survey List."),
+              actions: [
+                FlatButton(
+                  child: Text("OK"),
+                  onPressed: () => {
+                    Navigator.of(context).pop(),
+                    Navigator.of(context).pop(),
+                  },
+                )
+              ],
+            );
+          },
+        );
+      } else {
+        widget.notifyParent();
+      }
     } else {
       widget.notifyParent();
     }
