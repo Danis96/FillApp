@@ -124,7 +124,7 @@ class _MultipleChoiceSurveyChoices
     setState(() {
       isTapped = true;
     });
-    Timer(Duration(milliseconds: 200), () {
+    Timer(Duration(milliseconds: 400), () {
       onPressed(widget.choice1);
     });
   }
@@ -149,7 +149,9 @@ class _MultipleChoiceSurveyChoices
   }
 
   onPressed2() {
-    multipleAnswers.add(widget.choice1);
+    if(!multipleAnswers.contains(widget.choice1)) {
+      multipleAnswers.add(widget.choice1);
+    }
     print(multipleAnswers);
   }
 }
