@@ -67,11 +67,9 @@ class _YesNoSurveyState extends State<SurveyCard> {
 
                       if (type == 'mcq') {
                         isSingle = widget.snapQuestions[index]['is_single'];
-                        print(isSingle);
                       }
                       if (type == 'image') {
                         isSingle = widget.snapQuestions[index]['is_single'];
-                        print(isSingle);
                       }
                       branching =  widget.snapQuestions[index]['is_branching'];
                       return Column(
@@ -104,7 +102,6 @@ class _YesNoSurveyState extends State<SurveyCard> {
     print(questionNumber);
     if (questionNumber == 0) {
       widget.isCompleted();
-      print('NA PRVI');
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
           widget.doc, context, widget.username);
       Navigator.of(context).pop();

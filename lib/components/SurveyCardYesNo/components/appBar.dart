@@ -34,20 +34,18 @@ class SurveyAppBar extends StatelessWidget {
                     context: context,
                     builder: (context) => new AlertDialog(
                       title: Text('Are you sure?'),
-                      content: new Text('Do you really want to exit the survey?'),
+                      content:
+                          new Text('Do you really want to exit the survey?'),
                       actions: <Widget>[
                         new FlatButton(
                           onPressed: () => Navigator.pop(context),
                           child: new Text(MyText().registerNo),
                         ),
                         new FlatButton(
-                          onPressed: () => Navigator.of(context).pushNamed(NavBar, 
-                          arguments: PasswordArguments(
-                            email: arguments.email,
-                            password: arguments.password,
-                            phone: arguments.phone,
-                            username: arguments.username
-                          )),
+                          onPressed: () => {
+                            Navigator.of(context).pop(),
+                            Navigator.of(context).pop(),
+                          },
                           child: new Text(MyText().willYes),
                         ),
                       ],

@@ -1,4 +1,5 @@
 import 'dart:async';
+
 /// Survey class
 ///
 /// This class contains methods and layout for survey page.
@@ -19,6 +20,8 @@ import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../components/emptyCont.dart';
+
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
 bool isVisible = false, isCompleted = false;
 List<dynamic> snapi = [],
@@ -37,12 +40,11 @@ class SurveyPage extends StatefulWidget {
   _SurveyState createState() => _SurveyState();
 }
 
-
 class _SurveyState extends State<SurveyPage> {
-  
   @override
   void initState() {
     super.initState();
+
     Timer(Duration(milliseconds: 600), () {
       setState(() {});
     });
@@ -63,12 +65,12 @@ class _SurveyState extends State<SurveyPage> {
                 top: ScreenUtil.instance.setWidth(45.0),
                 bottom: ScreenUtil.instance.setWidth(15.0)),
             child: Text('Survey List',
-                  style: TextStyle(
-                      color: MyColor().black,
-                      fontWeight: FontWeight.w700,
-                      fontFamily: "LoewNextArabic",
-                      fontStyle: FontStyle.normal,
-                      fontSize: ScreenUtil.instance.setSp(24.0))),
+                style: TextStyle(
+                    color: MyColor().black,
+                    fontWeight: FontWeight.w700,
+                    fontFamily: "LoewNextArabic",
+                    fontStyle: FontStyle.normal,
+                    fontSize: ScreenUtil.instance.setSp(24.0))),
           )),
           FutureBuilder(
             future: FirebaseCheck().getUserUsername(widget.arguments.username),
@@ -102,10 +104,12 @@ class _SurveyState extends State<SurveyPage> {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
 
+                    if (!isVisible) {
                       snapi = snapshot.data
                           .map((doc) => Survey.fromDocument(doc))
                           .toList();
-
+                      isVisible = true;
+                    }
 
                     return PageView.builder(
                         pageSnapping: true,
@@ -124,7 +128,7 @@ class _SurveyState extends State<SurveyPage> {
                           usernameFinal = snapi[index].usersCompleted;
 
                           return MySurveyGroupCard(
-                            arguments: widget.arguments,
+                              arguments: widget.arguments,
                               usernameFinal: usernameFinal,
                               usernameSecond: usernameSecond,
                               doc: doc,
@@ -136,7 +140,12 @@ class _SurveyState extends State<SurveyPage> {
                         });
                   }
 
-                  return CircularProgressIndicator();
+                  return Center(
+                    child: Container(
+                      
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
                 }),
           ),
         ],

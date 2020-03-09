@@ -87,15 +87,10 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
             actions: [
               FlatButton(
                 child: Text("OK"),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(NavBar, 
-                          arguments: PasswordArguments(
-                            email: widget.arguments.email,
-                            password: widget.arguments.password,
-                            phone: widget.arguments.phone,
-                            username: widget.arguments.username
-                          ));
-                },
+                onPressed: () => {
+                            Navigator.of(context).pop(),
+                            Navigator.of(context).pop(),
+                          },
               )
             ],
           );
