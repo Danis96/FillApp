@@ -42,7 +42,7 @@ class SurveyAppBar extends StatelessWidget {
                           child: new Text(MyText().registerNo),
                         ),
                         new FlatButton(
-                          onPressed: () => {
+                         onPressed: () => {
                             Navigator.of(context).pop(),
                             Navigator.of(context).pop(),
                           },

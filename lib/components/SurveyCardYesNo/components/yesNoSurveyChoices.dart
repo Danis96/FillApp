@@ -90,7 +90,7 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
                 onPressed: () => {
                             Navigator.of(context).pop(),
                             Navigator.of(context).pop(),
-                          },
+                },
               )
             ],
           );
