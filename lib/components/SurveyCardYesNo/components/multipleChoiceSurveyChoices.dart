@@ -37,6 +37,13 @@ List<dynamic> multipleAnswers = [];
 
 class _MultipleChoiceSurveyChoices
     extends State<MultipleChoiceSurveyChoices> {
+
+      @override
+      void initState() { 
+        super.initState();
+        isTapped = false;
+      }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -142,9 +149,9 @@ class _MultipleChoiceSurveyChoices
   }
 
   onPressed(String answer) {
-    setState(() {
-      isTapped = false;
-    });
+    // setState(() {
+    //   isTapped = false;
+    // });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, answer, widget.title);
     widget.notifyParent();
