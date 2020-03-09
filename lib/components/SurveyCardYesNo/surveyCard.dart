@@ -12,6 +12,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
+import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -125,7 +126,13 @@ class _YesNoSurveyState extends State<SurveyCard> {
                 child: new Text(MyText().willNo),
               ),
               new FlatButton(
-                onPressed: () => exit(0),
+                onPressed: () => Navigator.of(context).pushNamed(NavBar, 
+                          arguments: PasswordArguments(
+                            email: widget.arguments.email,
+                            password: widget.arguments.password,
+                            phone: widget.arguments.phone,
+                            username: widget.arguments.username
+                          )),
                 child: new Text(MyText().willYes),
               ),
             ],
