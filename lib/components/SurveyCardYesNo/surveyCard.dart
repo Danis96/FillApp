@@ -26,31 +26,42 @@ String img;
 class SurveyCard extends StatefulWidget {
   final PasswordArguments arguments;
   final List<dynamic> snapQuestions;
-  final int total, sarSurvey;
+  final int total, sarSurvey, number;
   int userSar;
   final String username;
   final DocumentSnapshot doc, userDoc;
   final Function isCompleted;
-  SurveyCard(
-      {this.arguments,
-      this.snapQuestions,
-      this.total,
-      this.sarSurvey,
-      this.userSar,
-      this.username,
-      this.doc,
-      this.userDoc,
-      this.isCompleted});
+  final Function increaseAnswered;
+  SurveyCard({
+    this.arguments,
+    this.snapQuestions,
+    this.total,
+    this.sarSurvey,
+    this.username,
+    this.doc,
+    this.isCompleted,
+    this.increaseAnswered,
+    this.number,
+  });
+
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
 }
 
-class _YesNoSurveyState extends State<SurveyCard> {
-
+class _YesNoSurveyState extends State<SurveyCard>
+    with AutomaticKeepAliveClientMixin<SurveyCard> {
+  int number1;
   bool isSar = false;
-
   PageController _controller = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = PageController(
+        keepPage: true, initialPage: widget.number);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,7 +83,6 @@ class _YesNoSurveyState extends State<SurveyCard> {
                     itemCount: widget.snapQuestions.length,
                     itemBuilder: (BuildContext context, int index) {
                       type = widget.snapQuestions[index]['type'];
-
                       if (type == 'mcq') {
                         isSingle = widget.snapQuestions[index]['is_single'];
                       }
@@ -109,7 +119,7 @@ class _YesNoSurveyState extends State<SurveyCard> {
   refresh() {
     checkForInternet();
     questionNumber--;
-    print(questionNumber);
+    widget.increaseAnswered();
     if (questionNumber == 0) {
       widget.userSar = widget.userSar + widget.sarSurvey;
       saroviOffline = saroviOffline + widget.sarSurvey;
@@ -169,6 +179,9 @@ class _YesNoSurveyState extends State<SurveyCard> {
         ) ??
         true;
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 /// widget koji provjerava tip i na osnovu toga vraca odgovarajuci widget
@@ -372,4 +385,3 @@ Widget imageWidget(widget, int index, Function refresh, int isSingle) {
     ],
   );
 }
-
