@@ -27,15 +27,15 @@ class DateChoice extends StatefulWidget {
 
 class _DateChoiceState extends State<DateChoice> {
   TextEditingController dayController = TextEditingController(text: day);
-
   TextEditingController monthController = TextEditingController(text: month);
-
   TextEditingController yearController = TextEditingController(text: year);
-
   String selectedDay, selectedMonth, selectedYear;
 
   @override
   Widget build(BuildContext context) {
+    day = '';
+    month = '';
+    year = '';
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
@@ -43,7 +43,10 @@ class _DateChoiceState extends State<DateChoice> {
       child: Column(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.only(left: ScreenUtil.instance.setWidth(45.0), right: ScreenUtil.instance.setWidth(45.0), top: ScreenUtil.instance.setWidth(15.0)),
+            padding: EdgeInsets.only(
+                left: ScreenUtil.instance.setWidth(45.0),
+                right: ScreenUtil.instance.setWidth(45.0),
+                top: ScreenUtil.instance.setWidth(15.0)),
             child: Row(
               children: <Widget>[
                 Column(
@@ -100,27 +103,33 @@ class _DateChoiceState extends State<DateChoice> {
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 20.0, horizontal: 20.0),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
-                              color:
-                                  fieldColor1 ? MyColor().error : MyColor().black,
+                              color: fieldColor1
+                                  ? MyColor().error
+                                  : MyColor().black,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
-                              color:
-                                  fieldColor1 ? MyColor().error : MyColor().black,
+                              color: fieldColor1
+                                  ? MyColor().error
+                                  : MyColor().black,
                             ),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
                               color: MyColor().error,
                             ),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
                               color: MyColor().error,
                             ),
@@ -139,7 +148,8 @@ class _DateChoiceState extends State<DateChoice> {
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(20.0),
                           left: ScreenUtil.instance.setWidth(10.0)),
-                      child: Text('Month',
+                      child: Text(
+                        'Month',
                         style: TextStyle(
                             color: MyColor().black,
                             fontWeight: FontWeight.w700,
@@ -174,7 +184,8 @@ class _DateChoiceState extends State<DateChoice> {
                                   child: Container(
                                       height:
                                           ScreenUtil.instance.setHeight(265.0),
-                                      child: _buildItemPicker('month', context)),
+                                      child:
+                                          _buildItemPicker('month', context)),
                                 );
                               });
                         },
@@ -186,27 +197,33 @@ class _DateChoiceState extends State<DateChoice> {
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 20.0, horizontal: 20.0),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
-                              color:
-                                  fieldColor2 ? MyColor().error : MyColor().black,
+                              color: fieldColor2
+                                  ? MyColor().error
+                                  : MyColor().black,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
-                              color:
-                                  fieldColor2 ? MyColor().error : MyColor().black,
+                              color: fieldColor2
+                                  ? MyColor().error
+                                  : MyColor().black,
                             ),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
                               color: MyColor().error,
                             ),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
                               color: MyColor().error,
                             ),
@@ -225,8 +242,9 @@ class _DateChoiceState extends State<DateChoice> {
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(20.0),
                           left: ScreenUtil.instance.setWidth(10.0)),
-                      child: Text('Year',
-                      style: TextStyle(
+                      child: Text(
+                        'Year',
+                        style: TextStyle(
                             color: MyColor().black,
                             fontWeight: FontWeight.w700,
                             fontStyle: FontStyle.normal,
@@ -272,27 +290,33 @@ class _DateChoiceState extends State<DateChoice> {
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 20.0, horizontal: 20.0),
                           enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
-                              color:
-                                  fieldColor3 ? MyColor().error : MyColor().black,
+                              color: fieldColor3
+                                  ? MyColor().error
+                                  : MyColor().black,
                             ),
                           ),
                           focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
-                              color:
-                                  fieldColor3 ? MyColor().error : MyColor().black,
+                              color: fieldColor3
+                                  ? MyColor().error
+                                  : MyColor().black,
                             ),
                           ),
                           focusedErrorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
                               color: MyColor().error,
                             ),
                           ),
                           errorBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
                             borderSide: BorderSide(
                               color: MyColor().error,
                             ),
