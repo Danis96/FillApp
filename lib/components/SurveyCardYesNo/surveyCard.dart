@@ -20,27 +20,30 @@ import '../emptyCont.dart';
 
 String type;
 int isSingle;
-String branching;
+String branching, branchingChoice;
 String img;
 
 class SurveyCard extends StatefulWidget {
   final PasswordArguments arguments;
   final List<dynamic> snapQuestions;
-  final int total, number;
+  final int total, sarSurvey, number;
+  int userSar;
   final String username;
-  final DocumentSnapshot doc;
+  final DocumentSnapshot doc, userDoc;
   final Function isCompleted;
   final Function increaseAnswered;
   SurveyCard({
     this.arguments,
     this.snapQuestions,
     this.total,
+    this.sarSurvey,
     this.username,
     this.doc,
     this.isCompleted,
     this.increaseAnswered,
     this.number,
   });
+
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
@@ -49,6 +52,7 @@ class SurveyCard extends StatefulWidget {
 class _YesNoSurveyState extends State<SurveyCard>
     with AutomaticKeepAliveClientMixin<SurveyCard> {
   int number1;
+  bool isSar = false;
   PageController _controller = PageController();
 
   @override
@@ -85,7 +89,8 @@ class _YesNoSurveyState extends State<SurveyCard>
                       if (type == 'image') {
                         isSingle = widget.snapQuestions[index]['is_single'];
                       }
-                      branching = widget.snapQuestions[index]['is_branching'];
+                      branching =  widget.snapQuestions[index]['is_branching'];
+                      branchingChoice = widget.snapQuestions[index]['choice_to_exit'];
                       return Column(
                         children: <Widget>[
                           SurveyAppBar(
@@ -112,9 +117,17 @@ class _YesNoSurveyState extends State<SurveyCard>
   }
 
   refresh() {
+    checkForInternet();
     questionNumber--;
     widget.increaseAnswered();
     if (questionNumber == 0) {
+      widget.userSar = widget.userSar + widget.sarSurvey;
+      saroviOffline = saroviOffline + widget.sarSurvey;
+      if(isSar) {
+        FirebaseCrud().updateUsersSars(widget.userDoc, context, saroviOffline);
+      } else {
+        FirebaseCrud().updateUsersSars(widget.userDoc, context, widget.userSar);
+      }
       widget.isCompleted();
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
           widget.doc, context, widget.username);
@@ -122,6 +135,20 @@ class _YesNoSurveyState extends State<SurveyCard>
     } else {
       _controller.nextPage(
           duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+    }
+  }
+
+  /// [checkForInternet]
+  ///
+  /// function that checks for internet connection
+  checkForInternet() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        isSar = false;
+      }
+    } on SocketException catch (_) {
+      isSar = true;
     }
   }
 
@@ -141,12 +168,10 @@ class _YesNoSurveyState extends State<SurveyCard>
                 child: new Text(MyText().willNo),
               ),
               new FlatButton(
-                onPressed: () => Navigator.of(context).pushNamed(NavBar,
-                    arguments: PasswordArguments(
-                        email: widget.arguments.email,
-                        password: widget.arguments.password,
-                        phone: widget.arguments.phone,
-                        username: widget.arguments.username)),
+                onPressed: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                },
                 child: new Text(MyText().willYes),
               ),
             ],
@@ -170,7 +195,13 @@ Widget typeContainerAnwers(
   /// provjeriti tip
   switch (type) {
     case 'yesno':
-      return yesnoWidget(widget, index, refresh, branching);
+      return yesnoWidget(
+        widget,
+        index,
+        refresh,
+        branching,
+        branchingChoice
+      );
     case 'input':
       return inputWidget(widget, index, refresh);
     case 'mcq':
@@ -185,12 +216,19 @@ Widget typeContainerAnwers(
 }
 
 /// yes no widget choices
-Widget yesnoWidget(widget, int index, Function refresh, String branching) {
+Widget yesnoWidget(
+  widget,
+  int index,
+  Function refresh,
+  String branching,
+  String branchingChoice
+) {
   return Column(
     children: <Widget>[
       SurveyChoices(
         arguments: widget.arguments,
         branching: branching,
+        branchingChoice: branchingChoice,
         choice1: widget.snapQuestions[index]['choices'][0]['text'],
         notifyParent: refresh,
         username: widget.username,
@@ -200,6 +238,7 @@ Widget yesnoWidget(widget, int index, Function refresh, String branching) {
       SurveyChoices(
         arguments: widget.arguments,
         branching: branching,
+        branchingChoice: branchingChoice,
         choice1: widget.snapQuestions[index]['choices'][1]['text'],
         notifyParent: refresh,
         username: widget.username,

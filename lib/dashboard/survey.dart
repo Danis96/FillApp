@@ -29,7 +29,7 @@ List<dynamic> snapi = [],
     usernamesThatAnswers = [],
     usernameFinal = [];
 DocumentSnapshot snap, doc;
-int userLevel, sar, total;
+int userLevel, sar, total, userSar;
 String name, type, usernameSecond;
 
 class SurveyPage extends StatefulWidget {
@@ -39,6 +39,8 @@ class SurveyPage extends StatefulWidget {
   @override
   _SurveyState createState() => _SurveyState();
 }
+
+int counter = 0;
 
 class _SurveyState extends State<SurveyPage> {
   @override
@@ -84,6 +86,11 @@ class _SurveyState extends State<SurveyPage> {
                       snap = snapshot.data[index];
                       userLevel = snap.data['level'];
                       usernameSecond = snap.data['username_second'];
+                      userSar = snap.data['sar'];
+                        if (counter == 0) {
+                          saroviOffline = userSar;
+                          counter = 1;
+                        }
                       return EmptyContainer();
                     });
               }
@@ -127,11 +134,13 @@ class _SurveyState extends State<SurveyPage> {
                           usernameFinal = snapi[index].usersCompleted;
 
                           return MySurveyGroupCard(
+                              userSar: userSar,
                               arguments: widget.arguments,
                               usernameFinal: usernameFinal,
                               usernameSecond: usernameSecond,
                               userProgress: usernamesThatAnswers,
                               doc: doc,
+                              userDoc: snap,
                               sar: sar,
                               name: name,
                               total: total,

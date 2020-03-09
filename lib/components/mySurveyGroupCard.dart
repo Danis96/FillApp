@@ -30,19 +30,20 @@ import '../globals.dart';
 class MySurveyGroupCard extends StatefulWidget {
   final PasswordArguments arguments;
   final String name, username, usernameSecond;
-  final int answered, total, sar;
-  final DocumentSnapshot doc;
+  final int answered, total, sar, userSar;
+  final DocumentSnapshot doc, userDoc;
   final List<dynamic> snapQuestions, usernameFinal, userProgress;
-
   MySurveyGroupCard({
     this.arguments,
     this.sar,
+    this.userSar,
     this.name,
     this.answered,
     this.total,
     this.snapQuestions,
     this.username,
     this.doc,
+    this.userDoc,
     this.usernameFinal,
     this.usernameSecond,
     this.userProgress,
@@ -83,11 +84,28 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       onTap: () {
         //  FirebaseJson().importSurveyJson();
         if (!isCompleted) {
+          // List<dynamic> lista = doc.data['questions'];
+          // // print(lista[1]['is_branching']);
+          // for(int i = 0; i < lista.length; i++) {
+          //   print(lista[i]['is_branching']);
+          //   if(lista[i]['is_branching'] == 'yes') {
+          //     lista.insert(0, lista[i]);
+          //     break;
+          //   }
+          // }
+          // print('Lista nakon pomjeranja!!!');
+          // for(int i = 0; i < lista.length; i++) {
+          //   print(lista[i]['is_branching']);
+          // }
+
+          //FirebaseJson().importSurveyJson(),
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
-                  isFirst: isFirst,
-                  number: number,
+                userDoc: widget.userDoc,
+                sarSurvey: widget.sar,
+                number: number,
                   increaseAnswered: increaseAnswered,
+                userSar: widget.userSar,
                   arguments: widget.arguments,
                   isCompleted: setColor,
                   doc: widget.doc,
