@@ -357,6 +357,9 @@ Widget dateWidget(widget, int index, Function refresh) {
   return Column(
     children: <Widget>[
       DateChoice(
+        day: '',
+        month: '',
+        year: '',
         notifyParent: refresh,
         username: widget.username,
         title: widget.snapQuestions[index]['title'],
