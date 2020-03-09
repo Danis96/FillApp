@@ -62,11 +62,11 @@ Very proud on team 2.
 	User story 3 - Registration from within the app for anonymous users<br/>
 	When anonymous user switches to Tab 3 (Profile), he is provided a dialog box which asks him if he wants to register. If the answer is 'No', he stays on Tab 3. If the answer is 'Yes', he is redirected to Register Page where he completes the registration process. After he registers, he is redirected to the app (Tab 2) and all his activities that he made until registration are saved, that is: he has the same cash balance (+5 for registration - NOT SURE YET), he won't be given question that he has answered before as anonymous user, and his level will remain as it was.<br/><br/>*
 	User story 4 - implementation of Tab 2 (Surveys)<br/>
-	Vertical scroll of Survey Cards is implemented. When user clicks on a card, he is redirected to Question List which my contain following types of questions:
-		Yes/No Question - these questions may be branching, which means if user clicks on a specific answer, he will be redirected back to Survey List and that survey will be completed for him; 
-		Multiple Choice Question - with three or four answers, and with single or multiple selectable answers; 
-		Choose Image Question - with single or multiple selectable answers;
-		Input Answer Question; 
-		Choose Date Question.
+	Vertical scroll of Survey Cards is implemented. When user clicks on a card, he is redirected to Question List which my contain following types of questions:<br/>
+		Yes/No Question - these questions may be branching, which means if user clicks on a specific answer, he will be redirected back to Survey List and that survey will be completed for him; <br/>
+		Multiple Choice Question - with three or four answers, and with single or multiple selectable answers; <br/>
+		Choose Image Question - with single or multiple selectable answers;<br/>
+		Input Answer Question; <br/>
+		Choose Date Question.<br/>
 When user answers last question, he is redirected back to Survey List and that Survey gets status 'Completed' and becomes white, so the user won't be able to enter that survey anymore.
 On back, user is asked with a Dialog Box if he is sure about exiting the survey. If he confirms the exit, the number of answered questions of the survey will be saved, and when user enters that survey next time, he will continue answering from where he left last time.
