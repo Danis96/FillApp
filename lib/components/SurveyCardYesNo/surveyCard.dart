@@ -64,7 +64,12 @@ class _YesNoSurveyState extends State<SurveyCard> {
                     itemCount: widget.snapQuestions.length,
                     itemBuilder: (BuildContext context, int index) {
                       type = widget.snapQuestions[index]['type'];
+
                       if (type == 'mcq') {
+                        isSingle = widget.snapQuestions[index]['is_single'];
+                        print(isSingle);
+                      }
+                      if (type == 'image') {
                         isSingle = widget.snapQuestions[index]['is_single'];
                         print(isSingle);
                       }
@@ -159,7 +164,7 @@ Widget typeContainerAnwers(
     case 'date':
       return dateWidget(widget, index, refresh);
     case 'image':
-      return imageWidget(widget, index, refresh);
+      return imageWidget(widget, index, refresh, isSingle);
     default:
       return EmptyContainer();
   }
@@ -311,11 +316,12 @@ Widget dateWidget(widget, int index, Function refresh) {
   );
 }
 
-Widget imageWidget(widget, int index, Function refresh) {
+Widget imageWidget(widget, int index, Function refresh, int isSingle) {
   return Column(
     children: <Widget>[
       ImageChoice(
         notifyParent: refresh,
+        isSingle: isSingle,
         title: widget.snapQuestions[index]['title'],
         username: widget.username,
         choice1: widget.snapQuestions[index]['choices'][0]['text'],

@@ -31,6 +31,7 @@ class QuestionsForSurvey {
         },
         {
           "title": "Choose the right image",
+          "is_single": 0,
           "type": "image",
           "sar": 10,
           "is_branching": "",
@@ -64,6 +65,7 @@ class QuestionsForSurvey {
           "title": "Choose the appropriate image",
           "type": "image",
           "sar": 10,
+          "is_single": 1,
           "is_branching": "",
           "choice_to_exit": "",
           "choices": [

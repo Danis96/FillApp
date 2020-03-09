@@ -1,7 +1,10 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/SurveyCardYesNo/surveyCard.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +14,11 @@ class ImageChoice extends StatefulWidget {
   final String username, title;
   final Function() notifyParent;
   final DocumentSnapshot doc;
+  final int isSingle;
   final String choice1, choice2, choice3, choice4, text1, text2, text3, text4;
   ImageChoice(
       {this.doc,
+      this.isSingle,
       this.title,
       this.notifyParent,
       this.username,
@@ -25,6 +30,8 @@ class ImageChoice extends StatefulWidget {
       this.text2,
       this.text3,
       this.text4});
+
+  List<dynamic> multipleChoices = [];
 
   @override
   _ImageChoiceState createState() => _ImageChoiceState();
@@ -47,12 +54,9 @@ class _ImageChoiceState extends State<ImageChoice> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isTapped1 = true;
-                    });
-                    Timer(Duration(milliseconds: 200), () {
-                      saveImage1();
-                    });
+                    widget.isSingle == 0
+                        ? onTapSingle()
+                        : saveMultiple1(widget.choice1);
                   },
                   child: Stack(
                     children: <Widget>[
@@ -109,12 +113,9 @@ class _ImageChoiceState extends State<ImageChoice> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isTapped2 = true;
-                    });
-                    Timer(Duration(milliseconds: 200), () {
-                      saveImage2();
-                    });
+                    widget.isSingle == 0
+                        ? onTapSingle1()
+                        : saveMultiple2(widget.choice2);
                   },
                   child: Stack(
                     children: <Widget>[
@@ -178,12 +179,9 @@ class _ImageChoiceState extends State<ImageChoice> {
               children: <Widget>[
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isTapped3 = true;
-                    });
-                    Timer(Duration(milliseconds: 200), () {
-                      saveImage3();
-                    });
+                    widget.isSingle == 0
+                        ? onTapSingle2()
+                        : saveMultiple3(widget.choice3);
                   },
                   child: Stack(
                     children: <Widget>[
@@ -240,12 +238,9 @@ class _ImageChoiceState extends State<ImageChoice> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    setState(() {
-                      isTapped4 = true;
-                    });
-                    Timer(Duration(milliseconds: 200), () {
-                      saveImage4();
-                    });
+                    widget.isSingle == 0
+                        ? onTapSingle3()
+                        : saveMultiple4(widget.choice4);
                   },
                   child: Stack(
                     children: <Widget>[
@@ -302,39 +297,135 @@ class _ImageChoiceState extends State<ImageChoice> {
                 ),
               ],
             ),
-          )
+          ),
+          widget.isSingle == 0
+              ? EmptyContainer()
+              : Container(
+                  width: ScreenUtil.instance.setWidth(316.0),
+                  height: ScreenUtil.instance.setHeight(55.0),
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.instance.setWidth(20.0),
+                      left: ScreenUtil.instance.setWidth(54.0),
+                      right: ScreenUtil.instance.setWidth(55.0)),
+                  child: RaisedButton(
+                    color: MyColor().black,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(33.5),
+                    ),
+                    onPressed: () => multipleSubmit(),
+                    child: Text(MyText().btnSubmit,
+                        style: TextStyle(fontSize: 18, color: MyColor().white)),
+                  ))
         ],
       ),
     );
   }
 
+  onTapSingle() {
+    setState(() {
+      isTapped1 = true;
+    });
+    Timer(Duration(milliseconds: 200), () {
+      saveImage1();
+    });
+  }
+
+  onTapSingle1() {
+    setState(() {
+      isTapped2 = true;
+    });
+    Timer(Duration(milliseconds: 200), () {
+      saveImage2();
+    });
+  }
+
+  onTapSingle2() {
+    setState(() {
+      isTapped3 = true;
+    });
+    Timer(Duration(milliseconds: 200), () {
+      saveImage3();
+    });
+  }
+
+  onTapSingle3() {
+    setState(() {
+      isTapped4 = true;
+    });
+    Timer(Duration(milliseconds: 200), () {
+      saveImage4();
+    });
+  }
+
+  multipleSubmit() {
+    onPressed(widget.multipleChoices.toString());
+  }
+
+  saveMultiple1(String choice) {
+    setState(() {
+        isTapped1 = true;
+    });
+    widget.multipleChoices.add(choice);
+  }
+  saveMultiple2(String choice) {
+    setState(() {
+        isTapped2 = true;
+    });
+    widget.multipleChoices.add(choice);
+  }
+  saveMultiple3(String choice) {
+    setState(() {
+        isTapped3 = true;
+    });
+    widget.multipleChoices.add(choice);
+  }
+  saveMultiple4(String choice) {
+    setState(() {
+        isTapped4 = true;
+    });
+    widget.multipleChoices.add(choice);
+  }
+
+  onPressed(String answer) {
+    setState(() {
+      isTapped = false;
+    });
+    FirebaseCrud().updateListOfUsernamesAnswersSurvey(
+        widget.doc, context, widget.username, answer, widget.title);
+    widget.notifyParent();
+    widget.multipleChoices.removeRange(0, widget.multipleChoices.length);
+  }
+
   saveImage1() {
     setState(() {
-       isTapped1 = false;
+       isSingle == 0 ? isTapped1 = false : isTapped1 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
     widget.notifyParent();
   }
+
   saveImage2() {
     setState(() {
-      isTapped2 = false;
+       isSingle == 0 ? isTapped2 = false : isTapped2 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
     widget.notifyParent();
   }
+
   saveImage3() {
     setState(() {
-      isTapped1 = false;
+      isSingle == 0 ? isTapped3 = false : isTapped3 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
     widget.notifyParent();
   }
+
   saveImage4() {
     setState(() {
-      isTapped1 = false;
+       isSingle == 0 ? isTapped4 = false : isTapped4 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);

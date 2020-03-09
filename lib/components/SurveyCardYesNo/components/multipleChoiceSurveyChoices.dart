@@ -37,7 +37,6 @@ class _MultipleChoiceSurveyChoices
     extends State<MultipleChoiceSurveyChoices> {
   @override
   Widget build(BuildContext context) {
-    print(widget.isSingle.toString() + ' ' + widget.length.toString() + ' ');
     return Column(
       children: <Widget>[
         Container(
