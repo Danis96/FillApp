@@ -13,13 +13,11 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
-import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:random_string/random_string.dart';
 
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
 bool isVisible = false, isCompleted = false;

@@ -41,13 +41,13 @@ class _ImageChoiceState extends State<ImageChoice> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(40.0)),
+      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(30.0)),
+            margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(15.0)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,

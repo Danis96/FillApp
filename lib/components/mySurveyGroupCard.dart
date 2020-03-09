@@ -20,7 +20,6 @@ import 'package:fillproject/components/myProgressNumbers.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/dashboard/survey.dart';
-import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,7 +74,8 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       allowFontScaling: true,
     )..init(context);
     return GestureDetector(
-      onTap: () =>
+      onTap: () {
+        if (!isCompleted) {
           // FirebaseJson().importSurveyJson(),
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
@@ -84,7 +84,9 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                   doc: widget.doc,
                   username: widget.username,
                   snapQuestions: widget.snapQuestions,
-                  total: widget.total))),
+                  total: widget.total)));
+        }
+      },
       child: Container(
           key: widget.key,
           width: ScreenUtil.instance.setWidth(340.0),
