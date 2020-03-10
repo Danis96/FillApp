@@ -343,7 +343,7 @@ Widget mcqWidget(widget, int index, Function refresh, int isSingle) {
 }
 
 /// input widget
-Widget inputWidget(widget, int index, Function refresh, int number) {
+Widget inputWidget(widget, int index, Function refresh) {
   return Column(
     children: <Widget>[
       InputChoice(
@@ -357,7 +357,7 @@ Widget inputWidget(widget, int index, Function refresh, int number) {
 }
 
 /// input widget
-Widget dateWidget(widget, int index, Function refresh, int number) {
+Widget dateWidget(widget, int index, Function refresh) {
   return Column(
     children: <Widget>[
       DateChoice(
@@ -374,7 +374,7 @@ Widget dateWidget(widget, int index, Function refresh, int number) {
 }
 
 Widget imageWidget(
-    widget, int index, Function refresh, int isSingle, int number) {
+    widget, int index, Function refresh, int isSingle) {
   return Column(
     children: <Widget>[
       ImageChoice(
