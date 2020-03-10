@@ -27,8 +27,6 @@ class SurveyChoices extends StatefulWidget {
     this.username,
     this.title,
     this.doc,
-    this.user,
-    this.number,
   });
 
   @override
