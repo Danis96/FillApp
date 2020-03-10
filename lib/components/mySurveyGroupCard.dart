@@ -20,6 +20,7 @@ import 'package:fillproject/components/myProgressNumbers.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/dashboard/survey.dart';
+import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,8 +57,9 @@ class MySurveyGroupCard extends StatefulWidget {
 class _MySurveyGroupCard extends State<MySurveyGroupCard>
     with AutomaticKeepAliveClientMixin<MySurveyGroupCard> {
   bool isCompleted = false, isFirst = false;
-  int number = 0;
+  int number;
   List<dynamic> endProgress;
+  var user;
 
   @override
   void initState() {
@@ -68,6 +70,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     } else {
       isCompleted = true;
     }
+    getUserProgress();
   }
 
   @override
@@ -97,15 +100,14 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
           // for(int i = 0; i < lista.length; i++) {
           //   print(lista[i]['is_branching']);
           // }
-
-          //FirebaseJson().importSurveyJson(),
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
-                userDoc: widget.userDoc,
-                sarSurvey: widget.sar,
-                number: number,
+                  user: user,
+                  userDoc: widget.userDoc,
+                  sarSurvey: widget.sar,
+                  number: number,
                   increaseAnswered: increaseAnswered,
-                userSar: widget.userSar,
+                  userSar: widget.userSar,
                   arguments: widget.arguments,
                   isCompleted: setColor,
                   doc: widget.doc,
@@ -152,9 +154,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                               left: ScreenUtil.instance.setWidth(83.0)),
                           child: MyProgressNumbers(
                               isCompleted: isCompleted,
-                              answered: isCompleted
-                                  ? widget.total
-                                  : number,
+                              answered: isCompleted ? widget.total : number,
                               total: widget.total),
                         ),
                       ],
@@ -182,11 +182,28 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     setState(() {
       number++;
     });
-    print(number);
+    FirebaseCrud().deleteListOfUsernamesThatGaveAnswersProgress(
+        widget.doc, context, widget.username + ',' + number.toString());
+    FirebaseCrud().updateListOfUsernamesThatGaveAnswersProgress(
+        widget.doc, context, widget.username + ',' + number.toString());
   }
 
-
-
+  getUserProgress() {
+    if (widget.userProgress.length == 0 || widget.userProgress.length == null) {
+      number = 0;
+    } else {
+      for (int i = 0; i < widget.userProgress.length; i++) {
+        var usernameProgress = widget.userProgress[i].toString();
+        user = usernameProgress.split(',');
+        var progressNum = user[1];
+        if (user[0] == widget.username) {
+          number = int.parse(progressNum);
+        } else {
+          number = 0;
+        }
+      }
+    }
+  }
 
   @override
   bool get wantKeepAlive => true;
