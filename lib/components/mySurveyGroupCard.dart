@@ -196,7 +196,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
         var usernameProgress = widget.userProgress[i].toString();
         user = usernameProgress.split(',');
         var progressNum = user[1];
-        if (user[0] == widget.username) {
+        if (user[0] == widget.username || user[0] == widget.usernameSecond) {
           number = int.parse(progressNum);
         } else {
           number = 0;
