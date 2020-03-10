@@ -117,4 +117,24 @@ class FirebaseCrud {
       'users_completed': FieldValue.arrayUnion(['$username'])
     });
   }
+
+  /// [updateListOfUsernamesThatGaveAnswers]
+  ///
+  /// this function updates users that answer questions in db
+  updateListOfUsernamesThatGaveAnswersProgress(
+      DocumentSnapshot doc, BuildContext context, String username) async {
+    await db.collection('QuestionsSurvey').document(doc.documentID).updateData({
+      'list_of_usernames_that_gave_answers': FieldValue.arrayUnion(['$username'])
+    });
+  }
+
+  deleteListOfUsernamesThatGaveAnswersProgress(
+      DocumentSnapshot doc, BuildContext context, String username) async {
+    await db.collection('QuestionsSurvey').document(doc.documentID).updateData({
+      'list_of_usernames_that_gave_answers': FieldValue.arrayRemove(['$username'])
+    });
+  }
+  
+  
+
 }

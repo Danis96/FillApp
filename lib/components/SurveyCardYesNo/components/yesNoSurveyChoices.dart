@@ -8,12 +8,15 @@ import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../firebaseMethods/firebaseCrud.dart';
+
 class SurveyChoices extends StatefulWidget {
   final PasswordArguments arguments;
   final String choice1, username, branching, branchingChoice;
   final Function() notifyParent;
   final String title;
   final DocumentSnapshot doc;
+ 
 
   SurveyChoices({
     this.arguments,
@@ -24,6 +27,8 @@ class SurveyChoices extends StatefulWidget {
     this.username,
     this.title,
     this.doc,
+    this.user,
+    this.number,
   });
 
   @override
@@ -77,6 +82,7 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
+   
     if (widget.branching == 'yes') {
       if (widget.choice1.toLowerCase() == widget.branchingChoice) {
         showDialog(

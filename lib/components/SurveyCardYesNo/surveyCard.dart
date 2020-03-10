@@ -26,12 +26,14 @@ String img;
 class SurveyCard extends StatefulWidget {
   final PasswordArguments arguments;
   final List<dynamic> snapQuestions;
-  final int total, sarSurvey, number;
+  final int total, sarSurvey;
   int userSar;
+  int number;
   final String username;
   final DocumentSnapshot doc, userDoc;
   final Function isCompleted;
   final Function increaseAnswered;
+  var user;
   SurveyCard({
     this.arguments,
     this.snapQuestions,
@@ -44,8 +46,8 @@ class SurveyCard extends StatefulWidget {
     this.number,
     this.userDoc,
     this.userSar,
+    this.user,
   });
-
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
@@ -53,15 +55,13 @@ class SurveyCard extends StatefulWidget {
 
 class _YesNoSurveyState extends State<SurveyCard>
     with AutomaticKeepAliveClientMixin<SurveyCard> {
-  int number1;
   bool isSar = false;
   PageController _controller = PageController();
 
   @override
   void initState() {
     super.initState();
-    _controller = PageController(
-        keepPage: true, initialPage: widget.number);
+    _controller = PageController(keepPage: true, initialPage: widget.number);
   }
 
   @override
@@ -91,8 +91,9 @@ class _YesNoSurveyState extends State<SurveyCard>
                       if (type == 'image') {
                         isSingle = widget.snapQuestions[index]['is_single'];
                       }
-                      branching =  widget.snapQuestions[index]['is_branching'];
-                      branchingChoice = widget.snapQuestions[index]['choice_to_exit'];
+                      branching = widget.snapQuestions[index]['is_branching'];
+                      branchingChoice =
+                          widget.snapQuestions[index]['choice_to_exit'];
                       return Column(
                         children: <Widget>[
                           SurveyAppBar(
@@ -106,7 +107,8 @@ class _YesNoSurveyState extends State<SurveyCard>
                             sar: widget.snapQuestions[index]['sar'],
                             question: widget.snapQuestions[index]['title'],
                           ),
-                          typeContainerAnwers(widget, index, refresh, type),
+                          typeContainerAnwers(widget, index, refresh, type,
+                              widget.number, widget.user),
                         ],
                       );
                     }),
@@ -125,7 +127,7 @@ class _YesNoSurveyState extends State<SurveyCard>
     if (questionNumber == 0) {
       widget.userSar = widget.userSar + widget.sarSurvey;
       saroviOffline = saroviOffline + widget.sarSurvey;
-      if(isSar) {
+      if (isSar) {
         FirebaseCrud().updateUsersSars(widget.userDoc, context, saroviOffline);
       } else {
         FirebaseCrud().updateUsersSars(widget.userDoc, context, widget.userSar);
@@ -171,8 +173,8 @@ class _YesNoSurveyState extends State<SurveyCard>
               ),
               new FlatButton(
                 onPressed: () {
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pop();
                 },
                 child: new Text(MyText().willYes),
               ),
@@ -193,6 +195,8 @@ Widget typeContainerAnwers(
   int index,
   Function refresh,
   String type,
+  int number,
+  var user,
 ) {
   /// provjeriti tip
   switch (type) {
@@ -202,16 +206,18 @@ Widget typeContainerAnwers(
         index,
         refresh,
         branching,
-        branchingChoice
+        branchingChoice,
+        number,
+        user,
       );
     case 'input':
-      return inputWidget(widget, index, refresh);
+      return inputWidget(widget, index, refresh, number);
     case 'mcq':
       return mcqWidget(widget, index, refresh, isSingle);
     case 'date':
-      return dateWidget(widget, index, refresh);
+      return dateWidget(widget, index, refresh, number);
     case 'image':
-      return imageWidget(widget, index, refresh, isSingle);
+      return imageWidget(widget, index, refresh, isSingle, number);
     default:
       return EmptyContainer();
   }
@@ -223,11 +229,15 @@ Widget yesnoWidget(
   int index,
   Function refresh,
   String branching,
-  String branchingChoice
+  String branchingChoice,
+  int number,
+  var user,
 ) {
   return Column(
     children: <Widget>[
       SurveyChoices(
+        user: user,
+        number: number,
         arguments: widget.arguments,
         branching: branching,
         branchingChoice: branchingChoice,
@@ -238,6 +248,8 @@ Widget yesnoWidget(
         doc: widget.doc,
       ),
       SurveyChoices(
+        user: user,
+        number: number,
         arguments: widget.arguments,
         branching: branching,
         branchingChoice: branchingChoice,
@@ -339,10 +351,11 @@ Widget mcqWidget(widget, int index, Function refresh, int isSingle) {
 }
 
 /// input widget
-Widget inputWidget(widget, int index, Function refresh) {
+Widget inputWidget(widget, int index, Function refresh, int number) {
   return Column(
     children: <Widget>[
       InputChoice(
+        // number: number,
         notifyParent: refresh,
         username: widget.username,
         title: widget.snapQuestions[index]['title'],
@@ -353,10 +366,11 @@ Widget inputWidget(widget, int index, Function refresh) {
 }
 
 /// input widget
-Widget dateWidget(widget, int index, Function refresh) {
+Widget dateWidget(widget, int index, Function refresh, int number) {
   return Column(
     children: <Widget>[
       DateChoice(
+        // number: number,
         notifyParent: refresh,
         username: widget.username,
         title: widget.snapQuestions[index]['title'],
@@ -366,10 +380,12 @@ Widget dateWidget(widget, int index, Function refresh) {
   );
 }
 
-Widget imageWidget(widget, int index, Function refresh, int isSingle) {
+Widget imageWidget(
+    widget, int index, Function refresh, int isSingle, int number) {
   return Column(
     children: <Widget>[
       ImageChoice(
+        // number: number,
         notifyParent: refresh,
         isSingle: isSingle,
         title: widget.snapQuestions[index]['title'],

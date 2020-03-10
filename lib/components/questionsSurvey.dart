@@ -9,12 +9,7 @@ class QuestionsForSurvey {
       "level": 1,
       "users_completed": [],
       "list_of_username_answers": [],
-      "list_of_usernames_that_gave_answers": [
-         {
-            "user": "",
-            "answerProgress":  ""
-         }
-      ],
+      "list_of_usernames_that_gave_answers": [],
       "questions": [
         {
           "title": "When is your birthday?",
