@@ -9,10 +9,10 @@ import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoice
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -108,7 +108,7 @@ class _YesNoSurveyState extends State<SurveyCard>
                             question: widget.snapQuestions[index]['title'],
                           ),
                           typeContainerAnwers(widget, index, refresh, type,
-                              widget.number, widget.user),
+                              widget.number, widget.user, widget.isCompleted),
                         ],
                       );
                     }),
@@ -141,6 +141,14 @@ class _YesNoSurveyState extends State<SurveyCard>
           duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
   }
+
+  // completeSurvey() {
+  //   print('Završio surveeeeeeeeeeeeeeyyyyyy!!!');
+  //   Timer(Duration(milliseconds: 300), () {
+  //     widget.isCompleted();
+  //     print('Nakon dvije sekundeeeeeeeeeeeeeeeeeeeeeeeeee!!!');
+  //   });
+  // }
 
   /// [checkForInternet]
   ///
@@ -190,24 +198,13 @@ class _YesNoSurveyState extends State<SurveyCard>
 
 /// widget koji provjerava tip i na osnovu toga vraca odgovarajuci widget
 ///
-Widget typeContainerAnwers(
-  widget,
-  int index,
-  Function refresh,
-  String type,
-  int number,
-  var user,
-) {
+Widget typeContainerAnwers(widget, int index, Function refresh, String type,
+    int number, var user, Function isCompleted) {
   /// provjeriti tip
   switch (type) {
     case 'yesno':
       return yesnoWidget(
-        widget,
-        index,
-        refresh,
-        branching,
-        branchingChoice,
-      );
+          widget, index, refresh, branching, branchingChoice, isCompleted);
     case 'input':
       return inputWidget(widget, index, refresh);
     case 'mcq':
@@ -228,10 +225,12 @@ Widget yesnoWidget(
   Function refresh,
   String branching,
   String branchingChoice,
+  Function isCompleted,
 ) {
   return Column(
     children: <Widget>[
       SurveyChoices(
+        complete: isCompleted,
         arguments: widget.arguments,
         branching: branching,
         branchingChoice: branchingChoice,
@@ -242,6 +241,7 @@ Widget yesnoWidget(
         doc: widget.doc,
       ),
       SurveyChoices(
+        complete: isCompleted,
         arguments: widget.arguments,
         branching: branching,
         branchingChoice: branchingChoice,
@@ -373,8 +373,7 @@ Widget dateWidget(widget, int index, Function refresh) {
   );
 }
 
-Widget imageWidget(
-    widget, int index, Function refresh, int isSingle) {
+Widget imageWidget(widget, int index, Function refresh, int isSingle) {
   return Column(
     children: <Widget>[
       ImageChoice(
