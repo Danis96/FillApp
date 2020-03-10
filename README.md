@@ -54,7 +54,7 @@ Very proud on team 2.
 	User story 4 - fixing bugs from previous sprint's US 4<br/>
 	Bugs that had to be fixed were: No internet, Auto-login, and Back button.<br/>
 
-**•	V4 – Sprint 4<br/>** *
+**•	V4 – Sprint 4 - (03.03.2020. - 10.03.2020.)<br/>** *
 	User story 1 - fixing bugs from previous sprint's US 1<br/>
 	Bugs that had to be fixed were: Text fields' layout, Skip button's layout on Home Page, and repeating text on input in email input text field.<br/><br/>*
 	User story 2 - fixing bugs from previous sprint's US 2<br/>
