@@ -459,9 +459,6 @@ class _DateChoiceState extends State<DateChoice> {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       widget.notifyParent();
-      dayController.text = '';
-      monthController.text = '';
-      yearController.text = '';
     }
   }
 }
