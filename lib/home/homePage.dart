@@ -18,6 +18,7 @@ import 'dart:io';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/firebaseMethods/firebaseSignIn.dart';
 import 'package:fillproject/routes/routeArguments.dart';
@@ -116,7 +117,7 @@ class _SignUpState extends State<SignUp> {
                           child: FlatButton(
                               onPressed: () {
                                 //  FirebaseJson().importJson();
-                                onPressed();
+                                onPressed(context);
                               },
                               child: Text(
                                 MyText().skipThisStep,
@@ -133,17 +134,25 @@ class _SignUpState extends State<SignUp> {
     );
   }
 
-  onPressed() async {
-    username = randomAlphaNumeric(5);
-    FirebaseCrud().createUser('', '', username, '', 0, 1);
-    loginUser();
-    FirebaseSignIn().signInAnonymously(username);
+  onPressed(BuildContext context) async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        username = randomAlphaNumeric(5);
+        FirebaseCrud().createUser('', '', username, '', 0, 1);
+        loginUser();
+        FirebaseSignIn().signInAnonymously(username);
 
-    Timer(Duration(milliseconds: 800), () {
-      Navigator.of(context).pushNamed(NavBar,
-          arguments: PasswordArguments(
-              email: '', password: '', phone: '', username: username));
-    });
+        Timer(Duration(milliseconds: 800), () {
+          Navigator.of(context).pushNamed(NavBar,
+              arguments: PasswordArguments(
+                  email: '', password: '', phone: '', username: username));
+        });
+      }
+    } on SocketException catch (_) {
+      MySnackbar()
+          .showSnackbar(MyText().checkConnection, context, MyText().snackUndo);
+    }
   }
 
   Future<bool> _onWillPop() async {

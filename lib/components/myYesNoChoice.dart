@@ -55,6 +55,12 @@ class MyYesNoChoice extends StatefulWidget {
 }
 
 class _MyYesNoChoiceState extends State<MyYesNoChoice> {
+
+  @override
+  void initState() { 
+    super.initState();
+    isTapped = false;
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
