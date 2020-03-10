@@ -38,14 +38,20 @@ class ImageChoice extends StatefulWidget {
 }
 
 class _ImageChoiceState extends State<ImageChoice> {
+  bool isLoading = true;
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     isTapped1 = false;
     isTapped2 = false;
     isTapped3 = false;
     isTapped4 = false;
+    Timer(Duration(milliseconds: 800), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
   }
 
   @override
@@ -66,7 +72,7 @@ class _ImageChoiceState extends State<ImageChoice> {
                   onTap: () {
                     widget.isSingle == 0
                         ? onTapSingle()
-                        : saveMultiple1(widget.choice1);
+                        : saveMultiple1(widget.text1);
                   },
                   child: Stack(
                     children: <Widget>[
@@ -90,11 +96,17 @@ class _ImageChoiceState extends State<ImageChoice> {
                         margin: EdgeInsets.only(
                             top: ScreenUtil.instance.setWidth(10.0)),
                         width: ScreenUtil.instance.setWidth(140.0),
-                        child: Image.network(
-                          widget.choice1,
-                          height: ScreenUtil.instance.setHeight(90.0),
-                          alignment: Alignment.center,
-                        ),
+                        child: isLoading
+                            ? Container(
+                                margin: EdgeInsets.only(
+                                    top: ScreenUtil.instance.setWidth(30.0)),
+                                child:
+                                    Center(child: CircularProgressIndicator()))
+                            : Image.network(
+                                widget.choice1,
+                                height: ScreenUtil.instance.setHeight(90.0),
+                                alignment: Alignment.center,
+                              ),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -125,7 +137,7 @@ class _ImageChoiceState extends State<ImageChoice> {
                   onTap: () {
                     widget.isSingle == 0
                         ? onTapSingle1()
-                        : saveMultiple2(widget.choice2);
+                        : saveMultiple2(widget.text2);
                   },
                   child: Stack(
                     children: <Widget>[
@@ -149,7 +161,13 @@ class _ImageChoiceState extends State<ImageChoice> {
                         margin: EdgeInsets.only(
                             top: ScreenUtil.instance.setWidth(10.0)),
                         width: ScreenUtil.instance.setWidth(140.0),
-                        child: Image.network(
+                        child: isLoading
+                            ? Container(
+                                margin: EdgeInsets.only(
+                                    top: ScreenUtil.instance.setWidth(30.0)),
+                                child:
+                                    Center(child: CircularProgressIndicator()))
+                            : Image.network(
                           widget.choice2,
                           height: ScreenUtil.instance.setHeight(90.0),
                           alignment: Alignment.center,
@@ -191,7 +209,7 @@ class _ImageChoiceState extends State<ImageChoice> {
                   onTap: () {
                     widget.isSingle == 0
                         ? onTapSingle2()
-                        : saveMultiple3(widget.choice3);
+                        : saveMultiple3(widget.text3);
                   },
                   child: Stack(
                     children: <Widget>[
@@ -215,7 +233,13 @@ class _ImageChoiceState extends State<ImageChoice> {
                         margin: EdgeInsets.only(
                             top: ScreenUtil.instance.setWidth(10.0)),
                         width: ScreenUtil.instance.setWidth(140.0),
-                        child: Image.network(
+                        child: isLoading
+                            ? Container(
+                                margin: EdgeInsets.only(
+                                    top: ScreenUtil.instance.setWidth(30.0)),
+                                child:
+                                    Center(child: CircularProgressIndicator()))
+                            : Image.network(
                           widget.choice3,
                           height: ScreenUtil.instance.setHeight(90.0),
                           alignment: Alignment.center,
@@ -250,7 +274,7 @@ class _ImageChoiceState extends State<ImageChoice> {
                   onTap: () {
                     widget.isSingle == 0
                         ? onTapSingle3()
-                        : saveMultiple4(widget.choice4);
+                        : saveMultiple4(widget.text3);
                   },
                   child: Stack(
                     children: <Widget>[
@@ -274,7 +298,13 @@ class _ImageChoiceState extends State<ImageChoice> {
                         margin: EdgeInsets.only(
                             top: ScreenUtil.instance.setWidth(10.0)),
                         width: ScreenUtil.instance.setWidth(140.0),
-                        child: Image.network(
+                        child:isLoading
+                            ? Container(
+                                margin: EdgeInsets.only(
+                                    top: ScreenUtil.instance.setWidth(30.0)),
+                                child:
+                                    Center(child: CircularProgressIndicator()))
+                            : Image.network(
                           widget.choice4,
                           height: ScreenUtil.instance.setHeight(90.0),
                           alignment: Alignment.center,
@@ -373,39 +403,38 @@ class _ImageChoiceState extends State<ImageChoice> {
 
   saveMultiple1(String choice) {
     setState(() {
-        isTapped1 = true;
+      isTapped1 = true;
     });
-    if(!widget.multipleChoices.contains(choice)) {
+    if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
     }
-    print(widget.multipleChoices);
   }
+
   saveMultiple2(String choice) {
     setState(() {
-        isTapped2 = true;
+      isTapped2 = true;
     });
-    if(!widget.multipleChoices.contains(choice)) {
+    if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
     }
-    print(widget.multipleChoices);
   }
+
   saveMultiple3(String choice) {
     setState(() {
-        isTapped3 = true;
+      isTapped3 = true;
     });
-    if(!widget.multipleChoices.contains(choice)) {
+    if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
     }
-    print(widget.multipleChoices);
   }
+
   saveMultiple4(String choice) {
     setState(() {
-        isTapped4 = true;
+      isTapped4 = true;
     });
-    if(!widget.multipleChoices.contains(choice)) {
+    if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
     }
-    print(widget.multipleChoices);
   }
 
   onPressed(String answer) {
@@ -420,7 +449,7 @@ class _ImageChoiceState extends State<ImageChoice> {
 
   saveImage1() {
     setState(() {
-       isSingle == 0 ? isTapped1 = false : isTapped1 = true;
+      isSingle == 0 ? isTapped1 = false : isTapped1 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text1, widget.title);
@@ -429,7 +458,7 @@ class _ImageChoiceState extends State<ImageChoice> {
 
   saveImage2() {
     setState(() {
-       isSingle == 0 ? isTapped2 = false : isTapped2 = true;
+      isSingle == 0 ? isTapped2 = false : isTapped2 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text2, widget.title);
@@ -447,7 +476,7 @@ class _ImageChoiceState extends State<ImageChoice> {
 
   saveImage4() {
     setState(() {
-       isSingle == 0 ? isTapped4 = false : isTapped4 = true;
+      isSingle == 0 ? isTapped4 = false : isTapped4 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text4, widget.title);
