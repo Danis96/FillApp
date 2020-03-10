@@ -207,17 +207,15 @@ Widget typeContainerAnwers(
         refresh,
         branching,
         branchingChoice,
-        number,
-        user,
       );
     case 'input':
-      return inputWidget(widget, index, refresh, number);
+      return inputWidget(widget, index, refresh);
     case 'mcq':
       return mcqWidget(widget, index, refresh, isSingle);
     case 'date':
-      return dateWidget(widget, index, refresh, number);
+      return dateWidget(widget, index, refresh);
     case 'image':
-      return imageWidget(widget, index, refresh, isSingle, number);
+      return imageWidget(widget, index, refresh, isSingle);
     default:
       return EmptyContainer();
   }
@@ -230,14 +228,10 @@ Widget yesnoWidget(
   Function refresh,
   String branching,
   String branchingChoice,
-  int number,
-  var user,
 ) {
   return Column(
     children: <Widget>[
       SurveyChoices(
-        user: user,
-        number: number,
         arguments: widget.arguments,
         branching: branching,
         branchingChoice: branchingChoice,
@@ -248,8 +242,6 @@ Widget yesnoWidget(
         doc: widget.doc,
       ),
       SurveyChoices(
-        user: user,
-        number: number,
         arguments: widget.arguments,
         branching: branching,
         branchingChoice: branchingChoice,
@@ -355,7 +347,6 @@ Widget inputWidget(widget, int index, Function refresh, int number) {
   return Column(
     children: <Widget>[
       InputChoice(
-        // number: number,
         notifyParent: refresh,
         username: widget.username,
         title: widget.snapQuestions[index]['title'],
@@ -370,7 +361,9 @@ Widget dateWidget(widget, int index, Function refresh, int number) {
   return Column(
     children: <Widget>[
       DateChoice(
-        // number: number,
+        day: '',
+        month: '',
+        year: '',
         notifyParent: refresh,
         username: widget.username,
         title: widget.snapQuestions[index]['title'],
@@ -385,7 +378,6 @@ Widget imageWidget(
   return Column(
     children: <Widget>[
       ImageChoice(
-        // number: number,
         notifyParent: refresh,
         isSingle: isSingle,
         title: widget.snapQuestions[index]['title'],
