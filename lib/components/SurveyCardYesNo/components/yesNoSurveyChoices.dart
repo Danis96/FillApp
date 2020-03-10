@@ -4,7 +4,6 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +12,7 @@ import '../../../firebaseMethods/firebaseCrud.dart';
 class SurveyChoices extends StatefulWidget {
   final PasswordArguments arguments;
   final String choice1, username, branching, branchingChoice;
-  final Function() notifyParent;
+  final Function() notifyParent, complete;
   final String title;
   final DocumentSnapshot doc;
  
@@ -24,6 +23,7 @@ class SurveyChoices extends StatefulWidget {
     this.branchingChoice,
     this.choice1,
     this.notifyParent,
+    this.complete,
     this.username,
     this.title,
     this.doc,
@@ -98,6 +98,7 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
                   onPressed: () => {
                     Navigator.of(context).pop(),
                     Navigator.of(context).pop(),
+                    widget.complete()
                   },
                 )
               ],
