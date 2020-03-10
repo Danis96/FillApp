@@ -423,7 +423,7 @@ class _ImageChoiceState extends State<ImageChoice> {
        isSingle == 0 ? isTapped1 = false : isTapped1 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-        widget.doc, context, widget.username, widget.choice1, widget.title);
+        widget.doc, context, widget.username, widget.text1, widget.title);
     widget.notifyParent();
   }
 
@@ -432,7 +432,7 @@ class _ImageChoiceState extends State<ImageChoice> {
        isSingle == 0 ? isTapped2 = false : isTapped2 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-        widget.doc, context, widget.username, widget.choice1, widget.title);
+        widget.doc, context, widget.username, widget.text2, widget.title);
     widget.notifyParent();
   }
 
@@ -441,7 +441,7 @@ class _ImageChoiceState extends State<ImageChoice> {
       isSingle == 0 ? isTapped3 = false : isTapped3 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-        widget.doc, context, widget.username, widget.choice1, widget.title);
+        widget.doc, context, widget.username, widget.text3, widget.title);
     widget.notifyParent();
   }
 
@@ -450,7 +450,7 @@ class _ImageChoiceState extends State<ImageChoice> {
        isSingle == 0 ? isTapped4 = false : isTapped4 = true;
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-        widget.doc, context, widget.username, widget.choice1, widget.title);
+        widget.doc, context, widget.username, widget.text4, widget.title);
     widget.notifyParent();
   }
 }
