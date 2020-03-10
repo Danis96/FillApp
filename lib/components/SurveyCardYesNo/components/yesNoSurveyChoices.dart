@@ -34,6 +34,12 @@ class SurveyChoices extends StatefulWidget {
 }
 
 class _YesNoSurveyChoicesState extends State<SurveyChoices> {
+
+  @override
+  void initState() { 
+    super.initState();
+    isTapped = false;
+  }
   @override
   Widget build(BuildContext context) {
     return Column(

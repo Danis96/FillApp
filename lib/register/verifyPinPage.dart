@@ -206,8 +206,8 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                         ..onTap = () {
                           Navigator.of(context).pushNamed(Register,
                               arguments: DidntRecievePinArguments(
-                                  phone: widget.arguments.phone,
-                                  username: widget.arguments.username));
+                                  phone: widget.arguments.phone == null ? '' : widget.arguments.phone,
+                                  username: widget.arguments.username == null ? '' : widget.arguments.username));
                         })
                 ]))),
           ],
