@@ -49,7 +49,7 @@ class _MultipleChoiceSurveyChoices
     return Column(
       children: <Widget>[
         Container(
-          width: ScreenUtil.instance.setWidth(300),
+          width: ScreenUtil.instance.setWidth(350.0),
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
           child: ListTile(
               leading: Container(
@@ -76,8 +76,7 @@ class _MultipleChoiceSurveyChoices
                         fontWeight: FontWeight.w700,
                         fontFamily: "LoewNextArabic",
                         fontStyle: FontStyle.normal,
-                        fontSize: 20.0),
-                    textAlign: TextAlign.center),
+                        fontSize: 25.0)),
               ),
               onTap: () => tap ? {
                 if(isSingle == 1) {
