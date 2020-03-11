@@ -69,7 +69,7 @@ class _EmailPageState extends State<EmailPage> {
                 arguments: RegisterArguments(
                     verId: widget.arguments.verId,
                     username: widget.arguments.username,
-                    usernameSecond: widget.arguments.username,
+                    usernameSecond: widget.arguments.usernameSecond,
                     phone: widget.arguments.phone));
           },
         ),
@@ -219,7 +219,7 @@ class _EmailPageState extends State<EmailPage> {
               email: email,
               verId: widget.arguments.verId,
               username: widget.arguments.username,
-              usernameSecond: widget.arguments.username,
+              usernameSecond: widget.arguments.usernameSecond,
               phone: widget.arguments.phone,
             ));
         _btnCounter = 1;

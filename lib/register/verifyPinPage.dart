@@ -57,7 +57,7 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
             arguments: RegisterArguments(
                 verId: widget.arguments.verId,
                 username: widget.arguments.username,
-                usernameSecond: widget.arguments.username,
+                usernameSecond: widget.arguments.usernameSecond,
                 phone: widget.arguments.phone));
       }).catchError((e) {
         print('Auth Credential Error : $e');

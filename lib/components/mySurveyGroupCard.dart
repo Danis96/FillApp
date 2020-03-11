@@ -172,7 +172,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                     ),
                     Container(
                       margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(100.0)),
+                          top: ScreenUtil.instance.setWidth(60.0)),
                       child: MyQuestion(
                           isCompleted: isCompleted,
                           question: widget.name,

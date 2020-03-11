@@ -29,29 +29,26 @@ class MultipleChoiceSurveyChoices extends StatefulWidget {
       this.length});
 
   @override
-  _MultipleChoiceSurveyChoices createState() =>
-      _MultipleChoiceSurveyChoices();
+  _MultipleChoiceSurveyChoices createState() => _MultipleChoiceSurveyChoices();
 }
 
 List<dynamic> multipleAnswers = [];
 
-class _MultipleChoiceSurveyChoices
-    extends State<MultipleChoiceSurveyChoices> {
-
-      @override
-      void initState() { 
-        super.initState();
-        isTapped = false;
-      }
+class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
+  @override
+  void initState() {
+    super.initState();
+    isTapped = false;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
         Container(
-          width: ScreenUtil.instance.setWidth(350.0),
-          margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
-          child: ListTile(
+            width: ScreenUtil.instance.setWidth(350.0),
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+            child: ListTile(
               leading: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
@@ -78,49 +75,54 @@ class _MultipleChoiceSurveyChoices
                         fontStyle: FontStyle.normal,
                         fontSize: 18.0)),
               ),
-              onTap: () => tap ? {
-                if(isSingle == 1) {
-                  tap = false,
-                  singleOnTap()
-                } else {
-                  singleOnTap2()
-                }
-              } : null,
-          )
-        ),
-        widget.isSingle == 1 ? EmptyContainer() : widget.length == 3 && widget.index == 'C'
-         ?
-        Container(
-          width: ScreenUtil.instance.setWidth(316.0),
+              onTap: () => tap
+                  ? {
+                      if (isSingle == 1)
+                        {tap = false, singleOnTap()}
+                      else
+                        {singleOnTap2()}
+                    }
+                  : null,
+            )),
+        widget.isSingle == 1
+            ? EmptyContainer()
+            : widget.length == 3 && widget.index == 'C'
+                ? Container(
+                    width: ScreenUtil.instance.setWidth(316.0),
+                    height: ScreenUtil.instance.setHeight(55.0),
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil.instance.setWidth(20.0),
+                        left: ScreenUtil.instance.setWidth(54.0),
+                        right: ScreenUtil.instance.setWidth(55.0)),
+                    child: RaisedButton(
+                      color: MyColor().black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(33.5),
+                      ),
+                      onPressed: () => submit(),
+                      child: Text(MyText().btnSubmit,
+                          style:
+                              TextStyle(fontSize: 18, color: MyColor().white)),
+                    ))
+                : widget.length == 4 && widget.index == 'D'
+                    ? Container(
+                        width: ScreenUtil.instance.setWidth(316.0),
                         height: ScreenUtil.instance.setHeight(55.0),
                         margin: EdgeInsets.only(
                             top: ScreenUtil.instance.setWidth(20.0),
                             left: ScreenUtil.instance.setWidth(54.0),
                             right: ScreenUtil.instance.setWidth(55.0)),
-            child: RaisedButton(
-              color: MyColor().black,
-          shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(33.5),
-          ),
-          onPressed: () => submit(),
-          child: Text(MyText().btnSubmit, style: TextStyle(fontSize: 18, color: MyColor().white)),
-        ))  
-        :
-         widget.length == 4 && widget.index == 'D' ? Container(
-          width: ScreenUtil.instance.setWidth(316.0),
-                        height: ScreenUtil.instance.setHeight(55.0),
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil.instance.setWidth(20.0),
-                            left: ScreenUtil.instance.setWidth(54.0),
-                            right: ScreenUtil.instance.setWidth(55.0)),
-            child: RaisedButton(
-              color: MyColor().black,
-          shape: RoundedRectangleBorder(
-            borderRadius: new BorderRadius.circular(33.5),
-          ),
-          onPressed: () => submit(),
-          child: Text(MyText().btnSubmit, style: TextStyle(fontSize: 18, color: MyColor().white)),
-        )) : EmptyContainer()
+                        child: RaisedButton(
+                          color: MyColor().black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(33.5),
+                          ),
+                          onPressed: () => submit(),
+                          child: Text(MyText().btnSubmit,
+                              style: TextStyle(
+                                  fontSize: 18, color: MyColor().white)),
+                        ))
+                    : EmptyContainer()
       ],
     );
   }
@@ -151,15 +153,17 @@ class _MultipleChoiceSurveyChoices
     // setState(() {
     //   isTapped = false;
     // });
-    FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-        widget.doc, context, widget.username, answer, widget.title);
-    widget.notifyParent();
-    tap = true;
-    multipleAnswers.removeRange(0, multipleAnswers.length);
+    if (answer != '' && answer != '[]') {
+      FirebaseCrud().updateListOfUsernamesAnswersSurvey(
+          widget.doc, context, widget.username, answer, widget.title);
+      widget.notifyParent();
+      tap = true;
+      multipleAnswers.removeRange(0, multipleAnswers.length);
+    }
   }
 
   onPressed2() {
-    if(!multipleAnswers.contains(widget.choice1)) {
+    if (!multipleAnswers.contains(widget.choice1)) {
       multipleAnswers.add(widget.choice1);
     }
     print(multipleAnswers);

@@ -10,6 +10,7 @@ class QuestionsFlash {
     {
       "type": "checkbox",
       "name": "question1",
+      "level": 1,
       "title": "What is your favorite food?",
       "choices": [
         {"value": "item1", "text": "Fish"},
@@ -24,6 +25,7 @@ class QuestionsFlash {
     {
       "type": "checkbox",
       "name": "question1",
+      "level": 2,
       "title": "What is your favorite TV series?",
       "choices": [
         {"value": "item1", "text": "Game of Thrones"},
@@ -38,6 +40,7 @@ class QuestionsFlash {
     {
       "type": "radiogroup",
       "name": "question1",
+      "level": 1,
       "title": "Do you love Flutter?",
       "choices": [
         {"value": "item1", "text": "YES"},
@@ -51,6 +54,7 @@ class QuestionsFlash {
     {
       "type": "radiogroup",
       "name": "question1",
+      "level": 1,
       "title": "Is flutter hard?",
       "choices": [
         {"value": "item1", "text": "YES"},
@@ -64,6 +68,7 @@ class QuestionsFlash {
     {
       "type": "radiogroup",
       "name": "question1",
+      "level": 2,
       "title": "Do you love chocolate?",
       "choices": [
         {"value": "item1", "text": "YES"},
@@ -77,6 +82,7 @@ class QuestionsFlash {
     {
       "type": "radiogroup",
       "name": "question1",
+      "level": 2,
       "title": "Do you drink alcohol?",
       "choices": [
         {"value": "item1", "text": "YES"},
@@ -90,6 +96,7 @@ class QuestionsFlash {
     {
       "type": "radiogroup",
       "name": "question1",
+      "level": 2,
       "title": "Do you have any  money?",
       "choices": [
         {"value": "item1", "text": "YES"},
@@ -103,6 +110,7 @@ class QuestionsFlash {
     {
       "type": "radiogroup",
       "name": "question1",
+      "level": 2,
       "title": "Do you like your job?",
       "choices": [
         {"value": "item1", "text": "YES"},
@@ -116,6 +124,7 @@ class QuestionsFlash {
     {
       "type": "radiogroup",
       "name": "question1",
+      "level": 2,
       "title": "Do you like star wars?",
       "choices": [
         {"value": "item1", "text": "YES"},
@@ -129,6 +138,7 @@ class QuestionsFlash {
     {
       "type": "checkbox",
       "name": "question1",
+      "level": 1,
       "title": "What is the first thing you do in the morning?",
       "choices": [
         {"value": "item1", "text": "Go to bathroom"},
@@ -143,6 +153,7 @@ class QuestionsFlash {
     {
       "type": "checkbox",
       "name": "question1",
+      "level": 1,
       "title": "What is your favorite sport?",
       "choices": [
         {"value": "item1", "text": "Basketball"},
@@ -157,6 +168,7 @@ class QuestionsFlash {
     {
       "type": "checkbox",
       "name": "question1",
+      "level": 2,
       "title": "What is your favorite food?",
       "choices": [
         {"value": "item1", "text": "Fish"},

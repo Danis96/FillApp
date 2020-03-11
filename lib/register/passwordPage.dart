@@ -52,6 +52,35 @@ class _PasswordPageState extends State<PasswordPage> {
 
   final TextEditingController passwordController = new TextEditingController();
 
+  Widget getIsAnonymousUser() {
+    print('USAO SAM U FUTURE');
+    print('OVO JE MOJ USERNAMEEE: ' + widget.arguments.usernameSecond);
+    return FutureBuilder(
+      future: FirebaseCheck().getUserUsername(widget.arguments.usernameSecond),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (snapshot.hasData) {
+          return ListView.builder(
+              shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                snap = snapshot.data[index];
+                isAnonymous = snap.data['is_anonymous'];
+                oldSar = snap.data['sar'];
+                return EmptyContainer();
+              });
+        }
+        return EmptyContainer();
+      },
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getIsAnonymousUser();
+  }
+
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
@@ -69,7 +98,7 @@ class _PasswordPageState extends State<PasswordPage> {
                     email: widget.arguments.email,
                     verId: widget.arguments.verId,
                     username: widget.arguments.username,
-                    usernameSecond: widget.arguments.username,
+                    usernameSecond: widget.arguments.usernameSecond,
                     phone: widget.arguments.phone));
           },
         ),
@@ -86,25 +115,7 @@ class _PasswordPageState extends State<PasswordPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  FutureBuilder(
-                    future: FirebaseCheck()
-                        .getUserUsername(widget.arguments.usernameSecond),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        return ListView.builder(
-                            shrinkWrap: true,
-                            physics: ClampingScrollPhysics(),
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) {
-                              snap = snapshot.data[index];
-                              isAnonymous = snap.data['is_anonymous'];
-                              oldSar = snap.data['sar'];
-                              return EmptyContainer();
-                            });
-                      }
-                      return EmptyContainer();
-                    },
-                  ),
+                  getIsAnonymousUser(),
                   Padding(
                     padding: EdgeInsets.only(
                         top: ScreenUtil.instance.setWidth(28.0),
@@ -253,9 +264,11 @@ class _PasswordPageState extends State<PasswordPage> {
     final _formState = _formKey.currentState;
     if (_formState.validate()) {
       if (_btnCounter == 0) {
-        loginUser(widget.arguments.username, isLoggedIn);
+        //loginUser(widget.arguments.username, isLoggedIn);
+        print('ANONIMNIIIIIIIIIIIIIIIIIIIIII ' + isAnonymous.toString());
         if (isAnonymous == 1) {
           oldSar = oldSar + 5;
+          print('STARI SAROVIIIIIII ' + oldSar.toString());
           FirebaseCrud().updateUser(
               snap,
               widget.arguments.email,

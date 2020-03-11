@@ -29,7 +29,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
     switch (type) {
       case 'yesno':
         return {
-          height = 240.0,
+          height = 200.0,
           heightContainer = 420.0,
         };
       case 'input':
@@ -68,6 +68,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
                 Container(
                     margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(57.0),
+                        bottom: ScreenUtil.instance.setWidth(10.0),
                         top: ScreenUtil.instance.setWidth(height)),
                     child: MyQuestionSAR(
                       isCompleted: false,

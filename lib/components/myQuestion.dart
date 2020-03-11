@@ -32,6 +32,6 @@ class MyQuestion extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 fontFamily: "LoewNextArabic",
                 fontStyle: FontStyle.normal,
-                fontSize: ScreenUtil.instance.setSp(25.0))));
+                fontSize: ScreenUtil.instance.setSp(20.0))));
   }
 }

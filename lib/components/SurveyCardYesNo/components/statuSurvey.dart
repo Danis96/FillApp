@@ -9,7 +9,8 @@ class StatusSurvey extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-       height: 30.0,
+       height: ScreenUtil.instance.setHeight(30.0),
+       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(10.0)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
