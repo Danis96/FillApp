@@ -33,6 +33,7 @@ class SurveyCard extends StatefulWidget {
   final DocumentSnapshot doc, userDoc;
   final Function isCompleted;
   final Function increaseAnswered;
+   final Function notifyParent;
   var user;
   SurveyCard({
     this.arguments,
@@ -47,6 +48,7 @@ class SurveyCard extends StatefulWidget {
     this.userDoc,
     this.userSar,
     this.user,
+    this.notifyParent,
   });
 
   @override
@@ -99,6 +101,7 @@ class _YesNoSurveyState extends State<SurveyCard>
                           SurveyAppBar(
                             arguments: widget.arguments,
                             percent: (index + 1.0) / widget.total,
+                            notifyParent: widget.notifyParent,
                           ),
                           YesNoSurveySQP(
                             type: type,

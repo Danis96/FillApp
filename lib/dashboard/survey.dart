@@ -110,12 +110,10 @@ class _SurveyState extends State<SurveyPage> {
                     (value) => FirebaseCheck().getSurveyGroups(userLevel)),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    if (!isVisible) {
+
                       snapi = snapshot.data
                           .map((doc) => Survey.fromDocument(doc))
                           .toList();
-                      isVisible = true;
-                    }
 
                     return PageView.builder(
                         pageSnapping: true,
