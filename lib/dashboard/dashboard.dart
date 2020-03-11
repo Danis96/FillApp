@@ -94,6 +94,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       itemBuilder: (context, index) {
                         snap = snapshot.data[index];
                         userSar = snap.data['sar'];
+                        print('USEROVI SAROVIIIIIIIIIIIIIIIIIIIIIIi ' + userSar.toString());
                         if (counter == 0) {
                           saroviOffline = userSar;
                           counter = 1;
@@ -172,7 +173,15 @@ class _DashboardPageState extends State<DashboardPage> {
                                         false &&
                                     target > usernameThatAnswers.length) {
                                   return type == 'checkbox'
-                                      ? MyCardMCQ(
+                                      ? GestureDetector(
+                                          onPanUpdate: (details) {
+                                            if (details.delta.dx > 0) {
+                                              print('Right');
+                                            } else if (details.delta.dx < 0) {
+                                              print('Left');
+                                            }
+                                          },
+                                          child: MyCardMCQ(
                                             key: key,
                                             sar: sar,
                                             isSar: isSar,
@@ -186,20 +195,30 @@ class _DashboardPageState extends State<DashboardPage> {
                                             target: target,
                                             doc: doc,
                                             username: username,
-                                          )
-                                      : MyCardYesNo(
-                                          key: key,
-                                          sar: sar,
-                                          isSar: isSar,
-                                          usersSar: userSar,
-                                          snap: snap,
-                                          question: question,
-                                          snapi: snapi,
-                                          index: index,
-                                          notifyParent: refresh,
-                                          target: target,
-                                          doc: doc,
-                                          username: username);
+                                          ),
+                                        )
+                                      : GestureDetector(
+                                          onPanUpdate: (details) {
+                                            if (details.delta.dx > 0) {
+                                              print('Right');
+                                            } else if (details.delta.dx < 0) {
+                                              print('Left');
+                                            }
+                                          },
+                                          child: MyCardYesNo(
+                                              key: key,
+                                              sar: sar,
+                                              isSar: isSar,
+                                              usersSar: userSar,
+                                              snap: snap,
+                                              question: question,
+                                              snapi: snapi,
+                                              index: index,
+                                              notifyParent: refresh,
+                                              target: target,
+                                              doc: doc,
+                                              username: username),
+                                        );
                                 } else {
                                   return EmptyContainer();
                                 }
