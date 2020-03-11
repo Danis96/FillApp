@@ -1,3 +1,5 @@
+import 'dart:async';
+
 /// Yes No Card class
 ///
 /// This class contains model for flash yes and no question card.
@@ -56,7 +58,7 @@ class MySurveyGroupCard extends StatefulWidget {
 
 class _MySurveyGroupCard extends State<MySurveyGroupCard>
     with AutomaticKeepAliveClientMixin<MySurveyGroupCard> {
-  bool isCompleted = false, isFirst = false;
+  bool isCompleted = false, isFirst = false, justToggle = false;
   int number;
   List<dynamic> endProgress;
   var user;
@@ -70,6 +72,14 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     } else {
       isCompleted = true;
     }
+     Timer(Duration(seconds: 1), () {
+         setState(() {
+             justToggle = !justToggle;
+         });
+         print('SS NAKON SEKUNDU');
+         getUserProgress();
+    });
+    print('INIT STATE');
     getUserProgress();
   }
 
@@ -102,6 +112,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
           // }
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
+                  notifyParent:refreshState,
                   user: user,
                   userDoc: widget.userDoc,
                   sarSurvey: widget.sar,
@@ -189,20 +200,27 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
   }
 
   getUserProgress() {
-    if (widget.userProgress.length == 0 || widget.userProgress.length == null) {
-      number = 0;
-    } else {
+    print(' Usao u funckiju');
       for (int i = 0; i < widget.userProgress.length; i++) {
+        print(' Usao u for petlju - niz ima duzinu');
         var usernameProgress = widget.userProgress[i].toString();
         user = usernameProgress.split(',');
         var progressNum = user[1];
         if (user[0] == widget.username || user[0] == widget.usernameSecond) {
+          print(' USER IMA ODGOVORE');
           number = int.parse(progressNum);
         } else {
+          print('User nema odgovora na ovaj Survey');
           number = 0;
         }
-      }
     }
+  }
+
+  refreshState() {
+     setState(() {
+         justToggle = !justToggle;
+     });
+     print('REFRESH gotov');
   }
 
   @override

@@ -5,10 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import '../../../routes/routeArguments.dart';
+import '../../../routes/routeConstants.dart';
+import '../../../routes/routeConstants.dart';
+import '../surveyCard.dart';
+
 class SurveyAppBar extends StatelessWidget {
   final PasswordArguments arguments;
   final double percent;
-  SurveyAppBar({this.arguments, this.percent});
+  final Function notifyParent;
+  SurveyAppBar({this.arguments, this.percent, this.notifyParent});
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +36,7 @@ class SurveyAppBar extends StatelessWidget {
                 icon: Icon(Icons.arrow_back_ios),
                 color: Colors.white,
                 onPressed: () {
+                  notifyParent();
                   showDialog(
                     context: context,
                     builder: (context) => new AlertDialog(
@@ -42,7 +49,7 @@ class SurveyAppBar extends StatelessWidget {
                           child: new Text(MyText().registerNo),
                         ),
                         new FlatButton(
-                         onPressed: () => {
+                          onPressed: () => {
                             Navigator.of(context).pop(),
                             Navigator.of(context).pop(),
                           },
