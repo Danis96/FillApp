@@ -76,7 +76,7 @@ class _MultipleChoiceSurveyChoices
                         fontWeight: FontWeight.w700,
                         fontFamily: "LoewNextArabic",
                         fontStyle: FontStyle.normal,
-                        fontSize: 25.0)),
+                        fontSize: 18.0)),
               ),
               onTap: () => tap ? {
                 if(isSingle == 1) {
