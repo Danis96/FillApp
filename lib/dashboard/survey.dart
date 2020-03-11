@@ -29,7 +29,7 @@ List<dynamic> snapi = [],
     usernamesThatAnswers = [],
     usernameFinal = [];
 DocumentSnapshot snap, doc;
-int userLevel, sar, total, userSar;
+int userLevel, sar, total, userSar, surveyTarget;
 String name, type, usernameSecond;
 
 class SurveyPage extends StatefulWidget {
@@ -87,10 +87,10 @@ class _SurveyState extends State<SurveyPage> {
                       userLevel = snap.data['level'];
                       usernameSecond = snap.data['username_second'];
                       userSar = snap.data['sar'];
-                        if (counter == 0) {
-                          saroviOffline = userSar;
-                          counter = 1;
-                        }
+                      if (counter == 0) {
+                        saroviOffline = userSar;
+                        counter = 1;
+                      }
                       return EmptyContainer();
                     });
               }
@@ -117,8 +117,8 @@ class _SurveyState extends State<SurveyPage> {
                       isVisible = true;
                     }
 
-                    return PageView.builder(
-                        pageSnapping: true,
+                    return ListView.builder(
+                        //pageSnapping: true,
                         controller: controller,
                         scrollDirection: Axis.vertical,
                         itemCount: snapi.length,
@@ -132,20 +132,26 @@ class _SurveyState extends State<SurveyPage> {
                           usernamesThatAnswers =
                               snapi[index].usersThatGaveAnswers;
                           usernameFinal = snapi[index].usersCompleted;
+                          surveyTarget = snapi[index].target;
 
-                          return MySurveyGroupCard(
-                              userSar: userSar,
-                              arguments: widget.arguments,
-                              usernameFinal: usernameFinal,
-                              usernameSecond: usernameSecond,
-                              userProgress: usernamesThatAnswers,
-                              doc: doc,
-                              userDoc: snap,
-                              sar: sar,
-                              name: name,
-                              total: total,
-                              snapQuestions: snapQuestions,
-                              username: widget.arguments.username);
+                          if (usernameFinal.length < surveyTarget) {
+                            return MySurveyGroupCard(
+                                userSar: userSar,
+                                arguments: widget.arguments,
+                                usernameFinal: usernameFinal,
+                                usernameSecond: usernameSecond,
+                                userProgress: usernamesThatAnswers,
+                                doc: doc,
+                                userDoc: snap,
+                                sar: sar,
+                                name: name,
+                                total: total,
+                                snapQuestions: snapQuestions,
+                                username: widget.arguments.username);
+                          } else {
+                            //usernameFinal.removeAt(index);
+                            return EmptyContainer();
+                          }
                         });
                   }
 
