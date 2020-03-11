@@ -19,6 +19,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/dashboard/dashboard.dart';
 import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
+import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +33,7 @@ bool isTab2Selected = false;
 bool isLoading = true;
 DocumentSnapshot snap;
 int isAnonymous;
+bool isUserInDB = true;
 
 class BottomNavigationBarController extends StatefulWidget {
   final PasswordArguments arguments;
@@ -47,7 +49,35 @@ class _BottomNavigationBarControllerState
   final PasswordArguments arguments;
   _BottomNavigationBarControllerState({Key key, this.arguments});
 
-  
+  Widget doesUserExist(String username) {
+    return Container(
+      height: 0,
+      width: 0,
+      child: FutureBuilder(
+        future: FirebaseCheck().doesNameAlreadyExist(username),
+        builder: (BuildContext context, AsyncSnapshot<bool> result) {
+          if (!result.hasData) {
+            print(username);
+            print('NEEEEEEEEEEMA DATEEEEEEEEEEEEE');
+            return EmptyContainer();
+          }
+          if (result.data) {
+            isUserInDB = true;
+            print('User upisan 1. - ' + isUserInDB.toString());
+            return EmptyContainer();
+          } else {
+            isUserInDB = false;
+            print('User upisan 2. - ' + isUserInDB.toString());
+            FirebaseCrud().createUser('', '', username, '', 0, 1);
+            isUserInDB = true;
+            print('User upisan 3. - ' + isUserInDB.toString());
+            return EmptyContainer();
+          }
+        },
+      ),
+    );
+  }
+
   Widget getIsAnonymous(String username) {
     return FutureBuilder(
       future: FirebaseCheck().getUserUsername(username),
@@ -76,12 +106,13 @@ class _BottomNavigationBarControllerState
           phone: arguments.phone,
           username: arguments.username,
         )),
-        SurveyPage(arguments: PasswordArguments(
-            email: arguments.email,
-            password: arguments.password,
-            phone: arguments.phone,
-            username: arguments.username,
-          )),
+        SurveyPage(
+            arguments: PasswordArguments(
+          email: arguments.email,
+          password: arguments.password,
+          phone: arguments.phone,
+          username: arguments.username,
+        )),
         Profile(
             arguments: PasswordArguments(
           email: arguments.email,
@@ -89,7 +120,7 @@ class _BottomNavigationBarControllerState
           phone: arguments.phone,
           username: arguments.username,
         )),
-        getIsAnonymous(arguments.username)
+        getIsAnonymous(arguments.username),
       ];
 
   final items = [
@@ -114,6 +145,9 @@ class _BottomNavigationBarControllerState
     setState(() {
       currentIndex = index;
     });
+    // if (isUserInDB == false) {
+    //   doesUserExist(arguments.username);
+    // }
     if (currentIndex == 0) {
       isTab1Selected = true;
       isTab2Selected = false;
@@ -148,6 +182,7 @@ class _BottomNavigationBarControllerState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  doesUserExist(arguments.username),
                   isLoadingCircular(),
                 ],
               ),
