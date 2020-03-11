@@ -64,7 +64,13 @@ class _PasswordPageState extends State<PasswordPage> {
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.white,
           onPressed: () {
-            Navigator.of(context).pushNamed(Email);
+            Navigator.of(context).pushNamed(Email,
+                arguments: RegisterArguments(
+                    email: widget.arguments.email,
+                    verId: widget.arguments.verId,
+                    username: widget.arguments.username,
+                    usernameSecond: widget.arguments.username,
+                    phone: widget.arguments.phone));
           },
         ),
       ),
@@ -259,8 +265,13 @@ class _PasswordPageState extends State<PasswordPage> {
               password,
               oldSar);
         } else {
-          FirebaseCrud().createUser(widget.arguments.email,
-              widget.arguments.phone, widget.arguments.username, password, 5, 0);
+          FirebaseCrud().createUser(
+              widget.arguments.email,
+              widget.arguments.phone,
+              widget.arguments.username,
+              password,
+              5,
+              0);
         }
         Navigator.of(context).pushNamed(NavBar,
             arguments: PasswordArguments(
