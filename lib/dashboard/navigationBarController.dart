@@ -121,7 +121,6 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         getIsAnonymous(arguments.username),
-        doesUserExist(arguments.username)
       ];
 
   final items = [
@@ -146,7 +145,9 @@ class _BottomNavigationBarControllerState
     setState(() {
       currentIndex = index;
     });
-    doesUserExist(arguments.username);
+    // if (isUserInDB == false) {
+    //   doesUserExist(arguments.username);
+    // }
     if (currentIndex == 0) {
       isTab1Selected = true;
       isTab2Selected = false;
@@ -181,6 +182,7 @@ class _BottomNavigationBarControllerState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  doesUserExist(arguments.username),
                   isLoadingCircular(),
                 ],
               ),
