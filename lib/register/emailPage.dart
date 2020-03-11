@@ -47,6 +47,13 @@ class _EmailPageState extends State<EmailPage> {
   final TextEditingController emailController = new TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    print(widget.arguments.username);
+    print(widget.arguments.phone);
+  }
+
+  @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
     return Scaffold(
@@ -58,7 +65,12 @@ class _EmailPageState extends State<EmailPage> {
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.white,
           onPressed: () {
-            Navigator.of(context).pushNamed(VerifyPin);
+            Navigator.of(context).pushNamed(VerifyPin,
+                arguments: RegisterArguments(
+                    verId: widget.arguments.verId,
+                    username: widget.arguments.username,
+                    usernameSecond: widget.arguments.username,
+                    phone: widget.arguments.phone));
           },
         ),
       ),
@@ -75,7 +87,9 @@ class _EmailPageState extends State<EmailPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(top: ScreenUtil.instance.setWidth(28.0), bottom: ScreenUtil.instance.setWidth(35.0)),
+                    padding: EdgeInsets.only(
+                        top: ScreenUtil.instance.setWidth(28.0),
+                        bottom: ScreenUtil.instance.setWidth(35.0)),
                     child: MyTextComponent(text: MyText().emailHeadline),
                   ),
                   Text(MyText().fiveSar,
@@ -85,11 +99,14 @@ class _EmailPageState extends State<EmailPage> {
                         color: MyColor().white,
                       )),
                   Container(
-                      margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(20.0), top: ScreenUtil.instance.setWidth(20.0)),
+                      margin: EdgeInsets.only(
+                          bottom: ScreenUtil.instance.setWidth(20.0),
+                          top: ScreenUtil.instance.setWidth(20.0)),
                       child: Container(
                         width: ScreenUtil.instance.setWidth(316.0),
                         height: ScreenUtil.instance.setHeight(92.0),
-                        margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil.instance.setWidth(20.0)),
                         child: Form(
                           key: _formKey,
                           child: TextFormField(
@@ -99,7 +116,9 @@ class _EmailPageState extends State<EmailPage> {
                               // floatingLabelBehavior: FloatingLabelBehavior.never,
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
-                                  vertical: ScreenUtil.instance.setWidth(25.0), horizontal: ScreenUtil.instance.setWidth(35.0)),
+                                  vertical: ScreenUtil.instance.setWidth(25.0),
+                                  horizontal:
+                                      ScreenUtil.instance.setWidth(35.0)),
                               labelText: MyText().labelEmail,
                               labelStyle: TextStyle(color: MyColor().white),
                               enabledBorder: OutlineInputBorder(
@@ -159,7 +178,8 @@ class _EmailPageState extends State<EmailPage> {
                           }
                         },
                         child: Text(MyText().btnEmail,
-                            style: TextStyle(fontSize: ScreenUtil.instance.setSp(18))),
+                            style: TextStyle(
+                                fontSize: ScreenUtil.instance.setSp(18))),
                       )),
                   Column(
                     children: <Widget>[
@@ -197,9 +217,10 @@ class _EmailPageState extends State<EmailPage> {
         Navigator.of(context).pushNamed(Password,
             arguments: RegisterArguments(
               email: email,
-              phone: widget.arguments.phone,
+              verId: widget.arguments.verId,
               username: widget.arguments.username,
-              usernameSecond: widget.arguments.usernameSecond,
+              usernameSecond: widget.arguments.username,
+              phone: widget.arguments.phone,
             ));
         _btnCounter = 1;
         Timer(Duration(seconds: 2), () {

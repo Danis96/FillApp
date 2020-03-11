@@ -55,8 +55,9 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
       FirebaseAuth.instance.signInWithCredential(credential).then((user) async {
         Navigator.of(context).pushNamed(Email,
             arguments: RegisterArguments(
+                verId: widget.arguments.verId,
                 username: widget.arguments.username,
-                usernameSecond: widget.arguments.usernameSecond,
+                usernameSecond: widget.arguments.username,
                 phone: widget.arguments.phone));
       }).catchError((e) {
         print('Auth Credential Error : $e');
@@ -108,7 +109,9 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
             child: Column(
           children: <Widget>[
             Container(
-                margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(105), bottom: ScreenUtil.instance.setWidth(35.0)),
+                margin: EdgeInsets.only(
+                    top: ScreenUtil.instance.setWidth(105),
+                    bottom: ScreenUtil.instance.setWidth(35.0)),
                 child: MyTextComponent(text: MyText().verifyPageHeadline)),
             Container(
               child: Text(
@@ -138,7 +141,9 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                   animationDuration: Duration(milliseconds: 400),
                   fieldHeight: ScreenUtil.instance.setHeight(60),
                   fieldWidth: ScreenUtil.instance.setWidth(50),
-                  textStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setSp(28)),
+                  textStyle: TextStyle(
+                      color: MyColor().white,
+                      fontSize: ScreenUtil.instance.setSp(28)),
                   activeColor: fieldColor || codeError
                       ? MyColor().error
                       : MyColor().white,
@@ -189,11 +194,13 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                         MyText().checkConnection, context, MyText().snackUndo);
                   }
                 },
-                child: Text(MyText().btnVerify, style: TextStyle(fontSize: ScreenUtil.instance.setSp(18))),
+                child: Text(MyText().btnVerify,
+                    style: TextStyle(fontSize: ScreenUtil.instance.setSp(18))),
               ),
             ),
             Container(
-                margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
+                margin:
+                    EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
                 child: RichText(
                     text: new TextSpan(children: [
                   new TextSpan(
@@ -206,8 +213,8 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                         ..onTap = () {
                           Navigator.of(context).pushNamed(Register,
                               arguments: DidntRecievePinArguments(
-                                  phone: widget.arguments.phone == null ? '' : widget.arguments.phone,
-                                  username: widget.arguments.username == null ? '' : widget.arguments.username));
+                                  phone: widget.arguments.phone,
+                                  username: widget.arguments.username));
                         })
                 ]))),
           ],
