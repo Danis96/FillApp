@@ -166,6 +166,5 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     if (!multipleAnswers.contains(widget.choice1)) {
       multipleAnswers.add(widget.choice1);
     }
-    print(multipleAnswers);
   }
 }

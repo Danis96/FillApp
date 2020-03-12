@@ -305,7 +305,6 @@ class _PasswordPageState extends State<PasswordPage> {
     final key = 'user_password';
     final value = password;
     prefs.setString(key, value);
-    print('saved $value');
   }
 
   Future<Null> loginUser(String username, bool isLoggedIn) async {

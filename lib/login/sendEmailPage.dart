@@ -168,7 +168,6 @@ class EmailResetPage extends StatelessWidget {
     if (_formState.validate()) {
       if (_btnCounter == 0) {
         String emailCode = randomAlphaNumeric(10);
-        print(emailCode);
         ResetPassword().sendEmail(emailController.text, emailCode);
         Navigator.of(context).pushNamed(PasswordReset,
             arguments: UpdatePasswordArguments(
