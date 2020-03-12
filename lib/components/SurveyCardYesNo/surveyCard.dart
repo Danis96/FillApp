@@ -6,6 +6,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/dateSurveyChoi
 import 'package:fillproject/components/SurveyCardYesNo/components/imageChoice.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/inputSurveyChoice.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
 import 'package:fillproject/components/constants/myText.dart';
@@ -138,7 +139,7 @@ class _YesNoSurveyState extends State<SurveyCard>
       widget.isCompleted();
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
           widget.doc, context, widget.username);
-      Navigator.of(context).pop();
+      Navigator.of(context).push(MaterialPageRoute(builder: (_) => Summary()));
     } else {
       _controller.nextPage(
           duration: Duration(milliseconds: 200), curve: Curves.easeInOut);

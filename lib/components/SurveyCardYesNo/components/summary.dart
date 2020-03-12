@@ -54,7 +54,6 @@ class _SummaryState extends State<Summary> {
                       child: Center(
                         child: Text('10/10',
                             style: TextStyle(
-                                //color: isTapped ? MyColor().black : MyColor().white,
                                 color: MyColor().white,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: "LoewNextArabic",
@@ -68,7 +67,6 @@ class _SummaryState extends State<Summary> {
                       child: Center(
                         child: Text('Congradulation\nyou have got',
                             style: TextStyle(
-                              //color: isTapped ? MyColor().black : MyColor().white,
                               color: MyColor().white,
                               fontWeight: FontWeight.w700,
                               fontFamily: "LoewNextArabic",
@@ -84,7 +82,6 @@ class _SummaryState extends State<Summary> {
                       child: Center(
                         child: Text('34\nSAR',
                             style: TextStyle(
-                              //color: isTapped ? MyColor().black : MyColor().white,
                               color: MyColor().white,
                               fontWeight: FontWeight.w700,
                               fontFamily: "LoewNextArabic",
@@ -100,7 +97,6 @@ class _SummaryState extends State<Summary> {
                       child: Center(
                         child: Text('Summery',
                             style: TextStyle(
-                              //color: isTapped ? MyColor().black : MyColor().white,
                               color: MyColor().white,
                               fontWeight: FontWeight.w700,
                               fontFamily: "LoewNextArabic",
@@ -150,23 +146,6 @@ class _SummaryState extends State<Summary> {
   }
 
   Future<bool> _onWillPop() async {
-    return showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text(MyText().willQuestion),
-            content: new Text(MyText().willQuestion1),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text(MyText().willNo),
-              ),
-              new FlatButton(
-                onPressed: () => exit(0),
-                child: new Text(MyText().willYes),
-              ),
-            ],
-          ),
-        ) ??
-        true;
+    return Navigator.of(context).pop() ?? true;
   }
 }
