@@ -153,7 +153,6 @@ class _YesNoSurveyState extends State<SurveyCard>
                 animateTo: summaryAnimateToPpage,
                 arguments: widget.arguments,
               )));
-      
     } else {
       _controller.nextPage(
           duration: Duration(milliseconds: 50), curve: Curves.easeInOut);
@@ -179,27 +178,35 @@ class _YesNoSurveyState extends State<SurveyCard>
   /// async funstion that creates an exit dialog for our screen
   /// YES / NO
   Future<bool> _onWillPop() async {
-    return showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: Text('Are you sure?'),
-            content: new Text('Do you really want to exit the survey?'),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text(MyText().willNo),
+    return isSummary
+        ? Navigator.of(context).push(MaterialPageRoute(
+            builder: (_) => Summary(
+                  animateTo: summaryAnimateToPpage,
+                  questions: widget.snapQuestions,
+                  totalProgress: widget.total,
+                  totalSar: widget.sarSurvey,
+                )))
+        : showDialog(
+              context: context,
+              builder: (context) => new AlertDialog(
+                title: Text('Are you sure?'),
+                content: new Text('Do you really want to exit the survey?'),
+                actions: <Widget>[
+                  new FlatButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: new Text(MyText().willNo),
+                  ),
+                  new FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    },
+                    child: new Text(MyText().willYes),
+                  ),
+                ],
               ),
-              new FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pop();
-                },
-                child: new Text(MyText().willYes),
-              ),
-            ],
-          ),
-        ) ??
-        true;
+            ) ??
+            true;
   }
 
   summaryAnimateToPpage(int index) {

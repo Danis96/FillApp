@@ -68,9 +68,7 @@ class SurveyAppBar extends StatelessWidget {
                                       totalProgress: totalProgress,
                                       totalSar: totalSar,
                                     )))
-                            : {
-                                notifyParent(),
-                                showDialog(
+                            : showDialog(
                                   context: context,
                                   builder: (context) => new AlertDialog(
                                     title: Text('Are you sure?'),
@@ -83,6 +81,7 @@ class SurveyAppBar extends StatelessWidget {
                                       ),
                                       new FlatButton(
                                         onPressed: () => {
+                                          notifyParent(),
                                           Navigator.of(context).pop(),
                                           Navigator.of(context).pop(),
                                         },
@@ -90,8 +89,8 @@ class SurveyAppBar extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                )
-                              };
+                                );
+                              
                   }),
             ),
           ),
