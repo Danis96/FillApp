@@ -15,7 +15,6 @@ class SurveyChoices extends StatefulWidget {
   final Function() notifyParent, complete;
   final String title;
   final DocumentSnapshot doc;
- 
 
   SurveyChoices({
     this.arguments,
@@ -34,12 +33,12 @@ class SurveyChoices extends StatefulWidget {
 }
 
 class _YesNoSurveyChoicesState extends State<SurveyChoices> {
-
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     isTapped = false;
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,14 +65,17 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
                     fontStyle: FontStyle.normal,
                     fontSize: 18.0),
                 textAlign: TextAlign.center),
-            onPressed: () {
-              setState(() {
-                isTapped = true;
-              });
-              Timer(Duration(milliseconds: 200), () {
-                onPressed();
-              });
-            },
+            onPressed: () => isSummary
+                  ? print('sdsdsd')
+                  : {
+                      setState(() {
+                        isTapped = true;
+                      }),
+                      Timer(Duration(milliseconds: 200), () {
+                        onPressed();
+                      }),
+                  }
+            
           ),
         ),
       ],
@@ -86,11 +88,11 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
-   
+
     if (widget.branching == 'yes') {
       if (widget.choice1.toLowerCase() == widget.branchingChoice) {
         FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
-          widget.doc, context, widget.username);
+            widget.doc, context, widget.username);
         showDialog(
           barrierDismissible: false,
           context: context,

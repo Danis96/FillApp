@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -39,6 +41,7 @@ class _InputChoiceState extends State<InputChoice> {
           height: ScreenUtil.instance.setWidth(65.0),
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
           child: TextFormField(
+            readOnly: isSummary ? true : false,
             maxLength: 60,
             enableSuggestions: false,
             style: TextStyle(color: Colors.black),
@@ -86,7 +89,7 @@ class _InputChoiceState extends State<InputChoice> {
                 )
               : Text(''),
         ),
-        Container(
+        isSummary ?  EmptyContainer() :  Container(
             width: ScreenUtil.instance.setWidth(316.0),
             height: ScreenUtil.instance.setHeight(50.0),
             margin: EdgeInsets.only(
@@ -98,7 +101,7 @@ class _InputChoiceState extends State<InputChoice> {
               shape: RoundedRectangleBorder(
                 borderRadius: new BorderRadius.circular(33.5),
               ),
-              onPressed: () => onPressed(context),
+              onPressed: () =>  onPressed(context),
               child: Text(MyText().btnSubmit,
                   style: TextStyle(fontSize: 18, color: MyColor().white)),
             )),

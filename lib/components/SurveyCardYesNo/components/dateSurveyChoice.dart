@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/globals.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -78,10 +80,9 @@ class _DateChoiceState extends State<DateChoice> {
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(5.0)),
                       child: TextFormField(
+                         readOnly:true,
                         textAlign: TextAlign.center,
-                        readOnly: true,
-                        onTap: () {
-                          showModalBottomSheet(
+                        onTap: () => isSummary ?  null : showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
                                 return GestureDetector(
@@ -98,8 +99,7 @@ class _DateChoiceState extends State<DateChoice> {
                                           ScreenUtil.instance.setHeight(265.0),
                                       child: _buildItemPicker('day', context)),
                                 );
-                              });
-                        },
+                              }),
                         enableSuggestions: false,
                         style: TextStyle(color: Colors.black),
                         controller: dayController,
@@ -172,7 +172,7 @@ class _DateChoiceState extends State<DateChoice> {
                       child: TextFormField(
                         textAlign: TextAlign.center,
                         readOnly: true,
-                        onTap: () {
+                        onTap: () => isSummary ? null :  
                           showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
@@ -191,8 +191,7 @@ class _DateChoiceState extends State<DateChoice> {
                                       child:
                                           _buildItemPicker('month', context)),
                                 );
-                              });
-                        },
+                              }),
                         enableSuggestions: false,
                         style: TextStyle(color: Colors.black),
                         controller: monthController,
@@ -265,7 +264,7 @@ class _DateChoiceState extends State<DateChoice> {
                       child: TextFormField(
                         textAlign: TextAlign.center,
                         readOnly: true,
-                        onTap: () {
+                        onTap: () => isSummary ? null : 
                           showModalBottomSheet(
                               context: context,
                               builder: (BuildContext context) {
@@ -283,8 +282,7 @@ class _DateChoiceState extends State<DateChoice> {
                                           ScreenUtil.instance.setHeight(265.0),
                                       child: _buildItemPicker('year', context)),
                                 );
-                              });
-                        },
+                              }),
                         enableSuggestions: false,
                         style: TextStyle(color: Colors.black),
                         controller: yearController,
@@ -342,7 +340,7 @@ class _DateChoiceState extends State<DateChoice> {
                   )
                 : Text(''),
           ),
-          Container(
+         isSummary ? EmptyContainer() : Container(
               width: ScreenUtil.instance.setWidth(316.0),
               height: ScreenUtil.instance.setHeight(55.0),
               margin: EdgeInsets.only(
