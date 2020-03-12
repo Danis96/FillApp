@@ -179,7 +179,6 @@ class _SignUpState extends State<SignUp> {
   void autoLogIn(BuildContext context, bool isLoggedIn) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String userId = prefs.getString('username');
-    print(username);
     if (userId != null) {
       setState(() {
         isLoggedIn = true;

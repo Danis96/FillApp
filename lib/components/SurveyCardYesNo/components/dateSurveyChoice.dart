@@ -89,7 +89,6 @@ class _DateChoiceState extends State<DateChoice> {
                                     if (selectedDay == null) {
                                       selectedDay = '1';
                                     }
-                                    print(selectedDay);
                                     widget.day = selectedDay;
                                     dayController.text = widget.day;
                                     Navigator.pop(context);
@@ -182,7 +181,6 @@ class _DateChoiceState extends State<DateChoice> {
                                     if (selectedMonth == null) {
                                       selectedMonth = '1';
                                     }
-                                    print(selectedMonth);
                                     widget.month = selectedMonth;
                                     monthController.text = widget.month;
                                     Navigator.pop(context);
@@ -276,7 +274,6 @@ class _DateChoiceState extends State<DateChoice> {
                                     if (selectedYear == null) {
                                       selectedYear = '2020';
                                     }
-                                    print(selectedYear);
                                     widget.year = selectedYear;
                                     yearController.text = widget.year;
                                     Navigator.pop(context);
@@ -387,19 +384,16 @@ class _DateChoiceState extends State<DateChoice> {
     return CupertinoPicker(
       itemExtent: 45.0,
       onSelectedItemChanged: (index) {
-        print(items[index]);
+    
         if (field == 'year') {
           selectedYear = items[index];
           widget.year = selectedYear;
-          print(selectedYear);
         } else if (field == 'month') {
           selectedMonth = items[index];
           widget.month = selectedMonth;
-          print(selectedMonth);
         } else if (field == 'day') {
           selectedDay = items[index];
           widget.day = selectedDay;
-          print(selectedDay);
         }
       },
       looping: true,
@@ -455,7 +449,6 @@ class _DateChoiceState extends State<DateChoice> {
           monthController.text +
           '/' +
           yearController.text;
-      print(userAnswer);
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       widget.notifyParent();

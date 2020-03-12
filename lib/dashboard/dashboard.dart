@@ -276,7 +276,6 @@ class _DashboardPageState extends State<DashboardPage> {
           _physics = CustomScrollPhysics(
             itemDimension: ScreenUtil.instance.setWidth(dimension),
           );
-          print(dimension);
         });
       }
     });

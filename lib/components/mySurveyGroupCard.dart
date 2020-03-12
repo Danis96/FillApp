@@ -76,10 +76,8 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
          setState(() {
              justToggle = !justToggle;
          });
-         print('SS NAKON SEKUNDU');
          getUserProgress();
     });
-    print('INIT STATE');
     getUserProgress();
   }
 
@@ -97,19 +95,6 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       onTap: () {
         //  FirebaseJson().importSurveyJson();
         if (!isCompleted) {
-          // List<dynamic> lista = doc.data['questions'];
-          // // print(lista[1]['is_branching']);
-          // for(int i = 0; i < lista.length; i++) {
-          //   print(lista[i]['is_branching']);
-          //   if(lista[i]['is_branching'] == 'yes') {
-          //     lista.insert(0, lista[i]);
-          //     break;
-          //   }
-          // }
-          // print('Lista nakon pomjeranja!!!');
-          // for(int i = 0; i < lista.length; i++) {
-          //   print(lista[i]['is_branching']);
-          // }
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
                   notifyParent:refreshState,
@@ -200,17 +185,13 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
   }
 
   getUserProgress() {
-    print(' Usao u funckiju');
       for (int i = 0; i < widget.userProgress.length; i++) {
-        print(' Usao u for petlju - niz ima duzinu');
         var usernameProgress = widget.userProgress[i].toString();
         user = usernameProgress.split(',');
         var progressNum = user[1];
         if (user[0] == widget.username || user[0] == widget.usernameSecond) {
-          print(' USER IMA ODGOVORE');
           number = int.parse(progressNum);
         } else {
-          print('User nema odgovora na ovaj Survey');
           number = 0;
         }
     }
@@ -220,7 +201,6 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
      setState(() {
          justToggle = !justToggle;
      });
-     print('REFRESH gotov');
   }
 
   @override

@@ -57,20 +57,15 @@ class _BottomNavigationBarControllerState
         future: FirebaseCheck().doesNameAlreadyExist(username),
         builder: (BuildContext context, AsyncSnapshot<bool> result) {
           if (!result.hasData) {
-            print(username);
-            print('NEEEEEEEEEEMA DATEEEEEEEEEEEEE');
             return EmptyContainer();
           }
           if (result.data) {
             isUserInDB = true;
-            print('User upisan 1. - ' + isUserInDB.toString());
             return EmptyContainer();
           } else {
             isUserInDB = false;
-            print('User upisan 2. - ' + isUserInDB.toString());
             FirebaseCrud().createUser('', '', username, '', 0, 1);
             isUserInDB = true;
-            print('User upisan 3. - ' + isUserInDB.toString());
             return EmptyContainer();
           }
         },
@@ -158,8 +153,6 @@ class _BottomNavigationBarControllerState
       isTab1Selected = false;
       isTab2Selected = false;
       getIsAnonymous(arguments.username);
-      print(arguments.username);
-      print(isAnonymous);
       if (isAnonymous == 1) {
         askUserToRegister();
       }

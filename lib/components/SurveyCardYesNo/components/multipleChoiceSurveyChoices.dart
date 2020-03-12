@@ -163,6 +163,5 @@ class _MultipleChoiceSurveyChoices
     if(!multipleAnswers.contains(widget.choice1)) {
       multipleAnswers.add(widget.choice1);
     }
-    print(multipleAnswers);
   }
 }

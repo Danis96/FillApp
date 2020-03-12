@@ -144,15 +144,6 @@ class _YesNoSurveyState extends State<SurveyCard>
           duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
     }
   }
-
-  // completeSurvey() {
-  //   print('Završio surveeeeeeeeeeeeeeyyyyyy!!!');
-  //   Timer(Duration(milliseconds: 300), () {
-  //     widget.isCompleted();
-  //     print('Nakon dvije sekundeeeeeeeeeeeeeeeeeeeeeeeeee!!!');
-  //   });
-  // }
-
   /// [checkForInternet]
   ///
   /// function that checks for internet connection
