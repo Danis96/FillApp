@@ -21,7 +21,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../components/emptyCont.dart';
-
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
 bool isVisible = false, isCompleted = false;
 List<dynamic> snapi = [],
@@ -106,7 +105,7 @@ class _SurveyState extends State<SurveyPage> {
                 /// future function that executes 500 miliseconds after
                 /// [getUserUsername] function, & recieve [userLevel] ,
                 /// variable that we get from future function above
-                future: Future.delayed(Duration(milliseconds: 600)).then(
+                future: Future.delayed(Duration(milliseconds: 400)).then(
                     (value) => FirebaseCheck().getSurveyGroups(userLevel)),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
@@ -147,7 +146,6 @@ class _SurveyState extends State<SurveyPage> {
                                 snapQuestions: snapQuestions,
                                 username: widget.arguments.username);
                           } else {
-                            //usernameFinal.removeAt(index);
                             return EmptyContainer();
                           }
                         });

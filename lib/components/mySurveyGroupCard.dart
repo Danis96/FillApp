@@ -72,11 +72,11 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     } else {
       isCompleted = true;
     }
-     Timer(Duration(seconds: 1), () {
-         setState(() {
-             justToggle = !justToggle;
-         });
-         getUserProgress();
+    Timer(Duration(seconds: 1), () {
+      setState(() {
+        justToggle = !justToggle;
+      });
+      getUserProgress();
     });
     getUserProgress();
   }
@@ -93,11 +93,11 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     )..init(context);
     return GestureDetector(
       onTap: () {
-        //  FirebaseJson().importSurveyJson();
+        // FirebaseJson().importSurveyJson();
         if (!isCompleted) {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
-                  notifyParent:refreshState,
+                  notifyParent: refreshState,
                   user: user,
                   userDoc: widget.userDoc,
                   sarSurvey: widget.sar,
@@ -185,6 +185,9 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
   }
 
   getUserProgress() {
+    if (widget.userProgress.length == null || widget.userProgress.length == 0) {
+      number = 0;
+    } else {
       for (int i = 0; i < widget.userProgress.length; i++) {
         var usernameProgress = widget.userProgress[i].toString();
         user = usernameProgress.split(',');
@@ -194,13 +197,14 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
         } else {
           number = 0;
         }
+      }
     }
   }
 
   refreshState() {
-     setState(() {
-         justToggle = !justToggle;
-     });
+    setState(() {
+      justToggle = !justToggle;
+    });
   }
 
   @override
