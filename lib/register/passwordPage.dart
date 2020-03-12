@@ -53,8 +53,6 @@ class _PasswordPageState extends State<PasswordPage> {
   final TextEditingController passwordController = new TextEditingController();
 
   Widget getIsAnonymousUser() {
-    print('USAO SAM U FUTURE');
-    print('OVO JE MOJ USERNAMEEE: ' + widget.arguments.usernameSecond);
     return FutureBuilder(
       future: FirebaseCheck().getUserUsername(widget.arguments.usernameSecond),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -264,11 +262,9 @@ class _PasswordPageState extends State<PasswordPage> {
     final _formState = _formKey.currentState;
     if (_formState.validate()) {
       if (_btnCounter == 0) {
-        //loginUser(widget.arguments.username, isLoggedIn);
-        print('ANONIMNIIIIIIIIIIIIIIIIIIIIII ' + isAnonymous.toString());
+        loginUser(widget.arguments.username, isLoggedIn);
         if (isAnonymous == 1) {
           oldSar = oldSar + 5;
-          print('STARI SAROVIIIIIII ' + oldSar.toString());
           FirebaseCrud().updateUser(
               snap,
               widget.arguments.email,

@@ -150,9 +150,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   }
 
   onPressed(String answer) {
-    // setState(() {
-    //   isTapped = false;
-    // });
     if (answer != '' && answer != '[]') {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, answer, widget.title);

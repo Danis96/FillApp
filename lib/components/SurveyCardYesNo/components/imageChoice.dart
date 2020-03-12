@@ -168,10 +168,10 @@ class _ImageChoiceState extends State<ImageChoice> {
                                 child:
                                     Center(child: CircularProgressIndicator()))
                             : Image.network(
-                          widget.choice2,
-                          height: ScreenUtil.instance.setHeight(90.0),
-                          alignment: Alignment.center,
-                        ),
+                                widget.choice2,
+                                height: ScreenUtil.instance.setHeight(90.0),
+                                alignment: Alignment.center,
+                              ),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -240,10 +240,10 @@ class _ImageChoiceState extends State<ImageChoice> {
                                 child:
                                     Center(child: CircularProgressIndicator()))
                             : Image.network(
-                          widget.choice3,
-                          height: ScreenUtil.instance.setHeight(90.0),
-                          alignment: Alignment.center,
-                        ),
+                                widget.choice3,
+                                height: ScreenUtil.instance.setHeight(90.0),
+                                alignment: Alignment.center,
+                              ),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -298,17 +298,17 @@ class _ImageChoiceState extends State<ImageChoice> {
                         margin: EdgeInsets.only(
                             top: ScreenUtil.instance.setWidth(10.0)),
                         width: ScreenUtil.instance.setWidth(140.0),
-                        child:isLoading
+                        child: isLoading
                             ? Container(
                                 margin: EdgeInsets.only(
                                     top: ScreenUtil.instance.setWidth(30.0)),
                                 child:
                                     Center(child: CircularProgressIndicator()))
                             : Image.network(
-                          widget.choice4,
-                          height: ScreenUtil.instance.setHeight(90.0),
-                          alignment: Alignment.center,
-                        ),
+                                widget.choice4,
+                                height: ScreenUtil.instance.setHeight(90.0),
+                                alignment: Alignment.center,
+                              ),
                       ),
                       Container(
                         decoration: BoxDecoration(
@@ -441,10 +441,12 @@ class _ImageChoiceState extends State<ImageChoice> {
     setState(() {
       isTapped = false;
     });
-    FirebaseCrud().updateListOfUsernamesAnswersSurvey(
-        widget.doc, context, widget.username, answer, widget.title);
-    widget.notifyParent();
-    widget.multipleChoices.removeRange(0, widget.multipleChoices.length);
+    if (answer != '' && answer != '[]') {
+      FirebaseCrud().updateListOfUsernamesAnswersSurvey(
+          widget.doc, context, widget.username, answer, widget.title);
+      widget.notifyParent();
+      widget.multipleChoices.removeRange(0, widget.multipleChoices.length);
+    }
   }
 
   saveImage1() {
