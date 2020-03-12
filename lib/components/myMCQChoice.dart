@@ -52,6 +52,13 @@ class MyMCQChoice extends StatefulWidget {
 }
 
 class _MyMCQChoiceState extends State<MyMCQChoice> {
+
+  @override
+  void initState() { 
+    super.initState();
+    isTappedMCQFlash = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,12 +73,12 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(28.0),
             ),
-            hoverColor: isTapped ? MyColor().white : MyColor().black,
+            hoverColor: isTappedMCQFlash ? MyColor().white : MyColor().black,
             elevation: 0,
-            color: isTapped ? MyColor().white : MyColor().black,
+            color: isTappedMCQFlash ? MyColor().white : MyColor().black,
             onPressed: () async {
               setState(() {
-                isTapped = true;
+                isTappedMCQFlash = true;
               });
            
                 Timer(Duration(milliseconds: 50), () {
@@ -81,7 +88,7 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
             },
             child: Text(widget.choice,
                 style: TextStyle(
-                    color: isTapped ? MyColor().black : MyColor().white,
+                    color: isTappedMCQFlash ? MyColor().black : MyColor().white,
                     fontWeight: FontWeight.w400,
                     fontFamily: "LoewNextArabic",
                     fontStyle: FontStyle.normal,
@@ -89,7 +96,7 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
           ),
         ),
         decoration: BoxDecoration(
-            color: isTapped ? MyColor().white : MyColor().black,
+            color: isTappedMCQFlash ? MyColor().white : MyColor().black,
             border: Border.all(color: MyColor().white),
             borderRadius: BorderRadius.all(Radius.circular(33.5))));
   }
@@ -115,6 +122,6 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());
     widget.notifyParent();
-    isTapped = false;
+    isTappedMCQFlash = false;
   }
 }
