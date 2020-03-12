@@ -11,6 +11,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/customScroll.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
@@ -21,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../components/emptyCont.dart';
+
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
 bool isVisible = false, isCompleted = false;
 List<dynamic> snapi = [],
@@ -39,13 +41,21 @@ class SurveyPage extends StatefulWidget {
   _SurveyState createState() => _SurveyState();
 }
 
+/// Scroll physics
+///
+/// custom physics and controller specified for out needs
+/// listview controller & physics that behaves like pageview
+ScrollController _controller = new ScrollController();
+ScrollPhysics _physics;
+var dimension = 361.7809523809524;
+
 int counter = 0;
 
 class _SurveyState extends State<SurveyPage> {
   @override
   void initState() {
     super.initState();
-
+addPhysicsListenerController();
     Timer(Duration(milliseconds: 600), () {
       setState(() {});
     });
@@ -109,14 +119,14 @@ class _SurveyState extends State<SurveyPage> {
                     (value) => FirebaseCheck().getSurveyGroups(userLevel)),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-
-                      snapi = snapshot.data
-                          .map((doc) => Survey.fromDocument(doc))
-                          .toList();
+                    snapi = snapshot.data
+                        .map((doc) => Survey.fromDocument(doc))
+                        .toList();
 
                     return ListView.builder(
-                        //pageSnapping: true,
-                        controller: controller,
+
+                        controller: _controller,
+                        physics: _physics,
                         scrollDirection: Axis.vertical,
                         itemCount: snapi.length,
                         itemBuilder: (BuildContext context, int index) {
@@ -186,5 +196,23 @@ class _SurveyState extends State<SurveyPage> {
           ),
         ) ??
         true;
+  }
+
+  /// [addPhysicsListenerController]
+  ///
+  /// function that creates a listener for out scroll controller
+  /// and checks for controller position
+  /// then add physics that recieve dimension
+  /// [dimension] =  361.7809523809524;
+  addPhysicsListenerController() {
+    _controller.addListener(() {
+      if (_controller.position.haveDimensions && _physics == null) {
+        setState(() {
+          _physics = CustomScrollPhysics(
+            itemDimension: ScreenUtil.instance.setWidth(dimension),
+          );
+        });
+      }
+    });
   }
 }
