@@ -59,8 +59,9 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
   @override
   void initState() { 
     super.initState();
-    isTapped = false;
+    isTappedYesNoFlash = false;
   }
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -76,12 +77,12 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(28.0),
             ),
-            hoverColor: isTapped ? MyColor().white : MyColor().black,
+            hoverColor: isTappedYesNoFlash ? MyColor().white : MyColor().black,
             elevation: 0,
-            color: isTapped ? MyColor().white : MyColor().black,
+            color: isTappedYesNoFlash ? MyColor().white : MyColor().black,
             onPressed: ()  {
               setState(() {
-                isTapped = true;
+                isTappedYesNoFlash = true;
               });
 
               Timer(Duration(milliseconds: 50), () {
@@ -90,7 +91,7 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
             },
             child: Text(widget.choice,
                 style: TextStyle(
-                    color: isTapped ? MyColor().black : MyColor().white,
+                    color: isTappedYesNoFlash ? MyColor().black : MyColor().white,
                     fontWeight: FontWeight.w400,
                     fontFamily: arabic,
                     fontStyle: FontStyle.normal,
@@ -98,7 +99,7 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
           ),
         ),
         decoration: BoxDecoration(
-            color: isTapped ? MyColor().white : MyColor().black,
+            color: isTappedYesNoFlash ? MyColor().white : MyColor().black,
             border: Border.all(color: MyColor().white),
             borderRadius: BorderRadius.all(Radius.circular(33.5))));
   }
@@ -124,6 +125,6 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
     widget.snapi.insert(widget.index, QuestionSkelet());
     widget.notifyParent();
 
-    isTapped = false;
+    isTappedYesNoFlash = false;
   }
 }
