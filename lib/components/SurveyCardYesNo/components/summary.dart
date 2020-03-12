@@ -66,7 +66,6 @@ class _SummaryState extends State<Summary> {
                         child: Center(
                           child: Text(widget.totalProgress.toString()+'/'+widget.totalProgress.toString(),
                               style: TextStyle(
-                                  //color: isTapped ? MyColor().black : MyColor().white,
                                   color: MyColor().white,
                                   fontWeight: FontWeight.w700,
                                   fontFamily: "LoewNextArabic",
@@ -80,7 +79,6 @@ class _SummaryState extends State<Summary> {
                         child: Center(
                           child: Text('Congratulation\nyou have got',
                               style: TextStyle(
-                                //color: isTapped ? MyColor().black : MyColor().white,
                                 color: MyColor().white,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: "LoewNextArabic",
@@ -88,15 +86,29 @@ class _SummaryState extends State<Summary> {
                                 fontSize: ScreenUtil.instance.setSp(25.0),
                               ),
                               textAlign: TextAlign.center),
-                        ),
                       ),
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(
+                          bottom: ScreenUtil.instance.setWidth(33.0)),
+                      child: Center(
+                        child: Text('Congradulation\nyou have got',
+                            style: TextStyle(
+                              color: MyColor().white,
+                              fontWeight: FontWeight.w700,
+                              fontFamily: "LoewNextArabic",
+                              fontStyle: FontStyle.normal,
+                              fontSize: ScreenUtil.instance.setSp(25.0),
+                            ),
+                            textAlign: TextAlign.center),
+                      ),
+                    ),
                       Container(
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(44.0)),
                         child: Center(
                           child: Text(widget.totalSar.toString() + '\nSAR',
                               style: TextStyle(
-                                //color: isTapped ? MyColor().black : MyColor().white,
                                 color: MyColor().white,
                                 fontWeight: FontWeight.w700,
                                 fontFamily: "LoewNextArabic",
@@ -110,7 +122,7 @@ class _SummaryState extends State<Summary> {
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(15.0)),
                         child: Center(
-                          child: Text('Summery',
+                          child: Text('Summary',
                               style: TextStyle(
                                 color: MyColor().white,
                                 fontWeight: FontWeight.w700,
@@ -142,23 +154,6 @@ class _SummaryState extends State<Summary> {
   }
 
   Future<bool> _onWillPop() async {
-    return showDialog(
-          context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text(MyText().willQuestion),
-            content: new Text(MyText().willQuestion1),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text(MyText().willNo),
-              ),
-              new FlatButton(
-                onPressed: () => exit(0),
-                child: new Text(MyText().willYes),
-              ),
-            ],
-          ),
-        ) ??
-        true;
+    return Navigator.of(context).pop() ?? true;
   }
 }
