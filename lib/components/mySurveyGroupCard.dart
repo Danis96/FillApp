@@ -15,6 +15,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/statuSurvey.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/SurveyCardYesNo/surveyCard.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/emptyCont.dart';
@@ -93,24 +94,25 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     )..init(context);
     return GestureDetector(
       onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => Summary()));
       //  FirebaseJson().importSurveyJson();
-        if (!isCompleted) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => SurveyCard(
-                  notifyParent: refreshState,
-                  user: user,
-                  userDoc: widget.userDoc,
-                  sarSurvey: widget.sar,
-                  number: number,
-                  increaseAnswered: increaseAnswered,
-                  userSar: widget.userSar,
-                  arguments: widget.arguments,
-                  isCompleted: setColor,
-                  doc: widget.doc,
-                  username: widget.username,
-                  snapQuestions: widget.snapQuestions,
-                  total: widget.total)));
-        }
+        // if (!isCompleted) {
+        //   Navigator.of(context).push(MaterialPageRoute(
+        //       builder: (_) => SurveyCard(
+        //           notifyParent: refreshState,
+        //           user: user,
+        //           userDoc: widget.userDoc,
+        //           sarSurvey: widget.sar,
+        //           number: number,
+        //           increaseAnswered: increaseAnswered,
+        //           userSar: widget.userSar,
+        //           arguments: widget.arguments,
+        //           isCompleted: setColor,
+        //           doc: widget.doc,
+        //           username: widget.username,
+        //           snapQuestions: widget.snapQuestions,
+        //           total: widget.total)));
+        // }
       },
       child: Container(
           key: widget.key,
