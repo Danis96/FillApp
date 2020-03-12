@@ -94,7 +94,11 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     )..init(context);
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (_) => Summary()));
+        Navigator.of(context).push(MaterialPageRoute(builder: (_) => Summary(
+          questions: widget.snapQuestions,
+          totalSar: widget.sar,
+          totalProgress: widget.total,
+        )));
       //  FirebaseJson().importSurveyJson();
         // if (!isCompleted) {
         //   Navigator.of(context).push(MaterialPageRoute(
