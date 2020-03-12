@@ -49,8 +49,6 @@ class _EmailPageState extends State<EmailPage> {
   @override
   void initState() {
     super.initState();
-    print(widget.arguments.username);
-    print(widget.arguments.phone);
   }
 
   @override

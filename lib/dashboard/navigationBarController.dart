@@ -140,9 +140,6 @@ class _BottomNavigationBarControllerState
     setState(() {
       currentIndex = index;
     });
-    // if (isUserInDB == false) {
-    //   doesUserExist(arguments.username);
-    // }
     if (currentIndex == 0) {
       isTab1Selected = true;
       isTab2Selected = false;
