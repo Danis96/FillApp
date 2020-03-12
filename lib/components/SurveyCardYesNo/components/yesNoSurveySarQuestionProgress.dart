@@ -96,7 +96,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
               child: MyQuestion(
                 isCompleted: false,
                 question: widget.question,
-                containerHeight: ScreenUtil.instance.setHeight(126.0),
+                containerHeight: ScreenUtil.instance.setHeight(120.0),
               ),
             ),
           ],
