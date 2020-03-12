@@ -75,7 +75,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                         fontStyle: FontStyle.normal,
                         fontSize: 18.0)),
               ),
-              onTap: () => tap
+              onTap: () => isSummary ? null : tap
                   ? {
                       if (isSingle == 1)
                         {tap = false, singleOnTap()}
@@ -84,7 +84,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                     }
                   : null,
             )),
-        widget.isSingle == 1
+      isSummary ? EmptyContainer() :  widget.isSingle == 1
             ? EmptyContainer()
             : widget.length == 3 && widget.index == 'C'
                 ? Container(

@@ -19,6 +19,8 @@ import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/summaryContainer.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/globals.dart';
+import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -27,7 +29,9 @@ class Summary extends StatefulWidget {
   final List<dynamic> questions;
   final int totalSar;
   final int totalProgress;
-  Summary({this.totalSar, this.questions, this.totalProgress});
+  final Function animateTo;
+  final PasswordArguments arguments;
+  Summary({this.totalSar, this.questions, this.totalProgress, this.animateTo, this.arguments});
 
   @override
   _SummaryState createState() => _SummaryState();
@@ -39,6 +43,9 @@ class _SummaryState extends State<Summary> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+        isOnSummary = true;
+      });
   }
 
   @override
@@ -52,7 +59,7 @@ class _SummaryState extends State<Summary> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                SurveyAppBar(percent: 1),
+                SurveyAppBar(percent: 1, arguments: widget.arguments,),
                 Padding(
                   padding: EdgeInsets.only(
                       left: ScreenUtil.instance.setWidth(25.0),
@@ -60,19 +67,22 @@ class _SummaryState extends State<Summary> {
                   child: Column(
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil.instance.setWidth(12.0),
-                            bottom: ScreenUtil.instance.setWidth(54.0)),
-                        child: Center(
-                          child: Text(widget.totalProgress.toString()+'/'+widget.totalProgress.toString(),
-                              style: TextStyle(
-                                  color: MyColor().white,
-                                  fontWeight: FontWeight.w700,
-                                  fontFamily: "LoewNextArabic",
-                                  fontStyle: FontStyle.normal,
-                                  fontSize: ScreenUtil.instance.setSp(20.0))),
-                        ),
-                      ),
+                  margin: EdgeInsets.only(
+                      top: ScreenUtil.instance.setWidth(0.0),
+                      bottom: ScreenUtil.instance.setWidth(54.0)),
+                  child: Center(
+                    child: Text(
+                        widget.totalProgress.toString() +
+                            '/' +
+                            widget.totalProgress.toString(),
+                        style: TextStyle(
+                            color: MyColor().white,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: "LoewNextArabic",
+                            fontStyle: FontStyle.normal,
+                            fontSize: ScreenUtil.instance.setSp(20.0))),
+                  ),
+                ),
                       Container(
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(33.0)),
@@ -86,23 +96,8 @@ class _SummaryState extends State<Summary> {
                                 fontSize: ScreenUtil.instance.setSp(25.0),
                               ),
                               textAlign: TextAlign.center),
+                        ),
                       ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.only(
-                          bottom: ScreenUtil.instance.setWidth(33.0)),
-                      child: Center(
-                        child: Text('Congradulation\nyou have got',
-                            style: TextStyle(
-                              color: MyColor().white,
-                              fontWeight: FontWeight.w700,
-                              fontFamily: "LoewNextArabic",
-                              fontStyle: FontStyle.normal,
-                              fontSize: ScreenUtil.instance.setSp(25.0),
-                            ),
-                            textAlign: TextAlign.center),
-                      ),
-                    ),
                       Container(
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(44.0)),
@@ -138,8 +133,8 @@ class _SummaryState extends State<Summary> {
                           itemCount: widget.questions.length,
                           itemBuilder: (BuildContext context, int index) {
                             title = widget.questions[index]['title'];
-
                             return SummaryAnswerContainer(
+                              animateTo: widget.animateTo,
                               index: index,
                               question: title,
                             );
@@ -154,6 +149,9 @@ class _SummaryState extends State<Summary> {
   }
 
   Future<bool> _onWillPop() async {
-    return Navigator.of(context).pop() ?? true;
+    setState(() {
+      isSummary = false;
+    });
+    return  Navigator.of(context).pop() ?? true;
   }
 }

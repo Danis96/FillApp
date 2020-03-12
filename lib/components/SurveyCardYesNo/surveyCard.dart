@@ -34,7 +34,8 @@ class SurveyCard extends StatefulWidget {
   final DocumentSnapshot doc, userDoc;
   final Function isCompleted;
   final Function increaseAnswered;
-   final Function notifyParent;
+  final Function notifyParent;
+  final String summaryCtrl;
   var user;
   SurveyCard({
     this.arguments,
@@ -50,6 +51,7 @@ class SurveyCard extends StatefulWidget {
     this.userSar,
     this.user,
     this.notifyParent,
+    this.summaryCtrl,
   });
 
   @override
@@ -103,6 +105,10 @@ class _YesNoSurveyState extends State<SurveyCard>
                             arguments: widget.arguments,
                             percent: (index + 1.0) / widget.total,
                             notifyParent: widget.notifyParent,
+                            questions: widget.snapQuestions,
+                            totalSar: widget.sarSurvey,
+                            totalProgress: widget.total,
+                            animateTo: summaryAnimateToPpage,
                           ),
                           YesNoSurveySQP(
                             type: type,
@@ -139,12 +145,21 @@ class _YesNoSurveyState extends State<SurveyCard>
       widget.isCompleted();
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
           widget.doc, context, widget.username);
-      Navigator.of(context).push(MaterialPageRoute(builder: (_) => Summary()));
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => Summary(
+                questions: widget.snapQuestions,
+                totalSar: widget.sarSurvey,
+                totalProgress: widget.total,
+                animateTo: summaryAnimateToPpage,
+                arguments: widget.arguments,
+              )));
+      
     } else {
       _controller.nextPage(
-          duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+          duration: Duration(milliseconds: 50), curve: Curves.easeInOut);
     }
   }
+
   /// [checkForInternet]
   ///
   /// function that checks for internet connection
@@ -187,6 +202,12 @@ class _YesNoSurveyState extends State<SurveyCard>
         true;
   }
 
+  summaryAnimateToPpage(int index) {
+    _controller.animateToPage(index,
+        duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
+    print('IZ METODE');
+  }
+
   @override
   bool get wantKeepAlive => true;
 }
@@ -208,6 +229,7 @@ Widget typeContainerAnwers(widget, int index, Function refresh, String type,
       return dateWidget(widget, index, refresh);
     case 'image':
       return imageWidget(widget, index, refresh, isSingle);
+
     default:
       return EmptyContainer();
   }

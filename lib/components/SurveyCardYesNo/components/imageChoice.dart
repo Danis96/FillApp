@@ -69,11 +69,10 @@ class _ImageChoiceState extends State<ImageChoice> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 GestureDetector(
-                  onTap: () {
+                  onTap: () => isSummary ? null :
                     widget.isSingle == 0
                         ? onTapSingle()
-                        : saveMultiple1(widget.text1);
-                  },
+                        : saveMultiple1(widget.text1),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -134,11 +133,10 @@ class _ImageChoiceState extends State<ImageChoice> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                 onTap: () => isSummary ? null :
                     widget.isSingle == 0
                         ? onTapSingle1()
-                        : saveMultiple2(widget.text2);
-                  },
+                        : saveMultiple2(widget.text2),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -206,11 +204,10 @@ class _ImageChoiceState extends State<ImageChoice> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 GestureDetector(
-                  onTap: () {
+                onTap: () => isSummary ? null :
                     widget.isSingle == 0
                         ? onTapSingle2()
-                        : saveMultiple3(widget.text3);
-                  },
+                        : saveMultiple3(widget.text3),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -271,11 +268,10 @@ class _ImageChoiceState extends State<ImageChoice> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                 onTap: () => isSummary ? null :
                     widget.isSingle == 0
                         ? onTapSingle3()
-                        : saveMultiple4(widget.text3);
-                  },
+                        : saveMultiple4(widget.text3),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -338,7 +334,7 @@ class _ImageChoiceState extends State<ImageChoice> {
               ],
             ),
           ),
-          widget.isSingle == 0
+         isSummary ? EmptyContainer() : widget.isSingle == 0
               ? EmptyContainer()
               : Container(
                   width: ScreenUtil.instance.setWidth(316.0),

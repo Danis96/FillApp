@@ -1,19 +1,25 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class SummaryAnswerContainer extends StatelessWidget {
-  
+class SummaryAnswerContainer extends StatefulWidget {
   final String question;
   final int index;
-  SummaryAnswerContainer({this.question, this.index});
+  final Function animateTo;
+  SummaryAnswerContainer({this.question, this.index, this.animateTo});
 
+  @override
+  _SummaryAnswerContainerState createState() => _SummaryAnswerContainerState();
+}
+
+class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
   int indexReal;
 
   @override
   Widget build(BuildContext context) {
-    indexReal = index + 1;
+    indexReal = widget.index + 1;
     return Container(
       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(18.0)),
       width: ScreenUtil.instance.setWidth(303.0),
@@ -29,7 +35,7 @@ class SummaryAnswerContainer extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(28.0),
         ),
-        child: Text('Q'+indexReal.toString()+": " +title,
+        child: Text('Q' + indexReal.toString() + ": " + title,
             style: TextStyle(
                 color: MyColor().white,
                 fontWeight: FontWeight.w500,
@@ -37,7 +43,14 @@ class SummaryAnswerContainer extends StatelessWidget {
                 fontStyle: FontStyle.normal,
                 fontSize: 18.0),
             textAlign: TextAlign.left),
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            isSummary = true;
+            isOnSummary = false;
+          });
+          Navigator.of(context).pop();
+          widget.animateTo(widget.index);
+        },
       ),
     );
   }
