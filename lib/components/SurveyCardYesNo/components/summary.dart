@@ -31,7 +31,12 @@ class Summary extends StatefulWidget {
   final int totalProgress;
   final Function animateTo;
   final PasswordArguments arguments;
-  Summary({this.totalSar, this.questions, this.totalProgress, this.animateTo, this.arguments});
+  Summary(
+      {this.totalSar,
+      this.questions,
+      this.totalProgress,
+      this.animateTo,
+      this.arguments});
 
   @override
   _SummaryState createState() => _SummaryState();
@@ -43,7 +48,6 @@ class _SummaryState extends State<Summary> {
   @override
   void initState() {
     super.initState();
-
         isOnSummary = true;
   }
 
@@ -58,30 +62,33 @@ class _SummaryState extends State<Summary> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                SurveyAppBar(percent: 1, arguments: widget.arguments,),
+                SurveyAppBar(
+                  percent: 1,
+                  arguments: widget.arguments,
+                ),
                 Padding(
                   padding: EdgeInsets.only(
                       left: ScreenUtil.instance.setWidth(25.0),
                       right: ScreenUtil.instance.setWidth(25.0)),
                   child: Column(
                     children: <Widget>[
-                      Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.instance.setWidth(0.0),
-                      bottom: ScreenUtil.instance.setWidth(54.0)),
-                  child: Center(
-                    child: Text(
-                        widget.totalProgress.toString() +
-                            '/' +
-                            widget.totalProgress.toString(),
-                        style: TextStyle(
-                            color: MyColor().white,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "LoewNextArabic",
-                            fontStyle: FontStyle.normal,
-                            fontSize: ScreenUtil.instance.setSp(20.0))),
-                  ),
-                ),
+                      // Container(
+                      //   margin: EdgeInsets.only(
+                      //       top: ScreenUtil.instance.setWidth(0.0),
+                      //       bottom: ScreenUtil.instance.setWidth(54.0)),
+                      //   child: Center(
+                      //     child: Text(
+                      //         widget.totalProgress.toString() +
+                      //             '/' +
+                      //             widget.totalProgress.toString(),
+                      //         style: TextStyle(
+                      //             color: MyColor().white,
+                      //             fontWeight: FontWeight.w700,
+                      //             fontFamily: "LoewNextArabic",
+                      //             fontStyle: FontStyle.normal,
+                      //             fontSize: ScreenUtil.instance.setSp(20.0))),
+                      //   ),
+                      // ),
                       Container(
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(33.0)),
@@ -127,21 +134,18 @@ class _SummaryState extends State<Summary> {
                               textAlign: TextAlign.center),
                         ),
                       ),
-                      Column(
-                        children: <Widget>[
-                          ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: widget.questions.length,
-                              itemBuilder: (BuildContext context, int index) {
-                                title = widget.questions[index]['title'];
-                                return SummaryAnswerContainer(
-                                  animateTo: widget.animateTo,
-                                  index: index,
-                                  question: title,
-                                );
-                              }),
-                        ],
-                      ),
+                      ListView.builder(
+                          shrinkWrap: true,
+                          physics: ClampingScrollPhysics(),
+                          itemCount: widget.questions.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            title = widget.questions[index]['title'];
+                            return SummaryAnswerContainer(
+                              animateTo: widget.animateTo,
+                              index: index,
+                              question: title,
+                            );
+                          }),
                     ],
                   ),
                 )
