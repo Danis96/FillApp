@@ -28,6 +28,7 @@ bool isVisible = false, isCompleted = false;
 List<dynamic> snapi = [],
     snapQuestions = [],
     usernamesThatAnswers = [],
+    usernameAnswers = [],
     usernameFinal = [];
 DocumentSnapshot snap, doc;
 int userLevel, sar, total, userSar, surveyTarget;
@@ -137,6 +138,7 @@ addPhysicsListenerController();
                           name = snapi[index].name;
                           snapQuestions = snapi[index].questions;
                           questionNumber = snapQuestions.length;
+                          usernameAnswers = snapi[index].usersAnswers;
                           usernamesThatAnswers =
                               snapi[index].usersThatGaveAnswers;
                           usernameFinal = snapi[index].usersCompleted;
@@ -149,6 +151,7 @@ addPhysicsListenerController();
                                 usernameFinal: usernameFinal,
                                 usernameSecond: usernameSecond,
                                 userProgress: usernamesThatAnswers,
+                                userLevel: userLevel,
                                 doc: doc,
                                 userDoc: snap,
                                 sar: sar,

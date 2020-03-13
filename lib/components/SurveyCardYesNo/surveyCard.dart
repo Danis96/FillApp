@@ -29,7 +29,7 @@ class SurveyCard extends StatefulWidget {
   final List<dynamic> snapQuestions;
   final int total, sarSurvey;
   int userSar;
-  int number;
+  int number, userLevel;
   final String username;
   final DocumentSnapshot doc, userDoc;
   final Function isCompleted;
@@ -52,6 +52,7 @@ class SurveyCard extends StatefulWidget {
     this.user,
     this.notifyParent,
     this.summaryCtrl,
+    this.userLevel,
   });
 
   @override
@@ -148,6 +149,7 @@ class _YesNoSurveyState extends State<SurveyCard>
           widget.doc, context, widget.username);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => Summary(
+                userLevel: widget.userLevel,
                 questions: widget.snapQuestions,
                 totalSar: widget.sarSurvey,
                 totalProgress: widget.total,
@@ -213,7 +215,6 @@ class _YesNoSurveyState extends State<SurveyCard>
   summaryAnimateToPpage(int index) {
     _controller.animateToPage(index,
         duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
-    print('IZ METODE');
   }
 
   @override

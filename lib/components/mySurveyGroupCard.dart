@@ -30,7 +30,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MySurveyGroupCard extends StatefulWidget {
   final PasswordArguments arguments;
   final String name, username, usernameSecond;
-  final int answered, total, sar, userSar;
+  final int answered, total, sar, userSar, userLevel;
   final DocumentSnapshot doc, userDoc;
   final List<dynamic> snapQuestions, usernameFinal, userProgress;
   MySurveyGroupCard({
@@ -47,6 +47,7 @@ class MySurveyGroupCard extends StatefulWidget {
     this.usernameFinal,
     this.usernameSecond,
     this.userProgress,
+    this.userLevel,
   });
 
   @override
@@ -94,6 +95,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
         if (!isCompleted) {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
+                  userLevel: userLevel,
                   notifyParent: refreshState,
                   user: user,
                   userDoc: widget.userDoc,

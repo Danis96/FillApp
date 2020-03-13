@@ -17,6 +17,9 @@ import 'dart:async';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/summaryContainer.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/dashboard/survey.dart';
+import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/screenUtils.dart';
@@ -25,16 +28,18 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Summary extends StatefulWidget {
   final List<dynamic> questions;
-  final int totalSar;
+  final int totalSar, userLevel;
   final int totalProgress;
   final Function animateTo;
   final PasswordArguments arguments;
-  Summary(
-      {this.totalSar,
-      this.questions,
-      this.totalProgress,
-      this.animateTo,
-      this.arguments});
+  Summary({
+    this.totalSar,
+    this.questions,
+    this.totalProgress,
+    this.animateTo,
+    this.arguments,
+    this.userLevel,
+  });
 
   @override
   _SummaryState createState() => _SummaryState();
@@ -46,8 +51,13 @@ class _SummaryState extends State<Summary> {
   @override
   void initState() {
     super.initState();
-        isOnSummary = true;
+    isOnSummary = true;
+    Timer(Duration(seconds: 2), () {
+      getUserAnswers();
+    });
   }
+
+  List<dynamic> answers = [];
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +70,7 @@ class _SummaryState extends State<Summary> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
+                
                 SurveyAppBar(
                   percent: 1,
                   arguments: widget.arguments,
@@ -130,15 +141,60 @@ class _SummaryState extends State<Summary> {
                           }),
                     ],
                   ),
-                )
+                ),
+                futu(),
               ],
             )),
       ),
     );
   }
 
+  getUserAnswers() {}
+
+  Widget futu() {
+    return Container(
+      child: FutureBuilder(
+        future: FirebaseCheck().getSurveyGroups(userLevel),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int indexx) {
+                answers =
+                    snapshot.data[indexx].data['list_of_username_answers'];
+                // print(answers.toString());
+                var userAnswers;
+                var userAnswersSplitted;
+                var usernameThatAnswers;
+                print('u metodi sam');
+                List<dynamic> answersList = [];
+                for (var i = 0; i < answers.length; i++) {
+                  userAnswers = answers[i].toString();
+                  // print(userAnswers);
+                  userAnswersSplitted = userAnswers.split(' : ');
+                  // print(userAnswersSplitted);
+                  usernameThatAnswers = userAnswersSplitted[2];
+                  // print(usernameThatAnswers);
+                  // /// usernameSecond treba
+
+                  if (userAnswersSplitted[2] == widget.arguments.username) {
+                    print('USAO SAM' + userAnswersSplitted[1]);
+                    answersList.add(userAnswersSplitted[1]);
+                    print(answersList.toString());
+                  }
+                }
+                return EmptyContainer();
+              },
+            );
+          }
+          return EmptyContainer();
+        },
+      ),
+    );
+  }
+
   Future<bool> _onWillPop() async {
-      isSummary = false;
-    return  Navigator.of(context).pop() ?? true;
+    isSummary = false;
+    return Navigator.of(context).pop() ?? true;
   }
 }
