@@ -48,9 +48,7 @@ class _SummaryState extends State<Summary> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      isOnSummary = true;
-    });
+        isOnSummary = true;
   }
 
   @override
@@ -136,7 +134,6 @@ class _SummaryState extends State<Summary> {
                               textAlign: TextAlign.center),
                         ),
                       ),
-
                       ListView.builder(
                           shrinkWrap: true,
                           physics: ClampingScrollPhysics(),
@@ -159,9 +156,7 @@ class _SummaryState extends State<Summary> {
   }
 
   Future<bool> _onWillPop() async {
-    setState(() {
       isSummary = false;
-    });
-    return Navigator.of(context).pop() ?? true;
+    return  Navigator.of(context).pop() ?? true;
   }
 }

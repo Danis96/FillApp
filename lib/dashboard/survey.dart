@@ -51,7 +51,7 @@ var dimension = 361.7809523809524;
 
 int counter = 0;
 
-class _SurveyState extends State<SurveyPage> {
+class _SurveyState extends State<SurveyPage>   with AutomaticKeepAliveClientMixin<SurveyPage>{
   @override
   void initState() {
     super.initState();
@@ -63,6 +63,7 @@ addPhysicsListenerController();
 
   @override
   Widget build(BuildContext context) {
+     super.build(context);
     return Scaffold(
         body: WillPopScope(
       onWillPop: _onWillPop,
@@ -215,4 +216,7 @@ addPhysicsListenerController();
       }
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
