@@ -1,7 +1,5 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
-import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
-import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -11,8 +9,7 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import '../../../routes/routeArguments.dart';
 import '../../../routes/routeConstants.dart';
-import '../../../routes/routeConstants.dart';
-import '../surveyCard.dart';
+
 
 class SurveyAppBar extends StatelessWidget {
   final PasswordArguments arguments;

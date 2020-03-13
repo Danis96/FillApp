@@ -116,7 +116,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
           margin: EdgeInsets.only(
               left: ScreenUtil.instance.setWidth(30.0),
               right: ScreenUtil.instance.setWidth(30.0),
-              bottom: ScreenUtil.instance.setWidth(25.0)),
+              bottom: ScreenUtil.instance.setWidth(50.0)),
           decoration: BoxDecoration(
               border: Border.all(
                   color: isCompleted ? MyColor().black : MyColor().black,
