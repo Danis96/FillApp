@@ -71,6 +71,7 @@ class _YesNoSurveyState extends State<SurveyCard>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: WillPopScope(
         onWillPop: _onWillPop,
@@ -134,7 +135,7 @@ class _YesNoSurveyState extends State<SurveyCard>
     checkForInternet();
     widget.number++;
     widget.increaseAnswered();
-    if ( widget.number == snapQuestions.length) {
+    if (widget.number == snapQuestions.length) {
       widget.userSar = widget.userSar + widget.sarSurvey;
       saroviOffline = saroviOffline + widget.sarSurvey;
       if (isSar) {
