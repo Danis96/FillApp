@@ -15,7 +15,6 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/statuSurvey.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/SurveyCardYesNo/surveyCard.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/emptyCont.dart';
@@ -27,9 +26,6 @@ import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../firebaseMethods/firebaseJson.dart';
-import '../globals.dart';
 
 class MySurveyGroupCard extends StatefulWidget {
   final PasswordArguments arguments;

@@ -63,6 +63,7 @@ addPhysicsListenerController();
 
   @override
   Widget build(BuildContext context) {
+     super.build(context);
     return Scaffold(
         body: WillPopScope(
       onWillPop: _onWillPop,
