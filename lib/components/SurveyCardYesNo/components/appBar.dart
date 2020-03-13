@@ -92,7 +92,7 @@ class SurveyAppBar extends StatelessWidget {
               ? Container(
                   margin: EdgeInsets.only(
                       top: ScreenUtil.instance.setWidth(12.0),
-                      bottom: ScreenUtil.instance.setWidth(54.0)),
+                      bottom: ScreenUtil.instance.setWidth(30.0)),
                   child: Center(
                     child: Text(
                         totalProgress.toString() +
