@@ -28,6 +28,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
       height: ScreenUtil.instance.setWidth(58.0),
       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(18.0)),
       child: TextFormField(
+        onTap: () => onPressed(),
         readOnly: true,
         style: TextStyle(
             color: MyColor().white,
