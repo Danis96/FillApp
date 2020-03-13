@@ -53,37 +53,6 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
         obscureText: false,
       ),
     );
-
-    // Container(
-    //   alignment: Alignment.centerLeft,
-    //   margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(18.0)),
-    //   width: ScreenUtil.instance.setWidth(303.0),
-    //   height: ScreenUtil.instance.setWidth(58.0),
-    //   decoration: BoxDecoration(
-    //       border: Border.all(width: 1.0, color: MyColor().white),
-    //       borderRadius: BorderRadius.all(Radius.circular(29)),
-    //       color: MyColor().white),
-    //   child: SizedBox(
-    //     width: ScreenUtil.instance.setWidth(333.0),
-    //     height: ScreenUtil.instance.setWidth(58.0),
-    //     child: RaisedButton(
-    //         hoverColor: MyColor().black,
-    //         color: MyColor().black,
-    //         elevation: 0,
-    //         shape: RoundedRectangleBorder(
-    //           borderRadius: new BorderRadius.circular(29.0),
-    //         ),
-    //         child: Text('Q' + indexReal.toString() + ": " + title,
-    //             style: TextStyle(
-    //                 color: MyColor().white,
-    //                 fontWeight: FontWeight.w500,
-    //                 fontFamily: "LoewNextArabic",
-    //                 fontStyle: FontStyle.normal,
-    //                 fontSize: 18.0),
-    //             textAlign: TextAlign.left),
-    //         onPressed: () => onPressed()),
-    //   ),
-    // );
   }
 
   onPressed() {
