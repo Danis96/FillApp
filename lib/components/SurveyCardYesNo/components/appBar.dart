@@ -46,7 +46,7 @@ class SurveyAppBar extends StatelessWidget {
           Container(
             margin: EdgeInsets.only(
                 top: ScreenUtil.instance.setWidth(0.0),
-                left: ScreenUtil.instance.setWidth(35.0)),
+                left: ScreenUtil.instance.setWidth(55.0)),
             child: Container(
               margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(40.0)),
               child: IconButton(

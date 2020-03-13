@@ -29,29 +29,28 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
           borderRadius: BorderRadius.all(Radius.circular(29)),
           color: MyColor().white),
       child: RaisedButton(
-        hoverColor: MyColor().black,
-        color: MyColor().black,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(28.0),
-        ),
-        child: Text('Q' + indexReal.toString() + ": " + title,
-            style: TextStyle(
-                color: MyColor().white,
-                fontWeight: FontWeight.w500,
-                fontFamily: "LoewNextArabic",
-                fontStyle: FontStyle.normal,
-                fontSize: 18.0),
-            textAlign: TextAlign.left),
-        onPressed: () {
-          setState(() {
-            isSummary = true;
-            isOnSummary = false;
-          });
-          Navigator.of(context).pop();
-          widget.animateTo(widget.index);
-        },
-      ),
+          hoverColor: MyColor().black,
+          color: MyColor().black,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: new BorderRadius.circular(28.0),
+          ),
+          child: Text('Q' + indexReal.toString() + ": " + title,
+              style: TextStyle(
+                  color: MyColor().white,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: "LoewNextArabic",
+                  fontStyle: FontStyle.normal,
+                  fontSize: 18.0),
+              textAlign: TextAlign.left),
+          onPressed: () => onPressed()),
     );
+  }
+
+  onPressed() {
+    isSummary = true;
+    isOnSummary = false;
+    widget.animateTo(widget.index);
+    Navigator.of(context).pop();
   }
 }
