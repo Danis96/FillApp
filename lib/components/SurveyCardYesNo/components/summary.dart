@@ -70,23 +70,6 @@ class _SummaryState extends State<Summary> {
                       right: ScreenUtil.instance.setWidth(25.0)),
                   child: Column(
                     children: <Widget>[
-                      // Container(
-                      //   margin: EdgeInsets.only(
-                      //       top: ScreenUtil.instance.setWidth(0.0),
-                      //       bottom: ScreenUtil.instance.setWidth(54.0)),
-                      //   child: Center(
-                      //     child: Text(
-                      //         widget.totalProgress.toString() +
-                      //             '/' +
-                      //             widget.totalProgress.toString(),
-                      //         style: TextStyle(
-                      //             color: MyColor().white,
-                      //             fontWeight: FontWeight.w700,
-                      //             fontFamily: "LoewNextArabic",
-                      //             fontStyle: FontStyle.normal,
-                      //             fontSize: ScreenUtil.instance.setSp(20.0))),
-                      //   ),
-                      // ),
                       Container(
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(33.0)),
