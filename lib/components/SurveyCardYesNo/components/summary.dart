@@ -43,9 +43,8 @@ class _SummaryState extends State<Summary> {
   @override
   void initState() {
     super.initState();
-    setState(() {
+
         isOnSummary = true;
-      });
   }
 
   @override
@@ -153,9 +152,7 @@ class _SummaryState extends State<Summary> {
   }
 
   Future<bool> _onWillPop() async {
-    setState(() {
       isSummary = false;
-    });
     return  Navigator.of(context).pop() ?? true;
   }
 }
