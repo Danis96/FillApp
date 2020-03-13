@@ -132,9 +132,9 @@ class _YesNoSurveyState extends State<SurveyCard>
 
   refresh() {
     checkForInternet();
-    questionNumber--;
+    widget.number++;
     widget.increaseAnswered();
-    if (questionNumber == 0) {
+    if ( widget.number == snapQuestions.length) {
       widget.userSar = widget.userSar + widget.sarSurvey;
       saroviOffline = saroviOffline + widget.sarSurvey;
       if (isSar) {
