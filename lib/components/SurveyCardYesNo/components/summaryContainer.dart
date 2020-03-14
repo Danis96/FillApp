@@ -8,7 +8,8 @@ class SummaryAnswerContainer extends StatefulWidget {
   final String question;
   final int index;
   final Function animateTo;
-  SummaryAnswerContainer({this.question, this.index, this.animateTo});
+  final List<dynamic> answersList;
+  SummaryAnswerContainer({this.question, this.index, this.animateTo, this.answersList});
 
   @override
   _SummaryAnswerContainerState createState() => _SummaryAnswerContainerState();

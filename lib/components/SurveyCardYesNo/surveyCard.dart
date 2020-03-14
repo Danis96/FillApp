@@ -26,7 +26,7 @@ String img;
 
 class SurveyCard extends StatefulWidget {
   final PasswordArguments arguments;
-  final List<dynamic> snapQuestions;
+  final List<dynamic> snapQuestions, usernameAnswers;
   final int total, sarSurvey;
   int userSar;
   int number, userLevel;
@@ -53,6 +53,7 @@ class SurveyCard extends StatefulWidget {
     this.notifyParent,
     this.summaryCtrl,
     this.userLevel,
+    this.usernameAnswers,
   });
 
   @override
@@ -69,6 +70,9 @@ class _YesNoSurveyState extends State<SurveyCard>
     super.initState();
     _controller = PageController(keepPage: true, initialPage: widget.number);
   }
+
+  
+  List<dynamic> answers;
 
   @override
   Widget build(BuildContext context) {
@@ -119,8 +123,16 @@ class _YesNoSurveyState extends State<SurveyCard>
                             sar: widget.snapQuestions[index]['sar'],
                             question: widget.snapQuestions[index]['title'],
                           ),
-                          typeContainerAnwers(widget, index, refresh, type,
-                              widget.number, widget.user, widget.isCompleted),
+                          typeContainerAnwers(
+                            widget,
+                            index,
+                            refresh,
+                            type,
+                            widget.number,
+                            widget.user,
+                            widget.isCompleted,
+                            answers,
+                          ),
                         ],
                       );
                     }),
@@ -149,6 +161,7 @@ class _YesNoSurveyState extends State<SurveyCard>
           widget.doc, context, widget.username);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => Summary(
+                usernameAnswers: usernameAnswers,
                 userLevel: widget.userLevel,
                 questions: widget.snapQuestions,
                 totalSar: widget.sarSurvey,
@@ -217,6 +230,8 @@ class _YesNoSurveyState extends State<SurveyCard>
         duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
   }
 
+ 
+
   @override
   bool get wantKeepAlive => true;
 }
@@ -224,20 +239,38 @@ class _YesNoSurveyState extends State<SurveyCard>
 /// widget koji provjerava tip i na osnovu toga vraca odgovarajuci widget
 ///
 Widget typeContainerAnwers(widget, int index, Function refresh, String type,
-    int number, var user, Function isCompleted) {
+    int number, var user, Function isCompleted, List<dynamic> answers) {
   /// provjeriti tip
   switch (type) {
     case 'yesno':
-      return yesnoWidget(
-          widget, index, refresh, branching, branchingChoice, isCompleted);
+      return yesnoWidget(widget, index, refresh, branching, branchingChoice,
+          isCompleted, answers);
     case 'input':
-      return inputWidget(widget, index, refresh);
+      return inputWidget(
+        widget,
+        index,
+        refresh,
+      );
     case 'mcq':
-      return mcqWidget(widget, index, refresh, isSingle);
+      return mcqWidget(
+        widget,
+        index,
+        refresh,
+        isSingle,
+      );
     case 'date':
-      return dateWidget(widget, index, refresh);
+      return dateWidget(
+        widget,
+        index,
+        refresh,
+      );
     case 'image':
-      return imageWidget(widget, index, refresh, isSingle);
+      return imageWidget(
+        widget,
+        index,
+        refresh,
+        isSingle,
+      );
 
     default:
       return EmptyContainer();
@@ -252,20 +285,21 @@ Widget yesnoWidget(
   String branching,
   String branchingChoice,
   Function isCompleted,
+  List<dynamic> answers,
 ) {
   return Column(
     children: <Widget>[
       SurveyChoices(
-        complete: isCompleted,
-        arguments: widget.arguments,
-        branching: branching,
-        branchingChoice: branchingChoice,
-        choice1: widget.snapQuestions[index]['choices'][0]['text'],
-        notifyParent: refresh,
-        username: widget.username,
-        title: widget.snapQuestions[index]['title'],
-        doc: widget.doc,
-      ),
+          complete: isCompleted,
+          arguments: widget.arguments,
+          branching: branching,
+          branchingChoice: branchingChoice,
+          choice1: widget.snapQuestions[index]['choices'][0]['text'],
+          notifyParent: refresh,
+          username: widget.username,
+          title: widget.snapQuestions[index]['title'],
+          doc: widget.doc,
+          ),
       SurveyChoices(
         complete: isCompleted,
         arguments: widget.arguments,
@@ -282,7 +316,12 @@ Widget yesnoWidget(
 }
 
 /// mcq widget choices
-Widget mcqWidget(widget, int index, Function refresh, int isSingle) {
+Widget mcqWidget(
+  widget,
+  int index,
+  Function refresh,
+  int isSingle,
+) {
   List<dynamic> choicesList = widget.snapQuestions[index]['choices'];
   int numberOfChoices = choicesList.length;
   if (numberOfChoices == 3) {
@@ -369,7 +408,11 @@ Widget mcqWidget(widget, int index, Function refresh, int isSingle) {
 }
 
 /// input widget
-Widget inputWidget(widget, int index, Function refresh) {
+Widget inputWidget(
+  widget,
+  int index,
+  Function refresh,
+) {
   return Column(
     children: <Widget>[
       InputChoice(
@@ -383,7 +426,11 @@ Widget inputWidget(widget, int index, Function refresh) {
 }
 
 /// input widget
-Widget dateWidget(widget, int index, Function refresh) {
+Widget dateWidget(
+  widget,
+  int index,
+  Function refresh,
+) {
   return Column(
     children: <Widget>[
       DateChoice(
@@ -399,7 +446,12 @@ Widget dateWidget(widget, int index, Function refresh) {
   );
 }
 
-Widget imageWidget(widget, int index, Function refresh, int isSingle) {
+Widget imageWidget(
+  widget,
+  int index,
+  Function refresh,
+  int isSingle,
+) {
   return Column(
     children: <Widget>[
       ImageChoice(

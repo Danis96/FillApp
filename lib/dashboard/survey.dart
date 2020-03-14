@@ -52,11 +52,12 @@ var dimension = 361.7809523809524;
 
 int counter = 0;
 
-class _SurveyState extends State<SurveyPage>   with AutomaticKeepAliveClientMixin<SurveyPage>{
+class _SurveyState extends State<SurveyPage>
+    with AutomaticKeepAliveClientMixin<SurveyPage> {
   @override
   void initState() {
     super.initState();
-addPhysicsListenerController();
+    addPhysicsListenerController();
     Timer(Duration(milliseconds: 600), () {
       setState(() {});
     });
@@ -64,7 +65,7 @@ addPhysicsListenerController();
 
   @override
   Widget build(BuildContext context) {
-     super.build(context);
+    super.build(context);
     return Scaffold(
         body: WillPopScope(
       onWillPop: _onWillPop,
@@ -121,12 +122,12 @@ addPhysicsListenerController();
                     (value) => FirebaseCheck().getSurveyGroups(userLevel)),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    snapi = snapshot.data
-                        .map((doc) => Survey.fromDocument(doc))
-                        .toList();
+                     snapi = snapshot.data
+                          .map((doc) => Survey.fromDocument(doc))
+                          .toList();
+                    
 
                     return ListView.builder(
-
                         controller: _controller,
                         physics: _physics,
                         scrollDirection: Axis.vertical,
@@ -138,6 +139,7 @@ addPhysicsListenerController();
                           name = snapi[index].name;
                           snapQuestions = snapi[index].questions;
                           questionNumber = snapQuestions.length;
+                          
                           usernameAnswers = snapi[index].usersAnswers;
                           usernamesThatAnswers =
                               snapi[index].usersThatGaveAnswers;
@@ -151,6 +153,7 @@ addPhysicsListenerController();
                                 usernameFinal: usernameFinal,
                                 usernameSecond: usernameSecond,
                                 userProgress: usernamesThatAnswers,
+                                usernameAnswers: usernameAnswers,
                                 userLevel: userLevel,
                                 doc: doc,
                                 userDoc: snap,
@@ -219,6 +222,8 @@ addPhysicsListenerController();
       }
     });
   }
+
+
 
   @override
   bool get wantKeepAlive => true;
