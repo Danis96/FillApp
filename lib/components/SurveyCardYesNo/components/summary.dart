@@ -170,19 +170,22 @@ class _SummaryState extends State<Summary> {
                               textAlign: TextAlign.center),
                         ),
                       ),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          physics: ClampingScrollPhysics(),
-                          itemCount: widget.questions.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            title = widget.questions[index]['title'];
-                            return SummaryAnswerContainer(
-                              answersList: answersList,
-                              animateTo: widget.animateTo,
-                              index: index,
-                              question: title,
-                            );
-                          }),
+                      Container(
+                        margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(20.0)),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: widget.questions.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              title = widget.questions[index]['title'];
+                              return SummaryAnswerContainer(
+                                answersList: answersList,
+                                animateTo: widget.animateTo,
+                                index: index,
+                                question: title,
+                              );
+                            }),
+                      ),
                     ],
                   ),
                 ),

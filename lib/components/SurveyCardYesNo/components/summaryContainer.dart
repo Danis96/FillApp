@@ -26,7 +26,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
     return Container(
       color: MyColor().black,
       width: ScreenUtil.instance.setWidth(327.0),
-      height: ScreenUtil.instance.setWidth(58.0),
+      height: ScreenUtil.instance.setWidth(70.0),
       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(18.0)),
       child: TextFormField(
         onTap: () => onPressed(),
@@ -35,8 +35,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
             color: MyColor().white,
             fontWeight: FontWeight.w500,
             fontFamily: "LoewNextArabic",
-            fontStyle: FontStyle.normal,
-            fontSize: 18.0),
+            fontSize: ScreenUtil.instance.setSp(14.0)),
         controller: questionController,
         decoration: InputDecoration(
           contentPadding:
@@ -52,7 +51,6 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
             borderSide: BorderSide(color: MyColor().white),
           ),
         ),
-        obscureText: false,
       ),
     );
   }

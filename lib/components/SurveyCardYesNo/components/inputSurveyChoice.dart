@@ -35,7 +35,7 @@ class _InputChoiceState extends State<InputChoice> {
   @override
   Widget build(BuildContext context) {
     return Column(
-       key: UniqueKey(),
+       key: ValueKey(widget.title),
       children: <Widget>[
         Container(
           width: ScreenUtil.instance.setWidth(327.0),

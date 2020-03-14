@@ -50,7 +50,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     return Column(
       children: <Widget>[
         Container(
-           key: UniqueKey(),
+           key: ValueKey(widget.choice1),
             width: ScreenUtil.instance.setWidth(350.0),
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
             child: ListTile(
