@@ -37,20 +37,25 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
   void initState() {
     super.initState();
     isTapped = false;
+  
   }
+
 
   @override
   Widget build(BuildContext context) {
+    
+     
     return Column(
       children: <Widget>[
         Container(
+           key: UniqueKey(),
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
           width: ScreenUtil.instance.setWidth(303.0),
           height: ScreenUtil.instance.setWidth(58.0),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(29)),
               color: MyColor().white),
-          child: RaisedButton(
+          child: isSummary ?  Text('ODGOVOR') : RaisedButton(
             hoverColor: isTapped ? MyColor().white : MyColor().black,
             color: isTapped ? MyColor().white : MyColor().black,
             elevation: 0,
@@ -81,6 +86,7 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
       ],
     );
   }
+
 
   onPressed() {
     setState(() {

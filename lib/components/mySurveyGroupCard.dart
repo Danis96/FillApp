@@ -32,7 +32,7 @@ class MySurveyGroupCard extends StatefulWidget {
   final String name, username, usernameSecond;
   final int answered, total, sar, userSar, userLevel;
   final DocumentSnapshot doc, userDoc;
-  final List<dynamic> snapQuestions, usernameFinal, userProgress;
+  final List<dynamic> snapQuestions, usernameFinal, userProgress, usernameAnswers;
   MySurveyGroupCard({
     this.arguments,
     this.sar,
@@ -48,6 +48,7 @@ class MySurveyGroupCard extends StatefulWidget {
     this.usernameSecond,
     this.userProgress,
     this.userLevel,
+    this.usernameAnswers,
   });
 
   @override
@@ -95,6 +96,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
         if (!isCompleted) {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
+                usernameAnswers: usernameAnswers,
                   userLevel: userLevel,
                   notifyParent: refreshState,
                   user: user,

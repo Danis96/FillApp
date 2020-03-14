@@ -16,20 +16,21 @@ class ImageChoice extends StatefulWidget {
   final DocumentSnapshot doc;
   final int isSingle;
   final String choice1, choice2, choice3, choice4, text1, text2, text3, text4;
-  ImageChoice(
-      {this.doc,
-      this.isSingle,
-      this.title,
-      this.notifyParent,
-      this.username,
-      this.choice1,
-      this.choice2,
-      this.choice3,
-      this.choice4,
-      this.text1,
-      this.text2,
-      this.text3,
-      this.text4});
+  ImageChoice({
+    this.doc,
+    this.isSingle,
+    this.title,
+    this.notifyParent,
+    this.username,
+    this.choice1,
+    this.choice2,
+    this.choice3,
+    this.choice4,
+    this.text1,
+    this.text2,
+    this.text3,
+    this.text4,
+  });
 
   List<dynamic> multipleChoices = [];
 
@@ -57,6 +58,7 @@ class _ImageChoiceState extends State<ImageChoice> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      key: UniqueKey(),
       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -69,10 +71,11 @@ class _ImageChoiceState extends State<ImageChoice> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 GestureDetector(
-                  onTap: () => isSummary ? null :
-                    widget.isSingle == 0
-                        ? onTapSingle()
-                        : saveMultiple1(widget.text1),
+                  onTap: () => isSummary
+                      ? null
+                      : widget.isSingle == 0
+                          ? onTapSingle()
+                          : saveMultiple1(widget.text1),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -133,10 +136,11 @@ class _ImageChoiceState extends State<ImageChoice> {
                   ),
                 ),
                 GestureDetector(
-                 onTap: () => isSummary ? null :
-                    widget.isSingle == 0
-                        ? onTapSingle1()
-                        : saveMultiple2(widget.text2),
+                  onTap: () => isSummary
+                      ? null
+                      : widget.isSingle == 0
+                          ? onTapSingle1()
+                          : saveMultiple2(widget.text2),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -204,10 +208,11 @@ class _ImageChoiceState extends State<ImageChoice> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 GestureDetector(
-                onTap: () => isSummary ? null :
-                    widget.isSingle == 0
-                        ? onTapSingle2()
-                        : saveMultiple3(widget.text3),
+                  onTap: () => isSummary
+                      ? null
+                      : widget.isSingle == 0
+                          ? onTapSingle2()
+                          : saveMultiple3(widget.text3),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -268,10 +273,11 @@ class _ImageChoiceState extends State<ImageChoice> {
                   ),
                 ),
                 GestureDetector(
-                 onTap: () => isSummary ? null :
-                    widget.isSingle == 0
-                        ? onTapSingle3()
-                        : saveMultiple4(widget.text3),
+                  onTap: () => isSummary
+                      ? null
+                      : widget.isSingle == 0
+                          ? onTapSingle3()
+                          : saveMultiple4(widget.text3),
                   child: Stack(
                     children: <Widget>[
                       Container(
@@ -334,24 +340,27 @@ class _ImageChoiceState extends State<ImageChoice> {
               ],
             ),
           ),
-         isSummary ? EmptyContainer() : widget.isSingle == 0
+          isSummary
               ? EmptyContainer()
-              : Container(
-                  width: ScreenUtil.instance.setWidth(316.0),
-                  height: ScreenUtil.instance.setHeight(55.0),
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.instance.setWidth(20.0),
-                      left: ScreenUtil.instance.setWidth(54.0),
-                      right: ScreenUtil.instance.setWidth(55.0)),
-                  child: RaisedButton(
-                    color: MyColor().black,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(33.5),
-                    ),
-                    onPressed: () => multipleSubmit(),
-                    child: Text(MyText().btnSubmit,
-                        style: TextStyle(fontSize: 18, color: MyColor().white)),
-                  ))
+              : widget.isSingle == 0
+                  ? EmptyContainer()
+                  : Container(
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setHeight(55.0),
+                      margin: EdgeInsets.only(
+                          top: ScreenUtil.instance.setWidth(20.0),
+                          left: ScreenUtil.instance.setWidth(54.0),
+                          right: ScreenUtil.instance.setWidth(55.0)),
+                      child: RaisedButton(
+                        color: MyColor().black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(33.5),
+                        ),
+                        onPressed: () => multipleSubmit(),
+                        child: Text(MyText().btnSubmit,
+                            style: TextStyle(
+                                fontSize: 18, color: MyColor().white)),
+                      ))
         ],
       ),
     );
@@ -404,7 +413,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
       print(widget.multipleChoices);
-          }
+    }
   }
 
   saveMultiple2(String choice) {
@@ -464,6 +473,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text2, widget.title);
+
     widget.notifyParent();
   }
 
@@ -473,6 +483,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text3, widget.title);
+  
     widget.notifyParent();
   }
 
@@ -482,6 +493,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text4, widget.title);
+
     widget.notifyParent();
   }
 }

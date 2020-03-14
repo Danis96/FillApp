@@ -17,7 +17,7 @@ bool fieldColor3 = false;
 
 class DateChoice extends StatefulWidget {
   final String username;
-  final Function() notifyParent;
+  final Function notifyParent;
   final DocumentSnapshot doc;
   final String title;
   String day, month, year;
@@ -49,6 +49,7 @@ class _DateChoiceState extends State<DateChoice> {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Column(
+         key: UniqueKey(),
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(

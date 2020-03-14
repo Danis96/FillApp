@@ -13,7 +13,7 @@ bool tap = true;
 
 class MultipleChoiceSurveyChoices extends StatefulWidget {
   final String choice1, username;
-  final Function() notifyParent;
+  final Function notifyParent;
   final String title;
   final DocumentSnapshot doc;
   final String index;
@@ -50,6 +50,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     return Column(
       children: <Widget>[
         Container(
+           key: UniqueKey(),
             width: ScreenUtil.instance.setWidth(350.0),
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
             child: ListTile(
@@ -77,16 +78,20 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                   child: Text(widget.index,
                       style: TextStyle(
                           color: index == 'A'
-                          ? isTappedMCQ1 ? MyColor().black : MyColor().white
-                          : index == 'B'
-                              ? isTappedMCQ2 ?  MyColor().black : MyColor().white
-                              : index == 'C'
-                                  ? isTappedMCQ3
-                                      ? MyColor().black : MyColor().white
-                                  : index == 'D'
-                                      ? isTappedMCQ4
-                                          ? MyColor().black : MyColor().white
-                                      : null,
+                              ? isTappedMCQ1 ? MyColor().black : MyColor().white
+                              : index == 'B'
+                                  ? isTappedMCQ2
+                                      ? MyColor().black
+                                      : MyColor().white
+                                  : index == 'C'
+                                      ? isTappedMCQ3
+                                          ? MyColor().black
+                                          : MyColor().white
+                                      : index == 'D'
+                                          ? isTappedMCQ4
+                                              ? MyColor().black
+                                              : MyColor().white
+                                          : null,
                           fontWeight: FontWeight.w500,
                           fontFamily: "LoewNextArabic",
                           fontStyle: FontStyle.normal,
@@ -104,8 +109,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                 ),
                 onTap: () => isSummary
                     ? null
-                    :
-                    {
+                    : {
                         if (isSingle == 1)
                           {
                             onSwitchSingle(),
@@ -114,8 +118,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                           {
                             onSwitchMultiple(),
                           }
-                      }
-                )),
+                      })),
         isSummary
             ? EmptyContainer()
             : widget.isSingle == 1
@@ -225,6 +228,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
+   
     widget.notifyParent();
   }
 
@@ -243,6 +247,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
+
     widget.notifyParent();
   }
 
@@ -261,6 +266,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
+ 
     widget.notifyParent();
   }
 
@@ -279,6 +285,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
+    
     widget.notifyParent();
   }
 
@@ -330,5 +337,3 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     }
   }
 }
-
-
