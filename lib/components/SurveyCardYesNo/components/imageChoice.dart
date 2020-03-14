@@ -58,7 +58,7 @@ class _ImageChoiceState extends State<ImageChoice> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      key: UniqueKey(),
+      key: ValueKey(widget.title),
       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

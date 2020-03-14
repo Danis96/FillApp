@@ -49,7 +49,7 @@ class _DateChoiceState extends State<DateChoice> {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Column(
-         key: UniqueKey(),
+         key: ValueKey(widget.title),
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(

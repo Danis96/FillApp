@@ -48,14 +48,14 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
     return Column(
       children: <Widget>[
         Container(
-           key: UniqueKey(),
+           key: ValueKey(widget.title),
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
           width: ScreenUtil.instance.setWidth(303.0),
           height: ScreenUtil.instance.setWidth(58.0),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(29)),
               color: MyColor().white),
-          child: isSummary ?  Text('ODGOVOR') : RaisedButton(
+          child: RaisedButton(
             hoverColor: isTapped ? MyColor().white : MyColor().black,
             color: isTapped ? MyColor().white : MyColor().black,
             elevation: 0,
