@@ -34,6 +34,11 @@ class FirebaseCrud {
       'user_id': randomAlphaNumeric(15),
       'level': 1,
       'sar': sar,
+      'name_and_surname': '',
+      'date_of_birth': '',
+      'card_number': '',
+      'expire_date': '',
+      'cc': ''
     });
   }
 
@@ -54,6 +59,24 @@ class FirebaseCrud {
       'sar': sar,
     });
   }
+
+  updateUserOnTransfer(DocumentSnapshot doc) async {
+    await db.collection('Users').document(doc.documentID).updateData({
+      'sar': 0
+    });
+  } 
+
+  updateUserOnCompletePRofile(DocumentSnapshot doc, String nameSurname, String dateOfBirth, String email,
+      String cardNumber, String expireDate, String cc) async {
+    await db.collection('Users').document(doc.documentID).updateData({
+      'email': email,
+      'name_and_surname': nameSurname,
+      'date_of_birth': dateOfBirth,
+      'card_number': cardNumber,
+      'expire_date': expireDate,
+      'cc': cc
+    });
+  }  
 
   /// [updatePassword]
   ///
