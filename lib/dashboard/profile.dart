@@ -1,6 +1,16 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/profileComponents/languageChoose.dart';
 import 'package:fillproject/components/profileComponents/textFieldProfile.dart';
+import 'package:fillproject/dashboard/navigationBarController.dart';
+import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/globals.dart';
+import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../routes/routeArguments.dart';
@@ -15,7 +25,8 @@ import '../routes/routeArguments.dart';
 
 class Profile extends StatefulWidget {
   final PasswordArguments arguments;
-  Profile({Key key, this.arguments}) : super(key: key);
+  final DocumentSnapshot doc;
+  Profile({Key key, this.arguments, this.doc}) : super(key: key);
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -28,14 +39,112 @@ TextEditingController controllerCreditCard = TextEditingController();
 TextEditingController controllerDate = TextEditingController();
 TextEditingController controllerCC = TextEditingController();
 String name, dateOfBirth, email, creditCard, date, cc;
+bool isSar = false;
 
 class _ProfileState extends State<Profile> {
   @override
+  void initState() {
+    super.initState();
+    checkForInternet();
+    print('BILDAO SSAAAAAAAAAAAAAAAAAAAMMMMMMMM');
+  }
+
+  checkForInternet() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        isSar = false;
+      }
+    } on SocketException catch (_) {
+      isSar = true;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print(
+        'BILDAO SSAAAAAAAAAAAAAAAAAAAMMMMMMMM DRUGI PUUUUUUUUUUUUUUUUUUUUUUUUTTTTTTTTTTTT');
+    print(anonym);
+    print(userSARAmount);
+    print(widget.arguments.username);
+
+    /// Metoda koja se poziva na klik button-a kada na njemu piše 'Register'
+    userRegister() {
+      Navigator.of(context).pushNamed(Register,
+          arguments:
+              DidntRecievePinArguments(username: widget.arguments.username));
+    }
+
+    /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
+    completeProfile() {
+      if (controllerName.text == null ||
+          controllerDate.text == null ||
+          controllerEmail.text == null ||
+          controllerCreditCard.text == null ||
+          controllerDOB.text == null ||
+          controllerCC.text == null) {
+        MySnackbar()
+            .showSnackbar('Please complete your profile.', context, 'Undo');
+      } else {
+        FirebaseCrud().updateUserOnCompletePRofile(
+            widget.doc,
+            controllerName.text,
+            controllerDOB.text,
+            controllerEmail.text,
+            controllerCreditCard.text,
+            controllerDate.text,
+            controllerCC.text);
+        setState(() {
+          btnText = 'Transfer';
+        });
+      }
+    }
+
+    transferSAR() {
+      FirebaseCrud().updateUserOnTransfer(widget.doc);
+      setState(() {
+        btnText = 'Transfer after 100';
+      });
+    }
+
+    /// State 1
+    if (userSARAmount < 100) {
+      print('Transfer after 100 SAR');
+      setState(() {
+        btnText = 'Transfer after 100 SAR';
+      });
+    }
+
+    /// State 2
+    if (userSARAmount >= 100) {
+      if (anonym == 0) {
+        if (controllerName.text == null &&
+            controllerDate.text == null &&
+            controllerEmail.text == null &&
+            controllerCreditCard.text == null &&
+            controllerDOB.text == null &&
+            controllerCC.text == null) {
+          setState(() {
+            btnText = 'Complete profile';
+          });
+        }
+      } else {
+        print('HAHAHAHAAAAAAAAAAAAAAAAAAA');
+        setState(() {
+          btnText = 'Register';
+        });
+      }
+    }
+
+    /// State 3
+    if (userSARAmount >= 100 && anonym == 0) {
+      setState(() {
+        btnText = 'Transfer';
+      });
+    }
+
     return Scaffold(
-      body: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
+      body: ListView(shrinkWrap: true, children: <Widget>[
         Center(
             child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -154,13 +263,37 @@ Widget btnProfile = Container(
         shape: RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(28.0),
         ),
-        child: Text('Transfer after 100 SAR',
-            style: TextStyle(
-                color: MyColor().white,
-                fontFamily: "LoewNextArabic",
-                fontStyle: FontStyle.normal,
-                fontSize: 18.0),
-            textAlign: TextAlign.center),
+        child: btnText == 'Register'
+            ? Text('Register',
+                style: TextStyle(
+                    color: MyColor().white,
+                    fontFamily: "LoewNextArabic",
+                    fontStyle: FontStyle.normal,
+                    fontSize: 18.0),
+                textAlign: TextAlign.center)
+            : btnText == 'Transfer'
+                ? Text('Transfer',
+                    style: TextStyle(
+                        color: MyColor().white,
+                        fontFamily: "LoewNextArabic",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 18.0),
+                    textAlign: TextAlign.center)
+                : btnText == 'Complete profile'
+                    ? Text('Complete profile',
+                        style: TextStyle(
+                            color: MyColor().white,
+                            fontFamily: "LoewNextArabic",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 18.0),
+                        textAlign: TextAlign.center)
+                    : Text('Transfer after 100 SAR',
+                        style: TextStyle(
+                            color: MyColor().white,
+                            fontFamily: "LoewNextArabic",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 18.0),
+                        textAlign: TextAlign.center),
         onPressed: () => onPressed()),
   ),
 );
@@ -190,6 +323,14 @@ onPressed() {
       '\n' +
       'Your CC is : ' +
       cc);
+  print('TEXT JE: + ' + btnText);
+  if (btnText == 'Register') {
+    print('Registrovanje');
+  } else if (btnText == 'Complete profile') {
+    print('Kompletiranje profila');
+  } else if (btnText == 'Transfer') {
+    print('Transerovanje');
+  }
 }
 
 Widget bigCircle = Container(
@@ -200,7 +341,7 @@ Widget bigCircle = Container(
       Container(
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(40.0)),
           child: Text(
-            '5',
+            userSARAmount.toString(),
             style: TextStyle(
               color: MyColor().white,
               fontSize: 35.0,

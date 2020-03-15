@@ -12,5 +12,8 @@ bool isTapped = false,
     isTappedMCQFlash = false;
 int saroviOffline;
 int questionNumber;
+int anonym;
+int userSARAmount;
 bool isSummary = false;
 bool isOnSummary = false;
+String btnText = '';

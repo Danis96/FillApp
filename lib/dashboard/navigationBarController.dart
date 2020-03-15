@@ -20,6 +20,7 @@ import 'package:fillproject/dashboard/dashboard.dart';
 import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 
@@ -109,6 +110,7 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
+          doc: snap,
             arguments: PasswordArguments(
           email: arguments.email,
           password: arguments.password,
@@ -151,7 +153,13 @@ class _BottomNavigationBarControllerState
       isTab2Selected = false;
       getIsAnonymous(arguments.username);
       if (isAnonymous == 1) {
-        askUserToRegister();
+        //askUserToRegister();
+        anonym = 1;
+      } else {
+        anonym = 0;
+      }
+      if (userSARAmount == null) {
+        userSARAmount = 0;
       }
     }
   }

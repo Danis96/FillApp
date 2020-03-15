@@ -107,6 +107,7 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
   onPressed() {
     widget.usersSars += widget.sar;
     saroviOffline += widget.sar;
+    userSARAmount = saroviOffline;
 
     /// update sarova na osnovu da li je app online ili offline
     ///
