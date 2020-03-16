@@ -21,7 +21,6 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
-import 'package:fillproject/models/Survey/usernameAnswerModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
@@ -73,47 +72,47 @@ class _SummaryState extends State<Summary> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                Container(
-                  child: FutureBuilder(
-                    future: FirebaseCheck().getSurveyGroups(userLevel),
-                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                      if (snapshot.hasData) {
-                        answers = snapshot.data
-                            .map((doc) => UsernameAnswers.fromDocument(doc))
-                            .toList();
+                // Container(
+                //   child: FutureBuilder(
+                //     future: FirebaseCheck().getSurveyGroups(userLevel),
+                //     builder: (BuildContext context, AsyncSnapshot snapshot) {
+                //       if (snapshot.hasData) {
+                //         answers = snapshot.data
+                //             .map((doc) => UsernameAnswers.fromDocument(doc))
+                //             .toList();
 
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: answers.length,
-                          itemBuilder: (BuildContext context, int indexx) {
-                            usernameAns = answers[indexx].usernameAnswers;
+                //         return ListView.builder(
+                //           shrinkWrap: true,
+                //           itemCount: answers.length,
+                //           itemBuilder: (BuildContext context, int indexx) {
+                //             usernameAns = answers[indexx].usernameAnswers;
 
-                            var userAnswers;
-                            var userAnswersSplitted;
-                            var usernameThatAnswers;
+                //             var userAnswers;
+                //             var userAnswersSplitted;
+                //             var usernameThatAnswers;
 
-                              for (var i = 0; i < usernameAns.length; i++) {
-                                userAnswers = usernameAns[i].toString();
-                                userAnswersSplitted = userAnswers.split(' : ');
-                                usernameThatAnswers = userAnswersSplitted[2];
-                                // /// usernameSecond treba
+                //               for (var i = 0; i < usernameAns.length; i++) {
+                //                 userAnswers = usernameAns[i].toString();
+                //                 userAnswersSplitted = userAnswers.split(' : ');
+                //                 usernameThatAnswers = userAnswersSplitted[2];
+                //                 // /// usernameSecond treba
 
-                                if (userAnswersSplitted[2] ==
-                                    widget.arguments.username) {
-                                  answersList.add(userAnswersSplitted[1]);
-                                  print('OVO SU ODGOVORI ' + answersList.toString());
-                                }
-                              }
+                //                 if (userAnswersSplitted[2] ==
+                //                     widget.arguments.username) {
+                //                   answersList.add(userAnswersSplitted[1]);
+                //                   print('OVO SU ODGOVORI ' + answersList.toString());
+                //                 }
+                //               }
                             
 
-                            return EmptyContainer();
-                          },
-                        );
-                      }
-                      return EmptyContainer();
-                    },
-                  ),
-                ),
+                //             return EmptyContainer();
+                //           },
+                //         );
+                //       }
+                //       return EmptyContainer();
+                //     },
+                //   ),
+                // ),
                 SurveyAppBar(
                   percent: 1,
                   arguments: widget.arguments,

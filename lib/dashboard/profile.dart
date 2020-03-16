@@ -1,13 +1,13 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/emptyCont.dart';
+
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/profileComponents/languageChoose.dart';
 import 'package:fillproject/components/profileComponents/textFieldProfile.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
-import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -26,7 +26,26 @@ import '../routes/routeArguments.dart';
 class Profile extends StatefulWidget {
   final PasswordArguments arguments;
   final DocumentSnapshot doc;
-  Profile({Key key, this.arguments, this.doc}) : super(key: key);
+  final String usersName,
+      usersEmail,
+      usersCC,
+      usersDOB,
+      usersCard,
+      usersCardDate;
+  final int usersSars;
+
+  Profile(
+      {Key key,
+      this.usersSars,
+      this.arguments,
+      this.doc,
+      this.usersCard,
+      this.usersCardDate,
+      this.usersCC,
+      this.usersDOB,
+      this.usersEmail,
+      this.usersName})
+      : super(key: key);
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -39,7 +58,13 @@ TextEditingController controllerCreditCard = TextEditingController();
 TextEditingController controllerDate = TextEditingController();
 TextEditingController controllerCC = TextEditingController();
 String name, dateOfBirth, email, creditCard, date, cc;
-bool isSar = false;
+bool isSar = false,
+    isEmptyName = false,
+    isEmptyBirth = false,
+    isEmptyMail = false,
+    isEmptyCard = false,
+    isEmptyDate = false,
+    isEmptyCC = false;
 
 class _ProfileState extends State<Profile> {
   @override
@@ -62,50 +87,9 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    print(
-        'BILDAO SSAAAAAAAAAAAAAAAAAAAMMMMMMMM DRUGI PUUUUUUUUUUUUUUUUUUUUUUUUTTTTTTTTTTTT');
     print(anonym);
     print(userSARAmount);
     print(widget.arguments.username);
-
-    /// Metoda koja se poziva na klik button-a kada na njemu piše 'Register'
-    userRegister() {
-      Navigator.of(context).pushNamed(Register,
-          arguments:
-              DidntRecievePinArguments(username: widget.arguments.username));
-    }
-
-    /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
-    completeProfile() {
-      if (controllerName.text == null ||
-          controllerDate.text == null ||
-          controllerEmail.text == null ||
-          controllerCreditCard.text == null ||
-          controllerDOB.text == null ||
-          controllerCC.text == null) {
-        MySnackbar()
-            .showSnackbar('Please complete your profile.', context, 'Undo');
-      } else {
-        FirebaseCrud().updateUserOnCompletePRofile(
-            widget.doc,
-            controllerName.text,
-            controllerDOB.text,
-            controllerEmail.text,
-            controllerCreditCard.text,
-            controllerDate.text,
-            controllerCC.text);
-        setState(() {
-          btnText = 'Transfer';
-        });
-      }
-    }
-
-    transferSAR() {
-      FirebaseCrud().updateUserOnTransfer(widget.doc);
-      setState(() {
-        btnText = 'Transfer after 100';
-      });
-    }
 
     /// State 1
     if (userSARAmount < 100) {
@@ -165,171 +149,480 @@ class _ProfileState extends State<Profile> {
               child: rowBelow,
             ),
             Container(
-              child: TextFieldProfile(
+              width: ScreenUtil.instance.setWidth(316.0),
+              height: ScreenUtil.instance.setHeight(67.0),
+              margin: EdgeInsets.only(
+                left: ScreenUtil.instance.setWidth(47.0),
+                top: ScreenUtil.instance.setWidth(22.0),
+                right: ScreenUtil.instance.setWidth(47.0),
+              ),
+              child: TextFormField(
+                maxLength: 200,
+                enableSuggestions: false,
+                style: TextStyle(color: Colors.black),
                 controller: controllerName,
-                label: 'Enter your name',
-                maxTextLength: 100,
+                decoration: InputDecoration(
+                  counterText: '',
+                  hasFloatingPlaceholder: false,
+                  contentPadding: new EdgeInsets.symmetric(
+                      vertical: 25.0, horizontal: 35.0),
+                  labelText: 'Enter your name',
+                  labelStyle: TextStyle(color: MyColor().black),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: isEmptyName ? MyColor().error : MyColor().black,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                        color: isEmptyName ? MyColor().error : MyColor().black),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: MyColor().error,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: MyColor().error,
+                    ),
+                  ),
+                ),
                 obscureText: false,
-                widthh: 316.0,
-                leftMargin: 47.0,
-                rightMargin: 47.0,
               ),
             ),
             Container(
-              child: TextFieldProfile(
+              width: ScreenUtil.instance.setWidth(316.0),
+              height: ScreenUtil.instance.setHeight(67.0),
+              margin: EdgeInsets.only(
+                left: ScreenUtil.instance.setWidth(47.0),
+                top: ScreenUtil.instance.setWidth(22.0),
+                right: ScreenUtil.instance.setWidth(47.0),
+              ),
+              child: TextFormField(
+                maxLength: 200,
+                enableSuggestions: false,
+                style: TextStyle(color: Colors.black),
                 controller: controllerDOB,
-                label: 'Enter date of birth',
-                maxTextLength: 100,
+                decoration: InputDecoration(
+                  counterText: '',
+                  hasFloatingPlaceholder: false,
+                  contentPadding: new EdgeInsets.symmetric(
+                      vertical: 25.0, horizontal: 35.0),
+                  labelText: 'Enter date of birth',
+                  labelStyle: TextStyle(color: MyColor().black),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: isEmptyBirth ? MyColor().error : MyColor().black,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                        color:
+                            isEmptyBirth ? MyColor().error : MyColor().black),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: MyColor().error,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: MyColor().error,
+                    ),
+                  ),
+                ),
                 obscureText: false,
-                widthh: 316.0,
-                leftMargin: 47.0,
-                rightMargin: 47.0,
               ),
             ),
             Container(
-              child: TextFieldProfile(
+              width: ScreenUtil.instance.setWidth(316.0),
+              height: ScreenUtil.instance.setHeight(67.0),
+              margin: EdgeInsets.only(
+                left: ScreenUtil.instance.setWidth(47.0),
+                top: ScreenUtil.instance.setWidth(22.0),
+                right: ScreenUtil.instance.setWidth(47.0),
+              ),
+              child: TextFormField(
+                maxLength: 200,
+                enableSuggestions: false,
+                style: TextStyle(color: Colors.black),
                 controller: controllerEmail,
-                label: 'Enter email',
-                maxTextLength: 100,
+                decoration: InputDecoration(
+                  counterText: '',
+                  hasFloatingPlaceholder: false,
+                  contentPadding: new EdgeInsets.symmetric(
+                      vertical: 25.0, horizontal: 35.0),
+                  labelText: 'Enter email',
+                  labelStyle: TextStyle(color: MyColor().black),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: isEmptyMail ? MyColor().error : MyColor().black,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                        color: isEmptyMail ? MyColor().error : MyColor().black),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: MyColor().error,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: MyColor().error,
+                    ),
+                  ),
+                ),
                 obscureText: false,
-                widthh: 316.0,
-                leftMargin: 47.0,
-                rightMargin: 47.0,
               ),
             ),
             Container(
               child: LanguageChoose(),
             ),
             Container(
-              child: TextFieldProfile(
+              width: ScreenUtil.instance.setWidth(316.0),
+              height: ScreenUtil.instance.setHeight(67.0),
+              margin: EdgeInsets.only(
+                left: ScreenUtil.instance.setWidth(47.0),
+                top: ScreenUtil.instance.setWidth(22.0),
+                right: ScreenUtil.instance.setWidth(47.0),
+              ),
+              child: TextFormField(
+                maxLength: 200,
+                enableSuggestions: false,
+                style: TextStyle(color: Colors.black),
                 controller: controllerCreditCard,
-                label: 'Enter card number',
-                maxTextLength: 100,
+                decoration: InputDecoration(
+                  counterText: '',
+                  hasFloatingPlaceholder: false,
+                  contentPadding: new EdgeInsets.symmetric(
+                      vertical: 25.0, horizontal: 35.0),
+                  labelText: 'Enter card number ',
+                  labelStyle: TextStyle(color: MyColor().black),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: isEmptyCard ? MyColor().error : MyColor().black,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                        color: isEmptyCard ? MyColor().error : MyColor().black),
+                  ),
+                  focusedErrorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: MyColor().error,
+                    ),
+                  ),
+                  errorBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                    borderSide: BorderSide(
+                      color: MyColor().error,
+                    ),
+                  ),
+                ),
                 obscureText: false,
-                widthh: 316.0,
-                leftMargin: 47.0,
-                rightMargin: 47.0,
               ),
             ),
             Row(
               children: <Widget>[
                 Container(
-                  child: TextFieldProfile(
+                  width: ScreenUtil.instance.setWidth(156.0),
+                  height: ScreenUtil.instance.setHeight(67.0),
+                  margin: EdgeInsets.only(
+                    left: ScreenUtil.instance.setWidth(47.0),
+                    top: ScreenUtil.instance.setWidth(22.0),
+                    right: ScreenUtil.instance.setWidth(0.0),
+                  ),
+                  child: TextFormField(
+                    maxLength: 200,
+                    enableSuggestions: false,
+                    style: TextStyle(color: Colors.black),
                     controller: controllerDate,
-                    label: 'Date',
-                    maxTextLength: 100,
+                    decoration: InputDecoration(
+                      counterText: '',
+                      hasFloatingPlaceholder: false,
+                      contentPadding: new EdgeInsets.symmetric(
+                          vertical: 25.0, horizontal: 35.0),
+                      labelText: 'Date',
+                      labelStyle: TextStyle(color: MyColor().black),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                        borderSide: BorderSide(
+                          color:
+                              isEmptyDate ? MyColor().error : MyColor().black,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                        borderSide: BorderSide(
+                            color: isEmptyDate
+                                ? MyColor().error
+                                : MyColor().black),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                        borderSide: BorderSide(
+                          color: MyColor().error,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                        borderSide: BorderSide(
+                          color: MyColor().error,
+                        ),
+                      ),
+                    ),
                     obscureText: false,
-                    widthh: 156.0,
-                    leftMargin: 47.0,
-                    rightMargin: 0.0,
                   ),
                 ),
                 Container(
-                  child: TextFieldProfile(
+                  width: ScreenUtil.instance.setWidth(156.0),
+                  height: ScreenUtil.instance.setHeight(67.0),
+                  margin: EdgeInsets.only(
+                    left: ScreenUtil.instance.setWidth(5.0),
+                    top: ScreenUtil.instance.setWidth(22.0),
+                    right: ScreenUtil.instance.setWidth(0.0),
+                  ),
+                  child: TextFormField(
+                    maxLength: 200,
+                    enableSuggestions: false,
+                    style: TextStyle(color: Colors.black),
                     controller: controllerCC,
-                    label: 'CC',
-                    maxTextLength: 100,
+                    decoration: InputDecoration(
+                      counterText: '',
+                      hasFloatingPlaceholder: false,
+                      contentPadding: new EdgeInsets.symmetric(
+                          vertical: 25.0, horizontal: 35.0),
+                      labelText: 'CC',
+                      labelStyle: TextStyle(color: MyColor().black),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                        borderSide: BorderSide(
+                          color: isEmptyCC ? MyColor().error : MyColor().black,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                        borderSide: BorderSide(
+                            color:
+                                isEmptyCC ? MyColor().error : MyColor().black),
+                      ),
+                      focusedErrorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                        borderSide: BorderSide(
+                          color: MyColor().error,
+                        ),
+                      ),
+                      errorBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(33.5)),
+                        borderSide: BorderSide(
+                          color: MyColor().error,
+                        ),
+                      ),
+                    ),
                     obscureText: false,
-                    widthh: 156.0,
-                    leftMargin: 5.0,
-                    rightMargin: 0.0,
                   ),
                 ),
               ],
             ),
             Container(
-              child: btnProfile,
+              child: btnProfile(),
             ),
           ],
         )),
       ]),
     );
   }
-}
 
-Widget btnProfile = Container(
-  child: Container(
-    margin: EdgeInsets.only(
-        top: ScreenUtil.instance.setWidth(30.0),
-        bottom: ScreenUtil.instance.setWidth(20.0)),
-    width: ScreenUtil.instance.setWidth(303.0),
-    height: ScreenUtil.instance.setWidth(58.0),
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(29)),
-        color: MyColor().white),
-    child: RaisedButton(
-        color: MyColor().black,
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: new BorderRadius.circular(28.0),
-        ),
-        child: btnText == 'Register'
-            ? Text('Register',
-                style: TextStyle(
-                    color: MyColor().white,
-                    fontFamily: "LoewNextArabic",
-                    fontStyle: FontStyle.normal,
-                    fontSize: 18.0),
-                textAlign: TextAlign.center)
-            : btnText == 'Transfer'
-                ? Text('Transfer',
+  onPressed() {
+    name = controllerName.text;
+    email = controllerEmail.text;
+    dateOfBirth = controllerDOB.text;
+    creditCard = controllerCreditCard.text;
+    date = controllerDate.text;
+    cc = controllerCC.text;
+
+    if (name == '') {
+      setState(() {
+        isEmptyName = true;
+      });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isEmptyName = false;
+        });
+      });
+    } else if (email == '') {
+      setState(() {
+        isEmptyMail = true;
+      });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isEmptyMail = false;
+        });
+      });
+    } else if (dateOfBirth == '') {
+      setState(() {
+        isEmptyBirth = true;
+      });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isEmptyBirth = false;
+        });
+      });
+    } else if (creditCard == '') {
+      setState(() {
+        isEmptyCard = true;
+      });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isEmptyCard = false;
+        });
+      });
+    } else if (date == '') {
+      setState(() {
+        isEmptyDate = true;
+      });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isEmptyDate = false;
+        });
+      });
+    } else if (cc == '') {
+      setState(() {
+        isEmptyCC = true;
+      });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isEmptyCC = false;
+        });
+      });
+    } else {
+      print('Your name is : ' +
+          name +
+          '\n' +
+          'Your email is : ' +
+          email +
+          '\n' +
+          'Your date of birth : ' +
+          dateOfBirth +
+          '\n' +
+          'Your credit card number is : ' +
+          creditCard +
+          '\n' +
+          'Your card date is :' +
+          date +
+          '\n' +
+          'Your CC is : ' +
+          cc);
+
+      print('TEXT JE: + ' + btnText);
+      if (btnText == 'Register') {
+        userRegister();
+      } else if (btnText == 'Complete profile') {
+        completeProfile();
+      } else if (btnText == 'Transfer') {
+        transferSAR();
+      }
+    }
+  }
+
+  /// Metoda koja se poziva na klik button-a kada na njemu piše 'Register'
+  userRegister() {
+    Navigator.of(context).pushNamed(Register,
+        arguments:
+            DidntRecievePinArguments(username: widget.arguments.username));
+  }
+
+  /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
+  completeProfile() {
+    FirebaseCrud().updateUserOnCompletePRofile(
+        widget.doc,
+        controllerName.text,
+        controllerDOB.text,
+        controllerEmail.text,
+        controllerCreditCard.text,
+        controllerDate.text,
+        controllerCC.text);
+    setState(() {
+      btnText = 'Transfer';
+    });
+  }
+
+  transferSAR() {
+    FirebaseCrud().updateUserOnTransfer(widget.doc);
+    setState(() {
+      btnText = 'Transfer after 100';
+    });
+  }
+
+  btnProfile() {
+    return Container(
+      child: Container(
+        margin: EdgeInsets.only(
+            top: ScreenUtil.instance.setWidth(30.0),
+            bottom: ScreenUtil.instance.setWidth(20.0)),
+        width: ScreenUtil.instance.setWidth(303.0),
+        height: ScreenUtil.instance.setWidth(58.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(29)),
+            color: MyColor().white),
+        child: RaisedButton(
+            color: MyColor().black,
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(28.0),
+            ),
+            child: btnText == 'Register'
+                ? Text('Register',
                     style: TextStyle(
                         color: MyColor().white,
                         fontFamily: "LoewNextArabic",
                         fontStyle: FontStyle.normal,
                         fontSize: 18.0),
                     textAlign: TextAlign.center)
-                : btnText == 'Complete profile'
-                    ? Text('Complete profile',
+                : btnText == 'Transfer'
+                    ? Text('Transfer',
                         style: TextStyle(
                             color: MyColor().white,
                             fontFamily: "LoewNextArabic",
                             fontStyle: FontStyle.normal,
                             fontSize: 18.0),
                         textAlign: TextAlign.center)
-                    : Text('Transfer after 100 SAR',
-                        style: TextStyle(
-                            color: MyColor().white,
-                            fontFamily: "LoewNextArabic",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 18.0),
-                        textAlign: TextAlign.center),
-        onPressed: () => onPressed()),
-  ),
-);
-
-onPressed() {
-  name = controllerName.text;
-  email = controllerEmail.text;
-  dateOfBirth = controllerDOB.text;
-  creditCard = controllerCreditCard.text;
-  date = controllerDate.text;
-  cc = controllerCC.text;
-
-  print('Your name is : ' +
-      name +
-      '\n' +
-      'Your email is : ' +
-      email +
-      '\n' +
-      'Your date of birth : ' +
-      dateOfBirth +
-      '\n' +
-      'Your credit card number is : ' +
-      creditCard +
-      '\n' +
-      'Your card date is :' +
-      date +
-      '\n' +
-      'Your CC is : ' +
-      cc);
-  print('TEXT JE: + ' + btnText);
-  if (btnText == 'Register') {
-    print('Registrovanje');
-  } else if (btnText == 'Complete profile') {
-    print('Kompletiranje profila');
-  } else if (btnText == 'Transfer') {
-    print('Transerovanje');
+                    : btnText == 'Complete profile'
+                        ? Text('Complete profile',
+                            style: TextStyle(
+                                color: MyColor().white,
+                                fontFamily: "LoewNextArabic",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 18.0),
+                            textAlign: TextAlign.center)
+                        : Text('Transfer after 100 SAR',
+                            style: TextStyle(
+                                color: MyColor().white,
+                                fontFamily: "LoewNextArabic",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 18.0),
+                            textAlign: TextAlign.center),
+            onPressed: () => onPressed()),
+      ),
+    );
   }
 }
 
@@ -341,7 +634,7 @@ Widget bigCircle = Container(
       Container(
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(40.0)),
           child: Text(
-            userSARAmount.toString(),
+            usersSars.toString(),
             style: TextStyle(
               color: MyColor().white,
               fontSize: 35.0,

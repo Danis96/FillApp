@@ -162,7 +162,7 @@ class _YesNoSurveyState extends State<SurveyCard>
           widget.doc, context, widget.username);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => Summary(
-                usernameAnswers: usernameAnswers,
+                // usernameAnswers: usernameAnswers,
                 userLevel: widget.userLevel,
                 questions: widget.snapQuestions,
                 totalSar: widget.sarSurvey,
