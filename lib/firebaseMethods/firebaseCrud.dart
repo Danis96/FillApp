@@ -60,21 +60,16 @@ class FirebaseCrud {
     });
   }
 
-  updateUserOnTransfer(DocumentSnapshot doc) async {
-    await db.collection('Users').document(doc.documentID).updateData({
-      'sar': 0
-    });
-  } 
-
   updateUserOnCompletePRofile(DocumentSnapshot doc, String nameSurname, String dateOfBirth, String email,
-      String cardNumber, String expireDate, String cc) async {
+      String cardNumber, String expireDate, String cc, int sar) async {
     await db.collection('Users').document(doc.documentID).updateData({
       'email': email,
       'name_and_surname': nameSurname,
       'date_of_birth': dateOfBirth,
       'card_number': cardNumber,
       'expire_date': expireDate,
-      'cc': cc
+      'cc': cc,
+      'sar': sar
     });
   }  
 
