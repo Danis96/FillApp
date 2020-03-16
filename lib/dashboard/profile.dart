@@ -1,12 +1,8 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-
-import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/profileComponents/languageChoose.dart';
-import 'package:fillproject/components/profileComponents/textFieldProfile.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -51,12 +47,14 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
-TextEditingController controllerName = TextEditingController();
-TextEditingController controllerDOB = TextEditingController();
-TextEditingController controllerEmail = TextEditingController();
-TextEditingController controllerCreditCard = TextEditingController();
-TextEditingController controllerDate = TextEditingController();
-TextEditingController controllerCC = TextEditingController();
+TextEditingController controllerName = TextEditingController(text: usersName);
+TextEditingController controllerDOB = TextEditingController(text: usersDOB);
+TextEditingController controllerEmail = TextEditingController(text: usersEmail);
+TextEditingController controllerCreditCard =
+    TextEditingController(text: usersCard);
+TextEditingController controllerDate =
+    TextEditingController(text: usersCardDate);
+TextEditingController controllerCC = TextEditingController(text: usersCC);
 String name, dateOfBirth, email, creditCard, date, cc;
 bool isSar = false,
     isEmptyName = false,
@@ -65,7 +63,6 @@ bool isSar = false,
     isEmptyCard = false,
     isEmptyDate = false,
     isEmptyCC = false;
-
 
 class _ProfileState extends State<Profile> {
   @override
@@ -486,6 +483,8 @@ class _ProfileState extends State<Profile> {
     date = controllerDate.text;
     cc = controllerCC.text;
 
+    print('TEXT JE: + ' + btnText);
+
     if (name == '') {
       setState(() {
         isEmptyName = true;
@@ -663,7 +662,9 @@ Widget bigCircle = Container(
           child: Text(
             usersSars.toString(),
             style: TextStyle(
-              color: MyColor().white,
+              color: btnText == 'Complete profile'
+                  ? MyColor().black
+                  : btnText == 'Transfer' ? MyColor().black : MyColor().white,
               fontSize: 35.0,
               fontFamily: "LoewNextArabic",
             ),
@@ -672,7 +673,9 @@ Widget bigCircle = Container(
           child: Text(
         'SAR',
         style: TextStyle(
-          color: MyColor().white,
+          color: btnText == 'Complete profile'
+              ? MyColor().black
+              : btnText == 'Transfer' ? MyColor().black : MyColor().white,
           fontSize: 35.0,
           fontFamily: "LoewNextArabic",
         ),
@@ -680,7 +683,14 @@ Widget bigCircle = Container(
     ],
   ),
   decoration: BoxDecoration(
-    color: MyColor().black,
+    border: Border.all(
+        width: 1,
+        color: btnText == 'Complete profile'
+            ? Colors.red
+            : btnText == 'Transfer' ? Colors.green : MyColor().white),
+    color: btnText == 'Complete profile'
+        ? MyColor().white
+        : btnText == 'Transfer' ? MyColor().white : MyColor().black,
     shape: BoxShape.circle,
   ),
 );
@@ -694,8 +704,10 @@ Widget rowBelow = Container(
         child: Text('transfer with'),
       ),
       Container(
+        height: ScreenUtil.instance.setHeight(27.0),
+        width: ScreenUtil.instance.setWidth(81.0),
         margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(20.0)),
-        child: Text('slika'),
+        child: Image.asset('assets/images/transferImage.png'),
       ),
     ],
   ),
