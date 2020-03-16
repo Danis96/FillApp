@@ -10,7 +10,7 @@ import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../routes/routeArguments.dart';
 
@@ -33,6 +33,9 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
+RegExp regexEmail = new RegExp(
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
 TextEditingController controllerName = TextEditingController(text: name);
 TextEditingController controllerDOB = TextEditingController(text: usersDOB);
 TextEditingController controllerEmail = TextEditingController(text: usersEmail);
@@ -41,6 +44,12 @@ TextEditingController controllerCreditCard =
 TextEditingController controllerDate =
     TextEditingController(text: usersCardDate);
 TextEditingController controllerCC = TextEditingController(text: usersCC);
+
+var maskTextInputFormatterCard =
+    MaskTextInputFormatter(mask: '####-####-####-####');
+var maskTextInputFormatterDate = MaskTextInputFormatter(mask: '##/##');
+var maskTextInputFormatterCC = MaskTextInputFormatter(mask: '###');
+
 String name, dateOfBirth, email, creditCard, date, cc;
 Key key = UniqueKey();
 bool isSar = false,
@@ -62,7 +71,6 @@ class _ProfileState extends State<Profile> {
     checkForInternet();
     FirebaseCheck().getUserUsername(widget.arguments.username);
     print('BILDAO SSAAAAAAAAAAAAAAAAAAAMMMMMMMM');
-    
   }
 
   checkForInternet() async {
@@ -76,75 +84,69 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-   settingStates() {
+  settingStates() {
+    print(usersSarovi.toString() + 'U SETTIGNS');
 
-     print(usersSarovi.toString() + 'U SETTIGNS');
-      /// State 1
-      if (usersSarovi < 100) {
-        print('STATE 1');
-        print('Transfer after 100 SAR');
+    /// State 1
+    if (usersSarovi < 100) {
+      print('STATE 1');
+      print('Transfer after 100 SAR');
+      btnText = 'Transfer after 100 SAR';
+    } else
 
-          btnText = 'Transfer after 100 SAR';
-      } else
-
-      /// State 2
-      if (usersSarovi >= 100) {
-        print('STATE 2');
-        print('SAROVI SU VEĆI OD 100');
-        if (profileAnonym == 0) {
-          print('USER NIJE ANONIMNI');
-          if (controllerName.text == null ||
-              controllerDate.text == null ||
-              controllerEmail.text == null ||
-              controllerCreditCard.text == null ||
-              controllerDOB.text == null ||
-              controllerCC.text == null ||
-              controllerName.text == '' ||
-              controllerDate.text == '' ||
-              controllerEmail.text == '' ||
-              controllerCreditCard.text == '' ||
-              controllerDOB.text == '' ||
-              controllerCC.text == '') {
-            print('POLJA SU PRAZNA');
-
-              btnText = 'Complete profile';
-          }
-        } else {
-          print('USER JE ANONIMNI');
-          print('HAHAHAHAAAAAAAAAAAAAAAAAAA');
-            btnText = 'Register';
+    /// State 2
+    if (usersSarovi >= 100) {
+      print('STATE 2');
+      print('SAROVI SU VEĆI OD 100');
+      if (profileAnonym == 0) {
+        print('USER NIJE ANONIMNI');
+        if (controllerName.text == null ||
+            controllerDate.text == null ||
+            controllerEmail.text == null ||
+            controllerCreditCard.text == null ||
+            controllerDOB.text == null ||
+            controllerCC.text == null ||
+            controllerName.text == '' ||
+            controllerDate.text == '' ||
+            controllerEmail.text == '' ||
+            controllerCreditCard.text == '' ||
+            controllerDOB.text == '' ||
+            controllerCC.text == '') {
+          print('POLJA SU PRAZNA');
+          btnText = 'Complete profile';
         }
-      } else
+      } else {
+        print('USER JE ANONIMNI');
+        print('HAHAHAHAAAAAAAAAAAAAAAAAAA');
+        btnText = 'Register';
+      }
+    } else
 
-      /// State 3
-      if (usersSarovi >= 100 && profileAnonym == 0) {
-        if (controllerName.text != null &&
-            controllerDate.text != null &&
-            controllerEmail.text != null &&
-            controllerCreditCard.text != null &&
-            controllerDOB.text != null &&
-            controllerCC.text != null &&
-            controllerName.text != '' &&
-            controllerDate.text != '' &&
-            controllerEmail.text != '' &&
-            controllerCreditCard.text != '' &&
-            controllerDOB.text != '' &&
-            controllerCC.text != '') {
-          print('STATE 3');
-
-            btnText = 'Transfer';
-
-        }
+    /// State 3
+    if (usersSarovi >= 100 && profileAnonym == 0) {
+      if (controllerName.text != null &&
+          controllerDate.text != null &&
+          controllerEmail.text != null &&
+          controllerCreditCard.text != null &&
+          controllerDOB.text != null &&
+          controllerCC.text != null &&
+          controllerName.text != '' &&
+          controllerDate.text != '' &&
+          controllerEmail.text != '' &&
+          controllerCreditCard.text != '' &&
+          controllerDOB.text != '' &&
+          controllerCC.text != '') {
+        print('STATE 3');
+        btnText = 'Transfer';
       }
     }
+  }
 
   @override
   Widget build(BuildContext context) {
     print(anonym);
     print(widget.arguments.username);
     print(usersSars);
-
-   
 
     Widget bigCircle = Container(
       width: ScreenUtil.instance.setWidth(198.0),
@@ -213,10 +215,11 @@ class _ProfileState extends State<Profile> {
                         itemBuilder: (context, index) {
                           snap = snapshot.data[index];
                           usersSarovi = snapshot.data[index].data['sar'];
-                          profileAnonym = snapshot.data[index].data['is_anonymous'];
+                          profileAnonym =
+                              snapshot.data[index].data['is_anonymous'];
                           print(
                               usersSarovi.toString() + 'QEWQEWQEWQEWQEWQEWQE');
-                        settingStates();
+                          settingStates();
                           return EmptyContainer();
                         });
                   }
@@ -398,6 +401,8 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
+                  inputFormatters: [maskTextInputFormatterCard],
+                  keyboardType: TextInputType.number,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
@@ -448,6 +453,8 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
+                      inputFormatters: [maskTextInputFormatterDate],
+                      keyboardType: TextInputType.number,
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
@@ -498,6 +505,8 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [maskTextInputFormatterCC],
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
@@ -561,10 +570,6 @@ class _ProfileState extends State<Profile> {
 
     print('TEXT JE: + ' + btnText);
 
-    if (btnText == 'Register') {
-      userRegister();
-    }
-
     if (name == '') {
       setState(() {
         isEmptyName = true;
@@ -574,7 +579,7 @@ class _ProfileState extends State<Profile> {
           isEmptyName = false;
         });
       });
-    } else if (email == '') {
+    } else if (email == '' || regexEmail.hasMatch(email) == false) {
       setState(() {
         isEmptyMail = true;
       });
@@ -639,7 +644,9 @@ class _ProfileState extends State<Profile> {
           cc);
 
       print('TEXT JE: + ' + btnText);
-      if (btnText == 'Complete profile') {
+      if (btnText == 'Register') {
+        userRegister();
+      } else if (btnText == 'Complete profile') {
         completeProfile();
       } else if (btnText == 'Transfer') {
         transferSAR();

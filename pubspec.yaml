@@ -33,6 +33,7 @@ dependencies:
   data_connection_checker: ^0.3.4
   after_layout: ^1.0.7+2
   percent_indicator: "^2.1.1"
+  mask_text_input_formatter: ^1.0.6
 
 
   
