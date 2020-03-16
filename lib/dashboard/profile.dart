@@ -86,11 +86,10 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     print(anonym);
-    print(userSARAmount);
     print(widget.arguments.username);
 
     /// State 1
-    if (userSARAmount < 100) {
+    if (usersSars < 100) {
       print('STATE 1');
       print('Transfer after 100 SAR');
       setState(() {
@@ -99,7 +98,7 @@ class _ProfileState extends State<Profile> {
     }
 
     /// State 2
-    if (userSARAmount >= 100) {
+    if (usersSars >= 100) {
       print('STATE 2');
       print('SAROVI SU VEĆI OD 100');
       if (anonym == 0) {
@@ -131,7 +130,7 @@ class _ProfileState extends State<Profile> {
     }
 
     /// State 3
-    if (userSARAmount >= 100 && anonym == 0) {
+    if (usersSars >= 100 && anonym == 0) {
       if (controllerName.text != null &&
           controllerDate.text != null &&
           controllerEmail.text != null &&

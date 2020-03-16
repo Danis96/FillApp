@@ -172,9 +172,6 @@ class _BottomNavigationBarControllerState
       } else {
         anonym = 0;
       }
-      if (userSARAmount == null) {
-        userSARAmount = 0;
-      }
     }
   }
 
