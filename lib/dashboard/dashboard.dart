@@ -94,10 +94,8 @@ class _DashboardPageState extends State<DashboardPage> {
                       itemBuilder: (context, index) {
                         snap = snapshot.data[index];
                         userSar = snap.data['sar'];
-                        userSARAmount = userSar;
                         if (counter == 0) {
                           saroviOffline = userSar;
-                          userSARAmount = userSar;
                           counter = 1;
                         }
                         id = snap.data['user_id'];

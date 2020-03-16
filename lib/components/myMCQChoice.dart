@@ -104,7 +104,6 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
   onPressed() {
     widget.usersSar += widget.sar;
     saroviOffline += widget.sar;
-    userSARAmount = saroviOffline;
 
     /// update sarova na osnovu da li je app online ili offline
     ///

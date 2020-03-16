@@ -151,7 +151,6 @@ class _YesNoSurveyState extends State<SurveyCard>
     if (widget.number == snapQuestions.length) {
       widget.userSar = widget.userSar + widget.sarSurvey;
       saroviOffline = saroviOffline + widget.sarSurvey;
-      userSARAmount = saroviOffline;
       if (isSar) {
         FirebaseCrud().updateUsersSars(widget.userDoc, context, saroviOffline);
       } else {
