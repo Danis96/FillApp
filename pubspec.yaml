@@ -24,7 +24,7 @@ dependencies:
   cloud_firestore: 
   email_validator: '^1.0.0'
   shared_preferences: ^0.5.1+2
-  # url_launcher: ^3.0.3
+  url_launcher: ^3.0.3
   pin_code_fields: ^2.3.0+3
   flutter_screenutil: ^0.7.0
   splashscreen: ^1.2.0
@@ -63,6 +63,7 @@ flutter:
    - assets/images/tab1_1.png
    - assets/images/tab2.png
    - assets/images/tab2_2.png
+   - assets/images/transferImage.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
