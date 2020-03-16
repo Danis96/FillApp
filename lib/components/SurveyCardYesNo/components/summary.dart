@@ -195,7 +195,9 @@ class _SummaryState extends State<Summary> {
   }
 
   Future<bool> _onWillPop() async {
-    isSummary = false;
+      setState(() {
+        isOnSummary = false;
+      });
     return Navigator.of(context).pop() ?? true;
   }
 }

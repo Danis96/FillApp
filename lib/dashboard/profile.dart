@@ -91,6 +91,7 @@ class _ProfileState extends State<Profile> {
     if (usersSarovi < 100) {
       print('STATE 1');
       print('Transfer after 100 SAR');
+
       btnText = 'Transfer after 100 SAR';
     } else
 
@@ -196,7 +197,7 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          // refresh();
+          FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: ListView(shrinkWrap: true, children: <Widget>[
           Center(
@@ -567,6 +568,7 @@ class _ProfileState extends State<Profile> {
     creditCard = controllerCreditCard.text;
     date = controllerDate.text;
     cc = controllerCC.text;
+    FocusScope.of(context).requestFocus(new FocusNode());
 
     print('TEXT JE: + ' + btnText);
 
