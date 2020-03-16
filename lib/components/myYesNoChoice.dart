@@ -27,7 +27,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class MyYesNoChoice extends StatefulWidget {
   final String choice, username;
   final int index, target, sar;
-  final Function() notifyParent;
+  final Function notifyParent;
   final List<dynamic> snapi;
   final DocumentSnapshot doc, snap;
   final ValueKey key;
@@ -48,7 +48,8 @@ class MyYesNoChoice extends StatefulWidget {
       this.target,
       this.doc,
       this.username,
-      this.marginRight});
+      this.marginRight,
+      });
 
   @override
   _MyYesNoChoiceState createState() => _MyYesNoChoiceState();
@@ -124,7 +125,6 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());
     widget.notifyParent();
-
     isTappedYesNoFlash = false;
   }
 }

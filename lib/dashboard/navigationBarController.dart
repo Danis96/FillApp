@@ -35,6 +35,7 @@ bool isLoading = true;
 DocumentSnapshot snap;
 int isAnonymous, usersSars;
 bool isUserInDB = true;
+Key key = UniqueKey();
 String usersName, usersDOB, usersEmail, usersCard, usersCardDate, usersCC;
 
 class BottomNavigationBarController extends StatefulWidget {
@@ -50,6 +51,8 @@ class _BottomNavigationBarControllerState
     extends State<BottomNavigationBarController> {
   final PasswordArguments arguments;
   _BottomNavigationBarControllerState({Key key, this.arguments});
+
+
 
   Widget doesUserExist(String username) {
     return Container(
@@ -87,13 +90,13 @@ class _BottomNavigationBarControllerState
               itemBuilder: (context, index) {
                 snap = snapshot.data[index];
                 isAnonymous = snap.data['is_anonymous'];
-                usersSars = snap.data['sar'];
-                usersName = snap.data['name_and_surname'];
-                usersDOB = snap.data['date_of_birth'];
-                usersEmail = snap.data['email'];
-                usersCard = snap.data['card_number'];
-                usersCardDate = snap.data['expire_date'];
-                usersCC = snap.data['cc'];
+                // usersSars = snap.data['sar'];
+                // usersName = snap.data['name_and_surname'];
+                // usersDOB = snap.data['date_of_birth'];
+                // usersEmail = snap.data['email'];
+                // usersCard = snap.data['card_number'];
+                // usersCardDate = snap.data['expire_date'];
+                // usersCC = snap.data['cc'];
                 return EmptyContainer();
               });
         }
@@ -118,23 +121,16 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
-          usersSars: usersSars,
-             usersName: usersName,
-             usersDOB: usersDOB,
-             usersCard: usersCard,
-             usersCardDate: usersCardDate,
-             usersCC: usersCC,
-            doc: snap,
             arguments: PasswordArguments(
-              email: arguments.email,
-              password: arguments.password,
-              phone: arguments.phone,
-              username: arguments.username,
-            )),
+          email: arguments.email,
+          password: arguments.password,
+          phone: arguments.phone,
+          username: arguments.username,
+        )),
         getIsAnonymous(arguments.username),
       ];
 
-  final items = [
+  var items = [
     BottomNavigationBarItem(
       icon: isTab1Selected
           ? ImageIcon(AssetImage(imageTab1))
@@ -153,9 +149,12 @@ class _BottomNavigationBarControllerState
   int currentIndex = 1;
 
   void onTap(int index) {
-    setState(() {
-      currentIndex = index;
+    Timer(Duration(milliseconds: 600), () {
+      setState(() {
+        currentIndex = index;
+      });
     });
+
     if (currentIndex == 0) {
       isTab1Selected = true;
       isTab2Selected = false;
@@ -165,6 +164,7 @@ class _BottomNavigationBarControllerState
     } else if (currentIndex == 2) {
       isTab1Selected = false;
       isTab2Selected = false;
+
       getIsAnonymous(arguments.username);
       if (isAnonymous == 1) {
         //askUserToRegister();
@@ -183,9 +183,28 @@ class _BottomNavigationBarControllerState
           unselectedItemColor: MyColor().unselectedItemColor,
           showSelectedLabels: false,
           showUnselectedLabels: false,
-          items: items,
+          items: [
+    BottomNavigationBarItem(
+      icon: isTab1Selected
+          ? ImageIcon(AssetImage(imageTab1))
+          : ImageIcon(AssetImage(imageTab1)),
+      title: Text(''),
+    ),
+    BottomNavigationBarItem(
+      icon: isTab2Selected
+          ? ImageIcon(AssetImage(imageTab2))
+          : ImageIcon(AssetImage(imageTab2)),
+      title: Text(''),
+    ),
+    BottomNavigationBarItem(icon: Icon(Icons.account_circle), title: Text(''))
+  ],
           currentIndex: currentIndex,
-          onTap: onTap),
+          onTap: (currentIndex) {
+               setState(() {
+                 
+               });
+               onTap(currentIndex);
+          }),
       body: isLoading
           ? Center(
               child: Column(
@@ -224,6 +243,8 @@ class _BottomNavigationBarControllerState
       ),
     );
   }
+
+  
 
   /// function for loader
   ///

@@ -61,6 +61,7 @@ class _SurveyState extends State<SurveyPage>
     Timer(Duration(milliseconds: 600), () {
       setState(() {});
     });
+    print('init SURVEY');
   }
 
   @override
