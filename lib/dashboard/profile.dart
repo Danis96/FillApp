@@ -484,6 +484,10 @@ class _ProfileState extends State<Profile> {
 
     print('TEXT JE: + ' + btnText);
 
+    if (btnText == 'Register') {
+      userRegister();
+    }
+
     if (name == '') {
       setState(() {
         isEmptyName = true;
@@ -558,9 +562,7 @@ class _ProfileState extends State<Profile> {
           cc);
 
       print('TEXT JE: + ' + btnText);
-      if (btnText == 'Register') {
-        userRegister();
-      } else if (btnText == 'Complete profile') {
+      if (btnText == 'Complete profile') {
         completeProfile();
       } else if (btnText == 'Transfer') {
         transferSAR();
