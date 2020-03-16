@@ -10,7 +10,7 @@ import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../routes/routeArguments.dart';
 
@@ -33,6 +33,9 @@ class Profile extends StatefulWidget {
   _ProfileState createState() => _ProfileState();
 }
 
+RegExp regexEmail = new RegExp(
+    r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+
 TextEditingController controllerName = TextEditingController(text: name);
 TextEditingController controllerDOB = TextEditingController(text: usersDOB);
 TextEditingController controllerEmail = TextEditingController(text: usersEmail);
@@ -41,6 +44,12 @@ TextEditingController controllerCreditCard =
 TextEditingController controllerDate =
     TextEditingController(text: usersCardDate);
 TextEditingController controllerCC = TextEditingController(text: usersCC);
+
+var maskTextInputFormatterCard =
+    MaskTextInputFormatter(mask: '####-####-####-####');
+var maskTextInputFormatterDate = MaskTextInputFormatter(mask: '##/##');
+var maskTextInputFormatterCC = MaskTextInputFormatter(mask: '###');
+
 String name, dateOfBirth, email, creditCard, date, cc;
 Key key = UniqueKey();
 bool isSar = false,
@@ -105,7 +114,6 @@ class _ProfileState extends State<Profile> {
             controllerDOB.text == '' ||
             controllerCC.text == '') {
           print('POLJA SU PRAZNA');
-
           btnText = 'Complete profile';
         }
       } else {
@@ -130,7 +138,6 @@ class _ProfileState extends State<Profile> {
           controllerDOB.text != '' &&
           controllerCC.text != '') {
         print('STATE 3');
-
         btnText = 'Transfer';
       }
     }
@@ -395,6 +402,8 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
+                  inputFormatters: [maskTextInputFormatterCard],
+                  keyboardType: TextInputType.number,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
@@ -445,6 +454,8 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
+                      inputFormatters: [maskTextInputFormatterDate],
+                      keyboardType: TextInputType.number,
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
@@ -495,6 +506,8 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      inputFormatters: [maskTextInputFormatterCC],
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
@@ -559,10 +572,6 @@ class _ProfileState extends State<Profile> {
 
     print('TEXT JE: + ' + btnText);
 
-    if (btnText == 'Register') {
-      userRegister();
-    }
-
     if (name == '') {
       setState(() {
         isEmptyName = true;
@@ -572,7 +581,7 @@ class _ProfileState extends State<Profile> {
           isEmptyName = false;
         });
       });
-    } else if (email == '') {
+    } else if (email == '' || regexEmail.hasMatch(email) == false) {
       setState(() {
         isEmptyMail = true;
       });
@@ -637,7 +646,9 @@ class _ProfileState extends State<Profile> {
           cc);
 
       print('TEXT JE: + ' + btnText);
-      if (btnText == 'Complete profile') {
+      if (btnText == 'Register') {
+        userRegister();
+      } else if (btnText == 'Complete profile') {
         completeProfile();
       } else if (btnText == 'Transfer') {
         transferSAR();
