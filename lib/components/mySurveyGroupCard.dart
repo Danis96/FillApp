@@ -96,7 +96,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
         if (!isCompleted) {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
-                usernameAnswers: usernameAnswers,
+                // usernameAnswers: usernameAnswers,
                   userLevel: userLevel,
                   notifyParent: refreshState,
                   user: user,

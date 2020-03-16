@@ -33,8 +33,9 @@ bool isTab1Selected = true;
 bool isTab2Selected = false;
 bool isLoading = true;
 DocumentSnapshot snap;
-int isAnonymous;
+int isAnonymous, usersSars;
 bool isUserInDB = true;
+String usersName, usersDOB, usersEmail, usersCard, usersCardDate, usersCC;
 
 class BottomNavigationBarController extends StatefulWidget {
   final PasswordArguments arguments;
@@ -86,6 +87,13 @@ class _BottomNavigationBarControllerState
               itemBuilder: (context, index) {
                 snap = snapshot.data[index];
                 isAnonymous = snap.data['is_anonymous'];
+                usersSars = snap.data['sar'];
+                usersName = snap.data['name_and_surname'];
+                usersDOB = snap.data['date_of_birth'];
+                usersEmail = snap.data['email'];
+                usersCard = snap.data['card_number'];
+                usersCardDate = snap.data['expire_date'];
+                usersCC = snap.data['cc'];
                 return EmptyContainer();
               });
         }
@@ -110,13 +118,19 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
-          doc: snap,
+          usersSars: usersSars,
+             usersName: usersName,
+             usersDOB: usersDOB,
+             usersCard: usersCard,
+             usersCardDate: usersCardDate,
+             usersCC: usersCC,
+            doc: snap,
             arguments: PasswordArguments(
-          email: arguments.email,
-          password: arguments.password,
-          phone: arguments.phone,
-          username: arguments.username,
-        )),
+              email: arguments.email,
+              password: arguments.password,
+              phone: arguments.phone,
+              username: arguments.username,
+            )),
         getIsAnonymous(arguments.username),
       ];
 
