@@ -584,14 +584,23 @@ class _ProfileState extends State<Profile> {
         controllerEmail.text,
         controllerCreditCard.text,
         controllerDate.text,
-        controllerCC.text);
+        controllerCC.text,
+        usersSars);
     setState(() {
       btnText = 'Transfer';
     });
   }
 
   transferSAR() {
-    FirebaseCrud().updateUserOnTransfer(widget.doc);
+    FirebaseCrud().updateUserOnCompletePRofile(
+        widget.doc,
+        controllerName.text,
+        controllerDOB.text,
+        controllerEmail.text,
+        controllerCreditCard.text,
+        controllerDate.text,
+        controllerCC.text,
+        0);
     setState(() {
       btnText = 'Transfer after 100';
     });
