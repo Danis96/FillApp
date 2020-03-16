@@ -24,6 +24,7 @@ import 'package:fillproject/components/myCardMCQ.dart';
 import 'package:fillproject/components/myCardYesNo.dart';
 import 'package:fillproject/components/myCashBalance.dart';
 import 'package:fillproject/components/mySAR.dart';
+import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/FlashQuestion/questionModel.dart';
@@ -33,8 +34,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DashboardPage extends StatefulWidget {
   final PasswordArguments arguments;
-
-  DashboardPage({Key key, this.arguments}) : super(key: key);
+  DashboardPage({
+    Key key,
+    this.arguments,
+  }) : super(key: key);
 
   @override
   _DashboardPageState createState() =>
@@ -70,6 +73,7 @@ class _DashboardPageState extends State<DashboardPage> {
     Timer(Duration(milliseconds: 500), () {
       setState(() {});
     });
+    print('INIT DASH');
   }
 
   @override
@@ -108,6 +112,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 return EmptyContainer();
               },
             ),
+           
             MyCashBalance(text: MyText().sarText),
 
             /// [MySar] widget
@@ -280,8 +285,6 @@ class _DashboardPageState extends State<DashboardPage> {
       }
     });
   }
-
-  
 
   /// [refresh]
   ///

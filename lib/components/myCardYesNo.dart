@@ -24,7 +24,7 @@ class MyCardYesNo extends StatefulWidget {
   final int sar, target, usersSar;
   final List<dynamic> snapi;
   final int index;
-  final Function() notifyParent;
+  final Function notifyParent, refreshNavbar;
   final DocumentSnapshot doc, snap;
   final ValueKey key;
   final bool isSar;
@@ -41,7 +41,9 @@ class MyCardYesNo extends StatefulWidget {
       @required this.notifyParent,
       this.target,
       this.doc,
-      this.username});
+      this.username,
+      this.refreshNavbar,
+      });
 
   @override
   _MyCardYesNoState createState() => _MyCardYesNoState();
