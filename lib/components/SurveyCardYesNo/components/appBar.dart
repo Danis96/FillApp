@@ -11,7 +11,6 @@ import 'package:percent_indicator/linear_percent_indicator.dart';
 import '../../../routes/routeArguments.dart';
 import '../../../routes/routeConstants.dart';
 
-
 class SurveyAppBar extends StatelessWidget {
   final PasswordArguments arguments;
   final double percent;
@@ -31,86 +30,91 @@ class SurveyAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: new BoxDecoration(
-          color: Colors.black,
-        ),
-        child: ListTile(
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              color: Colors.white,
-              onPressed: () {
-                isOnSummary
-                    ? Navigator.of(context).pushNamed(NavBar,
-                        arguments: PasswordArguments(
-                            email: arguments.email,
-                            password: arguments.password,
-                            phone: arguments.phone,
-                            username: arguments.username))
-                    : isSummary
-                        ? Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => Summary(
-                                  animateTo: animateTo,
-                                  questions: questions,
-                                  totalProgress: totalProgress,
-                                  totalSar: totalSar,
-                                )))
-                        : showDialog(
-                            context: context,
-                            builder: (context) => new AlertDialog(
-                              title: Text('Are you sure?'),
-                              content: new Text(
-                                  'Do you really want to exit the survey?'),
-                              actions: <Widget>[
-                                new FlatButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: new Text(MyText().registerNo),
-                                ),
-                                new FlatButton(
-                                  onPressed: () => {
-                                    notifyParent(),
-                                    Navigator.of(context).pop(),
-                                    Navigator.of(context).pop(),
-                                  },
-                                  child: new Text(MyText().willYes),
-                                ),
-                              ],
-                            ),
-                          );
-              }),
-          title: Container(
-            margin: isOnSummary ? EdgeInsets.only(top: ScreenUtil.instance.setWidth(35.0)) : EdgeInsets.only(top: ScreenUtil.instance.setWidth(0.0)),
-            padding: isOnSummary ? EdgeInsets.only(top: ScreenUtil.instance.setWidth(0.0)) : EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-            child: LinearPercentIndicator(
-              width: 170.0,
-              lineHeight: 6.0,
-              percent: percent,
-              progressColor: Colors.white,
-              alignment: MainAxisAlignment.center,
-            ),
-          ),
-          subtitle: isOnSummary
-              ? Container(
-                  margin: EdgeInsets.only(
-                      top: ScreenUtil.instance.setWidth(12.0),
-                      bottom: ScreenUtil.instance.setWidth(30.0)),
-                  child: Center(
-                    child: Text(
-                        totalProgress.toString() +
-                            '/' +
-                            totalProgress.toString(),
-                        style: TextStyle(
-                            color: MyColor().white,
-                            fontWeight: FontWeight.w700,
-                            fontFamily: "LoewNextArabic",
-                            fontStyle: FontStyle.normal,
-                            fontSize: ScreenUtil.instance.setSp(20.0))),
-                  ),
-                )
-              : null,
-          trailing: Container(
-            width: ScreenUtil.instance.setWidth(40.0),
+      decoration: new BoxDecoration(
+        color: Colors.black,
+      ),
+      child: ListTile(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.white,
+            onPressed: () {
+              isOnSummary
+                  ? () {
+                      Navigator.of(context).pushNamed(NavBar,
+                          arguments: PasswordArguments(
+                              email: arguments.email,
+                              password: arguments.password,
+                              phone: arguments.phone,
+                              username: arguments.username));
+                      isOnSummary = false;
+                    }()
+                  : isSummary
+                      ? Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => Summary(
+                                animateTo: animateTo,
+                                questions: questions,
+                                totalProgress: totalProgress,
+                                totalSar: totalSar,
+                              )))
+                      : showDialog(
+                          context: context,
+                          builder: (context) => new AlertDialog(
+                            title: Text('Are you sure?'),
+                            content: new Text(
+                                'Do you really want to exit the survey?'),
+                            actions: <Widget>[
+                              new FlatButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: new Text(MyText().registerNo),
+                              ),
+                              new FlatButton(
+                                onPressed: () => {
+                                  notifyParent(),
+                                  Navigator.of(context).pop(),
+                                  Navigator.of(context).pop(),
+                                },
+                                child: new Text(MyText().willYes),
+                              ),
+                            ],
+                          ),
+                        );
+            }),
+        title: Container(
+          margin: isOnSummary
+              ? EdgeInsets.only(top: ScreenUtil.instance.setWidth(35.0))
+              : EdgeInsets.only(top: ScreenUtil.instance.setWidth(0.0)),
+          padding: isOnSummary
+              ? EdgeInsets.only(top: ScreenUtil.instance.setWidth(0.0))
+              : EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
+          child: LinearPercentIndicator(
+            width: 170.0,
+            lineHeight: 6.0,
+            percent: percent,
+            progressColor: Colors.white,
+            alignment: MainAxisAlignment.center,
           ),
         ),
-        );
+        subtitle: isOnSummary
+            ? Container(
+                margin: EdgeInsets.only(
+                    top: ScreenUtil.instance.setWidth(12.0),
+                    bottom: ScreenUtil.instance.setWidth(30.0)),
+                child: Center(
+                  child: Text(
+                      totalProgress.toString() + '/' + totalProgress.toString(),
+                      style: TextStyle(
+                          color: MyColor().white,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "LoewNextArabic",
+                          fontStyle: FontStyle.normal,
+                          fontSize: ScreenUtil.instance.setSp(20.0))),
+                ),
+              )
+            : null,
+        trailing: Container(
+          width: ScreenUtil.instance.setWidth(40.0),
+        ),
+      ),
+    );
   }
 }
