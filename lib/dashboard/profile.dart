@@ -40,6 +40,7 @@ TextEditingController controllerDate = TextEditingController();
 TextEditingController controllerCC = TextEditingController();
 String name, dateOfBirth, email, creditCard, date, cc;
 bool isSar = false;
+BuildContext ctx;
 
 class _ProfileState extends State<Profile> {
   @override
@@ -62,6 +63,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    ctx = context;
     print(
         'BILDAO SSAAAAAAAAAAAAAAAAAAAMMMMMMMM DRUGI PUUUUUUUUUUUUUUUUUUUUUUUUTTTTTTTTTTTT');
     print(anonym);
@@ -109,6 +111,7 @@ class _ProfileState extends State<Profile> {
 
     /// State 1
     if (userSARAmount < 100) {
+      print('STATE 1');
       print('Transfer after 100 SAR');
       setState(() {
         btnText = 'Transfer after 100 SAR';
@@ -117,18 +120,29 @@ class _ProfileState extends State<Profile> {
 
     /// State 2
     if (userSARAmount >= 100) {
+      print('STATE 2');
+      print('SAROVI SU VEĆI OD 100');
       if (anonym == 0) {
-        if (controllerName.text == null &&
-            controllerDate.text == null &&
-            controllerEmail.text == null &&
-            controllerCreditCard.text == null &&
-            controllerDOB.text == null &&
-            controllerCC.text == null) {
+        print('USER NIJE ANONIMNI');
+        if (controllerName.text == null ||
+            controllerDate.text == null ||
+            controllerEmail.text == null ||
+            controllerCreditCard.text == null ||
+            controllerDOB.text == null ||
+            controllerCC.text == null ||
+            controllerName.text == '' ||
+            controllerDate.text == '' ||
+            controllerEmail.text == '' ||
+            controllerCreditCard.text == '' ||
+            controllerDOB.text == '' ||
+            controllerCC.text == '') {
+          print('POLJA SU PRAZNA');
           setState(() {
             btnText = 'Complete profile';
           });
         }
       } else {
+        print('USER JE ANONIMNI');
         print('HAHAHAHAAAAAAAAAAAAAAAAAAA');
         setState(() {
           btnText = 'Register';
@@ -138,9 +152,23 @@ class _ProfileState extends State<Profile> {
 
     /// State 3
     if (userSARAmount >= 100 && anonym == 0) {
-      setState(() {
-        btnText = 'Transfer';
-      });
+      if (controllerName.text != null &&
+          controllerDate.text != null &&
+          controllerEmail.text != null &&
+          controllerCreditCard.text != null &&
+          controllerDOB.text != null &&
+          controllerCC.text != null &&
+          controllerName.text != '' &&
+          controllerDate.text != '' &&
+          controllerEmail.text != '' &&
+          controllerCreditCard.text != '' &&
+          controllerDOB.text != '' &&
+          controllerCC.text != '') {
+        print('STATE 3');
+        setState(() {
+          btnText = 'Transfer';
+        });
+      }
     }
 
     return Scaffold(
