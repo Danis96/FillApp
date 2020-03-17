@@ -24,9 +24,11 @@ import '../routes/routeArguments.dart';
 
 class Profile extends StatefulWidget {
   final PasswordArguments arguments;
+  final String btnText;
   Profile({
     Key key,
     this.arguments,
+    this.btnText,
   }) : super(key: key);
 
   @override
@@ -84,64 +86,7 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  settingStates() {
-    print(usersSarovi.toString() + 'U SETTIGNS');
-
-    /// State 1
-    if (usersSarovi < 100) {
-      print('STATE 1');
-      print('Transfer after 100 SAR');
-
-      btnText = 'Transfer after 100 SAR';
-    } else
-
-    /// State 2
-    if (usersSarovi >= 100) {
-      print('STATE 2');
-      print('SAROVI SU VEĆI OD 100');
-      if (profileAnonym == 0) {
-        print('USER NIJE ANONIMNI');
-        if (controllerName.text == null ||
-            controllerDate.text == null ||
-            controllerEmail.text == null ||
-            controllerCreditCard.text == null ||
-            controllerDOB.text == null ||
-            controllerCC.text == null ||
-            controllerName.text == '' ||
-            controllerDate.text == '' ||
-            controllerEmail.text == '' ||
-            controllerCreditCard.text == '' ||
-            controllerDOB.text == '' ||
-            controllerCC.text == '') {
-          print('POLJA SU PRAZNA');
-          btnText = 'Complete profile';
-        }
-      } else {
-        print('USER JE ANONIMNI');
-        print('HAHAHAHAAAAAAAAAAAAAAAAAAA');
-        btnText = 'Register';
-      }
-    } else
-
-    /// State 3
-    if (usersSarovi >= 100 && profileAnonym == 0) {
-      if (controllerName.text != null &&
-          controllerDate.text != null &&
-          controllerEmail.text != null &&
-          controllerCreditCard.text != null &&
-          controllerDOB.text != null &&
-          controllerCC.text != null &&
-          controllerName.text != '' &&
-          controllerDate.text != '' &&
-          controllerEmail.text != '' &&
-          controllerCreditCard.text != '' &&
-          controllerDOB.text != '' &&
-          controllerCC.text != '') {
-        print('STATE 3');
-        btnText = 'Transfer';
-      }
-    }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -218,9 +163,7 @@ class _ProfileState extends State<Profile> {
                           usersSarovi = snapshot.data[index].data['sar'];
                           profileAnonym =
                               snapshot.data[index].data['is_anonymous'];
-                          print(
-                              usersSarovi.toString() + 'QEWQEWQEWQEWQEWQEWQE');
-                          settingStates();
+                         
                           return EmptyContainer();
                         });
                   }
@@ -570,7 +513,6 @@ class _ProfileState extends State<Profile> {
     cc = controllerCC.text;
     FocusScope.of(context).requestFocus(new FocusNode());
 
-    print('TEXT JE: + ' + btnText);
 
     if (name == '') {
       setState(() {
@@ -645,23 +587,18 @@ class _ProfileState extends State<Profile> {
           'Your CC is : ' +
           cc);
 
-      print('TEXT JE: + ' + btnText);
-      if (btnText == 'Register') {
-        userRegister();
-      } else if (btnText == 'Complete profile') {
+      print('TEXT JE: + ' + widget.btnText);
+      if (widget.btnText == 'Register') {
+        FirebaseCrud().userRegister(context, widget.arguments.username);
+      } else if (widget.btnText == 'Complete profile') {
         completeProfile();
-      } else if (btnText == 'Transfer') {
+      } else if (widget.btnText == 'Transfer') {
         transferSAR();
       }
     }
   }
 
-  /// Metoda koja se poziva na klik button-a kada na njemu piše 'Register'
-  userRegister() {
-    Navigator.of(context).pushNamed(Register,
-        arguments:
-            DidntRecievePinArguments(username: widget.arguments.username));
-  }
+ 
 
   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
   completeProfile() {
@@ -673,7 +610,9 @@ class _ProfileState extends State<Profile> {
         controllerCreditCard.text,
         controllerDate.text,
         controllerCC.text,
-        usersSars);
+        usersSarovi,
+        0,
+        );
     setState(() {
       btnText = 'Transfer';
     });
@@ -688,7 +627,8 @@ class _ProfileState extends State<Profile> {
         controllerCreditCard.text,
         controllerDate.text,
         controllerCC.text,
-        0);
+        0,
+        usersSarovi);
     setState(() {
       btnText = 'Transfer after 100';
     });
@@ -707,7 +647,7 @@ class _ProfileState extends State<Profile> {
             color: MyColor().white),
         child: RaisedButton(
             color: MyColor().black,
-            elevation: 0,
+            elevation: 1,
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(28.0),
             ),

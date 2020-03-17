@@ -12,6 +12,7 @@
 /// Feb, 2020
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:random_string/random_string.dart';
@@ -61,7 +62,7 @@ class FirebaseCrud {
   }
 
   updateUserOnCompletePRofile(DocumentSnapshot doc, String nameSurname, String dateOfBirth, String email,
-      String cardNumber, String expireDate, String cc, int sar) async {
+      String cardNumber, String expireDate, String cc, int sar, int tSar) async {
     await db.collection('Users').document(doc.documentID).updateData({
       'email': email,
       'name_and_surname': nameSurname,
@@ -69,7 +70,8 @@ class FirebaseCrud {
       'card_number': cardNumber,
       'expire_date': expireDate,
       'cc': cc,
-      'sar': sar
+      'sar': sar,
+      'transferSar': tSar 
     });
   }  
 
@@ -153,6 +155,11 @@ class FirebaseCrud {
     });
   }
   
-  
+   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Register'
+  userRegister(BuildContext context, String username) {
+    Navigator.of(context).pushNamed(Register,
+        arguments:
+            DidntRecievePinArguments(username: username));
+  }
 
 }
