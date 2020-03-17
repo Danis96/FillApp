@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/profileComponents/languageChoose.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
@@ -53,6 +54,7 @@ var maskTextInputFormatterCard =
     MaskTextInputFormatter(mask: '####-####-####-####');
 var maskTextInputFormatterDate = MaskTextInputFormatter(mask: '##/##');
 var maskTextInputFormatterCC = MaskTextInputFormatter(mask: '###');
+var maskTextInputFormatterDOB = MaskTextInputFormatter(mask: '##.##.####.');
 
 String name, dateOfBirth, email, creditCard, date, cc;
 Key key = UniqueKey();
@@ -68,14 +70,15 @@ DocumentSnapshot snap;
 
 class _ProfileState extends State<Profile> {
   int usersSarovi, profileAnonym;
+  bool emailPostoji = false;
   DateTime dateOfBirth2 = DateTime.now();
+
 
   @override
   void initState() {
     super.initState();
     checkForInternet();
     FirebaseCheck().getUserUsername(widget.arguments.username);
-    print('BILDAO SSAAAAAAAAAAAAAAAAAAAMMMMMMMM');
   }
 
   checkForInternet() async {
@@ -88,8 +91,6 @@ class _ProfileState extends State<Profile> {
       isSar = true;
     }
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +167,7 @@ class _ProfileState extends State<Profile> {
                           usersSarovi = snapshot.data[index].data['sar'];
                           profileAnonym =
                               snapshot.data[index].data['is_anonymous'];
-                         
+
                           return EmptyContainer();
                         });
                   }
@@ -203,6 +204,7 @@ class _ProfileState extends State<Profile> {
                 child: TextFormField(
                   maxLength: 200,
                   enableSuggestions: false,
+                  textCapitalization: TextCapitalization.sentences,
                   style: TextStyle(color: Colors.black),
                   controller: controllerName,
                   decoration: InputDecoration(
@@ -274,16 +276,6 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ));
                         });
-                    // print(dateOfBirth);
-                    // CupertinoDatePicker(
-                    //   initialDateTime: dateOfBirth2,
-                    //   onDateTimeChanged: (date) {
-                    //     setState(() {
-                    //       dateOfBirth2 = date;
-                    //     });
-                    //     print('Datum odabrani' + dateOfBirth2.toString());
-                    //   },
-                    // );
                   },
                   maxLength: 200,
                   enableSuggestions: false,
@@ -369,6 +361,11 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
+                  onChanged: (input) {
+                    setState(() {
+                      email = input;
+                    });
+                  },
                   obscureText: false,
                 ),
               ),
@@ -536,6 +533,25 @@ class _ProfileState extends State<Profile> {
               Container(
                 child: btnProfile(),
               ),
+              Column(
+                children: <Widget>[
+                  FutureBuilder(
+                    future: FirebaseCheck().doesEmailAlreadyExist(email),
+                    builder: (context, AsyncSnapshot<bool> result) {
+                      if (!result.hasData) {
+                        return EmptyContainer();
+                      }
+                      if (result.data) {
+                        emailPostoji = true;
+                        return EmptyContainer();
+                      } else {
+                        emailPostoji = false;
+                        return EmptyContainer();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ],
           )),
         ]),
@@ -552,7 +568,6 @@ class _ProfileState extends State<Profile> {
     cc = controllerCC.text;
     FocusScope.of(context).requestFocus(new FocusNode());
 
-
     if (name == '') {
       setState(() {
         isEmptyName = true;
@@ -566,6 +581,16 @@ class _ProfileState extends State<Profile> {
       setState(() {
         isEmptyMail = true;
       });
+      Timer(Duration(seconds: 2), () {
+        setState(() {
+          isEmptyMail = false;
+        });
+      });
+    } else if (emailPostoji) {
+      setState(() {
+        isEmptyMail = true;
+      });
+      MySnackbar().showSnackbar('Email already exists', context, 'Undo');
       Timer(Duration(seconds: 2), () {
         setState(() {
           isEmptyMail = false;
@@ -637,21 +662,19 @@ class _ProfileState extends State<Profile> {
     }
   }
 
- 
-
   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
   completeProfile() {
     FirebaseCrud().updateUserOnCompletePRofile(
-        snap,
-        controllerName.text,
-        controllerDOB.text,
-        controllerEmail.text,
-        controllerCreditCard.text,
-        controllerDate.text,
-        controllerCC.text,
-        usersSarovi,
-        0,
-        );
+      snap,
+      controllerName.text,
+      controllerDOB.text,
+      controllerEmail.text,
+      controllerCreditCard.text,
+      controllerDate.text,
+      controllerCC.text,
+      usersSarovi,
+      0,
+    );
     setState(() {
       btnText = 'Transfer';
     });
