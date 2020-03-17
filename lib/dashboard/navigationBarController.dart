@@ -110,6 +110,7 @@ class _BottomNavigationBarControllerState
         btnText = 'Transfer after 100 SAR';
       });
     } else
+
     /// State 2
     if (usersSars >= 100) {
       if (isAnonymous == 0) {
@@ -122,24 +123,12 @@ class _BottomNavigationBarControllerState
         });
       }
     } else
+
     /// State 3
     if (usersSars >= 100 && isAnonymous == 0) {
-      if (controllerName.text != null &&
-          controllerDate.text != null &&
-          controllerEmail.text != null &&
-          controllerCreditCard.text != null &&
-          controllerDOB.text != null &&
-          controllerCC.text != null &&
-          controllerName.text != '' &&
-          controllerDate.text != '' &&
-          controllerEmail.text != '' &&
-          controllerCreditCard.text != '' &&
-          controllerDOB.text != '' &&
-          controllerCC.text != '') {
-        setState(() {
-          btnText = 'Transfer';
-        });
-      }
+      setState(() {
+        btnText = 'Transfer';
+      });
     }
   }
 

@@ -276,16 +276,6 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ));
                         });
-                    // print(dateOfBirth);
-                    // CupertinoDatePicker(
-                    //   initialDateTime: dateOfBirth2,
-                    //   onDateTimeChanged: (date) {
-                    //     setState(() {
-                    //       dateOfBirth2 = date;
-                    //     });
-                    //     print('Datum odabrani' + dateOfBirth2.toString());
-                    //   },
-                    // );
                   },
                   maxLength: 200,
                   enableSuggestions: false,
