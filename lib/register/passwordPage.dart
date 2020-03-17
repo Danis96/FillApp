@@ -28,10 +28,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../components/emptyCont.dart';
 import '../firebaseMethods/firebaseCheck.dart';
-// import 'package:url_launcher/url_launcher.dart';
 
 String password, username = "";
 int _btnCounter = 0, isAnonymous, oldSar;
@@ -199,7 +198,7 @@ class _PasswordPageState extends State<PasswordPage> {
                               ..onTap = () {
                                 _save();
 
-                                //  launch('https://google.com');
+                                launch('https://google.com');
                               }),
                         new TextSpan(
                           text: MyText().passwordSubtitle2,
@@ -217,7 +216,7 @@ class _PasswordPageState extends State<PasswordPage> {
                               ..onTap = () {
                                 _save();
 
-                                //  launch('https://google.com');
+                                launch('https://google.com');
                               })
                       ]),
                     ),
