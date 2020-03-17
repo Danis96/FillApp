@@ -79,21 +79,6 @@ On back, user is asked with a Dialog Box if he is sure about exiting the survey.
 	User story 3 - fixing bugs from previous sprint's US 4<br/>
 	Bugs that had to be fixed were: Range error, Filter question according to target, Filter question according to level, White spave at the beginning and end of scroll, Layout of choices, Yes/No choices' color of Flash Question after anyof the Surveys is completed.<br/><br/>*
 	User story 4 - implementation of Summary Page<br/>
-	Vertical scroll of Survey Cards is implemented. When user clicks on a card, he is redirected to Question List which my contain following types of questions:<br/>
-		1. Yes/No Question - these questions may be branching, which means if user clicks on a specific answer, he will be redirected back to Survey List and that survey will be completed for him; <br/>
-		2. Multiple Choice Question - with three or four answers, and with single or multiple selectable answers; <br/>
-		3. Choose Image Question - with single or multiple selectable answers;<br/>
-		4. Input Answer Question; <br/>
-		5. Choose Date Question.<br/>
-When user answers last question, he is redirected back to Survey List and that Survey gets status 'Completed' and becomes white, so the user won't be able to enter that survey anymore.
-On back, user is asked with a Dialog Box if he is sure about exiting the survey. If he confirms the exit, the number of answered questions of the survey will be saved, and when user enters that survey next time, he will continue answering from where he left last time.<br/><br/>*
+	After last question of a Survey, user is redirected to Summary page where his progress is 100%, where he can see how much SARs he got and the list of all questions of the Survey. The question are clickable. When user clicks on a question, he/she is redirected to that question where he/she can only preview his answer, there is no possibility to change the answer. When back is clicked while previewing the answer, redirection to Summary page is made. From Summary, back leads to Survey List.<br/><br/>*
 	User story 5 - implementation of Profile Page<br/>
-	Vertical scroll of Survey Cards is implemented. When user clicks on a card, he is redirected to Question List which my contain following types of questions:<br/>
-		1. Yes/No Question - these questions may be branching, which means if user clicks on a specific answer, he will be redirected back to Survey List and that survey will be completed for him; <br/>
-		2. Multiple Choice Question - with three or four answers, and with single or multiple selectable answers; <br/>
-		3. Choose Image Question - with single or multiple selectable answers;<br/>
-		4. Input Answer Question; <br/>
-		5. Choose Date Question.<br/>
-When user answers last question, he is redirected back to Survey List and that Survey gets status 'Completed' and becomes white, so the user won't be able to enter that survey anymore.
-On back, user is asked with a Dialog Box if he is sure about exiting the survey. If he confirms the exit, the number of answered questions of the survey will be saved, and when user enters that survey next time, he will continue answering from where he left last time.<br/><br/>*
-
+	
