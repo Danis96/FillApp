@@ -54,7 +54,7 @@ Very proud on team 2.
 	User story 4 - fixing bugs from previous sprint's US 4<br/>
 	Bugs that had to be fixed were: No internet, Auto-login, and Back button.<br/>
 
-**•	V4 – Sprint 4 - (10.03.2020. - 17.03.2020.)<br/>** *
+**•	V4 – Sprint 4 - (03.03.2020. - 10.03.2020.)<br/>** *
 	User story 1 - fixing bugs from previous sprint's US 1<br/>
 	Bugs that had to be fixed were: Text fields' layout, Skip button's layout on Home Page, and repeating text on input in email input text field.<br/><br/>*
 	User story 2 - fixing bugs from previous sprint's US 2<br/>
@@ -71,7 +71,7 @@ Very proud on team 2.
 When user answers last question, he is redirected back to Survey List and that Survey gets status 'Completed' and becomes white, so the user won't be able to enter that survey anymore.
 On back, user is asked with a Dialog Box if he is sure about exiting the survey. If he confirms the exit, the number of answered questions of the survey will be saved, and when user enters that survey next time, he will continue answering from where he left last time.
 
-**•	V5 – Sprint 5 - (03.03.2020. - 10.03.2020.)<br/>** *
+**•	V5 – Sprint 5 - (10.03.2020. - 17.03.2020.)<br/>** *
 	User story 1 - fixing bugs from previous sprint's US 2<br/>
 	Bugs that had to be fixed were: Range error on Flash Questions.<br/><br/>*
 	User story 2 - fixing bugs from previous sprint's US 3<br/>
@@ -81,4 +81,11 @@ On back, user is asked with a Dialog Box if he is sure about exiting the survey.
 	User story 4 - implementation of Summary Page<br/>
 	After last question of a Survey, user is redirected to Summary page where his progress is 100%, where he can see how much SARs he got and the list of all questions of the Survey. The question are clickable. When user clicks on a question, he/she is redirected to that question where he/she can only preview his answer, there is no possibility to change the answer. When back is clicked while previewing the answer, redirection to Summary page is made. From Summary, back leads to Survey List.<br/><br/>*
 	User story 5 - implementation of Profile Page<br/>
-	
+	On Profile Page, user can preview his current cash balance and his profile info, if he has entered that info before. If not, the fields are empty. From here, anonym user can make registration, registered user can complete his profile, and registered user can make transfer.<br/>
+	There are six different states on this page:<br/>
+	1. Anonymous user - No enough SAR - Profile not completed<br/>
+	2. Anonymous user - Enough SAR - Profile not completed<br/>
+	3. Registered user - Enough SAR - Profile not completed<br/>
+	4. Registered user - No enough SAR - Profile not completed<br/>
+	5. Registered user - Enough SAR - Profile completed<br/>
+	6. Registered user - No enough SAR - Profile completed<br/>
