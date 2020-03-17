@@ -52,8 +52,6 @@ class _BottomNavigationBarControllerState
   final PasswordArguments arguments;
   _BottomNavigationBarControllerState({Key key, this.arguments});
 
-
-
   Widget doesUserExist(String username) {
     return Container(
       height: 0,
@@ -90,7 +88,7 @@ class _BottomNavigationBarControllerState
               itemBuilder: (context, index) {
                 snap = snapshot.data[index];
                 isAnonymous = snap.data['is_anonymous'];
-                // usersSars = snap.data['sar'];
+                usersSars = snap.data['sar'];
                 // usersName = snap.data['name_and_surname'];
                 // usersDOB = snap.data['date_of_birth'];
                 // usersEmail = snap.data['email'];
@@ -103,6 +101,46 @@ class _BottomNavigationBarControllerState
         return EmptyContainer();
       },
     );
+  }
+
+  settingStates() {
+    /// State 1
+    if (usersSars < 100) {
+      setState(() {
+        btnText = 'Transfer after 100 SAR';
+      });
+    } else
+    /// State 2
+    if (usersSars >= 100) {
+      if (isAnonymous == 0) {
+        setState(() {
+          btnText = 'Complete profile';
+        });
+      } else {
+        setState(() {
+          btnText = 'Register';
+        });
+      }
+    } else
+    /// State 3
+    if (usersSars >= 100 && isAnonymous == 0) {
+      if (controllerName.text != null &&
+          controllerDate.text != null &&
+          controllerEmail.text != null &&
+          controllerCreditCard.text != null &&
+          controllerDOB.text != null &&
+          controllerCC.text != null &&
+          controllerName.text != '' &&
+          controllerDate.text != '' &&
+          controllerEmail.text != '' &&
+          controllerCreditCard.text != '' &&
+          controllerDOB.text != '' &&
+          controllerCC.text != '') {
+        setState(() {
+          btnText = 'Transfer';
+        });
+      }
+    }
   }
 
   List<Widget> pages() => [
@@ -121,12 +159,13 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
+            btnText: btnText,
             arguments: PasswordArguments(
-          email: arguments.email,
-          password: arguments.password,
-          phone: arguments.phone,
-          username: arguments.username,
-        )),
+              email: arguments.email,
+              password: arguments.password,
+              phone: arguments.phone,
+              username: arguments.username,
+            )),
         getIsAnonymous(arguments.username),
       ];
 
@@ -150,6 +189,7 @@ class _BottomNavigationBarControllerState
 
   void onTap(int index) {
     Timer(Duration(milliseconds: 600), () {
+      settingStates();
       setState(() {
         currentIndex = index;
       });
@@ -184,26 +224,25 @@ class _BottomNavigationBarControllerState
           showSelectedLabels: false,
           showUnselectedLabels: false,
           items: [
-    BottomNavigationBarItem(
-      icon: isTab1Selected
-          ? ImageIcon(AssetImage(imageTab1))
-          : ImageIcon(AssetImage(imageTab1)),
-      title: Text(''),
-    ),
-    BottomNavigationBarItem(
-      icon: isTab2Selected
-          ? ImageIcon(AssetImage(imageTab2))
-          : ImageIcon(AssetImage(imageTab2)),
-      title: Text(''),
-    ),
-    BottomNavigationBarItem(icon: Icon(Icons.account_circle), title: Text(''))
-  ],
+            BottomNavigationBarItem(
+              icon: isTab1Selected
+                  ? ImageIcon(AssetImage(imageTab1))
+                  : ImageIcon(AssetImage(imageTab1)),
+              title: Text(''),
+            ),
+            BottomNavigationBarItem(
+              icon: isTab2Selected
+                  ? ImageIcon(AssetImage(imageTab2))
+                  : ImageIcon(AssetImage(imageTab2)),
+              title: Text(''),
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.account_circle), title: Text(''))
+          ],
           currentIndex: currentIndex,
           onTap: (currentIndex) {
-               setState(() {
-                 
-               });
-               onTap(currentIndex);
+            setState(() {});
+            onTap(currentIndex);
           }),
       body: isLoading
           ? Center(
@@ -243,8 +282,6 @@ class _BottomNavigationBarControllerState
       ),
     );
   }
-
-  
 
   /// function for loader
   ///
