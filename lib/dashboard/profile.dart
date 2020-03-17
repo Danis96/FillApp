@@ -9,9 +9,11 @@ import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeConstants.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import '../routes/routeArguments.dart';
 
 /// Profile class
@@ -39,7 +41,7 @@ RegExp regexEmail = new RegExp(
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
 TextEditingController controllerName = TextEditingController(text: name);
-TextEditingController controllerDOB = TextEditingController(text: usersDOB);
+TextEditingController controllerDOB = TextEditingController(text: dateOfBirth);
 TextEditingController controllerEmail = TextEditingController(text: usersEmail);
 TextEditingController controllerCreditCard =
     TextEditingController(text: usersCard);
@@ -66,6 +68,7 @@ DocumentSnapshot snap;
 
 class _ProfileState extends State<Profile> {
   int usersSarovi, profileAnonym;
+  DateTime dateOfBirth2 = DateTime.now();
 
   @override
   void initState() {
@@ -246,6 +249,42 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
+                  readOnly: true,
+                  onTap: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return GestureDetector(
+                              onTap: () {
+                                 print(dateOfBirth);
+                                 controllerDOB.text = dateOfBirth;
+                                 Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                height: ScreenUtil.instance.setHeight(265.0),
+                                child: CupertinoDatePicker(
+                                  mode: CupertinoDatePickerMode.date,
+                                  initialDateTime: dateOfBirth2,
+                                  onDateTimeChanged: (date) {
+                                    dateOfBirth2 = date;
+                                    // dateOfBirth = DateFormat('dd-MM-yyyy').format(dateOfBirth2);
+                                    dateOfBirth = DateFormat.yMd().format(dateOfBirth2); 
+                                   
+                                  },
+                                ),
+                              ));
+                        });
+                    // print(dateOfBirth);
+                    // CupertinoDatePicker(
+                    //   initialDateTime: dateOfBirth2,
+                    //   onDateTimeChanged: (date) {
+                    //     setState(() {
+                    //       dateOfBirth2 = date;
+                    //     });
+                    //     print('Datum odabrani' + dateOfBirth2.toString());
+                    //   },
+                    // );
+                  },
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
