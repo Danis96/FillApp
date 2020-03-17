@@ -54,7 +54,7 @@ Very proud on team 2.
 	User story 4 - fixing bugs from previous sprint's US 4<br/>
 	Bugs that had to be fixed were: No internet, Auto-login, and Back button.<br/>
 
-**•	V4 – Sprint 4 - (03.03.2020. - 10.03.2020.)<br/>** *
+**•	V4 – Sprint 4 - (10.03.2020. - 17.03.2020.)<br/>** *
 	User story 1 - fixing bugs from previous sprint's US 1<br/>
 	Bugs that had to be fixed were: Text fields' layout, Skip button's layout on Home Page, and repeating text on input in email input text field.<br/><br/>*
 	User story 2 - fixing bugs from previous sprint's US 2<br/>
@@ -70,3 +70,30 @@ Very proud on team 2.
 		5. Choose Date Question.<br/>
 When user answers last question, he is redirected back to Survey List and that Survey gets status 'Completed' and becomes white, so the user won't be able to enter that survey anymore.
 On back, user is asked with a Dialog Box if he is sure about exiting the survey. If he confirms the exit, the number of answered questions of the survey will be saved, and when user enters that survey next time, he will continue answering from where he left last time.
+
+**•	V5 – Sprint 5 - (03.03.2020. - 10.03.2020.)<br/>** *
+	User story 1 - fixing bugs from previous sprint's US 2<br/>
+	Bugs that had to be fixed were: Range error on Flash Questions.<br/><br/>*
+	User story 2 - fixing bugs from previous sprint's US 3<br/>
+	Bugs that had to be fixed were: On skip, sometimes user was not written to database and after that the app was full of bugs. After skip, existance of that user in databse was checked and if the user was not written to database, there is a way to write register the user in database<br/><br/>*
+	User story 3 - fixing bugs from previous sprint's US 4<br/>
+	Bugs that had to be fixed were: Range error, Filter question according to target, Filter question according to level, White spave at the beginning and end of scroll, Layout of choices, Yes/No choices' color of Flash Question after anyof the Surveys is completed.<br/><br/>*
+	User story 4 - implementation of Summary Page<br/>
+	Vertical scroll of Survey Cards is implemented. When user clicks on a card, he is redirected to Question List which my contain following types of questions:<br/>
+		1. Yes/No Question - these questions may be branching, which means if user clicks on a specific answer, he will be redirected back to Survey List and that survey will be completed for him; <br/>
+		2. Multiple Choice Question - with three or four answers, and with single or multiple selectable answers; <br/>
+		3. Choose Image Question - with single or multiple selectable answers;<br/>
+		4. Input Answer Question; <br/>
+		5. Choose Date Question.<br/>
+When user answers last question, he is redirected back to Survey List and that Survey gets status 'Completed' and becomes white, so the user won't be able to enter that survey anymore.
+On back, user is asked with a Dialog Box if he is sure about exiting the survey. If he confirms the exit, the number of answered questions of the survey will be saved, and when user enters that survey next time, he will continue answering from where he left last time.<br/><br/>*
+	User story 5 - implementation of Profile Page<br/>
+	Vertical scroll of Survey Cards is implemented. When user clicks on a card, he is redirected to Question List which my contain following types of questions:<br/>
+		1. Yes/No Question - these questions may be branching, which means if user clicks on a specific answer, he will be redirected back to Survey List and that survey will be completed for him; <br/>
+		2. Multiple Choice Question - with three or four answers, and with single or multiple selectable answers; <br/>
+		3. Choose Image Question - with single or multiple selectable answers;<br/>
+		4. Input Answer Question; <br/>
+		5. Choose Date Question.<br/>
+When user answers last question, he is redirected back to Survey List and that Survey gets status 'Completed' and becomes white, so the user won't be able to enter that survey anymore.
+On back, user is asked with a Dialog Box if he is sure about exiting the survey. If he confirms the exit, the number of answered questions of the survey will be saved, and when user enters that survey next time, he will continue answering from where he left last time.<br/><br/>*
+
