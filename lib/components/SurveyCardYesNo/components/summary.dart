@@ -75,6 +75,12 @@ class _SummaryState extends State<Summary> {
 
   @override
   Widget build(BuildContext context) {
+    if (isFutureDone == false) {
+      print('IZVRŠAVAM ISFUTUREDONE');
+      setState(() {
+        isFutureDone = true;
+      });
+    }
     Constant().responsive(context);
     //OVDJE PRAZNIM LISTU KADA PONOVO DODJEM NA SUMMARY KAKO NE BI MIJEŠAO ODGOVORE OD RANIJIH SRUVEYA
     answersList.removeRange(0, answersList.length);
@@ -89,7 +95,7 @@ class _SummaryState extends State<Summary> {
         // // /// usernameSecond treba
         //if (answersList == []) {
         // OVDJE NA OSNOVU USERNAME IZVLACIM ODGOVORE I SMJESTAM IH U LISTU KOJU PRINTAM
-        if (userAnswersSplitted[2] == widget.arguments.username) {
+        if (userAnswersSplitted[2] == currentUsername) {
           //print(answers[i]);
           answersList.add(userAnswersSplitted[1]);
         }
@@ -123,8 +129,7 @@ class _SummaryState extends State<Summary> {
                                 print(surveyGroupName);
                                 print(snapi[index].name);
                                 // OVDJE PROVJERAVAM DA LI JE TO SURVEY NA KOJEM SAM I AKO JEST UZIMAM TU LISTU
-                                if (surveyGroupName ==
-                                    snapi[index].name) {
+                                if (surveyGroupName == snapi[index].name) {
                                   //print('Nasao sam pravi survey!!!!!!!!!!');
                                   // print(snapi[index].name);
                                   // print(snapi[index].usersAnswers);
@@ -143,14 +148,14 @@ class _SummaryState extends State<Summary> {
                       }),
                 ),
                 SurveyAppBar(
-                    percent: 1,
-                    arguments: widget.arguments,
-                    totalProgress: widget.totalProgress,
-                    surveyDoc: widget.surveyDoc,
-                    answersList: answersList,
-                    // OVDJE SAM PROSLIJEĐIVO TAJ NAME U APPBAR
-                    //surveyName: widget.surveyDoc.name
-                    ),
+                  percent: 1,
+                  arguments: widget.arguments,
+                  totalProgress: widget.totalProgress,
+                  surveyDoc: widget.surveyDoc,
+                  answersList: answersList,
+                  // OVDJE SAM PROSLIJEĐIVO TAJ NAME U APPBAR
+                  //surveyName: widget.surveyDoc.name
+                ),
                 Padding(
                   padding: EdgeInsets.only(
                       left: ScreenUtil.instance.setWidth(25.0),
@@ -237,6 +242,7 @@ class _SummaryState extends State<Summary> {
     answersList.removeRange(0, answersList.length);
     setState(() {
       isOnSummary = false;
+      isFutureDone = false;
     });
     return Navigator.of(context).pop() ?? true;
   }

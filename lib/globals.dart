@@ -16,4 +16,6 @@ int anonym;
 bool isSummary = false;
 bool isOnSummary = false;
 String btnText = '';
-String surveyGroupName = '';
+String surveyGroupName = '', currentUsername = '';
+bool isFutureDone = false;
+List<dynamic> answersFromSummary;

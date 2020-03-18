@@ -55,6 +55,7 @@ class SurveyAppBar extends StatelessWidget {
                               phone: arguments.phone,
                               username: arguments.username));
                       isOnSummary = false;
+                      isFutureDone = false;
                       answersList.removeRange(0, answersList.length);
                     }()
                   : isSummary

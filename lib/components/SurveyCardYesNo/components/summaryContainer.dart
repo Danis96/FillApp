@@ -58,6 +58,10 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
   }
 
   onPressed() {
+    print(widget.answersList[widget.index]);
+    String answersFromSummaryString = widget.answersList[widget.index];
+    answersFromSummary = answersFromSummaryString.split(', ');
+    print(answersFromSummary);
     isSummary = true;
     isOnSummary = false;
     widget.animateTo(widget.index);

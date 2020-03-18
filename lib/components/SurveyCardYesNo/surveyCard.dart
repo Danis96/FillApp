@@ -163,6 +163,7 @@ class _YesNoSurveyState extends State<SurveyCard>
       widget.isCompleted();
       //OVDJE DAJEM GLOBALNOJ VARIJABLI VRIJEDNOST - IME SURVEYA
       surveyGroupName = widget.surveyDoc.name;
+      currentUsername = widget.arguments.username;
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
           widget.doc, context, widget.username);
       Navigator.of(context).push(MaterialPageRoute(
