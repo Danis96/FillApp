@@ -63,7 +63,13 @@ class _SummaryState extends State<Summary> {
 
   @override
   Widget build(BuildContext context) {
-    Constant().responsive(context);
+    double defaultScreenWidth = 400.0;
+    double defaultScreenHeight = 810.0;
+    ScreenUtil.instance = ScreenUtil(
+      width: defaultScreenWidth,
+      height: defaultScreenHeight,
+      allowFontScaling: true,
+    )..init(context);
     return Scaffold(
       backgroundColor: MyColor().black,
       body: Builder(
