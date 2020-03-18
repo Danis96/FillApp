@@ -50,7 +50,7 @@ class SurveyAppBar extends StatelessWidget {
                     }()
                   : isSummary
                       ? Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => Summary(
+                          builder: (_) => Summary(  
                                 animateTo: animateTo,
                                 questions: questions,
                                 totalProgress: totalProgress,

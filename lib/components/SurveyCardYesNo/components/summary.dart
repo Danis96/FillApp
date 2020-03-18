@@ -72,47 +72,7 @@ class _SummaryState extends State<Summary> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                // Container(
-                //   child: FutureBuilder(
-                //     future: FirebaseCheck().getSurveyGroups(userLevel),
-                //     builder: (BuildContext context, AsyncSnapshot snapshot) {
-                //       if (snapshot.hasData) {
-                //         answers = snapshot.data
-                //             .map((doc) => UsernameAnswers.fromDocument(doc))
-                //             .toList();
 
-                //         return ListView.builder(
-                //           shrinkWrap: true,
-                //           itemCount: answers.length,
-                //           itemBuilder: (BuildContext context, int indexx) {
-                //             usernameAns = answers[indexx].usernameAnswers;
-
-                //             var userAnswers;
-                //             var userAnswersSplitted;
-                //             var usernameThatAnswers;
-
-                //               for (var i = 0; i < usernameAns.length; i++) {
-                //                 userAnswers = usernameAns[i].toString();
-                //                 userAnswersSplitted = userAnswers.split(' : ');
-                //                 usernameThatAnswers = userAnswersSplitted[2];
-                //                 // /// usernameSecond treba
-
-                //                 if (userAnswersSplitted[2] ==
-                //                     widget.arguments.username) {
-                //                   answersList.add(userAnswersSplitted[1]);
-                //                   print('OVO SU ODGOVORI ' + answersList.toString());
-                //                 }
-                //               }
-                            
-
-                //             return EmptyContainer();
-                //           },
-                //         );
-                //       }
-                //       return EmptyContainer();
-                //     },
-                //   ),
-                // ),
                 SurveyAppBar(
                   percent: 1,
                   arguments: widget.arguments,
