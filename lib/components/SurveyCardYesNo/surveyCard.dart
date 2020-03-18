@@ -13,6 +13,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,6 +37,7 @@ class SurveyCard extends StatefulWidget {
   final Function increaseAnswered;
   final Function notifyParent;
   final String summaryCtrl;
+  final Survey surveyDoc;
   var user;
   SurveyCard({
     this.arguments,
@@ -54,6 +56,7 @@ class SurveyCard extends StatefulWidget {
     this.summaryCtrl,
     this.userLevel,
     this.usernameAnswers,
+    this.surveyDoc
   });
 
   @override
@@ -68,6 +71,7 @@ class _YesNoSurveyState extends State<SurveyCard>
   @override
   void initState() {
     super.initState();
+    print(widget.surveyDoc.name);
     _controller = PageController(keepPage: true, initialPage: widget.number);
   }
 
@@ -157,11 +161,14 @@ class _YesNoSurveyState extends State<SurveyCard>
         FirebaseCrud().updateUsersSars(widget.userDoc, context, widget.userSar);
       }
       widget.isCompleted();
+      //OVDJE DAJEM GLOBALNOJ VARIJABLI VRIJEDNOST - IME SURVEYA
+      surveyGroupName = widget.surveyDoc.name;
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
           widget.doc, context, widget.username);
       Navigator.of(context).push(MaterialPageRoute(
           builder: (_) => Summary(
-                // usernameAnswers: usernameAnswers,
+            surveyDoc: widget.surveyDoc,
+                doc: widget.doc,
                 userLevel: widget.userLevel,
                 questions: widget.snapQuestions,
                 totalSar: widget.sarSurvey,
@@ -197,6 +204,8 @@ class _YesNoSurveyState extends State<SurveyCard>
     return isSummary
         ? Navigator.of(context).push(MaterialPageRoute(
             builder: (_) => Summary(
+              userLevel: widget.userLevel,
+              surveyDoc: widget.surveyDoc,
                   animateTo: summaryAnimateToPpage,
                   questions: widget.snapQuestions,
                   totalProgress: widget.total,

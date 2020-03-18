@@ -16,3 +16,4 @@ int anonym;
 bool isSummary = false;
 bool isOnSummary = false;
 String btnText = '';
+String surveyGroupName = '';

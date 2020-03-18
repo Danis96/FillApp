@@ -1,6 +1,7 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,7 +10,8 @@ class SummaryAnswerContainer extends StatefulWidget {
   final int index;
   final Function animateTo;
   final List<dynamic> answersList;
-  SummaryAnswerContainer({this.question, this.index, this.animateTo, this.answersList});
+  final Survey surveyDoc;
+  SummaryAnswerContainer({this.question, this.index, this.animateTo, this.answersList, this.surveyDoc});
 
   @override
   _SummaryAnswerContainerState createState() => _SummaryAnswerContainerState();

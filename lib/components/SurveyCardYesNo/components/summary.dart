@@ -14,6 +14,7 @@
 /// Feb, 2020
 
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/summaryContainer.dart';
 import 'package:fillproject/components/constants/myColor.dart';
@@ -21,6 +22,8 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/models/Survey/surveyModel.dart';
+import 'package:fillproject/models/Survey/usernameAnswerModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
@@ -32,16 +35,20 @@ class Summary extends StatefulWidget {
   final int totalProgress;
   final Function animateTo;
   final PasswordArguments arguments;
-  Summary({
-    this.totalSar,
-    this.questions,
-    this.totalProgress,
-    this.animateTo,
-    this.arguments,
-    this.userLevel,
-    this.usernameAnswers,
-
-  });
+  final DocumentSnapshot doc;
+  final Survey surveyDoc;
+  String surveyName;
+  Summary(
+      {this.totalSar,
+      this.questions,
+      this.totalProgress,
+      this.animateTo,
+      this.arguments,
+      this.userLevel,
+      this.usernameAnswers,
+      this.doc,
+      this.surveyDoc,
+      this.surveyName});
 
   @override
   _SummaryState createState() => _SummaryState();
@@ -50,20 +57,46 @@ class Summary extends StatefulWidget {
 String title;
 
 class _SummaryState extends State<Summary> {
+  List<dynamic> answers = [];
+  List<dynamic> usernameAns = [];
+  List<dynamic> answersList = [];
+  List<dynamic> userAnswersSplitted = [];
+  int num = 0;
+  String userAnswers, usernameThatAnswers;
+
   @override
   void initState() {
     super.initState();
     isOnSummary = true;
+    //surveyName = widget.surveyDoc.name;
+    //surveyGroupName = widget.surveyDoc.name;
+    //print(widget.surveyDoc.usersAnswers);
   }
-
-  List<dynamic> answers = [];
-  List<dynamic> usernameAns = [];
-  List<dynamic> answersList = [];
-  int num = 0;
 
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
+    //OVDJE PRAZNIM LISTU KADA PONOVO DODJEM NA SUMMARY KAKO NE BI MIJEŠAO ODGOVORE OD RANIJIH SRUVEYA
+    answersList.removeRange(0, answersList.length);
+    Timer(Duration(milliseconds: 1000), () {
+      // OVDJE LOOPAM KROZ ODGOVORE I IZVLACIM IZ NJIH USERNAME
+      for (var i = 0; i < answers.length; i++) {
+        userAnswers = answers[i].toString();
+        // //print(userAnswers);
+        userAnswersSplitted = userAnswers.split(' : ');
+        usernameThatAnswers = userAnswersSplitted[2];
+        //print(usernameThatAnswers);
+        // // /// usernameSecond treba
+        //if (answersList == []) {
+        // OVDJE NA OSNOVU USERNAME IZVLACIM ODGOVORE I SMJESTAM IH U LISTU KOJU PRINTAM
+        if (userAnswersSplitted[2] == widget.arguments.username) {
+          //print(answers[i]);
+          answersList.add(userAnswersSplitted[1]);
+        }
+        // }
+      }
+      printList();
+    });
     return Scaffold(
       backgroundColor: MyColor().black,
       body: Builder(
@@ -72,52 +105,52 @@ class _SummaryState extends State<Summary> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                // Container(
-                //   child: FutureBuilder(
-                //     future: FirebaseCheck().getSurveyGroups(userLevel),
-                //     builder: (BuildContext context, AsyncSnapshot snapshot) {
-                //       if (snapshot.hasData) {
-                //         answers = snapshot.data
-                //             .map((doc) => UsernameAnswers.fromDocument(doc))
-                //             .toList();
-
-                //         return ListView.builder(
-                //           shrinkWrap: true,
-                //           itemCount: answers.length,
-                //           itemBuilder: (BuildContext context, int indexx) {
-                //             usernameAns = answers[indexx].usernameAnswers;
-
-                //             var userAnswers;
-                //             var userAnswersSplitted;
-                //             var usernameThatAnswers;
-
-                //               for (var i = 0; i < usernameAns.length; i++) {
-                //                 userAnswers = usernameAns[i].toString();
-                //                 userAnswersSplitted = userAnswers.split(' : ');
-                //                 usernameThatAnswers = userAnswersSplitted[2];
-                //                 // /// usernameSecond treba
-
-                //                 if (userAnswersSplitted[2] ==
-                //                     widget.arguments.username) {
-                //                   answersList.add(userAnswersSplitted[1]);
-                //                   print('OVO SU ODGOVORI ' + answersList.toString());
-                //                 }
-                //               }
-                            
-
-                //             return EmptyContainer();
-                //           },
-                //         );
-                //       }
-                //       return EmptyContainer();
-                //     },
-                //   ),
-                // ),
-                SurveyAppBar(
-                  percent: 1,
-                  arguments: widget.arguments,
-                  totalProgress: widget.totalProgress,
+                Container(
+                  height: 0,
+                  width: 0,
+                  child: FutureBuilder(
+                      future: Future.delayed(Duration(milliseconds: 400)).then(
+                          (value) => FirebaseCheck()
+                              .getSurveyGroups(widget.userLevel)),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          snapi = snapshot.data
+                              .map((doc) => Survey.fromDocument(doc))
+                              .toList();
+                          return ListView.builder(
+                              itemCount: snapi.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                print(surveyGroupName);
+                                print(snapi[index].name);
+                                // OVDJE PROVJERAVAM DA LI JE TO SURVEY NA KOJEM SAM I AKO JEST UZIMAM TU LISTU
+                                if (surveyGroupName ==
+                                    snapi[index].name) {
+                                  //print('Nasao sam pravi survey!!!!!!!!!!');
+                                  // print(snapi[index].name);
+                                  // print(snapi[index].usersAnswers);
+                                  answers = snapi[index].usersAnswers;
+                                }
+                                //print(answersList);
+                                //answersList.removeRange(0, answersList.length);
+                                return EmptyContainer();
+                              });
+                        }
+                        return Center(
+                          child: Container(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }),
                 ),
+                SurveyAppBar(
+                    percent: 1,
+                    arguments: widget.arguments,
+                    totalProgress: widget.totalProgress,
+                    surveyDoc: widget.surveyDoc,
+                    answersList: answersList,
+                    // OVDJE SAM PROSLIJEĐIVO TAJ NAME U APPBAR
+                    //surveyName: widget.surveyDoc.name
+                    ),
                 Padding(
                   padding: EdgeInsets.only(
                       left: ScreenUtil.instance.setWidth(25.0),
@@ -170,7 +203,8 @@ class _SummaryState extends State<Summary> {
                         ),
                       ),
                       Container(
-                        margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(20.0)),
+                        margin: EdgeInsets.only(
+                            bottom: ScreenUtil.instance.setWidth(20.0)),
                         child: ListView.builder(
                             shrinkWrap: true,
                             physics: ClampingScrollPhysics(),
@@ -178,6 +212,7 @@ class _SummaryState extends State<Summary> {
                             itemBuilder: (BuildContext context, int index) {
                               title = widget.questions[index]['title'];
                               return SummaryAnswerContainer(
+                                surveyDoc: widget.surveyDoc,
                                 answersList: answersList,
                                 animateTo: widget.animateTo,
                                 index: index,
@@ -194,10 +229,15 @@ class _SummaryState extends State<Summary> {
     );
   }
 
+  printList() {
+    print(answersList);
+  }
+
   Future<bool> _onWillPop() async {
-      setState(() {
-        isOnSummary = false;
-      });
+    answersList.removeRange(0, answersList.length);
+    setState(() {
+      isOnSummary = false;
+    });
     return Navigator.of(context).pop() ?? true;
   }
 }

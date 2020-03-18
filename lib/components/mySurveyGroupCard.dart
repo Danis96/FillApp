@@ -23,6 +23,7 @@ import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,6 +33,7 @@ class MySurveyGroupCard extends StatefulWidget {
   final String name, username, usernameSecond;
   final int answered, total, sar, userSar, userLevel;
   final DocumentSnapshot doc, userDoc;
+  final Survey surveyDoc;
   final List<dynamic> snapQuestions, usernameFinal, userProgress, usernameAnswers;
   MySurveyGroupCard({
     this.arguments,
@@ -44,6 +46,7 @@ class MySurveyGroupCard extends StatefulWidget {
     this.username,
     this.doc,
     this.userDoc,
+    this.surveyDoc,
     this.usernameFinal,
     this.usernameSecond,
     this.userProgress,
@@ -96,7 +99,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
         if (!isCompleted) {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => SurveyCard(
-                // usernameAnswers: usernameAnswers,
+                  surveyDoc: widget.surveyDoc,
                   userLevel: userLevel,
                   notifyParent: refreshState,
                   user: user,

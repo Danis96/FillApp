@@ -140,7 +140,7 @@ class _SurveyState extends State<SurveyPage>
                           name = snapi[index].name;
                           snapQuestions = snapi[index].questions;
                           questionNumber = snapQuestions.length;
-                          
+                          Survey surveyDoc = snapi[index];
                           usernameAnswers = snapi[index].usersAnswers;
                           usernamesThatAnswers =
                               snapi[index].usersThatGaveAnswers;
@@ -149,6 +149,7 @@ class _SurveyState extends State<SurveyPage>
 
                           if (usernameFinal.length < surveyTarget) {
                             return MySurveyGroupCard(
+                              surveyDoc: surveyDoc,
                                 userSar: userSar,
                                 arguments: widget.arguments,
                                 usernameFinal: usernameFinal,
