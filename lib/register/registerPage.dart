@@ -21,8 +21,10 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/myValidation.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/home/homePage.dart';
+import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,7 +37,7 @@ import '../routes/routeArguments.dart';
 class RegisterPage extends StatefulWidget {
   final DidntRecievePinArguments arguments;
 
-  RegisterPage({this.arguments });
+  RegisterPage({this.arguments});
 
   @override
   _RegisterPageState createState() => _RegisterPageState(arguments: arguments);
@@ -46,12 +48,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
   final DidntRecievePinArguments arguments;
 
-
-  _RegisterPageState({this.arguments,});
+  _RegisterPageState({
+    this.arguments,
+  });
 
   populateReg() async {
-      usernameController.text = widget.arguments.username;
-      phoneController.text = widget.arguments.phone;
+    usernameController.text = widget.arguments.username;
+    phoneController.text = widget.arguments.phone;
   }
 
   @override
@@ -69,7 +72,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
     ScreenUtil.instance = ScreenUtil(
@@ -78,21 +80,21 @@ class _RegisterPageState extends State<RegisterPage> {
       allowFontScaling: true,
     )..init(context);
 
-
     Future<void> verifyPhone() async {
-
       final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
         this.verificationId = verId;
       };
 
       final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResend]) {
         this.verificationId = verId;
-        Navigator.of(context).pushNamed(VerifyPin,
-            arguments: RegisterArguments(
-                verId: verificationId,
-                username: usernameController.text,
-                usernameSecond: widget.arguments.username,
-                phone: phoneController.text));
+        Navigator.of(context).push(CardAnimationTween(
+          widget: VerifyPinPage(
+              arguments: RegisterArguments(
+                  verId: verificationId,
+                  username: usernameController.text,
+                  usernameSecond: widget.arguments.username,
+                  phone: phoneController.text)),
+        ));
       };
 
       final PhoneVerificationCompleted verificationSuccess =
@@ -151,13 +153,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       children: <Widget>[
                         Center(
                             child: Padding(
-                          padding: EdgeInsets.only(top: ScreenUtil.instance.setWidth(28.0)),
+                          padding: EdgeInsets.only(
+                              top: ScreenUtil.instance.setWidth(28.0)),
                           child:
                               MyTextComponent(text: MyText().registerHeadline),
                         )),
                         Center(
                             child: Padding(
-                          padding: EdgeInsets.only(top: ScreenUtil.instance.setWidth(61.0), bottom: ScreenUtil.instance.setWidth(59.0)),
+                          padding: EdgeInsets.only(
+                              top: ScreenUtil.instance.setWidth(61.0),
+                              bottom: ScreenUtil.instance.setWidth(59.0)),
                           child: Text(
                             MyText().registerSubtitle,
                             style: TextStyle(
@@ -169,10 +174,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         Container(
                           width: ScreenUtil.instance.setWidth(320.0),
                           height: ScreenUtil.instance.setHeight(92.0),
-                          margin:
-                              EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(19.0), left: ScreenUtil.instance.setWidth(49.0), right: ScreenUtil.instance.setWidth(49.0)),
+                          margin: EdgeInsets.only(
+                              bottom: ScreenUtil.instance.setWidth(19.0),
+                              left: ScreenUtil.instance.setWidth(49.0),
+                              right: ScreenUtil.instance.setWidth(49.0)),
                           child: TextFormField(
-                            
                             enableSuggestions: false,
                             textCapitalization: TextCapitalization.sentences,
                             controller: usernameController,
@@ -183,7 +189,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   inherit: true,
                                   textBaseline: TextBaseline.ideographic),
                               contentPadding: new EdgeInsets.symmetric(
-                                  vertical: ScreenUtil.instance.setWidth(25.0), horizontal: ScreenUtil.instance.setWidth(35.0)),
+                                  vertical: ScreenUtil.instance.setWidth(25.0),
+                                  horizontal:
+                                      ScreenUtil.instance.setWidth(35.0)),
                               labelText: MyText().labelUsername,
                               labelStyle: TextStyle(
                                   color: MyColor().white,
@@ -241,7 +249,10 @@ class _RegisterPageState extends State<RegisterPage> {
                         Container(
                           width: ScreenUtil.instance.setWidth(316.0),
                           height: ScreenUtil.instance.setHeight(92.0),
-                          margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(49.0), right: ScreenUtil.instance.setWidth(49.0), bottom: ScreenUtil.instance.setWidth(19.0)),
+                          margin: EdgeInsets.only(
+                              left: ScreenUtil.instance.setWidth(49.0),
+                              right: ScreenUtil.instance.setWidth(49.0),
+                              bottom: ScreenUtil.instance.setWidth(19.0)),
                           child: TextFormField(
                             enableSuggestions: false,
                             keyboardType: TextInputType.number,
@@ -249,7 +260,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             decoration: InputDecoration(
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
-                                  vertical: ScreenUtil.instance.setWidth(25.0), horizontal: ScreenUtil.instance.setWidth(35.0)),
+                                  vertical: ScreenUtil.instance.setWidth(25.0),
+                                  horizontal:
+                                      ScreenUtil.instance.setWidth(35.0)),
                               prefix: Text(
                                 "+966",
                                 style: TextStyle(color: MyColor().white),

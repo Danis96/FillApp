@@ -12,6 +12,8 @@
 /// Feb, 2020
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
+import 'package:fillproject/register/registerPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
@@ -159,9 +161,13 @@ class FirebaseCrud {
   
    /// Metoda koja se poziva na klik button-a kada na njemu piše 'Register'
   userRegister(BuildContext context, String username) {
-    Navigator.of(context).pushNamed(Register,
-        arguments:
-            DidntRecievePinArguments(username: username));
+   
+      Navigator.of(context).push(
+          CardAnimationTween(
+               widget: RegisterPage(
+                 arguments:  DidntRecievePinArguments(username: username)),
+               ),
+          );           
   }
 
 }
