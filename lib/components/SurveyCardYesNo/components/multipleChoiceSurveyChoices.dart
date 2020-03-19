@@ -54,9 +54,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   Widget build(BuildContext context) {
     String index = widget.index;
     //print(answersFromSummary.length);
-    return isSummary
-        ? EmptyContainer()
-        : Column(
+    return Column(
             children: <Widget>[
               Container(
                   key: ValueKey(widget.choice1),

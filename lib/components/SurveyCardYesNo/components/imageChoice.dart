@@ -57,9 +57,7 @@ class _ImageChoiceState extends State<ImageChoice> {
 
   @override
   Widget build(BuildContext context) {
-    return isSummary
-        ? EmptyContainer()
-        : Container(
+    return Container(
             key: ValueKey(widget.title),
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
             child: Column(
@@ -295,7 +293,7 @@ class _ImageChoiceState extends State<ImageChoice> {
                             ? null
                             : widget.isSingle == 0
                                 ? onTapSingle3()
-                                : saveMultiple4(widget.text3),
+                                : saveMultiple4(widget.text4),
                         child: Stack(
                           children: <Widget>[
                             Container(
