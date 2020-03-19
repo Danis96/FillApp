@@ -10,6 +10,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -75,7 +76,6 @@ class _YesNoSurveyState extends State<SurveyCard>
     _controller = PageController(keepPage: true, initialPage: widget.number);
   }
 
-  
   List<dynamic> answers;
 
   @override
@@ -153,6 +153,26 @@ class _YesNoSurveyState extends State<SurveyCard>
     widget.number++;
     widget.increaseAnswered();
     if (widget.number == snapQuestions.length) {
+      Navigator.of(context).push(
+        DanisAnimationTween(widget:
+          Summary(
+                  animateTo: summaryAnimateToPpage,
+                  questions: widget.snapQuestions,
+                  totalProgress: widget.total,
+                  totalSar: widget.sarSurvey,
+                )
+        ),
+
+
+        // MaterialPageRoute(
+        //     builder: (_) => Summary(
+        //           animateTo: summaryAnimateToPpage,
+        //           questions: widget.snapQuestions,
+        //           totalProgress: widget.total,
+        //           totalSar: widget.sarSurvey,
+        //         )),
+      );
+
       widget.userSar = widget.userSar + widget.sarSurvey;
       saroviOffline = saroviOffline + widget.sarSurvey;
       if (isSar) {
@@ -179,7 +199,7 @@ class _YesNoSurveyState extends State<SurveyCard>
               )));
     } else {
       _controller.nextPage(
-          duration: Duration(milliseconds: 50), curve: Curves.easeInOut);
+          duration: Duration(milliseconds: 200), curve: Curves.bounceIn);
     }
   }
 
@@ -240,8 +260,6 @@ class _YesNoSurveyState extends State<SurveyCard>
         duration: Duration(milliseconds: 200), curve: Curves.easeInOut);
   }
 
- 
-
   @override
   bool get wantKeepAlive => true;
 }
@@ -300,16 +318,16 @@ Widget yesnoWidget(
   return Column(
     children: <Widget>[
       SurveyChoices(
-          complete: isCompleted,
-          arguments: widget.arguments,
-          branching: branching,
-          branchingChoice: branchingChoice,
-          choice1: widget.snapQuestions[index]['choices'][0]['text'],
-          notifyParent: refresh,
-          username: widget.username,
-          title: widget.snapQuestions[index]['title'],
-          doc: widget.doc,
-          ),
+        complete: isCompleted,
+        arguments: widget.arguments,
+        branching: branching,
+        branchingChoice: branchingChoice,
+        choice1: widget.snapQuestions[index]['choices'][0]['text'],
+        notifyParent: refresh,
+        username: widget.username,
+        title: widget.snapQuestions[index]['title'],
+        doc: widget.doc,
+      ),
       SurveyChoices(
         complete: isCompleted,
         arguments: widget.arguments,

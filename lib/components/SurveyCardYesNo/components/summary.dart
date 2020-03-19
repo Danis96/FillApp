@@ -75,6 +75,7 @@ class _SummaryState extends State<Summary> {
 
   @override
   Widget build(BuildContext context) {
+
     if (isFutureDone == false) {
       print('IZVRŠAVAM ISFUTUREDONE');
       setState(() {
@@ -103,6 +104,15 @@ class _SummaryState extends State<Summary> {
       }
       printList();
     });
+
+    double defaultScreenWidth = 400.0;
+    double defaultScreenHeight = 810.0;
+    ScreenUtil.instance = ScreenUtil(
+      width: defaultScreenWidth,
+      height: defaultScreenHeight,
+      allowFontScaling: true,
+    )..init(context);
+    
     return Scaffold(
       backgroundColor: MyColor().black,
       body: Builder(

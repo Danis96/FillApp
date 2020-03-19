@@ -2,6 +2,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
+import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -22,24 +23,35 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
 
   @override
   Widget build(BuildContext context) {
+        double defaultScreenWidth = 400.0;
+    double defaultScreenHeight = 810.0;
+    ScreenUtil.instance = ScreenUtil(
+      width: defaultScreenWidth,
+      height: defaultScreenHeight,
+      allowFontScaling: true,
+    )..init(context);
     indexReal = widget.index + 1;
     TextEditingController questionController =
-        TextEditingController(text: 'Q' + indexReal.toString() + ": " + title);
+        TextEditingController(text: 'Q' + indexReal.toString() + ": " + title,);
     return Container(
       color: MyColor().black,
       width: ScreenUtil.instance.setWidth(327.0),
-      height: ScreenUtil.instance.setWidth(70.0),
+      height: ScreenUtil.instance.setHeight(69.0),
       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(18.0)),
       child: TextFormField(
+         maxLength: 100,
+         enableSuggestions: false,
         onTap: () => onPressed(),
         readOnly: true,
         style: TextStyle(
             color: MyColor().white,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w900,
             fontFamily: "LoewNextArabic",
-            fontSize: ScreenUtil.instance.setSp(14.0)),
+            fontSize: ScreenUtil.instance.setSp(14.5), 
+            ),
         controller: questionController,
         decoration: InputDecoration(
+           counterText: '',
           contentPadding:
               new EdgeInsets.symmetric(vertical: 30.0, horizontal: 25.0),
           enabledBorder: OutlineInputBorder(

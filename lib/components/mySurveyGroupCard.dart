@@ -21,6 +21,7 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/myProgressNumbers.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
@@ -97,10 +98,11 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       onTap: () {
       //  FirebaseJson().importSurveyJson();
         if (!isCompleted) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => SurveyCard(
-                  surveyDoc: widget.surveyDoc,
-                  userLevel: userLevel,
+          Navigator.of(context).push(CardAnimationTween(
+              widget: SurveyCard(
+                // usernameAnswers: usernameAnswers,
+                surveyDoc: widget.surveyDoc,  
+                userLevel: userLevel,
                   notifyParent: refreshState,
                   user: user,
                   userDoc: widget.userDoc,
