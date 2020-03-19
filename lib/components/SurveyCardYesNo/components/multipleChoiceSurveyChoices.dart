@@ -44,47 +44,18 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     isTappedMCQ4 = false;
   }
 
+  listAnswers() {
+    for (int i = 0; i < answersFromSummary.length; i++) {
+      print(answersFromSummary[i]);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     String index = widget.index;
-    print(answersFromSummary.length);
+    //print(answersFromSummary.length);
     return isSummary
-        ? Container(
-            child: ListView.builder(
-              shrinkWrap: true,
-                itemCount: answersFromSummary.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                      width: ScreenUtil.instance.setWidth(350.0),
-                      margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(15.0)),
-                      child: ListTile(
-                          leading: Container(
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1.0, color: MyColor().black),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(100)),
-                                //color: isTappedMCQ1 || isTappedMCQ2 || isTappedMCQ3 || isTappedMCQ4 ? MyColor().white : MyColor().black),
-                                color: MyColor().black),
-                            height: ScreenUtil.instance.setHeight(58.0),
-                            width: ScreenUtil.instance.setWidth(58.0),
-                            child: Text('',
-                                style: TextStyle(color: MyColor().white)),
-                          ),
-                          title: Container(
-                            alignment: Alignment.centerLeft,
-                            child: Text(widget.choice1,
-                                style: TextStyle(
-                                    color: MyColor().black,
-                                    fontWeight: FontWeight.w700,
-                                    fontFamily: "LoewNextArabic",
-                                    fontStyle: FontStyle.normal,
-                                    fontSize: 18.0)),
-                          ),
-                          onTap: () => null));
-                }))
+        ? EmptyContainer()
         : Column(
             children: <Widget>[
               Container(

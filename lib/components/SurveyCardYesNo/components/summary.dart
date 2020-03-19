@@ -136,8 +136,8 @@ class _SummaryState extends State<Summary> {
                           return ListView.builder(
                               itemCount: snapi.length,
                               itemBuilder: (BuildContext context, int index) {
-                                print(surveyGroupName);
-                                print(snapi[index].name);
+                                //print(surveyGroupName);
+                                //print(snapi[index].name);
                                 // OVDJE PROVJERAVAM DA LI JE TO SURVEY NA KOJEM SAM I AKO JEST UZIMAM TU LISTU
                                 if (surveyGroupName == snapi[index].name) {
                                   //print('Nasao sam pravi survey!!!!!!!!!!');

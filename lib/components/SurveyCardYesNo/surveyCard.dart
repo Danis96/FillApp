@@ -40,25 +40,24 @@ class SurveyCard extends StatefulWidget {
   final String summaryCtrl;
   final Survey surveyDoc;
   var user;
-  SurveyCard({
-    this.arguments,
-    this.snapQuestions,
-    this.total,
-    this.sarSurvey,
-    this.username,
-    this.doc,
-    this.isCompleted,
-    this.increaseAnswered,
-    this.number,
-    this.userDoc,
-    this.userSar,
-    this.user,
-    this.notifyParent,
-    this.summaryCtrl,
-    this.userLevel,
-    this.usernameAnswers,
-    this.surveyDoc
-  });
+  SurveyCard(
+      {this.arguments,
+      this.snapQuestions,
+      this.total,
+      this.sarSurvey,
+      this.username,
+      this.doc,
+      this.isCompleted,
+      this.increaseAnswered,
+      this.number,
+      this.userDoc,
+      this.userSar,
+      this.user,
+      this.notifyParent,
+      this.summaryCtrl,
+      this.userLevel,
+      this.usernameAnswers,
+      this.surveyDoc});
 
   @override
   _YesNoSurveyState createState() => _YesNoSurveyState();
@@ -154,25 +153,15 @@ class _YesNoSurveyState extends State<SurveyCard>
     widget.increaseAnswered();
     if (widget.number == snapQuestions.length) {
       Navigator.of(context).push(
-        DanisAnimationTween(widget:
-          Summary(
-                  animateTo: summaryAnimateToPpage,
-                  questions: widget.snapQuestions,
-                  totalProgress: widget.total,
-                  totalSar: widget.sarSurvey,
-                )
-        ),
-
-
-        // MaterialPageRoute(
-        //     builder: (_) => Summary(
-        //           animateTo: summaryAnimateToPpage,
-        //           questions: widget.snapQuestions,
-        //           totalProgress: widget.total,
-        //           totalSar: widget.sarSurvey,
-        //         )),
+        DanisAnimationTween(
+            widget: Summary(
+          animateTo: summaryAnimateToPpage,
+          questions: widget.snapQuestions,
+          totalProgress: widget.total,
+          totalSar: widget.sarSurvey,
+          surveyDoc: widget.surveyDoc,
+        )),
       );
-
       widget.userSar = widget.userSar + widget.sarSurvey;
       saroviOffline = saroviOffline + widget.sarSurvey;
       if (isSar) {
@@ -186,17 +175,17 @@ class _YesNoSurveyState extends State<SurveyCard>
       currentUsername = widget.arguments.username;
       FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
           widget.doc, context, widget.username);
-      Navigator.of(context).push(MaterialPageRoute(
-          builder: (_) => Summary(
-            surveyDoc: widget.surveyDoc,
-                doc: widget.doc,
-                userLevel: widget.userLevel,
-                questions: widget.snapQuestions,
-                totalSar: widget.sarSurvey,
-                totalProgress: widget.total,
-                animateTo: summaryAnimateToPpage,
-                arguments: widget.arguments,
-              )));
+      // Navigator.of(context).push(MaterialPageRoute(
+      //     builder: (_) => Summary(
+      //       surveyDoc: widget.surveyDoc,
+      //           doc: widget.doc,
+      //           userLevel: widget.userLevel,
+      //           questions: widget.snapQuestions,
+      //           totalSar: widget.sarSurvey,
+      //           totalProgress: widget.total,
+      //           animateTo: summaryAnimateToPpage,
+      //           arguments: widget.arguments,
+      //         )));
     } else {
       _controller.nextPage(
           duration: Duration(milliseconds: 200), curve: Curves.bounceIn);
@@ -225,8 +214,8 @@ class _YesNoSurveyState extends State<SurveyCard>
     return isSummary
         ? Navigator.of(context).push(MaterialPageRoute(
             builder: (_) => Summary(
-              userLevel: widget.userLevel,
-              surveyDoc: widget.surveyDoc,
+                  userLevel: widget.userLevel,
+                  surveyDoc: widget.surveyDoc,
                   animateTo: summaryAnimateToPpage,
                   questions: widget.snapQuestions,
                   totalProgress: widget.total,
