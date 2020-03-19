@@ -20,7 +20,9 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/myValidation.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/register/passwordPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
@@ -63,12 +65,16 @@ class _EmailPageState extends State<EmailPage> {
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.white,
           onPressed: () {
-            Navigator.of(context).pushNamed(VerifyPin,
-                arguments: RegisterArguments(
-                    verId: widget.arguments.verId,
-                    username: widget.arguments.username,
-                    usernameSecond: widget.arguments.usernameSecond,
-                    phone: widget.arguments.phone));
+            Navigator.of(context).push(
+              CardAnimationTween(
+                widget: PasswordPage(
+                    arguments: RegisterArguments(
+                        verId: widget.arguments.verId,
+                        username: widget.arguments.username,
+                        usernameSecond: widget.arguments.usernameSecond,
+                        phone: widget.arguments.phone)),
+              ),
+            );
           },
         ),
       ),

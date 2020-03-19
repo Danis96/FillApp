@@ -19,6 +19,8 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myPinCode.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
+import 'package:fillproject/register/emailPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
@@ -53,12 +55,16 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
       final AuthCredential credential = PhoneAuthProvider.getCredential(
           verificationId: widget.arguments.verId, smsCode: smsCode);
       FirebaseAuth.instance.signInWithCredential(credential).then((user) async {
-        Navigator.of(context).pushNamed(Email,
-            arguments: RegisterArguments(
-                verId: widget.arguments.verId,
-                username: widget.arguments.username,
-                usernameSecond: widget.arguments.usernameSecond,
-                phone: widget.arguments.phone));
+        Navigator.of(context).push(
+          CardAnimationTween(
+            widget: EmailPage(
+                arguments: RegisterArguments(
+                    verId: widget.arguments.verId,
+                    username: widget.arguments.username,
+                    usernameSecond: widget.arguments.usernameSecond,
+                    phone: widget.arguments.phone)),
+          ),
+        );
       }).catchError((e) {
         print('Auth Credential Error : $e');
         wrongCodeError = e.toString();

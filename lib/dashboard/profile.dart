@@ -90,8 +90,77 @@ class _ProfileState extends State<Profile> {
   bool emailPostoji = false;
   DateTime dateOfBirth2 = DateTime.now();
 
+  addListenersOnControllers() {
+    /// name
+    controllerName.addListener(() {
+      final text = controllerName.text;
+      controllerName.value = controllerName.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+
+    /// Date of birth
+    controllerDOB.addListener(() {
+      final text = controllerDOB.text;
+      controllerDOB.value = controllerDOB.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+
+    /// email
+    controllerEmail.addListener(() {
+      final text = controllerEmail.text;
+      controllerEmail.value = controllerEmail.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+
+    /// card number
+    controllerCreditCard.addListener(() {
+      final text = controllerCreditCard.text;
+      controllerCreditCard.value = controllerCreditCard.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+
+    /// date
+    controllerDate.addListener(() {
+      final text = controllerDate.text;
+      controllerDate.value = controllerDate.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+
+    /// cc
+    controllerCC.addListener(() {
+      final text = controllerCC.text;
+      controllerCC.value = controllerCC.value.copyWith(
+        text: text,
+        selection:
+            TextSelection(baseOffset: text.length, extentOffset: text.length),
+        composing: TextRange.empty,
+      );
+    });
+  }
+
   @override
   void initState() {
+    addListenersOnControllers();
     super.initState();
     checkForInternet();
     FirebaseCheck().getUserUsername(widget.arguments.username);
@@ -216,13 +285,12 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  readOnly: isReadOnly,
+                  //  / readOnly: isReadOnly,
                   maxLength: 200,
                   enableSuggestions: false,
                   textCapitalization: TextCapitalization.sentences,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerName
-                    ..text = usersName,
+                  controller: controllerName..text = usersName,
                   decoration: InputDecoration(
                     labelText: 'Name and Surname',
                     counterText: '',
@@ -269,36 +337,33 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: TextFormField(
                   readOnly: true,
-                  onTap: () => isReadOnly
-                      ? null
-                      : {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return GestureDetector(
-                                    onTap: () {
-                                      controllerDOB.text = dateOfBirth;
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Container(
-                                      height:
-                                          ScreenUtil.instance.setHeight(265.0),
-                                      child: CupertinoDatePicker(
-                                        mode: CupertinoDatePickerMode.date,
-                                        initialDateTime: dateOfBirth2,
-                                        onDateTimeChanged: (date) {
-                                          dateOfBirth2 = date;
-                                          dateOfBirth = DateFormat.yMd()
-                                              .format(dateOfBirth2);
-                                        },
-                                      ),
-                                    ));
-                              }),
-                        },
+                  onTap: () => {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return GestureDetector(
+                              onTap: () {
+                                controllerDOB.text = dateOfBirth;
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                height: ScreenUtil.instance.setHeight(265.0),
+                                child: CupertinoDatePicker(
+                                  mode: CupertinoDatePickerMode.date,
+                                  initialDateTime: dateOfBirth2,
+                                  onDateTimeChanged: (date) {
+                                    dateOfBirth2 = date;
+                                    dateOfBirth =
+                                        DateFormat.yMd().format(dateOfBirth2);
+                                  },
+                                ),
+                              ));
+                        }),
+                  },
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                   controller: controllerDOB..text = usersDOB,
+                  controller: controllerDOB..text = usersDOB,
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -343,11 +408,11 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  readOnly: isReadOnly,
+                  // readOnly: isReadOnly,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                   controller: controllerEmail..text = usersEmail ,
+                  controller: controllerEmail..text = usersEmail,
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -395,13 +460,13 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  readOnly: isReadOnly,
+                  // readOnly: isReadOnly,
                   inputFormatters: [maskTextInputFormatterCard],
                   keyboardType: TextInputType.number,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerCreditCard..text =  usersCard ,
+                  controller: controllerCreditCard..text = usersCard,
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -448,13 +513,13 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
-                      readOnly: isReadOnly,
+                      // readOnly: isReadOnly,
                       inputFormatters: [maskTextInputFormatterDate],
                       keyboardType: TextInputType.number,
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
-                      controller: controllerDate..text =  usersCardDate ,
+                      controller: controllerDate..text = usersCardDate,
                       decoration: InputDecoration(
                         counterText: '',
                         hasFloatingPlaceholder: false,
@@ -501,13 +566,13 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
-                      readOnly: isReadOnly,
+                      // readOnly: isReadOnly,
                       keyboardType: TextInputType.number,
                       inputFormatters: [maskTextInputFormatterCC],
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
-                      controller: controllerCC..text =  usersCC ,
+                      controller: controllerCC..text = usersCC,
                       decoration: InputDecoration(
                         counterText: '',
                         hasFloatingPlaceholder: false,
@@ -576,9 +641,6 @@ class _ProfileState extends State<Profile> {
     );
   }
 
- 
-  
-
   btnProfile() {
     return Container(
       child: Container(
@@ -632,10 +694,7 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-
-
- 
-   transferSAR() {
+  transferSAR() {
     FirebaseCrud().updateUserOnCompletePRofile(
         snap,
         controllerName.text,
@@ -650,9 +709,7 @@ class _ProfileState extends State<Profile> {
       btnText = 'Transfer after 100';
     });
     Timer(Duration(seconds: 1), () {
-      setState(() {
-    
-      });
+      setState(() {});
     });
   }
 
@@ -672,18 +729,17 @@ class _ProfileState extends State<Profile> {
     setState(() {
       btnText = 'Transfer';
     });
+
     widget.refreshNavbar();
-    
   }
 
-   onPressed() {
+  onPressed() {
     name = controllerName.text;
     email = controllerEmail.text;
     dateOfBirth = controllerDOB.text;
     creditCard = controllerCreditCard.text;
     date = controllerDate.text;
     cc = controllerCC.text;
-
 
     if (btnText == 'Register') {
       FirebaseCrud().userRegister(context, widget.arguments.username);
@@ -824,5 +880,3 @@ class _ProfileState extends State<Profile> {
     ),
   );
 }
-
-

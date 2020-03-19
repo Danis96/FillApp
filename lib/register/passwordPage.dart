@@ -20,6 +20,8 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/myValidation.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
+import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -281,12 +283,16 @@ class _PasswordPageState extends State<PasswordPage> {
               5,
               0);
         }
-        Navigator.of(context).pushNamed(NavBar,
-            arguments: PasswordArguments(
+         Navigator.of(context).push(
+              CardAnimationTween(
+                 widget: BottomNavigationBarController(
+                   arguments: PasswordArguments(
                 email: widget.arguments.email,
                 phone: widget.arguments.phone,
                 username: widget.arguments.username,
-                password: password));
+                password: password)) ,
+                 ),
+              ); 
         _btnCounter = 1;
         Timer(Duration(seconds: 2), () {
           _btnCounter = 0;
