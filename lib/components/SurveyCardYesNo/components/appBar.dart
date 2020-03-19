@@ -22,18 +22,18 @@ class SurveyAppBar extends StatelessWidget {
   List<dynamic> answersList;
   //final String surveyName;
 
-  SurveyAppBar(
-      {this.arguments,
-      this.percent,
-      this.notifyParent,
-      this.animateTo,
-      this.totalProgress,
-      this.questions,
-      this.answersList,
-      this.totalSar,
-      this.surveyDoc,
-      //this.surveyName
-      });
+  SurveyAppBar({
+    this.arguments,
+    this.percent,
+    this.notifyParent,
+    this.animateTo,
+    this.totalProgress,
+    this.questions,
+    this.answersList,
+    this.totalSar,
+    this.surveyDoc,
+    //this.surveyName
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +54,7 @@ class SurveyAppBar extends StatelessWidget {
                               password: arguments.password,
                               phone: arguments.phone,
                               username: arguments.username));
+                      isSummary = false;
                       isOnSummary = false;
                       isFutureDone = false;
                       answersList.removeRange(0, answersList.length);
@@ -61,8 +62,8 @@ class SurveyAppBar extends StatelessWidget {
                   : isSummary
                       ? Navigator.of(context).push(MaterialPageRoute(
                           builder: (_) => Summary(
-                            //surveyName: surveyName,
-                            surveyDoc: surveyDoc,
+                                //surveyName: surveyName,
+                                surveyDoc: surveyDoc,
                                 animateTo: animateTo,
                                 questions: questions,
                                 totalProgress: totalProgress,

@@ -251,6 +251,7 @@ class _SummaryState extends State<Summary> {
   Future<bool> _onWillPop() async {
     answersList.removeRange(0, answersList.length);
     setState(() {
+      isSummary = false;
       isOnSummary = false;
       isFutureDone = false;
     });
