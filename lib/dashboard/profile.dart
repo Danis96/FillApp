@@ -28,10 +28,12 @@ import '../routes/routeArguments.dart';
 class Profile extends StatefulWidget {
   final PasswordArguments arguments;
   final String btnText;
+  final bool isReadOnly;
   Profile({
     Key key,
     this.arguments,
     this.btnText,
+    this.isReadOnly,
   }) : super(key: key);
 
   @override
@@ -72,7 +74,6 @@ class _ProfileState extends State<Profile> {
   int usersSarovi, profileAnonym;
   bool emailPostoji = false;
   DateTime dateOfBirth2 = DateTime.now();
-
 
   @override
   void initState() {
@@ -202,6 +203,7 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
+                  readOnly: isReadOnly,
                   maxLength: 200,
                   enableSuggestions: false,
                   textCapitalization: TextCapitalization.sentences,
@@ -252,15 +254,14 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: TextFormField(
                   readOnly: true,
-                  onTap: () {
+                  onTap: () => isReadOnly ? null : {
                     showModalBottomSheet(
                         context: context,
                         builder: (BuildContext context) {
                           return GestureDetector(
                               onTap: () {
-                                 print(dateOfBirth);
-                                 controllerDOB.text = dateOfBirth;
-                                 Navigator.of(context).pop();
+                                controllerDOB.text = dateOfBirth;
+                                Navigator.of(context).pop();
                               },
                               child: Container(
                                 height: ScreenUtil.instance.setHeight(265.0),
@@ -269,13 +270,12 @@ class _ProfileState extends State<Profile> {
                                   initialDateTime: dateOfBirth2,
                                   onDateTimeChanged: (date) {
                                     dateOfBirth2 = date;
-                                    // dateOfBirth = DateFormat('dd-MM-yyyy').format(dateOfBirth2);
-                                    dateOfBirth = DateFormat.yMd().format(dateOfBirth2); 
-                                   
+                                    dateOfBirth =
+                                        DateFormat.yMd().format(dateOfBirth2);
                                   },
                                 ),
                               ));
-                        });
+                        }),
                   },
                   maxLength: 200,
                   enableSuggestions: false,
@@ -325,6 +325,7 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
+                  readOnly: isReadOnly,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
@@ -381,6 +382,7 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
+                  readOnly: isReadOnly,
                   inputFormatters: [maskTextInputFormatterCard],
                   keyboardType: TextInputType.number,
                   maxLength: 200,
@@ -433,6 +435,7 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
+                      readOnly: isReadOnly,
                       inputFormatters: [maskTextInputFormatterDate],
                       keyboardType: TextInputType.number,
                       maxLength: 200,
@@ -485,6 +488,7 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
+                      readOnly: isReadOnly,
                       keyboardType: TextInputType.number,
                       inputFormatters: [maskTextInputFormatterCC],
                       maxLength: 200,
@@ -568,95 +572,122 @@ class _ProfileState extends State<Profile> {
     cc = controllerCC.text;
     FocusScope.of(context).requestFocus(new FocusNode());
 
-    if (name == '') {
-      setState(() {
-        isEmptyName = true;
-      });
-      Timer(Duration(seconds: 2), () {
+    if (btnText == 'Register') {
+      FirebaseCrud().userRegister(context, widget.arguments.username);
+    } else if (btnText == 'Complete profile') {
+      if (name == '') {
         setState(() {
-          isEmptyName = false;
+          isEmptyName = true;
         });
-      });
-    } else if (email == '' || regexEmail.hasMatch(email) == false) {
-      setState(() {
-        isEmptyMail = true;
-      });
-      Timer(Duration(seconds: 2), () {
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyName = false;
+          });
+        });
+      } else if (email == '' || regexEmail.hasMatch(email) == false) {
         setState(() {
-          isEmptyMail = false;
+          isEmptyMail = true;
         });
-      });
-    } else if (emailPostoji) {
-      setState(() {
-        isEmptyMail = true;
-      });
-      MySnackbar().showSnackbar('Email already exists', context, 'Undo');
-      Timer(Duration(seconds: 2), () {
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyMail = false;
+          });
+        });
+      } else if (dateOfBirth == '') {
         setState(() {
-          isEmptyMail = false;
+          isEmptyBirth = true;
         });
-      });
-    } else if (dateOfBirth == '') {
-      setState(() {
-        isEmptyBirth = true;
-      });
-      Timer(Duration(seconds: 2), () {
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyBirth = false;
+          });
+        });
+      } else if (creditCard == '') {
         setState(() {
-          isEmptyBirth = false;
+          isEmptyCard = true;
         });
-      });
-    } else if (creditCard == '') {
-      setState(() {
-        isEmptyCard = true;
-      });
-      Timer(Duration(seconds: 2), () {
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyCard = false;
+          });
+        });
+      } else if (date == '') {
         setState(() {
-          isEmptyCard = false;
+          isEmptyDate = true;
         });
-      });
-    } else if (date == '') {
-      setState(() {
-        isEmptyDate = true;
-      });
-      Timer(Duration(seconds: 2), () {
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyDate = false;
+          });
+        });
+      } else if (cc == '') {
         setState(() {
-          isEmptyDate = false;
+          isEmptyCC = true;
         });
-      });
-    } else if (cc == '') {
-      setState(() {
-        isEmptyCC = true;
-      });
-      Timer(Duration(seconds: 2), () {
-        setState(() {
-          isEmptyCC = false;
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyCC = false;
+          });
         });
-      });
-    } else {
-      print('Your name is : ' +
-          name +
-          '\n' +
-          'Your email is : ' +
-          email +
-          '\n' +
-          'Your date of birth : ' +
-          dateOfBirth +
-          '\n' +
-          'Your credit card number is : ' +
-          creditCard +
-          '\n' +
-          'Your card date is :' +
-          date +
-          '\n' +
-          'Your CC is : ' +
-          cc);
-
-      print('TEXT JE: + ' + widget.btnText);
-      if (widget.btnText == 'Register') {
-        FirebaseCrud().userRegister(context, widget.arguments.username);
-      } else if (widget.btnText == 'Complete profile') {
+      } else {
         completeProfile();
-      } else if (widget.btnText == 'Transfer') {
+      }
+    } else if (btnText == 'Transfer') {
+        if (name == '') {
+        setState(() {
+          isEmptyName = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyName = false;
+          });
+        });
+      } else if (email == '' || regexEmail.hasMatch(email) == false) {
+        setState(() {
+          isEmptyMail = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyMail = false;
+          });
+        });
+      } else if (dateOfBirth == '') {
+        setState(() {
+          isEmptyBirth = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyBirth = false;
+          });
+        });
+      } else if (creditCard == '') {
+        setState(() {
+          isEmptyCard = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyCard = false;
+          });
+        });
+      } else if (date == '') {
+        setState(() {
+          isEmptyDate = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyDate = false;
+          });
+        });
+      } else if (cc == '') {
+        setState(() {
+          isEmptyCC = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyCC = false;
+          });
+        });
+      } else {
         transferSAR();
       }
     }
