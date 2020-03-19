@@ -34,9 +34,9 @@ bool isTab2Selected = false;
 bool isLoading = true;
 DocumentSnapshot snap;
 int isAnonymous, usersSars;
-bool isUserInDB = true;
+bool isUserInDB = true, isReadOnly = false;
 Key key = UniqueKey();
-String usersName, usersDOB, usersEmail, usersCard, usersCardDate, usersCC;
+String usersName, usersDOB, usersEmail, usersCard, usersCardDate, usersCC, cc;
 
 class BottomNavigationBarController extends StatefulWidget {
   final PasswordArguments arguments;
@@ -89,12 +89,7 @@ class _BottomNavigationBarControllerState
                 snap = snapshot.data[index];
                 isAnonymous = snap.data['is_anonymous'];
                 usersSars = snap.data['sar'];
-                // usersName = snap.data['name_and_surname'];
-                // usersDOB = snap.data['date_of_birth'];
-                // usersEmail = snap.data['email'];
-                // usersCard = snap.data['card_number'];
-                // usersCardDate = snap.data['expire_date'];
-                // usersCC = snap.data['cc'];
+                cc = snap.data['cc'];
                 return EmptyContainer();
               });
         }
@@ -105,30 +100,45 @@ class _BottomNavigationBarControllerState
 
   settingStates() {
     /// State 1
-    if (usersSars < 100) {
-      setState(() {
-        btnText = 'Transfer after 100 SAR';
-      });
-    } else
-
-    /// State 2
-    if (usersSars >= 100) {
-      if (isAnonymous == 0) {
+    /// 
+    /// user anonymous 
+    if (isAnonymous == 1) {
+      /// if user is anonymous + no sars 
+      if(usersSars < 100) {
         setState(() {
-          btnText = 'Complete profile';
+           btnText = 'Transfer after 100 SAR';
+           isReadOnly = true;
         });
+        /// if user is anonymous + sars 
       } else {
-        setState(() {
-          btnText = 'Register';
-        });
+         btnText = 'Register';
+         isReadOnly = true;
       }
-    } else
+    } 
+    /// State 2 
+    /// 
+    /// user registered 
+    else if(isAnonymous == 0)  {
+         /// if user is registered + have sars + profile not completed
+         if(usersSars >= 100 && cc == '') {
+             setState(() {
+                btnText = 'Complete profile';
+                isReadOnly = false;
+             });
+         /// if user is registered + have sars + profile completed
+         } else if(usersSars >= 100 && cc != '') {
+            setState(() {
+               btnText = 'Transfer';
+               isReadOnly = false;
+            });
+        /// if user is registered + no sars + not profile completed
+         } else if(usersSars < 100 && cc != '') {
+           setState(() {
+               btnText = 'Transfer after 100 SAR';
+               isReadOnly = true;
+           });
+         } 
 
-    /// State 3
-    if (usersSars >= 100 && isAnonymous == 0) {
-      setState(() {
-        btnText = 'Transfer';
-      });
     }
   }
 
@@ -140,7 +150,7 @@ class _BottomNavigationBarControllerState
           phone: arguments.phone,
           username: arguments.username,
         )),
-        SurveyPage(
+        SurveyPage( 
             arguments: PasswordArguments(
           email: arguments.email,
           password: arguments.password,
@@ -148,6 +158,7 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
+            isReadOnly: isReadOnly,
             btnText: btnText,
             arguments: PasswordArguments(
               email: arguments.email,
@@ -196,7 +207,6 @@ class _BottomNavigationBarControllerState
 
       getIsAnonymous(arguments.username);
       if (isAnonymous == 1) {
-        //askUserToRegister();
         anonym = 1;
       } else {
         anonym = 0;

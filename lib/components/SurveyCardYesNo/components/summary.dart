@@ -40,7 +40,6 @@ class Summary extends StatefulWidget {
     this.arguments,
     this.userLevel,
     this.usernameAnswers,
-
   });
 
   @override

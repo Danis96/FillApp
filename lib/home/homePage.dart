@@ -118,8 +118,8 @@ class _SignUpState extends State<SignUp> {
                           child: FlatButton(
                               onPressed: () {
                               //  / FirebaseJson().importJson();
-                                //  FirebaseJson().importSurveyJson();
-                                onPressed(context);
+                                //  /  FirebaseJson().importSurveyJson();
+                                 onPressed(context);
                               },
                               child: Text(
                                 MyText().skipThisStep,

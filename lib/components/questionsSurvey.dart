@@ -29,20 +29,31 @@ class QuestionsForSurvey {
             {"value": "item2", "text": "No"},
           ]
         },
-        {
-          "title": "Choose the right image",
-          "is_single": 0,
-          "type": "image",
+          {
+          "title": "Do you love basketball",
+          "type": "yesno",
           "sar": 10,
           "is_branching": "",
           "choice_to_exit": "",
           "choices": [
-            {"value": "item1", "text": ""},
-            {"value": "item2", "text": ""},
-            {"value": "item1", "text": ""},
-            {"value": "item2", "text": ""},
+            {"value": "item1", "text": "Yes"},
+            {"value": "item2", "text": "No"},
           ]
         },
+        // {
+        //   "title": "Choose the right image",
+        //   "is_single": 0,
+        //   "type": "image",
+        //   "sar": 10,
+        //   "is_branching": "",
+        //   "choice_to_exit": "",
+        //   "choices": [
+        //     {"value": "item1", "text": ""},
+        //     {"value": "item2", "text": ""},
+        //     {"value": "item1", "text": ""},
+        //     {"value": "item2", "text": ""},
+        //   ]
+        // },
         {
           "title": "Do you love beer",
           "type": "yesno",
@@ -61,20 +72,27 @@ class QuestionsForSurvey {
           "is_branching": "",
           "choice_to_exit": "",
         },
-        {
-          "title": "Choose the appropriate image",
-          "type": "image",
+         {
+          "title": "Do you love your mother",
+          "type": "input",
           "sar": 10,
-          "is_single": 1,
           "is_branching": "",
           "choice_to_exit": "",
-          "choices": [
-            {"value": "item1", "text": ""},
-            {"value": "item2", "text": ""},
-            {"value": "item3", "text": ""},
-            {"value": "item4", "text": ""},
-          ]
         },
+        // {
+        //   "title": "Choose the appropriate image",
+        //   "type": "image",
+        //   "sar": 10,
+        //   "is_single": 1,
+        //   "is_branching": "",
+        //   "choice_to_exit": "",
+        //   "choices": [
+        //     {"value": "item1", "text": ""},
+        //     {"value": "item2", "text": ""},
+        //     {"value": "item3", "text": ""},
+        //     {"value": "item4", "text": ""},
+        //   ]
+        // },
         // {
         //   "title": "Do you love flutter",
         //   "type": "yesno",
@@ -334,22 +352,33 @@ class QuestionsForSurvey {
           "is_branching": "",
           "choice_to_exit": "",
         },
+        // {
+        //   "title": "Choose the appropriate image",
+        //   "type": "image",
+        //   "sar": 10,
+        //   "is_single": 1,
+        //   "is_branching": "",
+        //   "choice_to_exit": "",
+        //   "choices": [
+        //     {"value": "item1", "text": ""},
+        //     {"value": "item2", "text": ""},
+        //     {"value": "item3", "text": ""},
+        //     {"value": "item4", "text": ""},
+        //   ]
+        // },
         {
-          "title": "Choose the appropriate image",
-          "type": "image",
+          "title": "Do you love flutter",
+          "type": "yesno",
           "sar": 10,
-          "is_single": 1,
           "is_branching": "",
           "choice_to_exit": "",
           "choices": [
-            {"value": "item1", "text": ""},
-            {"value": "item2", "text": ""},
-            {"value": "item3", "text": ""},
-            {"value": "item4", "text": ""},
+            {"value": "item1", "text": "Yes"},
+            {"value": "item2", "text": "No"},
           ]
         },
-        {
-          "title": "Do you love flutter",
+         {
+          "title": "Do you love chinese food",
           "type": "yesno",
           "sar": 10,
           "is_branching": "",
