@@ -27,13 +27,27 @@ import '../routes/routeArguments.dart';
 
 class Profile extends StatefulWidget {
   final PasswordArguments arguments;
-  final String btnText;
+  final String btnText,
+      cc,
+      usersEmail,
+      usersName,
+      usersCard,
+      usersCardDate,
+      usersDOB,
+      usersCC;
   final bool isReadOnly;
   Profile({
     Key key,
     this.arguments,
     this.btnText,
     this.isReadOnly,
+    this.cc,
+    this.usersCard,
+    this.usersCardDate,
+    this.usersCC,
+    this.usersDOB,
+    this.usersEmail,
+    this.usersName,
   }) : super(key: key);
 
   @override
@@ -43,14 +57,18 @@ class Profile extends StatefulWidget {
 RegExp regexEmail = new RegExp(
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-TextEditingController controllerName = TextEditingController(text: name);
-TextEditingController controllerDOB = TextEditingController(text: dateOfBirth);
-TextEditingController controllerEmail = TextEditingController(text: usersEmail);
+TextEditingController controllerName =
+    TextEditingController(text: cc != '' ? usersName : '');
+TextEditingController controllerDOB =
+    TextEditingController(text: cc != '' ? usersDOB : '');
+TextEditingController controllerEmail =
+    TextEditingController(text: cc != '' ? usersEmail : '');
 TextEditingController controllerCreditCard =
-    TextEditingController(text: usersCard);
+    TextEditingController(text: cc != '' ? usersCard : '');
 TextEditingController controllerDate =
-    TextEditingController(text: usersCardDate);
-TextEditingController controllerCC = TextEditingController(text: usersCC);
+    TextEditingController(text: cc != '' ? usersCardDate : '');
+TextEditingController controllerCC =
+    TextEditingController(text: cc != '' ? usersCC : '');
 
 var maskTextInputFormatterCard =
     MaskTextInputFormatter(mask: '####-####-####-####');
@@ -254,29 +272,32 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: TextFormField(
                   readOnly: true,
-                  onTap: () => isReadOnly ? null : {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return GestureDetector(
-                              onTap: () {
-                                controllerDOB.text = dateOfBirth;
-                                Navigator.of(context).pop();
-                              },
-                              child: Container(
-                                height: ScreenUtil.instance.setHeight(265.0),
-                                child: CupertinoDatePicker(
-                                  mode: CupertinoDatePickerMode.date,
-                                  initialDateTime: dateOfBirth2,
-                                  onDateTimeChanged: (date) {
-                                    dateOfBirth2 = date;
-                                    dateOfBirth =
-                                        DateFormat.yMd().format(dateOfBirth2);
-                                  },
-                                ),
-                              ));
-                        }),
-                  },
+                  onTap: () => isReadOnly
+                      ? null
+                      : {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      controllerDOB.text = dateOfBirth;
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Container(
+                                      height:
+                                          ScreenUtil.instance.setHeight(265.0),
+                                      child: CupertinoDatePicker(
+                                        mode: CupertinoDatePickerMode.date,
+                                        initialDateTime: dateOfBirth2,
+                                        onDateTimeChanged: (date) {
+                                          dateOfBirth2 = date;
+                                          dateOfBirth = DateFormat.yMd()
+                                              .format(dateOfBirth2);
+                                        },
+                                      ),
+                                    ));
+                              }),
+                        },
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
@@ -633,7 +654,7 @@ class _ProfileState extends State<Profile> {
         completeProfile();
       }
     } else if (btnText == 'Transfer') {
-        if (name == '') {
+      if (name == '') {
         setState(() {
           isEmptyName = true;
         });
@@ -724,6 +745,9 @@ class _ProfileState extends State<Profile> {
         usersSarovi);
     setState(() {
       btnText = 'Transfer after 100';
+    });
+    Timer(Duration(seconds: 1), () {
+      setState(() {});
     });
   }
 

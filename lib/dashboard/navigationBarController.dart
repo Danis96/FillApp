@@ -53,7 +53,7 @@ class _BottomNavigationBarControllerState
   _BottomNavigationBarControllerState({Key key, this.arguments});
 
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     isOnSummary = false;
   }
@@ -96,6 +96,13 @@ class _BottomNavigationBarControllerState
                 isAnonymous = snap.data['is_anonymous'];
                 usersSars = snap.data['sar'];
                 cc = snap.data['cc'];
+                usersName = snap.data['name_and_surname'];
+                print(usersName + 'OVO JE USEROV NAME');
+                usersDOB = snap.data['date_of_birth'];
+                usersEmail = snap.data['email'];
+                usersCard = snap.data['card_number'];
+                usersCardDate = snap.data['expire_date'];
+                usersCC = snap.data['cc'];
                 return EmptyContainer();
               });
         }
@@ -106,45 +113,48 @@ class _BottomNavigationBarControllerState
 
   settingStates() {
     /// State 1
-    /// 
-    /// user anonymous 
+    ///
+    /// user anonymous
     if (isAnonymous == 1) {
-      /// if user is anonymous + no sars 
-      if(usersSars < 100) {
+      /// if user is anonymous + no sars
+      if (usersSars < 100) {
         setState(() {
-           btnText = 'Transfer after 100 SAR';
-           isReadOnly = true;
+          btnText = 'Transfer after 100 SAR';
+          isReadOnly = true;
         });
-        /// if user is anonymous + sars 
-      } else {
-         btnText = 'Register';
-         isReadOnly = true;
-      }
-    } 
-    /// State 2 
-    /// 
-    /// user registered 
-    else if(isAnonymous == 0)  {
-         /// if user is registered + have sars + profile not completed
-         if(usersSars >= 100 && cc == '') {
-             setState(() {
-                btnText = 'Complete profile';
-                isReadOnly = false;
-             });
-         /// if user is registered + have sars + profile completed
-         } else if(usersSars >= 100 && cc != '') {
-            setState(() {
-               btnText = 'Transfer';
-               isReadOnly = false;
-            });
-        /// if user is registered + no sars + not profile completed
-         } else if(usersSars < 100 && cc != '') {
-           setState(() {
-               btnText = 'Transfer after 100 SAR';
-               isReadOnly = true;
-           });
-         } 
 
+        /// if user is anonymous + sars
+      } else {
+        btnText = 'Register';
+        isReadOnly = true;
+      }
+    }
+
+    /// State 2
+    ///
+    /// user registered
+    else if (isAnonymous == 0) {
+      /// if user is registered + have sars + profile not completed
+      if (usersSars >= 100 && cc == '') {
+        setState(() {
+          btnText = 'Complete profile';
+          isReadOnly = false;
+        });
+
+        /// if user is registered + have sars + profile completed
+      } else if (usersSars >= 100 && cc != '') {
+        setState(() {
+          btnText = 'Transfer';
+          isReadOnly = false;
+        });
+
+        /// if user is registered + no sars + not profile completed
+      } else if (usersSars < 100 && cc != '') {
+        setState(() {
+          btnText = 'Transfer after 100 SAR';
+          isReadOnly = true;
+        });
+      }
     }
   }
 
@@ -156,7 +166,7 @@ class _BottomNavigationBarControllerState
           phone: arguments.phone,
           username: arguments.username,
         )),
-        SurveyPage( 
+        SurveyPage(
             arguments: PasswordArguments(
           email: arguments.email,
           password: arguments.password,
@@ -164,6 +174,13 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
+            usersName: usersName,
+            usersEmail: usersEmail,
+            usersCard: usersCard,
+            usersCardDate: usersCardDate,
+            usersDOB: usersDOB,
+            usersCC: usersCC,
+            cc: cc,
             isReadOnly: isReadOnly,
             btnText: btnText,
             arguments: PasswordArguments(
