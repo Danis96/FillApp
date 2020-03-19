@@ -401,7 +401,9 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<bool> _onWillPop() async {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => SignUp()));
+     Navigator.of(context).push(CardAnimationTween(
+       widget: SignUp(),
+     ));
     return EmptyContainer() ?? true;
   }
 }

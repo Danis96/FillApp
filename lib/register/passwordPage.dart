@@ -23,6 +23,7 @@ import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/register/emailPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
@@ -92,6 +93,16 @@ class _PasswordPageState extends State<PasswordPage> {
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.white,
           onPressed: () {
+            Navigator.of(context).push(
+              CardAnimationTween(
+                widget: EmailPage(
+                    arguments: RegisterArguments(
+                  email: widget.arguments.email,
+                  phone: widget.arguments.phone,
+                  username: widget.arguments.username,
+                )),
+              ),
+            );
             Navigator.of(context).pushNamed(Email,
                 arguments: RegisterArguments(
                     email: widget.arguments.email,
@@ -283,16 +294,16 @@ class _PasswordPageState extends State<PasswordPage> {
               5,
               0);
         }
-         Navigator.of(context).push(
-              CardAnimationTween(
-                 widget: BottomNavigationBarController(
-                   arguments: PasswordArguments(
-                email: widget.arguments.email,
-                phone: widget.arguments.phone,
-                username: widget.arguments.username,
-                password: password)) ,
-                 ),
-              ); 
+        Navigator.of(context).push(
+          CardAnimationTween(
+            widget: BottomNavigationBarController(
+                arguments: PasswordArguments(
+                    email: widget.arguments.email,
+                    phone: widget.arguments.phone,
+                    username: widget.arguments.username,
+                    password: password)),
+          ),
+        );
         _btnCounter = 1;
         Timer(Duration(seconds: 2), () {
           _btnCounter = 0;
