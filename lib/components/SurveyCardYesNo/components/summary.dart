@@ -76,7 +76,8 @@ class _SummaryState extends State<Summary> {
   Widget build(BuildContext context) {
     Constant().responsive(context);
     //OVDJE PRAZNIM LISTU KADA PONOVO DODJEM NA SUMMARY KAKO NE BI MIJEŠAO ODGOVORE OD RANIJIH SRUVEYA
-    answersList.removeRange(0, answersList.length);
+    //answersList.removeRange(0, answersList.length);
+    answersList = [];
     Timer(Duration(milliseconds: 1000), () {
       // OVDJE LOOPAM KROZ ODGOVORE I IZVLACIM IZ NJIH USERNAME
       for (var i = 0; i < answers.length; i++) {

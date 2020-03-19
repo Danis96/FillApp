@@ -70,7 +70,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
   }
 
   onPressed() {
-    print(widget.answersList[widget.index]);
+    //print(widget.answersList[widget.index]);
     answersFromSummary = widget.answersList[widget.index].toString();
     //answersFromSummary = answersFromSummaryString.split(', ');
     print(answersFromSummary);
