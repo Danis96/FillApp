@@ -35,6 +35,8 @@ class MultipleChoiceSurveyChoices extends StatefulWidget {
 List<dynamic> multipleAnswers = [];
 
 class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
+  int btnCounter;
+
   @override
   void initState() {
     super.initState();
@@ -42,6 +44,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     isTappedMCQ2 = false;
     isTappedMCQ3 = false;
     isTappedMCQ4 = false;
+    btnCounter = 0;
   }
 
   listAnswers() {
@@ -53,7 +56,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   @override
   Widget build(BuildContext context) {
     String index = widget.index;
-    //print(answersFromSummary.length);
+    print(isSingle.toString() + 'Is single');
     return isSummary
         ? EmptyContainer()
         : Column(
@@ -71,7 +74,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                                 Border.all(width: 1.0, color: MyColor().black),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(100)),
-                            //color: isTappedMCQ1 || isTappedMCQ2 || isTappedMCQ3 || isTappedMCQ4 ? MyColor().white : MyColor().black),
                             color: index == 'A'
                                 ? isTappedMCQ1
                                     ? MyColor().white
@@ -128,14 +130,16 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                       onTap: () => isSummary
                           ? null
                           : {
-                              if (isSingle == 1)
+                              if(isSingle == 1)
                                 {
                                   onSwitchSingle(),
                                 }
-                              else
+                              else if(isSingle == 0)
                                 {
                                   onSwitchMultiple(),
                                 }
+                              else
+                                null
                             })),
               isSummary
                   ? EmptyContainer()
