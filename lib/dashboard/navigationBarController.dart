@@ -31,7 +31,7 @@ import '../routes/routeConstants.dart';
 
 bool isTab1Selected = true;
 bool isTab2Selected = false;
-bool isLoading = true;
+bool isLoading = true, showData = false;
 DocumentSnapshot snap;
 int isAnonymous, usersSars;
 bool isUserInDB = true, isReadOnly = false;
@@ -97,7 +97,7 @@ class _BottomNavigationBarControllerState
                 usersSars = snap.data['sar'];
                 cc = snap.data['cc'];
                 usersName = snap.data['name_and_surname'];
-                print(usersName + 'OVO JE USEROV NAME');
+
                 usersDOB = snap.data['date_of_birth'];
                 usersEmail = snap.data['email'];
                 usersCard = snap.data['card_number'];
@@ -112,6 +112,16 @@ class _BottomNavigationBarControllerState
   }
 
   settingStates() {
+    if (usersName != '') {
+      setState(() {
+        showData = true;
+      });
+    } else {
+      setState(() {
+        showData = false;
+      });
+    }
+
     /// State 1
     ///
     /// user anonymous
@@ -174,6 +184,7 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
+            showData: showData,
             usersName: usersName,
             usersEmail: usersEmail,
             usersCard: usersCard,

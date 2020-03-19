@@ -66,6 +66,20 @@ class QuestionsForSurvey {
           ]
         },
         {
+          "title": "Who is/are your favourite player(s)?",
+          "type": "mcq",
+          "is_single": 1,
+          "sar": 15,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Cristiano Ronaldo"},
+            {"value": "item2", "text": "Lionel Messi"},
+            {"value": "item3", "text": "Mohamed Salah"},
+            {"value": "item4", "text": "Edin Džeko"},
+          ]
+        },
+        {
           "title": "Do you love your job",
           "type": "input",
           "sar": 10,
@@ -346,6 +360,20 @@ class QuestionsForSurvey {
         //   ]
         // },
         {
+          "title": "Who is/are your favourite player(s)?",
+          "type": "mcq",
+          "is_single": 0,
+          "sar": 10,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Cristiano Ronaldo"},
+            {"value": "item2", "text": "Lionel Messi"},
+            {"value": "item3", "text": "Mohamed Salah"},
+            {"value": "item4", "text": "Edin Džeko"},
+          ]
+        },
+        {
           "title": "Do you love your job",
           "type": "input",
           "sar": 10,
@@ -408,34 +436,7 @@ class QuestionsForSurvey {
             {"value": "item3", "text": "PSG"},
           ]
         },
-        {
-          "title": "Who is/are your favourite player(s)?",
-          "type": "mcq",
-          "is_single": 0,
-          "sar": 10,
-          "is_branching": "",
-          "choice_to_exit": "",
-          "choices": [
-            {"value": "item1", "text": "Cristiano Ronaldo"},
-            {"value": "item2", "text": "Lionel Messi"},
-            {"value": "item3", "text": "Mohamed Salah"},
-            {"value": "item4", "text": "Edin Džeko"},
-          ]
-        },
-        {
-          "title": "Who is/are your favourite player(s)?",
-          "type": "mcq",
-          "is_single": 1,
-          "sar": 15,
-          "is_branching": "",
-          "choice_to_exit": "",
-          "choices": [
-            {"value": "item1", "text": "Cristiano Ronaldo"},
-            {"value": "item2", "text": "Lionel Messi"},
-            {"value": "item3", "text": "Mohamed Salah"},
-            {"value": "item4", "text": "Edin Džeko"},
-          ]
-        },
+        
         {
           "title": "What is your favourite club?",
           "type": "mcq",

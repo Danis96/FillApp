@@ -35,7 +35,7 @@ class Profile extends StatefulWidget {
       usersCardDate,
       usersDOB,
       usersCC;
-  final bool isReadOnly;
+  final bool isReadOnly, showData;
   Profile({
     Key key,
     this.arguments,
@@ -48,6 +48,7 @@ class Profile extends StatefulWidget {
     this.usersDOB,
     this.usersEmail,
     this.usersName,
+    this.showData,
   }) : super(key: key);
 
   @override
@@ -57,18 +58,12 @@ class Profile extends StatefulWidget {
 RegExp regexEmail = new RegExp(
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 
-TextEditingController controllerName =
-    TextEditingController(text: cc != '' ? usersName : '');
-TextEditingController controllerDOB =
-    TextEditingController(text: cc != '' ? usersDOB : '');
-TextEditingController controllerEmail =
-    TextEditingController(text: cc != '' ? usersEmail : '');
-TextEditingController controllerCreditCard =
-    TextEditingController(text: cc != '' ? usersCard : '');
-TextEditingController controllerDate =
-    TextEditingController(text: cc != '' ? usersCardDate : '');
-TextEditingController controllerCC =
-    TextEditingController(text: cc != '' ? usersCC : '');
+TextEditingController controllerName = TextEditingController();
+TextEditingController controllerDOB = TextEditingController();
+TextEditingController controllerEmail = TextEditingController();
+TextEditingController controllerCreditCard = TextEditingController();
+TextEditingController controllerDate = TextEditingController();
+TextEditingController controllerCC = TextEditingController();
 
 var maskTextInputFormatterCard =
     MaskTextInputFormatter(mask: '####-####-####-####');
@@ -113,9 +108,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    print(anonym);
-    print(widget.arguments.username);
-    print(usersSars);
+    print(usersName);
 
     Widget bigCircle = Container(
       width: ScreenUtil.instance.setWidth(198.0),
@@ -226,13 +219,15 @@ class _ProfileState extends State<Profile> {
                   enableSuggestions: false,
                   textCapitalization: TextCapitalization.sentences,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerName,
+                  controller: controllerName
+                    ..text = showData == true ? usersName : '',
                   decoration: InputDecoration(
+                    labelText: 'Name and Surname',
                     counterText: '',
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    labelText: 'Enter your name',
+                    //  / labelText: usersName != '' ? null : 'Enter name and surname',
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -301,7 +296,7 @@ class _ProfileState extends State<Profile> {
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerDOB,
+                   controller: controllerDOB..text = showData == true ? usersDOB : '',
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -350,7 +345,7 @@ class _ProfileState extends State<Profile> {
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerEmail,
+                   controller: controllerEmail..text = showData == true ? usersEmail : '',
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -409,7 +404,7 @@ class _ProfileState extends State<Profile> {
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerCreditCard,
+                  controller: controllerCreditCard..text = showData == true ? usersCard : '',
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -462,7 +457,7 @@ class _ProfileState extends State<Profile> {
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
-                      controller: controllerDate,
+                      controller: controllerDate..text = showData == true ? usersCardDate : '',
                       decoration: InputDecoration(
                         counterText: '',
                         hasFloatingPlaceholder: false,
@@ -515,7 +510,7 @@ class _ProfileState extends State<Profile> {
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
-                      controller: controllerCC,
+                      controller: controllerCC..text = showData == true ? usersCC : '',
                       decoration: InputDecoration(
                         counterText: '',
                         hasFloatingPlaceholder: false,
