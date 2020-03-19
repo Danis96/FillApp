@@ -23,6 +23,7 @@ import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/register/passwordPage.dart';
+import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
@@ -67,7 +68,7 @@ class _EmailPageState extends State<EmailPage> {
           onPressed: () {
             Navigator.of(context).push(
               CardAnimationTween(
-                widget: PasswordPage(
+                widget: VerifyPinPage(
                     arguments: RegisterArguments(
                         verId: widget.arguments.verId,
                         username: widget.arguments.username,
@@ -218,14 +219,15 @@ class _EmailPageState extends State<EmailPage> {
     final _formState = _formKey.currentState;
     if (_formState.validate()) {
       if (_btnCounter == 0) {
-        Navigator.of(context).pushNamed(Password,
-            arguments: RegisterArguments(
+            Navigator.of(context).push(
+              CardAnimationTween(
+                widget: PasswordPage( arguments: RegisterArguments(
               email: email,
               verId: widget.arguments.verId,
               username: widget.arguments.username,
               usernameSecond: widget.arguments.usernameSecond,
               phone: widget.arguments.phone,
-            ));
+            ))));
         _btnCounter = 1;
         Timer(Duration(seconds: 2), () {
           _btnCounter = 0;

@@ -21,6 +21,7 @@ import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/register/emailPage.dart';
+import 'package:fillproject/register/registerPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
@@ -217,10 +218,14 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                           fontWeight: FontWeight.w300),
                       recognizer: new TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.of(context).pushNamed(Register,
-                              arguments: DidntRecievePinArguments(
-                                  phone: widget.arguments.phone,
-                                  username: widget.arguments.username));
+                          Navigator.of(context).push(
+                            CardAnimationTween(
+                              widget: RegisterPage(
+                                  arguments: DidntRecievePinArguments(
+                                      phone: widget.arguments.phone,
+                                      username: widget.arguments.username)),
+                            ),
+                          );
                         })
                 ]))),
           ],
