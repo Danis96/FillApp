@@ -52,6 +52,12 @@ class _BottomNavigationBarControllerState
   final PasswordArguments arguments;
   _BottomNavigationBarControllerState({Key key, this.arguments});
 
+  @override
+  void initState() { 
+    super.initState();
+    isOnSummary = false;
+  }
+
   Widget doesUserExist(String username) {
     return Container(
       height: 0,

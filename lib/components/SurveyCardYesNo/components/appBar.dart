@@ -2,6 +2,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,9 @@ class SurveyAppBar extends StatelessWidget {
   final Function notifyParent, animateTo;
   final List<dynamic> questions;
   final int totalSar, totalProgress;
+  final Survey surveyDoc;
+  List<dynamic> answersList;
+  //final String surveyName;
 
   SurveyAppBar(
       {this.arguments,
@@ -25,7 +29,11 @@ class SurveyAppBar extends StatelessWidget {
       this.animateTo,
       this.totalProgress,
       this.questions,
-      this.totalSar});
+      this.answersList,
+      this.totalSar,
+      this.surveyDoc,
+      //this.surveyName
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +55,23 @@ class SurveyAppBar extends StatelessWidget {
                               phone: arguments.phone,
                               username: arguments.username));
                       isOnSummary = false;
+                      isFutureDone = false;
+                      answersList.removeRange(0, answersList.length);
                     }()
                   : isSummary
                       ? Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => Summary(  
+                          builder: (_) => Summary(
+                            //surveyName: surveyName,
+                            surveyDoc: surveyDoc,
                                 animateTo: animateTo,
                                 questions: questions,
                                 totalProgress: totalProgress,
                                 totalSar: totalSar,
+                                arguments: PasswordArguments(
+                                    email: arguments.email,
+                                    password: arguments.password,
+                                    phone: arguments.phone,
+                                    username: arguments.username),
                               )))
                       : showDialog(
                           context: context,
