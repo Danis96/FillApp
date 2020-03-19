@@ -9,8 +9,10 @@ import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoice
 import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
+import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
+import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -304,32 +306,58 @@ Widget yesnoWidget(
   Function isCompleted,
   List<dynamic> answers,
 ) {
-  return Column(
-    children: <Widget>[
-      SurveyChoices(
-        complete: isCompleted,
-        arguments: widget.arguments,
-        branching: branching,
-        branchingChoice: branchingChoice,
-        choice1: widget.snapQuestions[index]['choices'][0]['text'],
-        notifyParent: refresh,
-        username: widget.username,
-        title: widget.snapQuestions[index]['title'],
-        doc: widget.doc,
-      ),
-      SurveyChoices(
-        complete: isCompleted,
-        arguments: widget.arguments,
-        branching: branching,
-        branchingChoice: branchingChoice,
-        choice1: widget.snapQuestions[index]['choices'][1]['text'],
-        notifyParent: refresh,
-        username: widget.username,
-        title: widget.snapQuestions[index]['title'],
-        doc: widget.doc,
-      ),
-    ],
-  );
+  return isSummary
+      ? Container(
+          //key: ValueKey(widget.title),
+          margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
+          width: ScreenUtil.instance.setWidth(303.0),
+          height: ScreenUtil.instance.setWidth(58.0),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(29)),
+              color: MyColor().white),
+          child: RaisedButton(
+              hoverColor: MyColor().black,
+              color: MyColor().black,
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(28.0),
+              ),
+              child: Text(answersFromSummary.toString(),
+                  style: TextStyle(
+                      color: MyColor().white,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "LoewNextArabic",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 18.0),
+                  textAlign: TextAlign.center),
+              onPressed: () => null),
+        )
+      : Column(
+          children: <Widget>[
+            SurveyChoices(
+              complete: isCompleted,
+              arguments: widget.arguments,
+              branching: branching,
+              branchingChoice: branchingChoice,
+              choice1: widget.snapQuestions[index]['choices'][0]['text'],
+              notifyParent: refresh,
+              username: widget.username,
+              title: widget.snapQuestions[index]['title'],
+              doc: widget.doc,
+            ),
+            SurveyChoices(
+              complete: isCompleted,
+              arguments: widget.arguments,
+              branching: branching,
+              branchingChoice: branchingChoice,
+              choice1: widget.snapQuestions[index]['choices'][1]['text'],
+              notifyParent: refresh,
+              username: widget.username,
+              title: widget.snapQuestions[index]['title'],
+              doc: widget.doc,
+            ),
+          ],
+        );
 }
 
 /// mcq widget choices
@@ -342,85 +370,153 @@ Widget mcqWidget(
   List<dynamic> choicesList = widget.snapQuestions[index]['choices'];
   int numberOfChoices = choicesList.length;
   if (numberOfChoices == 3) {
-    return Column(
-      children: <Widget>[
-        MultipleChoiceSurveyChoices(
-          length: numberOfChoices,
-          isSingle: isSingle,
-          index: 'A',
-          choice1: widget.snapQuestions[index]['choices'][0]['text'],
-          notifyParent: refresh,
-          username: widget.username,
-          title: widget.snapQuestions[index]['title'],
-          doc: widget.doc,
-        ),
-        MultipleChoiceSurveyChoices(
-          length: numberOfChoices,
-          isSingle: isSingle,
-          index: 'B',
-          choice1: widget.snapQuestions[index]['choices'][1]['text'],
-          notifyParent: refresh,
-          username: widget.username,
-          title: widget.snapQuestions[index]['title'],
-          doc: widget.doc,
-        ),
-        MultipleChoiceSurveyChoices(
-          length: numberOfChoices,
-          isSingle: isSingle,
-          index: 'C',
-          choice1: widget.snapQuestions[index]['choices'][2]['text'],
-          notifyParent: refresh,
-          username: widget.username,
-          title: widget.snapQuestions[index]['title'],
-          doc: widget.doc,
-        ),
-      ],
-    );
+    return isSummary
+        ? Container(
+            //key: ValueKey(widget.choice1),
+            width: ScreenUtil.instance.setWidth(350.0),
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+            child: ListTile(
+                leading: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1.0, color: MyColor().black),
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                      //color: isTappedMCQ1 || isTappedMCQ2 || isTappedMCQ3 || isTappedMCQ4 ? MyColor().white : MyColor().black),
+                      color: MyColor().black),
+                  height: ScreenUtil.instance.setHeight(58.0),
+                  width: ScreenUtil.instance.setWidth(58.0),
+                  child: Text('A',
+                      style: TextStyle(
+                          color: MyColor().white,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "LoewNextArabic",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 18.0)),
+                ),
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(answersFromSummary,
+                      style: TextStyle(
+                          color: MyColor().black,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "LoewNextArabic",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 18.0)),
+                ),
+                onTap: () => null))
+        : Column(
+            children: <Widget>[
+              MultipleChoiceSurveyChoices(
+                length: numberOfChoices,
+                isSingle: isSingle,
+                index: 'A',
+                choice1: widget.snapQuestions[index]['choices'][0]['text'],
+                notifyParent: refresh,
+                username: widget.username,
+                title: widget.snapQuestions[index]['title'],
+                doc: widget.doc,
+              ),
+              MultipleChoiceSurveyChoices(
+                length: numberOfChoices,
+                isSingle: isSingle,
+                index: 'B',
+                choice1: widget.snapQuestions[index]['choices'][1]['text'],
+                notifyParent: refresh,
+                username: widget.username,
+                title: widget.snapQuestions[index]['title'],
+                doc: widget.doc,
+              ),
+              MultipleChoiceSurveyChoices(
+                length: numberOfChoices,
+                isSingle: isSingle,
+                index: 'C',
+                choice1: widget.snapQuestions[index]['choices'][2]['text'],
+                notifyParent: refresh,
+                username: widget.username,
+                title: widget.snapQuestions[index]['title'],
+                doc: widget.doc,
+              ),
+            ],
+          );
   } else {
-    return Column(
-      children: <Widget>[
-        MultipleChoiceSurveyChoices(
-          length: numberOfChoices,
-          isSingle: isSingle,
-          index: 'A',
-          choice1: widget.snapQuestions[index]['choices'][0]['text'],
-          notifyParent: refresh,
-          username: widget.username,
-          title: widget.snapQuestions[index]['title'],
-          doc: widget.doc,
-        ),
-        MultipleChoiceSurveyChoices(
-          length: numberOfChoices,
-          isSingle: isSingle,
-          index: 'B',
-          choice1: widget.snapQuestions[index]['choices'][1]['text'],
-          notifyParent: refresh,
-          username: widget.username,
-          title: widget.snapQuestions[index]['title'],
-          doc: widget.doc,
-        ),
-        MultipleChoiceSurveyChoices(
-          length: numberOfChoices,
-          isSingle: isSingle,
-          index: 'C',
-          choice1: widget.snapQuestions[index]['choices'][2]['text'],
-          notifyParent: refresh,
-          username: widget.username,
-          title: widget.snapQuestions[index]['title'],
-          doc: widget.doc,
-        ),
-        MultipleChoiceSurveyChoices(
-          length: numberOfChoices,
-          isSingle: isSingle,
-          index: 'D',
-          choice1: widget.snapQuestions[index]['choices'][3]['text'],
-          notifyParent: refresh,
-          username: widget.username,
-          title: widget.snapQuestions[index]['title'],
-          doc: widget.doc,
-        ),
-      ],
-    );
+    return isSummary
+        ? Container(
+            //key: ValueKey(widget.choice1),
+            width: ScreenUtil.instance.setWidth(350.0),
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+            child: ListTile(
+                leading: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1.0, color: MyColor().black),
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                      //color: isTappedMCQ1 || isTappedMCQ2 || isTappedMCQ3 || isTappedMCQ4 ? MyColor().white : MyColor().black),
+                      color: MyColor().black),
+                  height: ScreenUtil.instance.setHeight(58.0),
+                  width: ScreenUtil.instance.setWidth(58.0),
+                  child: Text('A',
+                      style: TextStyle(
+                          color: MyColor().white,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: "LoewNextArabic",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 18.0)),
+                ),
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(answersFromSummary,
+                      style: TextStyle(
+                          color: MyColor().black,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: "LoewNextArabic",
+                          fontStyle: FontStyle.normal,
+                          fontSize: 18.0)),
+                ),
+                onTap: () => null))
+        : Column(
+            children: <Widget>[
+              MultipleChoiceSurveyChoices(
+                length: numberOfChoices,
+                isSingle: isSingle,
+                index: 'A',
+                choice1: widget.snapQuestions[index]['choices'][0]['text'],
+                notifyParent: refresh,
+                username: widget.username,
+                title: widget.snapQuestions[index]['title'],
+                doc: widget.doc,
+              ),
+              MultipleChoiceSurveyChoices(
+                length: numberOfChoices,
+                isSingle: isSingle,
+                index: 'B',
+                choice1: widget.snapQuestions[index]['choices'][1]['text'],
+                notifyParent: refresh,
+                username: widget.username,
+                title: widget.snapQuestions[index]['title'],
+                doc: widget.doc,
+              ),
+              MultipleChoiceSurveyChoices(
+                length: numberOfChoices,
+                isSingle: isSingle,
+                index: 'C',
+                choice1: widget.snapQuestions[index]['choices'][2]['text'],
+                notifyParent: refresh,
+                username: widget.username,
+                title: widget.snapQuestions[index]['title'],
+                doc: widget.doc,
+              ),
+              MultipleChoiceSurveyChoices(
+                length: numberOfChoices,
+                isSingle: isSingle,
+                index: 'D',
+                choice1: widget.snapQuestions[index]['choices'][3]['text'],
+                notifyParent: refresh,
+                username: widget.username,
+                title: widget.snapQuestions[index]['title'],
+                doc: widget.doc,
+              ),
+            ],
+          );
   }
 }
 
@@ -469,23 +565,76 @@ Widget imageWidget(
   Function refresh,
   int isSingle,
 ) {
-  return Column(
-    children: <Widget>[
-      ImageChoice(
-        notifyParent: refresh,
-        isSingle: isSingle,
-        title: widget.snapQuestions[index]['title'],
-        username: widget.username,
-        choice1: widget.snapQuestions[index]['choices'][0]['text'],
-        choice2: widget.snapQuestions[index]['choices'][1]['text'],
-        choice3: widget.snapQuestions[index]['choices'][2]['text'],
-        choice4: widget.snapQuestions[index]['choices'][3]['text'],
-        text1: widget.snapQuestions[index]['choices'][0]['value'],
-        text2: widget.snapQuestions[index]['choices'][1]['value'],
-        text3: widget.snapQuestions[index]['choices'][2]['value'],
-        text4: widget.snapQuestions[index]['choices'][3]['value'],
-        doc: widget.doc,
-      ),
-    ],
-  );
+  return isSummary
+      ? Stack(
+          children: <Widget>[
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: MyColor().black, width: 3.0),
+                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              ),
+              width: ScreenUtil.instance.setWidth(145.0),
+              height: ScreenUtil.instance.setWidth(145.0),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.transparent, width: 5.0),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0)),
+              ),
+              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(10.0)),
+              width: ScreenUtil.instance.setWidth(140.0),
+              child: EmptyContainer(),
+              // child: isLoading
+              //     ? Container(
+              //         margin: EdgeInsets.only(
+              //             top: ScreenUtil.instance.setWidth(30.0)),
+              //         child: Center(child: CircularProgressIndicator()))
+              //     : Image.network(
+              //         widget.choice1,
+              //         height: ScreenUtil.instance.setHeight(90.0),
+              //         alignment: Alignment.center,
+              //       ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: MyColor().black,
+                border: Border.all(color: MyColor().black, width: 1.0),
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30.0),
+                    bottomRight: Radius.circular(30.0)),
+              ),
+              height: 31.0,
+              width: ScreenUtil.instance.setWidth(141.5),
+              margin: EdgeInsets.only(
+                  top: ScreenUtil.instance.setWidth(113.0),
+                  left: ScreenUtil.instance.setWidth(2.0)),
+              child: Center(
+                  child: Text(answersFromSummary,
+                      style: TextStyle(
+                        color: MyColor().white,
+                      ))),
+            ),
+          ],
+        )
+      : Column(
+          children: <Widget>[
+            ImageChoice(
+              notifyParent: refresh,
+              isSingle: isSingle,
+              title: widget.snapQuestions[index]['title'],
+              username: widget.username,
+              choice1: widget.snapQuestions[index]['choices'][0]['text'],
+              choice2: widget.snapQuestions[index]['choices'][1]['text'],
+              choice3: widget.snapQuestions[index]['choices'][2]['text'],
+              choice4: widget.snapQuestions[index]['choices'][3]['text'],
+              text1: widget.snapQuestions[index]['choices'][0]['value'],
+              text2: widget.snapQuestions[index]['choices'][1]['value'],
+              text3: widget.snapQuestions[index]['choices'][2]['value'],
+              text4: widget.snapQuestions[index]['choices'][3]['value'],
+              doc: widget.doc,
+            ),
+          ],
+        );
 }
