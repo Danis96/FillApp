@@ -47,121 +47,171 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   @override
   Widget build(BuildContext context) {
     String index = widget.index;
-    return Column(
-      children: <Widget>[
-        Container(
-           key: ValueKey(widget.choice1),
-            width: ScreenUtil.instance.setWidth(350.0),
-            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
-            child: ListTile(
-                leading: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      border: Border.all(width: 1.0, color: MyColor().black),
-                      borderRadius: BorderRadius.all(Radius.circular(100)),
-                      //color: isTappedMCQ1 || isTappedMCQ2 || isTappedMCQ3 || isTappedMCQ4 ? MyColor().white : MyColor().black),
-                      color: index == 'A'
-                          ? isTappedMCQ1 ? MyColor().white : MyColor().black
-                          : index == 'B'
-                              ? isTappedMCQ2 ? MyColor().white : MyColor().black
-                              : index == 'C'
-                                  ? isTappedMCQ3
-                                      ? MyColor().white
-                                      : MyColor().black
-                                  : index == 'D'
-                                      ? isTappedMCQ4
-                                          ? MyColor().white
-                                          : MyColor().black
-                                      : null),
-                  height: ScreenUtil.instance.setHeight(58.0),
-                  width: ScreenUtil.instance.setWidth(58.0),
-                  child: Text(widget.index,
-                      style: TextStyle(
-                          color: index == 'A'
-                              ? isTappedMCQ1 ? MyColor().black : MyColor().white
-                              : index == 'B'
-                                  ? isTappedMCQ2
-                                      ? MyColor().black
-                                      : MyColor().white
-                                  : index == 'C'
-                                      ? isTappedMCQ3
-                                          ? MyColor().black
-                                          : MyColor().white
-                                      : index == 'D'
-                                          ? isTappedMCQ4
-                                              ? MyColor().black
-                                              : MyColor().white
-                                          : null,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "LoewNextArabic",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 18.0)),
-                ),
-                title: Container(
-                  alignment: Alignment.centerLeft,
-                  child: Text(widget.choice1,
-                      style: TextStyle(
-                          color: MyColor().black,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: "LoewNextArabic",
-                          fontStyle: FontStyle.normal,
-                          fontSize: 18.0)),
-                ),
-                onTap: () => isSummary
-                    ? null
-                    : {
-                        if (isSingle == 1)
-                          {
-                            onSwitchSingle(),
-                          }
-                        else
-                          {
-                            onSwitchMultiple(),
-                          }
-                      })),
-        isSummary
-            ? EmptyContainer()
-            : widget.isSingle == 1
-                ? EmptyContainer()
-                : widget.length == 3 && widget.index == 'C'
-                    ? Container(
-                        width: ScreenUtil.instance.setWidth(316.0),
-                        height: ScreenUtil.instance.setHeight(55.0),
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil.instance.setWidth(20.0),
-                            left: ScreenUtil.instance.setWidth(54.0),
-                            right: ScreenUtil.instance.setWidth(55.0)),
-                        child: RaisedButton(
-                          color: MyColor().black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(33.5),
+    print(answersFromSummary.length);
+    return isSummary
+        ? Container(
+            child: ListView.builder(
+              shrinkWrap: true,
+                itemCount: answersFromSummary.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                      width: ScreenUtil.instance.setWidth(350.0),
+                      margin: EdgeInsets.only(
+                          top: ScreenUtil.instance.setWidth(15.0)),
+                      child: ListTile(
+                          leading: Container(
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1.0, color: MyColor().black),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(100)),
+                                //color: isTappedMCQ1 || isTappedMCQ2 || isTappedMCQ3 || isTappedMCQ4 ? MyColor().white : MyColor().black),
+                                color: MyColor().black),
+                            height: ScreenUtil.instance.setHeight(58.0),
+                            width: ScreenUtil.instance.setWidth(58.0),
+                            child: Text('',
+                                style: TextStyle(color: MyColor().white)),
                           ),
-                          onPressed: () => submit(),
-                          child: Text(MyText().btnSubmit,
-                              style: TextStyle(
-                                  fontSize: 18, color: MyColor().white)),
-                        ))
-                    : widget.length == 4 && widget.index == 'D'
-                        ? Container(
-                            width: ScreenUtil.instance.setWidth(316.0),
-                            height: ScreenUtil.instance.setHeight(55.0),
-                            margin: EdgeInsets.only(
-                                top: ScreenUtil.instance.setWidth(20.0),
-                                left: ScreenUtil.instance.setWidth(54.0),
-                                right: ScreenUtil.instance.setWidth(55.0)),
-                            child: RaisedButton(
-                              color: MyColor().black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(33.5),
-                              ),
-                              onPressed: () => submit(),
-                              child: Text(MyText().btnSubmit,
-                                  style: TextStyle(
-                                      fontSize: 18, color: MyColor().white)),
-                            ))
-                        : EmptyContainer()
-      ],
-    );
+                          title: Container(
+                            alignment: Alignment.centerLeft,
+                            child: Text(widget.choice1,
+                                style: TextStyle(
+                                    color: MyColor().black,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: "LoewNextArabic",
+                                    fontStyle: FontStyle.normal,
+                                    fontSize: 18.0)),
+                          ),
+                          onTap: () => null));
+                }))
+        : Column(
+            children: <Widget>[
+              Container(
+                  key: ValueKey(widget.choice1),
+                  width: ScreenUtil.instance.setWidth(350.0),
+                  margin:
+                      EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+                  child: ListTile(
+                      leading: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            border:
+                                Border.all(width: 1.0, color: MyColor().black),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100)),
+                            //color: isTappedMCQ1 || isTappedMCQ2 || isTappedMCQ3 || isTappedMCQ4 ? MyColor().white : MyColor().black),
+                            color: index == 'A'
+                                ? isTappedMCQ1
+                                    ? MyColor().white
+                                    : MyColor().black
+                                : index == 'B'
+                                    ? isTappedMCQ2
+                                        ? MyColor().white
+                                        : MyColor().black
+                                    : index == 'C'
+                                        ? isTappedMCQ3
+                                            ? MyColor().white
+                                            : MyColor().black
+                                        : index == 'D'
+                                            ? isTappedMCQ4
+                                                ? MyColor().white
+                                                : MyColor().black
+                                            : null),
+                        height: ScreenUtil.instance.setHeight(58.0),
+                        width: ScreenUtil.instance.setWidth(58.0),
+                        child: Text(widget.index,
+                            style: TextStyle(
+                                color: index == 'A'
+                                    ? isTappedMCQ1
+                                        ? MyColor().black
+                                        : MyColor().white
+                                    : index == 'B'
+                                        ? isTappedMCQ2
+                                            ? MyColor().black
+                                            : MyColor().white
+                                        : index == 'C'
+                                            ? isTappedMCQ3
+                                                ? MyColor().black
+                                                : MyColor().white
+                                            : index == 'D'
+                                                ? isTappedMCQ4
+                                                    ? MyColor().black
+                                                    : MyColor().white
+                                                : null,
+                                fontWeight: FontWeight.w500,
+                                fontFamily: "LoewNextArabic",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 18.0)),
+                      ),
+                      title: Container(
+                        alignment: Alignment.centerLeft,
+                        child: Text(widget.choice1,
+                            style: TextStyle(
+                                color: MyColor().black,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: "LoewNextArabic",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 18.0)),
+                      ),
+                      onTap: () => isSummary
+                          ? null
+                          : {
+                              if (isSingle == 1)
+                                {
+                                  onSwitchSingle(),
+                                }
+                              else
+                                {
+                                  onSwitchMultiple(),
+                                }
+                            })),
+              isSummary
+                  ? EmptyContainer()
+                  : widget.isSingle == 1
+                      ? EmptyContainer()
+                      : widget.length == 3 && widget.index == 'C'
+                          ? Container(
+                              width: ScreenUtil.instance.setWidth(316.0),
+                              height: ScreenUtil.instance.setHeight(55.0),
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(20.0),
+                                  left: ScreenUtil.instance.setWidth(54.0),
+                                  right: ScreenUtil.instance.setWidth(55.0)),
+                              child: RaisedButton(
+                                color: MyColor().black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(33.5),
+                                ),
+                                onPressed: () => submit(),
+                                child: Text(MyText().btnSubmit,
+                                    style: TextStyle(
+                                        fontSize: 18, color: MyColor().white)),
+                              ))
+                          : widget.length == 4 && widget.index == 'D'
+                              ? Container(
+                                  width: ScreenUtil.instance.setWidth(316.0),
+                                  height: ScreenUtil.instance.setHeight(55.0),
+                                  margin: EdgeInsets.only(
+                                      top: ScreenUtil.instance.setWidth(20.0),
+                                      left: ScreenUtil.instance.setWidth(54.0),
+                                      right:
+                                          ScreenUtil.instance.setWidth(55.0)),
+                                  child: RaisedButton(
+                                    color: MyColor().black,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(33.5),
+                                    ),
+                                    onPressed: () => submit(),
+                                    child: Text(MyText().btnSubmit,
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            color: MyColor().white)),
+                                  ))
+                              : EmptyContainer()
+            ],
+          );
   }
 
   onSwitchSingle() {
@@ -228,7 +278,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
-   
+
     widget.notifyParent();
   }
 
@@ -266,7 +316,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
- 
+
     widget.notifyParent();
   }
 
@@ -285,7 +335,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
-    
+
     widget.notifyParent();
   }
 
