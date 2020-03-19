@@ -39,7 +39,8 @@ class FirebaseCrud {
       'date_of_birth': '',
       'card_number': '',
       'expire_date': '',
-      'cc': ''
+      'cc': '',
+      'email_profile' : ''
     });
   }
 
@@ -64,7 +65,7 @@ class FirebaseCrud {
   updateUserOnCompletePRofile(DocumentSnapshot doc, String nameSurname, String dateOfBirth, String email,
       String cardNumber, String expireDate, String cc, int sar, int tSar) async {
     await db.collection('Users').document(doc.documentID).updateData({
-      'email': email,
+      'email_profile': email,
       'name_and_surname': nameSurname,
       'date_of_birth': dateOfBirth,
       'card_number': cardNumber,
@@ -74,6 +75,7 @@ class FirebaseCrud {
       'transferSar': tSar 
     });
   }  
+
 
   /// [updatePassword]
   ///

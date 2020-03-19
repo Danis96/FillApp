@@ -37,6 +37,7 @@ class Summary extends StatefulWidget {
   final PasswordArguments arguments;
   final DocumentSnapshot doc;
   final Survey surveyDoc;
+  final String usernameSecond;
   String surveyName;
   Summary(
       {this.totalSar,
@@ -47,6 +48,7 @@ class Summary extends StatefulWidget {
       this.userLevel,
       this.usernameAnswers,
       this.doc,
+      this.usernameSecond,
       this.surveyDoc,
       this.surveyName});
 
@@ -68,20 +70,10 @@ class _SummaryState extends State<Summary> {
   void initState() {
     super.initState();
     isOnSummary = true;
-    //surveyName = widget.surveyDoc.name;
-    //surveyGroupName = widget.surveyDoc.name;
-    //print(widget.surveyDoc.usersAnswers);
   }
 
   @override
   Widget build(BuildContext context) {
-
-    if (isFutureDone == false) {
-      print('IZVRŠAVAM ISFUTUREDONE');
-      setState(() {
-        isFutureDone = true;
-      });
-    }
     Constant().responsive(context);
     //OVDJE PRAZNIM LISTU KADA PONOVO DODJEM NA SUMMARY KAKO NE BI MIJEŠAO ODGOVORE OD RANIJIH SRUVEYA
     answersList.removeRange(0, answersList.length);
@@ -89,18 +81,13 @@ class _SummaryState extends State<Summary> {
       // OVDJE LOOPAM KROZ ODGOVORE I IZVLACIM IZ NJIH USERNAME
       for (var i = 0; i < answers.length; i++) {
         userAnswers = answers[i].toString();
-        // //print(userAnswers);
         userAnswersSplitted = userAnswers.split(' : ');
         usernameThatAnswers = userAnswersSplitted[2];
-        //print(usernameThatAnswers);
-        // // /// usernameSecond treba
-        //if (answersList == []) {
         // OVDJE NA OSNOVU USERNAME IZVLACIM ODGOVORE I SMJESTAM IH U LISTU KOJU PRINTAM
-        if (userAnswersSplitted[2] == currentUsername) {
+        if (userAnswersSplitted[2] == currentUsername || userAnswersSplitted[2] == widget.usernameSecond) {
           //print(answers[i]);
           answersList.add(userAnswersSplitted[1]);
         }
-        // }
       }
       printList();
     });
@@ -136,8 +123,6 @@ class _SummaryState extends State<Summary> {
                           return ListView.builder(
                               itemCount: snapi.length,
                               itemBuilder: (BuildContext context, int index) {
-                                //print(surveyGroupName);
-                                //print(snapi[index].name);
                                 // OVDJE PROVJERAVAM DA LI JE TO SURVEY NA KOJEM SAM I AKO JEST UZIMAM TU LISTU
                                 if (surveyGroupName == snapi[index].name) {
                                   //print('Nasao sam pravi survey!!!!!!!!!!');

@@ -97,9 +97,8 @@ class _BottomNavigationBarControllerState
                 usersSars = snap.data['sar'];
                 cc = snap.data['cc'];
                 usersName = snap.data['name_and_surname'];
-
                 usersDOB = snap.data['date_of_birth'];
-                usersEmail = snap.data['email'];
+                usersEmail = snap.data['email_profile'];
                 usersCard = snap.data['card_number'];
                 usersCardDate = snap.data['expire_date'];
                 usersCC = snap.data['cc'];
@@ -191,7 +190,7 @@ class _BottomNavigationBarControllerState
             usersCardDate: usersCardDate,
             usersDOB: usersDOB,
             usersCC: usersCC,
-            cc: cc,
+            refreshNavbar: refreshNavbar,
             isReadOnly: isReadOnly,
             btnText: btnText,
             arguments: PasswordArguments(
@@ -314,6 +313,13 @@ class _BottomNavigationBarControllerState
         ],
       ),
     );
+  }
+
+  refreshNavbar() {
+     setState(() {
+       key = UniqueKey();
+     });
+     print('JESAM');
   }
 
   /// function for loader

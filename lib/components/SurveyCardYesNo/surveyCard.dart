@@ -34,7 +34,7 @@ class SurveyCard extends StatefulWidget {
   final int total, sarSurvey;
   int userSar;
   int number, userLevel;
-  final String username;
+  final String username, usernameSecond;
   final DocumentSnapshot doc, userDoc;
   final Function isCompleted;
   final Function increaseAnswered;
@@ -48,6 +48,7 @@ class SurveyCard extends StatefulWidget {
       this.total,
       this.sarSurvey,
       this.username,
+      this.usernameSecond,
       this.doc,
       this.isCompleted,
       this.increaseAnswered,
@@ -157,6 +158,7 @@ class _YesNoSurveyState extends State<SurveyCard>
       Navigator.of(context).push(
         DanisAnimationTween(
             widget: Summary(
+          usernameSecond: widget.usernameSecond,
           animateTo: summaryAnimateToPpage,
           questions: widget.snapQuestions,
           totalProgress: widget.total,
