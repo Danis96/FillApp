@@ -103,6 +103,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                 // usernameAnswers: usernameAnswers,
                 surveyDoc: widget.surveyDoc,  
                 userLevel: userLevel,
+                usernameSecond: widget.usernameSecond,
                   notifyParent: refreshState,
                   user: user,
                   userDoc: widget.userDoc,

@@ -36,6 +36,7 @@ class Profile extends StatefulWidget {
       usersDOB,
       usersCC;
   final bool isReadOnly, showData;
+  final Function refreshNavbar;
   Profile({
     Key key,
     this.arguments,
@@ -49,6 +50,7 @@ class Profile extends StatefulWidget {
     this.usersEmail,
     this.usersName,
     this.showData,
+    this.refreshNavbar,
   }) : super(key: key);
 
   @override
@@ -220,7 +222,7 @@ class _ProfileState extends State<Profile> {
                   textCapitalization: TextCapitalization.sentences,
                   style: TextStyle(color: Colors.black),
                   controller: controllerName
-                    ..text = showData == true ? usersName : '',
+                    ..text = usersName,
                   decoration: InputDecoration(
                     labelText: 'Name and Surname',
                     counterText: '',
@@ -296,7 +298,7 @@ class _ProfileState extends State<Profile> {
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                   controller: controllerDOB..text = showData == true ? usersDOB : '',
+                   controller: controllerDOB..text = usersDOB,
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -345,7 +347,7 @@ class _ProfileState extends State<Profile> {
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                   controller: controllerEmail..text = showData == true ? usersEmail : '',
+                   controller: controllerEmail..text = usersEmail ,
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -378,11 +380,6 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
-                  onChanged: (input) {
-                    setState(() {
-                      email = input;
-                    });
-                  },
                   obscureText: false,
                 ),
               ),
@@ -404,7 +401,7 @@ class _ProfileState extends State<Profile> {
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerCreditCard..text = showData == true ? usersCard : '',
+                  controller: controllerCreditCard..text =  usersCard ,
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -457,7 +454,7 @@ class _ProfileState extends State<Profile> {
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
-                      controller: controllerDate..text = showData == true ? usersCardDate : '',
+                      controller: controllerDate..text =  usersCardDate ,
                       decoration: InputDecoration(
                         counterText: '',
                         hasFloatingPlaceholder: false,
@@ -510,7 +507,7 @@ class _ProfileState extends State<Profile> {
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
-                      controller: controllerCC..text = showData == true ? usersCC : '',
+                      controller: controllerCC..text =  usersCC ,
                       decoration: InputDecoration(
                         counterText: '',
                         hasFloatingPlaceholder: false,
@@ -579,14 +576,114 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  onPressed() {
+ 
+  
+
+  btnProfile() {
+    return Container(
+      child: Container(
+        margin: EdgeInsets.only(
+            top: ScreenUtil.instance.setWidth(30.0),
+            bottom: ScreenUtil.instance.setWidth(20.0)),
+        width: ScreenUtil.instance.setWidth(303.0),
+        height: ScreenUtil.instance.setWidth(58.0),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(29)),
+            color: MyColor().white),
+        child: RaisedButton(
+            color: MyColor().black,
+            elevation: 1,
+            shape: RoundedRectangleBorder(
+              borderRadius: new BorderRadius.circular(28.0),
+            ),
+            child: btnText == 'Register'
+                ? Text('Register',
+                    style: TextStyle(
+                        color: MyColor().white,
+                        fontFamily: "LoewNextArabic",
+                        fontStyle: FontStyle.normal,
+                        fontSize: 18.0),
+                    textAlign: TextAlign.center)
+                : btnText == 'Transfer'
+                    ? Text('Transfer',
+                        style: TextStyle(
+                            color: MyColor().white,
+                            fontFamily: "LoewNextArabic",
+                            fontStyle: FontStyle.normal,
+                            fontSize: 18.0),
+                        textAlign: TextAlign.center)
+                    : btnText == 'Complete profile'
+                        ? Text('Complete profile',
+                            style: TextStyle(
+                                color: MyColor().white,
+                                fontFamily: "LoewNextArabic",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 18.0),
+                            textAlign: TextAlign.center)
+                        : Text('Transfer after 100 SAR',
+                            style: TextStyle(
+                                color: MyColor().white,
+                                fontFamily: "LoewNextArabic",
+                                fontStyle: FontStyle.normal,
+                                fontSize: 18.0),
+                            textAlign: TextAlign.center),
+            onPressed: () => onPressed()),
+      ),
+    );
+  }
+
+
+
+ 
+   transferSAR() {
+    FirebaseCrud().updateUserOnCompletePRofile(
+        snap,
+        controllerName.text,
+        controllerDOB.text,
+        controllerEmail.text,
+        controllerCreditCard.text,
+        controllerDate.text,
+        controllerCC.text,
+        0,
+        usersSarovi);
+    setState(() {
+      btnText = 'Transfer after 100';
+    });
+    Timer(Duration(seconds: 1), () {
+      setState(() {
+    
+      });
+    });
+  }
+
+  /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
+  completeProfile() {
+    FirebaseCrud().updateUserOnCompletePRofile(
+      snap,
+      controllerName.text,
+      controllerDOB.text,
+      controllerEmail.text,
+      controllerCreditCard.text,
+      controllerDate.text,
+      controllerCC.text,
+      usersSarovi,
+      0,
+    );
+    setState(() {
+      btnText = 'Transfer';
+    });
+    widget.refreshNavbar();
+    
+  }
+
+   onPressed() {
     name = controllerName.text;
     email = controllerEmail.text;
     dateOfBirth = controllerDOB.text;
     creditCard = controllerCreditCard.text;
     date = controllerDate.text;
     cc = controllerCC.text;
-    FocusScope.of(context).requestFocus(new FocusNode());
+
 
     if (btnText == 'Register') {
       FirebaseCrud().userRegister(context, widget.arguments.username);
@@ -709,96 +806,6 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
-  completeProfile() {
-    FirebaseCrud().updateUserOnCompletePRofile(
-      snap,
-      controllerName.text,
-      controllerDOB.text,
-      controllerEmail.text,
-      controllerCreditCard.text,
-      controllerDate.text,
-      controllerCC.text,
-      usersSarovi,
-      0,
-    );
-    setState(() {
-      btnText = 'Transfer';
-    });
-  }
-
-  transferSAR() {
-    FirebaseCrud().updateUserOnCompletePRofile(
-        snap,
-        controllerName.text,
-        controllerDOB.text,
-        controllerEmail.text,
-        controllerCreditCard.text,
-        controllerDate.text,
-        controllerCC.text,
-        0,
-        usersSarovi);
-    setState(() {
-      btnText = 'Transfer after 100';
-    });
-    Timer(Duration(seconds: 1), () {
-      setState(() {});
-    });
-  }
-
-  btnProfile() {
-    return Container(
-      child: Container(
-        margin: EdgeInsets.only(
-            top: ScreenUtil.instance.setWidth(30.0),
-            bottom: ScreenUtil.instance.setWidth(20.0)),
-        width: ScreenUtil.instance.setWidth(303.0),
-        height: ScreenUtil.instance.setWidth(58.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(29)),
-            color: MyColor().white),
-        child: RaisedButton(
-            color: MyColor().black,
-            elevation: 1,
-            shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(28.0),
-            ),
-            child: btnText == 'Register'
-                ? Text('Register',
-                    style: TextStyle(
-                        color: MyColor().white,
-                        fontFamily: "LoewNextArabic",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 18.0),
-                    textAlign: TextAlign.center)
-                : btnText == 'Transfer'
-                    ? Text('Transfer',
-                        style: TextStyle(
-                            color: MyColor().white,
-                            fontFamily: "LoewNextArabic",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 18.0),
-                        textAlign: TextAlign.center)
-                    : btnText == 'Complete profile'
-                        ? Text('Complete profile',
-                            style: TextStyle(
-                                color: MyColor().white,
-                                fontFamily: "LoewNextArabic",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 18.0),
-                            textAlign: TextAlign.center)
-                        : Text('Transfer after 100 SAR',
-                            style: TextStyle(
-                                color: MyColor().white,
-                                fontFamily: "LoewNextArabic",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 18.0),
-                            textAlign: TextAlign.center),
-            onPressed: () => onPressed()),
-      ),
-    );
-  }
-
   Widget rowBelow = Container(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -817,3 +824,5 @@ class _ProfileState extends State<Profile> {
     ),
   );
 }
+
+
