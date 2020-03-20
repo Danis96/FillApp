@@ -10,7 +10,7 @@ class SummaryAnswerContainer extends StatefulWidget {
   final String question;
   final int index;
   final Function animateTo;
-  final List<dynamic> answersList;
+  List<dynamic> answersList;
   final Survey surveyDoc;
   SummaryAnswerContainer({this.question, this.index, this.animateTo, this.answersList, this.surveyDoc});
 

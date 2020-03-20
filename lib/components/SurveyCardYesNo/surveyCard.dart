@@ -711,7 +711,7 @@ Widget imageWidget(
                                     bottomLeft: Radius.circular(30.0),
                                     bottomRight: Radius.circular(30.0)),
                               ),
-                              height: 31.0,
+                              height: ScreenUtil.instance.setHeight(31.0),
                               width: ScreenUtil.instance.setWidth(141.5),
                               margin: EdgeInsets.only(
                                   top: ScreenUtil.instance.setWidth(113.0),
@@ -787,7 +787,7 @@ Widget imageWidget(
                                     bottomLeft: Radius.circular(30.0),
                                     bottomRight: Radius.circular(30.0)),
                               ),
-                              height: 31.0,
+                              height: ScreenUtil.instance.setHeight(31.0),
                               width: ScreenUtil.instance.setWidth(141.5),
                               margin: EdgeInsets.only(
                                   top: ScreenUtil.instance.setWidth(113.0),
