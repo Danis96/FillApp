@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 String language = 'Arabic';
 
 class LanguageChoose extends StatelessWidget {
+  final Function refresh;
+  LanguageChoose({this.refresh});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,53 +15,64 @@ class LanguageChoose extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Container(
-            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(22.0)),
-            width: ScreenUtil.instance.setWidth(156.0),
-            height: ScreenUtil.instance.setWidth(58.0),
-            decoration: BoxDecoration(
+          GestureDetector(
+            onTap: () {
+              language = 'Arabic';
+              print(language);
+              refresh();
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(22.0)),
+              width: ScreenUtil.instance.setWidth(156.0),
+              height: ScreenUtil.instance.setWidth(58.0),
+              decoration: BoxDecoration(
+                border: Border.all(width: 1.0, color: MyColor().black),
                 borderRadius: BorderRadius.all(Radius.circular(29)),
-                color: MyColor().black),
-            child: RaisedButton(
                 color: language == 'Arabic' ? MyColor().white : MyColor().black,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(28.0),
-                ),
-                child: Text('Arabic',
-                    style: TextStyle(
-                        color: language == 'Arabic' ? MyColor().black : MyColor().white,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "LoewNextArabic",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 18.0),
-                    textAlign: TextAlign.center),
-                onPressed: () => language = 'Arabic'),
+              ),
+              child: Text('Arabic',
+                  style: TextStyle(
+                      color: language == 'Arabic'
+                          ? MyColor().black
+                          : MyColor().white,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "LoewNextArabic",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 18.0),
+                  textAlign: TextAlign.center),
+            ),
           ),
-          Container(
-            margin: EdgeInsets.only(
-                top: ScreenUtil.instance.setWidth(22.0),
-                left: ScreenUtil.instance.setWidth(5.0)),
-            width: ScreenUtil.instance.setWidth(156.0),
-            height: ScreenUtil.instance.setWidth(58.0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(29)),
-                color: MyColor().white),
-            child: RaisedButton(
-                color: language == 'English' ? MyColor().white : MyColor().black,
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(28.0),
-                ),
-                child: Text('English',
-                    style: TextStyle(
-                        color: language == 'English' ? MyColor().black : MyColor().white,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: "LoewNextArabic",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 18.0),
-                    textAlign: TextAlign.center),
-                onPressed: () => language = 'English'),
+          GestureDetector(
+            onTap: () {
+              language = 'English';
+              print(language);
+              refresh();
+            },
+            child: Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.only(
+                  top: ScreenUtil.instance.setWidth(22.0),
+                  left: ScreenUtil.instance.setWidth(5.0)),
+              width: ScreenUtil.instance.setWidth(156.0),
+              height: ScreenUtil.instance.setWidth(58.0),
+              decoration: BoxDecoration(
+                  border: Border.all(width: 1.0, color: MyColor().black),
+                  borderRadius: BorderRadius.all(Radius.circular(29)),
+                  color: language == 'English'
+                      ? MyColor().white
+                      : MyColor().black),
+              child: Text('English',
+                  style: TextStyle(
+                      color: language == 'English'
+                          ? MyColor().black
+                          : MyColor().white,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: "LoewNextArabic",
+                      fontStyle: FontStyle.normal,
+                      fontSize: 18.0),
+                  textAlign: TextAlign.center),
+            ),
           ),
         ],
       ),
