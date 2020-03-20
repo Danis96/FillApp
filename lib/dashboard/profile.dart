@@ -102,6 +102,11 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+  refresh() {
+    print('Refreshujemoo');
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget bigCircle = Container(
@@ -409,7 +414,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               Container(
-                child: LanguageChoose(),
+                child: LanguageChoose(refresh: refresh),
               ),
               Container(
                 width: ScreenUtil.instance.setWidth(316.0),
@@ -626,7 +631,7 @@ class _ProfileState extends State<Profile> {
       child: Container(
         margin: EdgeInsets.only(
             top: ScreenUtil.instance.setWidth(30.0),
-            bottom: ScreenUtil.instance.setWidth(20.0)),
+            bottom: ScreenUtil.instance.setWidth(30.0)),
         width: ScreenUtil.instance.setWidth(303.0),
         height: ScreenUtil.instance.setWidth(58.0),
         decoration: BoxDecoration(
