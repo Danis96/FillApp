@@ -19,3 +19,4 @@ String btnText = '';
 String surveyGroupName = '', currentUsername = '';
 bool isFutureDone = false;
 String answersFromSummary;
+int userLevelForList;

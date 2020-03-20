@@ -98,6 +98,7 @@ class _SurveyState extends State<SurveyPage>
                     itemBuilder: (context, index) {
                       snap = snapshot.data[index];
                       userLevel = snap.data['level'];
+                      userLevelForList = userLevel;
                       usernameSecond = snap.data['username_second'];
                       userSar = snap.data['sar'];
                       if (counter == 0) {

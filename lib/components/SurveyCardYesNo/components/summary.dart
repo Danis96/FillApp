@@ -57,6 +57,7 @@ class Summary extends StatefulWidget {
 }
 
 String title;
+bool toggle = true;
 
 class _SummaryState extends State<Summary> {
   List<dynamic> answers = [];
@@ -85,7 +86,8 @@ class _SummaryState extends State<Summary> {
         userAnswersSplitted = userAnswers.split(' : ');
         usernameThatAnswers = userAnswersSplitted[2];
         // OVDJE NA OSNOVU USERNAME IZVLACIM ODGOVORE I SMJESTAM IH U LISTU KOJU PRINTAM
-        if (userAnswersSplitted[2] == currentUsername || userAnswersSplitted[2] == widget.usernameSecond) {
+        if (userAnswersSplitted[2] == currentUsername ||
+            userAnswersSplitted[2] == widget.usernameSecond) {
           //print(answers[i]);
           answersList.add(userAnswersSplitted[1]);
         }
@@ -100,7 +102,7 @@ class _SummaryState extends State<Summary> {
       height: defaultScreenHeight,
       allowFontScaling: true,
     )..init(context);
-    
+
     return Scaffold(
       backgroundColor: MyColor().black,
       body: Builder(
@@ -115,7 +117,7 @@ class _SummaryState extends State<Summary> {
                   child: FutureBuilder(
                       future: Future.delayed(Duration(milliseconds: 400)).then(
                           (value) => FirebaseCheck()
-                              .getSurveyGroups(widget.userLevel)),
+                              .getSurveyGroups(userLevelForList)),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
                           snapi = snapshot.data
@@ -230,8 +232,28 @@ class _SummaryState extends State<Summary> {
     );
   }
 
+  populateAgain() {
+    for (var i = 0; i < answers.length; i++) {
+      userAnswers = answers[i].toString();
+      userAnswersSplitted = userAnswers.split(' : ');
+      usernameThatAnswers = userAnswersSplitted[2];
+      // OVDJE NA OSNOVU USERNAME IZVLACIM ODGOVORE I SMJESTAM IH U LISTU KOJU PRINTAM
+      if (userAnswersSplitted[2] == currentUsername ||
+          userAnswersSplitted[2] == widget.usernameSecond) {
+        //print(answers[i]);
+        answersList.add(userAnswersSplitted[1]);
+      }
+    }
+    printList();
+  }
+
   printList() {
-    print(answersList);
+    if (answersList == [] || answersList == null || answersList.length == 0) {
+      print('PRAZNA LISTAAAAAAAAAA');
+      setState(() {});
+    } else {
+      print(answersList);
+    }
   }
 
   Future<bool> _onWillPop() async {
