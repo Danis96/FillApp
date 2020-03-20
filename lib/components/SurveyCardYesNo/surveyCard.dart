@@ -630,59 +630,245 @@ Widget imageWidget(
   Function refresh,
   int isSingle,
 ) {
-  return isSummary
-      ? Stack(
+  Widget listMultipleImages() {
+    if (answersFromSummary.substring(0, 1) == '[' &&
+        answersFromSummary.substring(
+                answersFromSummary.length - 1, answersFromSummary.length) ==
+            ']') {
+      answersFromSummary =
+          answersFromSummary.substring(1, answersFromSummary.length - 1);
+    }
+    List<dynamic> listOfAnswers = answersFromSummary.split(', ');
+    List<dynamic> listOfAnswers1 = [];
+    List<dynamic> listOfAnswers2 = [];
+    if (listOfAnswers.length > 2) {
+      listOfAnswers1 = listOfAnswers.sublist(0, 2);
+      listOfAnswers2 = listOfAnswers.sublist(2, listOfAnswers.length);
+    }
+
+    return Padding(
+      padding: EdgeInsets.only(left: ScreenUtil.instance.setWidth(20.0), right: ScreenUtil.instance.setWidth(20.0)),
+      child: Container(
+        height: ScreenUtil.instance.setHeight(460.0),
+        child: Column(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: MyColor().black, width: 3.0),
-                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+              height: ScreenUtil.instance.setHeight(160.0),
+              child: Row(
+                children: <Widget>[
+                  ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: listOfAnswers.length > 2
+                          ? listOfAnswers1.length
+                          : listOfAnswers.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Stack(
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(
+                                  left: ScreenUtil.instance.setWidth(20.0)),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: MyColor().black, width: 3.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0)),
+                              ),
+                              width: ScreenUtil.instance.setWidth(145.0),
+                              height: ScreenUtil.instance.setWidth(145.0),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.transparent, width: 5.0),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30.0),
+                                    topRight: Radius.circular(30.0)),
+                              ),
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(10.0),
+                                  left: ScreenUtil.instance.setWidth(20.0)),
+                              width: ScreenUtil.instance.setWidth(140.0),
+                              child: EmptyContainer(),
+                              // child: isLoading
+                              //     ? Container(
+                              //         margin: EdgeInsets.only(
+                              //             top: ScreenUtil.instance.setWidth(30.0)),
+                              //         child: Center(child: CircularProgressIndicator()))
+                              //     : Image.network(
+                              //         widget.choice1,
+                              //         height: ScreenUtil.instance.setHeight(90.0),
+                              //         alignment: Alignment.center,
+                              //       ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: MyColor().black,
+                                border:
+                                    Border.all(color: MyColor().black, width: 1.0),
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(30.0),
+                                    bottomRight: Radius.circular(30.0)),
+                              ),
+                              height: 31.0,
+                              width: ScreenUtil.instance.setWidth(141.5),
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(113.0),
+                                  left: ScreenUtil.instance.setWidth(22.0)),
+                              child: Center(
+                                  child: Text(listOfAnswers[index],
+                                      style: TextStyle(
+                                        color: MyColor().white,
+                                      ))),
+                            ),
+                          ],
+                        );
+                      }),
+                ],
               ),
-              width: ScreenUtil.instance.setWidth(145.0),
-              height: ScreenUtil.instance.setWidth(145.0),
             ),
             Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.transparent, width: 5.0),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30.0),
-                    topRight: Radius.circular(30.0)),
+              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+              height: ScreenUtil.instance.setHeight(160.0),
+              child: Row(
+                children: <Widget>[
+                  ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: listOfAnswers.length > 2
+                          ? listOfAnswers2.length
+                          : 0,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Stack(
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsets.only(
+                                  left: ScreenUtil.instance.setWidth(20.0)),
+                              decoration: BoxDecoration(
+                                border:
+                                    Border.all(color: MyColor().black, width: 3.0),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0)),
+                              ),
+                              width: ScreenUtil.instance.setWidth(145.0),
+                              height: ScreenUtil.instance.setWidth(145.0),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                    color: Colors.transparent, width: 5.0),
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(30.0),
+                                    topRight: Radius.circular(30.0)),
+                              ),
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(10.0),
+                                  left: ScreenUtil.instance.setWidth(20.0)),
+                              width: ScreenUtil.instance.setWidth(140.0),
+                              child: EmptyContainer(),
+                              // child: isLoading
+                              //     ? Container(
+                              //         margin: EdgeInsets.only(
+                              //             top: ScreenUtil.instance.setWidth(30.0)),
+                              //         child: Center(child: CircularProgressIndicator()))
+                              //     : Image.network(
+                              //         widget.choice1,
+                              //         height: ScreenUtil.instance.setHeight(90.0),
+                              //         alignment: Alignment.center,
+                              //       ),
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                color: MyColor().black,
+                                border:
+                                    Border.all(color: MyColor().black, width: 1.0),
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(30.0),
+                                    bottomRight: Radius.circular(30.0)),
+                              ),
+                              height: 31.0,
+                              width: ScreenUtil.instance.setWidth(141.5),
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(113.0),
+                                  left: ScreenUtil.instance.setWidth(22.0)),
+                              child: Center(
+                                  child: Text(listOfAnswers2[index],
+                                      style: TextStyle(
+                                        color: MyColor().white,
+                                      ))),
+                            ),
+                          ],
+                        );
+                      }),
+                ],
               ),
-              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(10.0)),
-              width: ScreenUtil.instance.setWidth(140.0),
-              child: EmptyContainer(),
-              // child: isLoading
-              //     ? Container(
-              //         margin: EdgeInsets.only(
-              //             top: ScreenUtil.instance.setWidth(30.0)),
-              //         child: Center(child: CircularProgressIndicator()))
-              //     : Image.network(
-              //         widget.choice1,
-              //         height: ScreenUtil.instance.setHeight(90.0),
-              //         alignment: Alignment.center,
-              //       ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                color: MyColor().black,
-                border: Border.all(color: MyColor().black, width: 1.0),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(30.0),
-                    bottomRight: Radius.circular(30.0)),
-              ),
-              height: 31.0,
-              width: ScreenUtil.instance.setWidth(141.5),
-              margin: EdgeInsets.only(
-                  top: ScreenUtil.instance.setWidth(113.0),
-                  left: ScreenUtil.instance.setWidth(2.0)),
-              child: Center(
-                  child: Text(answersFromSummary,
-                      style: TextStyle(
-                        color: MyColor().white,
-                      ))),
             ),
           ],
-        )
+        ),
+      ),
+    );
+  }
+
+  return isSummary
+      ? isSingle == 0
+          ? Container(
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+            child: Stack(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: MyColor().black, width: 3.0),
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    ),
+                    width: ScreenUtil.instance.setWidth(145.0),
+                    height: ScreenUtil.instance.setWidth(145.0),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.transparent, width: 5.0),
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(30.0),
+                          topRight: Radius.circular(30.0)),
+                    ),
+                    margin:
+                        EdgeInsets.only(top: ScreenUtil.instance.setWidth(10.0)),
+                    width: ScreenUtil.instance.setWidth(140.0),
+                    child: EmptyContainer(),
+                    // child: isLoading
+                    //     ? Container(
+                    //         margin: EdgeInsets.only(
+                    //             top: ScreenUtil.instance.setWidth(30.0)),
+                    //         child: Center(child: CircularProgressIndicator()))
+                    //     : Image.network(
+                    //         widget.choice1,
+                    //         height: ScreenUtil.instance.setHeight(90.0),
+                    //         alignment: Alignment.center,
+                    //       ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: MyColor().black,
+                      border: Border.all(color: MyColor().black, width: 1.0),
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(30.0),
+                          bottomRight: Radius.circular(30.0)),
+                    ),
+                    height: 31.0,
+                    width: ScreenUtil.instance.setWidth(141.5),
+                    margin: EdgeInsets.only(
+                        top: ScreenUtil.instance.setWidth(113.0),
+                        left: ScreenUtil.instance.setWidth(2.0)),
+                    child: Center(
+                        child: Text(answersFromSummary,
+                            style: TextStyle(
+                              color: MyColor().white,
+                            ))),
+                  ),
+                ],
+              ),
+          )
+          : listMultipleImages()
       : Column(
           children: <Widget>[
             ImageChoice(

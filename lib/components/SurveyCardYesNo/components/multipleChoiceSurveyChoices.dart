@@ -56,7 +56,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   @override
   Widget build(BuildContext context) {
     String index = widget.index;
-    print(isSingle.toString() + 'Is single');
     return Column(
             children: <Widget>[
               Container(
