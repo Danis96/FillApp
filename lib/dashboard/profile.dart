@@ -73,6 +73,7 @@ class _ProfileState extends State<Profile> {
   DateTime dateOfBirth2 = DateTime.now();
   String usersName, usersEmail, usersDOB, usersCard, usersCardDate, usersCC;
 
+  /// field focus variables
   FocusNode _nameFocus = FocusNode(),
       _dobFocus = FocusNode(),
       _emailFocus = FocusNode(),
@@ -82,6 +83,8 @@ class _ProfileState extends State<Profile> {
 
   @override
   void initState() {
+    /// checking if any change happend,
+    /// if it is set btn text to complete profile if not, leave it
     isButtonComplete ? btnText = 'Complete profile' : btnText = btnText;
     super.initState();
     checkForInternet();
@@ -270,28 +273,33 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: TextFormField(
                   readOnly: true,
-                  onTap: () => {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).pop();
-                              },
-                              child: Container(
-                                height: ScreenUtil.instance.setHeight(265.0),
-                                child: CupertinoDatePicker(
-                                  mode: CupertinoDatePickerMode.date,
-                                  initialDateTime: dateOfBirth2,
-                                  onDateTimeChanged: (date) {
-                                    dateOfBirth2 = date;
-                                    dateOfBirth =
-                                        DateFormat.yMd().format(dateOfBirth2);
-                                  },
-                                ),
-                              ));
-                        }),
-                  },
+                  onTap: () => isReadOnly
+                      ? MySnackbar().showSnackbar(
+                          'You must register first', context, 'Ok')
+                      : {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return GestureDetector(
+                                    onTap: () {
+                                      usersDOB = dateOfBirth;
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: Container(
+                                      height:
+                                          ScreenUtil.instance.setHeight(265.0),
+                                      child: CupertinoDatePicker(
+                                        mode: CupertinoDatePickerMode.date,
+                                        initialDateTime: dateOfBirth2,
+                                        onDateTimeChanged: (date) {
+                                          dateOfBirth2 = date;
+                                          dateOfBirth = DateFormat.yMd()
+                                              .format(dateOfBirth2);
+                                        },
+                                      ),
+                                    ));
+                              }),
+                        },
                   focusNode: _dobFocus,
                   maxLength: 200,
                   enableSuggestions: false,
