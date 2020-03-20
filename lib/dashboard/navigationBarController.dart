@@ -36,7 +36,7 @@ DocumentSnapshot snap;
 int isAnonymous, usersSars;
 bool isUserInDB = true, isReadOnly = false;
 Key key = UniqueKey();
-String usersName, usersDOB, usersEmail, usersCard, usersCardDate, usersCC, cc;
+String cc;
 
 class BottomNavigationBarController extends StatefulWidget {
   final PasswordArguments arguments;
@@ -96,12 +96,7 @@ class _BottomNavigationBarControllerState
                 isAnonymous = snap.data['is_anonymous'];
                 usersSars = snap.data['sar'];
                 cc = snap.data['cc'];
-                usersName = snap.data['name_and_surname'];
-                usersDOB = snap.data['date_of_birth'];
-                usersEmail = snap.data['email_profile'];
-                usersCard = snap.data['card_number'];
-                usersCardDate = snap.data['expire_date'];
-                usersCC = snap.data['cc'];
+
                 return EmptyContainer();
               });
         }
@@ -111,15 +106,15 @@ class _BottomNavigationBarControllerState
   }
 
   settingStates() {
-    if (usersName != '') {
-      setState(() {
-        showData = true;
-      });
-    } else {
-      setState(() {
-        showData = false;
-      });
-    }
+    // if (usersName != '') {
+    //   setState(() {
+    //     showData = true;
+    //   });
+    // } else {
+    //   setState(() {
+    //     showData = false;
+    //   });
+    // }
 
     /// State 1
     ///
@@ -161,7 +156,7 @@ class _BottomNavigationBarControllerState
       } else if (usersSars < 100 && cc != '') {
         setState(() {
           btnText = 'Transfer after 100 SAR';
-          isReadOnly = true;
+          isReadOnly = false;
         });
       }
     }
@@ -183,13 +178,7 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
-            showData: showData,
-            usersName: usersName,
-            usersEmail: usersEmail,
-            usersCard: usersCard,
-            usersCardDate: usersCardDate,
-            usersDOB: usersDOB,
-            usersCC: usersCC,
+            snap2: snap,
             refreshNavbar: refreshNavbar,
             isReadOnly: isReadOnly,
             btnText: btnText,
@@ -316,10 +305,9 @@ class _BottomNavigationBarControllerState
   }
 
   refreshNavbar() {
-     setState(() {
-       key = UniqueKey();
-     });
-     print('JESAM');
+    setState(() {
+      key = UniqueKey();
+    });
   }
 
   /// function for loader
