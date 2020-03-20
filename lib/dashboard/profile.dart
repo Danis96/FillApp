@@ -6,10 +6,10 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/profileComponents/languageChoose.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
+import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -27,30 +27,18 @@ import '../routes/routeArguments.dart';
 
 class Profile extends StatefulWidget {
   final PasswordArguments arguments;
-  final String btnText,
-      cc,
-      usersEmail,
-      usersName,
-      usersCard,
-      usersCardDate,
-      usersDOB,
-      usersCC;
+  final String btnText;
   final bool isReadOnly, showData;
   final Function refreshNavbar;
+  final DocumentSnapshot snap2;
   Profile({
     Key key,
     this.arguments,
     this.btnText,
     this.isReadOnly,
-    this.cc,
-    this.usersCard,
-    this.usersCardDate,
-    this.usersCC,
-    this.usersDOB,
-    this.usersEmail,
-    this.usersName,
     this.showData,
     this.refreshNavbar,
+    this.snap2,
   }) : super(key: key);
 
   @override
@@ -59,13 +47,7 @@ class Profile extends StatefulWidget {
 
 RegExp regexEmail = new RegExp(
     r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
-
-TextEditingController controllerName = TextEditingController();
-TextEditingController controllerDOB = TextEditingController();
-TextEditingController controllerEmail = TextEditingController();
-TextEditingController controllerCreditCard = TextEditingController();
-TextEditingController controllerDate = TextEditingController();
-TextEditingController controllerCC = TextEditingController();
+RegExp regexSpace = new RegExp(r'\s');
 
 var maskTextInputFormatterCard =
     MaskTextInputFormatter(mask: '####-####-####-####');
@@ -87,80 +69,20 @@ DocumentSnapshot snap;
 
 class _ProfileState extends State<Profile> {
   int usersSarovi, profileAnonym;
-  bool emailPostoji = false;
+  bool isButtonComplete = false;
   DateTime dateOfBirth2 = DateTime.now();
+  String usersName, usersEmail, usersDOB, usersCard, usersCardDate, usersCC;
 
-  addListenersOnControllers() {
-    /// name
-    controllerName.addListener(() {
-      final text = controllerName.text;
-      controllerName.value = controllerName.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
-
-    /// Date of birth
-    controllerDOB.addListener(() {
-      final text = controllerDOB.text;
-      controllerDOB.value = controllerDOB.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
-
-    /// email
-    controllerEmail.addListener(() {
-      final text = controllerEmail.text;
-      controllerEmail.value = controllerEmail.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
-
-    /// card number
-    controllerCreditCard.addListener(() {
-      final text = controllerCreditCard.text;
-      controllerCreditCard.value = controllerCreditCard.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
-
-    /// date
-    controllerDate.addListener(() {
-      final text = controllerDate.text;
-      controllerDate.value = controllerDate.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
-
-    /// cc
-    controllerCC.addListener(() {
-      final text = controllerCC.text;
-      controllerCC.value = controllerCC.value.copyWith(
-        text: text,
-        selection:
-            TextSelection(baseOffset: text.length, extentOffset: text.length),
-        composing: TextRange.empty,
-      );
-    });
-  }
+  FocusNode _nameFocus = FocusNode(),
+      _dobFocus = FocusNode(),
+      _emailFocus = FocusNode(),
+      _cardFocus = FocusNode(),
+      _dateFocus = FocusNode(),
+      _ccFocus = FocusNode();
 
   @override
   void initState() {
-    addListenersOnControllers();
+    isButtonComplete ? btnText = 'Complete profile' : btnText = btnText;
     super.initState();
     checkForInternet();
     FirebaseCheck().getUserUsername(widget.arguments.username);
@@ -179,8 +101,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    print(usersName);
-
     Widget bigCircle = Container(
       width: ScreenUtil.instance.setWidth(198.0),
       height: ScreenUtil.instance.setHeight(198.0),
@@ -285,19 +205,19 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  //  / readOnly: isReadOnly,
+                  focusNode: _nameFocus,
+                  readOnly: isReadOnly,
                   maxLength: 200,
                   enableSuggestions: false,
                   textCapitalization: TextCapitalization.sentences,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerName..text = usersName,
+                  initialValue: widget.snap2.data['name_and_surname'],
                   decoration: InputDecoration(
                     labelText: 'Name and Surname',
                     counterText: '',
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    //  / labelText: usersName != '' ? null : 'Enter name and surname',
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -324,6 +244,19 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
+                  onTap: () {
+                    isReadOnly
+                        ? MySnackbar().showSnackbar(
+                            'You must register first', context, 'Ok')
+                        : print('ssss');
+                  },
+                  onChanged: (input) {
+                    setState(() {
+                      name = input;
+                      isButtonComplete = true;
+                    });
+                    print(isButtonComplete);
+                  },
                   obscureText: false,
                 ),
               ),
@@ -343,7 +276,6 @@ class _ProfileState extends State<Profile> {
                         builder: (BuildContext context) {
                           return GestureDetector(
                               onTap: () {
-                                controllerDOB.text = dateOfBirth;
                                 Navigator.of(context).pop();
                               },
                               child: Container(
@@ -360,10 +292,11 @@ class _ProfileState extends State<Profile> {
                               ));
                         }),
                   },
+                  focusNode: _dobFocus,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerDOB..text = usersDOB,
+                  initialValue: widget.snap2.data['date_of_birth'],
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -396,6 +329,12 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
+                  onChanged: (input) {
+                    setState(() {
+                      dateOfBirth = input;
+                      isButtonComplete = true;
+                    });
+                  },
                   obscureText: false,
                 ),
               ),
@@ -408,11 +347,12 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  // readOnly: isReadOnly,
+                  focusNode: _emailFocus,
+                  readOnly: isReadOnly,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerEmail..text = usersEmail,
+                  initialValue: widget.snap2.data['email_profile'],
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -445,6 +385,18 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
+                  onChanged: (input) {
+                    setState(() {
+                      email = input;
+                      isButtonComplete = true;
+                    });
+                  },
+                  onTap: () {
+                    isReadOnly
+                        ? MySnackbar().showSnackbar(
+                            'You must register first', context, 'Ok')
+                        : print('ssss');
+                  },
                   obscureText: false,
                 ),
               ),
@@ -460,13 +412,14 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  // readOnly: isReadOnly,
+                  focusNode: _cardFocus,
+                  readOnly: isReadOnly,
                   inputFormatters: [maskTextInputFormatterCard],
                   keyboardType: TextInputType.number,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: controllerCreditCard..text = usersCard,
+                  initialValue: widget.snap2.data['card_number'],
                   decoration: InputDecoration(
                     counterText: '',
                     hasFloatingPlaceholder: false,
@@ -499,6 +452,18 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
+                  onChanged: (input) {
+                    setState(() {
+                      creditCard = input;
+                      isButtonComplete = true;
+                    });
+                  },
+                  onTap: () {
+                    isReadOnly
+                        ? MySnackbar().showSnackbar(
+                            'You must register first', context, 'Ok')
+                        : print('ssss');
+                  },
                   obscureText: false,
                 ),
               ),
@@ -513,13 +478,14 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
-                      // readOnly: isReadOnly,
+                      focusNode: _dateFocus,
+                      readOnly: isReadOnly,
                       inputFormatters: [maskTextInputFormatterDate],
                       keyboardType: TextInputType.number,
                       maxLength: 200,
                       enableSuggestions: false,
+                      initialValue: widget.snap2.data['expire_date'],
                       style: TextStyle(color: Colors.black),
-                      controller: controllerDate..text = usersCardDate,
                       decoration: InputDecoration(
                         counterText: '',
                         hasFloatingPlaceholder: false,
@@ -554,6 +520,18 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
+                      onChanged: (input) {
+                        setState(() {
+                          date = input;
+                          isButtonComplete = true;
+                        });
+                      },
+                      onTap: () {
+                        isReadOnly
+                            ? MySnackbar().showSnackbar(
+                                'You must register first', context, 'Ok')
+                            : print('ssss');
+                      },
                       obscureText: false,
                     ),
                   ),
@@ -566,13 +544,14 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
-                      // readOnly: isReadOnly,
+                      focusNode: _ccFocus,
+                      readOnly: isReadOnly,
                       keyboardType: TextInputType.number,
                       inputFormatters: [maskTextInputFormatterCC],
                       maxLength: 200,
                       enableSuggestions: false,
                       style: TextStyle(color: Colors.black),
-                      controller: controllerCC..text = usersCC,
+                      initialValue: widget.snap2.data['cc'],
                       decoration: InputDecoration(
                         counterText: '',
                         hasFloatingPlaceholder: false,
@@ -607,6 +586,18 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                       ),
+                      onChanged: (input) {
+                        setState(() {
+                          cc = input;
+                          isButtonComplete = true;
+                        });
+                      },
+                      onTap: () {
+                        isReadOnly
+                            ? MySnackbar().showSnackbar(
+                                'You must register first', context, 'Ok')
+                            : print('ssss');
+                      },
                       obscureText: false,
                     ),
                   ),
@@ -614,25 +605,6 @@ class _ProfileState extends State<Profile> {
               ),
               Container(
                 child: btnProfile(),
-              ),
-              Column(
-                children: <Widget>[
-                  FutureBuilder(
-                    future: FirebaseCheck().doesEmailAlreadyExist(email),
-                    builder: (context, AsyncSnapshot<bool> result) {
-                      if (!result.hasData) {
-                        return EmptyContainer();
-                      }
-                      if (result.data) {
-                        emailPostoji = true;
-                        return EmptyContainer();
-                      } else {
-                        emailPostoji = false;
-                        return EmptyContainer();
-                      }
-                    },
-                  ),
-                ],
               ),
             ],
           )),
@@ -694,57 +666,47 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  transferSAR() {
+  /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
+  completeProfile() {
     FirebaseCrud().updateUserOnCompletePRofile(
-        snap,
-        controllerName.text,
-        controllerDOB.text,
-        controllerEmail.text,
-        controllerCreditCard.text,
-        controllerDate.text,
-        controllerCC.text,
-        0,
-        usersSarovi);
+      snap,
+      isButtonComplete ? name : usersName,
+      isButtonComplete ? dateOfBirth : usersDOB,
+      isButtonComplete ? email : usersEmail,
+      isButtonComplete ? creditCard : usersCard,
+      isButtonComplete ? date : usersCardDate,
+      isButtonComplete ? cc : usersCC,
+    );
     setState(() {
-      btnText = 'Transfer after 100';
+      btnText = isButtonComplete ? 'Transfer' : 'Complete profile';
+    });
+    widget.refreshNavbar();
+  }
+
+  transferSar() {
+    FirebaseCrud().updateUserOnCompletePRofile(
+      snap,
+      isButtonComplete ? name : usersName,
+      isButtonComplete ? dateOfBirth : usersDOB,
+      isButtonComplete ? email : usersEmail,
+      isButtonComplete ? creditCard : usersCard,
+      isButtonComplete ? date : usersCardDate,
+      isButtonComplete ? cc : usersCC,
+    );
+    FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi);
+    setState(() {
+      btnText = 'Transfer after 100 SAR';
     });
     Timer(Duration(seconds: 1), () {
       setState(() {});
     });
   }
 
-  /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
-  completeProfile() {
-    FirebaseCrud().updateUserOnCompletePRofile(
-      snap,
-      controllerName.text,
-      controllerDOB.text,
-      controllerEmail.text,
-      controllerCreditCard.text,
-      controllerDate.text,
-      controllerCC.text,
-      usersSarovi,
-      0,
-    );
-    setState(() {
-      btnText = 'Transfer';
-    });
-
-    widget.refreshNavbar();
-  }
-
   onPressed() {
-    name = controllerName.text;
-    email = controllerEmail.text;
-    dateOfBirth = controllerDOB.text;
-    creditCard = controllerCreditCard.text;
-    date = controllerDate.text;
-    cc = controllerCC.text;
-
     if (btnText == 'Register') {
       FirebaseCrud().userRegister(context, widget.arguments.username);
     } else if (btnText == 'Complete profile') {
-      if (name == '') {
+      if (name == '' || regexSpace.hasMatch(name) == false) {
         setState(() {
           isEmptyName = true;
         });
@@ -771,7 +733,7 @@ class _ProfileState extends State<Profile> {
             isEmptyBirth = false;
           });
         });
-      } else if (creditCard == '') {
+      } else if (creditCard == '' || creditCard.length < 19) {
         setState(() {
           isEmptyCard = true;
         });
@@ -802,63 +764,7 @@ class _ProfileState extends State<Profile> {
         completeProfile();
       }
     } else if (btnText == 'Transfer') {
-      if (name == '') {
-        setState(() {
-          isEmptyName = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyName = false;
-          });
-        });
-      } else if (email == '' || regexEmail.hasMatch(email) == false) {
-        setState(() {
-          isEmptyMail = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyMail = false;
-          });
-        });
-      } else if (dateOfBirth == '') {
-        setState(() {
-          isEmptyBirth = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyBirth = false;
-          });
-        });
-      } else if (creditCard == '') {
-        setState(() {
-          isEmptyCard = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyCard = false;
-          });
-        });
-      } else if (date == '') {
-        setState(() {
-          isEmptyDate = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyDate = false;
-          });
-        });
-      } else if (cc == '') {
-        setState(() {
-          isEmptyCC = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyCC = false;
-          });
-        });
-      } else {
-        transferSAR();
-      }
+      transferSar();
     }
   }
 
