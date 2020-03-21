@@ -106,16 +106,6 @@ class _BottomNavigationBarControllerState
   }
 
   settingStates() {
-    // if (usersName != '') {
-    //   setState(() {
-    //     showData = true;
-    //   });
-    // } else {
-    //   setState(() {
-    //     showData = false;
-    //   });
-    // }
-
     /// State 1
     ///
     /// user anonymous

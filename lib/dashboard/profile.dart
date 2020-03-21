@@ -68,8 +68,8 @@ bool isSar = false,
 DocumentSnapshot snap;
 
 class _ProfileState extends State<Profile> {
-  int usersSarovi, profileAnonym;
-  bool isButtonComplete = false;
+  int usersSarovi, profileAnonym, _btnCounter = 0;
+  bool isButtonComplete = false, isDateChanged = false;
   DateTime dateOfBirth2 = DateTime.now();
   String usersName, usersEmail, usersDOB, usersCard, usersCardDate, usersCC;
 
@@ -80,6 +80,8 @@ class _ProfileState extends State<Profile> {
       _cardFocus = FocusNode(),
       _dateFocus = FocusNode(),
       _ccFocus = FocusNode();
+
+  TextEditingController _dobController = TextEditingController();
 
   @override
   void initState() {
@@ -252,12 +254,7 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
-                  onTap: () {
-                    isReadOnly
-                        ? MySnackbar().showSnackbar(
-                            'You must register first', context, 'Ok')
-                        : print('ssss');
-                  },
+                  onTap: () => onTapFieldAnonymous(),
                   onChanged: (input) {
                     setState(() {
                       name = input;
@@ -278,33 +275,7 @@ class _ProfileState extends State<Profile> {
                 ),
                 child: TextFormField(
                   readOnly: true,
-                  onTap: () => isReadOnly
-                      ? MySnackbar().showSnackbar(
-                          'You must register first', context, 'Ok')
-                      : {
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return GestureDetector(
-                                    onTap: () {
-                                      usersDOB = dateOfBirth;
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Container(
-                                      height:
-                                          ScreenUtil.instance.setHeight(265.0),
-                                      child: CupertinoDatePicker(
-                                        mode: CupertinoDatePickerMode.date,
-                                        initialDateTime: dateOfBirth2,
-                                        onDateTimeChanged: (date) {
-                                          dateOfBirth2 = date;
-                                          dateOfBirth = DateFormat.yMd()
-                                              .format(dateOfBirth2);
-                                        },
-                                      ),
-                                    ));
-                              }),
-                        },
+                  onTap: () => onTapFieldAnonymousEmail(),
                   focusNode: _dobFocus,
                   maxLength: 200,
                   enableSuggestions: false,
@@ -404,12 +375,7 @@ class _ProfileState extends State<Profile> {
                       isButtonComplete = true;
                     });
                   },
-                  onTap: () {
-                    isReadOnly
-                        ? MySnackbar().showSnackbar(
-                            'You must register first', context, 'Ok')
-                        : print('ssss');
-                  },
+                  onTap: () => onTapFieldAnonymous(),
                   obscureText: false,
                 ),
               ),
@@ -471,12 +437,7 @@ class _ProfileState extends State<Profile> {
                       isButtonComplete = true;
                     });
                   },
-                  onTap: () {
-                    isReadOnly
-                        ? MySnackbar().showSnackbar(
-                            'You must register first', context, 'Ok')
-                        : print('ssss');
-                  },
+                  onTap: () => onTapFieldAnonymous(),
                   obscureText: false,
                 ),
               ),
@@ -539,12 +500,7 @@ class _ProfileState extends State<Profile> {
                           isButtonComplete = true;
                         });
                       },
-                      onTap: () {
-                        isReadOnly
-                            ? MySnackbar().showSnackbar(
-                                'You must register first', context, 'Ok')
-                            : print('ssss');
-                      },
+                      onTap: () => onTapFieldAnonymous(),
                       obscureText: false,
                     ),
                   ),
@@ -605,12 +561,7 @@ class _ProfileState extends State<Profile> {
                           isButtonComplete = true;
                         });
                       },
-                      onTap: () {
-                        isReadOnly
-                            ? MySnackbar().showSnackbar(
-                                'You must register first', context, 'Ok')
-                            : print('ssss');
-                      },
+                      onTap: () => onTapFieldAnonymous(),
                       obscureText: false,
                     ),
                   ),
@@ -679,16 +630,59 @@ class _ProfileState extends State<Profile> {
     );
   }
 
+  onTapFieldAnonymous() {
+    if (_btnCounter == 0) {
+      isReadOnly
+          ? MySnackbar().showSnackbar('You must register first', context, 'Ok')
+          : print('ssss');
+      _btnCounter = 1;
+      Timer(Duration(seconds: 2), () {
+        _btnCounter = 0;
+      });
+    }
+  }
+
+  onTapFieldAnonymousEmail() {
+    if (_btnCounter == 0) {
+      isReadOnly
+          ? MySnackbar().showSnackbar('You must register first', context, 'Ok')
+          : showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Container(
+                      height: ScreenUtil.instance.setHeight(265.0),
+                      child: CupertinoDatePicker(
+                        mode: CupertinoDatePickerMode.date,
+                        initialDateTime: dateOfBirth2,
+                        onDateTimeChanged: (date) {
+                          dateOfBirth2 = date;
+                          dateOfBirth = DateFormat.yMd().format(dateOfBirth2);
+                        },
+                      ),
+                    ));
+              });
+
+      _btnCounter = 1;
+      Timer(Duration(seconds: 2), () {
+        _btnCounter = 0;
+      });
+    }
+  }
+
   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
   completeProfile() {
     FirebaseCrud().updateUserOnCompletePRofile(
       snap,
-      isButtonComplete ? name : usersName,
-      isButtonComplete ? dateOfBirth : usersDOB,
-      isButtonComplete ? email : usersEmail,
-      isButtonComplete ? creditCard : usersCard,
-      isButtonComplete ? date : usersCardDate,
-      isButtonComplete ? cc : usersCC,
+      isButtonComplete ? name : widget.snap2.data['name_and_surname'],
+      isButtonComplete ? dateOfBirth :  widget.snap2.data['date_of_birth'],
+      isButtonComplete ? email :  widget.snap2.data['email_profile'],
+      isButtonComplete ? creditCard : widget.snap2.data['card_number'],
+      isButtonComplete ? date : widget.snap2.data['expire_date'],
+      isButtonComplete ? cc : widget.snap2.data['cc'],
     );
     setState(() {
       btnText = isButtonComplete ? 'Transfer' : 'Complete profile';
@@ -697,16 +691,22 @@ class _ProfileState extends State<Profile> {
   }
 
   transferSar() {
+    DateTime now = DateTime.now();
+    String dateOfTransfer = '';
+
+    dateOfTransfer = DateFormat.yMd().add_jms().format(now);
+    print(dateOfTransfer);
+
     FirebaseCrud().updateUserOnCompletePRofile(
       snap,
-      isButtonComplete ? name : usersName,
-      isButtonComplete ? dateOfBirth : usersDOB,
-      isButtonComplete ? email : usersEmail,
-      isButtonComplete ? creditCard : usersCard,
-      isButtonComplete ? date : usersCardDate,
-      isButtonComplete ? cc : usersCC,
+      isButtonComplete ? name : widget.snap2.data['name_and_surname'],
+      isButtonComplete ? dateOfBirth :  widget.snap2.data['date_of_birth'],
+      isButtonComplete ? email :  widget.snap2.data['email_profile'],
+      isButtonComplete ? creditCard : widget.snap2.data['card_number'],
+      isButtonComplete ? date : widget.snap2.data['expire_date'],
+      isButtonComplete ? cc : widget.snap2.data['cc'],
     );
-    FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi);
+    FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi, dateOfTransfer);
     setState(() {
       btnText = 'Transfer after 100 SAR';
     });

@@ -37,13 +37,13 @@ class FirebaseCrud {
       'user_id': randomAlphaNumeric(15),
       'level': 1,
       'sar': sar,
-      'transferSar': 0,
+      'transferSar': [],
       'name_and_surname': '',
       'date_of_birth': '',
       'card_number': '',
       'expire_date': '',
       'cc': '',
-      'email_profile' : ''
+      'email_profile': ''
     });
   }
 
@@ -65,8 +65,14 @@ class FirebaseCrud {
     });
   }
 
-  updateUserOnCompletePRofile(DocumentSnapshot doc, String nameSurname, String dateOfBirth, String email,
-      String cardNumber, String expireDate, String cc) async {
+  updateUserOnCompletePRofile(
+      DocumentSnapshot doc,
+      String nameSurname,
+      String dateOfBirth,
+      String email,
+      String cardNumber,
+      String expireDate,
+      String cc) async {
     await db.collection('Users').document(doc.documentID).updateData({
       'email_profile': email,
       'name_and_surname': nameSurname,
@@ -75,15 +81,15 @@ class FirebaseCrud {
       'expire_date': expireDate,
       'cc': cc,
     });
-  }  
-
-  updateSarOnTransfer(DocumentSnapshot doc, int sar, int tSar)async {
-    await db.collection('Users').document(doc.documentID).updateData({
-      'sar': sar,
-      'transferSar': tSar 
-    });
   }
 
+  updateSarOnTransfer(DocumentSnapshot doc, int sar, int tSar, String dateOfTransfer) async {
+     await db.collection('Users').document(doc.documentID).updateData({
+      'sar': sar,
+      'transferSar':
+          FieldValue.arrayUnion(['$dateOfTransfer : $tSar'])
+    });
+  }
 
   /// [updatePassword]
   ///
@@ -134,7 +140,8 @@ class FirebaseCrud {
   updateListOfUsernamesAnswersSurvey(DocumentSnapshot doc, BuildContext context,
       String username, String choice, String title) async {
     await db.collection('QuestionsSurvey').document(doc.documentID).updateData({
-      'list_of_username_answers': FieldValue.arrayUnion(['$title : $choice : $username']),
+      'list_of_username_answers':
+          FieldValue.arrayUnion(['$title : $choice : $username']),
     });
   }
 
@@ -154,26 +161,26 @@ class FirebaseCrud {
   updateListOfUsernamesThatGaveAnswersProgress(
       DocumentSnapshot doc, BuildContext context, String username) async {
     await db.collection('QuestionsSurvey').document(doc.documentID).updateData({
-      'list_of_usernames_that_gave_answers': FieldValue.arrayUnion(['$username'])
+      'list_of_usernames_that_gave_answers':
+          FieldValue.arrayUnion(['$username'])
     });
   }
 
   deleteListOfUsernamesThatGaveAnswersProgress(
       DocumentSnapshot doc, BuildContext context, String username) async {
     await db.collection('QuestionsSurvey').document(doc.documentID).updateData({
-      'list_of_usernames_that_gave_answers': FieldValue.arrayRemove(['$username'])
+      'list_of_usernames_that_gave_answers':
+          FieldValue.arrayRemove(['$username'])
     });
   }
-  
-   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Register'
-  userRegister(BuildContext context, String username) {
-   
-      Navigator.of(context).push(
-          CardAnimationTween(
-               widget: RegisterPage(
-                 arguments:  DidntRecievePinArguments(username: username)),
-               ),
-          );           
-  }
 
+  /// Metoda koja se poziva na klik button-a kada na njemu piše 'Register'
+  userRegister(BuildContext context, String username) {
+    Navigator.of(context).push(
+      CardAnimationTween(
+        widget: RegisterPage(
+            arguments: DidntRecievePinArguments(username: username)),
+      ),
+    );
+  }
 }
