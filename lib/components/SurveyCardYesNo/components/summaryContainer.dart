@@ -1,8 +1,8 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
-import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -46,7 +46,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
         style: TextStyle(
             color: MyColor().white,
             fontWeight: FontWeight.w900,
-            fontFamily: "LoewNextArabic",
+            fontFamily: arabic,
             fontSize: ScreenUtil.instance.setSp(14.5), 
             ),
         controller: questionController,
@@ -70,10 +70,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
   }
 
   onPressed() {
-    //print(widget.answersList[widget.index]);
     answersFromSummary = widget.answersList[widget.index].toString();
-    //answersFromSummary = answersFromSummaryString.split(', ');
-    print(answersFromSummary);
     isSummary = true;
     isOnSummary = false;
     widget.animateTo(widget.index);

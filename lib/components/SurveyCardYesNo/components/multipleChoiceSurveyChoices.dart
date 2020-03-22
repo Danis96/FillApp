@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/surveyCard.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
@@ -57,133 +58,121 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   Widget build(BuildContext context) {
     String index = widget.index;
     return Column(
-            children: <Widget>[
-              Container(
-                  key: ValueKey(widget.choice1),
-                  width: ScreenUtil.instance.setWidth(350.0),
-                  margin:
-                      EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
-                  child: ListTile(
-                      leading: Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            border:
-                                Border.all(width: 1.0, color: MyColor().black),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(100)),
-                            color: index == 'A'
-                                ? isTappedMCQ1
-                                    ? MyColor().white
-                                    : MyColor().black
-                                : index == 'B'
-                                    ? isTappedMCQ2
-                                        ? MyColor().white
-                                        : MyColor().black
-                                    : index == 'C'
-                                        ? isTappedMCQ3
-                                            ? MyColor().white
-                                            : MyColor().black
-                                        : index == 'D'
-                                            ? isTappedMCQ4
-                                                ? MyColor().white
-                                                : MyColor().black
-                                            : null),
-                        height: ScreenUtil.instance.setHeight(58.0),
-                        width: ScreenUtil.instance.setWidth(58.0),
-                        child: Text(widget.index,
-                            style: TextStyle(
-                                color: index == 'A'
-                                    ? isTappedMCQ1
-                                        ? MyColor().black
-                                        : MyColor().white
-                                    : index == 'B'
-                                        ? isTappedMCQ2
-                                            ? MyColor().black
-                                            : MyColor().white
-                                        : index == 'C'
-                                            ? isTappedMCQ3
-                                                ? MyColor().black
-                                                : MyColor().white
-                                            : index == 'D'
-                                                ? isTappedMCQ4
-                                                    ? MyColor().black
-                                                    : MyColor().white
-                                                : null,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "LoewNextArabic",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 18.0)),
-                      ),
-                      title: Container(
-                        alignment: Alignment.centerLeft,
-                        child: Text(widget.choice1,
-                            style: TextStyle(
-                                color: MyColor().black,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "LoewNextArabic",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 18.0)),
-                      ),
-                      onTap: () => isSummary
-                          ? null
-                          : {
-                              if(isSingle == 1)
-                                {
-                                  onSwitchSingle(),
-                                }
-                              else if(isSingle == 0)
-                                {
-                                  onSwitchMultiple(),
-                                }
-                              else
-                                null
-                            })),
-              isSummary
-                  ? EmptyContainer()
-                  : widget.isSingle == 1
-                      ? EmptyContainer()
-                      : widget.length == 3 && widget.index == 'C'
-                          ? Container(
-                              width: ScreenUtil.instance.setWidth(316.0),
-                              height: ScreenUtil.instance.setHeight(55.0),
-                              margin: EdgeInsets.only(
-                                  top: ScreenUtil.instance.setWidth(20.0),
-                                  left: ScreenUtil.instance.setWidth(54.0),
-                                  right: ScreenUtil.instance.setWidth(55.0)),
-                              child: RaisedButton(
-                                color: MyColor().black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: new BorderRadius.circular(33.5),
-                                ),
-                                onPressed: () => submit(),
-                                child: Text(MyText().btnSubmit,
-                                    style: TextStyle(
-                                        fontSize: 18, color: MyColor().white)),
-                              ))
-                          : widget.length == 4 && widget.index == 'D'
-                              ? Container(
-                                  width: ScreenUtil.instance.setWidth(316.0),
-                                  height: ScreenUtil.instance.setHeight(55.0),
-                                  margin: EdgeInsets.only(
-                                      top: ScreenUtil.instance.setWidth(20.0),
-                                      left: ScreenUtil.instance.setWidth(54.0),
-                                      right:
-                                          ScreenUtil.instance.setWidth(55.0)),
-                                  child: RaisedButton(
-                                    color: MyColor().black,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(33.5),
-                                    ),
-                                    onPressed: () => submit(),
-                                    child: Text(MyText().btnSubmit,
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            color: MyColor().white)),
-                                  ))
-                              : EmptyContainer()
-            ],
-          );
+      children: <Widget>[
+        Container(
+            key: ValueKey(widget.choice1),
+            width: ScreenUtil.instance.setWidth(350.0),
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+            child: ListTile(
+                leading: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1.0, color: MyColor().black),
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                      color: index == MyText().indexA
+                          ? isTappedMCQ1 ? MyColor().white : MyColor().black
+                          : index == MyText().indexB
+                              ? isTappedMCQ2 ? MyColor().white : MyColor().black
+                              : index == MyText().indexC
+                                  ? isTappedMCQ3
+                                      ? MyColor().white
+                                      : MyColor().black
+                                  : index == MyText().indexD
+                                      ? isTappedMCQ4
+                                          ? MyColor().white
+                                          : MyColor().black
+                                      : null),
+                  height: ScreenUtil.instance.setHeight(58.0),
+                  width: ScreenUtil.instance.setWidth(58.0),
+                  child: Text(widget.index,
+                      style: TextStyle(
+                          color: index == MyText().indexA
+                              ? isTappedMCQ1 ? MyColor().black : MyColor().white
+                              : index == MyText().indexB
+                                  ? isTappedMCQ2
+                                      ? MyColor().black
+                                      : MyColor().white
+                                  : index == MyText().indexC
+                                      ? isTappedMCQ3
+                                          ? MyColor().black
+                                          : MyColor().white
+                                      : index == MyText().indexD
+                                          ? isTappedMCQ4
+                                              ? MyColor().black
+                                              : MyColor().white
+                                          : null,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: arabic,
+                          fontStyle: FontStyle.normal,
+                          fontSize: ScreenUtil.instance.setSp(18.0))),
+                ),
+                title: Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(widget.choice1,
+                      style: TextStyle(
+                          color: MyColor().black,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: arabic,
+                          fontStyle: FontStyle.normal,
+                          fontSize: ScreenUtil.instance.setSp(18.0))),
+                ),
+                onTap: () => isSummary
+                    ? null
+                    : {
+                        if (isSingle == 1)
+                          {
+                            onSwitchSingle(),
+                          }
+                        else if (isSingle == 0)
+                          {
+                            onSwitchMultiple(),
+                          }
+                        else
+                          null
+                      })),
+        isSummary
+            ? EmptyContainer()
+            : widget.isSingle == 1
+                ? EmptyContainer()
+                : widget.length == 3 && widget.index == MyText().indexC
+                    ? Container(
+                        width: ScreenUtil.instance.setWidth(316.0),
+                        height: ScreenUtil.instance.setHeight(55.0),
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil.instance.setWidth(20.0),
+                            left: ScreenUtil.instance.setWidth(54.0),
+                            right: ScreenUtil.instance.setWidth(55.0)),
+                        child: RaisedButton(
+                          color: MyColor().black,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(33.5),
+                          ),
+                          onPressed: () => submit(),
+                          child: Text(MyText().btnSubmit,
+                              style: TextStyle(
+                                  fontSize: ScreenUtil.instance.setSp(18.0), color: MyColor().white)),
+                        ))
+                    : widget.length == 4 && widget.index == MyText().indexD
+                        ? Container(
+                            width: ScreenUtil.instance.setWidth(316.0),
+                            height: ScreenUtil.instance.setHeight(55.0),
+                            margin: EdgeInsets.only(
+                                top: ScreenUtil.instance.setWidth(20.0),
+                                left: ScreenUtil.instance.setWidth(54.0),
+                                right: ScreenUtil.instance.setWidth(55.0)),
+                            child: RaisedButton(
+                              color: MyColor().black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(33.5),
+                              ),
+                              onPressed: () => submit(),
+                              child: Text(MyText().btnSubmit,
+                                  style: TextStyle(
+                                      fontSize: ScreenUtil.instance.setSp(18.0), color: MyColor().white)),
+                            ))
+                        : EmptyContainer()
+      ],
+    );
   }
 
   onSwitchSingle() {

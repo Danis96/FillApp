@@ -1,8 +1,10 @@
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/constants/myText.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-String language = 'Arabic';
+String language = MyText().languageArabic;
 
 class LanguageChoose extends StatelessWidget {
   final Function refresh;
@@ -17,8 +19,7 @@ class LanguageChoose extends StatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              language = 'Arabic';
-              print(language);
+              language = MyText().languageArabic;
               refresh();
             },
             child: Container(
@@ -29,24 +30,23 @@ class LanguageChoose extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border.all(width: 1.0, color: MyColor().black),
                 borderRadius: BorderRadius.all(Radius.circular(29)),
-                color: language == 'Arabic' ? MyColor().white : MyColor().black,
+                color: language == MyText().languageArabic ? MyColor().white : MyColor().black,
               ),
-              child: Text('Arabic',
+              child: Text(MyText().languageArabic,
                   style: TextStyle(
-                      color: language == 'Arabic'
+                      color: language == MyText().languageArabic
                           ? MyColor().black
                           : MyColor().white,
                       fontWeight: FontWeight.w700,
-                      fontFamily: "LoewNextArabic",
+                      fontFamily: arabic,
                       fontStyle: FontStyle.normal,
-                      fontSize: 18.0),
+                      fontSize: ScreenUtil.instance.setSp(18.0)),
                   textAlign: TextAlign.center),
             ),
           ),
           GestureDetector(
             onTap: () {
-              language = 'English';
-              print(language);
+              language = MyText().languageEnglish;
               refresh();
             },
             child: Container(
@@ -59,18 +59,18 @@ class LanguageChoose extends StatelessWidget {
               decoration: BoxDecoration(
                   border: Border.all(width: 1.0, color: MyColor().black),
                   borderRadius: BorderRadius.all(Radius.circular(29)),
-                  color: language == 'English'
+                  color: language == MyText().languageEnglish
                       ? MyColor().white
                       : MyColor().black),
-              child: Text('English',
+              child: Text(MyText().languageArabic,
                   style: TextStyle(
-                      color: language == 'English'
+                      color: language == MyText().languageEnglish
                           ? MyColor().black
                           : MyColor().white,
                       fontWeight: FontWeight.w700,
-                      fontFamily: "LoewNextArabic",
+                      fontFamily: arabic,
                       fontStyle: FontStyle.normal,
-                      fontSize: 18.0),
+                      fontSize: ScreenUtil.instance.setSp(18.0)),
                   textAlign: TextAlign.center),
             ),
           ),

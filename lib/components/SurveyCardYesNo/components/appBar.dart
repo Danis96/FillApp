@@ -1,6 +1,8 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
@@ -20,20 +22,17 @@ class SurveyAppBar extends StatelessWidget {
   final int totalSar, totalProgress;
   final Survey surveyDoc;
   List<dynamic> answersList;
-  //final String surveyName;
 
-  SurveyAppBar({
-    this.arguments,
-    this.percent,
-    this.notifyParent,
-    this.animateTo,
-    this.totalProgress,
-    this.questions,
-    this.answersList,
-    this.totalSar,
-    this.surveyDoc,
-    //this.surveyName
-  });
+  SurveyAppBar(
+      {this.arguments,
+      this.percent,
+      this.notifyParent,
+      this.animateTo,
+      this.totalProgress,
+      this.questions,
+      this.answersList,
+      this.totalSar,
+      this.surveyDoc});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +61,6 @@ class SurveyAppBar extends StatelessWidget {
                   : isSummary
                       ? Navigator.of(context).push(MaterialPageRoute(
                           builder: (_) => Summary(
-                                //surveyName: surveyName,
                                 surveyDoc: surveyDoc,
                                 animateTo: animateTo,
                                 questions: questions,
@@ -76,25 +74,12 @@ class SurveyAppBar extends StatelessWidget {
                               )))
                       : showDialog(
                           context: context,
-                          builder: (context) => new AlertDialog(
-                            title: Text('Are you sure?'),
-                            content: new Text(
-                                'Do you really want to exit the survey?'),
-                            actions: <Widget>[
-                              new FlatButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: new Text(MyText().registerNo),
-                              ),
-                              new FlatButton(
-                                onPressed: () => {
-                                  notifyParent(),
-                                  Navigator.of(context).pop(),
-                                  Navigator.of(context).pop(),
-                                },
-                                child: new Text(MyText().willYes),
-                              ),
-                            ],
-                          ),
+                          builder: (context) => MyAlertDialog(
+                              title: MyText().areYouSure,
+                              content: MyText().askToExitSurvey,
+                              no: MyText().registerNo,
+                              yes: MyText().willYes,
+                              notifyParent: notifyParent),
                         );
             }),
         title: Container(
@@ -105,10 +90,10 @@ class SurveyAppBar extends StatelessWidget {
               ? EdgeInsets.only(top: ScreenUtil.instance.setWidth(0.0))
               : EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
           child: LinearPercentIndicator(
-            width: 170.0,
+            width: ScreenUtil.instance.setWidth(170.0),
             lineHeight: 6.0,
             percent: percent,
-            progressColor: Colors.white,
+            progressColor: MyColor().white,
             alignment: MainAxisAlignment.center,
           ),
         ),
@@ -123,7 +108,7 @@ class SurveyAppBar extends StatelessWidget {
                       style: TextStyle(
                           color: MyColor().white,
                           fontWeight: FontWeight.w700,
-                          fontFamily: "LoewNextArabic",
+                          fontFamily: arabic,
                           fontStyle: FontStyle.normal,
                           fontSize: ScreenUtil.instance.setSp(20.0))),
                 ),

@@ -6,6 +6,38 @@
 /// Feb, 2020
 
 class MyText {
+
+//Profile Languages
+  final String languageArabic = 'Arabic';
+  final String languageEnglish = 'English';
+
+//Dialog boxes
+  final String areYouSure = 'Are you sure?';
+  final String askToExitSurvey = 'Do you really want to exit the survey?';
+  final String branching1 = "This survey is not compatible with your answers.";
+  final String branching2 = "You will be redirected to Survey List.";
+  final String branchingOK = 'OK';
+
+//Date question
+  final String day = 'Day';
+  final String month = 'Month';
+  final String year = 'Year';
+
+//MCQ
+  final String indexA = 'A';
+  final String indexB = 'B';
+  final String indexC = 'C';
+  final String indexD = 'D';
+
+//Survey status
+  final String status = 'Status';
+  final String statusCompleted = 'COMPLETED';
+
+//Summary
+  final String congradulations = 'Congratulation\nyou have got';
+  final String sar = '\nSAR';
+  final String summary = 'Summary';
+  final String label = 'Your answer:';
   
 //SplashScreen
   final String fill = 'fill';
