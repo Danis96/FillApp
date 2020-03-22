@@ -65,7 +65,8 @@ bool isSar = false,
     isEmptyCard = false,
     isEmptyDate = false,
     isEmptyCC = false,
-    emailPostoji = false;
+    emailPostoji = false, 
+    isClicked = false;
 DocumentSnapshot snap;
 
 class _ProfileState extends State<Profile> {
@@ -111,7 +112,6 @@ class _ProfileState extends State<Profile> {
   }
 
   refresh() {
-    print('Refreshujemoo');
     setState(() {});
   }
 
@@ -192,13 +192,6 @@ class _ProfileState extends State<Profile> {
                           usersCard = snap.data['card_number'];
                           usersCardDate = snap.data['expire_date'];
                           usersCC = snap.data['cc'];
-                          print(usersName + ' NAME');
-                          print(usersDOB + ' DOB');
-                          print(usersEmail + ' email');
-                          print(usersCard + ' Card');
-                          print(usersCardDate + ' date');
-                          print(usersCC + ' cc');
-                          print(usersSarovi.toString() + ' SAROVI');
                           return EmptyContainer();
                         });
                   }
@@ -279,7 +272,6 @@ class _ProfileState extends State<Profile> {
                       isButtonComplete = true;
                       isButtonCompleteName = true;
                     });
-                    print(isButtonComplete);
                   },
                   obscureText: false,
                 ),
@@ -306,11 +298,13 @@ class _ProfileState extends State<Profile> {
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(25.0),
                           left: ScreenUtil.instance.setWidth(30.0)),
-                      child: Text(
+                      child: isClicked ? Text(
                         isDateChanged
                             ? dateOfBirth
                             : widget.snap2.data['date_of_birth'],
-                      ),
+                      ) : Text('Date of birth'),
+                      
+                       
                     ),
                   ),
                 ),
@@ -659,6 +653,7 @@ class _ProfileState extends State<Profile> {
   }
 
   onTapFieldAnonymousEmail() {
+   
     if (_btnCounter == 0) {
       isReadOnly
           ? MySnackbar().showSnackbar('You must register first', context, 'Ok')
@@ -670,6 +665,7 @@ class _ProfileState extends State<Profile> {
                       setState(() {
                         isButtonComplete = true;
                         isButtonCompleteDOB = true;
+                        isClicked = true;
                       });
                       Navigator.of(context).pop();
                     },
@@ -685,6 +681,7 @@ class _ProfileState extends State<Profile> {
                             isDateChanged = true;
                             isButtonComplete = true;
                             isButtonCompleteDOB = true;
+                            isClicked = true;
                           });
                         },
                       ),
@@ -738,7 +735,6 @@ class _ProfileState extends State<Profile> {
       isButtonCompleteCC ? cc : usersCC,
     );
     FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi);
-    print('TRANSFEROVO SAM');
     setState(() {
       btnText = 'Transfer after 100 SAR';
     });
