@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/inputComponents/inputField.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/submitButton.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
@@ -17,12 +19,12 @@ class InputChoice extends StatefulWidget {
   final Function notifyParent;
   final DocumentSnapshot doc;
   final String title;
-  InputChoice(
-      {this.doc,
-      this.notifyParent,
-      this.username,
-      this.title,
-      });
+  InputChoice({
+    this.doc,
+    this.notifyParent,
+    this.username,
+    this.title,
+  });
 
   @override
   _InputChoiceState createState() => _InputChoiceState();
@@ -30,56 +32,12 @@ class InputChoice extends StatefulWidget {
 
 class _InputChoiceState extends State<InputChoice> {
   TextEditingController answerController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Column(
-       key: ValueKey(widget.title),
+      key: ValueKey(widget.title),
       children: <Widget>[
-        Container(
-          width: ScreenUtil.instance.setWidth(327.0),
-          height: ScreenUtil.instance.setWidth(65.0),
-          margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
-          child: TextFormField(
-            readOnly: isSummary ? true : false,
-            maxLength: 60,
-            enableSuggestions: false,
-            style: TextStyle(color: Colors.black),
-            controller: answerController,
-            decoration: InputDecoration(
-              counterText: '',
-              hasFloatingPlaceholder: false,
-              contentPadding:
-                  new EdgeInsets.symmetric(vertical: 25.0, horizontal: 35.0),
-              labelText: MyText().placeholderInput,
-              labelStyle: TextStyle(color: MyColor().black),
-              enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                borderSide: BorderSide(
-                  color: fieldColor ? MyColor().error : MyColor().black,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                borderSide: BorderSide(
-                    color: fieldColor ? MyColor().error : MyColor().black),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                borderSide: BorderSide(
-                  color: MyColor().error,
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                borderSide: BorderSide(
-                  color: MyColor().error,
-                ),
-              ),
-            ),
-            obscureText: false,
-          ),
-        ),
+        InputField(fieldColor: fieldColor, answerController: answerController),
         Container(
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
           child: fieldColor
@@ -89,22 +47,9 @@ class _InputChoiceState extends State<InputChoice> {
                 )
               : Text(''),
         ),
-        isSummary ?  EmptyContainer() :  Container(
-            width: ScreenUtil.instance.setWidth(316.0),
-            height: ScreenUtil.instance.setHeight(50.0),
-            margin: EdgeInsets.only(
-                top: ScreenUtil.instance.setWidth(7.0),
-                left: ScreenUtil.instance.setWidth(54.0),
-                right: ScreenUtil.instance.setWidth(55.0)),
-            child: RaisedButton(
-              color: MyColor().black,
-              shape: RoundedRectangleBorder(
-                borderRadius: new BorderRadius.circular(33.5),
-              ),
-              onPressed: () =>  onPressed(context),
-              child: Text(MyText().btnSubmit,
-                  style: TextStyle(fontSize: 18, color: MyColor().white)),
-            )),
+        isSummary
+            ? EmptyContainer()
+            : SubmitButton(onPressedFunction: onPressed),
       ],
     );
   }
@@ -126,13 +71,8 @@ class _InputChoiceState extends State<InputChoice> {
       });
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
-          onTap(context);
+      FocusScope.of(context).requestFocus(new FocusNode());
       widget.notifyParent();
     }
-
-  }
-
-  onTap(BuildContext context) {
-    FocusScope.of(context).requestFocus(new FocusNode());
   }
 }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/submitButton.dart';
 import 'package:fillproject/components/SurveyCardYesNo/surveyCard.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
@@ -135,41 +136,9 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
             : widget.isSingle == 1
                 ? EmptyContainer()
                 : widget.length == 3 && widget.index == MyText().indexC
-                    ? Container(
-                        width: ScreenUtil.instance.setWidth(316.0),
-                        height: ScreenUtil.instance.setHeight(55.0),
-                        margin: EdgeInsets.only(
-                            top: ScreenUtil.instance.setWidth(20.0),
-                            left: ScreenUtil.instance.setWidth(54.0),
-                            right: ScreenUtil.instance.setWidth(55.0)),
-                        child: RaisedButton(
-                          color: MyColor().black,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: new BorderRadius.circular(33.5),
-                          ),
-                          onPressed: () => submit(),
-                          child: Text(MyText().btnSubmit,
-                              style: TextStyle(
-                                  fontSize: ScreenUtil.instance.setSp(18.0), color: MyColor().white)),
-                        ))
+                    ? SubmitButton(onPressedFunction: submit)
                     : widget.length == 4 && widget.index == MyText().indexD
-                        ? Container(
-                            width: ScreenUtil.instance.setWidth(316.0),
-                            height: ScreenUtil.instance.setHeight(55.0),
-                            margin: EdgeInsets.only(
-                                top: ScreenUtil.instance.setWidth(20.0),
-                                left: ScreenUtil.instance.setWidth(54.0),
-                                right: ScreenUtil.instance.setWidth(55.0)),
-                            child: RaisedButton(
-                              color: MyColor().black,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(33.5),
-                              ),
-                              onPressed: () => submit(),
-                              child: Text(MyText().btnSubmit,
-                                  style: TextStyle(
-                                      fontSize: ScreenUtil.instance.setSp(18.0), color: MyColor().white)),
-                            ))
+                        ? SubmitButton(onPressedFunction: submit)
                         : EmptyContainer()
       ],
     );
@@ -223,7 +192,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     onPressed(multipleAnswers.toString());
   }
 
-  ////
   onTapSingle1() {
     setState(() {
       isTappedMCQ1 = true;
