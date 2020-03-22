@@ -18,7 +18,6 @@ class Survey {
       this.usersThatGaveAnswers,
       });
 
-
     factory Survey.fromDocument(DocumentSnapshot doc) {
         return Survey(
           level: doc['level'],

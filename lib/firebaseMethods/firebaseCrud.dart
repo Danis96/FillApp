@@ -16,7 +16,6 @@ import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/login/loginPage.dart';
 import 'package:fillproject/register/registerPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:random_string/random_string.dart';
 
@@ -117,7 +116,6 @@ class FirebaseCrud {
       'sar': sar,
       'transferSar': FieldValue.arrayUnion([tSar])
     });
-    print('UPDATOVO SAM SAROVE PICKO');
   }
 
   /// [updatePassword]
@@ -130,7 +128,6 @@ class FirebaseCrud {
         .collection('Users')
         .document(doc.documentID)
         .updateData({'password': '$password'});
-
     Navigator.of(context).push(CardAnimationTween(widget: LoginPage()));
   }
 

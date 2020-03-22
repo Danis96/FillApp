@@ -29,6 +29,28 @@ class MyText {
   final String indexC = 'C';
   final String indexD = 'D';
 
+//Survey List
+  final String surveyList = 'Survey List';
+
+//Navigation Bar
+  final String transferAfter = 'Transfer after 100 SAR';
+  final String register = 'Register';
+  final String completeProfile = 'Complete profile';
+  final String transfer = 'Transfer';
+  final String singleSar = 'SAR';
+
+//Profile
+  final String profileTitle = 'Profile';
+  final String transferWith = 'transfer with';
+  final String labelNameAndSurname = 'Name and Surname';
+  final String labelDOB = 'Date of birth';
+  final String labelEmailProfile = 'Enter email';
+  final String labelCardNumber = 'Enter card number ';
+  final String labelExpireDate = 'Date';
+  final String labelCC = 'CC';
+  final String mustRegister = 'You must register first';
+  final String ok = 'Ok';
+
 //Survey status
   final String status = 'Status';
   final String statusCompleted = 'COMPLETED';
@@ -55,6 +77,7 @@ class MyText {
   final String registerSubtitle = '3\nSAR';
   final String labelUsername = 'Username';
   final String labelPhone = ' +966 Phone number';
+  final String sendPIN = "Send PIN";
 
 //VerityPage
   final String verifyPageHeadline = 'Verify your \nnumber';

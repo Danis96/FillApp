@@ -10,6 +10,7 @@
 /// Feb, 2020
 
 import 'package:fillproject/components/constants/fontsConstants.dart';
+import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:splashscreen/splashscreen.dart';
@@ -29,16 +30,16 @@ class _MySplashScreenState extends State<MySplashScreen> {
       title: new Text(
         MyText().fill,
         style: new TextStyle(
-            fontSize: 70.0, color: Colors.white, fontFamily: roboto),
+            fontSize: 70.0, color: MyColor().white, fontFamily: roboto),
       ),
-      backgroundColor: Colors.black,
+      backgroundColor: MyColor().black,
       styleTextUnderTheLoader: new TextStyle(),
       onClick: () => new SignUp(),
       loaderColor: Colors.black,
       loadingText: new Text(
         MyText().builtBy,
         style: new TextStyle(
-            fontSize: 23, color: Colors.white, fontFamily: roboto),
+            fontSize: 23, color: MyColor().white, fontFamily: roboto),
       ),
     );
   }

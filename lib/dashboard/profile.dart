@@ -1,12 +1,15 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/bigCircle.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
+import 'package:fillproject/components/profileButton.dart';
 import 'package:fillproject/components/profileComponents/languageChoose.dart';
+import 'package:fillproject/components/transferWithIcon.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
-import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -65,7 +68,7 @@ bool isSar = false,
     isEmptyCard = false,
     isEmptyDate = false,
     isEmptyCC = false,
-    emailPostoji = false, 
+    emailPostoji = false,
     isClicked = false;
 DocumentSnapshot snap;
 
@@ -94,7 +97,7 @@ class _ProfileState extends State<Profile> {
   void initState() {
     /// checking if any change happend,
     /// if it is set btn text to complete profile if not, leave it
-    isButtonComplete ? btnText = 'Complete profile' : btnText = btnText;
+    isButtonComplete ? btnText = MyText().completeProfile : btnText = btnText;
     super.initState();
     checkForInternet();
     FirebaseCheck().getUserUsername(widget.arguments.username);
@@ -117,51 +120,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    Widget bigCircle = Container(
-      width: ScreenUtil.instance.setWidth(198.0),
-      height: ScreenUtil.instance.setHeight(198.0),
-      child: Column(
-        children: <Widget>[
-          Container(
-              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(40.0)),
-              child: Text(
-                usersSarovi.toString(),
-                style: TextStyle(
-                  color: btnText == 'Complete profile'
-                      ? MyColor().black
-                      : btnText == 'Transfer'
-                          ? MyColor().black
-                          : MyColor().white,
-                  fontSize: 35.0,
-                  fontFamily: "LoewNextArabic",
-                ),
-              )),
-          Container(
-              child: Text(
-            'SAR',
-            style: TextStyle(
-              color: btnText == 'Complete profile'
-                  ? MyColor().black
-                  : btnText == 'Transfer' ? MyColor().black : MyColor().white,
-              fontSize: 35.0,
-              fontFamily: "LoewNextArabic",
-            ),
-          )),
-        ],
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(
-            width: 1,
-            color: btnText == 'Complete profile'
-                ? Colors.red
-                : btnText == 'Transfer' ? Colors.green : MyColor().white),
-        color: btnText == 'Complete profile'
-            ? MyColor().white
-            : btnText == 'Transfer' ? MyColor().white : MyColor().black,
-        shape: BoxShape.circle,
-      ),
-    );
-
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -203,19 +161,19 @@ class _ProfileState extends State<Profile> {
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(70.0)),
                 child: Text(
-                  'Profile',
+                  MyText().profileTitle,
                   style: TextStyle(fontSize: 23.0),
                 ),
               ),
               Container(
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
-                child: bigCircle,
+                child: BigCircle(usersSarovi: usersSarovi),
               ),
               Container(
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
-                child: rowBelow,
+                child: TransferWithIcon(),
               ),
               Container(
                 width: ScreenUtil.instance.setWidth(316.0),
@@ -234,7 +192,7 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(color: Colors.black),
                   initialValue: widget.snap2.data['name_and_surname'],
                   decoration: InputDecoration(
-                    labelText: 'Name and Surname',
+                    labelText: MyText().labelNameAndSurname,
                     counterText: '',
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
@@ -298,13 +256,13 @@ class _ProfileState extends State<Profile> {
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(25.0),
                           left: ScreenUtil.instance.setWidth(30.0)),
-                      child: isClicked ? Text(
-                        isDateChanged
-                            ? dateOfBirth
-                            : widget.snap2.data['date_of_birth'],
-                      ) : Text('Date of birth'),
-                      
-                       
+                      child: isClicked
+                          ? Text(
+                              isDateChanged
+                                  ? dateOfBirth
+                                  : widget.snap2.data['date_of_birth'],
+                            )
+                          : Text(MyText().labelDOB),
                     ),
                   ),
                 ),
@@ -329,7 +287,7 @@ class _ProfileState extends State<Profile> {
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    labelText: 'Enter email',
+                    labelText: MyText().labelEmailProfile,
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -392,7 +350,7 @@ class _ProfileState extends State<Profile> {
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    labelText: 'Enter card number ',
+                    labelText: MyText().labelCardNumber,
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -454,7 +412,7 @@ class _ProfileState extends State<Profile> {
                         hasFloatingPlaceholder: false,
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 25.0, horizontal: 35.0),
-                        labelText: 'Date',
+                        labelText: MyText().labelExpireDate,
                         labelStyle: TextStyle(color: MyColor().black),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -516,7 +474,7 @@ class _ProfileState extends State<Profile> {
                         hasFloatingPlaceholder: false,
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 25.0, horizontal: 35.0),
-                        labelText: 'CC',
+                        labelText: MyText().labelCC,
                         labelStyle: TextStyle(color: MyColor().black),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -559,7 +517,7 @@ class _ProfileState extends State<Profile> {
                 ],
               ),
               Container(
-                child: btnProfile(),
+                child: ProfileButton(onPressed: onPressed),
               ),
               Column(
                 children: <Widget>[
@@ -587,63 +545,11 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  btnProfile() {
-    return Container(
-      child: Container(
-        margin: EdgeInsets.only(
-            top: ScreenUtil.instance.setWidth(30.0),
-            bottom: ScreenUtil.instance.setWidth(30.0)),
-        width: ScreenUtil.instance.setWidth(303.0),
-        height: ScreenUtil.instance.setWidth(58.0),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(29)),
-            color: MyColor().white),
-        child: RaisedButton(
-            color: MyColor().black,
-            elevation: 1,
-            shape: RoundedRectangleBorder(
-              borderRadius: new BorderRadius.circular(28.0),
-            ),
-            child: btnText == 'Register'
-                ? Text('Register',
-                    style: TextStyle(
-                        color: MyColor().white,
-                        fontFamily: "LoewNextArabic",
-                        fontStyle: FontStyle.normal,
-                        fontSize: 18.0),
-                    textAlign: TextAlign.center)
-                : btnText == 'Transfer'
-                    ? Text('Transfer',
-                        style: TextStyle(
-                            color: MyColor().white,
-                            fontFamily: "LoewNextArabic",
-                            fontStyle: FontStyle.normal,
-                            fontSize: 18.0),
-                        textAlign: TextAlign.center)
-                    : btnText == 'Complete profile'
-                        ? Text('Complete profile',
-                            style: TextStyle(
-                                color: MyColor().white,
-                                fontFamily: "LoewNextArabic",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 18.0),
-                            textAlign: TextAlign.center)
-                        : Text('Transfer after 100 SAR',
-                            style: TextStyle(
-                                color: MyColor().white,
-                                fontFamily: "LoewNextArabic",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 18.0),
-                            textAlign: TextAlign.center),
-            onPressed: () => onPressed()),
-      ),
-    );
-  }
-
   onTapFieldAnonymous() {
     if (_btnCounter == 0) {
       isReadOnly
-          ? MySnackbar().showSnackbar('You must register first', context, 'Ok')
+          ? MySnackbar()
+              .showSnackbar(MyText().mustRegister, context, MyText().ok)
           : print('ssss');
       _btnCounter = 1;
       Timer(Duration(seconds: 2), () {
@@ -653,10 +559,10 @@ class _ProfileState extends State<Profile> {
   }
 
   onTapFieldAnonymousEmail() {
-   
     if (_btnCounter == 0) {
       isReadOnly
-          ? MySnackbar().showSnackbar('You must register first', context, 'Ok')
+          ? MySnackbar()
+              .showSnackbar(MyText().mustRegister, context, MyText().ok)
           : showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
@@ -687,7 +593,6 @@ class _ProfileState extends State<Profile> {
                       ),
                     ));
               });
-
       _btnCounter = 1;
       Timer(Duration(seconds: 2), () {
         _btnCounter = 0;
@@ -706,9 +611,8 @@ class _ProfileState extends State<Profile> {
       isButtonCompleteDate ? date : usersCardDate,
       isButtonCompleteCC ? cc : usersCC,
     );
-
     setState(() {
-      btnText = isButtonComplete ? 'Transfer' : 'Complete profile';
+      btnText = isButtonComplete ? MyText().transfer : MyText().completeProfile;
     });
     widget.refreshNavbar();
   }
@@ -724,7 +628,6 @@ class _ProfileState extends State<Profile> {
         isButtonCompleteDate ? date : usersCardDate,
         isButtonCompleteCC ? cc : usersCC,
         usersSarovi);
-
     FirebaseCrud().updateUserOnCompletePRofile(
       snap,
       isButtonCompleteName ? name : usersName,
@@ -736,7 +639,7 @@ class _ProfileState extends State<Profile> {
     );
     FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi);
     setState(() {
-      btnText = 'Transfer after 100 SAR';
+      btnText = MyText().transferAfter;
     });
     Timer(Duration(seconds: 1), () {
       setState(() {});
@@ -744,9 +647,9 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressed() {
-    if (btnText == 'Register') {
+    if (btnText == MyText().register) {
       FirebaseCrud().userRegister(context, widget.arguments.username);
-    } else if (btnText == 'Complete profile') {
+    } else if (btnText == MyText().completeProfile) {
       if (name == '' || regexSpace.hasMatch(name) == false) {
         setState(() {
           isEmptyName = true;
@@ -806,26 +709,8 @@ class _ProfileState extends State<Profile> {
       } else {
         completeProfile();
       }
-    } else if (btnText == 'Transfer') {
+    } else if (btnText == MyText().transfer) {
       transferSar();
     }
   }
-
-  Widget rowBelow = Container(
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Container(
-          child: Text('transfer with'),
-        ),
-        Container(
-          height: ScreenUtil.instance.setHeight(27.0),
-          width: ScreenUtil.instance.setWidth(81.0),
-          margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(20.0)),
-          child: Image.asset('assets/images/transferImage.png'),
-        ),
-      ],
-    ),
-  );
 }

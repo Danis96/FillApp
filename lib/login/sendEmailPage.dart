@@ -15,6 +15,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/mySnackbar.dart';
@@ -23,7 +24,6 @@ import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/resetPassword.dart';
 import 'package:fillproject/login/resetPasswordPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:random_string/random_string.dart';
@@ -45,7 +45,7 @@ class EmailResetPage extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: MyColor().white,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -62,15 +62,15 @@ class EmailResetPage extends StatelessWidget {
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(25.0)),
                 child: SizedBox(
-                    width: 184,
-                    height: 28,
+                    width: ScreenUtil.instance.setWidth(184.0),
+                    height: ScreenUtil.instance.setHeight(28.0),
                     child: Text(MyText().emailReset,
-                        style: const TextStyle(
-                            color: const Color(0xffffffff),
+                        style: TextStyle(
+                            color: MyColor().white,
                             fontWeight: FontWeight.bold,
-                            fontFamily: 'LoewNextArabic',
+                            fontFamily: arabic,
                             fontStyle: FontStyle.normal,
-                            fontSize: 23.0),
+                            fontSize: ScreenUtil.instance.setSp(23.0)),
                         textAlign: TextAlign.center)),
               ),
               Container(
@@ -83,12 +83,12 @@ class EmailResetPage extends StatelessWidget {
                     width: ScreenUtil.instance.setWidth(269),
                     height: ScreenUtil.instance.setWidth(66),
                     child: Text(MyText().emailSub,
-                        style: const TextStyle(
-                            color: const Color(0xffffffff),
+                        style: TextStyle(
+                            color: MyColor().white,
                             fontWeight: FontWeight.w500,
-                            fontFamily: 'LoewNextArabic',
+                            fontFamily: arabic,
                             fontStyle: FontStyle.normal,
-                            fontSize: 16),
+                            fontSize: ScreenUtil.instance.setSp(16.0)),
                         textAlign: TextAlign.center)),
               ),
               Container(
@@ -104,7 +104,6 @@ class EmailResetPage extends StatelessWidget {
                     enableSuggestions: false,
                     controller: emailController,
                     decoration: InputDecoration(
-                      // floatingLabelBehavior: FloatingLabelBehavior.never,
                       hasFloatingPlaceholder: false,
                       contentPadding: new EdgeInsets.symmetric(
                           vertical: 25.0, horizontal: 35.0),
@@ -162,7 +161,7 @@ class EmailResetPage extends StatelessWidget {
                       }
                     },
                     child:
-                        Text(MyText().btnEmail, style: TextStyle(fontSize: 18)),
+                        Text(MyText().btnEmail, style: TextStyle(fontSize: ScreenUtil.instance.setSp(18.0))),
                   )),
             ],
           ),

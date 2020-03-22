@@ -25,7 +25,6 @@ import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/register/passwordPage.dart';
 import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -64,7 +63,7 @@ class _EmailPageState extends State<EmailPage> {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: MyColor().white,
           onPressed: () {
             Navigator.of(context).push(
               CardAnimationTween(
@@ -118,7 +117,6 @@ class _EmailPageState extends State<EmailPage> {
                             enableSuggestions: false,
                             controller: emailController,
                             decoration: InputDecoration(
-                              // floatingLabelBehavior: FloatingLabelBehavior.never,
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: ScreenUtil.instance.setWidth(25.0),
