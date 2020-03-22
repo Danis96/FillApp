@@ -116,8 +116,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           width: ScreenUtil.instance.setWidth(316.0),
                           height: ScreenUtil.instance.setHeight(92.0),
                           margin: EdgeInsets.only(
-                            
-                              bottom: ScreenUtil.instance.setWidth(19.0), top: ScreenUtil.instance.setWidth(105.0), left: ScreenUtil.instance.setWidth(40.0), right: ScreenUtil.instance.setWidth(40.0)),
+                              bottom: ScreenUtil.instance.setWidth(19.0),
+                              top: ScreenUtil.instance.setWidth(105.0),
+                              left: ScreenUtil.instance.setWidth(40.0),
+                              right: ScreenUtil.instance.setWidth(40.0)),
                           child: TextFormField(
                             enableSuggestions: false,
                             style: TextStyle(color: Colors.white),
@@ -211,7 +213,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                           width: ScreenUtil.instance.setWidth(316.0),
                           height: ScreenUtil.instance.setHeight(92.0),
                           margin: EdgeInsets.only(
-                              bottom: ScreenUtil.instance.setWidth(28.0), top: ScreenUtil.instance.setWidth(19.0), left: ScreenUtil.instance.setWidth(40.0), right: ScreenUtil.instance.setWidth(40.0)),
+                              bottom: ScreenUtil.instance.setWidth(28.0),
+                              top: ScreenUtil.instance.setWidth(19.0),
+                              left: ScreenUtil.instance.setWidth(40.0),
+                              right: ScreenUtil.instance.setWidth(40.0)),
                           child: TextFormField(
                             enableSuggestions: false,
                             style: TextStyle(color: Colors.white),
@@ -258,7 +263,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     )),
                 Container(
                   margin: EdgeInsets.only(
-                  top: ScreenUtil.instance.setWidth(18.0), left: ScreenUtil.instance.setWidth(40.0), right: ScreenUtil.instance.setWidth(40.0), bottom: ScreenUtil.instance.setWidth(127.0)),
+                      top: ScreenUtil.instance.setWidth(18.0),
+                      left: ScreenUtil.instance.setWidth(40.0),
+                      right: ScreenUtil.instance.setWidth(40.0),
+                      bottom: ScreenUtil.instance.setWidth(127.0)),
                   width: ScreenUtil.instance.setWidth(316.0),
                   height: ScreenUtil.instance.setHeight(67.0),
                   child: RaisedButton(

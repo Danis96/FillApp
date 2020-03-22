@@ -13,6 +13,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
+import 'package:fillproject/login/loginPage.dart';
 import 'package:fillproject/register/registerPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -47,11 +48,18 @@ class FirebaseCrud {
     });
   }
 
-   /// create transfer
+  /// create transfer
   ///
   /// upis u firestore collection
-  createTransfer(String date, String nameAndSurname, String dateOfBirth, String email,
-      String cardNumber, String expireDate, String cc, int tSar) async {
+  createTransfer(
+      String date,
+      String nameAndSurname,
+      String dateOfBirth,
+      String email,
+      String cardNumber,
+      String expireDate,
+      String cc,
+      int tSar) async {
     await db.collection('Transfers').add({
       'date': date,
       'name_and_surname': nameAndSurname,
@@ -100,11 +108,14 @@ class FirebaseCrud {
     });
   }
 
-  updateSarOnTransfer(DocumentSnapshot doc, int sar, int tSar,) async {
-     await db.collection('Users').document(doc.documentID).updateData({
+  updateSarOnTransfer(
+    DocumentSnapshot doc,
+    int sar,
+    int tSar,
+  ) async {
+    await db.collection('Users').document(doc.documentID).updateData({
       'sar': sar,
-      'transferSar':
-          FieldValue.arrayUnion([tSar])
+      'transferSar': FieldValue.arrayUnion([tSar])
     });
     print('UPDATOVO SAM SAROVE PICKO');
   }
@@ -119,7 +130,8 @@ class FirebaseCrud {
         .collection('Users')
         .document(doc.documentID)
         .updateData({'password': '$password'});
-    Navigator.of(context).pushNamed(Login);
+
+    Navigator.of(context).push(CardAnimationTween(widget: LoginPage()));
   }
 
   /// [updateListOfUsernameAnswers]
