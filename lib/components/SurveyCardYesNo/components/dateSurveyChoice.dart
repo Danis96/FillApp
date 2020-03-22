@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/labelContainer.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/submitButton.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
@@ -21,20 +22,27 @@ class DateChoice extends StatefulWidget {
   final DocumentSnapshot doc;
   final String title;
   String day, month, year;
-  DateChoice({this.doc, this.notifyParent, this.username, this.title, this.day, this.month, this.year});
+  DateChoice(
+      {this.doc,
+      this.notifyParent,
+      this.username,
+      this.title,
+      this.day,
+      this.month,
+      this.year});
 
   @override
   _DateChoiceState createState() => _DateChoiceState();
 }
-  TextEditingController dayController = TextEditingController(text: '');
-  TextEditingController monthController = TextEditingController(text: '');
-  TextEditingController yearController = TextEditingController(text: '');
-  String selectedDay, selectedMonth, selectedYear;
+
+TextEditingController dayController = TextEditingController(text: '');
+TextEditingController monthController = TextEditingController(text: '');
+TextEditingController yearController = TextEditingController(text: '');
+String selectedDay, selectedMonth, selectedYear;
 
 class _DateChoiceState extends State<DateChoice> {
-
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     dayController.text = '';
     monthController.text = '';
@@ -43,13 +51,12 @@ class _DateChoiceState extends State<DateChoice> {
 
   @override
   Widget build(BuildContext context) {
-  
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(new FocusNode());
       },
       child: Column(
-         key: ValueKey(widget.title),
+        key: ValueKey(widget.title),
         children: <Widget>[
           Padding(
             padding: EdgeInsets.only(
@@ -60,33 +67,39 @@ class _DateChoiceState extends State<DateChoice> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    LabelContainer(text: MyText().day, leftMargin: 0.0, containerWidth: 80.0),
+                    LabelContainer(
+                        text: MyText().day,
+                        leftMargin: 0.0,
+                        containerWidth: 80.0),
                     Container(
                       width: ScreenUtil.instance.setWidth(80.0),
                       height: ScreenUtil.instance.setWidth(61.0),
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(5.0)),
                       child: TextFormField(
-                         readOnly:true,
+                        readOnly: true,
                         textAlign: TextAlign.center,
-                        onTap: () => isSummary ?  null : showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    if (selectedDay == null) {
-                                      selectedDay = '1';
-                                    }
-                                    widget.day = selectedDay;
-                                    dayController.text = widget.day;
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                      height:
-                                          ScreenUtil.instance.setHeight(265.0),
-                                      child: _buildItemPicker('day', context)),
-                                );
-                              }),
+                        onTap: () => isSummary
+                            ? null
+                            : showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      if (selectedDay == null) {
+                                        selectedDay = '1';
+                                      }
+                                      widget.day = selectedDay;
+                                      dayController.text = widget.day;
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                        height: ScreenUtil.instance
+                                            .setHeight(265.0),
+                                        child:
+                                            _buildItemPicker('day', context)),
+                                  );
+                                }),
                         enableSuggestions: false,
                         style: TextStyle(color: Colors.black),
                         controller: dayController,
@@ -134,7 +147,10 @@ class _DateChoiceState extends State<DateChoice> {
                 ),
                 Column(
                   children: <Widget>[
-                    LabelContainer(text: MyText().month, leftMargin: 10.0, containerWidth: 80.0),
+                    LabelContainer(
+                        text: MyText().month,
+                        leftMargin: 10.0,
+                        containerWidth: 80.0),
                     Container(
                       width: ScreenUtil.instance.setWidth(80.0),
                       height: ScreenUtil.instance.setWidth(61.0),
@@ -144,26 +160,27 @@ class _DateChoiceState extends State<DateChoice> {
                       child: TextFormField(
                         textAlign: TextAlign.center,
                         readOnly: true,
-                        onTap: () => isSummary ? null :  
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    if (selectedMonth == null) {
-                                      selectedMonth = '1';
-                                    }
-                                    widget.month = selectedMonth;
-                                    monthController.text = widget.month;
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                      height:
-                                          ScreenUtil.instance.setHeight(265.0),
-                                      child:
-                                          _buildItemPicker('month', context)),
-                                );
-                              }),
+                        onTap: () => isSummary
+                            ? null
+                            : showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      if (selectedMonth == null) {
+                                        selectedMonth = '1';
+                                      }
+                                      widget.month = selectedMonth;
+                                      monthController.text = widget.month;
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                        height: ScreenUtil.instance
+                                            .setHeight(265.0),
+                                        child:
+                                            _buildItemPicker('month', context)),
+                                  );
+                                }),
                         enableSuggestions: false,
                         style: TextStyle(color: Colors.black),
                         controller: monthController,
@@ -211,7 +228,10 @@ class _DateChoiceState extends State<DateChoice> {
                 ),
                 Column(
                   children: <Widget>[
-                    LabelContainer(text: MyText().year, leftMargin: 10.0, containerWidth: 125.0),
+                    LabelContainer(
+                        text: MyText().year,
+                        leftMargin: 10.0,
+                        containerWidth: 125.0),
                     Container(
                       width: ScreenUtil.instance.setWidth(125.0),
                       height: ScreenUtil.instance.setWidth(61.0),
@@ -221,25 +241,27 @@ class _DateChoiceState extends State<DateChoice> {
                       child: TextFormField(
                         textAlign: TextAlign.center,
                         readOnly: true,
-                        onTap: () => isSummary ? null : 
-                          showModalBottomSheet(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    if (selectedYear == null) {
-                                      selectedYear = '2020';
-                                    }
-                                    widget.year = selectedYear;
-                                    yearController.text = widget.year;
-                                    Navigator.pop(context);
-                                  },
-                                  child: Container(
-                                      height:
-                                          ScreenUtil.instance.setHeight(265.0),
-                                      child: _buildItemPicker('year', context)),
-                                );
-                              }),
+                        onTap: () => isSummary
+                            ? null
+                            : showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      if (selectedYear == null) {
+                                        selectedYear = '2020';
+                                      }
+                                      widget.year = selectedYear;
+                                      yearController.text = widget.year;
+                                      Navigator.pop(context);
+                                    },
+                                    child: Container(
+                                        height: ScreenUtil.instance
+                                            .setHeight(265.0),
+                                        child:
+                                            _buildItemPicker('year', context)),
+                                  );
+                                }),
                         enableSuggestions: false,
                         style: TextStyle(color: Colors.black),
                         controller: yearController,
@@ -297,22 +319,9 @@ class _DateChoiceState extends State<DateChoice> {
                   )
                 : Text(''),
           ),
-         isSummary ? EmptyContainer() : Container(
-              width: ScreenUtil.instance.setWidth(316.0),
-              height: ScreenUtil.instance.setHeight(55.0),
-              margin: EdgeInsets.only(
-                  top: ScreenUtil.instance.setWidth(20.0),
-                  left: ScreenUtil.instance.setWidth(54.0),
-                  right: ScreenUtil.instance.setWidth(55.0)),
-              child: RaisedButton(
-                color: MyColor().black,
-                shape: RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(33.5),
-                ),
-                onPressed: () => onPressed(context),
-                child: Text(MyText().btnSubmit,
-                    style: TextStyle(fontSize: ScreenUtil.instance.setSp(18.0), color: MyColor().white)),
-              )),
+          isSummary
+              ? EmptyContainer()
+              : SubmitButton(onPressedFunction: onPressed)
         ],
       ),
     );
@@ -339,7 +348,6 @@ class _DateChoiceState extends State<DateChoice> {
     return CupertinoPicker(
       itemExtent: 45.0,
       onSelectedItemChanged: (index) {
-    
         if (field == 'year') {
           selectedYear = items[index];
           widget.year = selectedYear;

@@ -16,10 +16,11 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/congradulationsContainer.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/summaryContainer.dart';
-import 'package:fillproject/components/constants/fontsConstants.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/summaryTitleContainer.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/totalSar.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
@@ -148,51 +149,9 @@ class _SummaryState extends State<Summary> {
                       right: ScreenUtil.instance.setWidth(25.0)),
                   child: Column(
                     children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.only(
-                            bottom: ScreenUtil.instance.setWidth(33.0)),
-                        child: Center(
-                          child: Text(MyText().congradulations,
-                              style: TextStyle(
-                                color: MyColor().white,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: arabic,
-                                fontStyle: FontStyle.normal,
-                                fontSize: ScreenUtil.instance.setSp(25.0),
-                              ),
-                              textAlign: TextAlign.center),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            bottom: ScreenUtil.instance.setWidth(44.0)),
-                        child: Center(
-                          child: Text(widget.totalSar.toString() + MyText().sar,
-                              style: TextStyle(
-                                color: MyColor().white,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: arabic,
-                                fontStyle: FontStyle.normal,
-                                fontSize: ScreenUtil.instance.setSp(35.0),
-                              ),
-                              textAlign: TextAlign.center),
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.only(
-                            bottom: ScreenUtil.instance.setWidth(15.0)),
-                        child: Center(
-                          child: Text(MyText().summary,
-                              style: TextStyle(
-                                color: MyColor().white,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: arabic,
-                                fontStyle: FontStyle.normal,
-                                fontSize: ScreenUtil.instance.setSp(25.0),
-                              ),
-                              textAlign: TextAlign.center),
-                        ),
-                      ),
+                      CongradulationsContainer(),
+                      TotalSar(sars: widget.totalSar.toString()),
+                      SummaryTitleContainer(),
                       Container(
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(20.0)),
