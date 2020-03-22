@@ -64,7 +64,8 @@ bool isSar = false,
     isEmptyMail = false,
     isEmptyCard = false,
     isEmptyDate = false,
-    isEmptyCC = false;
+    isEmptyCC = false, 
+    emailPostoji = false;
 DocumentSnapshot snap;
 
 class _ProfileState extends State<Profile> {
@@ -188,7 +189,7 @@ class _ProfileState extends State<Profile> {
                           usersName = snap.data['name_and_surname'];
                           usersDOB = snap.data['date_of_birth'];
                           usersEmail = snap.data['email_profile'];
-                          usersCard =snap.data['card_number'];
+                          usersCard = snap.data['card_number'];
                           usersCardDate = snap.data['expire_date'];
                           usersCC = snap.data['cc'];
                           print(usersName + ' NAME');
@@ -566,6 +567,25 @@ class _ProfileState extends State<Profile> {
               Container(
                 child: btnProfile(),
               ),
+              Column(
+                children: <Widget>[
+                  FutureBuilder(
+                    future: FirebaseCheck().doesEmailAlreadyExist(email),
+                    builder: (context, AsyncSnapshot<bool> result) {
+                      if (!result.hasData) {
+                        return EmptyContainer();
+                      }
+                      if (result.data) {
+                        emailPostoji = true;
+                        return EmptyContainer();
+                      } else {
+                        emailPostoji = false;
+                        return EmptyContainer();
+                      }
+                    },
+                  ),
+                ],
+              ),
             ],
           )),
         ]),
@@ -729,7 +749,7 @@ class _ProfileState extends State<Profile> {
             isEmptyName = false;
           });
         });
-      } else if (email == '' || regexEmail.hasMatch(email) == false) {
+      } else if (email == '' || regexEmail.hasMatch(email) == false || emailPostoji) {
         setState(() {
           isEmptyMail = true;
         });
@@ -800,4 +820,3 @@ class _ProfileState extends State<Profile> {
     ),
   );
 }
- 
