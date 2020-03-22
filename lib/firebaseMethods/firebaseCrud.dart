@@ -83,12 +83,13 @@ class FirebaseCrud {
     });
   }
 
-  updateSarOnTransfer(DocumentSnapshot doc, int sar, int tSar, String dateOfTransfer) async {
+  updateSarOnTransfer(DocumentSnapshot doc, int sar, int tSar,) async {
      await db.collection('Users').document(doc.documentID).updateData({
       'sar': sar,
       'transferSar':
-          FieldValue.arrayUnion(['$dateOfTransfer : $tSar'])
+          FieldValue.arrayUnion([tSar])
     });
+    print('UPDATOVO SAM SAROVE PICKO');
   }
 
   /// [updatePassword]

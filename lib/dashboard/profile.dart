@@ -69,7 +69,14 @@ DocumentSnapshot snap;
 
 class _ProfileState extends State<Profile> {
   int usersSarovi, profileAnonym, _btnCounter = 0;
-  bool isButtonComplete = false, isDateChanged = false;
+  bool isButtonComplete = false,
+      isButtonCompleteName = false,
+      isButtonCompleteDOB = false,
+      isButtonCompleteEmail = false,
+      isButtonCompleteCard = false,
+      isButtonCompleteDate = false,
+      isButtonCompleteCC = false,
+      isDateChanged = false;
   DateTime dateOfBirth2 = DateTime.now();
   String usersName, usersEmail, usersDOB, usersCard, usersCardDate, usersCC;
 
@@ -80,8 +87,6 @@ class _ProfileState extends State<Profile> {
       _cardFocus = FocusNode(),
       _dateFocus = FocusNode(),
       _ccFocus = FocusNode();
-
-  TextEditingController _dobController = TextEditingController();
 
   @override
   void initState() {
@@ -177,10 +182,22 @@ class _ProfileState extends State<Profile> {
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
                           snap = snapshot.data[index];
-                          usersSarovi = snapshot.data[index].data['sar'];
                           profileAnonym =
                               snapshot.data[index].data['is_anonymous'];
-
+                          usersSarovi = snap.data['sar'];
+                          usersName = snap.data['name_and_surname'];
+                          usersDOB = snap.data['date_of_birth'];
+                          usersEmail = snap.data['email_profile'];
+                          usersCard =snap.data['card_number'];
+                          usersCardDate = snap.data['expire_date'];
+                          usersCC = snap.data['cc'];
+                          print(usersName + ' NAME');
+                          print(usersDOB + ' DOB');
+                          print(usersEmail + ' email');
+                          print(usersCard + ' Card');
+                          print(usersCardDate + ' date');
+                          print(usersCC + ' cc');
+                          print(usersSarovi.toString() + ' SAROVI');
                           return EmptyContainer();
                         });
                   }
@@ -259,6 +276,7 @@ class _ProfileState extends State<Profile> {
                     setState(() {
                       name = input;
                       isButtonComplete = true;
+                      isButtonCompleteName = true;
                     });
                     print(isButtonComplete);
                   },
@@ -273,53 +291,27 @@ class _ProfileState extends State<Profile> {
                   top: ScreenUtil.instance.setWidth(22.0),
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
-                child: TextFormField(
-                  readOnly: true,
+                child: GestureDetector(
                   onTap: () => onTapFieldAnonymousEmail(),
-                  focusNode: _dobFocus,
-                  maxLength: 200,
-                  enableSuggestions: false,
-                  style: TextStyle(color: Colors.black),
-                  initialValue: widget.snap2.data['date_of_birth'],
-                  decoration: InputDecoration(
-                    counterText: '',
-                    hasFloatingPlaceholder: false,
-                    contentPadding: new EdgeInsets.symmetric(
-                        vertical: 25.0, horizontal: 35.0),
-                    labelText: 'Enter date of birth',
-                    labelStyle: TextStyle(color: MyColor().black),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: isEmptyBirth ? MyColor().error : MyColor().black,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 1,
                       ),
+                      borderRadius: BorderRadius.circular(33.5),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                          color:
-                              isEmptyBirth ? MyColor().error : MyColor().black),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: MyColor().error,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: MyColor().error,
+                    child: Container(
+                      margin: EdgeInsets.only(
+                          top: ScreenUtil.instance.setWidth(25.0),
+                          left: ScreenUtil.instance.setWidth(30.0)),
+                      child: Text(
+                        isDateChanged
+                            ? dateOfBirth
+                            : widget.snap2.data['date_of_birth'],
                       ),
                     ),
                   ),
-                  onChanged: (input) {
-                    setState(() {
-                      dateOfBirth = input;
-                      isButtonComplete = true;
-                    });
-                  },
-                  obscureText: false,
                 ),
               ),
               Container(
@@ -372,6 +364,7 @@ class _ProfileState extends State<Profile> {
                   onChanged: (input) {
                     setState(() {
                       email = input;
+                      isButtonCompleteEmail = true;
                       isButtonComplete = true;
                     });
                   },
@@ -434,6 +427,7 @@ class _ProfileState extends State<Profile> {
                   onChanged: (input) {
                     setState(() {
                       creditCard = input;
+                      isButtonCompleteCard = true;
                       isButtonComplete = true;
                     });
                   },
@@ -497,6 +491,7 @@ class _ProfileState extends State<Profile> {
                       onChanged: (input) {
                         setState(() {
                           date = input;
+                          isButtonCompleteDate = true;
                           isButtonComplete = true;
                         });
                       },
@@ -558,6 +553,7 @@ class _ProfileState extends State<Profile> {
                       onChanged: (input) {
                         setState(() {
                           cc = input;
+                          isButtonCompleteCC = true;
                           isButtonComplete = true;
                         });
                       },
@@ -651,6 +647,10 @@ class _ProfileState extends State<Profile> {
               builder: (BuildContext context) {
                 return GestureDetector(
                     onTap: () {
+                      setState(() {
+                        isButtonComplete = true;
+                        isButtonCompleteDOB = true;
+                      });
                       Navigator.of(context).pop();
                     },
                     child: Container(
@@ -659,8 +659,13 @@ class _ProfileState extends State<Profile> {
                         mode: CupertinoDatePickerMode.date,
                         initialDateTime: dateOfBirth2,
                         onDateTimeChanged: (date) {
-                          dateOfBirth2 = date;
-                          dateOfBirth = DateFormat.yMd().format(dateOfBirth2);
+                          setState(() {
+                            dateOfBirth2 = date;
+                            dateOfBirth = DateFormat.yMd().format(dateOfBirth2);
+                            isDateChanged = true;
+                            isButtonComplete = true;
+                            isButtonCompleteDOB = true;
+                          });
                         },
                       ),
                     ));
@@ -677,13 +682,14 @@ class _ProfileState extends State<Profile> {
   completeProfile() {
     FirebaseCrud().updateUserOnCompletePRofile(
       snap,
-      isButtonComplete ? name : widget.snap2.data['name_and_surname'],
-      isButtonComplete ? dateOfBirth :  widget.snap2.data['date_of_birth'],
-      isButtonComplete ? email :  widget.snap2.data['email_profile'],
-      isButtonComplete ? creditCard : widget.snap2.data['card_number'],
-      isButtonComplete ? date : widget.snap2.data['expire_date'],
-      isButtonComplete ? cc : widget.snap2.data['cc'],
+      isButtonCompleteName ? name : usersName,
+      isButtonCompleteDOB ? dateOfBirth : usersDOB,
+      isButtonCompleteEmail ? email : usersEmail,
+      isButtonCompleteCard ? creditCard : usersCard,
+      isButtonCompleteDate ? date : usersCardDate,
+      isButtonCompleteCC ? cc : usersCC,
     );
+
     setState(() {
       btnText = isButtonComplete ? 'Transfer' : 'Complete profile';
     });
@@ -691,22 +697,17 @@ class _ProfileState extends State<Profile> {
   }
 
   transferSar() {
-    DateTime now = DateTime.now();
-    String dateOfTransfer = '';
-
-    dateOfTransfer = DateFormat.yMd().add_jms().format(now);
-    print(dateOfTransfer);
-
     FirebaseCrud().updateUserOnCompletePRofile(
       snap,
-      isButtonComplete ? name : widget.snap2.data['name_and_surname'],
-      isButtonComplete ? dateOfBirth :  widget.snap2.data['date_of_birth'],
-      isButtonComplete ? email :  widget.snap2.data['email_profile'],
-      isButtonComplete ? creditCard : widget.snap2.data['card_number'],
-      isButtonComplete ? date : widget.snap2.data['expire_date'],
-      isButtonComplete ? cc : widget.snap2.data['cc'],
+      isButtonCompleteName ? name : usersName,
+      isButtonCompleteDOB ? dateOfBirth : usersDOB,
+      isButtonCompleteEmail ? email : usersEmail,
+      isButtonCompleteCard ? creditCard : usersCard,
+      isButtonCompleteDate ? date : usersCardDate,
+      isButtonCompleteCC ? cc : usersCC,
     );
-    FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi, dateOfTransfer);
+    FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi);
+    print('TRANSFEROVO SAM');
     setState(() {
       btnText = 'Transfer after 100 SAR';
     });
@@ -799,3 +800,4 @@ class _ProfileState extends State<Profile> {
     ),
   );
 }
+ 
