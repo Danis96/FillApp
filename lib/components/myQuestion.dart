@@ -13,6 +13,7 @@
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 
 class MyQuestion extends StatelessWidget {
   final String question;
@@ -30,7 +31,7 @@ class MyQuestion extends StatelessWidget {
             style: TextStyle(
                 color: isCompleted ? MyColor().black : MyColor().white,
                 fontWeight: FontWeight.w700,
-                fontFamily: "LoewNextArabic",
+                fontFamily: arabic,
                 fontStyle: FontStyle.normal,
                 fontSize: ScreenUtil.instance.setSp(20.0))));
   }

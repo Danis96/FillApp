@@ -21,6 +21,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/customScroll.dart';
 import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/myCardMCQ.dart';
 import 'package:fillproject/components/myCardYesNo.dart';
 import 'package:fillproject/components/myCashBalance.dart';
@@ -57,8 +58,6 @@ class _DashboardPageState extends State<DashboardPage> {
   List<dynamic> snapi = [];
   List<dynamic> usernameThatAnswers;
   ValueKey key;
-
-  
 
   /// Scroll physics
   ///
@@ -115,7 +114,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 return EmptyContainer();
               },
             ),
-           
+
             MyCashBalance(text: MyText().sarText),
 
             /// [MySar] widget
@@ -232,6 +231,10 @@ class _DashboardPageState extends State<DashboardPage> {
     ));
   }
 
+  exitApp() {
+    exit(0);
+  }
+
   /// [_onWillPop]
   ///
   /// async funstion that creates an exit dialog for our screen
@@ -239,20 +242,12 @@ class _DashboardPageState extends State<DashboardPage> {
   Future<bool> _onWillPop() async {
     return showDialog(
           context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text(MyText().willQuestion),
-            content: new Text(MyText().willQuestion1),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text(MyText().willNo),
-              ),
-              new FlatButton(
-                onPressed: () => exit(0),
-                child: new Text(MyText().willYes),
-              ),
-            ],
-          ),
+          builder: (context) => MyAlertDialog(
+              title: MyText().willQuestion,
+              content: MyText().willQuestion1,
+              yes: MyText().willYes,
+              no: MyText().willNo,
+              notifyParent: exitApp),
         ) ??
         true;
   }
@@ -302,5 +297,3 @@ class _DashboardPageState extends State<DashboardPage> {
     checkForInternet();
   }
 }
-
-

@@ -16,6 +16,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/imageConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/dashboard/dashboard.dart';
 import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
@@ -272,25 +273,21 @@ class _BottomNavigationBarControllerState
     );
   }
 
+  navigateToRegister() {
+    Navigator.of(context).pushNamed(Register,
+        arguments:
+            DidntRecievePinArguments(username: widget.arguments.username));
+  }
+
   askUserToRegister() {
     return showDialog(
       context: context,
-      builder: (context) => new AlertDialog(
-        title: new Text(MyText().registerQuestion),
-        content: new Text(MyText().registerQuestion1),
-        actions: <Widget>[
-          new FlatButton(
-            onPressed: () => Navigator.pop(context),
-            child: new Text(MyText().registerNo),
-          ),
-          new FlatButton(
-            onPressed: () => Navigator.of(context).pushNamed(Register,
-                arguments: DidntRecievePinArguments(
-                    username: widget.arguments.username)),
-            child: new Text(MyText().willYes),
-          ),
-        ],
-      ),
+      builder: (context) => MyAlertDialog(
+          title: MyText().registerQuestion,
+          content: MyText().registerQuestion1,
+          yes: MyText().willYes,
+          no: MyText().registerNo,
+          notifyParent: navigateToRegister),
     );
   }
 

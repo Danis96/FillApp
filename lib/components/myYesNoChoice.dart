@@ -20,7 +20,6 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/FlashQuestion/questionSkelet.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -33,7 +32,7 @@ class MyYesNoChoice extends StatefulWidget {
   final ValueKey key;
   int usersSars;
   final bool isSar;
-  double marginRight;
+  final double marginRight;
 
   MyYesNoChoice(
       {this.choice,
@@ -85,7 +84,6 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
               setState(() {
                 isTappedYesNoFlash = true;
               });
-
               Timer(Duration(milliseconds: 50), () {
                 onPressed();
               });
@@ -108,7 +106,6 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
   onPressed() {
     widget.usersSars += widget.sar;
     saroviOffline += widget.sar;
-
     /// update sarova na osnovu da li je app online ili offline
     ///
     /// online = [widget.usersSar]

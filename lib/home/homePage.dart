@@ -18,6 +18,7 @@ import 'dart:io';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/firebaseMethods/firebaseJson.dart';
@@ -117,9 +118,9 @@ class _SignUpState extends State<SignUp> {
                       child: Center(
                           child: FlatButton(
                               onPressed: () {
-                                 /// FirebaseJson().importJson();
+                                /// FirebaseJson().importJson();
                                 /// FirebaseJson().importSurveyJson();
-                                 onPressed(context);
+                                onPressed(context);
                               },
                               child: Text(
                                 MyText().skipThisStep,
@@ -157,23 +158,19 @@ class _SignUpState extends State<SignUp> {
     }
   }
 
+  exitApp() {
+    exit(0);
+  }
+
   Future<bool> _onWillPop() async {
     return showDialog(
           context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text(MyText().willQuestion),
-            content: new Text(MyText().willQuestion1),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text(MyText().willNo),
-              ),
-              new FlatButton(
-                onPressed: () => exit(0),
-                child: new Text(MyText().willYes),
-              ),
-            ],
-          ),
+          builder: (context) => MyAlertDialog(
+              title: MyText().willQuestion,
+              content: MyText().willQuestion1,
+              yes: MyText().willYes,
+              notifyParent: exitApp,
+              no: MyText().willNo),
         ) ??
         true;
   }

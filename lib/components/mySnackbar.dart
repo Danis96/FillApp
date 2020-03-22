@@ -17,7 +17,7 @@ class MySnackbar {
     Scaffold.of(context).showSnackBar(SnackBar(
       duration: Duration(seconds: 2),
       behavior: SnackBarBehavior.floating,
-      backgroundColor: Color.fromRGBO(225, 225, 225, 1.0),
+      backgroundColor: MyColor().white,
       content: Text(
         snackText,
         style: TextStyle(color: MyColor().black),

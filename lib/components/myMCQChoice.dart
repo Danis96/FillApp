@@ -14,6 +14,7 @@
 
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/models/FlashQuestion/questionSkelet.dart';
@@ -23,8 +24,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../globals.dart';
 
 class MyMCQChoice extends StatefulWidget {
-  DocumentSnapshot doc;
-  DocumentSnapshot snap;
+  final DocumentSnapshot doc;
+  final DocumentSnapshot snap;
   final String choice, username;
   int index, target, sar, usersSar;
   final Function() notifyParent;
@@ -80,17 +81,15 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
               setState(() {
                 isTappedMCQFlash = true;
               });
-           
                 Timer(Duration(milliseconds: 50), () {
                   onPressed();
                 });
-              
             },
             child: Text(widget.choice,
                 style: TextStyle(
                     color: isTappedMCQFlash ? MyColor().black : MyColor().white,
                     fontWeight: FontWeight.w400,
-                    fontFamily: "LoewNextArabic",
+                    fontFamily: arabic,
                     fontStyle: FontStyle.normal,
                     fontSize: ScreenUtil.instance.setSp(15.0))),
           ),
@@ -104,7 +103,6 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
   onPressed() {
     widget.usersSar += widget.sar;
     saroviOffline += widget.sar;
-
     /// update sarova na osnovu da li je app online ili offline
     ///
     /// online = [widget.usersSar]
@@ -114,7 +112,6 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
     } else {
       FirebaseCrud().updateUsersSars(widget.snap, context, widget.usersSar);
     }
-
     FirebaseCrud().updateListOfUsernameAnswers(
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(

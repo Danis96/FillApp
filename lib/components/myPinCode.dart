@@ -12,7 +12,6 @@
 /// Feb, 2020
 
 library pin_code_fields;
-
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
