@@ -16,6 +16,7 @@
 /// Feb, 2020
 import 'dart:async';
 import 'dart:io';
+import 'dart:isolate';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/customScroll.dart';
@@ -56,6 +57,8 @@ class _DashboardPageState extends State<DashboardPage> {
   List<dynamic> snapi = [];
   List<dynamic> usernameThatAnswers;
   ValueKey key;
+
+  
 
   /// Scroll physics
   ///
@@ -299,3 +302,5 @@ class _DashboardPageState extends State<DashboardPage> {
     checkForInternet();
   }
 }
+
+

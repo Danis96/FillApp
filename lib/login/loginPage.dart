@@ -21,8 +21,11 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myValidation.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
+import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/home/homePage.dart';
+import 'package:fillproject/login/sendEmailPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/gestures.dart';
@@ -56,8 +59,7 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.white,
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => SignUp()));
+            Navigator.of(context).push(CardAnimationTween(widget: SignUp()));
           },
         ),
       ),
@@ -251,7 +253,8 @@ class _LoginPageState extends State<LoginPage> {
                                   fontWeight: FontWeight.w300),
                               recognizer: new TapGestureRecognizer()
                                 ..onTap = () {
-                                  Navigator.of(context).pushNamed(EmailReset);
+                                  Navigator.of(context).push(CardAnimationTween(
+                                      widget: EmailResetPage()));
                                 })
                         ]))),
                     Column(
@@ -311,9 +314,11 @@ class _LoginPageState extends State<LoginPage> {
         username = usernameController.text;
         password = passwordController.text;
         loginUser();
-        Navigator.of(context).pushNamed(NavBar,
-            arguments: PasswordArguments(
-                username: username, password: password, email: '', phone: ''));
+        Navigator.of(context).push(CardAnimationTween(
+            widget: BottomNavigationBarController(
+          arguments: PasswordArguments(
+              username: username, password: password, email: '', phone: ''),
+        )));
         _btnCounter = 1;
         Timer(Duration(seconds: 2), () {
           _btnCounter = 0;

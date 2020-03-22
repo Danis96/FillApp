@@ -19,7 +19,9 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myValidation.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/resetPassword.dart';
+import 'package:fillproject/login/resetPasswordPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +59,8 @@ class EmailResetPage extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(25.0)),
+                margin:
+                    EdgeInsets.only(top: ScreenUtil.instance.setWidth(25.0)),
                 child: SizedBox(
                     width: 184,
                     height: 28,
@@ -72,7 +75,10 @@ class EmailResetPage extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.only(
-                    top: ScreenUtil.instance.setWidth(28.0), right: ScreenUtil.instance.setWidth(73.0), left: ScreenUtil.instance.setWidth(72.0), bottom: ScreenUtil.instance.setWidth(163.0)),
+                    top: ScreenUtil.instance.setWidth(28.0),
+                    right: ScreenUtil.instance.setWidth(73.0),
+                    left: ScreenUtil.instance.setWidth(72.0),
+                    bottom: ScreenUtil.instance.setWidth(163.0)),
                 child: SizedBox(
                     width: ScreenUtil.instance.setWidth(269),
                     height: ScreenUtil.instance.setWidth(66),
@@ -88,7 +94,10 @@ class EmailResetPage extends StatelessWidget {
               Container(
                 width: ScreenUtil.instance.setWidth(316.0),
                 height: ScreenUtil.instance.setHeight(92.0),
-                margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(49.0), right: ScreenUtil.instance.setWidth(49.0), bottom: ScreenUtil.instance.setWidth(22.0)),
+                margin: EdgeInsets.only(
+                    left: ScreenUtil.instance.setWidth(49.0),
+                    right: ScreenUtil.instance.setWidth(49.0),
+                    bottom: ScreenUtil.instance.setWidth(22.0)),
                 child: Form(
                   key: _formKey,
                   child: TextFormField(
@@ -169,9 +178,11 @@ class EmailResetPage extends StatelessWidget {
       if (_btnCounter == 0) {
         String emailCode = randomAlphaNumeric(10);
         ResetPassword().sendEmail(emailController.text, emailCode);
-        Navigator.of(context).pushNamed(PasswordReset,
-            arguments: UpdatePasswordArguments(
-                email: emailController.text, emailCode: emailCode));
+        Navigator.of(context).push(CardAnimationTween(
+            widget: ResetPasswordPage(
+          arguments: UpdatePasswordArguments(
+              email: emailController.text, emailCode: emailCode),
+        )));
         _btnCounter = 1;
         Timer(Duration(seconds: 2), () {
           _btnCounter = 0;
