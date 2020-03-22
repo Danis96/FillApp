@@ -48,16 +48,16 @@ class SurveyAppBar extends StatelessWidget {
             onPressed: () {
               isOnSummary
                   ? () {
+                      isSummary = false;
+                      isOnSummary = false;
+                      isFutureDone = false;
+                      answersList.removeRange(0, answersList.length);
                       Navigator.of(context).pushNamed(NavBar,
                           arguments: PasswordArguments(
                               email: arguments.email,
                               password: arguments.password,
                               phone: arguments.phone,
                               username: arguments.username));
-                      isSummary = false;
-                      isOnSummary = false;
-                      isFutureDone = false;
-                      answersList.removeRange(0, answersList.length);
                     }()
                   : isSummary
                       ? Navigator.of(context).push(MaterialPageRoute(
