@@ -17,13 +17,14 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/summaryContainer.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
-import 'package:fillproject/models/Survey/usernameAnswerModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
@@ -76,19 +77,14 @@ class _SummaryState extends State<Summary> {
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
-    //OVDJE PRAZNIM LISTU KADA PONOVO DODJEM NA SUMMARY KAKO NE BI MIJEŠAO ODGOVORE OD RANIJIH SRUVEYA
-    //answersList.removeRange(0, answersList.length);
     answersList = [];
     Timer(Duration(milliseconds: 1000), () {
-      // OVDJE LOOPAM KROZ ODGOVORE I IZVLACIM IZ NJIH USERNAME
       for (var i = 0; i < answers.length; i++) {
         userAnswers = answers[i].toString();
         userAnswersSplitted = userAnswers.split(' : ');
         usernameThatAnswers = userAnswersSplitted[2];
-        // OVDJE NA OSNOVU USERNAME IZVLACIM ODGOVORE I SMJESTAM IH U LISTU KOJU PRINTAM
         if (userAnswersSplitted[2] == currentUsername ||
             userAnswersSplitted[2] == widget.usernameSecond) {
-          //print(answers[i]);
           answersList.add(userAnswersSplitted[1]);
         }
       }
@@ -126,15 +122,9 @@ class _SummaryState extends State<Summary> {
                           return ListView.builder(
                               itemCount: snapi.length,
                               itemBuilder: (BuildContext context, int index) {
-                                // OVDJE PROVJERAVAM DA LI JE TO SURVEY NA KOJEM SAM I AKO JEST UZIMAM TU LISTU
                                 if (surveyGroupName == snapi[index].name) {
-                                  //print('Nasao sam pravi survey!!!!!!!!!!');
-                                  // print(snapi[index].name);
-                                  // print(snapi[index].usersAnswers);
                                   answers = snapi[index].usersAnswers;
                                 }
-                                //print(answersList);
-                                //answersList.removeRange(0, answersList.length);
                                 return EmptyContainer();
                               });
                         }
@@ -151,8 +141,6 @@ class _SummaryState extends State<Summary> {
                   totalProgress: widget.totalProgress,
                   surveyDoc: widget.surveyDoc,
                   answersList: answersList,
-                  // OVDJE SAM PROSLIJEĐIVO TAJ NAME U APPBAR
-                  //surveyName: widget.surveyDoc.name
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -164,11 +152,11 @@ class _SummaryState extends State<Summary> {
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(33.0)),
                         child: Center(
-                          child: Text('Congratulation\nyou have got',
+                          child: Text(MyText().congradulations,
                               style: TextStyle(
                                 color: MyColor().white,
                                 fontWeight: FontWeight.w700,
-                                fontFamily: "LoewNextArabic",
+                                fontFamily: arabic,
                                 fontStyle: FontStyle.normal,
                                 fontSize: ScreenUtil.instance.setSp(25.0),
                               ),
@@ -179,11 +167,11 @@ class _SummaryState extends State<Summary> {
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(44.0)),
                         child: Center(
-                          child: Text(widget.totalSar.toString() + '\nSAR',
+                          child: Text(widget.totalSar.toString() + MyText().sar,
                               style: TextStyle(
                                 color: MyColor().white,
                                 fontWeight: FontWeight.w700,
-                                fontFamily: "LoewNextArabic",
+                                fontFamily: arabic,
                                 fontStyle: FontStyle.normal,
                                 fontSize: ScreenUtil.instance.setSp(35.0),
                               ),
@@ -194,11 +182,11 @@ class _SummaryState extends State<Summary> {
                         margin: EdgeInsets.only(
                             bottom: ScreenUtil.instance.setWidth(15.0)),
                         child: Center(
-                          child: Text('Summary',
+                          child: Text(MyText().summary,
                               style: TextStyle(
                                 color: MyColor().white,
                                 fontWeight: FontWeight.w700,
-                                fontFamily: "LoewNextArabic",
+                                fontFamily: arabic,
                                 fontStyle: FontStyle.normal,
                                 fontSize: ScreenUtil.instance.setSp(25.0),
                               ),
@@ -237,10 +225,8 @@ class _SummaryState extends State<Summary> {
       userAnswers = answers[i].toString();
       userAnswersSplitted = userAnswers.split(' : ');
       usernameThatAnswers = userAnswersSplitted[2];
-      // OVDJE NA OSNOVU USERNAME IZVLACIM ODGOVORE I SMJESTAM IH U LISTU KOJU PRINTAM
       if (userAnswersSplitted[2] == currentUsername ||
           userAnswersSplitted[2] == widget.usernameSecond) {
-        //print(answers[i]);
         answersList.add(userAnswersSplitted[1]);
       }
     }
@@ -249,11 +235,8 @@ class _SummaryState extends State<Summary> {
 
   printList() {
     if (answersList == [] || answersList == null || answersList.length == 0) {
-      print('PRAZNA LISTAAAAAAAAAA');
       setState(() {});
-    } else {
-      print(answersList);
-    }
+    } 
   }
 
   Future<bool> _onWillPop() async {

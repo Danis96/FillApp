@@ -1,3 +1,4 @@
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
@@ -83,8 +84,8 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
                         color: MyColor().white,
                         fontWeight: FontWeight.w700,
                         fontStyle: FontStyle.normal,
-                        fontFamily: 'LoewNextArabic',
-                        fontSize: 16.0),
+                        fontFamily: arabic,
+                        fontSize: ScreenUtil.instance.setSp(16.0)),
                   ),
                   margin: EdgeInsets.only(
                       left: ScreenUtil.instance.setWidth(106.0),

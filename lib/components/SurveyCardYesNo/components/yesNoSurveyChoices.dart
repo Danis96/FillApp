@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../../../firebaseMethods/firebaseCrud.dart';
 
 class SurveyChoices extends StatefulWidget {
@@ -64,12 +64,12 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
                         style: TextStyle(
                             color: isTapped ? MyColor().black : MyColor().white,
                             fontWeight: FontWeight.w700,
-                            fontFamily: "LoewNextArabic",
+                            fontFamily: arabic,
                             fontStyle: FontStyle.normal,
-                            fontSize: 18.0),
+                            fontSize: ScreenUtil.instance.setSp(18.0)),
                         textAlign: TextAlign.center),
                     onPressed: () => isSummary
-                        ? print('sdsdsd')
+                        ? null
                         : {
                             setState(() {
                               isTapped = true;
@@ -99,11 +99,11 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text("This survey is not compatible with your answers."),
-              content: Text("You will be redirected to Survey List."),
+              title: Text(MyText().branching1),
+              content: Text(MyText().branching2),
               actions: [
                 FlatButton(
-                  child: Text("OK"),
+                  child: Text(MyText().branchingOK),
                   onPressed: () => {
                     Navigator.of(context).pop(),
                     Navigator.of(context).pop(),

@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/labelContainer.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
@@ -60,21 +60,7 @@ class _DateChoiceState extends State<DateChoice> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      width: ScreenUtil.instance.setWidth(80.0),
-                      margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(20.0)),
-                      child: Text(
-                        'Day',
-                        style: TextStyle(
-                            color: MyColor().black,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                            fontFamily: 'LoewNextArabic',
-                            fontSize: ScreenUtil.instance.setSp(18.0)),
-                      ),
-                    ),
+                    LabelContainer(text: MyText().day, leftMargin: 0.0, containerWidth: 80.0),
                     Container(
                       width: ScreenUtil.instance.setWidth(80.0),
                       height: ScreenUtil.instance.setWidth(61.0),
@@ -148,22 +134,7 @@ class _DateChoiceState extends State<DateChoice> {
                 ),
                 Column(
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      width: ScreenUtil.instance.setWidth(80.0),
-                      margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(20.0),
-                          left: ScreenUtil.instance.setWidth(10.0)),
-                      child: Text(
-                        'Month',
-                        style: TextStyle(
-                            color: MyColor().black,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                            fontFamily: 'LoewNextArabic',
-                            fontSize: ScreenUtil.instance.setSp(18.0)),
-                      ),
-                    ),
+                    LabelContainer(text: MyText().month, leftMargin: 10.0, containerWidth: 80.0),
                     Container(
                       width: ScreenUtil.instance.setWidth(80.0),
                       height: ScreenUtil.instance.setWidth(61.0),
@@ -240,22 +211,7 @@ class _DateChoiceState extends State<DateChoice> {
                 ),
                 Column(
                   children: <Widget>[
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      width: ScreenUtil.instance.setWidth(125.0),
-                      margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(20.0),
-                          left: ScreenUtil.instance.setWidth(10.0)),
-                      child: Text(
-                        'Year',
-                        style: TextStyle(
-                            color: MyColor().black,
-                            fontWeight: FontWeight.w700,
-                            fontStyle: FontStyle.normal,
-                            fontFamily: 'LoewNextArabic',
-                            fontSize: ScreenUtil.instance.setSp(18.0)),
-                      ),
-                    ),
+                    LabelContainer(text: MyText().year, leftMargin: 10.0, containerWidth: 125.0),
                     Container(
                       width: ScreenUtil.instance.setWidth(125.0),
                       height: ScreenUtil.instance.setWidth(61.0),
@@ -355,7 +311,7 @@ class _DateChoiceState extends State<DateChoice> {
                 ),
                 onPressed: () => onPressed(context),
                 child: Text(MyText().btnSubmit,
-                    style: TextStyle(fontSize: 18, color: MyColor().white)),
+                    style: TextStyle(fontSize: ScreenUtil.instance.setSp(18.0), color: MyColor().white)),
               )),
         ],
       ),
