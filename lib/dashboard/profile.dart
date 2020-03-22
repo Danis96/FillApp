@@ -64,7 +64,7 @@ bool isSar = false,
     isEmptyMail = false,
     isEmptyCard = false,
     isEmptyDate = false,
-    isEmptyCC = false, 
+    isEmptyCC = false,
     emailPostoji = false;
 DocumentSnapshot snap;
 
@@ -717,8 +717,16 @@ class _ProfileState extends State<Profile> {
   }
 
   transferSar() {
-
-    FirebaseCrud().createTransfer(DateTime.now().toString(), usersName, usersDOB, email, usersCard, usersCardDate, usersCC);
+    /// metoda za kreiranje kolekcije transferi
+    FirebaseCrud().createTransfer(
+        DateTime.now().toString(),
+        isButtonCompleteName ? name : usersName,
+        isButtonCompleteDOB ? dateOfBirth : usersDOB,
+        isButtonCompleteEmail ? email : usersEmail,
+        isButtonCompleteCard ? creditCard : usersCard,
+        isButtonCompleteDate ? date : usersCardDate,
+        isButtonCompleteCC ? cc : usersCC,
+        usersSarovi);
 
     FirebaseCrud().updateUserOnCompletePRofile(
       snap,
@@ -752,7 +760,9 @@ class _ProfileState extends State<Profile> {
             isEmptyName = false;
           });
         });
-      } else if (email == '' || regexEmail.hasMatch(email) == false || emailPostoji) {
+      } else if (email == '' ||
+          regexEmail.hasMatch(email) == false ||
+          emailPostoji) {
         setState(() {
           isEmptyMail = true;
         });
