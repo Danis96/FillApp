@@ -697,6 +697,9 @@ class _ProfileState extends State<Profile> {
   }
 
   transferSar() {
+
+    FirebaseCrud().createTransfer(DateTime.now().toString(), usersName, usersDOB, email, usersCard, usersCardDate, usersCC);
+
     FirebaseCrud().updateUserOnCompletePRofile(
       snap,
       isButtonCompleteName ? name : usersName,
