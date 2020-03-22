@@ -321,7 +321,7 @@ class _DateChoiceState extends State<DateChoice> {
           ),
           isSummary
               ? EmptyContainer()
-              : SubmitButton(onPressedFunction: onPressed)
+              : SubmitButton(onPressedFunction: onPressed, isImage: false)
         ],
       ),
     );
