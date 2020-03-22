@@ -51,7 +51,7 @@ class FirebaseCrud {
   ///
   /// upis u firestore collection
   createTransfer(String date, String nameAndSurname, String dateOfBirth, String email,
-      String cardNumber, String expireDate, String cc) async {
+      String cardNumber, String expireDate, String cc, int tSar) async {
     await db.collection('Transfers').add({
       'date': date,
       'name_and_surname': nameAndSurname,
@@ -60,6 +60,7 @@ class FirebaseCrud {
       'card_number': cardNumber,
       'expipre_date': expireDate,
       'cc': cc,
+      'transferSar': tSar,
     });
   }
 
