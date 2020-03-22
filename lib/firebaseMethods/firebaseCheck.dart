@@ -49,12 +49,24 @@ class FirebaseCheck {
     return documents.length == 1;
   }
 
-  /// heck if number already exists in db
+  /// heck if email already exists in db
   /// 
   Future<bool> doesEmailAlreadyExist(String email) async {
     final QuerySnapshot result = await Firestore.instance
         .collection('Users')
         .where('email', isEqualTo: email)
+        .limit(1)
+        .getDocuments();
+    final List<DocumentSnapshot> documents = result.documents;
+    return documents.length == 1;
+  }
+
+    /// check if email_profile already exists in db
+  /// 
+  Future<bool> doesEmailAlreadyExistProfile(String email) async {
+    final QuerySnapshot result = await Firestore.instance
+        .collection('Users')
+        .where('email_profile', isEqualTo: email)
         .limit(1)
         .getDocuments();
     final List<DocumentSnapshot> documents = result.documents;
