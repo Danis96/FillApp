@@ -2,22 +2,11 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/dateSurveyChoice.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/imageChoice.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/inputSurveyChoice.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/dateWidget.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/imageWidget.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/inputWidget.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqWidget.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/yesNoWidget.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveyChoices.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/containerTypes.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
-import 'package:fillproject/components/answerLabelContainer.dart';
-import 'package:fillproject/components/constants/fontsConstants.dart';
-import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
@@ -26,7 +15,6 @@ import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../emptyCont.dart';
 
 String type;
 int isSingle;
@@ -133,16 +121,18 @@ class _YesNoSurveyState extends State<SurveyCard>
                             sar: widget.snapQuestions[index]['sar'],
                             question: widget.snapQuestions[index]['title'],
                           ),
-                          typeContainerAnwers(
-                            widget,
-                            index,
-                            refresh,
-                            type,
-                            widget.number,
-                            widget.user,
-                            widget.isCompleted,
-                            answers,
-                          ),
+                          ContainerTypes(
+                              widget: widget,
+                              index: index,
+                              refresh: refresh,
+                              type: type,
+                              number: widget.number,
+                              user: widget.user,
+                              isCompleted: widget.isCompleted,
+                              answers: answers,
+                              isSingle: isSingle,
+                              branching: branching,
+                              branchingChoice: branchingChoice),
                         ],
                       );
                     }),
@@ -219,23 +209,12 @@ class _YesNoSurveyState extends State<SurveyCard>
                 )))
         : showDialog(
               context: context,
-              builder: (context) => new AlertDialog(
-                title: Text(MyText().areYouSure),
-                content: new Text(MyText().askToExitSurvey),
-                actions: <Widget>[
-                  new FlatButton(
-                    onPressed: () => Navigator.of(context).pop(false),
-                    child: new Text(MyText().willNo),
-                  ),
-                  new FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop();
-                    },
-                    child: new Text(MyText().willYes),
-                  ),
-                ],
-              ),
+              builder: (context) => MyAlertDialog(
+                  notifyParent: widget.notifyParent,
+                  title: MyText().areYouSure,
+                  content: MyText().askToExitSurvey,
+                  yes: MyText().willYes,
+                  no: MyText().willNo),
             ) ??
             true;
   }
@@ -247,33 +226,4 @@ class _YesNoSurveyState extends State<SurveyCard>
 
   @override
   bool get wantKeepAlive => true;
-}
-
-/// widget koji provjerava tip i na osnovu toga vraca odgovarajuci widget
-///
-Widget typeContainerAnwers(widget, int index, Function refresh, String type,
-    int number, var user, Function isCompleted, List<dynamic> answers) {
-  switch (type) {
-    case 'yesno':
-      return YesNoWidget(
-          widget: widget,
-          index: index,
-          refresh: refresh,
-          branching: branching,
-          branchingChoice: branchingChoice,
-          isCompleted: isCompleted,
-          answers: answers);
-    case 'input':
-      return InputWidget(widget: widget, index: index, refresh: refresh);
-    case 'mcq':
-      return McqWidget(
-          widget: widget, index: index, refresh: refresh, isSingle: isSingle);
-    case 'date':
-      return DateWidget(widget: widget, index: index, refresh: refresh);
-    case 'image':
-      return ImageWidget(
-          widget: widget, index: index, refresh: refresh, isSingle: isSingle);
-    default:
-      return EmptyContainer();
-  }
 }

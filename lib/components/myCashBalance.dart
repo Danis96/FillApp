@@ -1,3 +1,4 @@
+import 'package:fillproject/components/constants/fontsConstants.dart';
 /// Cash Balance class
 ///
 /// This class contains layout for cash balance.
@@ -27,7 +28,7 @@ class MyCashBalance extends StatelessWidget {
             style: TextStyle(
                 color: MyColor().black,
                 fontWeight: FontWeight.w700,
-                fontFamily: "LoewNextArabic",
+                fontFamily: arabic,
                 fontStyle: FontStyle.normal,
                 fontSize: ScreenUtil.instance.setSp(23.0)),
             textAlign: TextAlign.center));

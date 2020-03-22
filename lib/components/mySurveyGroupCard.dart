@@ -1,5 +1,3 @@
-import 'dart:async';
-
 /// Yes No Card class
 ///
 /// This class contains model for flash yes and no question card.
@@ -28,6 +26,7 @@ import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'dart:async';
 
 class MySurveyGroupCard extends StatefulWidget {
   final PasswordArguments arguments;
@@ -100,7 +99,6 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
         if (!isCompleted) {
           Navigator.of(context).push(CardAnimationTween(
               widget: SurveyCard(
-                // usernameAnswers: usernameAnswers,
                 surveyDoc: widget.surveyDoc,  
                 userLevel: userLevel,
                 usernameSecond: widget.usernameSecond,

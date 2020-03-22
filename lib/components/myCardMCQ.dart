@@ -26,8 +26,8 @@ class MyCardMCQ extends StatefulWidget {
   final int index;
   final List<dynamic> choices;
   final Function() notifyParent;
-  DocumentSnapshot doc;
-  DocumentSnapshot snap;
+  final DocumentSnapshot doc;
+  final DocumentSnapshot snap;
   final ValueKey key;
   final bool isSar;
 

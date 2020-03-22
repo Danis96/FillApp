@@ -13,6 +13,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/components/myYesNoChoice.dart';
@@ -88,7 +89,7 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
                   child: Row(
                     children: <Widget>[
                       MyYesNoChoice(
-                          choice: 'Yes',
+                          choice: MyText().willYes,
                           snapi: widget.snapi,
                           usersSars: widget.usersSar,
                           sar: widget.sar,
@@ -101,7 +102,7 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
                           marginRight: ScreenUtil.instance.setWidth(0.0),
                           username: widget.username),
                       MyYesNoChoice(
-                          choice: 'No',
+                          choice: MyText().willNo,
                           snapi: widget.snapi,
                           usersSars: widget.usersSar,
                           snap: widget.snap,

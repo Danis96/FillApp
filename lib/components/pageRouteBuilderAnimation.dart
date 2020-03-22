@@ -1,4 +1,3 @@
-import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:flutter/material.dart';
 
 class DanisAnimationTween extends PageRouteBuilder {
@@ -26,7 +25,6 @@ class DanisAnimationTween extends PageRouteBuilder {
               );
             });
 }
-
 
 class CardAnimationTween extends PageRouteBuilder {
   final Widget widget;
