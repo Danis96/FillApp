@@ -49,7 +49,7 @@ class _InputChoiceState extends State<InputChoice> {
         ),
         isSummary
             ? EmptyContainer()
-            : SubmitButton(onPressedFunction: onPressed),
+            : SubmitButton(onPressedFunction: onPressed, isImage: false),
       ],
     );
   }

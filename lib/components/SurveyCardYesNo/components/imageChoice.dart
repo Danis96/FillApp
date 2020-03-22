@@ -111,7 +111,7 @@ class _ImageChoiceState extends State<ImageChoice> {
               ? EmptyContainer()
               : widget.isSingle == 0
                   ? EmptyContainer()
-                  : SubmitButton(onPressedFunction: multipleSubmit)
+                  : SubmitButton(onPressedFunction: multipleSubmit, isImage: true)
         ],
       ),
     );

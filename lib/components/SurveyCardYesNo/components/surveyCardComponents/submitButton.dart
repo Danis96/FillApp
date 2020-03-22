@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubmitButton extends StatelessWidget {
   final Function onPressedFunction;
-  SubmitButton({Key key, this.onPressedFunction}) : super(key: key);
-
+  final bool isImage;
+  SubmitButton({Key key, this.onPressedFunction, this.isImage}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -21,7 +21,13 @@ class SubmitButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: new BorderRadius.circular(33.5),
           ),
-          onPressed: () => onPressedFunction(context),
+          onPressed: () {
+            if(isImage) {
+              onPressedFunction();
+            } else {
+              onPressedFunction(context);
+            }
+          },
           child: Text(MyText().btnSubmit,
               style: TextStyle(
                   fontSize: ScreenUtil.instance.setSp(18.0),
