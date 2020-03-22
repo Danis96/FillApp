@@ -16,7 +16,6 @@
 /// Feb, 2020
 import 'dart:async';
 import 'dart:io';
-import 'dart:isolate';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/customScroll.dart';
@@ -26,7 +25,6 @@ import 'package:fillproject/components/myCardMCQ.dart';
 import 'package:fillproject/components/myCardYesNo.dart';
 import 'package:fillproject/components/myCashBalance.dart';
 import 'package:fillproject/components/mySAR.dart';
-import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/FlashQuestion/questionModel.dart';
@@ -75,7 +73,6 @@ class _DashboardPageState extends State<DashboardPage> {
     Timer(Duration(milliseconds: 500), () {
       setState(() {});
     });
-    print('INIT DASH');
   }
 
   @override
@@ -114,9 +111,7 @@ class _DashboardPageState extends State<DashboardPage> {
                 return EmptyContainer();
               },
             ),
-
             MyCashBalance(text: MyText().sarText),
-
             /// [MySar] widget
             ///
             /// shows you your cash balance

@@ -91,7 +91,7 @@ class _PasswordPageState extends State<PasswordPage> {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: MyColor().white,
           onPressed: () {
             Navigator.of(context).push(
               CardAnimationTween(
@@ -210,7 +210,6 @@ class _PasswordPageState extends State<PasswordPage> {
                             recognizer: new TapGestureRecognizer()
                               ..onTap = () {
                                 _save();
-
                                 launch('https://google.com');
                               }),
                         new TextSpan(
@@ -228,7 +227,6 @@ class _PasswordPageState extends State<PasswordPage> {
                             recognizer: new TapGestureRecognizer()
                               ..onTap = () {
                                 _save();
-
                                 launch('https://google.com');
                               })
                       ]),
@@ -322,7 +320,6 @@ class _PasswordPageState extends State<PasswordPage> {
   Future<Null> loginUser(String username, bool isLoggedIn) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('username', username);
-    // name = usernameController.text;
     setState(() {
       username = username;
       isLoggedIn = true;

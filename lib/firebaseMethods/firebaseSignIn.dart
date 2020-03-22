@@ -22,6 +22,4 @@ class FirebaseSignIn {
       print(e);
     }
   }
-
-
 }

@@ -16,15 +16,13 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/imageConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/myAlertDialog.dart';
+import 'package:fillproject/components/userExistanceCheck.dart';
 import 'package:fillproject/dashboard/dashboard.dart';
 import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
-import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
-
 import '../components/constants/myText.dart';
 import '../components/emptyCont.dart';
 import '../firebaseMethods/firebaseCheck.dart';
@@ -59,30 +57,6 @@ class _BottomNavigationBarControllerState
     isOnSummary = false;
   }
 
-  Widget doesUserExist(String username) {
-    return Container(
-      height: 0,
-      width: 0,
-      child: FutureBuilder(
-        future: FirebaseCheck().doesNameAlreadyExist(username),
-        builder: (BuildContext context, AsyncSnapshot<bool> result) {
-          if (!result.hasData) {
-            return EmptyContainer();
-          }
-          if (result.data) {
-            isUserInDB = true;
-            return EmptyContainer();
-          } else {
-            isUserInDB = false;
-            FirebaseCrud().createUser('', '', username, '', 0, 1);
-            isUserInDB = true;
-            return EmptyContainer();
-          }
-        },
-      ),
-    );
-  }
-
   Widget getIsAnonymous(String username) {
     return FutureBuilder(
       future: FirebaseCheck().getUserUsername(username),
@@ -114,13 +88,13 @@ class _BottomNavigationBarControllerState
       /// if user is anonymous + no sars
       if (usersSars < 100) {
         setState(() {
-          btnText = 'Transfer after 100 SAR';
+          btnText = MyText().transferAfter;
           isReadOnly = true;
         });
 
         /// if user is anonymous + sars
       } else {
-        btnText = 'Register';
+        btnText = MyText().register;
         isReadOnly = true;
       }
     }
@@ -132,21 +106,21 @@ class _BottomNavigationBarControllerState
       /// if user is registered + have sars + profile not completed
       if (usersSars >= 100 && cc == '') {
         setState(() {
-          btnText = 'Complete profile';
+          btnText = MyText().completeProfile;
           isReadOnly = false;
         });
 
         /// if user is registered + have sars + profile completed
       } else if (usersSars >= 100 && cc != '') {
         setState(() {
-          btnText = 'Transfer';
+          btnText = MyText().transfer;
           isReadOnly = false;
         });
 
         /// if user is registered + no sars + not profile completed
       } else if (usersSars < 100 && cc != '') {
         setState(() {
-          btnText = 'Transfer after 100 SAR';
+          btnText = MyText().transferAfter;
           isReadOnly = false;
         });
       }
@@ -155,14 +129,14 @@ class _BottomNavigationBarControllerState
 
   List<Widget> pages() => [
         DashboardPage(
-            arguments: PasswordArguments(
+          arguments: PasswordArguments(
           email: arguments.email,
           password: arguments.password,
           phone: arguments.phone,
           username: arguments.username,
         )),
         SurveyPage(
-            arguments: PasswordArguments(
+          arguments: PasswordArguments(
           email: arguments.email,
           password: arguments.password,
           phone: arguments.phone,
@@ -181,22 +155,6 @@ class _BottomNavigationBarControllerState
             )),
         getIsAnonymous(arguments.username),
       ];
-
-  var items = [
-    BottomNavigationBarItem(
-      icon: isTab1Selected
-          ? ImageIcon(AssetImage(imageTab1))
-          : ImageIcon(AssetImage(imageTab1)),
-      title: Text(''),
-    ),
-    BottomNavigationBarItem(
-      icon: isTab2Selected
-          ? ImageIcon(AssetImage(imageTab2))
-          : ImageIcon(AssetImage(imageTab2)),
-      title: Text(''),
-    ),
-    BottomNavigationBarItem(icon: Icon(Icons.account_circle), title: Text(''))
-  ];
 
   int currentIndex = 1;
 
@@ -217,7 +175,6 @@ class _BottomNavigationBarControllerState
     } else if (currentIndex == 2) {
       isTab1Selected = false;
       isTab2Selected = false;
-
       getIsAnonymous(arguments.username);
       if (isAnonymous == 1) {
         anonym = 1;
@@ -261,7 +218,7 @@ class _BottomNavigationBarControllerState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  doesUserExist(arguments.username),
+                  UserExistanceCheck(username: arguments.username, isUserInDB: isUserInDB),
                   isLoadingCircular(),
                 ],
               ),
@@ -277,18 +234,6 @@ class _BottomNavigationBarControllerState
     Navigator.of(context).pushNamed(Register,
         arguments:
             DidntRecievePinArguments(username: widget.arguments.username));
-  }
-
-  askUserToRegister() {
-    return showDialog(
-      context: context,
-      builder: (context) => MyAlertDialog(
-          title: MyText().registerQuestion,
-          content: MyText().registerQuestion1,
-          yes: MyText().willYes,
-          no: MyText().registerNo,
-          notifyParent: navigateToRegister),
-    );
   }
 
   refreshNavbar() {

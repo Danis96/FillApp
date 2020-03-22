@@ -17,6 +17,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/MyText.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
@@ -77,7 +78,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: MyColor().white,
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -95,15 +96,15 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                 Center(
                   child: Container(
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 35),
+                      padding: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(35.0)),
                       child: Text(
                         MyText().resetHeadline,
-                        style: const TextStyle(
-                            color: const Color(0xffffffff),
+                        style: TextStyle(
+                            color: MyColor().white,
                             fontWeight: FontWeight.w500,
-                            fontFamily: 'LoewNextArabic',
+                            fontFamily: arabic,
                             fontStyle: FontStyle.normal,
-                            fontSize: 23.0),
+                            fontSize: ScreenUtil.instance.setSp(23.0)),
                       ),
                     ),
                   ),
@@ -125,7 +126,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             style: TextStyle(color: Colors.white),
                             controller: oldPasswordController,
                             decoration: InputDecoration(
-                              // floatingLabelBehavior: FloatingLabelBehavior.never,
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),
@@ -173,7 +173,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             style: TextStyle(color: MyColor().white),
                             controller: newPasswordController,
                             decoration: InputDecoration(
-                              // floatingLabelBehavior: FloatingLabelBehavior.never,
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),
@@ -222,7 +221,6 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             style: TextStyle(color: Colors.white),
                             controller: repeatPasswordController,
                             decoration: InputDecoration(
-                              // floatingLabelBehavior: FloatingLabelBehavior.never,
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),

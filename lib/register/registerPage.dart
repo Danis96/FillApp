@@ -26,12 +26,10 @@ import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../routes/routeArguments.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -183,7 +181,6 @@ class _RegisterPageState extends State<RegisterPage> {
                             textCapitalization: TextCapitalization.sentences,
                             controller: usernameController,
                             decoration: InputDecoration(
-                              //  floatingLabelBehavior: FloatingLabelBehavior.never,
                               hasFloatingPlaceholder: false,
                               errorStyle: TextStyle(
                                   inherit: true,
@@ -342,7 +339,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       MyText().snackUndo);
                                 }
                               },
-                              child: Text("Send PIN",
+                              child: Text(MyText().sendPIN,
                                   style: TextStyle(
                                       fontSize: ScreenUtil.instance.setSp(18))),
                             )),

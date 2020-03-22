@@ -21,7 +21,6 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
-import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/firebaseMethods/firebaseSignIn.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -56,7 +55,7 @@ class _SignUpState extends State<SignUp> {
           onWillPop: _onWillPop,
           child: Center(
             child: Container(
-              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(210.0)),
+              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(170.0)),
               child: Column(
                 children: <Widget>[
                   Center(
@@ -118,8 +117,6 @@ class _SignUpState extends State<SignUp> {
                       child: Center(
                           child: FlatButton(
                               onPressed: () {
-                                /// FirebaseJson().importJson();
-                                /// FirebaseJson().importSurveyJson();
                                 onPressed(context);
                               },
                               child: Text(
@@ -145,7 +142,6 @@ class _SignUpState extends State<SignUp> {
         FirebaseCrud().createUser('', '', username, '', 0, 1);
         loginUser();
         FirebaseSignIn().signInAnonymously(username);
-
         Timer(Duration(milliseconds: 800), () {
           Navigator.of(context).pushNamed(NavBar,
               arguments: PasswordArguments(

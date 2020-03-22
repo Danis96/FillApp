@@ -27,7 +27,6 @@ import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/login/sendEmailPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -57,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: MyColor().white,
           onPressed: () {
             Navigator.of(context).push(CardAnimationTween(widget: SignUp()));
           },
@@ -84,15 +83,15 @@ class _LoginPageState extends State<LoginPage> {
                         top: ScreenUtil.instance.setWidth(28.0),
                       ),
                       child: SizedBox(
-                          width: 215,
-                          height: 60,
+                          width: ScreenUtil.instance.setWidth(215.0),
+                          height: ScreenUtil.instance.setHeight(60.0),
                           child: Text(MyText().loginHeadline,
-                              style: const TextStyle(
-                                  color: const Color(0xffffffff),
+                              style: TextStyle(
+                                  color: MyColor().white,
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.normal,
-                                  fontFamily: 'LoewNextArabic',
-                                  fontSize: 23.0),
+                                  fontFamily: arabic,
+                                  fontSize: ScreenUtil.instance.setSp(23.0)),
                               textAlign: TextAlign.center)),
                     ),
                     Container(
@@ -107,7 +106,6 @@ class _LoginPageState extends State<LoginPage> {
                         textCapitalization: TextCapitalization.sentences,
                         controller: usernameController,
                         decoration: InputDecoration(
-                          // floatingLabelBehavior: FloatingLabelBehavior.never,
                           hasFloatingPlaceholder: false,
                           errorStyle: TextStyle(
                               inherit: true,
@@ -117,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                           labelText: MyText().labelUsername,
                           labelStyle: TextStyle(
                             color: MyColor().white,
-                            fontSize: 18,
+                            fontSize: ScreenUtil.instance.setSp(18.0),
                             fontFamily: arabic,
                           ),
                           enabledBorder: OutlineInputBorder(
@@ -166,7 +164,6 @@ class _LoginPageState extends State<LoginPage> {
                         enableSuggestions: false,
                         controller: passwordController,
                         decoration: InputDecoration(
-                          // floatingLabelBehavior: FloatingLabelBehavior.never,
                           hasFloatingPlaceholder: false,
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 25.0, horizontal: 35.0),
@@ -174,7 +171,7 @@ class _LoginPageState extends State<LoginPage> {
                           labelStyle: TextStyle(
                               color: MyColor().white,
                               fontFamily: arabic,
-                              fontSize: 18.0),
+                              fontSize: ScreenUtil.instance.setSp(18.0)),
                           enabledBorder: OutlineInputBorder(
                             borderRadius:
                                 BorderRadius.all(Radius.circular(33.5)),
@@ -238,7 +235,8 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           },
                           child: Text(MyText().btnLogin,
-                              style: TextStyle(fontSize: 18)),
+                              style: TextStyle(
+                                  fontSize: ScreenUtil.instance.setSp(18.0))),
                         )),
                     Container(
                         margin: EdgeInsets.only(

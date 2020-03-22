@@ -1,5 +1,3 @@
-import 'dart:async';
-
 /// Survey class
 ///
 /// This class contains methods and layout for survey page.
@@ -9,10 +7,12 @@ import 'dart:async';
 /// Feb, 2020import 'package:fillproject/components/SurveyCardYesNo/myYesNoSurveyCard.dart';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/customScroll.dart';
 import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
@@ -20,8 +20,8 @@ import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import '../components/emptyCont.dart';
+import 'dart:async';
 
 var controller = PageController(viewportFraction: 1 / 2, initialPage: 1);
 bool isVisible = false, isCompleted = false;
@@ -61,7 +61,6 @@ class _SurveyState extends State<SurveyPage>
     Timer(Duration(milliseconds: 600), () {
       setState(() {});
     });
-    print('init SURVEY');
   }
 
   @override
@@ -79,11 +78,11 @@ class _SurveyState extends State<SurveyPage>
             margin: EdgeInsets.only(
                 top: ScreenUtil.instance.setWidth(45.0),
                 bottom: ScreenUtil.instance.setWidth(15.0)),
-            child: Text('Survey List',
+            child: Text(MyText().surveyList,
                 style: TextStyle(
                     color: MyColor().black,
                     fontWeight: FontWeight.w700,
-                    fontFamily: "LoewNextArabic",
+                    fontFamily: arabic,
                     fontStyle: FontStyle.normal,
                     fontSize: ScreenUtil.instance.setSp(24.0))),
           )),
@@ -114,7 +113,6 @@ class _SurveyState extends State<SurveyPage>
           Container(
             height: ScreenUtil.instance.setHeight(650.0),
             child: FutureBuilder(
-
                 /// [getQuestions]
                 ///
                 /// future function that executes 500 miliseconds after
@@ -124,11 +122,9 @@ class _SurveyState extends State<SurveyPage>
                     (value) => FirebaseCheck().getSurveyGroups(userLevel)),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                     snapi = snapshot.data
-                          .map((doc) => Survey.fromDocument(doc))
-                          .toList();
-                    
-
+                    snapi = snapshot.data
+                        .map((doc) => Survey.fromDocument(doc))
+                        .toList();
                     return ListView.builder(
                         controller: _controller,
                         physics: _physics,
@@ -147,10 +143,9 @@ class _SurveyState extends State<SurveyPage>
                               snapi[index].usersThatGaveAnswers;
                           usernameFinal = snapi[index].usersCompleted;
                           surveyTarget = snapi[index].target;
-
                           if (usernameFinal.length < surveyTarget) {
                             return MySurveyGroupCard(
-                              surveyDoc: surveyDoc,
+                                surveyDoc: surveyDoc,
                                 userSar: userSar,
                                 arguments: widget.arguments,
                                 usernameFinal: usernameFinal,
@@ -170,7 +165,6 @@ class _SurveyState extends State<SurveyPage>
                           }
                         });
                   }
-
                   return Center(
                     child: Container(
                       child: CircularProgressIndicator(),
@@ -190,22 +184,18 @@ class _SurveyState extends State<SurveyPage>
   Future<bool> _onWillPop() async {
     return showDialog(
           context: context,
-          builder: (context) => new AlertDialog(
-            title: new Text(MyText().willQuestion),
-            content: new Text(MyText().willQuestion1),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                child: new Text(MyText().willNo),
-              ),
-              new FlatButton(
-                onPressed: () => exit(0),
-                child: new Text(MyText().willYes),
-              ),
-            ],
-          ),
+          builder: (context) => MyAlertDialog(
+              title: MyText().willQuestion,
+              content: MyText().willQuestion1,
+              yes: MyText().willYes,
+              no: MyText().willNo,
+              notifyParent: exitApp),
         ) ??
         true;
+  }
+
+  exitApp() {
+    exit(0);
   }
 
   /// [addPhysicsListenerController]
@@ -225,8 +215,6 @@ class _SurveyState extends State<SurveyPage>
       }
     });
   }
-
-
 
   @override
   bool get wantKeepAlive => true;
