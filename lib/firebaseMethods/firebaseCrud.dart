@@ -47,6 +47,22 @@ class FirebaseCrud {
     });
   }
 
+   /// create transfer
+  ///
+  /// upis u firestore collection
+  createTransfer(String date, String nameAndSurname, String dateOfBirth, String email,
+      String cardNumber, String expireDate, String cc) async {
+    await db.collection('Transfers').add({
+      'date': date,
+      'name_and_surname': nameAndSurname,
+      'date_of_birth': dateOfBirth,
+      'email': email,
+      'card_number': cardNumber,
+      'expipre_date': expireDate,
+      'cc': cc,
+    });
+  }
+
   /// update function for user that is anonymous and wants to become registered user
   ///
   /// we only need to update specific fields,
