@@ -58,6 +58,11 @@ class _BottomNavigationBarControllerState
   }
 
   Widget getIsAnonymous(String username) {
+    usernameGlobal = widget.arguments.username;
+    passGlobal = widget.arguments.password;
+    phoneGlobal = widget.arguments.phone;
+    emailGlobal = widget.arguments.email;
+
     return FutureBuilder(
       future: FirebaseCheck().getUserUsername(username),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -69,9 +74,11 @@ class _BottomNavigationBarControllerState
               itemBuilder: (context, index) {
                 snap = snapshot.data[index];
                 isAnonymous = snap.data['is_anonymous'];
+                passGlobal = snap.data['password'];
+                emailGlobal = snap.data['email'];
+                phoneGlobal = snap.data['phone'];
                 usersSars = snap.data['sar'];
                 cc = snap.data['cc'];
-
                 return EmptyContainer();
               });
         }
@@ -130,16 +137,16 @@ class _BottomNavigationBarControllerState
   List<Widget> pages() => [
         DashboardPage(
           arguments: PasswordArguments(
-          email: arguments.email,
-          password: arguments.password,
-          phone: arguments.phone,
+          email: emailGlobal,
+          password: passGlobal,
+          phone: phoneGlobal,
           username: arguments.username,
         )),
         SurveyPage(
           arguments: PasswordArguments(
-          email: arguments.email,
-          password: arguments.password,
-          phone: arguments.phone,
+          email: emailGlobal,
+          password: passGlobal,
+          phone: phoneGlobal,
           username: arguments.username,
         )),
         Profile(
@@ -148,9 +155,9 @@ class _BottomNavigationBarControllerState
             isReadOnly: isReadOnly,
             btnText: btnText,
             arguments: PasswordArguments(
-              email: arguments.email,
-              password: arguments.password,
-              phone: arguments.phone,
+              email: emailGlobal,
+              password: passGlobal,
+              phone: phoneGlobal,
               username: arguments.username,
             )),
         getIsAnonymous(arguments.username),
