@@ -254,7 +254,7 @@ class _ProfileState extends State<Profile> {
                     ),
                     child: Container(
                       margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(25.0),
+                          top: ScreenUtil.instance.setWidth(20.0),
                           left: ScreenUtil.instance.setWidth(30.0)),
                       child: isClicked
                           ? Text(
