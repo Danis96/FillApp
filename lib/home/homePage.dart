@@ -15,6 +15,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'package:fillproject/components/checkIfIsFirstTime.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
@@ -42,6 +43,7 @@ class _SignUpState extends State<SignUp> {
   @override
   void initState() {
     super.initState();
+    Check().isChecking();
     autoLogIn(context, isLoggedIn);
   }
 
