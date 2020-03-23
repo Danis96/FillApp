@@ -33,36 +33,39 @@ class MyMCQChoice extends StatefulWidget {
   final bool isSar;
   final bottomMargin;
 
-  MyMCQChoice({
-    this.choice,
-    this.isSar,
-    this.snapi,
-    this.index,
-    this.notifyParent,
-    this.target,
-    this.doc,
-    this.username,
-    this.sar,
-    this.snap,
-    this.usersSar,
-    this.bottomMargin
-  });
+  MyMCQChoice(
+      {this.choice,
+      this.isSar,
+      this.snapi,
+      this.index,
+      this.notifyParent,
+      this.target,
+      this.doc,
+      this.username,
+      this.sar,
+      this.snap,
+      this.usersSar,
+      this.bottomMargin});
 
   @override
   _MyMCQChoiceState createState() => _MyMCQChoiceState();
 }
 
 class _MyMCQChoiceState extends State<MyMCQChoice> {
-
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     isTappedMCQFlash = false;
+  }
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
+        key: UniqueKey(),
         width: ScreenUtil.instance.setWidth(257.0),
         height: ScreenUtil.instance.setHeight(60.0),
         margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
@@ -81,9 +84,10 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
               setState(() {
                 isTappedMCQFlash = true;
               });
-                Timer(Duration(milliseconds: 50), () {
-                  onPressed();
-                });
+
+              Timer(Duration(milliseconds: 200), () {
+                onPressed();
+              });
             },
             child: Text(widget.choice,
                 style: TextStyle(
@@ -103,6 +107,8 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
   onPressed() {
     widget.usersSar += widget.sar;
     saroviOffline += widget.sar;
+    
+
     /// update sarova na osnovu da li je app online ili offline
     ///
     /// online = [widget.usersSar]
@@ -116,9 +122,10 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(
         widget.doc, context, widget.username);
+      isTappedMCQFlash = false;
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());
     widget.notifyParent();
-    isTappedMCQFlash = false;
+    
   }
 }

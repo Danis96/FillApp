@@ -35,6 +35,8 @@ class SurveyChoices extends StatefulWidget {
 }
 
 class _YesNoSurveyChoicesState extends State<SurveyChoices> {
+  int _btnCounter = 0;
+
   @override
   void initState() {
     super.initState();
@@ -54,6 +56,7 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
               borderRadius: BorderRadius.all(Radius.circular(29)),
               color: MyColor().white),
           child: RaisedButton(
+              key: UniqueKey(),
               hoverColor: isTapped ? MyColor().white : MyColor().black,
               color: isTapped ? MyColor().white : MyColor().black,
               elevation: 0,
@@ -71,12 +74,19 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
               onPressed: () => isSummary
                   ? null
                   : {
-                      setState(() {
-                        isTapped = true;
-                      }),
-                      Timer(Duration(milliseconds: 200), () {
-                        onPressed();
-                      }),
+                      if (counterSurvey == 0)
+                        {
+                          setState(() {
+                            isTapped = true;
+                          }),
+                          counterSurvey = 1,
+                          Timer(Duration(milliseconds: 200), () {
+                            onPressed();
+                          }),
+                          Timer(Duration(milliseconds: 600), () {
+                            counterSurvey = 0;
+                          }),
+                        }
                     }),
         ),
       ],
