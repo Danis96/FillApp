@@ -163,7 +163,6 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
-      print(widget.multipleChoices);
     }
   }
 
@@ -173,7 +172,6 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
-      print(widget.multipleChoices);
     }
   }
 
@@ -183,7 +181,6 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
-      print(widget.multipleChoices);
     }
   }
 
@@ -193,7 +190,6 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     if (!widget.multipleChoices.contains(choice)) {
       widget.multipleChoices.add(choice);
-      print(widget.multipleChoices);
     }
   }
 
