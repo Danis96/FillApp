@@ -25,7 +25,7 @@ class BigCircle extends StatelessWidget {
                     : btnText == MyText().transfer
                         ? MyColor().greenCircle
                         : MyColor().white),
-            color: btnText == MyText().completeProfile
+            color: btnText == MyText().completeProfile 
                 ? MyColor().white
                 : btnText == MyText().transfer
                     ? MyColor().white
