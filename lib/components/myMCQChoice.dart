@@ -80,14 +80,20 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
             hoverColor: isTappedMCQFlash ? MyColor().white : MyColor().black,
             elevation: 0,
             color: isTappedMCQFlash ? MyColor().white : MyColor().black,
-            onPressed: () async {
-              setState(() {
+            onPressed: () {
+              if (counterSurvey == 0) {
+                setState(() {
                 isTappedMCQFlash = true;
               });
-
-              Timer(Duration(milliseconds: 200), () {
+              counterSurvey = 1;
+              Timer(Duration(milliseconds: 400), () {
                 onPressed();
-              });
+              }); 
+              Timer(Duration(seconds: 1), () {
+                  counterSurvey = 0;
+              });    
+              }
+              
             },
             child: Text(widget.choice,
                 style: TextStyle(
@@ -107,7 +113,9 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
   onPressed() {
     widget.usersSar += widget.sar;
     saroviOffline += widget.sar;
-    
+    setState(() {
+      isTappedMCQFlash = false;
+    });
 
     /// update sarova na osnovu da li je app online ili offline
     ///
@@ -122,7 +130,7 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(
         widget.doc, context, widget.username);
-      isTappedMCQFlash = false;
+      
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());
     widget.notifyParent();
