@@ -62,7 +62,7 @@ class LanguageChoose extends StatelessWidget {
                   color: language == MyText().languageEnglish
                       ? MyColor().white
                       : MyColor().black),
-              child: Text(MyText().languageArabic,
+              child: Text(MyText().languageEnglish,
                   style: TextStyle(
                       color: language == MyText().languageEnglish
                           ? MyColor().black
