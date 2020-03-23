@@ -12,7 +12,12 @@ class SummaryAnswerContainer extends StatefulWidget {
   final Function animateTo;
   List<dynamic> answersList;
   final Survey surveyDoc;
-  SummaryAnswerContainer({this.question, this.index, this.animateTo, this.answersList, this.surveyDoc});
+  SummaryAnswerContainer(
+      {this.question,
+      this.index,
+      this.animateTo,
+      this.answersList,
+      this.surveyDoc});
 
   @override
   _SummaryAnswerContainerState createState() => _SummaryAnswerContainerState();
@@ -23,7 +28,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
 
   @override
   Widget build(BuildContext context) {
-        double defaultScreenWidth = 400.0;
+    double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
     ScreenUtil.instance = ScreenUtil(
       width: defaultScreenWidth,
@@ -31,41 +36,40 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
       allowFontScaling: true,
     )..init(context);
     indexReal = widget.index + 1;
-    TextEditingController questionController =
-        TextEditingController(text: 'Q' + indexReal.toString() + ": " + title,);
-    return Container(
-      color: MyColor().black,
-      width: ScreenUtil.instance.setWidth(327.0),
-      height: ScreenUtil.instance.setHeight(69.0),
-      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(18.0)),
-      child: TextFormField(
-         maxLength: 100,
-         enableSuggestions: false,
-        onTap: () => onPressed(),
-        readOnly: true,
-        style: TextStyle(
-            color: MyColor().white,
-            fontWeight: FontWeight.w900,
-            fontFamily: arabic,
-            fontSize: ScreenUtil.instance.setSp(14.5), 
-            ),
-        controller: questionController,
-        decoration: InputDecoration(
-           counterText: '',
-          contentPadding:
-              new EdgeInsets.symmetric(vertical: 30.0, horizontal: 25.0),
-          enabledBorder: OutlineInputBorder(
+    String question = 'Q' + indexReal.toString() + ": " + title;
+
+    return GestureDetector(
+      onTap: () => onPressed(),
+      child: Container(
+          alignment: Alignment.centerLeft,
+          width: ScreenUtil.instance.setWidth(327.0),
+          height: ScreenUtil.instance.setHeight(69.0),
+          margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(18.0)),
+          padding: EdgeInsets.only(
+              left: ScreenUtil.instance.setWidth(20.0),
+              right: ScreenUtil.instance.setWidth(20.0),
+              top: ScreenUtil.instance.setWidth(10.0),
+              bottom: ScreenUtil.instance.setWidth(10.0)),
+          decoration: BoxDecoration(
+            color: MyColor().black,
             borderRadius: BorderRadius.all(Radius.circular(33.5)),
-            borderSide: BorderSide(
+            border: Border.all(
+              width: 1.0,
               color: MyColor().white,
             ),
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(33.5)),
-            borderSide: BorderSide(color: MyColor().white),
-          ),
-        ),
-      ),
+          child: Text(
+            question,
+            style: TextStyle(
+              color: MyColor().white,
+              fontWeight: FontWeight.w900,
+              fontFamily: arabic,
+              fontSize: ScreenUtil.instance.setSp(16.0),
+            ),
+            textAlign: TextAlign.left,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          )),
     );
   }
 
