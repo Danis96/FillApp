@@ -16,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginStorage {
+  
   Future<Null> loginUser(String username, bool isLoggedIn) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('username', username);
