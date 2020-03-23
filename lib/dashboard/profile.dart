@@ -261,8 +261,9 @@ class _ProfileState extends State<Profile> {
                               isDateChanged
                                   ? dateOfBirth
                                   : widget.snap2.data['date_of_birth'],
+                                  style: TextStyle(fontSize: ScreenUtil.instance.setSp(15.0)),
                             )
-                          : Text(MyText().labelDOB),
+                          : Text(MyText().labelDOB, style: TextStyle(fontSize: ScreenUtil.instance.setSp(15.0)),),
                     ),
                   ),
                 ),
