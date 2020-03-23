@@ -520,25 +520,6 @@ class _ProfileState extends State<Profile> {
               Container(
                 child: ProfileButton(onPressed: onPressed),
               ),
-              Column(
-                children: <Widget>[
-                  FutureBuilder(
-                    future: FirebaseCheck().doesEmailAlreadyExist(email),
-                    builder: (context, AsyncSnapshot<bool> result) {
-                      if (!result.hasData) {
-                        return EmptyContainer();
-                      }
-                      if (result.data) {
-                        emailPostoji = true;
-                        return EmptyContainer();
-                      } else {
-                        emailPostoji = false;
-                        return EmptyContainer();
-                      }
-                    },
-                  ),
-                ],
-              ),
             ],
           )),
         ]),
@@ -661,8 +642,7 @@ class _ProfileState extends State<Profile> {
           });
         });
       } else if (email == '' ||
-          regexEmail.hasMatch(email) == false ||
-          emailPostoji) {
+          regexEmail.hasMatch(email) == false) {
         setState(() {
           isEmptyMail = true;
         });
