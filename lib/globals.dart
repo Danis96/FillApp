@@ -20,3 +20,4 @@ String surveyGroupName = '', currentUsername = '';
 bool isFutureDone = false;
 String answersFromSummary;
 int userLevelForList;
+String usernameGlobal, passGlobal, emailGlobal, phoneGlobal;
