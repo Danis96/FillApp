@@ -12,6 +12,7 @@ bool isTapped = false,
     isTappedMCQFlash = false;
 int saroviOffline;
 int questionNumber;
+int counterSurvey = 0;
 int anonym;
 bool isSummary = false;
 bool isOnSummary = false;

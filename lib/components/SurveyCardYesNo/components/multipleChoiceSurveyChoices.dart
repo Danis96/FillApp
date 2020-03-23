@@ -6,6 +6,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +132,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                 ? EmptyContainer()
                 : widget.length == 3 && widget.index == MyText().indexC
                     ? SubmitButton(onPressedFunction: submit, isImage: true)
-                    : widget.length == 4 && widget.index == MyText().indexD 
+                    : widget.length == 4 && widget.index == MyText().indexD
                         ? SubmitButton(onPressedFunction: submit, isImage: true)
                         : EmptyContainer()
       ],
@@ -187,12 +188,18 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   }
 
   onTapSingle1() {
-    setState(() {
-      isTappedMCQ1 = true;
-    });
-    Timer(Duration(milliseconds: 200), () {
-      saveMCQ1();
-    });
+    if (counterSurvey == 0) {
+      setState(() {
+        isTappedMCQ1 = true;
+      });
+      counterSurvey = 1;
+      Timer(Duration(milliseconds: 200), () {
+        saveMCQ1();
+      });
+      Timer(Duration(milliseconds: 600), () {
+        counterSurvey = 0;
+      });
+    }
   }
 
   saveMCQ1() {
@@ -206,12 +213,18 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   }
 
   onTapSingle2() {
-    setState(() {
-      isTappedMCQ2 = true;
-    });
-    Timer(Duration(milliseconds: 200), () {
-      saveMCQ2();
-    });
+     if (counterSurvey == 0) {
+      setState(() {
+        isTappedMCQ2 = true;
+      });
+      counterSurvey = 1;
+      Timer(Duration(milliseconds: 200), () {
+        saveMCQ2();
+      });
+      Timer(Duration(milliseconds: 600), () {
+        counterSurvey = 0;
+      });
+    }
   }
 
   saveMCQ2() {
@@ -225,12 +238,18 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   }
 
   onTapSingle3() {
-    setState(() {
-      isTappedMCQ3 = true;
-    });
-    Timer(Duration(milliseconds: 200), () {
-      saveMCQ3();
-    });
+     if (counterSurvey == 0) {
+      setState(() {
+        isTappedMCQ3 = true;
+      });
+      counterSurvey = 1;
+      Timer(Duration(milliseconds: 200), () {
+        saveMCQ3();
+      });
+      Timer(Duration(milliseconds: 600), () {
+        counterSurvey = 0;
+      });
+    }
   }
 
   saveMCQ3() {
@@ -244,12 +263,18 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   }
 
   onTapSingle4() {
-    setState(() {
-      isTappedMCQ4 = true;
-    });
-    Timer(Duration(milliseconds: 200), () {
-      saveMCQ4();
-    });
+     if (counterSurvey == 0) {
+      setState(() {
+        isTappedMCQ4 = true;
+      });
+      counterSurvey = 1;
+      Timer(Duration(milliseconds: 200), () {
+        saveMCQ4();
+      });
+      Timer(Duration(milliseconds: 600), () {
+        counterSurvey = 0;
+      });
+    }
   }
 
   saveMCQ4() {

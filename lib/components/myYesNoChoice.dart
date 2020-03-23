@@ -34,42 +34,47 @@ class MyYesNoChoice extends StatefulWidget {
   final bool isSar;
   final double marginRight;
 
-  MyYesNoChoice(
-      {this.choice,
-      this.isSar,
-      this.snap,
-      this.usersSars,
-      this.key,
-      this.sar,
-      this.index,
-      this.snapi,
-      @required this.notifyParent,
-      this.target,
-      this.doc,
-      this.username,
-      this.marginRight,
-      });
+  MyYesNoChoice({
+    this.choice,
+    this.isSar,
+    this.snap,
+    this.usersSars,
+    this.key,
+    this.sar,
+    this.index,
+    this.snapi,
+    @required this.notifyParent,
+    this.target,
+    this.doc,
+    this.username,
+    this.marginRight,
+  });
 
   @override
   _MyYesNoChoiceState createState() => _MyYesNoChoiceState();
 }
 
 class _MyYesNoChoiceState extends State<MyYesNoChoice> {
-
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     isTappedYesNoFlash = false;
   }
-  
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        key: widget.key,
+        key: UniqueKey(),
         width: ScreenUtil.instance.setWidth(110.0),
         height: ScreenUtil.instance.setHeight(60.0),
         alignment: Alignment.center,
-        margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(widget.marginRight)),
+        margin: EdgeInsets.only(
+            left: ScreenUtil.instance.setWidth(widget.marginRight)),
         child: Container(
           width: ScreenUtil.instance.setWidth(113.0),
           height: ScreenUtil.instance.setHeight(55.0),
@@ -80,17 +85,18 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
             hoverColor: isTappedYesNoFlash ? MyColor().white : MyColor().black,
             elevation: 0,
             color: isTappedYesNoFlash ? MyColor().white : MyColor().black,
-            onPressed: ()  {
+            onPressed: () {
               setState(() {
                 isTappedYesNoFlash = true;
               });
-              Timer(Duration(milliseconds: 50), () {
+              Timer(Duration(milliseconds: 200), () {
                 onPressed();
               });
             },
             child: Text(widget.choice,
                 style: TextStyle(
-                    color: isTappedYesNoFlash ? MyColor().black : MyColor().white,
+                    color:
+                        isTappedYesNoFlash ? MyColor().black : MyColor().white,
                     fontWeight: FontWeight.w400,
                     fontFamily: arabic,
                     fontStyle: FontStyle.normal,
@@ -106,6 +112,7 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
   onPressed() {
     widget.usersSars += widget.sar;
     saroviOffline += widget.sar;
+
     /// update sarova na osnovu da li je app online ili offline
     ///
     /// online = [widget.usersSar]
@@ -119,9 +126,9 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(
         widget.doc, context, widget.username);
+    isTappedYesNoFlash = false;
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());
     widget.notifyParent();
-    isTappedYesNoFlash = false;
   }
 }
