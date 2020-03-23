@@ -49,12 +49,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     btnCounter = 0;
   }
 
-  listAnswers() {
-    for (int i = 0; i < answersFromSummary.length; i++) {
-      print(answersFromSummary[i]);
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     String index = widget.index;
@@ -162,7 +156,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
 
         break;
       default:
-        return print('');
+        return null;
     }
   }
 
@@ -184,7 +178,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
 
         break;
       default:
-        return print('');
+        return null;
     }
   }
 
