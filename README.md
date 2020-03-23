@@ -89,3 +89,19 @@ On back, user is asked with a Dialog Box if he is sure about exiting the survey.
 	4. Registered user - No enough SAR - Profile not completed<br/>
 	5. Registered user - Enough SAR - Profile completed<br/>
 	6. Registered user - No enough SAR - Profile completed<br/>
+
+**•	V6 – Sprint 6 - (17.03.2020. - 23.03.2020.)<br/>** *
+	User story 1 - fixing bugs from previous sprint's US 4<br/>
+	Bugs that had to be fixed were: Preview answers, Back button from Survey, Font size in Question fields on Summary, Delays.<br/><br/>*
+	User story 2 - fixing bugs from previous sprint's US 5<br/>
+	Bugs that had to be fixed were: Profile states, Border on language containers, Bottom margin on button, Label text for Name and Surname fields, Validation for Name and Surname, Language toggle, Validation for Credit Card Number, Validation for Email.<br/><br/>*
+	User story 3 - Export Flash Question Answers, Survey Answers and Transfers Info<br/>
+	Database configured for easier export of data needed. Research made about what are the options for export of data. Two opstions available:<br/>
+	1. Export through Firebase Console - for this option, the account must be paid, not free<br/>
+	2. Export using script - for this option, script is needed and export is made thorugh terminal<br/><br/>*
+	User story 4 - Performance<br/>
+	Minimum accepted criteria for good performance is:<br/>
+	1. 500 Flash Question<br/>
+	2. 500 Surveys<br/>
+	3. Smooth loading of lists<br/>
+	4. Smooth and live update of SAR balance<br/>
