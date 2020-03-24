@@ -80,6 +80,7 @@ class _SummaryState extends State<Summary> {
     Constant().responsive(context);
     answersList = [];
     Timer(Duration(milliseconds: 1000), () {
+      print(answers);
       for (var i = 0; i < answers.length; i++) {
         userAnswers = answers[i].toString();
         userAnswersSplitted = userAnswers.split(' : ');
