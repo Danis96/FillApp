@@ -22,6 +22,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../globals.dart';
+import 'emptyCont.dart';
 
 class MyMCQChoice extends StatefulWidget {
   final DocumentSnapshot doc;
@@ -57,6 +58,7 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
     super.initState();
     isTappedMCQFlash = false;
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -81,19 +83,12 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
             elevation: 0,
             color: isTappedMCQFlash ? MyColor().white : MyColor().black,
             onPressed: () {
-              if (counterSurvey == 0) {
-                setState(() {
+              setState(() {
                 isTappedMCQFlash = true;
               });
-              counterSurvey = 1;
               Timer(Duration(milliseconds: 400), () {
                 onPressed();
-              }); 
-              Timer(Duration(milliseconds: 800), () {
-                  counterSurvey = 0;
-              });    
-              }
-              
+              });
             },
             child: Text(widget.choice,
                 style: TextStyle(
@@ -130,10 +125,16 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(
         widget.doc, context, widget.username);
-      
+
+    
+    listKey.currentState.removeItem(
+      widget.index,
+      (context, animation) => EmptyContainer(),
+      duration: Duration(seconds: 2),
+    );
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());
+    listKey.currentState.insertItem(widget.index);
     widget.notifyParent();
-    
   }
 }

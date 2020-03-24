@@ -44,9 +44,12 @@ class DashboardPage extends StatefulWidget {
       _DashboardPageState(arguments: arguments);
 }
 
-class _DashboardPageState extends State<DashboardPage> {
+class _DashboardPageState extends State<DashboardPage>
+    with TickerProviderStateMixin {
   final PasswordArguments arguments;
   _DashboardPageState({this.arguments});
+
+  AnimationController animationController;
 
   bool visible = false, isEmptyCard = false, isLoggedIn = false, isSar = false;
   DocumentSnapshot snap, doc;
@@ -73,6 +76,11 @@ class _DashboardPageState extends State<DashboardPage> {
     Timer(Duration(milliseconds: 500), () {
       setState(() {});
     });
+    animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 400),
+    );
+    animationController.forward();
   }
 
   @override
@@ -112,6 +120,7 @@ class _DashboardPageState extends State<DashboardPage> {
               },
             ),
             MyCashBalance(text: MyText().sarText),
+
             /// [MySar] widget
             ///
             /// shows you your cash balance
@@ -147,13 +156,15 @@ class _DashboardPageState extends State<DashboardPage> {
                             visible = !visible;
                           }
 
-                          return ListView.builder(
+                          return AnimatedList(
+                            key: listKey,
                             controller: _controller,
                             scrollDirection: Axis.horizontal,
                             shrinkWrap: true,
                             physics: _physics,
-                            itemCount: snapi.length,
-                            itemBuilder: (BuildContext context, int index) {
+                            initialItemCount: snapi.length,
+                            itemBuilder: (BuildContext context, int index,
+                                Animation animation) {
                               doc = snapshot.data[index];
                               choices = snapi[index].choices;
                               key = snapi[index].key;
@@ -163,6 +174,12 @@ class _DashboardPageState extends State<DashboardPage> {
                               target = snapi[index].target;
                               usernameThatAnswers =
                                   snapi[index].listOfUsernamesThatGaveAnswers;
+
+                              var begin = Offset(1.0, 0.0);
+                              var end = Offset.zero;
+                              var curve = Curves.easeIn;
+                              var tween = Tween(begin: begin, end: end)
+                                  .chain(CurveTween(curve: curve));
 
                               /// conditions which must be satisfied
                               /// after them show flash cards with questions
@@ -174,34 +191,40 @@ class _DashboardPageState extends State<DashboardPage> {
                                         false &&
                                     target > usernameThatAnswers.length) {
                                   return type == 'checkbox'
-                                      ? MyCardMCQ(
-                                          key: key,
-                                          sar: sar,
-                                          isSar: isSar,
-                                          usersSar: userSar,
-                                          question: question,
-                                          choices: choices,
-                                          snapi: snapi,
-                                          snap: snap,
-                                          index: index,
-                                          notifyParent: refresh,
-                                          target: target,
-                                          doc: doc,
-                                          username: username,
+                                      ? SlideTransition(
+                                            position: animationController.drive(tween),
+                                          child: MyCardMCQ(
+                                            key: key,
+                                            sar: sar,
+                                            isSar: isSar,
+                                            usersSar: userSar,
+                                            question: question,
+                                            choices: choices,
+                                            snapi: snapi,
+                                            snap: snap,
+                                            index: index,
+                                            notifyParent: refresh,
+                                            target: target,
+                                            doc: doc,
+                                            username: username,
+                                          ),
                                         )
-                                      : MyCardYesNo(
-                                          key: key,
-                                          sar: sar,
-                                          isSar: isSar,
-                                          usersSar: userSar,
-                                          snap: snap,
-                                          question: question,
-                                          snapi: snapi,
-                                          index: index,
-                                          notifyParent: refresh,
-                                          target: target,
-                                          doc: doc,
-                                          username: username);
+                                      : SlideTransition(
+                                          position: animationController.drive(tween),
+                                          child: MyCardYesNo(
+                                              key: key,
+                                              sar: sar,
+                                              isSar: isSar,
+                                              usersSar: userSar,
+                                              snap: snap,
+                                              question: question,
+                                              snapi: snapi,
+                                              index: index,
+                                              notifyParent: refresh,
+                                              target: target,
+                                              doc: doc,
+                                              username: username),
+                                        );
                                 } else {
                                   return EmptyContainer();
                                 }
@@ -285,10 +308,12 @@ class _DashboardPageState extends State<DashboardPage> {
   /// changes occured in children of this dashboard widget.
   /// It refresh the state and call [checkForInternet] function
   refresh() {
+    animationController.reset();
     setState(() {});
     Timer(Duration(milliseconds: 500), () {
       setState(() {});
     });
+    animationController.forward();
     checkForInternet();
   }
 }

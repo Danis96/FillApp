@@ -17,6 +17,8 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/components/myCardYesNo.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/FlashQuestion/questionSkelet.dart';
@@ -43,7 +45,7 @@ class MyYesNoChoice extends StatefulWidget {
     this.sar,
     this.index,
     this.snapi,
-    @required this.notifyParent,
+    this.notifyParent,
     this.target,
     this.doc,
     this.username,
@@ -86,18 +88,13 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
             elevation: 0,
             color: isTappedYesNoFlash ? MyColor().white : MyColor().black,
             onPressed: () {
-              if (counterSurvey == 0) {
-                setState(() {
-                  isTappedYesNoFlash = true;
-                });
-                counterSurvey = 1;
-                Timer(Duration(milliseconds: 400), () {
-                  onPressed();
-                });
-                Timer(Duration(milliseconds: 800), () {
-                  counterSurvey = 0;
-                });
-              }
+              setState(() {
+                isTappedYesNoFlash = true;
+              });
+
+              Timer(Duration(milliseconds: 400), () {
+                onPressed();
+              });
             },
             child: Text(widget.choice,
                 style: TextStyle(
@@ -135,8 +132,16 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(
         widget.doc, context, widget.username);
+    
+    listKey.currentState.removeItem(
+      widget.index,
+      (context, animation) => EmptyContainer(),
+      duration: Duration(seconds: 2),
+    );
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());
+    listKey.currentState.insertItem(widget.index);
     widget.notifyParent();
   }
 }
+ 
