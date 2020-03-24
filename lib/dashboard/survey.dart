@@ -31,7 +31,7 @@ List<dynamic> snapi = [],
     usernameAnswers = [],
     usernameFinal = [];
 DocumentSnapshot snap, doc;
-int userLevel, sar, total, userSar, surveyTarget;
+int userLevel, sar, total, userSar, surveyTarget, numberOfQuestions;
 String name, type, usernameSecond;
 
 class SurveyPage extends StatefulWidget {
@@ -136,7 +136,6 @@ class _SurveyState extends State<SurveyPage>
                           total = snapi[index].numberOfQuestions;
                           name = snapi[index].name;
                           snapQuestions = snapi[index].questions;
-                          questionNumber = snapQuestions.length;
                           Survey surveyDoc = snapi[index];
                           usernameAnswers = snapi[index].usersAnswers;
                           usernamesThatAnswers =

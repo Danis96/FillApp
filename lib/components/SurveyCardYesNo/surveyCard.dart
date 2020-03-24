@@ -92,7 +92,7 @@ class _YesNoSurveyState extends State<SurveyCard>
                 child: PageView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     controller: _controller,
-                    itemCount: widget.snapQuestions.length,
+                    itemCount: widget.surveyDoc.questions.length,
                     itemBuilder: (BuildContext context, int index) {
                       type = widget.snapQuestions[index]['type'];
                       if (type == 'mcq') {
@@ -113,17 +113,17 @@ class _YesNoSurveyState extends State<SurveyCard>
                               phone: widget.arguments.phone,
                               username: widget.arguments.username,
                             ),
-                            percent: (index + 1.0) / widget.total,
+                            percent: ((index + 1.0) / widget.surveyDoc.numberOfQuestions).toDouble(),
                             notifyParent: widget.notifyParent,
                             questions: widget.snapQuestions,
                             totalSar: widget.sarSurvey,
-                            totalProgress: widget.total,
+                            totalProgress: widget.surveyDoc.numberOfQuestions,
                             animateTo: summaryAnimateToPpage,
                           ),
                           YesNoSurveySQP(
                             type: type,
                             answered: index + 1,
-                            answeredFrom: widget.total,
+                            answeredFrom: widget.surveyDoc.numberOfQuestions,
                             sar: widget.snapQuestions[index]['sar'],
                             question: widget.snapQuestions[index]['title'],
                           ),
@@ -153,8 +153,10 @@ class _YesNoSurveyState extends State<SurveyCard>
   refresh() {
     checkForInternet();
     widget.number++;
+    print(widget.number);
     widget.increaseAnswered();
-    if (widget.number == snapQuestions.length) {
+
+    if (widget.number ==  widget.surveyDoc.numberOfQuestions) {
       Navigator.of(context).push(
         DanisAnimationTween(
             widget: Summary(
@@ -166,8 +168,8 @@ class _YesNoSurveyState extends State<SurveyCard>
           ),
           usernameSecond: widget.usernameSecond,
           animateTo: summaryAnimateToPpage,
-          questions: widget.snapQuestions,
-          totalProgress: widget.total,
+          questions: widget.surveyDoc.questions,
+          totalProgress: widget.surveyDoc.numberOfQuestions,
           totalSar: widget.sarSurvey,
           surveyDoc: widget.surveyDoc,
         )),

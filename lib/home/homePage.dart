@@ -22,6 +22,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/firebaseMethods/firebaseSignIn.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -119,7 +120,8 @@ class _SignUpState extends State<SignUp> {
                       child: Center(
                           child: FlatButton(
                               onPressed: () {
-                                onPressed(context);
+                                //  FirebaseJson().importSurveyJson();
+                                 onPressed(context);
                               },
                               child: Text(
                                 MyText().skipThisStep,
