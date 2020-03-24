@@ -22,6 +22,7 @@ import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/routes/routeArguments.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../components/constants/myText.dart';
 import '../components/emptyCont.dart';
@@ -136,14 +137,14 @@ class _BottomNavigationBarControllerState
 
   List<Widget> pages() => [
         DashboardPage(
-          arguments: PasswordArguments(
+            arguments: PasswordArguments(
           email: emailGlobal,
           password: passGlobal,
           phone: phoneGlobal,
           username: arguments.username,
         )),
         SurveyPage(
-          arguments: PasswordArguments(
+            arguments: PasswordArguments(
           email: emailGlobal,
           password: passGlobal,
           phone: phoneGlobal,
@@ -201,9 +202,9 @@ class _BottomNavigationBarControllerState
           showUnselectedLabels: false,
           items: [
             BottomNavigationBarItem(
-              icon: isTab1Selected
-                  ? ImageIcon(AssetImage(imageTab1))
-                  : ImageIcon(AssetImage(imageTab1)),
+              icon: Icon(IconData(0xF391,
+                  fontFamily: CupertinoIcons.iconFont,
+                  fontPackage: CupertinoIcons.iconFontPackage)),
               title: Text(''),
             ),
             BottomNavigationBarItem(
@@ -225,7 +226,8 @@ class _BottomNavigationBarControllerState
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  UserExistanceCheck(username: arguments.username, isUserInDB: isUserInDB),
+                  UserExistanceCheck(
+                      username: arguments.username, isUserInDB: isUserInDB),
                   isLoadingCircular(),
                 ],
               ),
