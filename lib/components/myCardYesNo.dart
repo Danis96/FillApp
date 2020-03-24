@@ -39,7 +39,7 @@ class MyCardYesNo extends StatefulWidget {
       this.index,
       this.snapi,
       this.snap,
-      @required this.notifyParent,
+      this.notifyParent,
       this.target,
       this.doc,
       this.username,

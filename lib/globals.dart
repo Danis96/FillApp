@@ -1,10 +1,12 @@
+import 'package:flutter/material.dart';
+
 bool isTapped = false,
     isTapped1 = false,
     isTapped2 = false,
     isTapped3 = false,
     isTapped4 = false,
-     isTappedMCQ= false,
-     isTappedMCQ1= false,
+    isTappedMCQ = false,
+    isTappedMCQ1 = false,
     isTappedMCQ2 = false,
     isTappedMCQ3 = false,
     isTappedMCQ4 = false,
@@ -22,3 +24,4 @@ bool isFutureDone = false;
 String answersFromSummary;
 int userLevelForList;
 String usernameGlobal, passGlobal, emailGlobal, phoneGlobal;
+final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
