@@ -695,28 +695,7 @@ class _ProfileState extends State<Profile> {
         completeProfile();
       }
     } else if (btnText == MyText().transfer) {
-      if (regexSpace.hasMatch(name) == false) {
-        setState(() {
-          isEmptyName = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyName = false;
-          });
-        });
-      } else if (creditCard.length < 19) {
-        setState(() {
-          isEmptyCard = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyCard = false;
-          });
-        });
-      } else {
-        transferSar();
-      }
-      
+      transferSar();
     }
   }
 }
