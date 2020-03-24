@@ -21,8 +21,10 @@ import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/survey.dart';
+import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/firebaseMethods/firebaseJson.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +67,7 @@ class MySurveyGroupCard extends StatefulWidget {
 class _MySurveyGroupCard extends State<MySurveyGroupCard>
     with AutomaticKeepAliveClientMixin<MySurveyGroupCard> {
   bool isCompleted = false, isFirst = false, justToggle = false;
-  int number;
+  int number, totalNumber;
   List<dynamic> endProgress;
   var user;
 
@@ -99,7 +101,6 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     )..init(context);
     return GestureDetector(
       onTap: () {
-        // FirebaseJson().importSurveyJson();
         if (!isCompleted) {
           Navigator.of(context).push(CardAnimationTween(
               widget: SurveyCard(
@@ -123,7 +124,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                   doc: widget.doc,
                   username: widget.username,
                   snapQuestions: widget.snapQuestions,
-                  total: widget.total)));
+                  total: totalNumber)));
         }
       },
       child: Container(

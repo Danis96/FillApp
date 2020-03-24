@@ -73,6 +73,13 @@ class _SummaryState extends State<Summary> {
   void initState() {
     super.initState();
     isOnSummary = true;
+    
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Constant().responsive(context);
+    answersList = [];
     Timer(Duration(milliseconds: 1000), () {
       print(answers);
       for (var i = 0; i < answers.length; i++) {
@@ -86,13 +93,6 @@ class _SummaryState extends State<Summary> {
       }
       printList();
     });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Constant().responsive(context);
-    answersList = [];
-    
 
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
@@ -114,19 +114,26 @@ class _SummaryState extends State<Summary> {
                   height: 0,
                   width: 0,
                   child: FutureBuilder(
-                      future: Future.delayed(Duration(milliseconds: 400)).then(
-                          (value) => FirebaseCheck()
-                              .getSurveyGroups(userLevelForList)),
+                      future: 
+                      // /Future.delayed(Duration(milliseconds: 400)).then(
+                          // (value) =>
+                           FirebaseCheck()
+                              .getSurveyGroups(userLevelForList),
+                              // ),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
+                          print('U FUTURE SAM');
                           snapi = snapshot.data
                               .map((doc) => Survey.fromDocument(doc))
                               .toList();
                           return ListView.builder(
                               itemCount: snapi.length,
                               itemBuilder: (BuildContext context, int index) {
+                                
+                          print('U FUTURE 2 SAM');
                                 if (surveyGroupName == snapi[index].name) {
                                   answers = snapi[index].usersAnswers;
+
                                 }
                                 return EmptyContainer();
                               });
@@ -167,6 +174,7 @@ class _SummaryState extends State<Summary> {
                             itemCount: widget.questions.length,
                             itemBuilder: (BuildContext context, int index) {
                               title = widget.questions[index]['title'];
+
                               return SummaryAnswerContainer(
                                 surveyDoc: widget.surveyDoc,
                                 answersList: answersList,
@@ -187,7 +195,17 @@ class _SummaryState extends State<Summary> {
 
   printList() {
     if (answersList == [] || answersList == null || answersList.length == 0) {
-      setState(() {});
+         for (var i = 0; i < answers.length; i++) {
+        userAnswers = answers[i].toString();
+        userAnswersSplitted = userAnswers.split(' : ');
+        usernameThatAnswers = userAnswersSplitted[2];
+        if (userAnswersSplitted[2] == currentUsername ||
+            userAnswersSplitted[2] == widget.usernameSecond) {
+          answersList.add(userAnswersSplitted[1]);
+        }
+      }
+    } else {
+      print(answersList);
     }
   }
 

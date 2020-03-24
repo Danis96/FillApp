@@ -384,27 +384,27 @@ class QuestionsForSurvey {
         //     {"value": "item2", "text": "No"},
         //   ]
         // },
-        // {
-        //   "title": "Who is/are your favourite player(s)?",
-        //   "type": "mcq",
-        //   "is_single": 0,
-        //   "sar": 10,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        //   "choices": [
-        //     {"value": "item1", "text": "Cristiano Ronaldo"},
-        //     {"value": "item2", "text": "Lionel Messi"},
-        //     {"value": "item3", "text": "Mohamed Salah"},
-        //     {"value": "item4", "text": "Edin Džeko"},
-        //   ]
-        // },
-        // {
-        //   "title": "Do you love your job",
-        //   "type": "input",
-        //   "sar": 10,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        // },
+        {
+          "title": "Who is/are your favourite player(s)?",
+          "type": "mcq",
+          "is_single": 0,
+          "sar": 10,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Cristiano Ronaldo"},
+            {"value": "item2", "text": "Lionel Messi"},
+            {"value": "item3", "text": "Mohamed Salah"},
+            {"value": "item4", "text": "Edin Džeko"},
+          ]
+        },
+        {
+          "title": "Do you love your job",
+          "type": "input",
+          "sar": 10,
+          "is_branching": "",
+          "choice_to_exit": "",
+        },
         // {
         //   "title": "Choose the appropriate image",
         //   "type": "image",
@@ -419,17 +419,17 @@ class QuestionsForSurvey {
         //     {"value": "item4", "text": ""},
         //   ]
         // },
-        // {
-        //   "title": "Do you love flutter",
-        //   "type": "yesno",
-        //   "sar": 10,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        //   "choices": [
-        //     {"value": "item1", "text": "Yes"},
-        //     {"value": "item2", "text": "No"},
-        //   ]
-        // },
+        {
+          "title": "Do you love flutter",
+          "type": "yesno",
+          "sar": 10,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Yes"},
+            {"value": "item2", "text": "No"},
+          ]
+        },
         //  {
         //   "title": "Do you love chinese food",
         //   "type": "yesno",
