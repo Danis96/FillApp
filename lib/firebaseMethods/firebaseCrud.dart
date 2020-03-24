@@ -32,7 +32,7 @@ class FirebaseCrud {
       'username': username,
       'username_second': '',
       'password': password,
-      'phone': phone,
+      'phone': '+966' + phone,
       'is_anonymous': isAnonymous,
       'user_id': randomAlphaNumeric(15),
       'level': 1,
@@ -83,7 +83,7 @@ class FirebaseCrud {
       'username': username,
       'username_second': usernameSecond,
       'password': password,
-      'phone': phone,
+      'phone': '+966' + phone,
       'is_anonymous': 0,
       'sar': sar,
     });
