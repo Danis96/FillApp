@@ -122,7 +122,7 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
       isTappedYesNoFlash = false;
     });
 
-    /// update sarova na osnovu da li je app online ili offline
+    /// update sarova na osnovu da li je app online ili offlines
     ///
     /// online = [widget.usersSar]
     /// offline = [saroviOffline]

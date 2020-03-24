@@ -89,7 +89,7 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
               Timer(Duration(milliseconds: 400), () {
                 onPressed();
               }); 
-              Timer(Duration(seconds: 1), () {
+              Timer(Duration(milliseconds: 800), () {
                   counterSurvey = 0;
               });    
               }

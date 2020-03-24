@@ -106,7 +106,12 @@ class _YesNoSurveyState extends State<SurveyCard>
                       return Column(
                         children: <Widget>[
                           SurveyAppBar(
-                            arguments: widget.arguments,
+                            arguments: PasswordArguments(
+                              email: widget.arguments.email,
+                              password: widget.arguments.password,
+                              phone: widget.arguments.phone,
+                              username: widget.arguments.username,
+                            ),
                             percent: (index + 1.0) / widget.total,
                             notifyParent: widget.notifyParent,
                             questions: widget.snapQuestions,
@@ -152,6 +157,12 @@ class _YesNoSurveyState extends State<SurveyCard>
       Navigator.of(context).push(
         DanisAnimationTween(
             widget: Summary(
+          arguments: PasswordArguments(
+            email: widget.arguments.email,
+            password: widget.arguments.password,
+            phone: widget.arguments.phone,
+            username: widget.arguments.username,
+          ),
           usernameSecond: widget.usernameSecond,
           animateTo: summaryAnimateToPpage,
           questions: widget.snapQuestions,
@@ -200,6 +211,12 @@ class _YesNoSurveyState extends State<SurveyCard>
     return isSummary
         ? Navigator.of(context).push(MaterialPageRoute(
             builder: (_) => Summary(
+                  arguments: PasswordArguments(
+                    email: widget.arguments.email,
+                    password: widget.arguments.password,
+                    phone: widget.arguments.phone,
+                    username: widget.arguments.username,
+                  ),
                   userLevel: widget.userLevel,
                   surveyDoc: widget.surveyDoc,
                   animateTo: summaryAnimateToPpage,

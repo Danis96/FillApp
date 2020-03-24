@@ -147,7 +147,12 @@ class _SurveyState extends State<SurveyPage>
                             return MySurveyGroupCard(
                                 surveyDoc: surveyDoc,
                                 userSar: userSar,
-                                arguments: widget.arguments,
+                                arguments: PasswordArguments(
+                                  email: widget.arguments.email,
+                                  password: widget.arguments.password,
+                                  phone: widget.arguments.phone,
+                                  username: widget.arguments.username,
+                                ),
                                 usernameFinal: usernameFinal,
                                 usernameSecond: usernameSecond,
                                 userProgress: usernamesThatAnswers,

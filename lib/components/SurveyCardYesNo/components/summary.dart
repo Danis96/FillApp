@@ -138,7 +138,11 @@ class _SummaryState extends State<Summary> {
                 ),
                 SurveyAppBar(
                   percent: 1,
-                  arguments: widget.arguments,
+                  arguments: PasswordArguments(
+                      email: widget.arguments.email,
+                      password: widget.arguments.password,
+                      phone: widget.arguments.phone,
+                      username: widget.arguments.username),
                   totalProgress: widget.totalProgress,
                   surveyDoc: widget.surveyDoc,
                   answersList: answersList,
@@ -195,7 +199,7 @@ class _SummaryState extends State<Summary> {
   printList() {
     if (answersList == [] || answersList == null || answersList.length == 0) {
       setState(() {});
-    } 
+    }
   }
 
   Future<bool> _onWillPop() async {
