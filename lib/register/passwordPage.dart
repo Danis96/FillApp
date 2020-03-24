@@ -23,6 +23,8 @@ import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/register/components/privacy.dart';
+import 'package:fillproject/register/components/terms.dart';
 import 'package:fillproject/register/emailPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -210,7 +212,8 @@ class _PasswordPageState extends State<PasswordPage> {
                             recognizer: new TapGestureRecognizer()
                               ..onTap = () {
                                 _save();
-                                launch('https://google.com');
+                                Navigator.of(context)
+                                    .push(CardAnimationTween(widget: Privacy()));
                               }),
                         new TextSpan(
                           text: MyText().passwordSubtitle2,
@@ -227,7 +230,8 @@ class _PasswordPageState extends State<PasswordPage> {
                             recognizer: new TapGestureRecognizer()
                               ..onTap = () {
                                 _save();
-                                launch('https://google.com');
+                                Navigator.of(context)
+                                    .push(CardAnimationTween(widget: Terms()));
                               })
                       ]),
                     ),
