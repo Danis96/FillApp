@@ -219,7 +219,8 @@ class _EmailPageState extends State<EmailPage> {
       if (_btnCounter == 0) {
             Navigator.of(context).push(
               CardAnimationTween(
-                widget: PasswordPage( arguments: RegisterArguments(
+                widget: PasswordPage( 
+              arguments: RegisterArguments(
               email: email,
               verId: widget.arguments.verId,
               username: widget.arguments.username,

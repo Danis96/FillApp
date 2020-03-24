@@ -34,7 +34,10 @@ class MySurveyGroupCard extends StatefulWidget {
   final int answered, total, sar, userSar, userLevel;
   final DocumentSnapshot doc, userDoc;
   final Survey surveyDoc;
-  final List<dynamic> snapQuestions, usernameFinal, userProgress, usernameAnswers;
+  final List<dynamic> snapQuestions,
+      usernameFinal,
+      userProgress,
+      usernameAnswers;
   MySurveyGroupCard({
     this.arguments,
     this.sar,
@@ -95,13 +98,13 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
     )..init(context);
     return GestureDetector(
       onTap: () {
-      //  FirebaseJson().importSurveyJson();
+        //  FirebaseJson().importSurveyJson();
         if (!isCompleted) {
           Navigator.of(context).push(CardAnimationTween(
               widget: SurveyCard(
-                surveyDoc: widget.surveyDoc,  
-                userLevel: userLevel,
-                usernameSecond: widget.usernameSecond,
+                  surveyDoc: widget.surveyDoc,
+                  userLevel: userLevel,
+                  usernameSecond: widget.usernameSecond,
                   notifyParent: refreshState,
                   user: user,
                   userDoc: widget.userDoc,
@@ -109,7 +112,12 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                   number: number,
                   increaseAnswered: increaseAnswered,
                   userSar: widget.userSar,
-                  arguments: widget.arguments,
+                  arguments: PasswordArguments(
+                    email: widget.arguments.email,
+                    password: widget.arguments.password,
+                    phone: widget.arguments.phone,
+                    username: widget.arguments.username,
+                  ),
                   isCompleted: setColor,
                   doc: widget.doc,
                   username: widget.username,

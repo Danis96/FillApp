@@ -261,9 +261,14 @@ class _ProfileState extends State<Profile> {
                               isDateChanged
                                   ? dateOfBirth
                                   : widget.snap2.data['date_of_birth'],
-                                  style: TextStyle(fontSize: ScreenUtil.instance.setSp(15.0)),
+                              style: TextStyle(
+                                  fontSize: ScreenUtil.instance.setSp(15.0)),
                             )
-                          : Text(MyText().labelDOB, style: TextStyle(fontSize: ScreenUtil.instance.setSp(15.0)),),
+                          : Text(
+                              MyText().labelDOB,
+                              style: TextStyle(
+                                  fontSize: ScreenUtil.instance.setSp(15.0)),
+                            ),
                     ),
                   ),
                 ),
@@ -641,8 +646,7 @@ class _ProfileState extends State<Profile> {
             isEmptyName = false;
           });
         });
-      } else if (email == '' ||
-          regexEmail.hasMatch(email) == false) {
+      } else if (email == '' || regexEmail.hasMatch(email) == false) {
         setState(() {
           isEmptyMail = true;
         });
@@ -691,7 +695,28 @@ class _ProfileState extends State<Profile> {
         completeProfile();
       }
     } else if (btnText == MyText().transfer) {
-      transferSar();
+      if (regexSpace.hasMatch(name) == false) {
+        setState(() {
+          isEmptyName = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyName = false;
+          });
+        });
+      } else if (creditCard.length < 19) {
+        setState(() {
+          isEmptyCard = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyCard = false;
+          });
+        });
+      } else {
+        transferSar();
+      }
+      
     }
   }
 }

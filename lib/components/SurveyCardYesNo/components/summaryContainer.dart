@@ -79,5 +79,5 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
     isOnSummary = false;
     widget.animateTo(widget.index);
     Navigator.of(context).pop();
-  }
+      }
 }

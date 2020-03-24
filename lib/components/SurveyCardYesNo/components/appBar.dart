@@ -53,10 +53,10 @@ class SurveyAppBar extends StatelessWidget {
                       answersList.removeRange(0, answersList.length);
                       Navigator.of(context).pushNamed(NavBar,
                           arguments: PasswordArguments(
-                              email: emailGlobal,
-                              password: passGlobal,
-                              phone: phoneGlobal,
-                              username: usernameGlobal));
+                              email: arguments.email,
+                              password: arguments.password,
+                              phone: arguments.phone,
+                              username: arguments.username));
                     }()
                   : isSummary
                       ? Navigator.of(context).push(MaterialPageRoute(
