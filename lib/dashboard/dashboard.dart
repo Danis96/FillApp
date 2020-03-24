@@ -49,6 +49,7 @@ class _DashboardPageState extends State<DashboardPage>
   final PasswordArguments arguments;
   _DashboardPageState({this.arguments});
 
+  /// Animation Controller for Flash Questionss
   AnimationController animationController;
 
   bool visible = false, isEmptyCard = false, isLoggedIn = false, isSar = false;
@@ -76,6 +77,9 @@ class _DashboardPageState extends State<DashboardPage>
     Timer(Duration(milliseconds: 500), () {
       setState(() {});
     });
+    /// Animation controller instance 
+    /// 
+    /// vsync - frame ticking & duration
     animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
@@ -308,11 +312,13 @@ class _DashboardPageState extends State<DashboardPage>
   /// changes occured in children of this dashboard widget.
   /// It refresh the state and call [checkForInternet] function
   refresh() {
+    /// reset animation
     animationController.reset();
     setState(() {});
     Timer(Duration(milliseconds: 500), () {
       setState(() {});
     });
+    /// animation forward
     animationController.forward();
     checkForInternet();
   }
