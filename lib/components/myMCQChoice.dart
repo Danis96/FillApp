@@ -86,7 +86,7 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
               setState(() {
                 isTappedMCQFlash = true;
               });
-              Timer(Duration(milliseconds: 300), () {
+              Timer(Duration(milliseconds: 100), () {
                 onPressed();
               });
             },
@@ -108,9 +108,6 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
   onPressed() {
     widget.usersSar += widget.sar;
     saroviOffline += widget.sar;
-    setState(() {
-      isTappedMCQFlash = false;
-    });
 
     /// update sarova na osnovu da li je app online ili offline
     ///
@@ -125,12 +122,10 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(
         widget.doc, context, widget.username);
-
-    
+    isTappedMCQFlash = false;
     listKey.currentState.removeItem(
       widget.index,
       (context, animation) => EmptyContainer(),
-      duration: Duration(seconds: 2),
     );
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());

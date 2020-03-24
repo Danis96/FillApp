@@ -73,12 +73,6 @@ class _SummaryState extends State<Summary> {
   void initState() {
     super.initState();
     isOnSummary = true;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    Constant().responsive(context);
-    answersList = [];
     Timer(Duration(milliseconds: 1000), () {
       print(answers);
       for (var i = 0; i < answers.length; i++) {
@@ -92,6 +86,13 @@ class _SummaryState extends State<Summary> {
       }
       printList();
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Constant().responsive(context);
+    answersList = [];
+    
 
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
@@ -182,19 +183,6 @@ class _SummaryState extends State<Summary> {
             )),
       ),
     );
-  }
-
-  populateAgain() {
-    for (var i = 0; i < answers.length; i++) {
-      userAnswers = answers[i].toString();
-      userAnswersSplitted = userAnswers.split(' : ');
-      usernameThatAnswers = userAnswersSplitted[2];
-      if (userAnswersSplitted[2] == currentUsername ||
-          userAnswersSplitted[2] == widget.usernameSecond) {
-        answersList.add(userAnswersSplitted[1]);
-      }
-    }
-    printList();
   }
 
   printList() {

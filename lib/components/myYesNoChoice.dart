@@ -91,8 +91,7 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
               setState(() {
                 isTappedYesNoFlash = true;
               });
-
-              Timer(Duration(milliseconds: 300), () {
+              Timer(Duration(milliseconds: 100), () {
                 onPressed();
               });
             },
@@ -115,10 +114,6 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
   onPressed() {
     widget.usersSars += widget.sar;
     saroviOffline += widget.sar;
-    setState(() {
-      isTappedYesNoFlash = false;
-    });
-
     /// update sarova na osnovu da li je app online ili offlines
     ///
     /// online = [widget.usersSar]
@@ -132,11 +127,10 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(
         widget.doc, context, widget.username);
-    
+    isTappedYesNoFlash = false;
     listKey.currentState.removeItem(
       widget.index,
       (context, animation) => EmptyContainer(),
-      duration: Duration(seconds: 2),
     );
     widget.snapi.removeAt(widget.index);
     widget.snapi.insert(widget.index, QuestionSkelet());
@@ -144,4 +138,3 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
     widget.notifyParent();
   }
 }
- 
