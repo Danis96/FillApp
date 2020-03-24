@@ -36,6 +36,13 @@ class YearDateField extends StatefulWidget {
 }
 
 class _YearDateFieldState extends State<YearDateField> {
+
+  @override
+  void initState() {
+    super.initState();
+    yearController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

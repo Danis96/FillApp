@@ -37,6 +37,13 @@ class DayDateField extends StatefulWidget {
 }
 
 class _DayDateFieldState extends State<DayDateField> {
+
+  @override
+  void initState() {
+    super.initState();
+    dayController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

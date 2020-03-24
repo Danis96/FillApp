@@ -37,6 +37,13 @@ class MonthDateField extends StatefulWidget {
 }
 
 class _MonthDateFieldState extends State<MonthDateField> {
+
+  @override
+  void initState() {
+    super.initState();
+    monthController.text = '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
