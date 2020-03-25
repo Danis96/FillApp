@@ -84,7 +84,7 @@ class MyText {
   final String verifyMoney = '2 \nSAR';
   final String verifyEnterPin = 'Enter the pin';
   final String btnVerify = 'Verify PIN';
-  final String verifyRecieve = "didn't recieve the PIN";
+  final String verifyRecieve = "didn't receive the PIN";
 
 //EmailPage
   final String emailHeadline = "Set up an email \nand start getting \n";
@@ -140,7 +140,7 @@ class MyText {
   final String msgSent = 'Message sent: ';
   final String msgNotSent = 'Message not sent.';
   final String emailMsg =
-      'You are recieving this e-mail because you requested a password reset for your Fill account.\n \n This is your code for reset password:';
+      'You are receiving this e-mail because you requested a password reset for your Fill account.\n \n This is your code for reset password:';
 
 //Reusable
   final String verifyCode = 'Enter sms code';
@@ -159,8 +159,8 @@ class MyText {
   final String emailPlace = "Email";
 
 // VALIDATION
-  final String validateSpaceUsername = 'Username must not containe space';
-  final String validateSpacePassword = 'Password must not containe space';
+  final String validateSpaceUsername = 'Username must not contain space';
+  final String validateSpacePassword = 'Password must not contain space';
   final String numberExists = 'Number already exists';
   final String usernameExist = 'Username already exists';
   final String usernameDontExist = "Username doesn't exists";
