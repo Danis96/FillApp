@@ -6,6 +6,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
+import 'package:fillproject/components/transferSnackbar.dart';
 import 'package:fillproject/components/profileButton.dart';
 import 'package:fillproject/components/profileComponents/languageChoose.dart';
 import 'package:fillproject/components/transferWithIcon.dart';
@@ -587,6 +588,10 @@ class _ProfileState extends State<Profile> {
     }
   }
 
+  successfullTransfer() {
+      return MySnackbarTransfer().showSnackbar('Transfer succesfull', context, 'Congratulations');
+  }
+
   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
   completeProfile() {
     FirebaseCrud().updateUserOnCompletePRofile(
@@ -696,6 +701,7 @@ class _ProfileState extends State<Profile> {
       }
     } else if (btnText == MyText().transfer) {
       transferSar();
+      successfullTransfer();
     }
   }
 }
