@@ -589,7 +589,8 @@ class _ProfileState extends State<Profile> {
   }
 
   successfullTransfer() {
-      return MySnackbarTransfer().showSnackbar('Transfer succesfull', context, 'Congratulations');
+    return MySnackbarTransfer()
+        .showSnackbar('Transfer succesfull', context, 'Congratulations');
   }
 
   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
@@ -678,7 +679,7 @@ class _ProfileState extends State<Profile> {
             isEmptyCard = false;
           });
         });
-      } else if (date == '') {
+      } else if (date == '' || date.length < 5) {
         setState(() {
           isEmptyDate = true;
         });
@@ -687,7 +688,7 @@ class _ProfileState extends State<Profile> {
             isEmptyDate = false;
           });
         });
-      } else if (cc == '') {
+      } else if (cc == '' || cc.length < 3) {
         setState(() {
           isEmptyCC = true;
         });
@@ -700,8 +701,54 @@ class _ProfileState extends State<Profile> {
         completeProfile();
       }
     } else if (btnText == MyText().transfer) {
-      transferSar();
-      successfullTransfer();
+      if (isButtonCompleteName
+          ? name == '' || regexSpace.hasMatch(name) == false
+          : usersName == '' || regexSpace.hasMatch(usersName) == false) {
+        setState(() {
+          isEmptyName = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyName = false;
+          });
+        });
+      } else if (isButtonCompleteCard
+          ? creditCard == '' || creditCard.length < 19
+          : usersCard == '' || usersCard.length < 19) {
+        setState(() {
+          isEmptyCard = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyCard = false;
+          });
+        });
+      } else if (isButtonCompleteDate
+          ? date == '' || date.length < 5
+          : usersCardDate == '' || usersCardDate.length < 5) {
+        setState(() {
+          isEmptyDate = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyDate = false;
+          });
+        });
+      } else if (isButtonCompleteCC
+          ? cc == '' || cc.length < 3
+          : usersCC == '' || usersCC.length < 3) {
+        setState(() {
+          isEmptyCC = true;
+        });
+        Timer(Duration(seconds: 2), () {
+          setState(() {
+            isEmptyCC = false;
+          });
+        });
+      } else {
+        transferSar();
+        successfullTransfer();
+      }
     }
   }
 }
