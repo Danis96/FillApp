@@ -81,7 +81,6 @@ class _SummaryState extends State<Summary> {
     Constant().responsive(context);
     answersList = [];
     Timer(Duration(milliseconds: 1000), () {
-      print(answers);
       for (var i = 0; i < answers.length; i++) {
         userAnswers = answers[i].toString();
         userAnswersSplitted = userAnswers.split(' : ');
@@ -122,15 +121,12 @@ class _SummaryState extends State<Summary> {
                               // ),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
-                          print('U FUTURE SAM');
                           snapi = snapshot.data
                               .map((doc) => Survey.fromDocument(doc))
                               .toList();
                           return ListView.builder(
                               itemCount: snapi.length,
                               itemBuilder: (BuildContext context, int index) {
-                                
-                          print('U FUTURE 2 SAM');
                                 if (surveyGroupName == snapi[index].name) {
                                   answers = snapi[index].usersAnswers;
 

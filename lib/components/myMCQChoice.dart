@@ -91,6 +91,7 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
               });
             },
             child: Text(widget.choice,
+            overflow: TextOverflow.ellipsis,
                 style: TextStyle(
                     color: isTappedMCQFlash ? MyColor().black : MyColor().white,
                     fontWeight: FontWeight.w400,
