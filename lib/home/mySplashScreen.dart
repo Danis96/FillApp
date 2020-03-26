@@ -13,6 +13,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/home/homePage.dart';
+import 'package:fillproject/home/languageScreen.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
   Widget build(BuildContext context) {
     return new SplashScreen(
       seconds: 2,
-      navigateAfterSeconds: new SignUp(),
+      navigateAfterSeconds: new LanguageScreen(),
       title: new Text(
         MyText().fill,
         style: new TextStyle(
@@ -34,7 +35,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
       ),
       backgroundColor: MyColor().black,
       styleTextUnderTheLoader: new TextStyle(),
-      onClick: () => new SignUp(),
+      onClick: () => new LanguageScreen(),
       loaderColor: Colors.black,
       loadingText: new Text(
         MyText().builtBy,
