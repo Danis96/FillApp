@@ -30,7 +30,6 @@ import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:random_string/random_string.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -45,7 +44,6 @@ class _SignUpState extends State<SignUp> {
   void initState() {
     super.initState();
     Check().isChecking();
-    autoLogIn(context, isLoggedIn);
   }
 
   @override
@@ -144,7 +142,6 @@ class _SignUpState extends State<SignUp> {
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         username = randomAlphaNumeric(5);
         FirebaseCrud().createUser('', '', username, '', 0, 1);
-        loginUser();
         FirebaseSignIn().signInAnonymously(username);
         Timer(Duration(milliseconds: 800), () {
           Navigator.of(context).pushNamed(NavBar,
@@ -173,31 +170,5 @@ class _SignUpState extends State<SignUp> {
               no: MyText().willNo),
         ) ??
         true;
-  }
-
-  void autoLogIn(BuildContext context, bool isLoggedIn) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String userId = prefs.getString('username');
-    if (userId != null) {
-      setState(() {
-        isLoggedIn = true;
-        username = userId;
-      });
-
-      Navigator.of(context).pushNamed(NavBar,
-          arguments: PasswordArguments(
-              email: '', password: '', phone: '', username: username));
-      return;
-    }
-  }
-
-  //duplanje koda i implementacija funckije ovdje zbog setState-a
-  Future<Null> loginUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('username', username);
-    setState(() {
-      username = username;
-      isLoggedIn = true;
-    });
   }
 }

@@ -28,6 +28,7 @@ class MyQuestion extends StatelessWidget {
         width: ScreenUtil.instance.setWidth(245.0),
         height: ScreenUtil.instance.setHeight(containerHeight),
         child: Text(question,
+        overflow: TextOverflow.ellipsis,
             style: TextStyle(
                 color: isCompleted ? MyColor().black : MyColor().white,
                 fontWeight: FontWeight.w700,

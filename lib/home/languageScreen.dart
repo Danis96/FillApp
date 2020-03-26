@@ -25,12 +25,14 @@ import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/firebaseMethods/firebaseSignIn.dart';
 import 'package:fillproject/home/homePage.dart';
+import 'package:fillproject/localization/appLanguage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:random_string/random_string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -42,17 +44,20 @@ class LanguageScreen extends StatefulWidget {
 class _LanguageScreenState extends State<LanguageScreen> {
   bool isLoggedIn = false;
   String name = '', username;
-  String selectedLanguage = 'English';
+  String selectedLanguageCode, selectedLanguage;
+  var appLanguage;
 
   @override
   void initState() {
     super.initState();
     Check().isChecking();
     autoLogIn(context, isLoggedIn);
+    getLanguage();
   }
 
   @override
   Widget build(BuildContext context) {
+    appLanguage = Provider.of<AppLanguage>(context);
     Constant().responsive(context);
     return Scaffold(
       backgroundColor: MyColor().black,
@@ -104,15 +109,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
                           borderRadius: new BorderRadius.circular(33.5),
                         ),
                         onPressed: () {
-                          print('PREVODIM NA BOSANSKI');
                           setState(() {
+                            appLanguage.changeLanguage(Locale("bs"));
                             selectedLanguage = 'Arabic';
                           });
-                          Navigator.of(context).push(
-                            CardAnimationTween(
-                              widget: SignUp(),
-                            ),
-                          );
+                          Timer(Duration(seconds: 1), () {
+                            Navigator.of(context).push(
+                              CardAnimationTween(
+                                widget: SignUp(),
+                              ),
+                            );
+                          });
                         },
                         child: Text(
                           AppLocalizations.of(context)
@@ -126,7 +133,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: new BorderRadius.circular(33.5),
-                        border: Border.all(width: 1, color: MyColor().white),
+                        border: Border.all(width: 2, color: MyColor().white),
                         color: selectedLanguage == 'English'
                             ? MyColor().white
                             : MyColor().black),
@@ -144,15 +151,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
                           borderRadius: new BorderRadius.circular(33.5),
                         ),
                         onPressed: () {
-                          print('PREVODIM NA ENGLESKI');
                           setState(() {
+                            appLanguage.changeLanguage(Locale("en"));
                             selectedLanguage = 'English';
                           });
-                          Navigator.of(context).push(
-                            CardAnimationTween(
-                              widget: SignUp(),
-                            ),
-                          );
+                          Timer(Duration(seconds: 2), () {
+                            Navigator.of(context).push(
+                              CardAnimationTween(
+                                widget: SignUp(),
+                              ),
+                            );
+                          });
                         },
                         child: Text(
                           AppLocalizations.of(context)
@@ -170,6 +179,25 @@ class _LanguageScreenState extends State<LanguageScreen> {
         ),
       ),
     );
+  }
+
+  ///Method for fetching last selected language in order to continue
+  ///
+  ///with the same language after opening the application again
+  getLanguage() async {
+    var prefs = await SharedPreferences.getInstance();
+    selectedLanguageCode = prefs.getString('language_code');
+    if (selectedLanguageCode == 'en') {
+      setState(() {
+        selectedLanguage = 'English';
+      });
+      appLanguage.changeLanguage(Locale("en"));
+    } else {
+      setState(() {
+        selectedLanguage = 'Arabic';
+      });
+      appLanguage.changeLanguage(Locale("bs"));
+    }
   }
 
   onPressed(BuildContext context) async {
