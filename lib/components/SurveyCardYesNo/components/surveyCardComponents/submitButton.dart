@@ -13,7 +13,7 @@ class SubmitButton extends StatelessWidget {
         width: ScreenUtil.instance.setWidth(316.0),
         height: ScreenUtil.instance.setHeight(50.0),
         margin: EdgeInsets.only(
-            top: ScreenUtil.instance.setWidth(7.0),
+            top: ScreenUtil.instance.setWidth(10.0),
             left: ScreenUtil.instance.setWidth(54.0),
             right: ScreenUtil.instance.setWidth(55.0)),
         child: RaisedButton(
