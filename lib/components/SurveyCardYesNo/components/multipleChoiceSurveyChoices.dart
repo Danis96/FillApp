@@ -131,9 +131,13 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
             : widget.isSingle == 1
                 ? EmptyContainer()
                 : widget.length == 3 && widget.index == MyText().indexC
-                    ? SubmitButton(onPressedFunction: submit, isImage: true)
+                    ? Container(
+                      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+                      child: SubmitButton(onPressedFunction: submit, isImage: true))
                     : widget.length == 4 && widget.index == MyText().indexD
-                        ? SubmitButton(onPressedFunction: submit, isImage: true)
+                        ? Container(
+                          margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+                          child: SubmitButton(onPressedFunction: submit, isImage: true))
                         : EmptyContainer()
       ],
     );
