@@ -89,6 +89,7 @@
     "youEnteredInvalidCode": "You entered invalid code",
     "undo": "Undo",
     "emailCantEmpty": "Email can't be empty",
+    "usernaneCantEmoty": "Username can't be empty",
     "phoneCantEmpty": "Phone can't be empty",
     "passCantEmpty": "Password can't be empty",
     "passCantBeLess8": "Password can't be less than 8 characters",
