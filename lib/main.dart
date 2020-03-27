@@ -16,6 +16,7 @@ class FillApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return ChangeNotifierProvider<AppLanguage>(
       create: (context) => AppLanguage(),
       child: Consumer<AppLanguage>(builder: (context, model, child) {
