@@ -155,7 +155,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                             appLanguage.changeLanguage(Locale("en"));
                             selectedLanguage = 'English';
                           });
-                          Timer(Duration(seconds: 2), () {
+                          Timer(Duration(seconds: 1), () {
                             Navigator.of(context).push(
                               CardAnimationTween(
                                 widget: SignUp(),
