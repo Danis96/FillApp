@@ -52,7 +52,11 @@ class _DashboardPageState extends State<DashboardPage>
   /// Animation Controller for Flash Questionss
   AnimationController animationController;
 
-  bool visible = false, isEmptyCard = false, isLoggedIn = false, isSar = false;
+  bool visible = false,
+      isEmptyCard = false,
+      isLoggedIn = false,
+      isSar = false,
+      ifSnapshotHasData = false;
   DocumentSnapshot snap, doc;
   int counter = 0, userSar = 0, sar, target, userLevel;
   String question, type, username, id, usernameSecond;
@@ -77,8 +81,9 @@ class _DashboardPageState extends State<DashboardPage>
     Timer(Duration(milliseconds: 500), () {
       setState(() {});
     });
-    /// Animation controller instance 
-    /// 
+
+    /// Animation controller instance
+    ///
     /// vsync - frame ticking & duration
     animationController = AnimationController(
       vsync: this,
@@ -149,6 +154,8 @@ class _DashboardPageState extends State<DashboardPage>
                           (value) => FirebaseCheck().getQuestions(userLevel)),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
+                          ifSnapshotHasData = true;
+
                           /// punjenje lokalnog niza
                           ///
                           /// nakon sto se jednom napuni nepuni se vise
@@ -196,7 +203,8 @@ class _DashboardPageState extends State<DashboardPage>
                                     target > usernameThatAnswers.length) {
                                   return type == 'checkbox'
                                       ? SlideTransition(
-                                            position: animationController.drive(tween),
+                                          position:
+                                              animationController.drive(tween),
                                           child: MyCardMCQ(
                                             key: key,
                                             sar: sar,
@@ -214,7 +222,8 @@ class _DashboardPageState extends State<DashboardPage>
                                           ),
                                         )
                                       : SlideTransition(
-                                          position: animationController.drive(tween),
+                                          position:
+                                              animationController.drive(tween),
                                           child: MyCardYesNo(
                                               key: key,
                                               sar: sar,
@@ -240,7 +249,7 @@ class _DashboardPageState extends State<DashboardPage>
                         }
 
                         /// Indicator that appears while questions are loading
-                        return CircularProgressIndicator();
+                        return EmptyContainer();
                       },
                     ),
                   ),
@@ -318,6 +327,7 @@ class _DashboardPageState extends State<DashboardPage>
     Timer(Duration(milliseconds: 500), () {
       setState(() {});
     });
+
     /// animation forward
     animationController.forward();
     checkForInternet();
