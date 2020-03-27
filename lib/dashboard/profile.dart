@@ -170,7 +170,7 @@ class _ProfileState extends State<Profile> {
               Container(
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
-                child: BigCircle(usersSarovi: usersSarovi),
+                child: BigCircle(usersSarovi: usersSarovi,),
               ),
               Container(
                 margin:
