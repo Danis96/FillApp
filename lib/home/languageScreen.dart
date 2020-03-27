@@ -123,7 +123,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         },
                         child: Text(
                           AppLocalizations.of(context)
-                              .translate('arabicLanguage'),
+                              .translate('arabic'),
                           style: TextStyle(
                               color: selectedLanguage == 'Arabic'
                                   ? MyColor().black
@@ -165,7 +165,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         },
                         child: Text(
                           AppLocalizations.of(context)
-                              .translate('englishLanguage'),
+                              .translate('english'),
                           style: TextStyle(
                               color: selectedLanguage == 'English'
                                   ? MyColor().black
