@@ -57,7 +57,7 @@ class _DayDateFieldState extends State<DayDateField> {
           Column(
             children: <Widget>[
               LabelContainer(
-                  text: MyText().day, leftMargin: 0.0, containerWidth: 300.0),
+                  text: AppLocalizations.of(context).translate('day'), leftMargin: 0.0, containerWidth: 300.0),
               Container(
                 width: ScreenUtil.instance.setWidth(327.0),
                 height: ScreenUtil.instance.setWidth(61.0),

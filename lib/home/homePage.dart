@@ -72,7 +72,7 @@ class _SignUpState extends State<SignUp> {
                       padding: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(85.0)),
                       child: Text(
-                        MyText().subtitle,
+                        AppLocalizations.of(context).translate("register&get5SAR"),
                         style: TextStyle(
                             fontSize: ScreenUtil.instance.setSp(23.0),
                             color: MyColor().white),
@@ -95,7 +95,7 @@ class _SignUpState extends State<SignUp> {
                               arguments: DidntRecievePinArguments(
                                   phone: '', username: ''));
                         },
-                        child: Text(MyText().btnSU)),
+                        child: Text(AppLocalizations.of(context).translate('newRegister'))),
                   ),
                   Container(
                     width: ScreenUtil.instance.setWidth(316.0),
@@ -112,7 +112,7 @@ class _SignUpState extends State<SignUp> {
                           Navigator.of(context)
                               .pushNamed(Login); // go to Login Page
                         },
-                        child: Text(MyText().btnSI)),
+                        child: Text(AppLocalizations.of(context).translate("signIn"))),
                   ),
                   Container(
                       width: ScreenUtil.instance.setWidth(255.0),
@@ -123,7 +123,7 @@ class _SignUpState extends State<SignUp> {
                                 onPressed(context);
                               },
                               child: Text(
-                                MyText().skipThisStep,
+                                AppLocalizations.of(context).translate("skip"),
                                 style: TextStyle(
                                     color: MyColor().white,
                                     fontSize: ScreenUtil.instance.setSp(23.0)),
@@ -168,9 +168,10 @@ class _SignUpState extends State<SignUp> {
           builder: (context) => MyAlertDialog(
               title: MyText().willQuestion,
               content: MyText().willQuestion1,
-              yes: MyText().willYes,
+              yes: AppLocalizations.of(context).translate('yes'),
               notifyParent: exitApp,
-              no: MyText().willNo),
+              no: AppLocalizations.of(context).translate('no'),
+),
         ) ??
         true;
   }

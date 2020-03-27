@@ -20,7 +20,7 @@ class QuestionsForSurvey {
           "choice_to_exit": "",
         },
         {
-          "title": "When is your birthday?",
+          "title": "What is your favourite day number?",
           "type": "date",
           "subtype": "day",
           "sar": 35,
@@ -28,7 +28,7 @@ class QuestionsForSurvey {
           "choice_to_exit": "",
         },
         {
-          "title": "When is your birthday?",
+          "title": "What is your favourite month?",
           "type": "date",
           "subtype": "month",
           "sar": 35,
@@ -36,7 +36,7 @@ class QuestionsForSurvey {
           "choice_to_exit": "",
         },
         {
-          "title": "When is your birthday?",
+          "title": "When is your birthday year?",
           "type": "date",
           "subtype": "year",
           "sar": 35,
@@ -442,7 +442,7 @@ class QuestionsForSurvey {
         //   ]
         // },
         {
-          "title": "Do you love your job",
+          "title": "What is your favourite band?",
           "type": "input",
           "sar": 10,
           "is_branching": "",

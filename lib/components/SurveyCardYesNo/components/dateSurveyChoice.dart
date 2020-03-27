@@ -69,7 +69,7 @@ class _DateChoiceState extends State<DateChoice> {
                 Column(
                   children: <Widget>[
                     LabelContainer(
-                        text: MyText().day,
+                        text: AppLocalizations.of(context).translate("day"),
                         leftMargin: 0.0,
                         containerWidth: 80.0),
                     Container(
@@ -149,7 +149,7 @@ class _DateChoiceState extends State<DateChoice> {
                 Column(
                   children: <Widget>[
                     LabelContainer(
-                        text: MyText().month,
+                        text:AppLocalizations.of(context).translate('month'),
                         leftMargin: 10.0,
                         containerWidth: 80.0),
                     Container(
@@ -230,7 +230,7 @@ class _DateChoiceState extends State<DateChoice> {
                 Column(
                   children: <Widget>[
                     LabelContainer(
-                        text: MyText().year,
+                        text: AppLocalizations.of(context).translate('year'),
                         leftMargin: 10.0,
                         containerWidth: 125.0),
                     Container(

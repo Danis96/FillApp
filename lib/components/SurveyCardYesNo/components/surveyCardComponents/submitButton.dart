@@ -1,5 +1,6 @@
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,7 +29,7 @@ class SubmitButton extends StatelessWidget {
               onPressedFunction(context);
             }
           },
-          child: Text(MyText().btnSubmit,
+          child: Text(AppLocalizations.of(context).translate("submit"),
               style: TextStyle(
                   fontSize: ScreenUtil.instance.setSp(18.0),
                   color: MyColor().white)),

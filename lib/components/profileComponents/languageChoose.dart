@@ -1,6 +1,7 @@
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,7 +33,7 @@ class LanguageChoose extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(29)),
                 color: language == MyText().languageArabic ? MyColor().white : MyColor().black,
               ),
-              child: Text(MyText().languageArabic,
+              child: Text(AppLocalizations.of(context).translate('arabic'),
                   style: TextStyle(
                       color: language == MyText().languageArabic
                           ? MyColor().black
@@ -62,7 +63,7 @@ class LanguageChoose extends StatelessWidget {
                   color: language == MyText().languageEnglish
                       ? MyColor().white
                       : MyColor().black),
-              child: Text(MyText().languageEnglish,
+              child: Text(AppLocalizations.of(context).translate('english'),
                   style: TextStyle(
                       color: language == MyText().languageEnglish
                           ? MyColor().black

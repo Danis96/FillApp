@@ -1,6 +1,7 @@
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,7 +27,7 @@ class InputField extends StatelessWidget {
           hasFloatingPlaceholder: false,
           contentPadding:
               new EdgeInsets.symmetric(vertical: 25.0, horizontal: 35.0),
-          labelText: MyText().placeholderInput,
+          labelText: AppLocalizations.of(context).translate('typeTheAnswer'),
           labelStyle: TextStyle(color: MyColor().black),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(33.5)),

@@ -119,7 +119,9 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                 margin: EdgeInsets.only(
                     top: ScreenUtil.instance.setWidth(105),
                     bottom: ScreenUtil.instance.setWidth(35.0)),
-                child: MyTextComponent(text: MyText().verifyPageHeadline)),
+                child: MyTextComponent(
+                    text: AppLocalizations.of(context)
+                        .translate('verifyYourNumber'))),
             Container(
               child: Text(
                 MyText().verifyMoney,

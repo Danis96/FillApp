@@ -1,5 +1,6 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,7 +28,7 @@ class MultipleMcqAnswers extends StatelessWidget {
           MultipleChoiceSurveyChoices(
             length: numberOfChoices,
             isSingle: isSingle,
-            index: MyText().indexA,
+            index: AppLocalizations.of(context).translate('a'),
             choice1: widget.snapQuestions[index]['choices'][0]['text'],
             notifyParent: refresh,
             username: widget.username,
@@ -37,7 +38,7 @@ class MultipleMcqAnswers extends StatelessWidget {
           MultipleChoiceSurveyChoices(
             length: numberOfChoices,
             isSingle: isSingle,
-            index: MyText().indexB,
+            index:  AppLocalizations.of(context).translate('b'),
             choice1: widget.snapQuestions[index]['choices'][1]['text'],
             notifyParent: refresh,
             username: widget.username,
@@ -47,7 +48,7 @@ class MultipleMcqAnswers extends StatelessWidget {
           MultipleChoiceSurveyChoices(
             length: numberOfChoices,
             isSingle: isSingle,
-            index: MyText().indexC,
+            index:  AppLocalizations.of(context).translate('c'),
             choice1: widget.snapQuestions[index]['choices'][2]['text'],
             notifyParent: refresh,
             username: widget.username,
@@ -57,7 +58,7 @@ class MultipleMcqAnswers extends StatelessWidget {
           MultipleChoiceSurveyChoices(
             length: numberOfChoices,
             isSingle: isSingle,
-            index: MyText().indexD,
+            index: AppLocalizations.of(context).translate('d'),
             choice1: widget.snapQuestions[index]['choices'][3]['text'],
             notifyParent: refresh,
             username: widget.username,

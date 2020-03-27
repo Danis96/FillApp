@@ -2,6 +2,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -28,7 +29,7 @@ class ProfileButton extends StatelessWidget {
               borderRadius: new BorderRadius.circular(28.0),
             ),
             child: btnText == MyText().register
-                ? Text(MyText().register,
+                ? Text(AppLocalizations.of(context).translate('register'),
                     style: TextStyle(
                         color: MyColor().white,
                         fontFamily: arabic,
@@ -36,7 +37,7 @@ class ProfileButton extends StatelessWidget {
                         fontSize: ScreenUtil.instance.setSp(18.0)),
                     textAlign: TextAlign.center)
                 : btnText == MyText().transfer
-                    ? Text(MyText().transfer,
+                    ? Text(AppLocalizations.of(context).translate('transfer'),
                         style: TextStyle(
                             color: MyColor().white,
                             fontFamily: arabic,
@@ -44,14 +45,14 @@ class ProfileButton extends StatelessWidget {
                             fontSize: ScreenUtil.instance.setSp(18.0)),
                         textAlign: TextAlign.center)
                     : btnText == MyText().completeProfile
-                        ? Text(MyText().completeProfile,
+                        ? Text(AppLocalizations.of(context).translate('complete'),
                             style: TextStyle(
                                 color: MyColor().white,
                                 fontFamily: arabic,
                                 fontStyle: FontStyle.normal,
                                 fontSize: ScreenUtil.instance.setSp(18.0)),
                             textAlign: TextAlign.center)
-                        : Text(MyText().transferAfter,
+                        : Text(AppLocalizations.of(context).translate('transferAfter100SAR'),
                             style: TextStyle(
                                 color: MyColor().white,
                                 fontFamily: arabic,

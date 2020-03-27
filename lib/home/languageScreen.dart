@@ -80,8 +80,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   Container(
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(120.0)),
-                      child: Text(
-                        MyText().subtitle,
+                      child: Text( 
+                        AppLocalizations.of(context).translate('register&get5SAR'),
                         style: TextStyle(
                             fontSize: ScreenUtil.instance.setSp(23.0),
                             color: MyColor().white),
@@ -230,9 +230,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
           builder: (context) => MyAlertDialog(
               title: MyText().willQuestion,
               content: MyText().willQuestion1,
-              yes: MyText().willYes,
+              yes: AppLocalizations.of(context).translate('yes'),
               notifyParent: exitApp,
-              no: MyText().willNo),
+              no: AppLocalizations.of(context).translate('no'),
+),
         ) ??
         true;
   }

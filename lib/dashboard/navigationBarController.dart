@@ -21,6 +21,7 @@ import 'package:fillproject/dashboard/dashboard.dart';
 import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -96,13 +97,13 @@ class _BottomNavigationBarControllerState
       /// if user is anonymous + no sars
       if (usersSars < 100) {
         setState(() {
-          btnText = MyText().transferAfter;
+          btnText = AppLocalizations.of(context).translate('transferAfter100SAR');
           isReadOnly = true;
         });
 
         /// if user is anonymous + sars
       } else {
-        btnText = MyText().register;
+        btnText = AppLocalizations.of(context).translate('register');
         isReadOnly = true;
       }
     }
@@ -114,7 +115,7 @@ class _BottomNavigationBarControllerState
       /// if user is registered + have sars + profile not completed
       if (usersSars >= 100 && cc == '') {
         setState(() {
-          btnText = MyText().completeProfile;
+          btnText = AppLocalizations.of(context).translate('complete');
           isReadOnly = false;
         });
 
@@ -128,7 +129,7 @@ class _BottomNavigationBarControllerState
         /// if user is registered + no sars + not profile completed
       } else if (usersSars < 100 && cc != '') {
         setState(() {
-          btnText = MyText().transferAfter;
+          btnText = AppLocalizations.of(context).translate('transferAfter100SAR');
           isReadOnly = false;
         });
       }

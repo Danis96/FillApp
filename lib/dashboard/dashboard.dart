@@ -27,6 +27,7 @@ import 'package:fillproject/components/myCashBalance.dart';
 import 'package:fillproject/components/mySAR.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/FlashQuestion/questionModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
@@ -128,7 +129,7 @@ class _DashboardPageState extends State<DashboardPage>
                 return EmptyContainer();
               },
             ),
-            MyCashBalance(text: MyText().sarText),
+            MyCashBalance(text: AppLocalizations.of(context).translate("yourCashBalance")),
 
             /// [MySar] widget
             ///
@@ -276,8 +277,8 @@ class _DashboardPageState extends State<DashboardPage>
           builder: (context) => MyAlertDialog(
               title: MyText().willQuestion,
               content: MyText().willQuestion1,
-              yes: MyText().willYes,
-              no: MyText().willNo,
+              yes:AppLocalizations.of(context).translate('yes'),
+              no: AppLocalizations.of(context).translate('no'),
               notifyParent: exitApp),
         ) ??
         true;

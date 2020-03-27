@@ -181,7 +181,7 @@ class _EmailPageState extends State<EmailPage> {
                                 context, AppLocalizations.of(context).translate('undo'));
                           }
                         },
-                        child: Text(MyText().btnEmail,
+                        child: Text(AppLocalizations.of(context).translate("submit"),
                             style: TextStyle(
                                 fontSize: ScreenUtil.instance.setSp(18))),
                       )),

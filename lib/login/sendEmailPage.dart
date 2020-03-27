@@ -162,7 +162,7 @@ class EmailResetPage extends StatelessWidget {
                       }
                     },
                     child:
-                        Text(MyText().btnEmail, style: TextStyle(fontSize: ScreenUtil.instance.setSp(18.0))),
+                        Text(AppLocalizations.of(context).translate("submit"), style: TextStyle(fontSize: ScreenUtil.instance.setSp(18.0))),
                   )),
             ],
           ),

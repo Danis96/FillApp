@@ -11,6 +11,7 @@ import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
@@ -224,17 +225,18 @@ class _YesNoSurveyState extends State<SurveyCard>
                   surveyDoc: widget.surveyDoc,
                   animateTo: summaryAnimateToPpage,
                   questions: widget.snapQuestions,
-                  totalProgress: widget.total,
+                  totalProgress:widget.surveyDoc.numberOfQuestions,
                   totalSar: widget.sarSurvey,
+
                 )))
         : showDialog(
               context: context,
               builder: (context) => MyAlertDialog(
                   notifyParent: widget.notifyParent,
-                  title: MyText().areYouSure,
-                  content: MyText().askToExitSurvey,
-                  yes: MyText().willYes,
-                  no: MyText().willNo),
+                  title: AppLocalizations.of(context).translate('areYouSure'),
+                  content: AppLocalizations.of(context).translate('doYouReallyWantToExitTheSurvey'),
+                  yes: AppLocalizations.of(context).translate('yes'),
+                  no: AppLocalizations.of(context).translate('no')),
             ) ??
             true;
   }

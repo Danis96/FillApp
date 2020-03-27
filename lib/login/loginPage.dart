@@ -113,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                               textBaseline: TextBaseline.ideographic),
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 25.0, horizontal: 35.0),
-                          labelText: MyText().labelUsername,
+                          labelText: AppLocalizations.of(context).translate('username'),
                           labelStyle: TextStyle(
                             color: MyColor().white,
                             fontSize: ScreenUtil.instance.setSp(18.0),

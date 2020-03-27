@@ -156,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           padding: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(28.0)),
                           child:
-                              MyTextComponent(text: MyText().registerHeadline),
+                              MyTextComponent(text: AppLocalizations.of(context).translate('registerAndStartMakingMoney')),
                         )),
                         Center(
                             child: Padding(
@@ -164,7 +164,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               top: ScreenUtil.instance.setWidth(61.0),
                               bottom: ScreenUtil.instance.setWidth(59.0)),
                           child: Text(
-                            MyText().registerSubtitle,
+                            AppLocalizations.of(context).translate("register&get5SAR"),
                             style: TextStyle(
                                 color: MyColor().white,
                                 fontSize: ScreenUtil.instance.setSp(40)),
@@ -191,7 +191,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   vertical: ScreenUtil.instance.setWidth(25.0),
                                   horizontal:
                                       ScreenUtil.instance.setWidth(35.0)),
-                              labelText: MyText().labelUsername,
+                              labelText: AppLocalizations.of(context).translate('username'),
                               labelStyle: TextStyle(
                                   color: MyColor().white,
                                   fontSize: ScreenUtil.instance.setSp(18)),
@@ -266,7 +266,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 "+966",
                                 style: TextStyle(color: MyColor().white),
                               ),
-                              labelText: MyText().labelPhone,
+                              labelText: AppLocalizations.of(context).translate('966phoneNumber'),
                               labelStyle: TextStyle(color: MyColor().white),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
@@ -341,7 +341,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                       AppLocalizations.of(context).translate('undo'));
                                 }
                               },
-                              child: Text(MyText().sendPIN,
+                              child: Text(AppLocalizations.of(context).translate('sendPin'),
                                   style: TextStyle(
                                       fontSize: ScreenUtil.instance.setSp(18))),
                             )),

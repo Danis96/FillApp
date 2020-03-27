@@ -57,7 +57,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
           Column(
             children: <Widget>[
               LabelContainer(
-                  text: MyText().month, leftMargin: 0.0, containerWidth: 300.0),
+                  text: AppLocalizations.of(context).translate('month'), leftMargin: 0.0, containerWidth: 300.0),
               Container(
                 width: ScreenUtil.instance.setWidth(327.0),
                 height: ScreenUtil.instance.setWidth(61.0),
