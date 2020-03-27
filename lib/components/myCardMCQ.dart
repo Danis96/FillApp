@@ -16,6 +16,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myMCQChoice.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -83,7 +84,7 @@ class _MyCardMCQState extends State<MyCardMCQ> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-            child: MyQuestionSAR(text: '${widget.sar}', isCompleted: false,),
+            child: MyQuestionSAR(text: '${widget.sar} ' + AppLocalizations.of(context).translate('SAR'), isCompleted: false,),
           ),
           Container(
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),

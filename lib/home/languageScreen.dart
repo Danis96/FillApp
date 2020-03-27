@@ -80,8 +80,9 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   Container(
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(120.0)),
-                      child: Text( 
-                        AppLocalizations.of(context).translate('register&get5SAR'),
+                      child: Text(
+                        AppLocalizations.of(context)
+                            .translate('register&get5SAR'),
                         style: TextStyle(
                             fontSize: ScreenUtil.instance.setSp(23.0),
                             color: MyColor().white),
@@ -185,38 +186,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
   getLanguage() async {
     var prefs = await SharedPreferences.getInstance();
     selectedLanguageCode = prefs.getString('language_code');
+    print('Selected language was: ' + selectedLanguageCode);
     if (selectedLanguageCode == 'en') {
       setState(() {
         selectedLanguage = 'English';
+        appLanguage.changeLanguage(Locale("en"));
       });
-      appLanguage.changeLanguage(Locale("en"));
     } else {
       setState(() {
         selectedLanguage = 'Arabic';
+        appLanguage.changeLanguage(Locale("ar"));
       });
-      appLanguage.changeLanguage(Locale("bs"));
-    }
-  }
-
-  onPressed(BuildContext context) async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        username = randomAlphaNumeric(5);
-        FirebaseCrud().createUser('', '', username, '', 0, 1);
-        loginUser();
-        FirebaseSignIn().signInAnonymously(username);
-        Timer(Duration(milliseconds: 800), () {
-          Navigator.of(context).pushNamed(NavBar,
-              arguments: PasswordArguments(
-                  email: '', password: '', phone: '', username: username));
-        });
-      }
-    } on SocketException catch (_) {
-      MySnackbar().showSnackbar(
-          AppLocalizations.of(context).translate('noIternent'),
-          context,
-          AppLocalizations.of(context).translate('undo'));
     }
   }
 
@@ -228,12 +208,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
     return showDialog(
           context: context,
           builder: (context) => MyAlertDialog(
-              title: MyText().willQuestion,
-              content: MyText().willQuestion1,
-              yes: AppLocalizations.of(context).translate('yes'),
-              notifyParent: exitApp,
-              no: AppLocalizations.of(context).translate('no'),
-),
+            title: MyText().willQuestion,
+            content: MyText().willQuestion1,
+            yes: AppLocalizations.of(context).translate('yes'),
+            notifyParent: exitApp,
+            no: AppLocalizations.of(context).translate('no'),
+          ),
         ) ??
         true;
   }
@@ -252,15 +232,5 @@ class _LanguageScreenState extends State<LanguageScreen> {
               email: '', password: '', phone: '', username: username));
       return;
     }
-  }
-
-  //duplanje koda i implementacija funckije ovdje zbog setState-a
-  Future<Null> loginUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('username', username);
-    setState(() {
-      username = username;
-      isLoggedIn = true;
-    });
   }
 }

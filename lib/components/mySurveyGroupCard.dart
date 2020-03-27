@@ -25,6 +25,7 @@ import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/firebaseMethods/firebaseJson.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
@@ -154,8 +155,8 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                         Container(
                           margin: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(5.0)),
-                          child: MyQuestionSAR(
-                            text: '+' + widget.sar.toString() ,
+                          child: MyQuestionSAR
+                            text: '+' + widget.sar.toString() + ' ' + AppLocalizations.of(context).translate('SAR'),
                             isCompleted: isCompleted,
                           ),
                         ),

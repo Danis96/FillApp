@@ -2,6 +2,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -73,7 +74,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
                         top: ScreenUtil.instance.setWidth(height)),
                     child: MyQuestionSAR(
                       isCompleted: false,
-                      text: '+' + widget.sar.toString() + ' SAR',
+                      text: '+' + widget.sar.toString() + ' ' + AppLocalizations.of(context).translate('SAR'),
                     )),
                 Container(
                   child: Text(
