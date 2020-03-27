@@ -155,7 +155,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                           margin: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(5.0)),
                           child: MyQuestionSAR(
-                            text: '+' + widget.sar.toString() + ' SAR',
+                            text: '+' + widget.sar.toString() ,
                             isCompleted: isCompleted,
                           ),
                         ),
