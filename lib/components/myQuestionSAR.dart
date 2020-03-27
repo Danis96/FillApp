@@ -12,6 +12,7 @@
 /// Feb, 2020
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,13 +30,13 @@ class MyQuestionSAR extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(24)),
           color: isCompleted ? MyColor().black : MyColor().white),
-      child: Text(text,
+      child: Text(text + AppLocalizations.of(context).translate('sar'),
           style: TextStyle(
               color: isCompleted ? MyColor().white : MyColor().black,
               fontWeight: FontWeight.w700,
               fontFamily: arabic,
               fontStyle: FontStyle.normal,
-              fontSize: ScreenUtil.instance.setSp(22.0)),
+              fontSize: ScreenUtil.instance.setSp(18.0)),
           textAlign: TextAlign.center),
     );
   }

@@ -155,7 +155,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                         Container(
                           margin: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(5.0)),
-                          child: MyQuestionSAR(
+                          child: MyQuestionSAR
                             text: '+' + widget.sar.toString() + ' ' + AppLocalizations.of(context).translate('SAR'),
                             isCompleted: isCompleted,
                           ),
