@@ -26,7 +26,7 @@ class FillApp extends StatelessWidget {
           ///list of supported languages
           supportedLocales: [
             Locale('en', 'US'),
-            Locale('bs', 'BS'),
+            Locale('ar', ''),
           ],
 
           ///localization delegates
@@ -41,20 +41,6 @@ class FillApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
           ],
 
-          // /// returns locale wich will be used by the app
-          // localeResolutionCallback: (locale, supportedLocales) {
-          //   /// check if the current device locale is supported
-          //   for (var supportedLocale in supportedLocales) {
-          //     if (supportedLocale.languageCode == locale.languageCode &&
-          //         supportedLocale.countryCode == locale.countryCode) {
-          //       return supportedLocale;
-          //     }
-          //   }
-
-          //   /// if the locale device is not supported, get first language from the list (eng)
-          //   return supportedLocales.first;
-          // },
-
           debugShowCheckedModeBanner: false,
           initialRoute: Home,
           onGenerateRoute: RouteGenerator.generateRoute,
@@ -63,63 +49,4 @@ class FillApp extends StatelessWidget {
       }),
     );
   }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  //   return MaterialApp(
-  //     ///localization
-  //     ///
-  //     ///list of supported languages
-  //     supportedLocales: [
-  //       Locale('en', 'US'),
-  //       Locale('bs', 'BS'),
-  //     ],
-
-  //     ///localization delegates
-  //     localizationsDelegates: [
-  //       /// our localization, load translates from JSON
-  //       AppLocalizations.delegate,
-
-  //       /// translates Material texts
-  //       GlobalMaterialLocalizations.delegate,
-
-  //       /// translate Widget texts
-  //       GlobalWidgetsLocalizations.delegate,
-  //     ],
-
-  //     /// returns locale wich will be used by the app
-  //     localeResolutionCallback: (locale, supportedLocales) {
-  //       /// check if the current device locale is supported
-  //       for (var supportedLocale in supportedLocales) {
-  //         if (supportedLocale.languageCode == locale.languageCode &&
-  //             supportedLocale.countryCode == locale.countryCode) {
-  //           return supportedLocale;
-  //         }
-  //       }
-
-  //       /// if the locale device is not supported, get first language from the list (eng)
-  //       return supportedLocales.first;
-  //     },
-
-  //     debugShowCheckedModeBanner: false,
-  //     initialRoute: Home,
-  //     onGenerateRoute: RouteGenerator.generateRoute,
-  //     home: Scaffold(body: MySplashScreen()),
-  //   );
-  // }
 }
-
-/// example
-///
-/// Text(
-///   AppLocalizations.of(context).translate('first_string'),
-/// )
-///
-///
-///
-/// BTN
-///
-/// onPressed() {
-/// AppLocalizations.load(Locale('en', 'US'))
-/// }

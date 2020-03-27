@@ -25,6 +25,7 @@ import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/home/homePage.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/login/sendEmailPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/gestures.dart';
@@ -85,7 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                       child: SizedBox(
                           width: ScreenUtil.instance.setWidth(215.0),
                           height: ScreenUtil.instance.setHeight(60.0),
-                          child: Text(MyText().loginHeadline,
+                          child: Text(AppLocalizations.of(context).translate('login&startGenMoney'),
                               style: TextStyle(
                                   color: MyColor().white,
                                   fontWeight: FontWeight.w700,
@@ -145,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         style: TextStyle(color: MyColor().white),
                         validator: (username) => MyValidation()
-                            .validateUsernameLogin(username, usernamePostoji),
+                            .validateUsernameLogin(username, usernamePostoji, context),
                         onChanged: (input) {
                           setState(() {
                             username = input;
@@ -167,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                           hasFloatingPlaceholder: false,
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 25.0, horizontal: 35.0),
-                          labelText: MyText().labelPassword,
+                          labelText: AppLocalizations.of(context).translate('password'),
                           labelStyle: TextStyle(
                               color: MyColor().white,
                               fontFamily: arabic,
@@ -200,7 +201,7 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(color: MyColor().white),
                         obscureText: true,
                         validator: (password) => MyValidation()
-                            .validatePasswordLogin(password, passwordPostoji),
+                            .validatePasswordLogin(password, passwordPostoji, context),
                         onChanged: (input) {
                           setState(() {
                             password = input;
@@ -229,12 +230,12 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             } on SocketException catch (_) {
                               MySnackbar().showSnackbar(
-                                  MyText().checkConnection,
+                                  AppLocalizations.of(context).translate('noIternent'),
                                   context,
-                                  MyText().snackUndo);
+                                  AppLocalizations.of(context).translate('undo'));
                             }
                           },
-                          child: Text(MyText().btnLogin,
+                          child: Text(AppLocalizations.of(context).translate('login'),
                               style: TextStyle(
                                   fontSize: ScreenUtil.instance.setSp(18.0))),
                         )),
@@ -244,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: RichText(
                             text: new TextSpan(children: [
                           new TextSpan(
-                              text: MyText().resetPass,
+                              text: AppLocalizations.of(context).translate('forgetPass'),
                               style: TextStyle(
                                   color: MyColor().white,
                                   fontSize: ScreenUtil.instance.setSp(18.0),

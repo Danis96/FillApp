@@ -54,7 +54,7 @@
     "setUpAnEmailAndStartGetting": "",
     "password": "Password",
     "email": "Email",
-    "byTappingSignIn&Accept": "By tapping Sing Up & Accept, you acknowledge that you have read the Privacy Policy and agree to the Terms of Services",
+    "byTappingSignIn&Accept": "By tapping Sing Up & Accept, you acknowledge that you have read the ",
     "signUp&Accept": "Sign Up & Accept",
     "setUpAPassword": "",
     "resetYourPassword": "Reset Your Password",
@@ -79,8 +79,8 @@
     "login": "Login",
     "login&startGenMoney": "Login and start generating money",
     "forgetPass": "Forgot password",
-    "usernameMustNotSpace": "Username must not containe space",
-    "passMustNotSpace": "Pssword must not containe space",
+    "usernameMustNotSpace": "Username must not contain space",
+    "passMustNotSpace": "Password must not contain space",
     "numberAlreadyExists": "Number already exist",
     "userAlreadyExists": "Username already exist",
     "userDoesntExists": "Username doesn't exist",
@@ -100,5 +100,9 @@
     "emailMustBeValid": "Email must be valid",
     "passContainAll": "Password must contain at least one number and at least one capital letter",
     "noIternent": "There is no internet connection",
-    "successTransfer": "You have successfully made the money transfer. The money will appear in your account within the next 24 hours."
+    "successTransfer": "You have successfully made the money transfer. The money will appear in your account within the next 24 hours.",
+
+    "privacy": "Privacy Policy ",
+    "andAgree": "and agree to the ",
+    "terms": "Terms of Services"
 }

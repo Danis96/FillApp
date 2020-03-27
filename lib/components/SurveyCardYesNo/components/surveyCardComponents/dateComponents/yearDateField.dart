@@ -7,6 +7,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -123,7 +124,7 @@ class _YearDateFieldState extends State<YearDateField> {
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
             child: fieldColor1
                 ? Text(
-                    MyText().emptyFieldSnack,
+                    AppLocalizations.of(context).translate('thisFiledCantBeEmpty'),
                     style: TextStyle(color: MyColor().error),
                   )
                 : Text(''),

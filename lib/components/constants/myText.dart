@@ -6,7 +6,6 @@
 /// Feb, 2020
 
 class MyText {
-
 //Profile Languages
   final String languageArabic = 'Arabic';
   final String languageEnglish = 'English';
@@ -60,7 +59,7 @@ class MyText {
   final String sar = '\nSAR';
   final String summary = 'Summary';
   final String label = 'Your answer:';
-  
+
 //SplashScreen
   final String fill = 'fill';
   final String builtBy = 'Built by Makena';
@@ -116,7 +115,6 @@ class MyText {
 
 // Input Survey Choice
   final String placeholderInput = 'Type the answer';
-   
 
 //LoginPage -> sendEmailPage
   final String emailReset = "Reset password";

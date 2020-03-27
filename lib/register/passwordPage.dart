@@ -23,6 +23,7 @@ import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/components/privacy.dart';
 import 'package:fillproject/register/components/terms.dart';
 import 'package:fillproject/register/emailPage.dart';
@@ -156,7 +157,7 @@ class _PasswordPageState extends State<PasswordPage> {
                             contentPadding: new EdgeInsets.symmetric(
                                 vertical: ScreenUtil.instance.setWidth(25.0),
                                 horizontal: ScreenUtil.instance.setWidth(35.0)),
-                            labelText: MyText().labelPassword,
+                            labelText: AppLocalizations.of(context).translate('password'),
                             labelStyle: TextStyle(color: MyColor().white),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
@@ -186,7 +187,7 @@ class _PasswordPageState extends State<PasswordPage> {
                           style: TextStyle(color: MyColor().white),
                           obscureText: true,
                           validator: (password) =>
-                              MyValidation().validatePassword(password),
+                              MyValidation().validatePassword(password, context),
                         ),
                       )),
                   Container(
@@ -198,13 +199,13 @@ class _PasswordPageState extends State<PasswordPage> {
                     child: RichText(
                       text: new TextSpan(children: [
                         new TextSpan(
-                          text: MyText().passwordSubtitle1,
+                          text: AppLocalizations.of(context).translate('byTappingSignIn&Accept&Accept'),
                           style: new TextStyle(
                               color: Colors.white,
                               fontSize: ScreenUtil.instance.setSp(12)),
                         ),
                         new TextSpan(
-                            text: MyText().privacy,
+                            text: AppLocalizations.of(context).translate('privacy'),
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -216,13 +217,13 @@ class _PasswordPageState extends State<PasswordPage> {
                                     .push(CardAnimationTween(widget: Privacy()));
                               }),
                         new TextSpan(
-                          text: MyText().passwordSubtitle2,
+                          text: AppLocalizations.of(context).translate('andAgree'),
                           style: new TextStyle(
                               color: Colors.white,
                               fontSize: ScreenUtil.instance.setSp(12)),
                         ),
                         new TextSpan(
-                            text: MyText().termsOfService,
+                            text: AppLocalizations.of(context).translate('terms'),
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -254,12 +255,12 @@ class _PasswordPageState extends State<PasswordPage> {
                               }
                             } on SocketException catch (_) {
                               MySnackbar().showSnackbar(
-                                  MyText().checkConnection,
+                                  AppLocalizations.of(context).translate('noIternent'),
                                   context,
-                                  MyText().snackUndo);
+                                  AppLocalizations.of(context).translate('undo'));
                             }
                           },
-                          child: Text(MyText().btnPassword,
+                          child: Text(AppLocalizations.of(context).translate('signUp&Accept'),
                               style: TextStyle(
                                   fontSize: ScreenUtil.instance.setSp(18))))),
                 ],

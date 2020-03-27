@@ -24,6 +24,7 @@ import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/home/homePage.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -221,7 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             style: TextStyle(color: MyColor().white),
                             validator: (username) => MyValidation()
-                                .validateUsername(username, usernamePostoji),
+                                .validateUsername(username, usernamePostoji, context),
                             onChanged: (input) {
                               setState(() {
                                 username = input;
@@ -237,9 +238,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 }
                               } on SocketException catch (_) {
                                 MySnackbar().showSnackbar(
-                                    MyText().checkConnection,
+                                    AppLocalizations.of(context).translate('noIternent'),
                                     context,
-                                    MyText().snackUndo);
+                                    AppLocalizations.of(context).translate('undo'));
                               }
                             },
                           ),
@@ -298,7 +299,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               });
                             },
                             validator: (phone) =>
-                                MyValidation().validatePhone(phone, brPostoji),
+                                MyValidation().validatePhone(phone, brPostoji, context),
                             onFieldSubmitted: (value) async {
                               try {
                                 final result =
@@ -309,9 +310,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 }
                               } on SocketException catch (_) {
                                 MySnackbar().showSnackbar(
-                                    MyText().checkConnection,
+                                    AppLocalizations.of(context).translate('noIternent'),
                                     context,
-                                    MyText().snackUndo);
+                                    AppLocalizations.of(context).translate('undo'));
                               }
                             },
                             style: TextStyle(color: MyColor().white),
@@ -335,9 +336,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   }
                                 } on SocketException catch (_) {
                                   MySnackbar().showSnackbar(
-                                      MyText().checkConnection,
+                                      AppLocalizations.of(context).translate('noIternent'),
                                       context,
-                                      MyText().snackUndo);
+                                      AppLocalizations.of(context).translate('undo'));
                                 }
                               },
                               child: Text(MyText().sendPIN,

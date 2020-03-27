@@ -24,6 +24,7 @@ import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -98,7 +99,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     child: Padding(
                       padding: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(35.0)),
                       child: Text(
-                        MyText().resetHeadline,
+                        AppLocalizations.of(context).translate('resetYourPassword'),
                         style: TextStyle(
                             color: MyColor().white,
                             fontWeight: FontWeight.w500,
@@ -129,7 +130,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),
-                              labelText: MyText().labelOldPassword,
+                              labelText: AppLocalizations.of(context).translate('enterCodeFromEmail'),
                               labelStyle: TextStyle(color: MyColor().white),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
@@ -158,7 +159,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             ),
                             obscureText: false,
                             validator: (code) => MyValidation()
-                                .resetPassword(code, arguments.emailCode),
+                                .resetPassword(code, arguments.emailCode, context),
                           ),
                         ),
                         Container(
@@ -176,7 +177,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),
-                              labelText: MyText().labelNewPassword,
+                              labelText: AppLocalizations.of(context).translate('enterNewPssword'),
                               labelStyle: TextStyle(color: MyColor().white),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
@@ -205,7 +206,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             ),
                             obscureText: true,
                             validator: (password) =>
-                                MyValidation().validatePassword(password),
+                                MyValidation().validatePassword(password, context),
                           ),
                         ),
                         Container(
@@ -224,7 +225,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),
-                              labelText: MyText().repeatNewPassword,
+                              labelText: AppLocalizations.of(context).translate('reenterPassword'),
                               labelStyle: TextStyle(color: MyColor().white),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
@@ -254,7 +255,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             obscureText: true,
                             validator: (repeatPassword) => MyValidation()
                                 .resetPassword(
-                                    repeatPassword, newPasswordController.text),
+                                    repeatPassword, newPasswordController.text, context),
                           ),
                         ),
                       ],
@@ -280,11 +281,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             onPressed(context);
                           }
                         } on SocketException catch (_) {
-                          MySnackbar().showSnackbar(MyText().checkConnection,
-                              context, MyText().snackUndo);
+                          MySnackbar().showSnackbar(AppLocalizations.of(context).translate('noIternent'),
+                              context, AppLocalizations.of(context).translate('undo'));
                         }
                       },
-                      child: Text(MyText().btnReset)),
+                      child: Text(AppLocalizations.of(context).translate('resetPassword'))),
                 ),
 
                 /// izvlaci podatke za tog usera na osnovu emaila koji smo pruzeli sa prethodnog screen-a

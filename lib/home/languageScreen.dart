@@ -110,7 +110,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         ),
                         onPressed: () {
                           setState(() {
-                            appLanguage.changeLanguage(Locale("bs"));
+                            appLanguage.changeLanguage(Locale("ar"));
                             selectedLanguage = 'Arabic';
                           });
                           Timer(Duration(seconds: 1), () {
@@ -122,8 +122,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                           });
                         },
                         child: Text(
-                          AppLocalizations.of(context)
-                              .translate('arabicLanguage'),
+                          AppLocalizations.of(context).translate('arabic'),
                           style: TextStyle(
                               color: selectedLanguage == 'Arabic'
                                   ? MyColor().black
@@ -164,8 +163,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                           });
                         },
                         child: Text(
-                          AppLocalizations.of(context)
-                              .translate('englishLanguage'),
+                          AppLocalizations.of(context).translate('english'),
                           style: TextStyle(
                               color: selectedLanguage == 'English'
                                   ? MyColor().black
@@ -215,8 +213,10 @@ class _LanguageScreenState extends State<LanguageScreen> {
         });
       }
     } on SocketException catch (_) {
-      MySnackbar()
-          .showSnackbar(MyText().checkConnection, context, MyText().snackUndo);
+      MySnackbar().showSnackbar(
+          AppLocalizations.of(context).translate('noIternent'),
+          context,
+          AppLocalizations.of(context).translate('undo'));
     }
   }
 
