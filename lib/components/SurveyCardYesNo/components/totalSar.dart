@@ -14,7 +14,7 @@ class TotalSar extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(44.0)),
       child: Center(
-        child: Text(sars + AppLocalizations.of(context).translate('sar'),
+        child: Text(sars + AppLocalizations.of(context).translate('SAR'),
             style: TextStyle(
               color: MyColor().white,
               fontWeight: FontWeight.w700,
