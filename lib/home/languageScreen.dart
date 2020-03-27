@@ -114,13 +114,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
                             appLanguage.changeLanguage(Locale("ar"));
                             selectedLanguage = 'Arabic';
                           });
-                          Timer(Duration(seconds: 1), () {
-                            Navigator.of(context).push(
-                              CardAnimationTween(
-                                widget: SignUp(),
-                              ),
-                            );
-                          });
+
+                          Navigator.of(context).push(
+                            CardAnimationTween(
+                              widget: SignUp(),
+                            ),
+                          );
                         },
                         child: Text(
                           AppLocalizations.of(context).translate('arabic'),
@@ -155,13 +154,12 @@ class _LanguageScreenState extends State<LanguageScreen> {
                             appLanguage.changeLanguage(Locale("en"));
                             selectedLanguage = 'English';
                           });
-                          Timer(Duration(seconds: 1), () {
-                            Navigator.of(context).push(
-                              CardAnimationTween(
-                                widget: SignUp(),
-                              ),
-                            );
-                          });
+
+                          Navigator.of(context).push(
+                            CardAnimationTween(
+                              widget: SignUp(),
+                            ),
+                          );
                         },
                         child: Text(
                           AppLocalizations.of(context).translate('english'),
@@ -209,7 +207,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
           context: context,
           builder: (context) => MyAlertDialog(
             title: AppLocalizations.of(context).translate('areYouSure'),
-            content: AppLocalizations.of(context).translate('doYouWantToExitTheApp'),
+            content:
+                AppLocalizations.of(context).translate('doYouWantToExitTheApp'),
             yes: AppLocalizations.of(context).translate('yes'),
             notifyParent: exitApp,
             no: AppLocalizations.of(context).translate('no'),
