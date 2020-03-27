@@ -2,6 +2,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,7 +35,7 @@ class BigCircle extends StatelessWidget {
           ),
         ),
         Text(
-          usersSarovi.toString() + '\n' + MyText().singleSar,
+          usersSarovi.toString() + '\n' + AppLocalizations.of(context).translate("SAR"),
           style: TextStyle(
             color: btnText == MyText().completeProfile
                 ? MyColor().black

@@ -1,6 +1,7 @@
 import 'package:fillproject/components/completedStatus.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,7 +16,7 @@ class StatusSurvey extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Container(child: Text(MyText().status)),
+          Container(child: Text(AppLocalizations.of(context).translate('status'))),
           CompletedStatus(text: MyText().statusCompleted, arabic: arabic, isCompleted: true)
         ],
       ),

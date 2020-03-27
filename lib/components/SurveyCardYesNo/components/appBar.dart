@@ -4,6 +4,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
@@ -75,10 +76,10 @@ class SurveyAppBar extends StatelessWidget {
                       : showDialog(
                           context: context,
                           builder: (context) => MyAlertDialog(
-                              title: MyText().areYouSure,
-                              content: MyText().askToExitSurvey,
-                              no: MyText().registerNo,
-                              yes: MyText().willYes,
+                              title: AppLocalizations.of(context).translate('areYouSure'),
+                              content: AppLocalizations.of(context).translate('doYouReallyWantToExitTheSurvey'),
+                              no: AppLocalizations.of(context).translate('no'),
+                              yes: AppLocalizations.of(context).translate('yes'),
                               notifyParent: notifyParent),
                         );
             }),

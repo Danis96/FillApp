@@ -7,6 +7,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,7 +69,7 @@ class _DateChoiceState extends State<DateChoice> {
                 Column(
                   children: <Widget>[
                     LabelContainer(
-                        text: MyText().day,
+                        text: AppLocalizations.of(context).translate("day"),
                         leftMargin: 0.0,
                         containerWidth: 80.0),
                     Container(
@@ -148,7 +149,7 @@ class _DateChoiceState extends State<DateChoice> {
                 Column(
                   children: <Widget>[
                     LabelContainer(
-                        text: MyText().month,
+                        text:AppLocalizations.of(context).translate('month'),
                         leftMargin: 10.0,
                         containerWidth: 80.0),
                     Container(
@@ -229,7 +230,7 @@ class _DateChoiceState extends State<DateChoice> {
                 Column(
                   children: <Widget>[
                     LabelContainer(
-                        text: MyText().year,
+                        text: AppLocalizations.of(context).translate('year'),
                         leftMargin: 10.0,
                         containerWidth: 125.0),
                     Container(

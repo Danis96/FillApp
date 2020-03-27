@@ -22,6 +22,7 @@ import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/resetPassword.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/login/resetPasswordPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
@@ -161,7 +162,7 @@ class EmailResetPage extends StatelessWidget {
                       }
                     },
                     child:
-                        Text(MyText().btnEmail, style: TextStyle(fontSize: ScreenUtil.instance.setSp(18.0))),
+                        Text(AppLocalizations.of(context).translate("submit"), style: TextStyle(fontSize: ScreenUtil.instance.setSp(18.0))),
                   )),
             ],
           ),

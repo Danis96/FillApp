@@ -6,6 +6,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -109,10 +110,10 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
           context: context,
           builder: (BuildContext context) {
             return MyAlertDialog(
-                title: MyText().branching1,
-                content: MyText().branching2,
+                title: AppLocalizations.of(context).translate('thisSurveyIsNotCompatible'),
+                content: AppLocalizations.of(context).translate('youWillBeRedirected'),
                 no: null,
-                yes: MyText().branchingOK,
+                yes: AppLocalizations.of(context).translate('ok'),
                 notifyParent: widget.complete);
           },
         );
