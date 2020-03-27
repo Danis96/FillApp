@@ -133,9 +133,9 @@ class _PasswordPageState extends State<PasswordPage> {
                     padding: EdgeInsets.only(
                         top: ScreenUtil.instance.setWidth(28.0),
                         bottom: ScreenUtil.instance.setWidth(35.0)),
-                    child: MyTextComponent(text: MyText().passwordHeadline),
+                    child: MyTextComponent(text: AppLocalizations.of(context).translate('setUpAPassword')),
                   ),
-                  Text(MyText().fiveSar,
+                  Text(AppLocalizations.of(context).translate('fiveSAR'),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: ScreenUtil.instance.setSp(40),

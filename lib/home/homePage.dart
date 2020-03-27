@@ -181,8 +181,8 @@ class _SignUpState extends State<SignUp> {
     return showDialog(
           context: context,
           builder: (context) => MyAlertDialog(
-            title: MyText().willQuestion,
-            content: MyText().willQuestion1,
+            title: AppLocalizations.of(context).translate('areYouSure'),
+            content: AppLocalizations.of(context).translate('doYouWantToExitTheApp'),
             yes: AppLocalizations.of(context).translate('yes'),
             notifyParent: exitApp,
             no: AppLocalizations.of(context).translate('no'),

@@ -28,7 +28,7 @@ class ProfileButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(28.0),
             ),
-            child: btnText == MyText().register
+            child: btnText == AppLocalizations.of(context).translate('register')
                 ? Text(AppLocalizations.of(context).translate('register'),
                     style: TextStyle(
                         color: MyColor().white,
@@ -36,7 +36,7 @@ class ProfileButton extends StatelessWidget {
                         fontStyle: FontStyle.normal,
                         fontSize: ScreenUtil.instance.setSp(18.0)),
                     textAlign: TextAlign.center)
-                : btnText == MyText().transfer
+                : btnText == AppLocalizations.of(context).translate('transfer')
                     ? Text(AppLocalizations.of(context).translate('transfer'),
                         style: TextStyle(
                             color: MyColor().white,
@@ -44,7 +44,7 @@ class ProfileButton extends StatelessWidget {
                             fontStyle: FontStyle.normal,
                             fontSize: ScreenUtil.instance.setSp(18.0)),
                         textAlign: TextAlign.center)
-                    : btnText == MyText().completeProfile
+                    : btnText == AppLocalizations.of(context).translate('complete')
                         ? Text(AppLocalizations.of(context).translate('complete'),
                             style: TextStyle(
                                 color: MyColor().white,

@@ -75,7 +75,6 @@ class _YesNoSurveyState extends State<SurveyCard>
   
   @override
   Widget build(BuildContext context) {
-    String subtype;
     super.build(context);
     return Scaffold(
       body: WillPopScope(

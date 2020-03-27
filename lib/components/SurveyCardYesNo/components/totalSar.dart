@@ -1,6 +1,7 @@
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,7 +14,7 @@ class TotalSar extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(44.0)),
       child: Center(
-        child: Text(sars + MyText().sar,
+        child: Text(sars + AppLocalizations.of(context).translate('newLineSAR'),
             style: TextStyle(
               color: MyColor().white,
               fontWeight: FontWeight.w700,

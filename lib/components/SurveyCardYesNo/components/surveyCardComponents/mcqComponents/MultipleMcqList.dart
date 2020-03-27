@@ -48,7 +48,7 @@ class MultipleMcqList extends StatelessWidget {
                                   ?  AppLocalizations.of(context).translate('b')
                                   : index == 2
                                       ?  AppLocalizations.of(context).translate('c')
-                                      : index == 3 ? MyText().indexD : null,
+                                      : index == 3 ? AppLocalizations.of(context).translate('d') : null,
                           style: TextStyle(
                               color: MyColor().white,
                               fontWeight: FontWeight.w500,

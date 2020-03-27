@@ -17,7 +17,7 @@ class StatusSurvey extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Container(child: Text(AppLocalizations.of(context).translate('status'))),
-          CompletedStatus(text: MyText().statusCompleted, arabic: arabic, isCompleted: true)
+          CompletedStatus(text: AppLocalizations.of(context).translate('statusCompleted'), arabic: arabic, isCompleted: true)
         ],
       ),
     );
