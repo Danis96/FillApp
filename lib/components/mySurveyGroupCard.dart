@@ -150,7 +150,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Row(
+                     Row(
                       children: <Widget>[
                         Container(
                           margin: EdgeInsets.only(
