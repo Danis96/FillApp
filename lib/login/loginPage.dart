@@ -25,6 +25,7 @@ import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/home/homePage.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/login/sendEmailPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/gestures.dart';
@@ -112,7 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                               textBaseline: TextBaseline.ideographic),
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 25.0, horizontal: 35.0),
-                          labelText: MyText().labelUsername,
+                          labelText: AppLocalizations.of(context).translate('username'),
                           labelStyle: TextStyle(
                             color: MyColor().white,
                             fontSize: ScreenUtil.instance.setSp(18.0),

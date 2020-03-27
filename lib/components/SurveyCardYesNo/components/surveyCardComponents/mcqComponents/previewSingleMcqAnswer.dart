@@ -3,6 +3,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -30,7 +31,7 @@ class PreviewSingleMcqAnswer extends StatelessWidget {
                         color: MyColor().black),
                     height: ScreenUtil.instance.setHeight(58.0),
                     width: ScreenUtil.instance.setWidth(58.0),
-                    child: Text(MyText().indexA,
+                    child: Text(AppLocalizations.of(context).translate('a'),
                         style: TextStyle(
                             color: MyColor().white,
                             fontWeight: FontWeight.w500,

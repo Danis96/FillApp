@@ -16,6 +16,7 @@ import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/mySurveyGroupCard.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class _SurveyState extends State<SurveyPage>
             margin: EdgeInsets.only(
                 top: ScreenUtil.instance.setWidth(45.0),
                 bottom: ScreenUtil.instance.setWidth(15.0)),
-            child: Text(MyText().surveyList,
+            child: Text(AppLocalizations.of(context).translate('surveyList'),
                 style: TextStyle(
                     color: MyColor().black,
                     fontWeight: FontWeight.w700,
@@ -191,7 +192,7 @@ class _SurveyState extends State<SurveyPage>
           builder: (context) => MyAlertDialog(
               title: MyText().willQuestion,
               content: MyText().willQuestion1,
-              yes: MyText().willYes,
+              yes:AppLocalizations.of(context).translate('yes'),
               no: MyText().willNo,
               notifyParent: exitApp),
         ) ??

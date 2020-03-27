@@ -2,6 +2,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -42,11 +43,11 @@ class MultipleMcqList extends StatelessWidget {
                       width: ScreenUtil.instance.setWidth(58.0),
                       child: Text(
                           index == 0
-                              ? MyText().indexA
+                              ? AppLocalizations.of(context).translate('a')
                               : index == 1
-                                  ? MyText().indexB
+                                  ?  AppLocalizations.of(context).translate('b')
                                   : index == 2
-                                      ? MyText().indexC
+                                      ?  AppLocalizations.of(context).translate('c')
                                       : index == 3 ? MyText().indexD : null,
                           style: TextStyle(
                               color: MyColor().white,

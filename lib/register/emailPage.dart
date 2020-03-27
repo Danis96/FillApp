@@ -22,6 +22,7 @@ import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/passwordPage.dart';
 import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
@@ -180,7 +181,7 @@ class _EmailPageState extends State<EmailPage> {
                                 context, MyText().snackUndo);
                           }
                         },
-                        child: Text(MyText().btnEmail,
+                        child: Text(AppLocalizations.of(context).translate("submit"),
                             style: TextStyle(
                                 fontSize: ScreenUtil.instance.setSp(18))),
                       )),

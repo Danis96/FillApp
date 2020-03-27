@@ -8,6 +8,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -56,7 +57,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
           Column(
             children: <Widget>[
               LabelContainer(
-                  text: MyText().month, leftMargin: 0.0, containerWidth: 300.0),
+                  text: AppLocalizations.of(context).translate('month'), leftMargin: 0.0, containerWidth: 300.0),
               Container(
                 width: ScreenUtil.instance.setWidth(327.0),
                 height: ScreenUtil.instance.setWidth(61.0),

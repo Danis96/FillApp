@@ -14,6 +14,7 @@ import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -98,7 +99,7 @@ class _ProfileState extends State<Profile> {
   void initState() {
     /// checking if any change happend,
     /// if it is set btn text to complete profile if not, leave it
-    isButtonComplete ? btnText = MyText().completeProfile : btnText = btnText;
+    isButtonComplete ? btnText = AppLocalizations.of(context).translate('complete') : btnText = btnText;
     super.initState();
     checkForInternet();
     FirebaseCheck().getUserUsername(widget.arguments.username);
@@ -162,7 +163,7 @@ class _ProfileState extends State<Profile> {
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(70.0)),
                 child: Text(
-                  MyText().profileTitle,
+                  AppLocalizations.of(context).translate('profile'),
                   style: TextStyle(fontSize: 23.0),
                 ),
               ),
@@ -193,7 +194,7 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(color: Colors.black),
                   initialValue: widget.snap2.data['name_and_surname'],
                   decoration: InputDecoration(
-                    labelText: MyText().labelNameAndSurname,
+                    labelText: AppLocalizations.of(context).translate('name&surname'),
                     counterText: '',
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
@@ -266,7 +267,7 @@ class _ProfileState extends State<Profile> {
                                   fontSize: ScreenUtil.instance.setSp(15.0)),
                             )
                           : Text(
-                              MyText().labelDOB,
+                             AppLocalizations.of(context).translate("dateOfBirth"),
                               style: TextStyle(
                                   fontSize: ScreenUtil.instance.setSp(15.0)),
                             ),
@@ -294,7 +295,7 @@ class _ProfileState extends State<Profile> {
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    labelText: MyText().labelEmailProfile,
+                    labelText: AppLocalizations.of(context).translate('enterEmail'),
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -357,7 +358,7 @@ class _ProfileState extends State<Profile> {
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    labelText: MyText().labelCardNumber,
+                    labelText: AppLocalizations.of(context).translate('enterCardNumber'),
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -419,7 +420,7 @@ class _ProfileState extends State<Profile> {
                         hasFloatingPlaceholder: false,
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 25.0, horizontal: 35.0),
-                        labelText: MyText().labelExpireDate,
+                        labelText: AppLocalizations.of(context).translate('date'),
                         labelStyle: TextStyle(color: MyColor().black),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -481,7 +482,7 @@ class _ProfileState extends State<Profile> {
                         hasFloatingPlaceholder: false,
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 25.0, horizontal: 35.0),
-                        labelText: MyText().labelCC,
+                        labelText: AppLocalizations.of(context).translate('cc'),
                         labelStyle: TextStyle(color: MyColor().black),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -537,7 +538,7 @@ class _ProfileState extends State<Profile> {
     if (_btnCounter == 0) {
       isReadOnly
           ? MySnackbar()
-              .showSnackbar(MyText().mustRegister, context, MyText().ok)
+              .showSnackbar(AppLocalizations.of(context).translate('youMustRegisterFirst'), context,  AppLocalizations.of(context).translate('ok'))
           : print('ssss');
       _btnCounter = 1;
       Timer(Duration(seconds: 2), () {
@@ -550,7 +551,7 @@ class _ProfileState extends State<Profile> {
     if (_btnCounter == 0) {
       isReadOnly
           ? MySnackbar()
-              .showSnackbar(MyText().mustRegister, context, MyText().ok)
+              .showSnackbar(AppLocalizations.of(context).translate('youMustRegisterFirst'), context, AppLocalizations.of(context).translate('ok'))
           : showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
@@ -605,7 +606,7 @@ class _ProfileState extends State<Profile> {
       isButtonCompleteCC ? cc : usersCC,
     );
     setState(() {
-      btnText = isButtonComplete ? MyText().transfer : MyText().completeProfile;
+      btnText = isButtonComplete ? AppLocalizations.of(context).translate('transfer') : AppLocalizations.of(context).translate('complete');
     });
     widget.refreshNavbar();
   }
@@ -632,7 +633,7 @@ class _ProfileState extends State<Profile> {
     );
     FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi);
     setState(() {
-      btnText = MyText().transferAfter;
+      btnText = AppLocalizations.of(context).translate('transferAfter100SAR');
     });
     Timer(Duration(seconds: 1), () {
       setState(() {});

@@ -20,6 +20,7 @@ import 'package:fillproject/components/myPinCode.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/emailPage.dart';
 import 'package:fillproject/register/registerPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
@@ -118,7 +119,9 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                 margin: EdgeInsets.only(
                     top: ScreenUtil.instance.setWidth(105),
                     bottom: ScreenUtil.instance.setWidth(35.0)),
-                child: MyTextComponent(text: MyText().verifyPageHeadline)),
+                child: MyTextComponent(
+                    text: AppLocalizations.of(context)
+                        .translate('verifyYourNumber'))),
             Container(
               child: Text(
                 MyText().verifyMoney,
@@ -130,7 +133,8 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(23.0)),
-              child: Text(MyText().verifyEnterPin,
+              child: Text(
+                AppLocalizations.of(context).translate('enterThePin'),
                   style: TextStyle(
                       color: MyColor().white,
                       fontSize: ScreenUtil.instance.setSp(17.0),
@@ -200,7 +204,8 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                         MyText().checkConnection, context, MyText().snackUndo);
                   }
                 },
-                child: Text(MyText().btnVerify,
+                child: Text(
+                  AppLocalizations.of(context).translate('verifyPin'),
                     style: TextStyle(fontSize: ScreenUtil.instance.setSp(18))),
               ),
             ),
