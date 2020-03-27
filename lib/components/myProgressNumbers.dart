@@ -30,6 +30,6 @@ class MyProgressNumbers extends StatelessWidget {
                 fontWeight: FontWeight.w500,
                 fontFamily: arabic,
                 fontStyle: FontStyle.normal,
-                fontSize: ScreenUtil.instance.setSp(18.0))));
+                fontSize: ScreenUtil.instance.setSp(15.0))));
   }
 }
