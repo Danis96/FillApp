@@ -83,7 +83,7 @@ class EmailResetPage extends StatelessWidget {
                 child: SizedBox(
                     width: ScreenUtil.instance.setWidth(269),
                     height: ScreenUtil.instance.setWidth(66),
-                    child: Text(MyText().emailSub,
+                    child: Text(AppLocalizations.of(context).translate('ifYouDontKnowCurrentPass'),
                         style: TextStyle(
                             color: MyColor().white,
                             fontWeight: FontWeight.w500,
@@ -108,7 +108,7 @@ class EmailResetPage extends StatelessWidget {
                       hasFloatingPlaceholder: false,
                       contentPadding: new EdgeInsets.symmetric(
                           vertical: 25.0, horizontal: 35.0),
-                      labelText: MyText().labelEmail,
+                      labelText: AppLocalizations.of(context).translate('email'),
                       labelStyle: TextStyle(color: MyColor().white),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -133,7 +133,7 @@ class EmailResetPage extends StatelessWidget {
                     ),
                     style: TextStyle(color: MyColor().white),
                     validator: (email) =>
-                        MyValidation().validateEmailLogin(email, _btnCounter),
+                        MyValidation().validateEmailLogin(email, _btnCounter, context),
                   ),
                 ),
               ),
@@ -157,8 +157,8 @@ class EmailResetPage extends StatelessWidget {
                           onPressed(context);
                         }
                       } on SocketException catch (_) {
-                        MySnackbar().showSnackbar(MyText().checkConnection,
-                            context, MyText().snackUndo);
+                        MySnackbar().showSnackbar(AppLocalizations.of(context).translate('noIternent'),
+                            context, AppLocalizations.of(context).translate('undo'));
                       }
                     },
                     child:
@@ -177,7 +177,7 @@ class EmailResetPage extends StatelessWidget {
     if (_formState.validate()) {
       if (_btnCounter == 0) {
         String emailCode = randomAlphaNumeric(10);
-        ResetPassword().sendEmail(emailController.text, emailCode);
+        ResetPassword().sendEmail(emailController.text, emailCode, context);
         Navigator.of(context).push(CardAnimationTween(
             widget: ResetPasswordPage(
           arguments: UpdatePasswordArguments(

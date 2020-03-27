@@ -133,8 +133,7 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
             ),
             Container(
               margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(23.0)),
-              child: Text(
-                AppLocalizations.of(context).translate('enterThePin'),
+              child: Text(AppLocalizations.of(context).translate('enterThePin'),
                   style: TextStyle(
                       color: MyColor().white,
                       fontSize: ScreenUtil.instance.setSp(17.0),
@@ -177,11 +176,11 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
             Container(
               child: fieldColor
                   ? Text(
-                      MyText().smsLengthSnack,
+                      AppLocalizations.of(context).translate('smsCodeLess6'),
                       style: TextStyle(color: MyColor().error),
                     )
                   : codeError
-                      ? Text(MyText().wrongCode,
+                      ? Text(AppLocalizations.of(context).translate('youEnteredInvalidCode'),
                           style: TextStyle(color: MyColor().error))
                       : Text(''),
             ),
@@ -201,11 +200,12 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                     }
                   } on SocketException catch (_) {
                     MySnackbar().showSnackbar(
-                        MyText().checkConnection, context, MyText().snackUndo);
+                        AppLocalizations.of(context).translate('noIternent'),
+                        context,
+                        AppLocalizations.of(context).translate('undo'));
                   }
                 },
-                child: Text(
-                  AppLocalizations.of(context).translate('verifyPin'),
+                child: Text(AppLocalizations.of(context).translate('verifyPin'),
                     style: TextStyle(fontSize: ScreenUtil.instance.setSp(18))),
               ),
             ),
@@ -215,7 +215,7 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                 child: RichText(
                     text: new TextSpan(children: [
                   new TextSpan(
-                      text: MyText().verifyRecieve,
+                      text: AppLocalizations.of(context).translate('didntRecievePIN'),
                       style: TextStyle(
                           color: MyColor().white,
                           fontSize: ScreenUtil.instance.setSp(15.0),

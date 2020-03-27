@@ -151,8 +151,10 @@ class _SignUpState extends State<SignUp> {
         });
       }
     } on SocketException catch (_) {
-      MySnackbar()
-          .showSnackbar(MyText().checkConnection, context, MyText().snackUndo);
+      MySnackbar().showSnackbar(
+          AppLocalizations.of(context).translate('noIternent'),
+          context,
+          AppLocalizations.of(context).translate('undo'));
     }
   }
 

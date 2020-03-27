@@ -123,7 +123,7 @@ class _EmailPageState extends State<EmailPage> {
                                   vertical: ScreenUtil.instance.setWidth(25.0),
                                   horizontal:
                                       ScreenUtil.instance.setWidth(35.0)),
-                              labelText: MyText().labelEmail,
+                              labelText: AppLocalizations.of(context).translate('email'),
                               labelStyle: TextStyle(color: MyColor().white),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
@@ -152,7 +152,7 @@ class _EmailPageState extends State<EmailPage> {
                             ),
                             style: TextStyle(color: MyColor().white),
                             validator: (email) => MyValidation().validateEmail(
-                                email, _btnCounter, emailPostoji),
+                                email, _btnCounter, emailPostoji, context),
                             onChanged: (input) {
                               setState(() {
                                 email = input;
@@ -177,8 +177,8 @@ class _EmailPageState extends State<EmailPage> {
                               onPressed(context);
                             }
                           } on SocketException catch (_) {
-                            MySnackbar().showSnackbar(MyText().checkConnection,
-                                context, MyText().snackUndo);
+                            MySnackbar().showSnackbar(AppLocalizations.of(context).translate('noIternent'),
+                                context, AppLocalizations.of(context).translate('undo'));
                           }
                         },
                         child: Text(AppLocalizations.of(context).translate("submit"),

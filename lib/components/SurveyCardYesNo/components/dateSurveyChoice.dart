@@ -315,7 +315,7 @@ class _DateChoiceState extends State<DateChoice> {
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
             child: fieldColor1 || fieldColor2 || fieldColor3
                 ? Text(
-                    MyText().emptyFieldSnack,
+                    AppLocalizations.of(context).translate('thisFiledCantBeEmpty'),
                     style: TextStyle(color: MyColor().error),
                   )
                 : Text(''),

@@ -125,7 +125,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
             child: fieldColor1
                 ? Text(
-                    MyText().emptyFieldSnack,
+                    AppLocalizations.of(context).translate('thisFiledCantBeEmpty'),
                     style: TextStyle(color: MyColor().error),
                   )
                 : Text(''),

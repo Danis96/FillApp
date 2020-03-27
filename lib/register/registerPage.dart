@@ -222,7 +222,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             style: TextStyle(color: MyColor().white),
                             validator: (username) => MyValidation()
-                                .validateUsername(username, usernamePostoji),
+                                .validateUsername(username, usernamePostoji, context),
                             onChanged: (input) {
                               setState(() {
                                 username = input;
@@ -238,9 +238,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 }
                               } on SocketException catch (_) {
                                 MySnackbar().showSnackbar(
-                                    MyText().checkConnection,
+                                    AppLocalizations.of(context).translate('noIternent'),
                                     context,
-                                    MyText().snackUndo);
+                                    AppLocalizations.of(context).translate('undo'));
                               }
                             },
                           ),
@@ -299,7 +299,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               });
                             },
                             validator: (phone) =>
-                                MyValidation().validatePhone(phone, brPostoji),
+                                MyValidation().validatePhone(phone, brPostoji, context),
                             onFieldSubmitted: (value) async {
                               try {
                                 final result =
@@ -310,9 +310,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                 }
                               } on SocketException catch (_) {
                                 MySnackbar().showSnackbar(
-                                    MyText().checkConnection,
+                                    AppLocalizations.of(context).translate('noIternent'),
                                     context,
-                                    MyText().snackUndo);
+                                    AppLocalizations.of(context).translate('undo'));
                               }
                             },
                             style: TextStyle(color: MyColor().white),
@@ -336,9 +336,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   }
                                 } on SocketException catch (_) {
                                   MySnackbar().showSnackbar(
-                                      MyText().checkConnection,
+                                      AppLocalizations.of(context).translate('noIternent'),
                                       context,
-                                      MyText().snackUndo);
+                                      AppLocalizations.of(context).translate('undo'));
                                 }
                               },
                               child: Text(AppLocalizations.of(context).translate('sendPin'),
