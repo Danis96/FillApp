@@ -30,7 +30,7 @@ class MyQuestionSAR extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(24)),
           color: isCompleted ? MyColor().black : MyColor().white),
-      child: Text(text + AppLocalizations.of(context).translate('sar'),
+      child: Text(text ,
           style: TextStyle(
               color: isCompleted ? MyColor().white : MyColor().black,
               fontWeight: FontWeight.w700,

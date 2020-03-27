@@ -35,7 +35,7 @@ class BigCircle extends StatelessWidget {
           ),
         ),
         Text(
-          usersSarovi.toString() + '\n' + AppLocalizations.of(context).translate("sar"),
+          usersSarovi.toString() + '\n' + AppLocalizations.of(context).translate("SAR"),
           style: TextStyle(
             color: btnText == AppLocalizations.of(context).translate('complete')
                 ? MyColor().black
