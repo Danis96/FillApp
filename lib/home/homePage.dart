@@ -31,6 +31,7 @@ import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:random_string/random_string.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SignUp extends StatefulWidget {
   @override
@@ -72,7 +73,8 @@ class _SignUpState extends State<SignUp> {
                       padding: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(85.0)),
                       child: Text(
-                        AppLocalizations.of(context).translate("register&get5SAR"),
+                        AppLocalizations.of(context)
+                            .translate("register&get5SAR"),
                         style: TextStyle(
                             fontSize: ScreenUtil.instance.setSp(23.0),
                             color: MyColor().white),
@@ -95,7 +97,8 @@ class _SignUpState extends State<SignUp> {
                               arguments: DidntRecievePinArguments(
                                   phone: '', username: ''));
                         },
-                        child: Text(AppLocalizations.of(context).translate('newRegister'))),
+                        child: Text(AppLocalizations.of(context)
+                            .translate('newRegister'))),
                   ),
                   Container(
                     width: ScreenUtil.instance.setWidth(316.0),
@@ -112,7 +115,8 @@ class _SignUpState extends State<SignUp> {
                           Navigator.of(context)
                               .pushNamed(Login); // go to Login Page
                         },
-                        child: Text(AppLocalizations.of(context).translate("signIn"))),
+                        child: Text(
+                            AppLocalizations.of(context).translate("signIn"))),
                   ),
                   Container(
                       width: ScreenUtil.instance.setWidth(255.0),
@@ -143,6 +147,7 @@ class _SignUpState extends State<SignUp> {
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         username = randomAlphaNumeric(5);
         FirebaseCrud().createUser('', '', username, '', 0, 1);
+        loginUser();
         FirebaseSignIn().signInAnonymously(username);
         Timer(Duration(milliseconds: 800), () {
           Navigator.of(context).pushNamed(NavBar,
@@ -162,16 +167,26 @@ class _SignUpState extends State<SignUp> {
     exit(0);
   }
 
+  //duplanje koda i implementacija funckije ovdje zbog setState-a
+  Future<Null> loginUser() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', username);
+    setState(() {
+      username = username;
+      isLoggedIn = true;
+    });
+  }
+
   Future<bool> _onWillPop() async {
     return showDialog(
           context: context,
           builder: (context) => MyAlertDialog(
-              title: MyText().willQuestion,
-              content: MyText().willQuestion1,
-              yes: AppLocalizations.of(context).translate('yes'),
-              notifyParent: exitApp,
-              no: AppLocalizations.of(context).translate('no'),
-),
+            title: MyText().willQuestion,
+            content: MyText().willQuestion1,
+            yes: AppLocalizations.of(context).translate('yes'),
+            notifyParent: exitApp,
+            no: AppLocalizations.of(context).translate('no'),
+          ),
         ) ??
         true;
   }
