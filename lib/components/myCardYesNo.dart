@@ -17,6 +17,7 @@ import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/components/myYesNoChoice.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -75,7 +76,7 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
             children: <Widget>[
             Container(
               margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-                child: MyQuestionSAR(text: widget.sar.toString() + ' SAR', isCompleted: false,),
+                child: MyQuestionSAR(text: widget.sar.toString() + AppLocalizations.of(context).translate('SAR') , isCompleted: false,),
               ),
               Container(
                 margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
