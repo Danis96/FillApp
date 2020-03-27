@@ -641,9 +641,9 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressed() {
-    if (btnText == MyText().register) {
+    if (btnText == AppLocalizations.of(context).translate('register')) {
       FirebaseCrud().userRegister(context, widget.arguments.username);
-    } else if (btnText == MyText().completeProfile) {
+    } else if (btnText == AppLocalizations.of(context).translate('complete')) {
       if (name == '' || regexSpace.hasMatch(name) == false) {
         setState(() {
           isEmptyName = true;
@@ -701,7 +701,7 @@ class _ProfileState extends State<Profile> {
       } else {
         completeProfile();
       }
-    } else if (btnText == MyText().transfer) {
+    } else if (btnText == AppLocalizations.of(context).translate('transfer')) {
       if (isButtonCompleteName
           ? name == '' || regexSpace.hasMatch(name) == false
           : usersName == '' || regexSpace.hasMatch(usersName) == false) {

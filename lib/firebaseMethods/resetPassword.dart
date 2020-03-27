@@ -31,7 +31,7 @@ class ResetPassword {
     final message = Message()
       ..from = Address(email)
       ..recipients.add(recipent) //recipent email
-      ..subject = MyText().subject //subject of the email
+      ..subject = AppLocalizations.of(context).translate('resetPassword') //subject of the email
       ..text = AppLocalizations.of(context).translate('youReqPassReset') + '  \n \n$emailCode'; //body of the email
 
     try {

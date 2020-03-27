@@ -9,6 +9,7 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -65,15 +66,15 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                   decoration: BoxDecoration(
                       border: Border.all(width: 1.0, color: MyColor().black),
                       borderRadius: BorderRadius.all(Radius.circular(100)),
-                      color: index == MyText().indexA
+                      color: index == AppLocalizations.of(context).translate('a')
                           ? isTappedMCQ1 ? MyColor().white : MyColor().black
-                          : index == MyText().indexB
+                          : index == AppLocalizations.of(context).translate('b')
                               ? isTappedMCQ2 ? MyColor().white : MyColor().black
-                              : index == MyText().indexC
+                              : index == AppLocalizations.of(context).translate('c')
                                   ? isTappedMCQ3
                                       ? MyColor().white
                                       : MyColor().black
-                                  : index == MyText().indexD
+                                  : index == AppLocalizations.of(context).translate('d')
                                       ? isTappedMCQ4
                                           ? MyColor().white
                                           : MyColor().black
@@ -82,17 +83,17 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                   width: ScreenUtil.instance.setWidth(58.0),
                   child: Text(widget.index,
                       style: TextStyle(
-                          color: index == MyText().indexA
+                          color: index == AppLocalizations.of(context).translate('a')
                               ? isTappedMCQ1 ? MyColor().black : MyColor().white
-                              : index == MyText().indexB
+                              : index == AppLocalizations.of(context).translate('b')
                                   ? isTappedMCQ2
                                       ? MyColor().black
                                       : MyColor().white
-                                  : index == MyText().indexC
+                                  : index == AppLocalizations.of(context).translate('c')
                                       ? isTappedMCQ3
                                           ? MyColor().black
                                           : MyColor().white
-                                      : index == MyText().indexD
+                                      : index == AppLocalizations.of(context).translate('d')
                                           ? isTappedMCQ4
                                               ? MyColor().black
                                               : MyColor().white
@@ -130,11 +131,11 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
             ? EmptyContainer()
             : widget.isSingle == 1
                 ? EmptyContainer()
-                : widget.length == 3 && widget.index == MyText().indexC
+                : widget.length == 3 && widget.index == AppLocalizations.of(context).translate('c')
                     ? Container(
                       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
                       child: SubmitButton(onPressedFunction: submit, isImage: true))
-                    : widget.length == 4 && widget.index == MyText().indexD
+                    : widget.length == 4 && widget.index == AppLocalizations.of(context).translate('d')
                         ? Container(
                           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
                           child: SubmitButton(onPressedFunction: submit, isImage: true))
@@ -148,17 +149,26 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
       case 'A':
         return onTapSingle1();
         break;
+      case 'أ':
+        return onTapSingle1();
+        break;
       case 'B':
         return onTapSingle2();
-
+        break;
+      case 'ب':
+        return onTapSingle2();
         break;
       case 'C':
         return onTapSingle3();
-
+        break;
+      case 'ج':
+        return onTapSingle3();
         break;
       case 'D':
         return onTapSingle4();
-
+        break;
+      case 'د':
+        return onTapSingle4();
         break;
       default:
         return null;
@@ -170,17 +180,26 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
       case 'A':
         return saveMultiple1(widget.choice1);
         break;
+      case 'أ':
+        return saveMultiple1(widget.choice1);
+        break;
       case 'B':
         return saveMultiple2(widget.choice1);
-
+        break;
+      case 'ب':
+        return saveMultiple2(widget.choice1);
         break;
       case 'C':
         return saveMultiple3(widget.choice1);
-
+        break;
+      case 'ج':
+        return saveMultiple3(widget.choice1);
         break;
       case 'D':
         return saveMultiple4(widget.choice1);
-
+        break;
+      case 'د':
+        return saveMultiple4(widget.choice1);
         break;
       default:
         return null;

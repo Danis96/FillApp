@@ -124,7 +124,7 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                         .translate('verifyYourNumber'))),
             Container(
               child: Text(
-                MyText().verifyMoney,
+                AppLocalizations.of(context).translate('verifySAR'),
                 style: TextStyle(
                     color: MyColor().white,
                     fontSize: ScreenUtil.instance.setSp(40.0)),

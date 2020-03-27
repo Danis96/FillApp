@@ -65,7 +65,7 @@ class EmailResetPage extends StatelessWidget {
                 child: SizedBox(
                     width: ScreenUtil.instance.setWidth(184.0),
                     height: ScreenUtil.instance.setHeight(28.0),
-                    child: Text(MyText().emailReset,
+                    child: Text(AppLocalizations.of(context).translate('resetPassword'),
                         style: TextStyle(
                             color: MyColor().white,
                             fontWeight: FontWeight.bold,

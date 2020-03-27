@@ -122,7 +122,7 @@ class _BottomNavigationBarControllerState
         /// if user is registered + have sars + profile completed
       } else if (usersSars >= 100 && cc != '') {
         setState(() {
-          btnText = MyText().transfer;
+          btnText = AppLocalizations.of(context).translate('transfer');
           isReadOnly = false;
         });
 

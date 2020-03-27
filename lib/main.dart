@@ -38,7 +38,7 @@ class FillApp extends StatelessWidget {
             GlobalMaterialLocalizations.delegate,
 
             /// translate Widget texts
-            GlobalWidgetsLocalizations.delegate,
+            //GlobalWidgetsLocalizations.delegate,
           ],
 
           debugShowCheckedModeBanner: false,

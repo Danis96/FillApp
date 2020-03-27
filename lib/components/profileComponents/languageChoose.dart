@@ -50,13 +50,13 @@ class _LanguageChooseState extends State<LanguageChoose> {
               decoration: BoxDecoration(
                 border: Border.all(width: 1.0, color: MyColor().black),
                 borderRadius: BorderRadius.all(Radius.circular(29)),
-                color: selectedLanguage == MyText().languageArabic
+                color: selectedLanguage == AppLocalizations.of(context).translate('arabic')
                     ? MyColor().white
                     : MyColor().black,
               ),
               child: Text(AppLocalizations.of(context).translate('arabic'),
                   style: TextStyle(
-                      color: selectedLanguage == MyText().languageArabic
+                      color: selectedLanguage == AppLocalizations.of(context).translate('arabic')
                           ? MyColor().black
                           : MyColor().white,
                       fontWeight: FontWeight.w700,
@@ -83,12 +83,12 @@ class _LanguageChooseState extends State<LanguageChoose> {
               decoration: BoxDecoration(
                   border: Border.all(width: 1.0, color: MyColor().black),
                   borderRadius: BorderRadius.all(Radius.circular(29)),
-                  color: selectedLanguage == MyText().languageEnglish
+                  color: selectedLanguage == AppLocalizations.of(context).translate('english')
                       ? MyColor().white
                       : MyColor().black),
               child: Text(AppLocalizations.of(context).translate('english'),
                   style: TextStyle(
-                      color: selectedLanguage == MyText().languageEnglish
+                      color: selectedLanguage == AppLocalizations.of(context).translate('english')
                           ? MyColor().black
                           : MyColor().white,
                       fontWeight: FontWeight.w700,

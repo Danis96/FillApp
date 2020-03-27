@@ -24,7 +24,7 @@ class MyQuestionSAR extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width:ScreenUtil.instance.setWidth(121.0),
+      width:ScreenUtil.instance.setWidth(130.0),
       height: ScreenUtil.instance.setHeight(38.0),
       alignment: Alignment.center,
       decoration: BoxDecoration(
