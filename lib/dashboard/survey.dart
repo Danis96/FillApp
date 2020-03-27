@@ -193,7 +193,7 @@ class _SurveyState extends State<SurveyPage>
               title: MyText().willQuestion,
               content: MyText().willQuestion1,
               yes:AppLocalizations.of(context).translate('yes'),
-              no: MyText().willNo,
+              no: AppLocalizations.of(context).translate('no'),
               notifyParent: exitApp),
         ) ??
         true;

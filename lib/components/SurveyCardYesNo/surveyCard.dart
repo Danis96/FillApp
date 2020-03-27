@@ -225,8 +225,9 @@ class _YesNoSurveyState extends State<SurveyCard>
                   surveyDoc: widget.surveyDoc,
                   animateTo: summaryAnimateToPpage,
                   questions: widget.snapQuestions,
-                  totalProgress: widget.total,
+                  totalProgress:widget.surveyDoc.numberOfQuestions,
                   totalSar: widget.sarSurvey,
+
                 )))
         : showDialog(
               context: context,

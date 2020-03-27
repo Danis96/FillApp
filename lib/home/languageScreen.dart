@@ -80,8 +80,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   Container(
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(120.0)),
-                      child: Text(
-                       AppLocalizations.of(context).translate("register&get5SAR"),
+                      child: Text( 
+                        AppLocalizations.of(context).translate('register&get5SAR'),
                         style: TextStyle(
                             fontSize: ScreenUtil.instance.setSp(23.0),
                             color: MyColor().white),
