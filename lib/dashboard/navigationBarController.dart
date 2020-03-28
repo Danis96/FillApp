@@ -102,7 +102,7 @@ class _BottomNavigationBarControllerState
         });
 
         /// if user is anonymous + sars
-      } else {
+      } else if (usersSars >= 100) {
         btnText = AppLocalizations.of(context).translate('register');
         isReadOnly = true;
       }
@@ -115,7 +115,7 @@ class _BottomNavigationBarControllerState
       /// if user is registered + have sars + profile not completed
       if (usersSars >= 100 && cc == '') {
         setState(() {
-          btnText = AppLocalizations.of(context).translate('complete');
+          btnText = AppLocalizations.of(context).translate('completeProfile');
           isReadOnly = false;
         });
 
@@ -152,6 +152,7 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
+          settingStates: settingStates,
             snap2: snap,
             refreshNavbar: refreshNavbar,
             isReadOnly: isReadOnly,

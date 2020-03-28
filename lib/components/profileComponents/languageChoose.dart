@@ -1,6 +1,7 @@
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/appLanguage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,10 @@ class _LanguageChooseState extends State<LanguageChoose> {
             onTap: () {
               setState(() {
                 appLanguage.changeLanguage(Locale("ar"));
-                selectedLanguage = 'Arabic';
+                selectedLanguage =
+                    AppLocalizations.of(context).translate('arabic');
+                languageOfApp = 'Arabic';
+                print(btnText);
               });
             },
             child: Container(
@@ -50,13 +54,13 @@ class _LanguageChooseState extends State<LanguageChoose> {
               decoration: BoxDecoration(
                 border: Border.all(width: 1.0, color: MyColor().black),
                 borderRadius: BorderRadius.all(Radius.circular(29)),
-                color: selectedLanguage == AppLocalizations.of(context).translate('arabic')
+                color: languageOfApp == 'Arabic'
                     ? MyColor().white
                     : MyColor().black,
               ),
               child: Text(AppLocalizations.of(context).translate('arabic'),
                   style: TextStyle(
-                      color: selectedLanguage == AppLocalizations.of(context).translate('arabic')
+                      color: languageOfApp == 'Arabic'
                           ? MyColor().black
                           : MyColor().white,
                       fontWeight: FontWeight.w700,
@@ -70,7 +74,10 @@ class _LanguageChooseState extends State<LanguageChoose> {
             onTap: () {
               setState(() {
                 appLanguage.changeLanguage(Locale("en"));
-                selectedLanguage = 'English';
+                selectedLanguage =
+                    AppLocalizations.of(context).translate('english');
+                languageOfApp = 'English';
+                print(btnText);
               });
             },
             child: Container(
@@ -83,12 +90,12 @@ class _LanguageChooseState extends State<LanguageChoose> {
               decoration: BoxDecoration(
                   border: Border.all(width: 1.0, color: MyColor().black),
                   borderRadius: BorderRadius.all(Radius.circular(29)),
-                  color: selectedLanguage == AppLocalizations.of(context).translate('english')
+                  color: languageOfApp == 'English'
                       ? MyColor().white
                       : MyColor().black),
               child: Text(AppLocalizations.of(context).translate('english'),
                   style: TextStyle(
-                      color: selectedLanguage == AppLocalizations.of(context).translate('english')
+                      color: languageOfApp == 'English'
                           ? MyColor().black
                           : MyColor().white,
                       fontWeight: FontWeight.w700,
@@ -111,15 +118,13 @@ class _LanguageChooseState extends State<LanguageChoose> {
     selectedLanguageCode = prefs.getString('language_code');
     print('Selected language was: ' + selectedLanguageCode);
     if (selectedLanguageCode == 'en') {
-      setState(() {
-        selectedLanguage = 'English';
-      });
       appLanguage.changeLanguage(Locale("en"));
+      selectedLanguage = AppLocalizations.of(context).translate('english');
+      languageOfApp = 'English';
     } else {
-      setState(() {
-        selectedLanguage = 'Arabic';
-      });
       appLanguage.changeLanguage(Locale("ar"));
+      selectedLanguage = AppLocalizations.of(context).translate('arabic');
+      languageOfApp = 'Arabic';
     }
   }
 }

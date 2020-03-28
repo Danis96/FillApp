@@ -44,8 +44,8 @@ class ProfileButton extends StatelessWidget {
                             fontStyle: FontStyle.normal,
                             fontSize: ScreenUtil.instance.setSp(18.0)),
                         textAlign: TextAlign.center)
-                    : btnText == AppLocalizations.of(context).translate('complete')
-                        ? Text(AppLocalizations.of(context).translate('complete'),
+                    : btnText == AppLocalizations.of(context).translate('completeProfile')
+                        ? Text(AppLocalizations.of(context).translate('completeProfile'),
                             style: TextStyle(
                                 color: MyColor().white,
                                 fontFamily: arabic,
