@@ -25,3 +25,4 @@ String answersFromSummary;
 int userLevelForList;
 String usernameGlobal, passGlobal, emailGlobal, phoneGlobal;
 final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
+String languageOfApp;

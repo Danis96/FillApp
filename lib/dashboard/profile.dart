@@ -34,10 +34,11 @@ class Profile extends StatefulWidget {
   final PasswordArguments arguments;
   final String btnText;
   final bool isReadOnly, showData;
-  final Function refreshNavbar;
+  final Function refreshNavbar, settingStates;
   final DocumentSnapshot snap2;
   Profile({
     Key key,
+    this.settingStates,
     this.arguments,
     this.btnText,
     this.isReadOnly,
@@ -334,7 +335,7 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
               Container(
-                child: LanguageChoose(refresh: refresh),
+                child: LanguageChoose(refresh: widget.settingStates),
               ),
               Container(
                 width: ScreenUtil.instance.setWidth(316.0),
