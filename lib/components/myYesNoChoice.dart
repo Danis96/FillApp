@@ -91,7 +91,7 @@ class _MyYesNoChoiceState extends State<MyYesNoChoice> {
               setState(() {
                 isTappedYesNoFlash = true;
               });
-              Timer(Duration(milliseconds: 100), () {
+              Timer(Duration(milliseconds: 400), () {
                 onPressed();
               });
             },
