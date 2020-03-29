@@ -86,7 +86,7 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
               setState(() {
                 isTappedMCQFlash = true;
               });
-              Timer(Duration(milliseconds: 100), () {
+              Timer(Duration(milliseconds: 400), () {
                 onPressed();
               });
             },

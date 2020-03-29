@@ -189,7 +189,7 @@ class _DashboardPageState extends State<DashboardPage>
 
                               var begin = Offset(0.2, 0.0);
                               var end = Offset.zero;
-                              var curve = Curves.easeInOut;
+                              var curve = Curves.fastLinearToSlowEaseIn;
                               var tween = Tween(begin: begin, end: end)
                                   .chain(CurveTween(curve: curve));
 
