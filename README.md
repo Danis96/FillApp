@@ -105,3 +105,14 @@ On back, user is asked with a Dialog Box if he is sure about exiting the survey.
 	2. 500 Surveys<br/>
 	3. Smooth loading of lists<br/>
 	4. Smooth and live update of SAR balance<br/>
+	
+**•	V7 – Sprint 7 - (23.03.2020. - 30.03.2020.)<br/>** *
+	User story 1 - Translate the application to Arabic language<br/>
+	User is provided a screen before Home Screen (Register, Login and skip) where he/she can choose the language of the app. Later on, the user has the same option on Profile Page. The second language that is added in this sprint is Arabic language. The content that is read from database is not translated.<br/><br/>*
+	User story 2 - Admin documentation for entering Surveys into database<br/>
+	The second part of the documentation, the part regarding entering Surveys into database is added to the already written documentation (entering Flash Questions and Changing level of a user).<br/><br/>*
+	User story 3 - Snackbar after Transfer<br/>
+	After user successfully makes a transfer, he should be aknowledged that he has successfully made a transfer. So, a showing up of a snackbar after successful transfer is implemented.<br/><br/>*
+	User story 4 - IOS release<br/>
+	The release process of IOS application is started. Now, we are waiting for the application to be available for testing using TestFlight.<br/><br/>*
+	
