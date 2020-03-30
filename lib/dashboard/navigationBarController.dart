@@ -57,6 +57,7 @@ class _BottomNavigationBarControllerState
   void initState() {
     super.initState();
     isOnSummary = false;
+    settingStates();
   }
 
   Widget getIsAnonymous(String username) {
@@ -97,7 +98,8 @@ class _BottomNavigationBarControllerState
       /// if user is anonymous + no sars
       if (usersSars < 100 || saroviOffline < 100) {
         setState(() {
-          btnText = AppLocalizations.of(context).translate('transferAfter100SAR');
+          btnText =
+              AppLocalizations.of(context).translate('transferAfter100SAR');
           isReadOnly = true;
         });
 
@@ -129,7 +131,8 @@ class _BottomNavigationBarControllerState
         /// if user is registered + no sars + not profile completed
       } else if ((usersSars < 100 || saroviOffline < 100) && cc != '') {
         setState(() {
-          btnText = AppLocalizations.of(context).translate('transferAfter100SAR');
+          btnText =
+              AppLocalizations.of(context).translate('transferAfter100SAR');
           isReadOnly = false;
         });
       }
@@ -152,7 +155,7 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
-          settingStates: settingStates,
+            settingStates: settingStates,
             snap2: snap,
             refreshNavbar: refreshNavbar,
             isReadOnly: isReadOnly,
@@ -251,6 +254,7 @@ class _BottomNavigationBarControllerState
     setState(() {
       key = UniqueKey();
     });
+    print(key);
   }
 
   /// function for loader

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
@@ -38,12 +40,14 @@ class _LanguageChooseState extends State<LanguageChoose> {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              setState(() {
-                appLanguage.changeLanguage(Locale("ar"));
-                selectedLanguage =
-                    AppLocalizations.of(context).translate('arabic');
-                languageOfApp = 'Arabic';
-                print(btnText);
+              appLanguage.changeLanguage(Locale("ar"));
+              selectedLanguage =
+                  AppLocalizations.of(context).translate('arabic');
+              languageOfApp = 'Arabic';
+              print('Arabic');
+
+              Timer(Duration(milliseconds: 100), () {
+                widget.refresh();
               });
             },
             child: Container(
@@ -72,12 +76,15 @@ class _LanguageChooseState extends State<LanguageChoose> {
           ),
           GestureDetector(
             onTap: () {
-              setState(() {
-                appLanguage.changeLanguage(Locale("en"));
-                selectedLanguage =
-                    AppLocalizations.of(context).translate('english');
-                languageOfApp = 'English';
-                print(btnText);
+              setState(() {});
+              appLanguage.changeLanguage(Locale("en"));
+              selectedLanguage =
+                  AppLocalizations.of(context).translate('english');
+              languageOfApp = 'English';
+              print('English');
+
+               Timer(Duration(milliseconds: 100), () {
+                widget.refresh();
               });
             },
             child: Container(
