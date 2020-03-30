@@ -102,7 +102,7 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
         widget.doc, context, widget.username, widget.choice1, widget.title);
 
     if (widget.branching == 'yes') {
-      if (widget.choice1.toLowerCase() == widget.branchingChoice) {
+      if (widget.choice1 == widget.branchingChoice) {
         FirebaseCrud().updateListOfUsernamesThatGaveAnswersSurvey(
             widget.doc, context, widget.username);
         showDialog(
@@ -112,7 +112,7 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
             return MyAlertDialog(
                 title: AppLocalizations.of(context).translate('thisSurveyIsNotCompatible'),
                 content: AppLocalizations.of(context).translate('youWillBeRedirected'),
-                no: null,
+                no: '',
                 yes: AppLocalizations.of(context).translate('ok'),
                 notifyParent: widget.complete);
           },
