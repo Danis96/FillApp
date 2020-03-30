@@ -38,8 +38,10 @@ class FillApp extends StatelessWidget {
             /// translates Material texts
             GlobalMaterialLocalizations.delegate,
 
+            FallbackCupertinoLocalisationsDelegate(),
+
             /// translate Widget texts
-            //GlobalWidgetsLocalizations.delegate,
+          // /  GlobalWidgetsLocalizations.delegate,
           ],
 
           debugShowCheckedModeBanner: false,

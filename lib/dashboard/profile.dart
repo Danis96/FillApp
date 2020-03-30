@@ -187,6 +187,7 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
+
                   focusNode: _nameFocus,
                   readOnly: isReadOnly,
                   maxLength: 200,
@@ -566,8 +567,10 @@ class _ProfileState extends State<Profile> {
                       Navigator.of(context).pop();
                     },
                     child: Container(
+                      key: UniqueKey(),
                       height: ScreenUtil.instance.setHeight(265.0),
                       child: CupertinoDatePicker(
+                        
                         mode: CupertinoDatePickerMode.date,
                         initialDateTime: dateOfBirth2,
                         onDateTimeChanged: (date) {
