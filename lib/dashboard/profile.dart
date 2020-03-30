@@ -102,7 +102,6 @@ class _ProfileState extends State<Profile> {
     /// if it is set btn text to complete profile if not, leave it
     isButtonComplete ? btnText = AppLocalizations.of(context).translate('complete') : btnText = btnText;
     super.initState();
-    checkForInternet();
     FirebaseCheck().getUserUsername(widget.arguments.username);
   }
 
@@ -123,6 +122,8 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    checkForInternet();
+    print('SAROVIIIIIIIIIIIIIIIIII: ' + isSar.toString());
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -171,7 +172,7 @@ class _ProfileState extends State<Profile> {
               Container(
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
-                child: BigCircle(usersSarovi: usersSarovi,),
+                child: BigCircle(usersSarovi: isSar ? saroviOffline : usersSarovi),
               ),
               Container(
                 margin:
@@ -639,9 +640,12 @@ class _ProfileState extends State<Profile> {
     setState(() {
       btnText = AppLocalizations.of(context).translate('transferAfter100SAR');
     });
+    saroviOffline = 0;
     Timer(Duration(seconds: 1), () {
       setState(() {});
     });
+    print('OFFLINE SAROVI SUU: ' + saroviOffline.toString());
+    print('SAROVI SUU: ' + usersSarovi.toString());
   }
 
   onPressed() {
