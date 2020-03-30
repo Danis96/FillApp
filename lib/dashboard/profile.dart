@@ -592,7 +592,7 @@ class _ProfileState extends State<Profile> {
 
   successfullTransfer() {
     return MySnackbarTransfer()
-        .showSnackbar('Transfer succesfull', context, 'Congratulations');
+        .showSnackbar(AppLocalizations.of(context).translate('successTransfer'), context, '');
   }
 
   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'

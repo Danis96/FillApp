@@ -114,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     onFieldSubmitted1(BuildContext context) {
-      phoneNo = "+966" + phoneController.text;
+      phoneNo = "+" + phoneController.text;
       final _formState = _formKey.currentState;
       if (_formState.validate()) {
         verifyPhone();
@@ -164,10 +164,11 @@ class _RegisterPageState extends State<RegisterPage> {
                               top: ScreenUtil.instance.setWidth(61.0),
                               bottom: ScreenUtil.instance.setWidth(59.0)),
                           child: Text(
-                            AppLocalizations.of(context).translate("register&get5SAR"),
+                            '3 \n SAR',
                             style: TextStyle(
                                 color: MyColor().white,
-                                fontSize: ScreenUtil.instance.setSp(40)),
+                                fontWeight: FontWeight.w600,
+                                fontSize: ScreenUtil.instance.setSp(34)),
                             textAlign: TextAlign.center,
                           ),
                         )),
