@@ -21,14 +21,14 @@ class BigCircle extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
                 width: 1,
-                color: btnText == AppLocalizations.of(context).translate('completeProfile')
+                color: btnText == 'Complete Profile' || btnText == 'إكمال الملف الشخصي'
                     ? Colors.red
-                    : btnText == AppLocalizations.of(context).translate('transfer')
+                    : btnText == 'Transfer' || btnText == 'تحويل'
                         ? MyColor().greenCircle
                         : MyColor().white),
-            color: btnText == AppLocalizations.of(context).translate('completeProfile') 
+            color: btnText == 'Complete Profile' || btnText ==  'إكمال الملف الشخصي'
                 ? MyColor().white
-                : btnText == AppLocalizations.of(context).translate('transfer')
+                : btnText == 'Transfer' || btnText == 'تحويل'
                     ? MyColor().white
                     : MyColor().black,
             shape: BoxShape.circle,
@@ -37,9 +37,9 @@ class BigCircle extends StatelessWidget {
         Text(
           usersSarovi.toString() + '\n' + AppLocalizations.of(context).translate("SAR"),
           style: TextStyle(
-            color: btnText == AppLocalizations.of(context).translate('completeProfile')
+            color: btnText == 'Complete Profile' || btnText == 'إكمال الملف الشخصي'
                 ? MyColor().black
-                : btnText == AppLocalizations.of(context).translate('transfer')
+                : btnText == 'Transfer' || btnText == 'تحويل'
                     ? MyColor().black
                     : MyColor().white,
             fontSize: ScreenUtil.instance.setSp(35.0),
