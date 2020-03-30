@@ -21,6 +21,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/localization/appLanguage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
@@ -88,7 +89,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     decoration: BoxDecoration(
                         borderRadius: new BorderRadius.circular(33.5),
                         border: Border.all(width: 1, color: MyColor().white),
-                        color: selectedLanguage == AppLocalizations.of(context).translate('arabic')
+                        color: languageOfApp == 'Araboc'
                             ? MyColor().white
                             : MyColor().black),
                     width: ScreenUtil.instance.setWidth(316.0),
@@ -99,7 +100,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         left: ScreenUtil.instance.setWidth(49.0),
                         right: ScreenUtil.instance.setWidth(49.0)),
                     child: RaisedButton(
-                        color: selectedLanguage == AppLocalizations.of(context).translate('arabic')
+                        color: languageOfApp == 'Arabic'
                             ? MyColor().white
                             : MyColor().black,
                         shape: RoundedRectangleBorder(
@@ -109,6 +110,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                           setState(() {
                             appLanguage.changeLanguage(Locale("ar"));
                             selectedLanguage = AppLocalizations.of(context).translate('arabic');
+                            languageOfApp = 'Arabic';
                           });
 
                           Navigator.of(context).push(
@@ -120,7 +122,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('arabic'),
                           style: TextStyle(
-                              color: selectedLanguage == AppLocalizations.of(context).translate('arabic')
+                              color: languageOfApp == 'Arabic'
                                   ? MyColor().black
                                   : MyColor().white),
                         )),
@@ -128,8 +130,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   Container(
                     decoration: BoxDecoration(
                         borderRadius: new BorderRadius.circular(33.5),
-                        border: Border.all(width: 2, color: MyColor().white),
-                        color: selectedLanguage == AppLocalizations.of(context).translate('english')
+                        border: Border.all(width: 1, color: MyColor().white),
+                        color: languageOfApp == 'English'
                             ? MyColor().white
                             : MyColor().black),
                     width: ScreenUtil.instance.setWidth(316.0),
@@ -139,7 +141,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         left: ScreenUtil.instance.setWidth(49.0),
                         right: ScreenUtil.instance.setWidth(49.0)),
                     child: RaisedButton(
-                        color: selectedLanguage == AppLocalizations.of(context).translate('english')
+                        color: languageOfApp == 'English'
                             ? MyColor().white
                             : MyColor().black,
                         shape: RoundedRectangleBorder(
@@ -149,6 +151,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                           setState(() {
                             appLanguage.changeLanguage(Locale("en"));
                             selectedLanguage = AppLocalizations.of(context).translate('english');
+                            languageOfApp = 'English';
                           });
 
                           Navigator.of(context).push(
@@ -160,7 +163,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('english'),
                           style: TextStyle(
-                              color: selectedLanguage == AppLocalizations.of(context).translate('english')
+                              color: languageOfApp == 'English'
                                   ? MyColor().black
                                   : MyColor().white),
                         )),
@@ -185,11 +188,13 @@ class _LanguageScreenState extends State<LanguageScreen> {
       setState(() {
         selectedLanguage = AppLocalizations.of(context).translate('english');
         appLanguage.changeLanguage(Locale("en"));
+        languageOfApp = 'English';
       });
     } else {
       setState(() {
         selectedLanguage = AppLocalizations.of(context).translate('english');
         appLanguage.changeLanguage(Locale("ar"));
+        languageOfApp = 'Arabic';
       });
     }
   }

@@ -2,6 +2,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +37,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
       allowFontScaling: true,
     )..init(context);
     indexReal = widget.index + 1;
-    String question = 'Q' + indexReal.toString() + ": " + title;
+    String question = AppLocalizations.of(context).translate('q1') + indexReal.toString() + ": " + title;
 
     return GestureDetector(
       onTap: () => onPressed(),
