@@ -22,10 +22,13 @@ class YearDateField extends StatefulWidget {
   final Function notifyParent;
   final DocumentSnapshot doc;
   final String title;
+  final int number, numberOfQuestions;
   String year;
   YearDateField(
       {Key key,
       this.title,
+      this.numberOfQuestions,
+      this.number,
       this.notifyParent,
       this.username,
       this.year,
@@ -37,11 +40,12 @@ class YearDateField extends StatefulWidget {
 }
 
 class _YearDateFieldState extends State<YearDateField> {
-
   @override
   void initState() {
     super.initState();
     yearController.text = '';
+    print('Po redu: ' + widget.number.toString());
+    print('Ukupno: ' + widget.numberOfQuestions.toString());
   }
 
   @override
@@ -56,7 +60,9 @@ class _YearDateFieldState extends State<YearDateField> {
           Column(
             children: <Widget>[
               LabelContainer(
-                  text: AppLocalizations.of(context).translate('year'), leftMargin: 0.0, containerWidth: 300.0),
+                  text: AppLocalizations.of(context).translate('year'),
+                  leftMargin: 0.0,
+                  containerWidth: 300.0),
               Container(
                 width: ScreenUtil.instance.setWidth(327.0),
                 height: ScreenUtil.instance.setWidth(61.0),
@@ -124,14 +130,20 @@ class _YearDateFieldState extends State<YearDateField> {
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
             child: fieldColor1
                 ? Text(
-                    AppLocalizations.of(context).translate('thisFiledCantBeEmpty'),
+                    AppLocalizations.of(context)
+                        .translate('thisFiledCantBeEmpty'),
                     style: TextStyle(color: MyColor().error),
                   )
                 : Text(''),
           ),
           isSummary
               ? EmptyContainer()
-              : SubmitButton(onPressedFunction: onPressed, isImage: false)
+              : SubmitButton(
+                  onPressedFunction: onPressed,
+                  isImage: false,
+                  text: (widget.number + 1) == widget.numberOfQuestions
+                      ? AppLocalizations.of(context).translate('submitLast')
+                      : AppLocalizations.of(context).translate('submit'))
         ],
       ),
     );

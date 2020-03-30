@@ -23,10 +23,13 @@ class MonthDateField extends StatefulWidget {
   final Function notifyParent;
   final DocumentSnapshot doc;
   final String title;
+  final int number, numberOfQuestions;
   String month;
   MonthDateField(
       {Key key,
       this.title,
+      this.number,
+      this.numberOfQuestions,
       this.notifyParent,
       this.username,
       this.month,
@@ -43,6 +46,8 @@ class _MonthDateFieldState extends State<MonthDateField> {
   void initState() {
     super.initState();
     monthController.text = '';
+    print('Po redu: ' + widget.number.toString());
+    print('Ukupno: ' + widget.numberOfQuestions.toString());
   }
 
   @override
@@ -132,7 +137,9 @@ class _MonthDateFieldState extends State<MonthDateField> {
           ),
           isSummary
               ? EmptyContainer()
-              : SubmitButton(onPressedFunction: onPressed, isImage: false)
+              : SubmitButton(onPressedFunction: onPressed, isImage: false, text: (widget.number + 1) == widget.numberOfQuestions
+                      ? AppLocalizations.of(context).translate('submitLast')
+                      : AppLocalizations.of(context).translate('submit'))
         ],
       ),
     );

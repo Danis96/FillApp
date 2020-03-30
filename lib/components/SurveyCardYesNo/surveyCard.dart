@@ -129,6 +129,7 @@ class _YesNoSurveyState extends State<SurveyCard>
                           ),
                           ContainerTypes(
                               widget: widget,
+                              numberOfQuestions: widget.surveyDoc.numberOfQuestions,
                               index: index,
                               refresh: refresh,
                               type: type,

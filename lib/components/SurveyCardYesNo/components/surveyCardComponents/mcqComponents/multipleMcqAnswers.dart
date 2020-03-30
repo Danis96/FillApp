@@ -5,12 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MultipleMcqAnswers extends StatelessWidget {
-  final int numberOfChoices, isSingle, index;
+  final int numberOfChoices, isSingle, index, number, numberOfQuestions;
   final widget;
   final Function refresh;
   const MultipleMcqAnswers(
       {Key key,
       this.numberOfChoices,
+      this.numberOfQuestions,
+      this.number,
       this.isSingle,
       this.index,
       this.widget,
@@ -26,6 +28,8 @@ class MultipleMcqAnswers extends StatelessWidget {
       child: Column(
         children: <Widget>[
           MultipleChoiceSurveyChoices(
+            number: number,
+            numberOfQuestions: numberOfQuestions,
             length: numberOfChoices,
             isSingle: isSingle,
             index: AppLocalizations.of(context).translate('a'),
@@ -36,6 +40,8 @@ class MultipleMcqAnswers extends StatelessWidget {
             doc: widget.doc,
           ),
           MultipleChoiceSurveyChoices(
+            number: number,
+            numberOfQuestions: numberOfQuestions,
             length: numberOfChoices,
             isSingle: isSingle,
             index:  AppLocalizations.of(context).translate('b'),
@@ -46,6 +52,8 @@ class MultipleMcqAnswers extends StatelessWidget {
             doc: widget.doc,
           ),
           MultipleChoiceSurveyChoices(
+            number: number,
+            numberOfQuestions: numberOfQuestions,
             length: numberOfChoices,
             isSingle: isSingle,
             index:  AppLocalizations.of(context).translate('c'),
@@ -56,6 +64,8 @@ class MultipleMcqAnswers extends StatelessWidget {
             doc: widget.doc,
           ),
           MultipleChoiceSurveyChoices(
+            number: number,
+            numberOfQuestions: numberOfQuestions,
             length: numberOfChoices,
             isSingle: isSingle,
             index: AppLocalizations.of(context).translate('d'),

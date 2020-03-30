@@ -1,17 +1,18 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListMcqChoicesThree extends StatelessWidget {
-  final int numberOfChoices, isSingle, index;
+  final int numberOfChoices, isSingle, index, number, numberOfQuestions;
   final widget;
   final Function refresh;
   ListMcqChoicesThree(
       {Key key,
       this.numberOfChoices,
       this.isSingle,
+      this.number,
+      this.numberOfQuestions,
       this.index,
       this.refresh,
       this.widget})
@@ -26,6 +27,8 @@ class ListMcqChoicesThree extends StatelessWidget {
       child: Column(
         children: <Widget>[
           MultipleChoiceSurveyChoices(
+            number: number,
+            numberOfQuestions: numberOfQuestions,
             length: numberOfChoices,
             isSingle: isSingle,
             index: AppLocalizations.of(context).translate('a'),
@@ -36,6 +39,8 @@ class ListMcqChoicesThree extends StatelessWidget {
             doc: widget.doc,
           ),
           MultipleChoiceSurveyChoices(
+            number: number,
+            numberOfQuestions: numberOfQuestions,
             length: numberOfChoices,
             isSingle: isSingle,
             index: AppLocalizations.of(context).translate('b'),
@@ -46,6 +51,8 @@ class ListMcqChoicesThree extends StatelessWidget {
             doc: widget.doc,
           ),
           MultipleChoiceSurveyChoices(
+            number: number,
+            numberOfQuestions: numberOfQuestions,
             length: numberOfChoices,
             isSingle: isSingle,
             index: AppLocalizations.of(context).translate('c'),

@@ -7,7 +7,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SubmitButton extends StatelessWidget {
   final Function onPressedFunction;
   final bool isImage;
-  SubmitButton({Key key, this.onPressedFunction, this.isImage}) : super(key: key);
+  final String text;
+  SubmitButton({Key key, this.text, this.onPressedFunction, this.isImage}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,7 +30,7 @@ class SubmitButton extends StatelessWidget {
               onPressedFunction(context);
             }
           },
-          child: Text(AppLocalizations.of(context).translate("submit"),
+          child: Text(text,
               style: TextStyle(
                   fontSize: ScreenUtil.instance.setSp(18.0),
                   color: MyColor().white)),
