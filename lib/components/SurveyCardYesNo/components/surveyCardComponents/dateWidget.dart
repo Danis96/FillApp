@@ -9,9 +9,9 @@ import 'package:flutter/material.dart';
 
 class DateWidget extends StatelessWidget {
   final widget;
-  final int index;
+  final int index, numberOfQuestions, number;
   final Function refresh;
-  DateWidget({Key key, this.widget, this.index, this.refresh})
+  DateWidget({Key key, this.widget, this.number, this.numberOfQuestions , this.index, this.refresh})
       : super(key: key);
 
   @override
@@ -22,6 +22,8 @@ class DateWidget extends StatelessWidget {
           children: <Widget>[
             isSummary ? AnswerLabel() : EmptyContainer(),
             DateChoice(
+              number: number,
+              numberOfQuestions: numberOfQuestions,
               day: '',
               month: '',
               year: '',
@@ -37,6 +39,8 @@ class DateWidget extends StatelessWidget {
           children: <Widget>[
             isSummary ? AnswerLabel() : EmptyContainer(),
             DayDateField(
+              number: number,
+              numberOfQuestions: numberOfQuestions,
               day: '',
               notifyParent: refresh,
               username: widget.username,
@@ -50,6 +54,8 @@ class DateWidget extends StatelessWidget {
           children: <Widget>[
             isSummary ? AnswerLabel() : EmptyContainer(),
             MonthDateField(
+              number: number,
+              numberOfQuestions: numberOfQuestions,
               month: '',
               notifyParent: refresh,
               username: widget.username,
@@ -63,6 +69,8 @@ class DateWidget extends StatelessWidget {
           children: <Widget>[
             isSummary ? AnswerLabel() : EmptyContainer(),
             YearDateField(
+              number: number,
+              numberOfQuestions: numberOfQuestions,
               year: '',
               notifyParent: refresh,
               username: widget.username,

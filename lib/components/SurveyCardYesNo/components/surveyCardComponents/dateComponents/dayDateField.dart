@@ -23,9 +23,12 @@ class DayDateField extends StatefulWidget {
   final Function notifyParent;
   final DocumentSnapshot doc;
   final String title;
+  final int number, numberOfQuestions;
   String day;
   DayDateField(
       {Key key,
+      this.numberOfQuestions,
+      this.number,
       this.title,
       this.notifyParent,
       this.username,
@@ -38,11 +41,12 @@ class DayDateField extends StatefulWidget {
 }
 
 class _DayDateFieldState extends State<DayDateField> {
-
   @override
   void initState() {
     super.initState();
     dayController.text = '';
+    print('Po redu: ' + widget.number.toString());
+    print('Ukupno: ' + widget.numberOfQuestions.toString());
   }
 
   @override
@@ -57,7 +61,9 @@ class _DayDateFieldState extends State<DayDateField> {
           Column(
             children: <Widget>[
               LabelContainer(
-                  text: AppLocalizations.of(context).translate('day'), leftMargin: 0.0, containerWidth: 300.0),
+                  text: AppLocalizations.of(context).translate('day'),
+                  leftMargin: 0.0,
+                  containerWidth: 300.0),
               Container(
                 width: ScreenUtil.instance.setWidth(327.0),
                 height: ScreenUtil.instance.setWidth(61.0),
@@ -125,14 +131,20 @@ class _DayDateFieldState extends State<DayDateField> {
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
             child: fieldColor1
                 ? Text(
-                    AppLocalizations.of(context).translate('thisFiledCantBeEmpty'),
+                    AppLocalizations.of(context)
+                        .translate('thisFiledCantBeEmpty'),
                     style: TextStyle(color: MyColor().error),
                   )
                 : Text(''),
           ),
           isSummary
               ? EmptyContainer()
-              : SubmitButton(onPressedFunction: onPressed, isImage: false)
+              : SubmitButton(
+                  onPressedFunction: onPressed,
+                  isImage: false,
+                  text: (widget.number + 1) == widget.numberOfQuestions
+                      ? AppLocalizations.of(context).translate('submitLast')
+                      : AppLocalizations.of(context).translate('submit'))
         ],
       ),
     );

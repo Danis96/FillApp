@@ -20,8 +20,11 @@ class InputChoice extends StatefulWidget {
   final Function notifyParent;
   final DocumentSnapshot doc;
   final String title;
+  final int number, numberOfQuestions;
   InputChoice({
     this.doc,
+    this.number,
+    this.numberOfQuestions,
     this.notifyParent,
     this.username,
     this.title,
@@ -43,14 +46,20 @@ class _InputChoiceState extends State<InputChoice> {
           margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
           child: fieldColor
               ? Text(
-                  AppLocalizations.of(context).translate('thisFiledCantBeEmpty'),
+                  AppLocalizations.of(context)
+                      .translate('thisFiledCantBeEmpty'),
                   style: TextStyle(color: MyColor().error),
                 )
               : Text(''),
         ),
         isSummary
             ? EmptyContainer()
-            : SubmitButton(onPressedFunction: onPressed, isImage: false),
+            : SubmitButton(
+                onPressedFunction: onPressed,
+                isImage: false,
+                text: (widget.number + 1) == widget.numberOfQuestions
+                    ? AppLocalizations.of(context).translate('submitLast')
+                    : AppLocalizations.of(context).translate('submit')),
       ],
     );
   }

@@ -21,9 +21,11 @@ class MultipleChoiceSurveyChoices extends StatefulWidget {
   final String title;
   final DocumentSnapshot doc;
   final String index;
-  final int isSingle, length;
+  final int isSingle, length, number, numberOfQuestions;
   MultipleChoiceSurveyChoices(
       {this.choice1,
+      this.number,
+      this.numberOfQuestions,
       this.notifyParent,
       this.username,
       this.title,
@@ -66,15 +68,20 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                   decoration: BoxDecoration(
                       border: Border.all(width: 1.0, color: MyColor().black),
                       borderRadius: BorderRadius.all(Radius.circular(100)),
-                      color: index == AppLocalizations.of(context).translate('a')
+                      color: index ==
+                              AppLocalizations.of(context).translate('a')
                           ? isTappedMCQ1 ? MyColor().white : MyColor().black
                           : index == AppLocalizations.of(context).translate('b')
                               ? isTappedMCQ2 ? MyColor().white : MyColor().black
-                              : index == AppLocalizations.of(context).translate('c')
+                              : index ==
+                                      AppLocalizations.of(context)
+                                          .translate('c')
                                   ? isTappedMCQ3
                                       ? MyColor().white
                                       : MyColor().black
-                                  : index == AppLocalizations.of(context).translate('d')
+                                  : index ==
+                                          AppLocalizations.of(context)
+                                              .translate('d')
                                       ? isTappedMCQ4
                                           ? MyColor().white
                                           : MyColor().black
@@ -83,17 +90,24 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                   width: ScreenUtil.instance.setWidth(58.0),
                   child: Text(widget.index,
                       style: TextStyle(
-                          color: index == AppLocalizations.of(context).translate('a')
+                          color: index ==
+                                  AppLocalizations.of(context).translate('a')
                               ? isTappedMCQ1 ? MyColor().black : MyColor().white
-                              : index == AppLocalizations.of(context).translate('b')
+                              : index ==
+                                      AppLocalizations.of(context)
+                                          .translate('b')
                                   ? isTappedMCQ2
                                       ? MyColor().black
                                       : MyColor().white
-                                  : index == AppLocalizations.of(context).translate('c')
+                                  : index ==
+                                          AppLocalizations.of(context)
+                                              .translate('c')
                                       ? isTappedMCQ3
                                           ? MyColor().black
                                           : MyColor().white
-                                      : index == AppLocalizations.of(context).translate('d')
+                                      : index ==
+                                              AppLocalizations.of(context)
+                                                  .translate('d')
                                           ? isTappedMCQ4
                                               ? MyColor().black
                                               : MyColor().white
@@ -133,12 +147,31 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
                 ? EmptyContainer()
                 : widget.length == 3 && widget.index == AppLocalizations.of(context).translate('c')
                     ? Container(
-                      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
-                      child: SubmitButton(onPressedFunction: submit, isImage: true))
-                    : widget.length == 4 && widget.index == AppLocalizations.of(context).translate('d')
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil.instance.setWidth(15.0)),
+                        child: SubmitButton(
+                            onPressedFunction: submit,
+                            isImage: true,
+                            text: (widget.number + 1) == widget.numberOfQuestions
+                                ? AppLocalizations.of(context)
+                                    .translate('submitLast')
+                                : AppLocalizations.of(context)
+                                    .translate('submit')))
+                    : widget.length == 4 &&
+                            widget.index ==
+                                AppLocalizations.of(context).translate('d')
                         ? Container(
-                          margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
-                          child: SubmitButton(onPressedFunction: submit, isImage: true))
+                            margin: EdgeInsets.only(
+                                top: ScreenUtil.instance.setWidth(15.0)),
+                            child: SubmitButton(
+                                onPressedFunction: submit,
+                                isImage: true,
+                                text:
+                                    (widget.number + 1) == widget.numberOfQuestions
+                                        ? AppLocalizations.of(context)
+                                            .translate('submitLast')
+                                        : AppLocalizations.of(context)
+                                            .translate('submit')))
                         : EmptyContainer()
       ],
     );
@@ -236,7 +269,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   }
 
   onTapSingle2() {
-     if (counterSurvey == 0) {
+    if (counterSurvey == 0) {
       setState(() {
         isTappedMCQ2 = true;
       });
@@ -261,7 +294,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   }
 
   onTapSingle3() {
-     if (counterSurvey == 0) {
+    if (counterSurvey == 0) {
       setState(() {
         isTappedMCQ3 = true;
       });
@@ -286,7 +319,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
   }
 
   onTapSingle4() {
-     if (counterSurvey == 0) {
+    if (counterSurvey == 0) {
       setState(() {
         isTappedMCQ4 = true;
       });

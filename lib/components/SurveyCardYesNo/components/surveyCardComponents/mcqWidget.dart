@@ -10,9 +10,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class McqWidget extends StatelessWidget {
   final widget;
-  final int index, isSingle;
+  final int index, isSingle, numberOfQuestions, number;
   final Function refresh;
-  McqWidget({Key key, this.widget, this.index, this.isSingle, this.refresh})
+  McqWidget(
+      {Key key,
+      this.widget,
+      this.index,
+      this.isSingle,
+      this.refresh,
+      this.number,
+      this.numberOfQuestions})
       : super(key: key);
 
   @override
@@ -35,6 +42,8 @@ class McqWidget extends StatelessWidget {
                   ],
                 )
           : ListMcqChoicesThree(
+              numberOfQuestions: numberOfQuestions,
+              number: number,
               numberOfChoices: numberOfChoices,
               index: index,
               isSingle: isSingle,
@@ -57,6 +66,8 @@ class McqWidget extends StatelessWidget {
                 )
           : MultipleMcqAnswers(
               numberOfChoices: numberOfChoices,
+              numberOfQuestions: numberOfQuestions,
+              number: number,
               widget: widget,
               index: index,
               isSingle: isSingle,

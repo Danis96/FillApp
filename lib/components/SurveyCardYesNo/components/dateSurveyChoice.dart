@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/labelContainer.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/submitButton.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -19,12 +18,17 @@ bool fieldColor3 = false;
 
 class DateChoice extends StatefulWidget {
   final String username;
+  final widget;
   final Function notifyParent;
   final DocumentSnapshot doc;
   final String title;
+  final int numberOfQuestions, number;
   String day, month, year;
   DateChoice(
       {this.doc,
+      this.widget,
+      this.number,
+      this.numberOfQuestions,
       this.notifyParent,
       this.username,
       this.title,
@@ -48,6 +52,8 @@ class _DateChoiceState extends State<DateChoice> {
     dayController.text = '';
     monthController.text = '';
     yearController.text = '';
+    print('Po redu: ' + widget.number.toString());
+    print('Ukupno: ' + widget.numberOfQuestions.toString());
   }
 
   @override
@@ -149,7 +155,7 @@ class _DateChoiceState extends State<DateChoice> {
                 Column(
                   children: <Widget>[
                     LabelContainer(
-                        text:AppLocalizations.of(context).translate('month'),
+                        text: AppLocalizations.of(context).translate('month'),
                         leftMargin: 10.0,
                         containerWidth: 80.0),
                     Container(
@@ -315,14 +321,20 @@ class _DateChoiceState extends State<DateChoice> {
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
             child: fieldColor1 || fieldColor2 || fieldColor3
                 ? Text(
-                    AppLocalizations.of(context).translate('thisFiledCantBeEmpty'),
+                    AppLocalizations.of(context)
+                        .translate('thisFiledCantBeEmpty'),
                     style: TextStyle(color: MyColor().error),
                   )
                 : Text(''),
           ),
           isSummary
               ? EmptyContainer()
-              : SubmitButton(onPressedFunction: onPressed, isImage: false)
+              : SubmitButton(
+                  onPressedFunction: onPressed,
+                  isImage: false,
+                  text: (widget.number + 1) == widget.numberOfQuestions
+                      ? AppLocalizations.of(context).translate('submitLast')
+                      : AppLocalizations.of(context).translate('submit'))
         ],
       ),
     );

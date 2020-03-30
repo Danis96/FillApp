@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class ContainerTypes extends StatelessWidget {
   final widget;
-  final int index, number, isSingle;
+  final int index, number, isSingle, numberOfQuestions;
   final Function refresh, isCompleted;
   final String type, branching, branchingChoice;
   var user;
@@ -17,6 +17,7 @@ class ContainerTypes extends StatelessWidget {
       {Key key,
       this.isCompleted,
       this.isSingle,
+      this.numberOfQuestions,
       this.refresh,
       this.index,
       this.widget,
@@ -41,12 +42,12 @@ class ContainerTypes extends StatelessWidget {
             isCompleted: isCompleted,
             answers: answers);
       case 'input':
-        return InputWidget(widget: widget, index: index, refresh: refresh);
+        return InputWidget(widget: widget, index: index, refresh: refresh, numberOfQuestions: numberOfQuestions, number: number);
       case 'mcq':
         return McqWidget(
-            widget: widget, index: index, refresh: refresh, isSingle: isSingle);
+            widget: widget, index: index, refresh: refresh, isSingle: isSingle, numberOfQuestions: numberOfQuestions, number: number);
       case 'date':
-        return DateWidget(widget: widget, index: index, refresh: refresh);
+        return DateWidget(widget: widget, index: index, refresh: refresh, numberOfQuestions: numberOfQuestions, number: number);
       case 'image':
         return ImageWidget(
             widget: widget, index: index, refresh: refresh, isSingle: isSingle);
