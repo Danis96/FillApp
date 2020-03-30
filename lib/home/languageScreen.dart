@@ -20,10 +20,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
-import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
-import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
-import 'package:fillproject/firebaseMethods/firebaseSignIn.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/localization/appLanguage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
@@ -33,7 +30,6 @@ import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:random_string/random_string.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageScreen extends StatefulWidget {
