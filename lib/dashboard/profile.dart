@@ -123,7 +123,6 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     checkForInternet();
-    print('SAROVIIIIIIIIIIIIIIIIII: ' + isSar.toString());
     return Scaffold(
       body: GestureDetector(
         onTap: () {
