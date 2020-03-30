@@ -21,12 +21,12 @@ class BigCircle extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
                 width: 1,
-                color: btnText == AppLocalizations.of(context).translate('complete')
+                color: btnText == AppLocalizations.of(context).translate('completeProfile')
                     ? Colors.red
                     : btnText == AppLocalizations.of(context).translate('transfer')
                         ? MyColor().greenCircle
                         : MyColor().white),
-            color: btnText == AppLocalizations.of(context).translate('complete') 
+            color: btnText == AppLocalizations.of(context).translate('completeProfile') 
                 ? MyColor().white
                 : btnText == AppLocalizations.of(context).translate('transfer')
                     ? MyColor().white
@@ -37,7 +37,7 @@ class BigCircle extends StatelessWidget {
         Text(
           usersSarovi.toString() + '\n' + AppLocalizations.of(context).translate("SAR"),
           style: TextStyle(
-            color: btnText == AppLocalizations.of(context).translate('complete')
+            color: btnText == AppLocalizations.of(context).translate('completeProfile')
                 ? MyColor().black
                 : btnText == AppLocalizations.of(context).translate('transfer')
                     ? MyColor().black

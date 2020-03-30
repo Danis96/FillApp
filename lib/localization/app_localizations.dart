@@ -8,7 +8,7 @@ class AppLocalizations {
 
       final Locale locale;
       AppLocalizations(this.locale);
-
+    
 
       /// helper method to keep the code in the widgets concise
       /// Localizations are accessed using an InheritedWidget "of" syntax
@@ -66,6 +66,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   bool shouldReload(LocalizationsDelegate<AppLocalizations> old) => false;       
 }
 
+/// cupertino localization
 class FallbackCupertinoLocalisationsDelegate
     extends LocalizationsDelegate<CupertinoLocalizations> {
   const FallbackCupertinoLocalisationsDelegate();
