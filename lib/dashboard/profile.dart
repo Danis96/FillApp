@@ -100,7 +100,7 @@ class _ProfileState extends State<Profile> {
   void initState() {
     /// checking if any change happend,
     /// if it is set btn text to complete profile if not, leave it
-    isButtonComplete ? btnText = AppLocalizations.of(context).translate('complete') : btnText = btnText;
+    isButtonComplete ? btnText = AppLocalizations.of(context).translate('completeProfile') : btnText = btnText;
     super.initState();
     checkForInternet();
     FirebaseCheck().getUserUsername(widget.arguments.username);
@@ -610,7 +610,7 @@ class _ProfileState extends State<Profile> {
       isButtonCompleteCC ? cc : usersCC,
     );
     setState(() {
-      btnText = isButtonComplete ? AppLocalizations.of(context).translate('transfer') : AppLocalizations.of(context).translate('complete');
+      btnText = isButtonComplete ? AppLocalizations.of(context).translate('transfer') : AppLocalizations.of(context).translate('completeProfile');
     });
     widget.refreshNavbar();
   }
@@ -645,9 +645,9 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressed() {
-    if (btnText == AppLocalizations.of(context).translate('register')) {
+    if (btnText == 'Register' || btnText == 'التسجيل') {
       FirebaseCrud().userRegister(context, widget.arguments.username);
-    } else if (btnText == AppLocalizations.of(context).translate('complete')) {
+    } else if (btnText == 'Complete Profile' || btnText == 'إكمال الملف الشخصي') {
       if (name == '' || regexSpace.hasMatch(name) == false) {
         setState(() {
           isEmptyName = true;
@@ -705,7 +705,7 @@ class _ProfileState extends State<Profile> {
       } else {
         completeProfile();
       }
-    } else if (btnText == AppLocalizations.of(context).translate('transfer')) {
+    } else if (btnText == 'Transfer' || btnText == 'تحويل') {
       if (isButtonCompleteName
           ? name == '' || regexSpace.hasMatch(name) == false
           : usersName == '' || regexSpace.hasMatch(usersName) == false) {
