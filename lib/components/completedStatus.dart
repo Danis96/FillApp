@@ -17,9 +17,7 @@ class CompletedStatus extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(24)),
-          color: isCompleted ? MyColor().black : number == 0
-                      ? MyColor().white
-                      : number > 0 && number <= total ? MyColor().white : MyColor().white,),
+          color: isCompleted ? MyColor().black : MyColor().white,),
       child: Text(text,
           style: TextStyle(
               color: isCompleted ? MyColor().white :  MyColor().black,

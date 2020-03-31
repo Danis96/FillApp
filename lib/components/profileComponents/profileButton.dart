@@ -16,7 +16,7 @@ class ProfileButton extends StatelessWidget {
       child: Container(
         margin: EdgeInsets.only(
             top: ScreenUtil.instance.setWidth(30.0),
-            bottom: ScreenUtil.instance.setWidth(30.0)),
+            bottom: ScreenUtil.instance.setWidth(15.0)),
         width: ScreenUtil.instance.setWidth(303.0),
         height: ScreenUtil.instance.setWidth(58.0),
         decoration: BoxDecoration(
@@ -28,15 +28,8 @@ class ProfileButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(28.0),
             ),
-            child: btnText == AppLocalizations.of(context).translate('register')
-                ? Text(AppLocalizations.of(context).translate('register'),
-                    style: TextStyle(
-                        color: MyColor().white,
-                        fontFamily: arabic,
-                        fontStyle: FontStyle.normal,
-                        fontSize: ScreenUtil.instance.setSp(18.0)),
-                    textAlign: TextAlign.center)
-                : btnText == AppLocalizations.of(context).translate('transfer')
+                child:
+                btnText == AppLocalizations.of(context).translate('transfer')
                     ? Text(AppLocalizations.of(context).translate('transfer'),
                         style: TextStyle(
                             color: MyColor().white,
