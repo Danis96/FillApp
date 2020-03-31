@@ -19,7 +19,7 @@ class MyValidation {
   RegExp regexPassword = new RegExp(r'^(?=.*?[A-Z])(?=.*[0-9])(?=.{8,})');
   RegExp regexSpace = new RegExp(r'\s');
   RegExp regexEmail = new RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+");
 
   String validatePhone(String phone, bool brPostoji, BuildContext context) {
     if (phone == '') {
