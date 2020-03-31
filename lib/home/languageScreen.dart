@@ -63,7 +63,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
           onWillPop: _onWillPop,
           child: Center(
             child: Container(
-              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(220.0)),
+              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(170.0)),
               child: Column(
                 children: <Widget>[
                   Center(
@@ -76,7 +76,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                   )),
                   Container(
                       margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(120.0)),
+                          top: ScreenUtil.instance.setWidth(85.0)),
                       child: Text(
                         AppLocalizations.of(context)
                             .translate('register&get5SAR'),
@@ -89,7 +89,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                     decoration: BoxDecoration(
                         borderRadius: new BorderRadius.circular(33.5),
                         border: Border.all(width: 1, color: MyColor().white),
-                        color: languageOfApp == 'Araboc'
+                        color: languageOfApp == 'Arabic'
                             ? MyColor().white
                             : MyColor().black),
                     width: ScreenUtil.instance.setWidth(316.0),
