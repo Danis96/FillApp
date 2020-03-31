@@ -32,7 +32,7 @@ import 'package:random_string/random_string.dart';
 class EmailResetPage extends StatelessWidget {
   String email;
   int _btnCounter = 0;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController emailController = new TextEditingController();
 

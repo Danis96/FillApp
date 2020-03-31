@@ -105,6 +105,11 @@ class _ProfileState extends State<Profile> {
     FirebaseCheck().getUserUsername(widget.arguments.username);
   }
 
+    @override
+  void dispose() {
+   super.dispose();
+  }
+
   checkForInternet() async {
     try {
       final result = await InternetAddress.lookup('google.com');
@@ -122,7 +127,6 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
-    checkForInternet();
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -187,7 +191,7 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-
+                 
                   focusNode: _nameFocus,
                   readOnly: isReadOnly,
                   maxLength: 200,
@@ -286,7 +290,6 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  focusNode: _emailFocus,
                   readOnly: isReadOnly,
                   maxLength: 200,
                   enableSuggestions: false,
@@ -347,7 +350,6 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  focusNode: _cardFocus,
                   readOnly: isReadOnly,
                   inputFormatters: [maskTextInputFormatterCard],
                   keyboardType: TextInputType.number,
@@ -409,7 +411,6 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
-                      focusNode: _dateFocus,
                       readOnly: isReadOnly,
                       inputFormatters: [maskTextInputFormatterDate],
                       keyboardType: TextInputType.number,
@@ -471,7 +472,6 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
-                      focusNode: _ccFocus,
                       readOnly: isReadOnly,
                       keyboardType: TextInputType.number,
                       inputFormatters: [maskTextInputFormatterCC],

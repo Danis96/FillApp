@@ -45,7 +45,7 @@ class EmailPage extends StatefulWidget {
 class _EmailPageState extends State<EmailPage> {
   bool emailPostoji = false;
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController emailController = new TextEditingController();
 
