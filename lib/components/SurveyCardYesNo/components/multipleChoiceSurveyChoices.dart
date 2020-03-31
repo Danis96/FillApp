@@ -345,37 +345,61 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
 
   saveMultiple1(String choice) {
     setState(() {
-      isTappedMCQ1 = true;
+      isTappedMCQ1 = !isTappedMCQ1;
     });
-    if (!multipleAnswers.contains(choice)) {
-      multipleAnswers.add(choice);
+    if (isTappedMCQ1) {
+      if (!multipleAnswers.contains(choice)) {
+        multipleAnswers.add(choice);
+        print(multipleAnswers);
+      }
+    } else {
+      multipleAnswers.remove(choice);
+      print(multipleAnswers);
     }
   }
 
   saveMultiple2(String choice) {
     setState(() {
-      isTappedMCQ2 = true;
+      isTappedMCQ2 = !isTappedMCQ2;
     });
-    if (!multipleAnswers.contains(choice)) {
-      multipleAnswers.add(choice);
+    if (isTappedMCQ2) {
+      if (!multipleAnswers.contains(choice)) {
+        multipleAnswers.add(choice);
+        print(multipleAnswers);
+      }
+    } else {
+      multipleAnswers.remove(choice);
+      print(multipleAnswers);
     }
   }
 
   saveMultiple3(String choice) {
     setState(() {
-      isTappedMCQ3 = true;
+      isTappedMCQ3 = !isTappedMCQ3;
     });
-    if (!multipleAnswers.contains(choice)) {
-      multipleAnswers.add(choice);
+    if (isTappedMCQ3) {
+      if (!multipleAnswers.contains(choice)) {
+        multipleAnswers.add(choice);
+        print(multipleAnswers);
+      }
+    } else {
+      multipleAnswers.remove(choice);
+      print(multipleAnswers);
     }
   }
 
   saveMultiple4(String choice) {
     setState(() {
-      isTappedMCQ4 = true;
+      isTappedMCQ4 = !isTappedMCQ4;
     });
-    if (!multipleAnswers.contains(choice)) {
-      multipleAnswers.add(choice);
+    if (isTappedMCQ4) {
+      if (!multipleAnswers.contains(choice)) {
+        multipleAnswers.add(choice);
+        print(multipleAnswers);
+      }
+    } else {
+      multipleAnswers.remove(choice);
+      print(multipleAnswers);
     }
   }
 
