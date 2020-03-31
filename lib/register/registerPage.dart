@@ -23,6 +23,7 @@ import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/verifyPinPage.dart';
@@ -155,8 +156,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: Padding(
                           padding: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(28.0)),
-                          child:
-                              MyTextComponent(text: AppLocalizations.of(context).translate('registerAndStartMakingMoney')),
+                          child: MyTextComponent(
+                              text: AppLocalizations.of(context)
+                                  .translate('registerAndStartMakingMoney')),
                         )),
                         Center(
                             child: Padding(
@@ -192,7 +194,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   vertical: ScreenUtil.instance.setWidth(25.0),
                                   horizontal:
                                       ScreenUtil.instance.setWidth(35.0)),
-                              labelText: AppLocalizations.of(context).translate('username'),
+                              labelText: AppLocalizations.of(context)
+                                  .translate('username'),
                               labelStyle: TextStyle(
                                   color: MyColor().white,
                                   fontSize: ScreenUtil.instance.setSp(18)),
@@ -223,7 +226,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             style: TextStyle(color: MyColor().white),
                             validator: (username) => MyValidation()
-                                .validateUsername(username, usernamePostoji, context),
+                                .validateUsername(
+                                    username, usernamePostoji, context),
                             onChanged: (input) {
                               setState(() {
                                 username = input;
@@ -239,9 +243,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 }
                               } on SocketException catch (_) {
                                 MySnackbar().showSnackbar(
-                                    AppLocalizations.of(context).translate('noIternent'),
+                                    AppLocalizations.of(context)
+                                        .translate('noIternent'),
                                     context,
-                                    AppLocalizations.of(context).translate('undo'));
+                                    AppLocalizations.of(context)
+                                        .translate('undo'));
                               }
                             },
                           ),
@@ -267,7 +273,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 "+966",
                                 style: TextStyle(color: MyColor().white),
                               ),
-                              labelText: AppLocalizations.of(context).translate('966phoneNumber'),
+                              labelText: AppLocalizations.of(context)
+                                  .translate('966phoneNumber'),
                               labelStyle: TextStyle(color: MyColor().white),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
@@ -299,8 +306,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                 phoneNo = '966' + input;
                               });
                             },
-                            validator: (phone) =>
-                                MyValidation().validatePhone(phone, brPostoji, context),
+                            validator: (phone) => MyValidation()
+                                .validatePhone(phone, brPostoji, context),
                             onFieldSubmitted: (value) async {
                               try {
                                 final result =
@@ -311,9 +318,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                 }
                               } on SocketException catch (_) {
                                 MySnackbar().showSnackbar(
-                                    AppLocalizations.of(context).translate('noIternent'),
+                                    AppLocalizations.of(context)
+                                        .translate('noIternent'),
                                     context,
-                                    AppLocalizations.of(context).translate('undo'));
+                                    AppLocalizations.of(context)
+                                        .translate('undo'));
                               }
                             },
                             style: TextStyle(color: MyColor().white),
@@ -337,12 +346,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                   }
                                 } on SocketException catch (_) {
                                   MySnackbar().showSnackbar(
-                                      AppLocalizations.of(context).translate('noIternent'),
+                                      AppLocalizations.of(context)
+                                          .translate('noIternent'),
                                       context,
-                                      AppLocalizations.of(context).translate('undo'));
+                                      AppLocalizations.of(context)
+                                          .translate('undo'));
                                 }
                               },
-                              child: Text(AppLocalizations.of(context).translate('sendPin'),
+                              child: Text(
+                                  AppLocalizations.of(context)
+                                      .translate('sendPin'),
                                   style: TextStyle(
                                       fontSize: ScreenUtil.instance.setSp(18))),
                             )),
@@ -401,9 +414,11 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   Future<bool> _onWillPop() async {
-     Navigator.of(context).push(CardAnimationTween(
-       widget: SignUp(),
-     ));
+    isFromProfile
+        ? Navigator.of(context).pop()
+        : Navigator.of(context).push(CardAnimationTween(
+            widget: SignUp(),
+          ));
     return EmptyContainer() ?? true;
   }
 }

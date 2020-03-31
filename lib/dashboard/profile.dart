@@ -665,7 +665,9 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressedRegister() {
+      isFromProfile = true;
       FirebaseCrud().userRegister(context, widget.arguments.username);
+
   }
 
   onPressed() {
