@@ -30,6 +30,12 @@ class _LanguageChooseState extends State<LanguageChoose> {
     getLanguage();
   }
 
+  refreshing() {
+    setState(() {
+      print('setan sam');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     appLanguage = Provider.of<AppLanguage>(context);
@@ -44,9 +50,10 @@ class _LanguageChooseState extends State<LanguageChoose> {
               selectedLanguage =
                   AppLocalizations.of(context).translate('arabic');
               languageOfApp = 'Arabic';
-              print('Arabic');
-
               Timer(Duration(milliseconds: 100), () {
+                widget.refresh();
+              });
+              Timer(Duration(milliseconds: 300), () {
                 widget.refresh();
               });
             },
@@ -76,14 +83,14 @@ class _LanguageChooseState extends State<LanguageChoose> {
           ),
           GestureDetector(
             onTap: () {
-              setState(() {});
               appLanguage.changeLanguage(Locale("en"));
               selectedLanguage =
                   AppLocalizations.of(context).translate('english');
               languageOfApp = 'English';
-              print('English');
-
                Timer(Duration(milliseconds: 100), () {
+                widget.refresh();
+              });
+              Timer(Duration(milliseconds: 300), () {
                 widget.refresh();
               });
             },

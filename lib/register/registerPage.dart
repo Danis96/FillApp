@@ -62,7 +62,7 @@ class _RegisterPageState extends State<RegisterPage> {
     populateReg();
   }
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   bool isLoggedIn = false, brPostoji = false, usernamePostoji = false;
 

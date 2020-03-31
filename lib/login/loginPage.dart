@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
   bool usernamePostoji = false;
   bool passwordPostoji = false;
   bool isLoggedIn = false;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
 
