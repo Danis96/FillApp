@@ -2,12 +2,14 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/bigCircle.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/transferSnackbar.dart';
-import 'package:fillproject/components/profileButton.dart';
+import 'package:fillproject/components/profileComponents/profileButton.dart';
+import 'package:fillproject/components/profileComponents/registerButton.dart';
 import 'package:fillproject/components/profileComponents/languageChoose.dart';
 import 'package:fillproject/components/transferWithIcon.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
@@ -36,6 +38,7 @@ class Profile extends StatefulWidget {
   final bool isReadOnly, showData;
   final Function refreshNavbar, settingStates;
   final DocumentSnapshot snap2;
+  final int isAnonymous;
   Profile({
     Key key,
     this.settingStates,
@@ -45,6 +48,7 @@ class Profile extends StatefulWidget {
     this.showData,
     this.refreshNavbar,
     this.snap2,
+    this.isAnonymous,
   }) : super(key: key);
 
   @override
@@ -100,14 +104,16 @@ class _ProfileState extends State<Profile> {
   void initState() {
     /// checking if any change happend,
     /// if it is set btn text to complete profile if not, leave it
-    isButtonComplete ? btnText = AppLocalizations.of(context).translate('completeProfile') : btnText = btnText;
+    isButtonComplete
+        ? btnText = AppLocalizations.of(context).translate('completeProfile')
+        : btnText = btnText;
     super.initState();
     FirebaseCheck().getUserUsername(widget.arguments.username);
   }
 
-    @override
+  @override
   void dispose() {
-   super.dispose();
+    super.dispose();
   }
 
   checkForInternet() async {
@@ -175,7 +181,8 @@ class _ProfileState extends State<Profile> {
               Container(
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
-                child: BigCircle(usersSarovi: isSar ? saroviOffline : usersSarovi),
+                child:
+                    BigCircle(usersSarovi: isSar ? saroviOffline : usersSarovi),
               ),
               Container(
                 margin:
@@ -191,7 +198,6 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                 
                   focusNode: _nameFocus,
                   readOnly: isReadOnly,
                   maxLength: 200,
@@ -200,7 +206,8 @@ class _ProfileState extends State<Profile> {
                   style: TextStyle(color: Colors.black),
                   initialValue: widget.snap2.data['name_and_surname'],
                   decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context).translate('name&surname'),
+                    labelText:
+                        AppLocalizations.of(context).translate('name&surname'),
                     counterText: '',
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
@@ -273,7 +280,8 @@ class _ProfileState extends State<Profile> {
                                   fontSize: ScreenUtil.instance.setSp(15.0)),
                             )
                           : Text(
-                             AppLocalizations.of(context).translate("dateOfBirth"),
+                              AppLocalizations.of(context)
+                                  .translate("dateOfBirth"),
                               style: TextStyle(
                                   fontSize: ScreenUtil.instance.setSp(15.0)),
                             ),
@@ -300,7 +308,8 @@ class _ProfileState extends State<Profile> {
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    labelText: AppLocalizations.of(context).translate('enterEmail'),
+                    labelText:
+                        AppLocalizations.of(context).translate('enterEmail'),
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -362,7 +371,8 @@ class _ProfileState extends State<Profile> {
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    labelText: AppLocalizations.of(context).translate('enterCardNumber'),
+                    labelText: AppLocalizations.of(context)
+                        .translate('enterCardNumber'),
                     labelStyle: TextStyle(color: MyColor().black),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -423,7 +433,8 @@ class _ProfileState extends State<Profile> {
                         hasFloatingPlaceholder: false,
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 25.0, horizontal: 35.0),
-                        labelText: AppLocalizations.of(context).translate('date'),
+                        labelText:
+                            AppLocalizations.of(context).translate('date'),
                         labelStyle: TextStyle(color: MyColor().black),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(33.5)),
@@ -527,7 +538,10 @@ class _ProfileState extends State<Profile> {
                 ],
               ),
               Container(
-                child: ProfileButton(onPressed: onPressed),
+                child: isAnonymous == 0 ? ProfileButton(onPressed: onPressed) : EmptyContainer(),
+              ),
+              Container(
+                child: isAnonymous == 1 ? RegisterButtonProfile(onPressedRegister) : EmptyContainer(),
               ),
             ],
           )),
@@ -539,8 +553,10 @@ class _ProfileState extends State<Profile> {
   onTapFieldAnonymous() {
     if (_btnCounter == 0) {
       isReadOnly
-          ? MySnackbar()
-              .showSnackbar(AppLocalizations.of(context).translate('youMustRegisterFirst'), context,  AppLocalizations.of(context).translate('ok'))
+          ? MySnackbar().showSnackbar(
+              AppLocalizations.of(context).translate('youMustRegisterFirst'),
+              context,
+              AppLocalizations.of(context).translate('ok'))
           : print('ssss');
       _btnCounter = 1;
       Timer(Duration(seconds: 2), () {
@@ -552,8 +568,10 @@ class _ProfileState extends State<Profile> {
   onTapFieldAnonymousEmail() {
     if (_btnCounter == 0) {
       isReadOnly
-          ? MySnackbar()
-              .showSnackbar(AppLocalizations.of(context).translate('youMustRegisterFirst'), context, AppLocalizations.of(context).translate('ok'))
+          ? MySnackbar().showSnackbar(
+              AppLocalizations.of(context).translate('youMustRegisterFirst'),
+              context,
+              AppLocalizations.of(context).translate('ok'))
           : showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
@@ -570,7 +588,6 @@ class _ProfileState extends State<Profile> {
                       key: UniqueKey(),
                       height: ScreenUtil.instance.setHeight(265.0),
                       child: CupertinoDatePicker(
-                        
                         mode: CupertinoDatePickerMode.date,
                         initialDateTime: dateOfBirth2,
                         onDateTimeChanged: (date) {
@@ -594,8 +611,8 @@ class _ProfileState extends State<Profile> {
   }
 
   successfullTransfer() {
-    return MySnackbarTransfer()
-        .showSnackbar(AppLocalizations.of(context).translate('successTransfer'), context, '');
+    return MySnackbarTransfer().showSnackbar(
+        AppLocalizations.of(context).translate('successTransfer'), context, '');
   }
 
   /// Metoda koja se poziva na klik button-a kada na njemu piše 'Complete profile'
@@ -610,7 +627,9 @@ class _ProfileState extends State<Profile> {
       isButtonCompleteCC ? cc : usersCC,
     );
     setState(() {
-      btnText = isButtonComplete ? AppLocalizations.of(context).translate('transfer') : AppLocalizations.of(context).translate('completeProfile');
+      btnText = isButtonComplete
+          ? AppLocalizations.of(context).translate('transfer')
+          : AppLocalizations.of(context).translate('completeProfile');
     });
     widget.refreshNavbar();
   }
@@ -643,14 +662,14 @@ class _ProfileState extends State<Profile> {
     Timer(Duration(seconds: 1), () {
       setState(() {});
     });
-    print('OFFLINE SAROVI SUU: ' + saroviOffline.toString());
-    print('SAROVI SUU: ' + usersSarovi.toString());
+  }
+
+  onPressedRegister() {
+      FirebaseCrud().userRegister(context, widget.arguments.username);
   }
 
   onPressed() {
-    if (btnText == 'Register' || btnText == 'التسجيل') {
-      FirebaseCrud().userRegister(context, widget.arguments.username);
-    } else if (btnText == 'Complete Profile' || btnText == 'إكمال الملف الشخصي') {
+    if (btnText == 'Complete Profile' || btnText == 'إكمال الملف الشخصي') {
       if (name == '' || regexSpace.hasMatch(name) == false) {
         setState(() {
           isEmptyName = true;

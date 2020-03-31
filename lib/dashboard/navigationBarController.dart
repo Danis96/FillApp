@@ -58,6 +58,7 @@ class _BottomNavigationBarControllerState
   void initState() {
     super.initState();
     isOnSummary = false;
+    /// after widget is done building call this method
     SchedulerBinding.instance.addPostFrameCallback((_) {
       settingStates();
     });
@@ -107,10 +108,7 @@ class _BottomNavigationBarControllerState
         });
 
         /// if user is anonymous + sars
-      } else if (usersSars >= 100 || saroviOffline >= 100) {
-        btnText = AppLocalizations.of(context).translate('register');
-        isReadOnly = true;
-      }
+      } 
     }
 
     /// State 2
@@ -158,6 +156,7 @@ class _BottomNavigationBarControllerState
           username: arguments.username,
         )),
         Profile(
+            isAnonymous: isAnonymous,
             settingStates: settingStates,
             snap2: snap,
             refreshNavbar: refreshNavbar,
