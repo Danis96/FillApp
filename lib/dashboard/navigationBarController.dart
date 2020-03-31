@@ -25,6 +25,7 @@ import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import '../components/constants/myText.dart';
 import '../components/emptyCont.dart';
 import '../firebaseMethods/firebaseCheck.dart';
@@ -57,7 +58,9 @@ class _BottomNavigationBarControllerState
   void initState() {
     super.initState();
     isOnSummary = false;
-    settingStates();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      settingStates();
+    });
   }
 
   Widget getIsAnonymous(String username) {

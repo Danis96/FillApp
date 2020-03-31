@@ -5,7 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class CompletedStatus extends StatelessWidget {
   final String text, arabic;
   final bool isCompleted;
-  CompletedStatus({Key key, this.text, this.arabic, this.isCompleted})
+  int number, total;
+  CompletedStatus({Key key, this.text, this.arabic, this.isCompleted, this.number, this.total})
       : super(key: key);
 
   @override
@@ -16,10 +17,12 @@ class CompletedStatus extends StatelessWidget {
       alignment: Alignment.center,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(24)),
-          color: isCompleted ? MyColor().black : MyColor().white),
+          color: isCompleted ? MyColor().black : number == 0
+                      ? MyColor().white
+                      : number > 0 && number <= total ? MyColor().white : MyColor().white,),
       child: Text(text,
           style: TextStyle(
-              color: isCompleted ? MyColor().white : MyColor().black,
+              color: isCompleted ? MyColor().white :  MyColor().black,
               fontWeight: isCompleted ? FontWeight.w400 : FontWeight.w700,
               fontFamily: arabic,
               fontStyle: FontStyle.normal,

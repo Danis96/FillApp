@@ -179,7 +179,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                           question: widget.name,
                           containerHeight: ScreenUtil.instance.setHeight(80.0)),
                     ),
-                    isCompleted ? StatusSurvey() : EmptyContainer(),
+                    StatusSurvey(isCompleted: isCompleted, number: number, total: widget.total),
                   ]))),
     );
   }

@@ -29,6 +29,8 @@
     "complete": "Complete Profile",
     "status": "Status",
     "statusCompleted": "COMPLETED",
+    "statusOpen": "OPEN",
+    "statusClosed":"CLOSED",
     "newLineSAR": "\nSAR",
     "profile": "Profile",
     "transwerWith": "Transfer With",
