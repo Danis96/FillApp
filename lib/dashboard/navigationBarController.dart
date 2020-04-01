@@ -26,7 +26,6 @@ import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import '../components/constants/myText.dart';
 import '../components/emptyCont.dart';
 import '../firebaseMethods/firebaseCheck.dart';
 import '../routes/routeConstants.dart';
