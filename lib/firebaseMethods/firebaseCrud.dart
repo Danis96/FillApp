@@ -68,6 +68,8 @@ class FirebaseCrud {
       'expipre_date': expireDate,
       'cc': cc,
       'transferSar': tSar,
+      'dateOfAdminTransfer' : '',
+      'isDone': 0
     });
   }
 
