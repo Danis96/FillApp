@@ -183,7 +183,6 @@ class _LanguageScreenState extends State<LanguageScreen> {
   getLanguage() async {
     var prefs = await SharedPreferences.getInstance();
     selectedLanguageCode = prefs.getString('language_code');
-    print('Selected language was: ' + selectedLanguageCode);
     if (selectedLanguageCode == 'en') {
       setState(() {
         selectedLanguage = AppLocalizations.of(context).translate('english');
