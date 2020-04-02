@@ -42,11 +42,13 @@ class _LanguageChooseState extends State<LanguageChoose> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           GestureDetector(
-            onTap: () {
+            onTap: () async {
               appLanguage.changeLanguage(Locale("ar"));
               selectedLanguage =
                   AppLocalizations.of(context).translate('arabic');
               languageOfApp = 'Arabic';
+              var prefs = await SharedPreferences.getInstance();
+              prefs.setString('language_code', 'ar');
               Timer(Duration(milliseconds: 100), () {
                 widget.refresh();
               });
@@ -79,12 +81,14 @@ class _LanguageChooseState extends State<LanguageChoose> {
             ),
           ),
           GestureDetector(
-            onTap: () {
+            onTap: () async {
               appLanguage.changeLanguage(Locale("en"));
               selectedLanguage =
                   AppLocalizations.of(context).translate('english');
               languageOfApp = 'English';
-               Timer(Duration(milliseconds: 100), () {
+              var prefs = await SharedPreferences.getInstance();
+              prefs.setString('language_code', 'en');
+              Timer(Duration(milliseconds: 100), () {
                 widget.refresh();
               });
               Timer(Duration(milliseconds: 300), () {
@@ -128,13 +132,26 @@ class _LanguageChooseState extends State<LanguageChoose> {
     var prefs = await SharedPreferences.getInstance();
     selectedLanguageCode = prefs.getString('language_code');
     if (selectedLanguageCode == 'en') {
-      appLanguage.changeLanguage(Locale("en"));
-      selectedLanguage = AppLocalizations.of(context).translate('english');
-      languageOfApp = 'English';
+      setState(() {
+        selectedLanguage = AppLocalizations.of(context).translate('english');
+        appLanguage.changeLanguage(Locale("en"));
+        languageOfApp = 'English';
+        prefs.setString('language_code', 'en');
+      });
+    } else if (selectedLanguageCode == 'ar') {
+      setState(() {
+        selectedLanguage = AppLocalizations.of(context).translate('english');
+        appLanguage.changeLanguage(Locale("ar"));
+        languageOfApp = 'Arabic';
+        prefs.setString('language_code', 'ar');
+      });
     } else {
-      appLanguage.changeLanguage(Locale("ar"));
-      selectedLanguage = AppLocalizations.of(context).translate('arabic');
-      languageOfApp = 'Arabic';
+      setState(() {
+        selectedLanguage = AppLocalizations.of(context).translate('english');
+        appLanguage.changeLanguage(Locale("en"));
+        languageOfApp = 'English';
+        prefs.setString('language_code', 'en');
+      });
     }
   }
 }
