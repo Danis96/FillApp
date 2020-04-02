@@ -109,6 +109,7 @@ class _ProfileState extends State<Profile> {
         : btnText = btnText;
     super.initState();
     FirebaseCheck().getUserUsername(widget.arguments.username);
+    checkForInternet();
   }
 
   @override
