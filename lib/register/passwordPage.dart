@@ -197,9 +197,10 @@ class _PasswordPageState extends State<PasswordPage> {
                         right: ScreenUtil.instance.setWidth(43.0)),
                     width: ScreenUtil.instance.setWidth(316.0),
                     child: RichText(
+                      overflow: TextOverflow.visible,
                       text: new TextSpan(children: [
                         new TextSpan(
-                          text: AppLocalizations.of(context).translate('byTappingSignIn&Accept&Accept'),
+                          text: AppLocalizations.of(context).translate('byTappingSignIn&Accept'),
                           style: new TextStyle(
                               color: Colors.white,
                               fontSize: ScreenUtil.instance.setSp(12)),

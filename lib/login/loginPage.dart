@@ -93,7 +93,8 @@ class _LoginPageState extends State<LoginPage> {
                                   fontStyle: FontStyle.normal,
                                   fontFamily: arabic,
                                   fontSize: ScreenUtil.instance.setSp(23.0)),
-                              textAlign: TextAlign.center)),
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.visible)),
                     ),
                     Container(
                       width: ScreenUtil.instance.setWidth(316.0),
