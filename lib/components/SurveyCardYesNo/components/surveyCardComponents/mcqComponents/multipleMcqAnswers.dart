@@ -1,5 +1,4 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/multipleChoiceSurveyChoices.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

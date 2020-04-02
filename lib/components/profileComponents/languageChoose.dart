@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/appLanguage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
@@ -31,9 +30,7 @@ class _LanguageChooseState extends State<LanguageChoose> {
   }
 
   refreshing() {
-    setState(() {
-      print('setan sam');
-    });
+    setState(() {});
   }
 
   @override
@@ -130,7 +127,6 @@ class _LanguageChooseState extends State<LanguageChoose> {
   getLanguage() async {
     var prefs = await SharedPreferences.getInstance();
     selectedLanguageCode = prefs.getString('language_code');
-    print('Selected language was: ' + selectedLanguageCode);
     if (selectedLanguageCode == 'en') {
       appLanguage.changeLanguage(Locale("en"));
       selectedLanguage = AppLocalizations.of(context).translate('english');

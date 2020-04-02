@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -10,7 +9,6 @@ import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../firebaseMethods/firebaseCrud.dart';
 
 class SurveyChoices extends StatefulWidget {
   final PasswordArguments arguments;
@@ -36,7 +34,6 @@ class SurveyChoices extends StatefulWidget {
 }
 
 class _YesNoSurveyChoicesState extends State<SurveyChoices> {
-  int _btnCounter = 0;
 
   @override
   void initState() {

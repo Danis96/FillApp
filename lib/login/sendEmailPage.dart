@@ -17,7 +17,6 @@ import 'dart:async';
 import 'dart:io';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';

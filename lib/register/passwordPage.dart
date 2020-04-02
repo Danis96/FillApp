@@ -15,13 +15,14 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fillproject/components/constants/MyText.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
+import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/components/privacy.dart';
@@ -34,9 +35,6 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../components/emptyCont.dart';
-import '../firebaseMethods/firebaseCheck.dart';
 
 String password, username = "";
 int _btnCounter = 0, isAnonymous, oldSar;
