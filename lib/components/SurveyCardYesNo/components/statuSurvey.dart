@@ -34,7 +34,7 @@ class StatusSurvey extends StatelessWidget {
                       ? AppLocalizations.of(context).translate('statusOpen')
                       : number > 0 && number <= total ? AppLocalizations.of(context).translate('statusClosed') : '',
               arabic: arabic,
-              isCompleted: true)
+              isCompleted: isCompleted ? true : number == 0 ? false : number > 0 && number <= total ? false : true)
         ],
       ),
     );

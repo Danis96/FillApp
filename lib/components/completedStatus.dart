@@ -21,12 +21,10 @@ class CompletedStatus extends StatelessWidget {
       child: Text(text,
           style: TextStyle(
               color: isCompleted ? MyColor().white :  MyColor().black,
-              fontWeight: isCompleted ? FontWeight.w400 : FontWeight.w700,
+              fontWeight: FontWeight.w400,
               fontFamily: arabic,
               fontStyle: FontStyle.normal,
-              fontSize: isCompleted
-                  ? ScreenUtil.instance.setSp(12.0)
-                  : ScreenUtil.instance.setSp(22.0)),
+              fontSize: ScreenUtil.instance.setSp(12.0)),
           textAlign: TextAlign.center),
     );
   }
