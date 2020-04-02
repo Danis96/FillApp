@@ -106,13 +106,15 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(33.5),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           setState(() {
                             appLanguage.changeLanguage(Locale("ar"));
-                            selectedLanguage = AppLocalizations.of(context).translate('arabic');
+                            selectedLanguage = AppLocalizations.of(context)
+                                .translate('arabic');
                             languageOfApp = 'Arabic';
                           });
-
+                          var prefs = await SharedPreferences.getInstance();
+                          prefs.setString('language_code', 'ar');
                           Navigator.of(context).push(
                             CardAnimationTween(
                               widget: SignUp(),
@@ -122,7 +124,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('arabic'),
                           style: TextStyle(
-                             fontSize: ScreenUtil.instance.setSp(18.0),
+                              fontSize: ScreenUtil.instance.setSp(18.0),
                               color: languageOfApp == 'Arabic'
                                   ? MyColor().black
                                   : MyColor().white),
@@ -148,13 +150,15 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(33.5),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           setState(() {
                             appLanguage.changeLanguage(Locale("en"));
-                            selectedLanguage = AppLocalizations.of(context).translate('english');
+                            selectedLanguage = AppLocalizations.of(context)
+                                .translate('english');
                             languageOfApp = 'English';
                           });
-
+                          var prefs = await SharedPreferences.getInstance();
+                          prefs.setString('language_code', 'en');
                           Navigator.of(context).push(
                             CardAnimationTween(
                               widget: SignUp(),
@@ -164,7 +168,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('english'),
                           style: TextStyle(
-                            fontSize: ScreenUtil.instance.setSp(18.0),
+                              fontSize: ScreenUtil.instance.setSp(18.0),
                               color: languageOfApp == 'English'
                                   ? MyColor().black
                                   : MyColor().white),
@@ -190,12 +194,21 @@ class _LanguageScreenState extends State<LanguageScreen> {
         selectedLanguage = AppLocalizations.of(context).translate('english');
         appLanguage.changeLanguage(Locale("en"));
         languageOfApp = 'English';
+        prefs.setString('language_code', 'en');
       });
-    } else {
+    } else if (selectedLanguageCode == 'ar') {
       setState(() {
         selectedLanguage = AppLocalizations.of(context).translate('english');
         appLanguage.changeLanguage(Locale("ar"));
         languageOfApp = 'Arabic';
+        prefs.setString('language_code', 'ar');
+      });
+    } else {
+      setState(() {
+        selectedLanguage = AppLocalizations.of(context).translate('english');
+        appLanguage.changeLanguage(Locale("en"));
+        languageOfApp = 'English';
+        prefs.setString('language_code', 'en');
       });
     }
   }
