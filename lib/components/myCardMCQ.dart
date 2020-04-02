@@ -94,7 +94,7 @@ class _MyCardMCQState extends State<MyCardMCQ> {
               containerHeight: ScreenUtil.instance.setHeight(100.0)),
           ),
           Container(
-            height: ScreenUtil.instance.setHeight(240.0),
+            height: ScreenUtil.instance.setWidth(240.0),
             width: ScreenUtil.instance.setWidth(260.0),
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
             child: Column(

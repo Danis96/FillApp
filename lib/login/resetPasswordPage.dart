@@ -131,7 +131,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),
                               labelText: AppLocalizations.of(context).translate('enterCodeFromEmail'),
-                              labelStyle: TextStyle(color: MyColor().white),
+                              labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setWidth(17.0)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(33.5)),
@@ -178,7 +178,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),
                               labelText: AppLocalizations.of(context).translate('enterNewPssword'),
-                              labelStyle: TextStyle(color: MyColor().white),
+                              labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setWidth(17.0)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(33.5)),
@@ -226,7 +226,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: 25.0, horizontal: 35.0),
                               labelText: AppLocalizations.of(context).translate('reenterPassword'),
-                              labelStyle: TextStyle(color: MyColor().white),
+                              labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setWidth(17.0)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(33.5)),
@@ -285,7 +285,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               context, AppLocalizations.of(context).translate('undo'));
                         }
                       },
-                      child: Text(AppLocalizations.of(context).translate('resetPassword'))),
+                      child: Text(AppLocalizations.of(context).translate('resetPassword'), style: TextStyle(fontSize: ScreenUtil.instance.setWidth(16.0)),)),
                 ),
 
                 /// izvlaci podatke za tog usera na osnovu emaila koji smo pruzeli sa prethodnog screen-a

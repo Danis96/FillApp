@@ -15,7 +15,7 @@ class TransferWithIcon extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            child: Text(AppLocalizations.of(context).translate('transwerWith')),
+            child: Text(AppLocalizations.of(context).translate('transwerWith'), style: TextStyle(fontSize: ScreenUtil.instance.setSp(14.0)),),
           ),
           Container(
             height: ScreenUtil.instance.setHeight(27.0),

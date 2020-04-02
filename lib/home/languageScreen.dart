@@ -63,7 +63,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
           onWillPop: _onWillPop,
           child: Center(
             child: Container(
-              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(170.0)),
+              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(150.0)),
               child: Column(
                 children: <Widget>[
                   Center(
@@ -122,6 +122,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('arabic'),
                           style: TextStyle(
+                             fontSize: ScreenUtil.instance.setSp(18.0),
                               color: languageOfApp == 'Arabic'
                                   ? MyColor().black
                                   : MyColor().white),
@@ -163,6 +164,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                         child: Text(
                           AppLocalizations.of(context).translate('english'),
                           style: TextStyle(
+                            fontSize: ScreenUtil.instance.setSp(18.0),
                               color: languageOfApp == 'English'
                                   ? MyColor().black
                                   : MyColor().white),

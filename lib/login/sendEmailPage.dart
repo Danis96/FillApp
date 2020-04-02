@@ -64,7 +64,7 @@ class EmailResetPage extends StatelessWidget {
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(25.0)),
                 child: SizedBox(
                     width: ScreenUtil.instance.setWidth(184.0),
-                    height: ScreenUtil.instance.setHeight(28.0),
+                    height: ScreenUtil.instance.setWidth(28.0),
                     child: Text(AppLocalizations.of(context).translate('resetPassword'),
                         style: TextStyle(
                             color: MyColor().white,
@@ -109,7 +109,7 @@ class EmailResetPage extends StatelessWidget {
                       contentPadding: new EdgeInsets.symmetric(
                           vertical: 25.0, horizontal: 35.0),
                       labelText: AppLocalizations.of(context).translate('email'),
-                      labelStyle: TextStyle(color: MyColor().white),
+                      labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setWidth(17.0)),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(33.5)),
                         borderSide: BorderSide(color: MyColor().white),
