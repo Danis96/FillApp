@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/labelContainer.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/submitButton.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -45,8 +43,6 @@ class _DayDateFieldState extends State<DayDateField> {
   void initState() {
     super.initState();
     dayController.text = '';
-    print('Po redu: ' + widget.number.toString());
-    print('Ukupno: ' + widget.numberOfQuestions.toString());
   }
 
   @override

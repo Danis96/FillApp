@@ -16,7 +16,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
@@ -32,7 +31,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../routes/routeArguments.dart';
 
 class RegisterPage extends StatefulWidget {
   final DidntRecievePinArguments arguments;

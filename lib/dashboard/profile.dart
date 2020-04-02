@@ -2,9 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/bigCircle.dart';
-import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/transferSnackbar.dart';
@@ -17,12 +15,12 @@ import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import '../routes/routeArguments.dart';
 
 /// Profile class
 ///
@@ -93,12 +91,7 @@ class _ProfileState extends State<Profile> {
   String usersName, usersEmail, usersDOB, usersCard, usersCardDate, usersCC;
 
   /// field focus variables
-  FocusNode _nameFocus = FocusNode(),
-      _dobFocus = FocusNode(),
-      _emailFocus = FocusNode(),
-      _cardFocus = FocusNode(),
-      _dateFocus = FocusNode(),
-      _ccFocus = FocusNode();
+  FocusNode _nameFocus = FocusNode();
 
   @override
   void initState() {

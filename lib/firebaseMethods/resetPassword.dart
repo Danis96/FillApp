@@ -10,7 +10,6 @@
 /// Tech387 - T2
 /// Feb, 2020
 
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mailer/mailer.dart';

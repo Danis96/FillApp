@@ -52,8 +52,6 @@ class _DateChoiceState extends State<DateChoice> {
     dayController.text = '';
     monthController.text = '';
     yearController.text = '';
-    print('Po redu: ' + widget.number.toString());
-    print('Ukupno: ' + widget.numberOfQuestions.toString());
   }
 
   @override

@@ -15,7 +15,6 @@
 
 import 'dart:async';
 import 'dart:io';
-import 'package:fillproject/components/constants/MyText.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/emptyCont.dart';

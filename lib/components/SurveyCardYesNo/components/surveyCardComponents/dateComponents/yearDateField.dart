@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/labelContainer.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/submitButton.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -44,8 +43,6 @@ class _YearDateFieldState extends State<YearDateField> {
   void initState() {
     super.initState();
     yearController.text = '';
-    print('Po redu: ' + widget.number.toString());
-    print('Ukupno: ' + widget.numberOfQuestions.toString());
   }
 
   @override
@@ -78,7 +75,7 @@ class _YearDateFieldState extends State<YearDateField> {
                             return GestureDetector(
                               onTap: () {
                                 if (selectedYear == null) {
-                                  selectedYear = '1';
+                                  selectedYear = '2020';
                                 }
                                 widget.year = selectedYear;
                                 yearController.text = widget.year;

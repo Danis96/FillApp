@@ -4,9 +4,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComp
 import 'package:fillproject/components/SurveyCardYesNo/surveyCard.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
-import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
@@ -350,11 +348,9 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     if (isTappedMCQ1) {
       if (!multipleAnswers.contains(choice)) {
         multipleAnswers.add(choice);
-        print(multipleAnswers);
       }
     } else {
       multipleAnswers.remove(choice);
-      print(multipleAnswers);
     }
   }
 
@@ -365,11 +361,9 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     if (isTappedMCQ2) {
       if (!multipleAnswers.contains(choice)) {
         multipleAnswers.add(choice);
-        print(multipleAnswers);
       }
     } else {
       multipleAnswers.remove(choice);
-      print(multipleAnswers);
     }
   }
 
@@ -380,11 +374,9 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     if (isTappedMCQ3) {
       if (!multipleAnswers.contains(choice)) {
         multipleAnswers.add(choice);
-        print(multipleAnswers);
       }
     } else {
       multipleAnswers.remove(choice);
-      print(multipleAnswers);
     }
   }
 
@@ -395,11 +387,9 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     if (isTappedMCQ4) {
       if (!multipleAnswers.contains(choice)) {
         multipleAnswers.add(choice);
-        print(multipleAnswers);
       }
     } else {
       multipleAnswers.remove(choice);
-      print(multipleAnswers);
     }
   }
 

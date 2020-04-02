@@ -5,10 +5,8 @@ import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/containerTypes.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/yesNoSurveySarQuestionProgress.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
-import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
@@ -154,7 +152,6 @@ class _YesNoSurveyState extends State<SurveyCard>
   refresh() {
     checkForInternet();
     widget.number++;
-    print(widget.number);
     widget.increaseAnswered();
 
     if (widget.number ==  widget.surveyDoc.numberOfQuestions) {

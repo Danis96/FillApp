@@ -255,7 +255,6 @@ class _BottomNavigationBarControllerState
     setState(() {
       key = UniqueKey();
     });
-    print(key);
   }
 
   /// function for loader
