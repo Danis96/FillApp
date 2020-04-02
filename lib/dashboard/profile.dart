@@ -176,7 +176,7 @@ class _ProfileState extends State<Profile> {
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(70.0)),
                 child: Text(
                   AppLocalizations.of(context).translate('profile'),
-                  style: TextStyle(fontSize: 23.0),
+                  style: TextStyle(fontSize:ScreenUtil.instance.setSp(23.0)),
                 ),
               ),
               Container(
@@ -192,7 +192,7 @@ class _ProfileState extends State<Profile> {
               ),
               Container(
                 width: ScreenUtil.instance.setWidth(316.0),
-                height: ScreenUtil.instance.setHeight(67.0),
+                height: ScreenUtil.instance.setWidth(67.0),
                 margin: EdgeInsets.only(
                   left: ScreenUtil.instance.setWidth(47.0),
                   top: ScreenUtil.instance.setWidth(22.0),
@@ -209,11 +209,12 @@ class _ProfileState extends State<Profile> {
                   decoration: InputDecoration(
                     labelText:
                         AppLocalizations.of(context).translate('name&surname'),
+
                     counterText: '',
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
                         vertical: 25.0, horizontal: 35.0),
-                    labelStyle: TextStyle(color: MyColor().black),
+                    labelStyle: TextStyle(color: MyColor().black, fontSize: ScreenUtil.instance.setSp(16.0)),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
                       borderSide: BorderSide(
@@ -255,7 +256,7 @@ class _ProfileState extends State<Profile> {
                 height: ScreenUtil.instance.setHeight(67.0),
                 margin: EdgeInsets.only(
                   left: ScreenUtil.instance.setWidth(47.0),
-                  top: ScreenUtil.instance.setWidth(22.0),
+                   top: ScreenUtil.instance.setWidth(22.0),
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: GestureDetector(
@@ -266,19 +267,19 @@ class _ProfileState extends State<Profile> {
                         color: Colors.black,
                         width: 1,
                       ),
-                      borderRadius: BorderRadius.circular(33.5),
+                      
+                      borderRadius: BorderRadius.circular(ScreenUtil.instance.setWidth(33.5)),
                     ),
                     child: Container(
-                      margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(20.0),
-                          left: ScreenUtil.instance.setWidth(30.0)),
+                      padding: EdgeInsets.all(15.0),
+                      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(9.0), left: ScreenUtil.instance.setWidth(7.0)) ,
                       child: isClicked
                           ? Text(
                               isDateChanged
                                   ? dateOfBirth
                                   : widget.snap2.data['date_of_birth'],
                               style: TextStyle(
-                                  fontSize: ScreenUtil.instance.setSp(15.0)),
+                                  fontSize: ScreenUtil.instance.setSp(14.0)),
                             )
                           : Text(
                               AppLocalizations.of(context)
@@ -311,7 +312,7 @@ class _ProfileState extends State<Profile> {
                         vertical: 25.0, horizontal: 35.0),
                     labelText:
                         AppLocalizations.of(context).translate('enterEmail'),
-                    labelStyle: TextStyle(color: MyColor().black),
+                    labelStyle: TextStyle(color: MyColor().black,  fontSize: ScreenUtil.instance.setSp(16.0)),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
                       borderSide: BorderSide(
@@ -374,7 +375,7 @@ class _ProfileState extends State<Profile> {
                         vertical: 25.0, horizontal: 35.0),
                     labelText: AppLocalizations.of(context)
                         .translate('enterCardNumber'),
-                    labelStyle: TextStyle(color: MyColor().black),
+                    labelStyle: TextStyle(color: MyColor().black,  fontSize: ScreenUtil.instance.setSp(16.0)),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(33.5)),
                       borderSide: BorderSide(
@@ -436,7 +437,7 @@ class _ProfileState extends State<Profile> {
                             vertical: 25.0, horizontal: 35.0),
                         labelText:
                             AppLocalizations.of(context).translate('date'),
-                        labelStyle: TextStyle(color: MyColor().black),
+                        labelStyle: TextStyle(color: MyColor().black,  fontSize: ScreenUtil.instance.setSp(16.0)),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(33.5)),
                           borderSide: BorderSide(
@@ -497,7 +498,7 @@ class _ProfileState extends State<Profile> {
                         contentPadding: new EdgeInsets.symmetric(
                             vertical: 25.0, horizontal: 35.0),
                         labelText: AppLocalizations.of(context).translate('cc'),
-                        labelStyle: TextStyle(color: MyColor().black),
+                        labelStyle: TextStyle(color: MyColor().black,  fontSize: ScreenUtil.instance.setSp(16.0)),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(33.5)),
                           borderSide: BorderSide(

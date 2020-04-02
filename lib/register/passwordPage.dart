@@ -158,7 +158,7 @@ class _PasswordPageState extends State<PasswordPage> {
                                 vertical: ScreenUtil.instance.setWidth(25.0),
                                 horizontal: ScreenUtil.instance.setWidth(35.0)),
                             labelText: AppLocalizations.of(context).translate('password'),
-                            labelStyle: TextStyle(color: MyColor().white),
+                            labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setSp(16.0)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(33.5)),

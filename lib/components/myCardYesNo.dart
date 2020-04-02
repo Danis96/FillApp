@@ -113,7 +113,7 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
                           notifyParent: widget.notifyParent,
                           target: widget.target,
                           doc: widget.doc,
-                          marginRight: ScreenUtil.instance.setWidth(35.0),
+                          marginRight: 35.0,
                           username: widget.username)
                     ],
                   ),

@@ -131,7 +131,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       child: Container(
           key: UniqueKey(),
           width: ScreenUtil.instance.setWidth(340.0),
-          height: ScreenUtil.instance.setHeight(265.0),
+          height: ScreenUtil.instance.setWidth(275.0),
           margin: EdgeInsets.only(
               left: ScreenUtil.instance.setWidth(30.0),
               right: ScreenUtil.instance.setWidth(30.0),

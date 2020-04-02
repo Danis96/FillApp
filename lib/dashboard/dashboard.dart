@@ -144,7 +144,7 @@ class _DashboardPageState extends State<DashboardPage>
               children: <Widget>[
                 Expanded(
                   child: SizedBox(
-                    height: ScreenUtil.instance.setHeight(430.0),
+                    height: ScreenUtil.instance.setWidth(433.0),
                     child: FutureBuilder(
                       /// [getQuestions]
                       ///

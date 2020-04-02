@@ -31,8 +31,8 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
     switch (type) {
       case 'yesno':
         return {
-          height = 200.0,
-          heightContainer = 420.0,
+          height = 100.0,
+          heightContainer = 300.0,
         };
       case 'input':
         return {
@@ -44,8 +44,8 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
           heightContainer = 210.0};
       case 'date':
         return {
-          height = 30.0, 
-          heightContainer = 210.0};
+          height = 33.0, 
+          heightContainer = 220.0};
       case 'image':
         return {
           height = 30.0, 
@@ -61,8 +61,8 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: ScreenUtil.instance.setHeight(heightContainer),
-        width: ScreenUtil.instance.setWidth(414.0),
+        height: ScreenUtil.instance.setWidth(heightContainer),
+        width: ScreenUtil.instance.setWidth(416.0),
         child: Column(
           children: <Widget>[
             Row(
@@ -70,7 +70,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
                 Container(
                     margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(57.0),
-                        bottom: ScreenUtil.instance.setWidth(10.0),
+                        bottom: ScreenUtil.instance.setWidth(7.0),
                         top: ScreenUtil.instance.setWidth(height)),
                     child: MyQuestionSAR(
                       isCompleted: false,

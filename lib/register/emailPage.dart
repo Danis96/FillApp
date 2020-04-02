@@ -124,7 +124,7 @@ class _EmailPageState extends State<EmailPage> {
                                   horizontal:
                                       ScreenUtil.instance.setWidth(35.0)),
                               labelText: AppLocalizations.of(context).translate('email'),
-                              labelStyle: TextStyle(color: MyColor().white),
+                              labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setSp(16.0)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(33.5)),

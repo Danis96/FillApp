@@ -16,7 +16,6 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
@@ -260,10 +259,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               right: ScreenUtil.instance.setWidth(49.0),
                               bottom: ScreenUtil.instance.setWidth(19.0)),
                           child: TextFormField(
+                            
                             enableSuggestions: false,
                             keyboardType: TextInputType.number,
                             controller: phoneController,
                             decoration: InputDecoration(
+
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: ScreenUtil.instance.setWidth(25.0),
@@ -275,7 +276,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               labelText: AppLocalizations.of(context)
                                   .translate('966phoneNumber'),
-                              labelStyle: TextStyle(color: MyColor().white),
+                              labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setSp(16.0)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(33.5)),

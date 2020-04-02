@@ -48,7 +48,7 @@ class _InputChoiceState extends State<InputChoice> {
               ? Text(
                   AppLocalizations.of(context)
                       .translate('thisFiledCantBeEmpty'),
-                  style: TextStyle(color: MyColor().error),
+                  style: TextStyle(color: MyColor().error, fontSize: ScreenUtil.instance.setSp(17.0)),
                 )
               : Text(''),
         ),

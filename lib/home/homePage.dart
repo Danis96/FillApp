@@ -58,7 +58,7 @@ class _SignUpState extends State<SignUp> {
           onWillPop: _onWillPop,
           child: Center(
             child: Container(
-              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(170.0)),
+              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(140.0)),
               child: Column(
                 children: <Widget>[
                   Center(
@@ -98,13 +98,13 @@ class _SignUpState extends State<SignUp> {
                                   phone: '', username: ''));
                         },
                         child: Text(AppLocalizations.of(context)
-                            .translate('newRegister'))),
+                            .translate('newRegister'), style: TextStyle(fontSize: ScreenUtil.instance.setSp(16.0)), )),
                   ),
                   Container(
                     width: ScreenUtil.instance.setWidth(316.0),
                     height: ScreenUtil.instance.setHeight(67.0),
                     margin: EdgeInsets.only(
-                        bottom: ScreenUtil.instance.setWidth(33.0),
+                        bottom: ScreenUtil.instance.setWidth(15.0),
                         left: ScreenUtil.instance.setWidth(49.0),
                         right: ScreenUtil.instance.setWidth(49.0)),
                     child: RaisedButton(
@@ -116,10 +116,11 @@ class _SignUpState extends State<SignUp> {
                               .pushNamed(Login); // go to Login Page
                         },
                         child: Text(
-                            AppLocalizations.of(context).translate("signIn"))),
+                            AppLocalizations.of(context).translate("signIn"), style: TextStyle(fontSize: ScreenUtil.instance.setSp(16.0)),)),
                   ),
                   Container(
                       width: ScreenUtil.instance.setWidth(255.0),
+
                       child: Center(
                           child: FlatButton(
                               onPressed: () {

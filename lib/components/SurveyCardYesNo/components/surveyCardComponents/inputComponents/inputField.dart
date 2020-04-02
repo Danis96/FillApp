@@ -28,7 +28,7 @@ class InputField extends StatelessWidget {
           contentPadding:
               new EdgeInsets.symmetric(vertical: 25.0, horizontal: 35.0),
           labelText: AppLocalizations.of(context).translate('typeTheAnswer'),
-          labelStyle: TextStyle(color: MyColor().black),
+          labelStyle: TextStyle(color: MyColor().black, fontSize: ScreenUtil.instance.setWidth(17.0)),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(33.5)),
             borderSide: BorderSide(
