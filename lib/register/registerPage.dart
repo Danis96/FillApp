@@ -130,8 +130,10 @@ class _RegisterPageState extends State<RegisterPage> {
           icon: Icon(Icons.arrow_back_ios),
           color: Colors.white,
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (_) => SignUp()));
+            isFromProfile
+                ? Navigator.of(context).pop()
+                : Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (_) => SignUp()));
           },
         ),
       ),
@@ -258,12 +260,10 @@ class _RegisterPageState extends State<RegisterPage> {
                               right: ScreenUtil.instance.setWidth(49.0),
                               bottom: ScreenUtil.instance.setWidth(19.0)),
                           child: TextFormField(
-                            
                             enableSuggestions: false,
                             keyboardType: TextInputType.number,
                             controller: phoneController,
                             decoration: InputDecoration(
-
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: ScreenUtil.instance.setWidth(25.0),
@@ -275,7 +275,9 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                               labelText: AppLocalizations.of(context)
                                   .translate('966phoneNumber'),
-                              labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setSp(16.0)),
+                              labelStyle: TextStyle(
+                                  color: MyColor().white,
+                                  fontSize: ScreenUtil.instance.setSp(16.0)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(33.5)),
