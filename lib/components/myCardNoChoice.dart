@@ -1,10 +1,11 @@
-/// Multiple Choice Question  class
+/// Yes No Choice class
 ///
 /// This class contains methods that updates users choice.
 ///
 /// Imports:
 ///   MyColor constant class with all colors
 ///   Cloud_firestore for connection to the firebase
+///   FirebaseCrud class which contains all method for database
 ///   ScreenUtil class for respnsive desing
 ///   QuestionSkelet model class for questions.
 ///
@@ -16,47 +17,49 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/FlashQuestion/questionSkelet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../globals.dart';
-import 'emptyCont.dart';
-
-class MyMCQChoice extends StatefulWidget {
-  final DocumentSnapshot doc;
-  final DocumentSnapshot snap;
+class MyNoChoice extends StatefulWidget {
   final String choice, username;
-  int index, target, sar, usersSar;
-  final Function() notifyParent;
+  final int index, target, sar;
+  final Function notifyParent;
   final List<dynamic> snapi;
+  final DocumentSnapshot doc, snap;
+  final ValueKey key;
+  int usersSars;
   final bool isSar;
-  final bottomMargin;
+  final double marginRight;
 
-  MyMCQChoice(
-      {this.choice,
-      this.isSar,
-      this.snapi,
-      this.index,
-      this.notifyParent,
-      this.target,
-      this.doc,
-      this.username,
-      this.sar,
-      this.snap,
-      this.usersSar,
-      this.bottomMargin});
+  MyNoChoice({
+    this.choice,
+    this.isSar,
+    this.snap,
+    this.usersSars,
+    this.key,
+    this.sar,
+    this.index,
+    this.snapi,
+    this.notifyParent,
+    this.target,
+    this.doc,
+    this.username,
+    this.marginRight,
+  });
 
   @override
-  _MyMCQChoiceState createState() => _MyMCQChoiceState();
+  _MyNoChoiceState createState() => _MyNoChoiceState();
 }
 
-class _MyMCQChoiceState extends State<MyMCQChoice> {
+class _MyNoChoiceState extends State<MyNoChoice> {
   @override
   void initState() {
     super.initState();
-    isTappedMCQFlash = false;
+    isTappedNoYesFlash = false;
   }
 
   @override
@@ -68,32 +71,33 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
   Widget build(BuildContext context) {
     return Container(
         key: UniqueKey(),
-        width: ScreenUtil.instance.setWidth(257.0),
+        width: ScreenUtil.instance.setWidth(110.0),
         height: ScreenUtil.instance.setHeight(60.0),
-        margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
         alignment: Alignment.center,
+        margin: EdgeInsets.only(
+            left: ScreenUtil.instance.setWidth(widget.marginRight)),
         child: Container(
-          width: ScreenUtil.instance.setWidth(257.0),
+          width: ScreenUtil.instance.setWidth(113.0),
           height: ScreenUtil.instance.setHeight(55.0),
           child: RaisedButton(
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(28.0),
             ),
-            hoverColor: isTappedMCQFlash ? MyColor().white : MyColor().black,
+            hoverColor: isTappedNoYesFlash ? MyColor().white : MyColor().black,
             elevation: 0,
-            color: isTappedMCQFlash ? MyColor().white : MyColor().black,
+            color: isTappedNoYesFlash ? MyColor().white : MyColor().black,
             onPressed: () {
               setState(() {
-                isTappedMCQFlash = true;
+                isTappedNoYesFlash = true;
               });
               Timer(Duration(milliseconds: 300), () {
                 onPressed();
               });
             },
             child: Text(widget.choice,
-            overflow: TextOverflow.ellipsis,
                 style: TextStyle(
-                    color: isTappedMCQFlash ? MyColor().black : MyColor().white,
+                    color:
+                        isTappedNoYesFlash ? MyColor().black : MyColor().white,
                     fontWeight: FontWeight.w400,
                     fontFamily: arabic,
                     fontStyle: FontStyle.normal,
@@ -101,29 +105,28 @@ class _MyMCQChoiceState extends State<MyMCQChoice> {
           ),
         ),
         decoration: BoxDecoration(
-            color: isTappedMCQFlash ? MyColor().white : MyColor().black,
+            color: isTappedNoYesFlash ? MyColor().white : MyColor().black,
             border: Border.all(color: MyColor().white),
             borderRadius: BorderRadius.all(Radius.circular(33.5))));
   }
 
   onPressed() {
-    widget.usersSar += widget.sar;
+    widget.usersSars += widget.sar;
     saroviOffline += widget.sar;
-
-    /// update sarova na osnovu da li je app online ili offline
+    /// update sarova na osnovu da li je app online ili offlines
     ///
     /// online = [widget.usersSar]
     /// offline = [saroviOffline]
     if (widget.isSar) {
       FirebaseCrud().updateUsersSars(widget.snap, context, saroviOffline);
     } else {
-      FirebaseCrud().updateUsersSars(widget.snap, context, widget.usersSar);
+      FirebaseCrud().updateUsersSars(widget.snap, context, widget.usersSars);
     }
     FirebaseCrud().updateListOfUsernameAnswers(
         widget.doc, context, widget.username, widget.choice);
     FirebaseCrud().updateListOfUsernamesThatGaveAnswers(
         widget.doc, context, widget.username);
-    isTappedMCQFlash = false;
+    isTappedNoYesFlash = false;
     listKey.currentState.removeItem(
       widget.index,
       (context, animation) => EmptyContainer(),
