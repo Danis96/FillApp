@@ -16,8 +16,7 @@ bool isTapped = false,
     isTappedMCQFlash2 = false,
     isTappedMCQFlash3 = false,
     isFromProfile = false;
-int saroviOffline;
-int questionNumber;
+int saroviOffline, questionNumber;
 int counterSurvey = 0;
 int anonym;
 bool isSummary = false;
