@@ -90,9 +90,6 @@ class _ProfileState extends State<Profile> {
   DateTime dateOfBirth2 = DateTime.now();
   String usersName, usersEmail, usersDOB, usersCard, usersCardDate, usersCC;
 
-  /// field focus variables
-  FocusNode _nameFocus = FocusNode();
-
   @override
   void initState() {
     /// checking if any change happend,
@@ -192,8 +189,7 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  focusNode: _nameFocus,
-                  readOnly: isReadOnly,
+                  readOnly: isAnonymous == 1,
                   maxLength: 200,
                   enableSuggestions: false,
                   textCapitalization: TextCapitalization.sentences,
@@ -293,7 +289,7 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  readOnly: isReadOnly,
+                   readOnly: isAnonymous == 1,
                   maxLength: 200,
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
@@ -354,7 +350,7 @@ class _ProfileState extends State<Profile> {
                   right: ScreenUtil.instance.setWidth(47.0),
                 ),
                 child: TextFormField(
-                  readOnly: isReadOnly,
+                 readOnly: isAnonymous == 1,
                   inputFormatters: [maskTextInputFormatterCard],
                   keyboardType: TextInputType.number,
                   maxLength: 200,
@@ -416,7 +412,7 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
-                      readOnly: isReadOnly,
+                      readOnly: isAnonymous == 1,
                       inputFormatters: [maskTextInputFormatterDate],
                       keyboardType: TextInputType.number,
                       maxLength: 200,
@@ -478,7 +474,7 @@ class _ProfileState extends State<Profile> {
                       right: ScreenUtil.instance.setWidth(0.0),
                     ),
                     child: TextFormField(
-                      readOnly: isReadOnly,
+                     readOnly: isAnonymous == 1,
                       keyboardType: TextInputType.number,
                       inputFormatters: [maskTextInputFormatterCC],
                       maxLength: 200,
@@ -547,7 +543,7 @@ class _ProfileState extends State<Profile> {
 
   onTapFieldAnonymous() {
     if (_btnCounter == 0) {
-      isReadOnly
+      isAnonymous == 1
           ? MySnackbar().showSnackbar(
               AppLocalizations.of(context).translate('youMustRegisterFirst'),
               context,
@@ -562,12 +558,12 @@ class _ProfileState extends State<Profile> {
 
   onTapFieldAnonymousEmail() {
     if (_btnCounter == 0) {
-      isReadOnly
+     isAnonymous == 1
           ? MySnackbar().showSnackbar(
               AppLocalizations.of(context).translate('youMustRegisterFirst'),
               context,
               AppLocalizations.of(context).translate('ok'))
-          : showModalBottomSheet(
+          : isAnonymous == 0 ? showModalBottomSheet(
               context: context,
               builder: (BuildContext context) {
                 return GestureDetector(
@@ -597,7 +593,8 @@ class _ProfileState extends State<Profile> {
                         },
                       ),
                     ));
-              });
+              }
+              ) : print('ssss');
       _btnCounter = 1;
       Timer(Duration(seconds: 2), () {
         _btnCounter = 0;

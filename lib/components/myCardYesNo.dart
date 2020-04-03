@@ -64,8 +64,8 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
     return Container(
        key: widget.key,
         width: ScreenUtil.instance.setWidth(340.0),
-        height: ScreenUtil.instance.setHeight(200.0),
-    margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(12.0), top: ScreenUtil.instance.setWidth(160.0), right: ScreenUtil.instance.setWidth(12.0)),
+        height: ScreenUtil.instance.setHeight(150.0),
+    margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(12.0), top: ScreenUtil.instance.setWidth(140.0), right: ScreenUtil.instance.setWidth(12.0)),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(30)),
             color: MyColor().black),
