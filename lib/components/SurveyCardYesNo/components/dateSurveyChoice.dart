@@ -425,6 +425,8 @@ class _DateChoiceState extends State<DateChoice> {
           yearController.text;
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
+      offlineAnswers.add(userAnswer);
+      print(offlineAnswers);
       widget.notifyParent();
       selectedDay = '1';
       selectedMonth = '1';

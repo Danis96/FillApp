@@ -47,7 +47,9 @@ class _InputChoiceState extends State<InputChoice> {
               ? Text(
                   AppLocalizations.of(context)
                       .translate('thisFiledCantBeEmpty'),
-                  style: TextStyle(color: MyColor().error, fontSize: ScreenUtil.instance.setSp(17.0)),
+                  style: TextStyle(
+                      color: MyColor().error,
+                      fontSize: ScreenUtil.instance.setSp(17.0)),
                 )
               : Text(''),
         ),
@@ -80,6 +82,8 @@ class _InputChoiceState extends State<InputChoice> {
       });
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
+      offlineAnswers.add(userAnswer);
+      print(offlineAnswers);
       FocusScope.of(context).requestFocus(new FocusNode());
       widget.notifyParent();
     }
