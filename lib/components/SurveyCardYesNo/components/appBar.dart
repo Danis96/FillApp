@@ -48,6 +48,8 @@ class SurveyAppBar extends StatelessWidget {
                       isOnSummary = false;
                       isFutureDone = false;
                       answersList.removeRange(0, answersList.length);
+                      offlineAnswers = [];
+                      print('PRAZNA OFFLINE LISTA ' + offlineAnswers.toString());
                       Navigator.of(context).pushNamed(NavBar,
                           arguments: PasswordArguments(
                               email: arguments.email,

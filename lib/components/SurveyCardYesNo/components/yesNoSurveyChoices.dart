@@ -97,6 +97,8 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
+    offlineAnswers.add(widget.choice1);
+    print(offlineAnswers);
 
     if (widget.branching == 'yes') {
       if (widget.choice1 == widget.branchingChoice) {

@@ -39,7 +39,6 @@ class MonthDateField extends StatefulWidget {
 }
 
 class _MonthDateFieldState extends State<MonthDateField> {
-
   @override
   void initState() {
     super.initState();
@@ -58,7 +57,9 @@ class _MonthDateFieldState extends State<MonthDateField> {
           Column(
             children: <Widget>[
               LabelContainer(
-                  text: AppLocalizations.of(context).translate('month'), leftMargin: 0.0, containerWidth: 300.0),
+                  text: AppLocalizations.of(context).translate('month'),
+                  leftMargin: 0.0,
+                  containerWidth: 300.0),
               Container(
                 width: ScreenUtil.instance.setWidth(327.0),
                 height: ScreenUtil.instance.setWidth(61.0),
@@ -126,14 +127,18 @@ class _MonthDateFieldState extends State<MonthDateField> {
             margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(3.0)),
             child: fieldColor1
                 ? Text(
-                    AppLocalizations.of(context).translate('thisFiledCantBeEmpty'),
+                    AppLocalizations.of(context)
+                        .translate('thisFiledCantBeEmpty'),
                     style: TextStyle(color: MyColor().error),
                   )
                 : Text(''),
           ),
           isSummary
               ? EmptyContainer()
-              : SubmitButton(onPressedFunction: onPressed, isImage: false, text: (widget.number + 1) == widget.numberOfQuestions
+              : SubmitButton(
+                  onPressedFunction: onPressed,
+                  isImage: false,
+                  text: (widget.number + 1) == widget.numberOfQuestions
                       ? AppLocalizations.of(context).translate('submitLast')
                       : AppLocalizations.of(context).translate('submit'))
         ],
@@ -158,6 +163,8 @@ class _MonthDateFieldState extends State<MonthDateField> {
       userAnswer = monthController.text;
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
+      offlineAnswers.add(userAnswer);
+      print(offlineAnswers);
       widget.notifyParent();
       selectedMonth = '1';
     }

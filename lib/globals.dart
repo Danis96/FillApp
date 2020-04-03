@@ -29,3 +29,4 @@ int userLevelForList;
 String usernameGlobal, passGlobal, emailGlobal, phoneGlobal;
 GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 String languageOfApp;
+List<dynamic> offlineAnswers = [];

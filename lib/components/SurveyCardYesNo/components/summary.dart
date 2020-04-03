@@ -14,6 +14,7 @@
 /// Feb, 2020
 
 import 'dart:async';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/congradulationsContainer.dart';
@@ -68,12 +69,24 @@ class _SummaryState extends State<Summary> {
   List<dynamic> userAnswersSplitted = [];
   int num = 0;
   String userAnswers, usernameThatAnswers;
+  bool isSar = false;
 
   @override
   void initState() {
     super.initState();
     isOnSummary = true;
-    
+    checkForInternet();
+  }
+
+  checkForInternet() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        isSar = false;
+      }
+    } on SocketException catch (_) {
+      isSar = true;
+    }
   }
 
   @override
@@ -91,6 +104,9 @@ class _SummaryState extends State<Summary> {
         }
       }
       printList();
+      print('LISTA OFFLINE    ' + offlineAnswers.toString());
+      print('Ukupno pitanja ima ' + widget.totalProgress.toString());
+      print('Duzina niza offline je ' + offlineAnswers.length.toString());
     });
 
     double defaultScreenWidth = 400.0;
@@ -150,7 +166,7 @@ class _SummaryState extends State<Summary> {
                       username: widget.arguments.username),
                   totalProgress: widget.totalProgress,
                   surveyDoc: widget.surveyDoc,
-                  answersList: answersList,
+                  answersList: offlineAnswers,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -173,7 +189,7 @@ class _SummaryState extends State<Summary> {
 
                               return SummaryAnswerContainer(
                                 surveyDoc: widget.surveyDoc,
-                                answersList: answersList,
+                                answersList: offlineAnswers,
                                 animateTo: widget.animateTo,
                                 index: index,
                                 question: title,
@@ -207,6 +223,8 @@ class _SummaryState extends State<Summary> {
 
   Future<bool> _onWillPop() async {
     answersList.removeRange(0, answersList.length);
+    offlineAnswers = [];
+    print('PRAZNA OFFLINE LISTA ' + offlineAnswers.toString());
     setState(() {
       isSummary = false;
       isOnSummary = false;

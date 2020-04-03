@@ -163,6 +163,8 @@ class _YearDateFieldState extends State<YearDateField> {
       userAnswer = yearController.text;
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
+      offlineAnswers.add(userAnswer);
+      print(offlineAnswers);
       widget.notifyParent();
       selectedYear = '2020';
     }
