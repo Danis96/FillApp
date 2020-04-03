@@ -14,9 +14,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
+import 'package:fillproject/components/myCardNoChoice.dart';
+import 'package:fillproject/components/myCardYesChoice.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
-import 'package:fillproject/components/myYesNoChoice.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -89,7 +90,7 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
                 margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
                   child: Row(
                     children: <Widget>[
-                      MyYesNoChoice(
+                      MyYesChoice(
                           choice: MyText().willYes,
                           snapi: widget.snapi,
                           usersSars: widget.usersSar,
@@ -102,7 +103,7 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
                           doc: widget.doc,
                           marginRight: ScreenUtil.instance.setWidth(0.0),
                           username: widget.username),
-                      MyYesNoChoice(
+                      MyNoChoice(
                           choice: MyText().willNo,
                           snapi: widget.snapi,
                           usersSars: widget.usersSar,
