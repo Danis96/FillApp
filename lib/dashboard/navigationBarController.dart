@@ -22,6 +22,7 @@ import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/register/passwordPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +62,7 @@ class _BottomNavigationBarControllerState
     SchedulerBinding.instance.addPostFrameCallback((_) {
       settingStates();
     });
+    
   }
 
   Widget getIsAnonymous(String username) {
@@ -103,10 +105,7 @@ class _BottomNavigationBarControllerState
         setState(() {
           btnText =
               AppLocalizations.of(context).translate('transferAfter100SAR');
-          isReadOnly = true;
         });
-
-        /// if user is anonymous + sars
       } 
     }
 
@@ -118,14 +117,12 @@ class _BottomNavigationBarControllerState
       if ((usersSars >= 100 || saroviOffline >= 100) && cc == '') {
         setState(() {
           btnText = AppLocalizations.of(context).translate('completeProfile');
-          isReadOnly = false;
         });
 
         /// if user is registered + have sars + profile completed
       } else if ((usersSars >= 100 || saroviOffline >= 100) && cc != '') {
         setState(() {
           btnText = AppLocalizations.of(context).translate('transfer');
-          isReadOnly = false;
         });
 
         /// if user is registered + no sars + not profile completed
@@ -133,7 +130,6 @@ class _BottomNavigationBarControllerState
         setState(() {
           btnText =
               AppLocalizations.of(context).translate('transferAfter100SAR');
-          isReadOnly = false;
         });
       }
     }
