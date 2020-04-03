@@ -22,13 +22,12 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 
-/// Profile class
-///
-/// This class contains methods and layout for profile page.
-///
-/// Authors: Sena Cikic, Danis Preldzic, Adi Cengic, Jusuf Elfarahati
-/// Tech387 - T2
-/// Feb, 2020
+FocusNode nameFocus;
+FocusNode dateFocus;
+FocusNode emailFocus;
+FocusNode creditFocus;
+FocusNode expireFocus;
+FocusNode ccFocus;
 
 class Profile extends StatefulWidget {
   final PasswordArguments arguments;
@@ -100,6 +99,12 @@ class _ProfileState extends State<Profile> {
     super.initState();
     FirebaseCheck().getUserUsername(widget.arguments.username);
     checkForInternet();
+    nameFocus = new FocusNode();
+    emailFocus = new FocusNode();
+    dateFocus = new FocusNode();
+    creditFocus = new FocusNode();
+    expireFocus = new FocusNode();
+    ccFocus = new FocusNode();
   }
 
   @override
@@ -166,7 +171,7 @@ class _ProfileState extends State<Profile> {
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(70.0)),
                 child: Text(
                   AppLocalizations.of(context).translate('profile'),
-                  style: TextStyle(fontSize:ScreenUtil.instance.setSp(23.0)),
+                  style: TextStyle(fontSize: ScreenUtil.instance.setSp(23.0)),
                 ),
               ),
               Container(
@@ -180,359 +185,440 @@ class _ProfileState extends State<Profile> {
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
                 child: TransferWithIcon(),
               ),
-              Container(
-                width: ScreenUtil.instance.setWidth(316.0),
-                height: ScreenUtil.instance.setWidth(67.0),
-                margin: EdgeInsets.only(
-                  left: ScreenUtil.instance.setWidth(47.0),
-                  top: ScreenUtil.instance.setWidth(22.0),
-                  right: ScreenUtil.instance.setWidth(47.0),
-                ),
-                child: TextFormField(
-                  readOnly: isAnonymous == 1,
-                  maxLength: 200,
-                  enableSuggestions: false,
-                  textCapitalization: TextCapitalization.sentences,
-                  style: TextStyle(color: Colors.black),
-                  initialValue: widget.snap2.data['name_and_surname'],
-                  decoration: InputDecoration(
-                    labelText:
-                        AppLocalizations.of(context).translate('name&surname'),
-
-                    counterText: '',
-                    hasFloatingPlaceholder: false,
-                    contentPadding: new EdgeInsets.symmetric(
-                        vertical: 25.0, horizontal: 35.0),
-                    labelStyle: TextStyle(color: MyColor().black, fontSize: ScreenUtil.instance.setSp(16.0)),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: isEmptyName ? MyColor().error : MyColor().black,
+              Form(
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setWidth(67.0),
+                      margin: EdgeInsets.only(
+                        left: ScreenUtil.instance.setWidth(47.0),
+                        top: ScreenUtil.instance.setWidth(22.0),
+                        right: ScreenUtil.instance.setWidth(47.0),
                       ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                          color:
-                              isEmptyName ? MyColor().error : MyColor().black),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: MyColor().error,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: MyColor().error,
-                      ),
-                    ),
-                  ),
-                  onTap: () => onTapFieldAnonymous(),
-                  onChanged: (input) {
-                    setState(() {
-                      name = input;
-                      isButtonComplete = true;
-                      isButtonCompleteName = true;
-                    });
-                  },
-                  obscureText: false,
-                ),
-              ),
-              Container(
-                width: ScreenUtil.instance.setWidth(316.0),
-                height: ScreenUtil.instance.setHeight(67.0),
-                margin: EdgeInsets.only(
-                  left: ScreenUtil.instance.setWidth(47.0),
-                   top: ScreenUtil.instance.setWidth(22.0),
-                  right: ScreenUtil.instance.setWidth(47.0),
-                ),
-                child: GestureDetector(
-                  onTap: () => onTapFieldAnonymousEmail(),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      ),
-                      
-                      borderRadius: BorderRadius.circular(ScreenUtil.instance.setWidth(33.5)),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(15.0),
-                      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(9.0), left: ScreenUtil.instance.setWidth(7.0)) ,
-                      child: isClicked
-                          ? Text(
-                              isDateChanged
-                                  ? dateOfBirth
-                                  : widget.snap2.data['date_of_birth'],
-                              style: TextStyle(
-                                  fontSize: ScreenUtil.instance.setSp(14.0)),
-                            )
-                          : Text(
-                              AppLocalizations.of(context)
-                                  .translate("dateOfBirth"),
-                              style: TextStyle(
-                                  fontSize: ScreenUtil.instance.setSp(15.0)),
+                      child: TextFormField(
+                        autofocus: false,
+                        focusNode: nameFocus,
+                        readOnly: isAnonymous == 1,
+                        maxLength: 200,
+                        enableSuggestions: false,
+                        textCapitalization: TextCapitalization.sentences,
+                        style: TextStyle(color: Colors.black),
+                        initialValue: widget.snap2.data['name_and_surname'],
+                        decoration: InputDecoration(
+                          labelText: AppLocalizations.of(context)
+                              .translate('name&surname'),
+                          counterText: '',
+                          hasFloatingPlaceholder: false,
+                          contentPadding: new EdgeInsets.symmetric(
+                              vertical: 25.0, horizontal: 35.0),
+                          labelStyle: TextStyle(
+                              color: MyColor().black,
+                              fontSize: ScreenUtil.instance.setSp(16.0)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: isEmptyName
+                                  ? MyColor().error
+                                  : MyColor().black,
                             ),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: ScreenUtil.instance.setWidth(316.0),
-                height: ScreenUtil.instance.setHeight(67.0),
-                margin: EdgeInsets.only(
-                  left: ScreenUtil.instance.setWidth(47.0),
-                  top: ScreenUtil.instance.setWidth(22.0),
-                  right: ScreenUtil.instance.setWidth(47.0),
-                ),
-                child: TextFormField(
-                   readOnly: isAnonymous == 1,
-                  maxLength: 200,
-                  enableSuggestions: false,
-                  style: TextStyle(color: Colors.black),
-                  initialValue: widget.snap2.data['email_profile'],
-                  decoration: InputDecoration(
-                    counterText: '',
-                    hasFloatingPlaceholder: false,
-                    contentPadding: new EdgeInsets.symmetric(
-                        vertical: 25.0, horizontal: 35.0),
-                    labelText:
-                        AppLocalizations.of(context).translate('enterEmail'),
-                    labelStyle: TextStyle(color: MyColor().black,  fontSize: ScreenUtil.instance.setSp(16.0)),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: isEmptyMail ? MyColor().error : MyColor().black,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                          color:
-                              isEmptyMail ? MyColor().error : MyColor().black),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: MyColor().error,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: MyColor().error,
-                      ),
-                    ),
-                  ),
-                  onChanged: (input) {
-                    setState(() {
-                      email = input;
-                      isButtonCompleteEmail = true;
-                      isButtonComplete = true;
-                    });
-                  },
-                  onTap: () => onTapFieldAnonymous(),
-                  obscureText: false,
-                ),
-              ),
-              Container(
-                child: LanguageChoose(refresh: widget.settingStates),
-              ),
-              Container(
-                width: ScreenUtil.instance.setWidth(316.0),
-                height: ScreenUtil.instance.setHeight(67.0),
-                margin: EdgeInsets.only(
-                  left: ScreenUtil.instance.setWidth(47.0),
-                  top: ScreenUtil.instance.setWidth(22.0),
-                  right: ScreenUtil.instance.setWidth(47.0),
-                ),
-                child: TextFormField(
-                 readOnly: isAnonymous == 1,
-                  inputFormatters: [maskTextInputFormatterCard],
-                  keyboardType: TextInputType.number,
-                  maxLength: 200,
-                  enableSuggestions: false,
-                  style: TextStyle(color: Colors.black),
-                  initialValue: widget.snap2.data['card_number'],
-                  decoration: InputDecoration(
-                    counterText: '',
-                    hasFloatingPlaceholder: false,
-                    contentPadding: new EdgeInsets.symmetric(
-                        vertical: 25.0, horizontal: 35.0),
-                    labelText: AppLocalizations.of(context)
-                        .translate('enterCardNumber'),
-                    labelStyle: TextStyle(color: MyColor().black,  fontSize: ScreenUtil.instance.setSp(16.0)),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: isEmptyCard ? MyColor().error : MyColor().black,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                          color:
-                              isEmptyCard ? MyColor().error : MyColor().black),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: MyColor().error,
-                      ),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                      borderSide: BorderSide(
-                        color: MyColor().error,
-                      ),
-                    ),
-                  ),
-                  onChanged: (input) {
-                    setState(() {
-                      creditCard = input;
-                      isButtonCompleteCard = true;
-                      isButtonComplete = true;
-                    });
-                  },
-                  onTap: () => onTapFieldAnonymous(),
-                  obscureText: false,
-                ),
-              ),
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: ScreenUtil.instance.setWidth(156.0),
-                    height: ScreenUtil.instance.setHeight(67.0),
-                    margin: EdgeInsets.only(
-                      left: ScreenUtil.instance.setWidth(47.0),
-                      top: ScreenUtil.instance.setWidth(22.0),
-                      right: ScreenUtil.instance.setWidth(0.0),
-                    ),
-                    child: TextFormField(
-                      readOnly: isAnonymous == 1,
-                      inputFormatters: [maskTextInputFormatterDate],
-                      keyboardType: TextInputType.number,
-                      maxLength: 200,
-                      enableSuggestions: false,
-                      initialValue: widget.snap2.data['expire_date'],
-                      style: TextStyle(color: Colors.black),
-                      decoration: InputDecoration(
-                        counterText: '',
-                        hasFloatingPlaceholder: false,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 25.0, horizontal: 35.0),
-                        labelText:
-                            AppLocalizations.of(context).translate('date'),
-                        labelStyle: TextStyle(color: MyColor().black,  fontSize: ScreenUtil.instance.setSp(16.0)),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                          borderSide: BorderSide(
-                            color:
-                                isEmptyDate ? MyColor().error : MyColor().black,
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                                color: isEmptyName
+                                    ? MyColor().error
+                                    : MyColor().black),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: MyColor().error,
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: MyColor().error,
+                            ),
                           ),
                         ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                          borderSide: BorderSide(
-                              color: isEmptyDate
+                        onTap: () => onTapFieldAnonymous(),
+                        onChanged: (input) {
+                          setState(() {
+                            name = input;
+                            isButtonComplete = true;
+                            isButtonCompleteName = true;
+                          });
+                          nameFocus.addListener(() {
+                            print("Has focus: ${nameFocus.hasFocus}");
+                          });
+                        },
+                        obscureText: false,
+                      ),
+                    ),
+                    Container(
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setHeight(67.0),
+                      margin: EdgeInsets.only(
+                        left: ScreenUtil.instance.setWidth(47.0),
+                        top: ScreenUtil.instance.setWidth(22.0),
+                        right: ScreenUtil.instance.setWidth(47.0),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          onTapFieldAnonymousDate();
+                        },
+                        child: Focus(
+                          autofocus: false,
+                          focusNode: dateFocus,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 1,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  ScreenUtil.instance.setWidth(33.5)),
+                            ),
+                            child: Container(
+                              padding: EdgeInsets.all(15.0),
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(9.0),
+                                  left: ScreenUtil.instance.setWidth(7.0)),
+                              child: isClicked
+                                  ? Text(
+                                      isDateChanged
+                                          ? dateOfBirth
+                                          : widget.snap2.data['date_of_birth'],
+                                      style: TextStyle(
+                                          fontSize:
+                                              ScreenUtil.instance.setSp(14.0)),
+                                    )
+                                  : widget.snap2.data['date_of_birth'] == ''
+                                      ? Text(
+                                          AppLocalizations.of(context)
+                                              .translate("dateOfBirth"),
+                                          style: TextStyle(
+                                              fontSize: ScreenUtil.instance
+                                                  .setSp(15.0)),
+                                        )
+                                      : Text(
+                                          widget.snap2.data['date_of_birth'],
+                                          style: TextStyle(
+                                              fontSize: ScreenUtil.instance
+                                                  .setSp(15.0)),
+                                        ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setHeight(67.0),
+                      margin: EdgeInsets.only(
+                        left: ScreenUtil.instance.setWidth(47.0),
+                        top: ScreenUtil.instance.setWidth(22.0),
+                        right: ScreenUtil.instance.setWidth(47.0),
+                      ),
+                      child: TextFormField(
+                        autofocus: false,
+                        focusNode: emailFocus,
+                        readOnly: isAnonymous == 1,
+                        maxLength: 200,
+                        enableSuggestions: false,
+                        style: TextStyle(color: Colors.black),
+                        initialValue: widget.snap2.data['email_profile'],
+                        decoration: InputDecoration(
+                          counterText: '',
+                          hasFloatingPlaceholder: false,
+                          contentPadding: new EdgeInsets.symmetric(
+                              vertical: 25.0, horizontal: 35.0),
+                          labelText: AppLocalizations.of(context)
+                              .translate('enterEmail'),
+                          labelStyle: TextStyle(
+                              color: MyColor().black,
+                              fontSize: ScreenUtil.instance.setSp(16.0)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: isEmptyMail
                                   ? MyColor().error
-                                  : MyColor().black),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                          borderSide: BorderSide(
-                            color: MyColor().error,
+                                  : MyColor().black,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                                color: isEmptyMail
+                                    ? MyColor().error
+                                    : MyColor().black),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: MyColor().error,
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: MyColor().error,
+                            ),
                           ),
                         ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                          borderSide: BorderSide(
-                            color: MyColor().error,
-                          ),
-                        ),
+                        onChanged: (input) {
+                          setState(() {
+                            email = input;
+                            isButtonCompleteEmail = true;
+                            isButtonComplete = true;
+                          });
+                        },
+                        onTap: () => onTapFieldAnonymous(),
+                        obscureText: false,
                       ),
-                      onChanged: (input) {
-                        setState(() {
-                          date = input;
-                          isButtonCompleteDate = true;
-                          isButtonComplete = true;
-                        });
-                      },
-                      onTap: () => onTapFieldAnonymous(),
-                      obscureText: false,
                     ),
-                  ),
-                  Container(
-                    width: ScreenUtil.instance.setWidth(156.0),
-                    height: ScreenUtil.instance.setHeight(67.0),
-                    margin: EdgeInsets.only(
-                      left: ScreenUtil.instance.setWidth(5.0),
-                      top: ScreenUtil.instance.setWidth(22.0),
-                      right: ScreenUtil.instance.setWidth(0.0),
+                    Container(
+                      child: LanguageChoose(refresh: widget.settingStates),
                     ),
-                    child: TextFormField(
-                     readOnly: isAnonymous == 1,
-                      keyboardType: TextInputType.number,
-                      inputFormatters: [maskTextInputFormatterCC],
-                      maxLength: 200,
-                      enableSuggestions: false,
-                      style: TextStyle(color: Colors.black),
-                      initialValue: widget.snap2.data['cc'],
-                      decoration: InputDecoration(
-                        counterText: '',
-                        hasFloatingPlaceholder: false,
-                        contentPadding: new EdgeInsets.symmetric(
-                            vertical: 25.0, horizontal: 35.0),
-                        labelText: AppLocalizations.of(context).translate('cc'),
-                        labelStyle: TextStyle(color: MyColor().black,  fontSize: ScreenUtil.instance.setSp(16.0)),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                          borderSide: BorderSide(
-                            color:
-                                isEmptyCC ? MyColor().error : MyColor().black,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                          borderSide: BorderSide(
-                              color: isEmptyCC
+                    Container(
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setHeight(67.0),
+                      margin: EdgeInsets.only(
+                        left: ScreenUtil.instance.setWidth(47.0),
+                        top: ScreenUtil.instance.setWidth(22.0),
+                        right: ScreenUtil.instance.setWidth(47.0),
+                      ),
+                      child: TextFormField(
+                        focusNode: creditFocus,
+                        autofocus: false,
+                        readOnly: isAnonymous == 1,
+                        inputFormatters: [maskTextInputFormatterCard],
+                        keyboardType: TextInputType.number,
+                        maxLength: 200,
+                        enableSuggestions: false,
+                        style: TextStyle(color: Colors.black),
+                        initialValue: widget.snap2.data['card_number'],
+                        decoration: InputDecoration(
+                          counterText: '',
+                          hasFloatingPlaceholder: false,
+                          contentPadding: new EdgeInsets.symmetric(
+                              vertical: 25.0, horizontal: 35.0),
+                          labelText: AppLocalizations.of(context)
+                              .translate('enterCardNumber'),
+                          labelStyle: TextStyle(
+                              color: MyColor().black,
+                              fontSize: ScreenUtil.instance.setSp(16.0)),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: isEmptyCard
                                   ? MyColor().error
-                                  : MyColor().black),
-                        ),
-                        focusedErrorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                          borderSide: BorderSide(
-                            color: MyColor().error,
+                                  : MyColor().black,
+                            ),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                                color: isEmptyCard
+                                    ? MyColor().error
+                                    : MyColor().black),
+                          ),
+                          focusedErrorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: MyColor().error,
+                            ),
+                          ),
+                          errorBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(33.5)),
+                            borderSide: BorderSide(
+                              color: MyColor().error,
+                            ),
                           ),
                         ),
-                        errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(33.5)),
-                          borderSide: BorderSide(
-                            color: MyColor().error,
-                          ),
-                        ),
+                        onChanged: (input) {
+                          setState(() {
+                            creditCard = input;
+                            isButtonCompleteCard = true;
+                            isButtonComplete = true;
+                          });
+                        },
+                        onTap: () => onTapFieldAnonymous(),
+                        obscureText: false,
                       ),
-                      onChanged: (input) {
-                        setState(() {
-                          cc = input;
-                          isButtonCompleteCC = true;
-                          isButtonComplete = true;
-                        });
-                      },
-                      onTap: () => onTapFieldAnonymous(),
-                      obscureText: false,
                     ),
-                  ),
-                ],
+                    Row(
+                      children: <Widget>[
+                        Container(
+                          width: ScreenUtil.instance.setWidth(156.0),
+                          height: ScreenUtil.instance.setHeight(67.0),
+                          margin: EdgeInsets.only(
+                            left: ScreenUtil.instance.setWidth(47.0),
+                            top: ScreenUtil.instance.setWidth(22.0),
+                            right: ScreenUtil.instance.setWidth(0.0),
+                          ),
+                          child: TextFormField(
+                            focusNode: expireFocus,
+                            autofocus: false,
+                            readOnly: isAnonymous == 1,
+                            inputFormatters: [maskTextInputFormatterDate],
+                            keyboardType: TextInputType.number,
+                            maxLength: 200,
+                            enableSuggestions: false,
+                            initialValue: widget.snap2.data['expire_date'],
+                            style: TextStyle(color: Colors.black),
+                            decoration: InputDecoration(
+                              counterText: '',
+                              hasFloatingPlaceholder: false,
+                              contentPadding: new EdgeInsets.symmetric(
+                                  vertical: 25.0, horizontal: 35.0),
+                              labelText: AppLocalizations.of(context)
+                                  .translate('date'),
+                              labelStyle: TextStyle(
+                                  color: MyColor().black,
+                                  fontSize: ScreenUtil.instance.setSp(16.0)),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33.5)),
+                                borderSide: BorderSide(
+                                  color: isEmptyDate
+                                      ? MyColor().error
+                                      : MyColor().black,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33.5)),
+                                borderSide: BorderSide(
+                                    color: isEmptyDate
+                                        ? MyColor().error
+                                        : MyColor().black),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33.5)),
+                                borderSide: BorderSide(
+                                  color: MyColor().error,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33.5)),
+                                borderSide: BorderSide(
+                                  color: MyColor().error,
+                                ),
+                              ),
+                            ),
+                            onChanged: (input) {
+                              setState(() {
+                                date = input;
+                                isButtonCompleteDate = true;
+                                isButtonComplete = true;
+                              });
+                            },
+                            onTap: () => onTapFieldAnonymous(),
+                            obscureText: false,
+                          ),
+                        ),
+                        Container(
+                          width: ScreenUtil.instance.setWidth(156.0),
+                          height: ScreenUtil.instance.setHeight(67.0),
+                          margin: EdgeInsets.only(
+                            left: ScreenUtil.instance.setWidth(5.0),
+                            top: ScreenUtil.instance.setWidth(22.0),
+                            right: ScreenUtil.instance.setWidth(0.0),
+                          ),
+                          child: TextFormField(
+                            focusNode: ccFocus,
+                            autofocus: false,
+                            readOnly: isAnonymous == 1,
+                            keyboardType: TextInputType.number,
+                            inputFormatters: [maskTextInputFormatterCC],
+                            maxLength: 200,
+                            enableSuggestions: false,
+                            style: TextStyle(color: Colors.black),
+                            initialValue: widget.snap2.data['cc'],
+                            decoration: InputDecoration(
+                              counterText: '',
+                              hasFloatingPlaceholder: false,
+                              contentPadding: new EdgeInsets.symmetric(
+                                  vertical: 25.0, horizontal: 35.0),
+                              labelText:
+                                  AppLocalizations.of(context).translate('cc'),
+                              labelStyle: TextStyle(
+                                  color: MyColor().black,
+                                  fontSize: ScreenUtil.instance.setSp(16.0)),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33.5)),
+                                borderSide: BorderSide(
+                                  color: isEmptyCC
+                                      ? MyColor().error
+                                      : MyColor().black,
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33.5)),
+                                borderSide: BorderSide(
+                                    color: isEmptyCC
+                                        ? MyColor().error
+                                        : MyColor().black),
+                              ),
+                              focusedErrorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33.5)),
+                                borderSide: BorderSide(
+                                  color: MyColor().error,
+                                ),
+                              ),
+                              errorBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(33.5)),
+                                borderSide: BorderSide(
+                                  color: MyColor().error,
+                                ),
+                              ),
+                            ),
+                            onChanged: (input) {
+                              setState(() {
+                                cc = input;
+                                isButtonCompleteCC = true;
+                                isButtonComplete = true;
+                              });
+                            },
+                            onTap: () => onTapFieldAnonymous(),
+                            obscureText: false,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Container(
-                child: isAnonymous == 0 ? ProfileButton(onPressed: onPressed) : EmptyContainer(),
+                child: isAnonymous == 0
+                    ? ProfileButton(onPressed: onPressed)
+                    : EmptyContainer(),
               ),
               Container(
-                child: isAnonymous == 1 ? RegisterButtonProfile(onPressedRegister) : EmptyContainer(),
+                child: isAnonymous == 1
+                    ? RegisterButtonProfile(onPressedRegister)
+                    : EmptyContainer(),
               ),
             ],
           )),
@@ -556,45 +642,51 @@ class _ProfileState extends State<Profile> {
     }
   }
 
-  onTapFieldAnonymousEmail() {
+  onTapFieldAnonymousDate() {
     if (_btnCounter == 0) {
-     isAnonymous == 1
+      isAnonymous == 1
           ? MySnackbar().showSnackbar(
               AppLocalizations.of(context).translate('youMustRegisterFirst'),
               context,
               AppLocalizations.of(context).translate('ok'))
-          : isAnonymous == 0 ? showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context) {
-                return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        isButtonComplete = true;
-                        isButtonCompleteDOB = true;
-                        isClicked = true;
-                      });
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      key: UniqueKey(),
-                      height: ScreenUtil.instance.setHeight(265.0),
-                      child: CupertinoDatePicker(
-                        mode: CupertinoDatePickerMode.date,
-                        initialDateTime: dateOfBirth2,
-                        onDateTimeChanged: (date) {
+          : isAnonymous == 0
+              ? showModalBottomSheet(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return GestureDetector(
+                        onTap: () {
                           setState(() {
-                            dateOfBirth2 = date;
-                            dateOfBirth = DateFormat.yMd().format(dateOfBirth2);
-                            isDateChanged = true;
                             isButtonComplete = true;
                             isButtonCompleteDOB = true;
                             isClicked = true;
                           });
+
+                          Navigator.of(context)
+                              .focusScopeNode
+                              .requestFocus(emailFocus);
+                          Navigator.of(context).pop();
                         },
-                      ),
-                    ));
-              }
-              ) : print('ssss');
+                        child: Container(
+                          key: UniqueKey(),
+                          height: ScreenUtil.instance.setHeight(265.0),
+                          child: CupertinoDatePicker(
+                            mode: CupertinoDatePickerMode.date,
+                            initialDateTime: dateOfBirth2,
+                            onDateTimeChanged: (date) {
+                              setState(() {
+                                dateOfBirth2 = date;
+                                dateOfBirth =
+                                    DateFormat.yMd().format(dateOfBirth2);
+                                isDateChanged = true;
+                                isButtonComplete = true;
+                                isButtonCompleteDOB = true;
+                                isClicked = true;
+                              });
+                            },
+                          ),
+                        ));
+                  })
+              : print('ssss');
       _btnCounter = 1;
       Timer(Duration(seconds: 2), () {
         _btnCounter = 0;
@@ -657,9 +749,8 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressedRegister() {
-      isFromProfile = true;
-      FirebaseCrud().userRegister(context, widget.arguments.username);
-
+    isFromProfile = true;
+    FirebaseCrud().userRegister(context, widget.arguments.username);
   }
 
   onPressed() {
