@@ -44,7 +44,7 @@ class EmailPage extends StatefulWidget {
 class _EmailPageState extends State<EmailPage> {
   bool emailPostoji = false;
 
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final TextEditingController emailController = new TextEditingController();
 
@@ -94,7 +94,9 @@ class _EmailPageState extends State<EmailPage> {
                     padding: EdgeInsets.only(
                         top: ScreenUtil.instance.setWidth(28.0),
                         bottom: ScreenUtil.instance.setWidth(35.0)),
-                    child: MyTextComponent(text: AppLocalizations.of(context).translate('setUpAnEmailAndStartGetting')),
+                    child: MyTextComponent(
+                        text: AppLocalizations.of(context)
+                            .translate('setUpAnEmailAndStartGetting')),
                   ),
                   Text(AppLocalizations.of(context).translate('fiveSAR'),
                       textAlign: TextAlign.center,
@@ -122,8 +124,11 @@ class _EmailPageState extends State<EmailPage> {
                                   vertical: ScreenUtil.instance.setWidth(25.0),
                                   horizontal:
                                       ScreenUtil.instance.setWidth(35.0)),
-                              labelText: AppLocalizations.of(context).translate('email'),
-                              labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setSp(16.0)),
+                              labelText: AppLocalizations.of(context)
+                                  .translate('email'),
+                              labelStyle: TextStyle(
+                                  color: MyColor().white,
+                                  fontSize: ScreenUtil.instance.setSp(16.0)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(33.5)),
@@ -176,11 +181,15 @@ class _EmailPageState extends State<EmailPage> {
                               onPressed(context);
                             }
                           } on SocketException catch (_) {
-                            MySnackbar().showSnackbar(AppLocalizations.of(context).translate('noIternent'),
-                                context, AppLocalizations.of(context).translate('undo'));
+                            MySnackbar().showSnackbar(
+                                AppLocalizations.of(context)
+                                    .translate('noIternent'),
+                                context,
+                                AppLocalizations.of(context).translate('undo'));
                           }
                         },
-                        child: Text(AppLocalizations.of(context).translate("submit"),
+                        child: Text(
+                            AppLocalizations.of(context).translate("submit"),
                             style: TextStyle(
                                 fontSize: ScreenUtil.instance.setSp(18))),
                       )),
@@ -215,23 +224,24 @@ class _EmailPageState extends State<EmailPage> {
   onPressed(BuildContext context) {
     email = emailController.text;
     final _formState = _formKey.currentState;
-    if (_formState.validate()) {
-      if (_btnCounter == 0) {
-            Navigator.of(context).push(
-              CardAnimationTween(
-                widget: PasswordPage( 
-              arguments: RegisterArguments(
-              email: email,
-              verId: widget.arguments.verId,
-              username: widget.arguments.username,
-              usernameSecond: widget.arguments.usernameSecond,
-              phone: widget.arguments.phone,
-            ))));
-        _btnCounter = 1;
-        Timer(Duration(seconds: 2), () {
-          _btnCounter = 0;
-        });
+    //if (email.endsWith('.con') == false) {
+      if (_formState.validate()) {
+        if (_btnCounter == 0) {
+          Navigator.of(context).push(CardAnimationTween(
+              widget: PasswordPage(
+                  arguments: RegisterArguments(
+            email: email,
+            verId: widget.arguments.verId,
+            username: widget.arguments.username,
+            usernameSecond: widget.arguments.usernameSecond,
+            phone: widget.arguments.phone,
+          ))));
+          _btnCounter = 1;
+          Timer(Duration(seconds: 2), () {
+            _btnCounter = 0;
+          });
+        }
       }
-    }
+    //}
   }
 }
