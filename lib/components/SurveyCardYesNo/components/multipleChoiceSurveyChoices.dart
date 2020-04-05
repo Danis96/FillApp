@@ -263,7 +263,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
     offlineAnswers.add(widget.choice1);
-    print(offlineAnswers);
     widget.notifyParent();
   }
 
@@ -289,7 +288,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
     offlineAnswers.add(widget.choice1);
-    print(offlineAnswers);
     widget.notifyParent();
   }
 
@@ -315,7 +313,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
     offlineAnswers.add(widget.choice1);
-    print(offlineAnswers);
     widget.notifyParent();
   }
 
@@ -341,7 +338,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.choice1, widget.title);
     offlineAnswers.add(widget.choice1);
-    print(offlineAnswers);
     widget.notifyParent();
   }
 
@@ -405,7 +401,6 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, answer, widget.title);
       offlineAnswers.add(answer);
-      print(offlineAnswers);
       widget.notifyParent();
       multipleAnswers.removeRange(0, multipleAnswers.length);
     }

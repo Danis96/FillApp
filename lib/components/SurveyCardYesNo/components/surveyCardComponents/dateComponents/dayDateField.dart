@@ -164,7 +164,6 @@ class _DayDateFieldState extends State<DayDateField> {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       offlineAnswers.add(userAnswer);
-      print(offlineAnswers);
       widget.notifyParent();
       selectedDay = '1';
     }

@@ -164,7 +164,6 @@ class _MonthDateFieldState extends State<MonthDateField> {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       offlineAnswers.add(userAnswer);
-      print(offlineAnswers);
       widget.notifyParent();
       selectedMonth = '1';
     }

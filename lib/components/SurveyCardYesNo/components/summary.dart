@@ -64,10 +64,6 @@ String title;
 bool toggle = true;
 
 class _SummaryState extends State<Summary> {
-  // List<dynamic> answers = [];
-  // List<dynamic> usernameAns = [];
-  // List<dynamic> answersList = [];
-  // List<dynamic> userAnswersSplitted = [];
   int num = 0;
   String userAnswers, usernameThatAnswers;
   bool isSar = false;
@@ -76,44 +72,14 @@ class _SummaryState extends State<Summary> {
   void initState() {
     super.initState();
     isOnSummary = true;
-    //checkForInternet();
-  }
-
-  checkForInternet() async {
-    try {
-      final result = await InternetAddress.lookup('google.com');
-      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
-        isSar = false;
-      }
-    } on SocketException catch (_) {
-      isSar = true;
-    }
   }
 
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
-    // answersList = [];
-    // Timer(Duration(milliseconds: 1000), () {
-    //   for (var i = 0; i < answers.length; i++) {
-    //     userAnswers = answers[i].toString();
-    //     userAnswersSplitted = userAnswers.split(' : ');
-    //     usernameThatAnswers = userAnswersSplitted[2];
-    //     if (userAnswersSplitted[2] == currentUsername ||
-    //         userAnswersSplitted[2] == widget.usernameSecond) {
-    //       answersList.add(userAnswersSplitted[1]);
-    //     }
-    //   }
-    //   printList();
-    // });
 
-    print('1. LISTA OFFLINE    ' + offlineAnswers.toString());
     if (offlineAnswers.length > widget.totalProgress) {
       offlineAnswers.removeAt(0);
-      print('2. LISTA OFFLINE    ' + offlineAnswers.toString());
-    } else {
-      print('Ukupno pitanja ima ' + widget.totalProgress.toString());
-      print('Duzina niza offline je ' + offlineAnswers.length.toString());
     }
 
     double defaultScreenWidth = 400.0;
@@ -132,36 +98,6 @@ class _SummaryState extends State<Summary> {
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
-                // Container(
-                //   height: 0,
-                //   width: 0,
-                //   child: FutureBuilder(
-                //       future:
-                //           // /Future.delayed(Duration(milliseconds: 400)).then(
-                //           // (value) =>
-                //           FirebaseCheck().getSurveyGroups(userLevelForList),
-                //       // ),
-                //       builder: (BuildContext context, AsyncSnapshot snapshot) {
-                //         if (snapshot.hasData) {
-                //           snapi = snapshot.data
-                //               .map((doc) => Survey.fromDocument(doc))
-                //               .toList();
-                //           return ListView.builder(
-                //               itemCount: snapi.length,
-                //               itemBuilder: (BuildContext context, int index) {
-                //                 if (surveyGroupName == snapi[index].name) {
-                //                   answers = snapi[index].usersAnswers;
-                //                 }
-                //                 return EmptyContainer();
-                //               });
-                //         }
-                //         return Center(
-                //           child: Container(
-                //             child: CircularProgressIndicator(),
-                //           ),
-                //         );
-                //       }),
-                // ),
                 SurveyAppBar(
                   percent: 1,
                   arguments: PasswordArguments(
@@ -210,34 +146,12 @@ class _SummaryState extends State<Summary> {
     );
   }
 
-  // printList() {
-  //   if (answersList == [] || answersList == null || answersList.length == 0) {
-  //     for (var i = 0; i < answers.length; i++) {
-  //       userAnswers = answers[i].toString();
-  //       userAnswersSplitted = userAnswers.split(' : ');
-  //       usernameThatAnswers = userAnswersSplitted[2];
-  //       if (userAnswersSplitted[2] == currentUsername ||
-  //           userAnswersSplitted[2] == widget.usernameSecond) {
-  //         answersList.add(userAnswersSplitted[1]);
-  //       }
-  //     }
-  //   } else {
-  //     print(answersList);
-  //   }
-  // }
-
   Future<bool> _onWillPop() async {
-    //answersList.removeRange(0, answersList.length);
     offlineAnswers = [];
     String listName;
     listName = widget.surveyDoc.name;
     var prefs = await SharedPreferences.getInstance();
-    print('1. Lista renutnog Survey-a u shared preference: ' +
-        prefs.getStringList('$listName').toString());
     prefs.setStringList('$listName', []);
-    print('2. Lista renutnog Survey-a u shared preference: ' +
-        prefs.getStringList('$listName').toString());
-    print('PRAZNA OFFLINE LISTA ' + offlineAnswers.toString());
     setState(() {
       isSummary = false;
       isOnSummary = false;
