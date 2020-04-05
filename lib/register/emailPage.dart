@@ -224,7 +224,6 @@ class _EmailPageState extends State<EmailPage> {
   onPressed(BuildContext context) {
     email = emailController.text;
     final _formState = _formKey.currentState;
-    //if (email.endsWith('.con') == false) {
       if (_formState.validate()) {
         if (_btnCounter == 0) {
           Navigator.of(context).push(CardAnimationTween(
@@ -242,6 +241,5 @@ class _EmailPageState extends State<EmailPage> {
           });
         }
       }
-    //}
   }
 }
