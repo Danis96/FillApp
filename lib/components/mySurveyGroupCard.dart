@@ -21,12 +21,15 @@ import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MySurveyGroupCard extends StatefulWidget {
   final PasswordArguments arguments;
@@ -96,9 +99,30 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       height: defaultScreenHeight,
       allowFontScaling: true,
     )..init(context);
+
+    surveyListOfAnswers() async {
+      String listName;
+      listName = widget.surveyDoc.name;
+      List<String> answersOfCurrentSurvey;
+      var prefs = await SharedPreferences.getInstance();
+      answersOfCurrentSurvey = prefs.getStringList('$listName');
+      //print('1. Lista iz shared preference: ' + answersOfCurrentSurvey.toString());
+      if(answersOfCurrentSurvey == null) {
+        print('Lista ne postoji!!!');
+        prefs.setStringList('$listName', [listName]);
+        answersOfCurrentSurvey = prefs.getStringList('$listName');
+        print('2. Lista iz shared preference: ' + answersOfCurrentSurvey.toString());
+      } else {
+        print('3. Lista iz shared preference: ' + answersOfCurrentSurvey.toString());
+      }
+      offlineAnswers = answersOfCurrentSurvey;
+      print('Offline answers lista: ' + offlineAnswers.toString());
+    }
+
     return GestureDetector(
       onTap: () {
         if (!isCompleted) {
+          surveyListOfAnswers();
           Navigator.of(context).push(CardAnimationTween(
               widget: SurveyCard(
                   surveyDoc: widget.surveyDoc,

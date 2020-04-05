@@ -7,10 +7,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class InputField extends StatelessWidget {
   final bool fieldColor;
   final TextEditingController answerController;
-  InputField({Key key, this.fieldColor, this.answerController}) : super(key: key);
+  InputField({Key key, this.fieldColor, this.answerController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    isSummary
+        ? answerController.text = clickedAnswer
+        : answerController.text = '';
     return Container(
       width: ScreenUtil.instance.setWidth(327.0),
       height: ScreenUtil.instance.setWidth(65.0),
@@ -27,7 +31,9 @@ class InputField extends StatelessWidget {
           contentPadding:
               new EdgeInsets.symmetric(vertical: 25.0, horizontal: 35.0),
           labelText: AppLocalizations.of(context).translate('typeTheAnswer'),
-          labelStyle: TextStyle(color: MyColor().black, fontSize: ScreenUtil.instance.setWidth(17.0)),
+          labelStyle: TextStyle(
+              color: MyColor().black,
+              fontSize: ScreenUtil.instance.setWidth(17.0)),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(33.5)),
             borderSide: BorderSide(

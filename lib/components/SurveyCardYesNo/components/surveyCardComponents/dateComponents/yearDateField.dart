@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String userAnswer;
 bool fieldColor1 = false;
-TextEditingController yearController = TextEditingController(text: '');
+TextEditingController singleYearController = TextEditingController(text: '');
 String selectedYear;
 
 class YearDateField extends StatefulWidget {
@@ -42,7 +42,7 @@ class _YearDateFieldState extends State<YearDateField> {
   @override
   void initState() {
     super.initState();
-    yearController.text = '';
+    isSummary ? singleYearController.text = clickedAnswer : singleYearController.text = '';
   }
 
   @override
@@ -78,7 +78,7 @@ class _YearDateFieldState extends State<YearDateField> {
                                   selectedYear = '2020';
                                 }
                                 widget.year = selectedYear;
-                                yearController.text = widget.year;
+                                singleYearController.text = widget.year;
                                 Navigator.pop(context);
                               },
                               child: Container(
@@ -88,7 +88,7 @@ class _YearDateFieldState extends State<YearDateField> {
                           }),
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: yearController,
+                  controller: singleYearController,
                   decoration: InputDecoration(
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
@@ -147,7 +147,7 @@ class _YearDateFieldState extends State<YearDateField> {
   }
 
   onPressed(BuildContext context) {
-    if (yearController.text.length == 0) {
+    if (singleYearController.text.length == 0) {
       setState(() {
         fieldColor1 = true;
       });
@@ -160,7 +160,7 @@ class _YearDateFieldState extends State<YearDateField> {
       setState(() {
         fieldColor1 = false;
       });
-      userAnswer = yearController.text;
+      userAnswer = singleYearController.text;
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       offlineAnswers.add(userAnswer);

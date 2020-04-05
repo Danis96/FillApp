@@ -14,6 +14,7 @@ import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 String type;
 int isSingle;
@@ -70,7 +71,20 @@ class _YesNoSurveyState extends State<SurveyCard>
   }
 
   List<dynamic> answers;
-  
+
+  saveAnswersToLocalStorage() async {
+    String listName;
+    listName = widget.surveyDoc.name;
+    var prefs = await SharedPreferences.getInstance();
+    print('1. Lista renutnog Survey-a u shared preference: ' +
+        prefs.getStringList('$listName').toString());
+    prefs.setStringList('$listName', offlineAnswers);
+    print('2. Lista renutnog Survey-a u shared preference: ' +
+        prefs.getStringList('$listName').toString());
+    offlineAnswers = [];
+    print('offlineAnswers list: ' + offlineAnswers.toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -111,12 +125,15 @@ class _YesNoSurveyState extends State<SurveyCard>
                               phone: widget.arguments.phone,
                               username: widget.arguments.username,
                             ),
-                            percent: ((index + 1.0) / widget.surveyDoc.numberOfQuestions).toDouble(),
+                            percent: ((index + 1.0) /
+                                    widget.surveyDoc.numberOfQuestions)
+                                .toDouble(),
                             notifyParent: widget.notifyParent,
                             questions: widget.snapQuestions,
                             totalSar: widget.sarSurvey,
                             totalProgress: widget.surveyDoc.numberOfQuestions,
                             animateTo: summaryAnimateToPpage,
+                            surveyDoc: widget.surveyDoc,
                           ),
                           YesNoSurveySQP(
                             type: type,
@@ -127,7 +144,8 @@ class _YesNoSurveyState extends State<SurveyCard>
                           ),
                           ContainerTypes(
                               widget: widget,
-                              numberOfQuestions: widget.surveyDoc.numberOfQuestions,
+                              numberOfQuestions:
+                                  widget.surveyDoc.numberOfQuestions,
                               index: index,
                               refresh: refresh,
                               type: type,
@@ -154,7 +172,7 @@ class _YesNoSurveyState extends State<SurveyCard>
     widget.number++;
     widget.increaseAnswered();
 
-    if (widget.number ==  widget.surveyDoc.numberOfQuestions) {
+    if (widget.number == widget.surveyDoc.numberOfQuestions) {
       Navigator.of(context).push(
         DanisAnimationTween(
             widget: Summary(
@@ -210,32 +228,39 @@ class _YesNoSurveyState extends State<SurveyCard>
   /// YES / NO
   Future<bool> _onWillPop() async {
     return isSummary
-        ? Navigator.of(context).push(MaterialPageRoute(
-            builder: (_) => Summary(
-                  arguments: PasswordArguments(
-                    email: widget.arguments.email,
-                    password: widget.arguments.password,
-                    phone: widget.arguments.phone,
-                    username: widget.arguments.username,
-                  ),
-                  userLevel: widget.userLevel,
-                  surveyDoc: widget.surveyDoc,
-                  animateTo: summaryAnimateToPpage,
-                  questions: widget.snapQuestions,
-                  totalProgress:widget.surveyDoc.numberOfQuestions,
-                  totalSar: widget.sarSurvey,
-
-                )))
-        : showDialog(
-              context: context,
-              builder: (context) => MyAlertDialog(
-                  notifyParent: widget.notifyParent,
-                  title: AppLocalizations.of(context).translate('areYouSure'),
-                  content: AppLocalizations.of(context).translate('doYouReallyWantToExitTheSurvey'),
-                  yes: AppLocalizations.of(context).translate('yes'),
-                  no: AppLocalizations.of(context).translate('no')),
-            ) ??
-            true;
+        ? () {
+          clickedAnswer = '';
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => Summary(
+                      arguments: PasswordArguments(
+                        email: widget.arguments.email,
+                        password: widget.arguments.password,
+                        phone: widget.arguments.phone,
+                        username: widget.arguments.username,
+                      ),
+                      userLevel: widget.userLevel,
+                      surveyDoc: widget.surveyDoc,
+                      animateTo: summaryAnimateToPpage,
+                      questions: widget.snapQuestions,
+                      totalProgress: widget.surveyDoc.numberOfQuestions,
+                      totalSar: widget.sarSurvey,
+                    )));
+          }()
+        : () {
+            showDialog(
+                  context: context,
+                  builder: (context) => MyAlertDialog(
+                    emptyAnswers: saveAnswersToLocalStorage,
+                      notifyParent: widget.notifyParent,
+                      title:
+                          AppLocalizations.of(context).translate('areYouSure'),
+                      content: AppLocalizations.of(context)
+                          .translate('doYouReallyWantToExitTheSurvey'),
+                      yes: AppLocalizations.of(context).translate('yes'),
+                      no: AppLocalizations.of(context).translate('no')),
+                ) ??
+                true;
+          }();
   }
 
   summaryAnimateToPpage(int index) {

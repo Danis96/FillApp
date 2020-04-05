@@ -10,6 +10,7 @@ import 'package:fillproject/routes/routeConstants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SurveyAppBar extends StatelessWidget {
   final PasswordArguments arguments;
@@ -31,6 +32,30 @@ class SurveyAppBar extends StatelessWidget {
       this.totalSar,
       this.surveyDoc});
 
+  saveAnswersToLocalStorage() async {
+    String listName;
+    listName = surveyDoc.name;
+    var prefs = await SharedPreferences.getInstance();
+    print('1. Lista renutnog Survey-a u shared preference: ' +
+        prefs.getStringList('$listName').toString());
+    prefs.setStringList('$listName', offlineAnswers);
+    print('2. Lista renutnog Survey-a u shared preference: ' +
+        prefs.getStringList('$listName').toString());
+    offlineAnswers = [];
+    print('offlineAnswers list: ' + offlineAnswers.toString());
+  }
+
+  emptyListFromLocalStorage() async {
+    String listName;
+    listName = surveyDoc.name;
+    var prefs = await SharedPreferences.getInstance();
+    print('1. Lista renutnog Survey-a u shared preference: ' +
+        prefs.getStringList('$listName').toString());
+    prefs.setStringList('$listName', []);
+    print('2. Lista renutnog Survey-a u shared preference: ' +
+        prefs.getStringList('$listName').toString());
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -49,7 +74,9 @@ class SurveyAppBar extends StatelessWidget {
                       isFutureDone = false;
                       answersList.removeRange(0, answersList.length);
                       offlineAnswers = [];
-                      print('PRAZNA OFFLINE LISTA ' + offlineAnswers.toString());
+                      emptyListFromLocalStorage();
+                      print(
+                          'PRAZNA OFFLINE LISTA ' + offlineAnswers.toString());
                       Navigator.of(context).pushNamed(NavBar,
                           arguments: PasswordArguments(
                               email: arguments.email,
@@ -58,28 +85,38 @@ class SurveyAppBar extends StatelessWidget {
                               username: arguments.username));
                     }()
                   : isSummary
-                      ? Navigator.of(context).push(MaterialPageRoute(
-                          builder: (_) => Summary(
-                                surveyDoc: surveyDoc,
-                                animateTo: animateTo,
-                                questions: questions,
-                                totalProgress: totalProgress,
-                                totalSar: totalSar,
-                                arguments: PasswordArguments(
-                                    email: arguments.email,
-                                    password: arguments.password,
-                                    phone: arguments.phone,
-                                    username: arguments.username),
-                              )))
-                      : showDialog(
-                          context: context,
-                          builder: (context) => MyAlertDialog(
-                              title: AppLocalizations.of(context).translate('areYouSure'),
-                              content: AppLocalizations.of(context).translate('doYouReallyWantToExitTheSurvey'),
-                              no: AppLocalizations.of(context).translate('no'),
-                              yes: AppLocalizations.of(context).translate('yes'),
-                              notifyParent: notifyParent),
-                        );
+                      ? () {
+                          clickedAnswer = '';
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => Summary(
+                                    surveyDoc: surveyDoc,
+                                    animateTo: animateTo,
+                                    questions: questions,
+                                    totalProgress: totalProgress,
+                                    totalSar: totalSar,
+                                    arguments: PasswordArguments(
+                                        email: arguments.email,
+                                        password: arguments.password,
+                                        phone: arguments.phone,
+                                        username: arguments.username),
+                                  )));
+                        }()
+                      : () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => MyAlertDialog(
+                              emptyAnswers: saveAnswersToLocalStorage,
+                                title: AppLocalizations.of(context)
+                                    .translate('areYouSure'),
+                                content: AppLocalizations.of(context).translate(
+                                    'doYouReallyWantToExitTheSurvey'),
+                                no: AppLocalizations.of(context)
+                                    .translate('no'),
+                                yes: AppLocalizations.of(context)
+                                    .translate('yes'),
+                                notifyParent: notifyParent),
+                          );
+                        }();
             }),
         title: Container(
           margin: isOnSummary

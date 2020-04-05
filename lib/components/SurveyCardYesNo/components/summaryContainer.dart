@@ -78,6 +78,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
     answersFromSummary = widget.answersList[widget.index].toString();
     isSummary = true;
     isOnSummary = false;
+    clickedAnswer = offlineAnswers.elementAt(widget.index);
     widget.animateTo(widget.index);
     Navigator.of(context).pop();
       }
