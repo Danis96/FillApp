@@ -294,7 +294,7 @@ class _ProfileState extends State<Profile> {
                                   ? Text(
                                       isDateChanged
                                           ? dateOfBirth
-                                          : widget.snap2.data['date_of_birth'],
+                                          : dateOfBirth,
                                       style: TextStyle(
                                           fontSize:
                                               ScreenUtil.instance.setSp(14.0)),
@@ -650,42 +650,47 @@ class _ProfileState extends State<Profile> {
               context,
               AppLocalizations.of(context).translate('ok'))
           : isAnonymous == 0
-              ? showModalBottomSheet(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            isButtonComplete = true;
-                            isButtonCompleteDOB = true;
-                            isClicked = true;
-                          });
-
-                          Navigator.of(context)
-                              .focusScopeNode
-                              .requestFocus(emailFocus);
-                          Navigator.of(context).pop();
-                        },
-                        child: Container(
-                          key: UniqueKey(),
-                          height: ScreenUtil.instance.setHeight(265.0),
-                          child: CupertinoDatePicker(
-                            mode: CupertinoDatePickerMode.date,
-                            initialDateTime: dateOfBirth2,
-                            onDateTimeChanged: (date) {
+              ? () {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return GestureDetector(
+                            onTap: () {
                               setState(() {
-                                dateOfBirth2 = date;
-                                dateOfBirth =
-                                    DateFormat.yMd().format(dateOfBirth2);
-                                isDateChanged = true;
                                 isButtonComplete = true;
                                 isButtonCompleteDOB = true;
                                 isClicked = true;
                               });
+                              if (isDateChanged == false) {
+                                dateOfBirth =
+                                    DateFormat.yMd().format(dateOfBirth2);
+                              }
+                              Navigator.of(context)
+                                  .focusScopeNode
+                                  .requestFocus(emailFocus);
+                              Navigator.of(context).pop();
                             },
-                          ),
-                        ));
-                  })
+                            child: Container(
+                              key: UniqueKey(),
+                              height: ScreenUtil.instance.setHeight(265.0),
+                              child: CupertinoDatePicker(
+                                mode: CupertinoDatePickerMode.date,
+                                initialDateTime: dateOfBirth2,
+                                onDateTimeChanged: (date) {
+                                  setState(() {
+                                    dateOfBirth2 = date;
+                                    dateOfBirth =
+                                        DateFormat.yMd().format(dateOfBirth2);
+                                    isDateChanged = true;
+                                    isButtonComplete = true;
+                                    isButtonCompleteDOB = true;
+                                    isClicked = true;
+                                  });
+                                },
+                              ),
+                            ));
+                      });
+                }()
               : print('ssss');
       _btnCounter = 1;
       Timer(Duration(seconds: 2), () {
