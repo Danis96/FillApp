@@ -1,10 +1,11 @@
+import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 
 class MyAlertDialog extends StatelessWidget {
   final String title, content, yes, no;
-  final Function notifyParent;
+  final Function notifyParent, emptyAnswers;
   MyAlertDialog(
-      {Key key, this.title, this.content, this.yes, this.no, this.notifyParent})
+      {Key key, this.title, this.content, this.yes, this.no, this.notifyParent, this.emptyAnswers})
       : super(key: key);
 
   @override
@@ -20,6 +21,7 @@ class MyAlertDialog extends StatelessWidget {
         new FlatButton(
           onPressed: () => {
             notifyParent(),
+            !isSummary ? emptyAnswers() : print(''),
             Navigator.of(context).pop(),
             Navigator.of(context).pop(),
           },

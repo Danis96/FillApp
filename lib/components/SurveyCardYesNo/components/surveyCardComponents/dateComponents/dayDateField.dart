@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String userAnswer;
 bool fieldColor1 = false;
-TextEditingController dayController = TextEditingController(text: '');
+TextEditingController singleDayController = TextEditingController(text: '');
 String selectedDay;
 
 class DayDateField extends StatefulWidget {
@@ -42,7 +42,7 @@ class _DayDateFieldState extends State<DayDateField> {
   @override
   void initState() {
     super.initState();
-    dayController.text = '';
+    isSummary ? singleDayController.text = clickedAnswer : singleDayController.text = '';
   }
 
   @override
@@ -78,7 +78,7 @@ class _DayDateFieldState extends State<DayDateField> {
                                   selectedDay = '1';
                                 }
                                 widget.day = selectedDay;
-                                dayController.text = widget.day;
+                                singleDayController.text = widget.day;
                                 Navigator.pop(context);
                               },
                               child: Container(
@@ -88,7 +88,7 @@ class _DayDateFieldState extends State<DayDateField> {
                           }),
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: dayController,
+                  controller: singleDayController,
                   decoration: InputDecoration(
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
@@ -147,7 +147,7 @@ class _DayDateFieldState extends State<DayDateField> {
   }
 
   onPressed(BuildContext context) {
-    if (dayController.text.length == 0) {
+    if (singleDayController.text.length == 0) {
       setState(() {
         fieldColor1 = true;
       });
@@ -160,7 +160,7 @@ class _DayDateFieldState extends State<DayDateField> {
       setState(() {
         fieldColor1 = false;
       });
-      userAnswer = dayController.text;
+      userAnswer = singleDayController.text;
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       offlineAnswers.add(userAnswer);

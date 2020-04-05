@@ -49,9 +49,15 @@ class _DateChoiceState extends State<DateChoice> {
   @override
   void initState() {
     super.initState();
-    dayController.text = '';
-    monthController.text = '';
-    yearController.text = '';
+    List<String> dateSplitted;
+    isSummary ? dateSplitted = clickedAnswer.split('/') : dateSplitted = [];
+    isSummary ? print(dateSplitted[0]) : print('');
+    isSummary ? print(dateSplitted[1]) : print('');
+    isSummary ? print(dateSplitted[2]) : print('');
+    isSummary ? dayController.text = dateSplitted[0] : dayController.text = '';
+    isSummary ? monthController.text = dateSplitted[1] : monthController.text = '';
+    isSummary ? yearController.text = dateSplitted[2] : yearController.text = '';
+    print(clickedAnswer);
   }
 
   @override

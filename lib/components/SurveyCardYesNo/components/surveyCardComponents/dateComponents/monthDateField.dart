@@ -13,7 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 String userAnswer;
 bool fieldColor1 = false;
-TextEditingController monthController = TextEditingController(text: '');
+TextEditingController singleMonthController = TextEditingController(text: '');
 String selectedMonth;
 
 class MonthDateField extends StatefulWidget {
@@ -42,7 +42,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
   @override
   void initState() {
     super.initState();
-    monthController.text = '';
+    isSummary ? singleMonthController.text = clickedAnswer : singleMonthController.text = '';
   }
 
   @override
@@ -78,7 +78,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
                                   selectedMonth = '1';
                                 }
                                 widget.month = selectedMonth;
-                                monthController.text = widget.month;
+                                singleMonthController.text = widget.month;
                                 Navigator.pop(context);
                               },
                               child: Container(
@@ -88,7 +88,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
                           }),
                   enableSuggestions: false,
                   style: TextStyle(color: Colors.black),
-                  controller: monthController,
+                  controller: singleMonthController,
                   decoration: InputDecoration(
                     hasFloatingPlaceholder: false,
                     contentPadding: new EdgeInsets.symmetric(
@@ -147,7 +147,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
   }
 
   onPressed(BuildContext context) {
-    if (monthController.text.length == 0) {
+    if (singleMonthController.text.length == 0) {
       setState(() {
         fieldColor1 = true;
       });
@@ -160,7 +160,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
       setState(() {
         fieldColor1 = false;
       });
-      userAnswer = monthController.text;
+      userAnswer = singleMonthController.text;
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       offlineAnswers.add(userAnswer);
