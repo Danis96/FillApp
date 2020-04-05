@@ -106,17 +106,12 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       List<String> answersOfCurrentSurvey;
       var prefs = await SharedPreferences.getInstance();
       answersOfCurrentSurvey = prefs.getStringList('$listName');
-      //print('1. Lista iz shared preference: ' + answersOfCurrentSurvey.toString());
       if(answersOfCurrentSurvey == null) {
-        print('Lista ne postoji!!!');
         prefs.setStringList('$listName', [listName]);
         answersOfCurrentSurvey = prefs.getStringList('$listName');
-        print('2. Lista iz shared preference: ' + answersOfCurrentSurvey.toString());
       } else {
-        print('3. Lista iz shared preference: ' + answersOfCurrentSurvey.toString());
       }
       offlineAnswers = answersOfCurrentSurvey;
-      print('Offline answers lista: ' + offlineAnswers.toString());
     }
 
     return GestureDetector(

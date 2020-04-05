@@ -51,13 +51,9 @@ class _DateChoiceState extends State<DateChoice> {
     super.initState();
     List<String> dateSplitted;
     isSummary ? dateSplitted = clickedAnswer.split('/') : dateSplitted = [];
-    isSummary ? print(dateSplitted[0]) : print('');
-    isSummary ? print(dateSplitted[1]) : print('');
-    isSummary ? print(dateSplitted[2]) : print('');
     isSummary ? dayController.text = dateSplitted[0] : dayController.text = '';
     isSummary ? monthController.text = dateSplitted[1] : monthController.text = '';
     isSummary ? yearController.text = dateSplitted[2] : yearController.text = '';
-    print(clickedAnswer);
   }
 
   @override
@@ -432,7 +428,6 @@ class _DateChoiceState extends State<DateChoice> {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       offlineAnswers.add(userAnswer);
-      print(offlineAnswers);
       widget.notifyParent();
       selectedDay = '1';
       selectedMonth = '1';

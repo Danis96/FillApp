@@ -36,24 +36,15 @@ class SurveyAppBar extends StatelessWidget {
     String listName;
     listName = surveyDoc.name;
     var prefs = await SharedPreferences.getInstance();
-    print('1. Lista renutnog Survey-a u shared preference: ' +
-        prefs.getStringList('$listName').toString());
     prefs.setStringList('$listName', offlineAnswers);
-    print('2. Lista renutnog Survey-a u shared preference: ' +
-        prefs.getStringList('$listName').toString());
     offlineAnswers = [];
-    print('offlineAnswers list: ' + offlineAnswers.toString());
   }
 
   emptyListFromLocalStorage() async {
     String listName;
     listName = surveyDoc.name;
     var prefs = await SharedPreferences.getInstance();
-    print('1. Lista renutnog Survey-a u shared preference: ' +
-        prefs.getStringList('$listName').toString());
     prefs.setStringList('$listName', []);
-    print('2. Lista renutnog Survey-a u shared preference: ' +
-        prefs.getStringList('$listName').toString());
   }
 
   @override
@@ -75,8 +66,6 @@ class SurveyAppBar extends StatelessWidget {
                       answersList.removeRange(0, answersList.length);
                       offlineAnswers = [];
                       emptyListFromLocalStorage();
-                      print(
-                          'PRAZNA OFFLINE LISTA ' + offlineAnswers.toString());
                       Navigator.of(context).pushNamed(NavBar,
                           arguments: PasswordArguments(
                               email: arguments.email,

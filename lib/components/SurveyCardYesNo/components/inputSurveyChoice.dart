@@ -83,7 +83,6 @@ class _InputChoiceState extends State<InputChoice> {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       offlineAnswers.add(userAnswer);
-      print(offlineAnswers);
       FocusScope.of(context).requestFocus(new FocusNode());
       widget.notifyParent();
     }

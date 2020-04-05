@@ -76,13 +76,8 @@ class _YesNoSurveyState extends State<SurveyCard>
     String listName;
     listName = widget.surveyDoc.name;
     var prefs = await SharedPreferences.getInstance();
-    print('1. Lista renutnog Survey-a u shared preference: ' +
-        prefs.getStringList('$listName').toString());
     prefs.setStringList('$listName', offlineAnswers);
-    print('2. Lista renutnog Survey-a u shared preference: ' +
-        prefs.getStringList('$listName').toString());
     offlineAnswers = [];
-    print('offlineAnswers list: ' + offlineAnswers.toString());
   }
 
   @override
