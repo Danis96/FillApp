@@ -18,7 +18,7 @@ class MyValidation {
   RegExp regexPassword = new RegExp(r'^(?=.*?[A-Z])(?=.*[0-9])(?=.{8,})');
   RegExp regexSpace = new RegExp(r'\s');
   RegExp regexEmail = new RegExp(
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9.-]+\.[a-zA-Z]+");
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9.-_]+\.[a-zA-Z]+");
 
   String validatePhone(String phone, bool brPostoji, BuildContext context) {
     if (phone == '') {
@@ -30,7 +30,8 @@ class MyValidation {
     return null;
   }
 
-  String validateUsername(String username, bool usernamePostoji, BuildContext context) {
+  String validateUsername(
+      String username, bool usernamePostoji, BuildContext context) {
     if (username == '') {
       return AppLocalizations.of(context).translate('usernaneCantEmoty');
     } else if (regexSpace.hasMatch(username) == true) {
@@ -43,7 +44,8 @@ class MyValidation {
 
   /// Dodatna validacija na loginu skrinu
   /// Error text je drugaciji, rijesit cemo prilikom refaktorisanja
-  String validateUsernameLogin(String username, bool usernamePostoji, BuildContext context) {
+  String validateUsernameLogin(
+      String username, bool usernamePostoji, BuildContext context) {
     if (username == '') {
       return AppLocalizations.of(context).translate('usernaneCantEmoty');
     } else if (regexSpace.hasMatch(username) == true) {
@@ -95,6 +97,9 @@ class MyValidation {
     } else if (regexSpace.hasMatch(input) == true) {
       counter = 0;
       return AppLocalizations.of(context).translate('emailMustBeValid');
+    } else if (input.endsWith('.con') == true) {
+      counter = 0;
+      return AppLocalizations.of(context).translate('emailMustBeValid');
     }
     return null;
   }
@@ -112,6 +117,9 @@ class MyValidation {
       counter = 0;
       return AppLocalizations.of(context).translate('emailMustBeValid');
     } else if (regexEmail.hasMatch(input) == false) {
+      counter = 0;
+      return AppLocalizations.of(context).translate('emailMustBeValid');
+    } else if (input.endsWith('.con') == true) {
       counter = 0;
       return AppLocalizations.of(context).translate('emailMustBeValid');
     }
