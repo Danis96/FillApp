@@ -2,6 +2,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComp
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/imageWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/inputWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqWidget.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/orderWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/yesNoWidget.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:flutter/material.dart';
@@ -42,15 +43,37 @@ class ContainerTypes extends StatelessWidget {
             isCompleted: isCompleted,
             answers: answers);
       case 'input':
-        return InputWidget(widget: widget, index: index, refresh: refresh, numberOfQuestions: numberOfQuestions, number: number);
+        return InputWidget(
+            widget: widget,
+            index: index,
+            refresh: refresh,
+            numberOfQuestions: numberOfQuestions,
+            number: number);
       case 'mcq':
         return McqWidget(
-            widget: widget, index: index, refresh: refresh, isSingle: isSingle, numberOfQuestions: numberOfQuestions, number: number);
+            widget: widget,
+            index: index,
+            refresh: refresh,
+            isSingle: isSingle,
+            numberOfQuestions: numberOfQuestions,
+            number: number);
       case 'date':
-        return DateWidget(widget: widget, index: index, refresh: refresh, numberOfQuestions: numberOfQuestions, number: number);
+        return DateWidget(
+            widget: widget,
+            index: index,
+            refresh: refresh,
+            numberOfQuestions: numberOfQuestions,
+            number: number);
       case 'image':
         return ImageWidget(
             widget: widget, index: index, refresh: refresh, isSingle: isSingle);
+      case 'order':
+        return OrderWidget(
+            widget: widget,
+            index: index,
+            refresh: refresh,
+            numberOfQuestions: numberOfQuestions,
+            number: number);
       default:
         return EmptyContainer();
     }
