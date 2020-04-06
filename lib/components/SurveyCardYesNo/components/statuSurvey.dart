@@ -21,7 +21,7 @@ class StatusSurvey extends StatelessWidget {
         children: <Widget>[
           Container(
               child: Text(
-            AppLocalizations.of(context).translate('status'),
+           '',
             style: TextStyle(
                 color: isCompleted ? MyColor().black : MyColor().white, fontSize: ScreenUtil.instance.setSp(15.0)),
           )),
