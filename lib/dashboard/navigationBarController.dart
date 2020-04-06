@@ -13,6 +13,7 @@
 /// Feb, 2020
 
 import 'dart:async';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/constants/imageConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
@@ -92,6 +93,17 @@ class _BottomNavigationBarControllerState
         return EmptyContainer();
       },
     );
+  }
+
+  checkForInternet() async {
+    try {
+      final result = await InternetAddress.lookup('google.com');
+      if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+        isSar = false;
+      }
+    } on SocketException catch (_) {
+      isSar = true;
+    }
   }
 
   settingStates() {
@@ -185,6 +197,7 @@ class _BottomNavigationBarControllerState
       isTab1Selected = false;
       isTab2Selected = false;
       getIsAnonymous(arguments.username);
+      checkForInternet();
       if (isAnonymous == 1) {
         anonym = 1;
       } else {
