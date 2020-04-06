@@ -169,9 +169,9 @@ class _YesNoSurveyState extends State<SurveyCard>
 
     if (widget.number == widget.surveyDoc.numberOfQuestions) {
       Navigator.of(context).push(
-        DanisAnimationTween(
+        CardAnimationTween(
             widget: Summary(
-          arguments: PasswordArguments(
+           arguments: PasswordArguments(
             email: widget.arguments.email,
             password: widget.arguments.password,
             phone: widget.arguments.phone,
@@ -224,9 +224,9 @@ class _YesNoSurveyState extends State<SurveyCard>
   Future<bool> _onWillPop() async {
     return isSummary
         ? () {
-          clickedAnswer = '';
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (_) => Summary(
+            clickedAnswer = '';
+            Navigator.of(context).push(CardAnimationTween(
+                widget: Summary(
                       arguments: PasswordArguments(
                         email: widget.arguments.email,
                         password: widget.arguments.password,
@@ -243,17 +243,16 @@ class _YesNoSurveyState extends State<SurveyCard>
           }()
         : () {
             showDialog(
-                  context: context,
-                  builder: (context) => MyAlertDialog(
-                    emptyAnswers: saveAnswersToLocalStorage,
-                      notifyParent: widget.notifyParent,
-                      title:
-                          AppLocalizations.of(context).translate('areYouSure'),
-                      content: AppLocalizations.of(context)
-                          .translate('doYouReallyWantToExitTheSurvey'),
-                      yes: AppLocalizations.of(context).translate('yes'),
-                      no: AppLocalizations.of(context).translate('no')),
-                );
+              context: context,
+              builder: (context) => MyAlertDialog(
+                  emptyAnswers: saveAnswersToLocalStorage,
+                  notifyParent: widget.notifyParent,
+                  title: AppLocalizations.of(context).translate('areYouSure'),
+                  content: AppLocalizations.of(context)
+                      .translate('doYouReallyWantToExitTheSurvey'),
+                  yes: AppLocalizations.of(context).translate('yes'),
+                  no: AppLocalizations.of(context).translate('no')),
+            );
           }();
   }
 
