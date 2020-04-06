@@ -2,6 +2,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/summary.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myAlertDialog.dart';
+import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
@@ -76,8 +77,8 @@ class SurveyAppBar extends StatelessWidget {
                   : isSummary
                       ? () {
                           clickedAnswer = '';
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => Summary(
+                          Navigator.of(context).push(CardAnimationTween(
+                              widget: Summary(
                                     surveyDoc: surveyDoc,
                                     animateTo: animateTo,
                                     questions: questions,
