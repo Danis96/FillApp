@@ -111,7 +111,8 @@ class _ImageChoiceState extends State<ImageChoice> {
               ? EmptyContainer()
               : widget.isSingle == 0
                   ? EmptyContainer()
-                  : SubmitButton(onPressedFunction: multipleSubmit, isImage: true)
+                  : SubmitButton(
+                      onPressedFunction: multipleSubmit, isImage: true)
         ],
       ),
     );
@@ -159,37 +160,53 @@ class _ImageChoiceState extends State<ImageChoice> {
 
   saveMultiple1(String choice) {
     setState(() {
-      isTapped1 = true;
+      isTapped1 = !isTapped1;
     });
-    if (!widget.multipleChoices.contains(choice)) {
-      widget.multipleChoices.add(choice);
+    if (isTapped1) {
+      if (!widget.multipleChoices.contains(choice)) {
+        widget.multipleChoices.add(choice);
+      }
+    } else {
+      widget.multipleChoices.remove(choice);
     }
   }
 
   saveMultiple2(String choice) {
     setState(() {
-      isTapped2 = true;
+      isTapped2 = !isTapped2;
     });
-    if (!widget.multipleChoices.contains(choice)) {
-      widget.multipleChoices.add(choice);
+    if (isTapped2) {
+      if (!widget.multipleChoices.contains(choice)) {
+        widget.multipleChoices.add(choice);
+      }
+    } else {
+      widget.multipleChoices.remove(choice);
     }
   }
 
   saveMultiple3(String choice) {
     setState(() {
-      isTapped3 = true;
+      isTapped3 = !isTapped3;
     });
-    if (!widget.multipleChoices.contains(choice)) {
-      widget.multipleChoices.add(choice);
+    if (isTapped3) {
+      if (!widget.multipleChoices.contains(choice)) {
+        widget.multipleChoices.add(choice);
+      }
+    } else {
+      widget.multipleChoices.remove(choice);
     }
   }
 
   saveMultiple4(String choice) {
     setState(() {
-      isTapped4 = true;
+      isTapped4 = !isTapped4;
     });
-    if (!widget.multipleChoices.contains(choice)) {
-      widget.multipleChoices.add(choice);
+    if (isTapped4) {
+      if (!widget.multipleChoices.contains(choice)) {
+        widget.multipleChoices.add(choice);
+      }
+    } else {
+      widget.multipleChoices.remove(choice);
     }
   }
 
@@ -200,6 +217,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     if (answer != '' && answer != '[]') {
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, answer, widget.title);
+      offlineAnswers.add(answer);
       widget.notifyParent();
       widget.multipleChoices.removeRange(0, widget.multipleChoices.length);
     }
@@ -211,6 +229,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text1, widget.title);
+    offlineAnswers.add(widget.text1);
     widget.notifyParent();
   }
 
@@ -220,7 +239,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text2, widget.title);
-
+    offlineAnswers.add(widget.text2);
     widget.notifyParent();
   }
 
@@ -230,7 +249,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text3, widget.title);
-
+    offlineAnswers.add(widget.text3);
     widget.notifyParent();
   }
 
@@ -240,7 +259,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text4, widget.title);
-
+  	offlineAnswers.add(widget.text4);
     widget.notifyParent();
   }
 }

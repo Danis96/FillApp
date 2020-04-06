@@ -22,7 +22,6 @@ import 'package:fillproject/dashboard/profile.dart';
 import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
-import 'package:fillproject/register/passwordPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

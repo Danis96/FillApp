@@ -14,7 +14,6 @@
 /// Feb, 2020
 
 import 'dart:async';
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/appBar.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/congradulationsContainer.dart';
@@ -22,9 +21,6 @@ import 'package:fillproject/components/SurveyCardYesNo/components/summaryContain
 import 'package:fillproject/components/SurveyCardYesNo/components/summaryTitleContainer.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/totalSar.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/emptyCont.dart';
-import 'package:fillproject/dashboard/survey.dart';
-import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';

@@ -253,8 +253,7 @@ class _YesNoSurveyState extends State<SurveyCard>
                           .translate('doYouReallyWantToExitTheSurvey'),
                       yes: AppLocalizations.of(context).translate('yes'),
                       no: AppLocalizations.of(context).translate('no')),
-                ) ??
-                true;
+                );
           }();
   }
 
