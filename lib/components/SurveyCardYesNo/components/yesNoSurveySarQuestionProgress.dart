@@ -49,7 +49,11 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
       case 'image':
         return {
           height = 30.0, 
-          heightContainer = 210.0};    
+          heightContainer = 210.0};
+      case 'order':
+        return {
+          height = 30.0, 
+          heightContainer = 210.0};   
       default:
         return {
           height = 260.0,
