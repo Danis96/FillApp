@@ -114,5 +114,12 @@ On back, user is asked with a Dialog Box if he is sure about exiting the survey.
 	User story 3 - Snackbar after Transfer<br/>
 	After user successfully makes a transfer, he should be aknowledged that he has successfully made a transfer. So, a showing up of a snackbar after successful transfer is implemented.<br/><br/>*
 	User story 4 - IOS release<br/>
-	The release process of IOS application is started. Now, we are waiting for the application to be available for testing using TestFlight.<br/><br/>*
+	The release process of IOS application is started. Now, we are waiting for the application to be available for testing using TestFlight.<br/><br/>
 	
+**•	V8 – Sprint 8 - (30.03.2020. - 06.04.2020.)<br/>** *
+	User story 1 - Fixing BUGS<br/>
+	Bugs that were fixed are: Cupertino localization, Border of language containers, Translation of Q1, Q2..., and Inserting +966 for APK.<br/><br/>*
+	User story 2 - Additional tasks implemented<br/>
+	Tasks that were implemented are: Adding two more statuses on survey, Open and Closed statuses. When a survey is not opened, its status is Open, and when a survey is opened and user has answered some questions of a survey, then its status is Closed.<br/><br/>*
+	User story 3 - Creating Admin Console for previewing transfers<br/>
+	Separate application, named Admin Console is created. From the console, admin can preview all transfers, pending and done transfers. On pending transfers tab, besides previewing the trasnfers, admin can check that he has made the transfer. When a transfer is checked, it is removed from pending transfers list and added to done transfers list. In addition to these two, admin has one more tab, Export tab from where he can export all transfers made so far. When he clicks the button, he will get JSON file on his email address, from where he can download the file, convert it to excel file and have all transfers in n excel sheet.<br/><br/>
