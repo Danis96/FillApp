@@ -1,7 +1,12 @@
+import 'dart:async';
+
+import 'package:fillproject/components/SurveyCardYesNo/components/inputSurveyChoice.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/choiceCont.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/dateWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/imageWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/inputWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqWidget.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/submitButton.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/yesNoWidget.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
@@ -10,6 +15,7 @@ import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 
 class ContainerTypes extends StatefulWidget {
   final widget;
@@ -103,10 +109,41 @@ class _ContainerTypesState extends State<ContainerTypes> {
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             Container(height: 400.0, child: lista()),
+            isSummary
+              ? EmptyContainer()
+              : SubmitButton(
+                  onPressedFunction: onPressed,
+                  isImage: false,
+                  text: (widget.number + 1) == widget.numberOfQuestions
+                      ? AppLocalizations.of(context).translate('submitLast')
+                      : AppLocalizations.of(context).translate('submit'))
           ],
         );
       default:
         return EmptyContainer();
+    }
+  }
+
+  onPressed(BuildContext context) {
+    userAnswer = listOfItems.toString();
+    if (userAnswer.length == 0) {
+      setState(() {
+        fieldColor = true;
+      });
+      Timer(Duration(seconds: 3), () {
+        setState(() {
+          fieldColor = false;
+        });
+      });
+    } else {
+      setState(() {
+        fieldColor = false;
+      });
+      // FirebaseCrud().updateListOfUsernamesAnswersSurvey(
+      //     widget.doc, context, widget.username, userAnswer, widget.title);
+      offlineAnswers.add(userAnswer);
+      FocusScope.of(context).requestFocus(new FocusNode());
+      widget.refresh();
     }
   }
 
@@ -122,7 +159,58 @@ class _ContainerTypesState extends State<ContainerTypes> {
   }
 
   Widget lista() {
-    return ReorderableListView(
+    return 
+    isSummary
+                ? Column(
+                    children: <Widget>[
+                      ChoiceContainer(
+                        number: widget.number,
+                        numberOfQuestions: widget.numberOfQuestions,
+                        index: AppLocalizations.of(context).translate('a'),
+                        choice1: listOfItems[0],
+                        notifyParent: widget.refresh,
+                        username: widget.widget.username,
+                        title: widget.widget.snapQuestions[widget.index]
+                            ['title'],
+                        doc: widget.widget.doc,
+                      ),
+                      ChoiceContainer(
+                        number: widget.number,
+                        numberOfQuestions: widget.numberOfQuestions,
+                        index: AppLocalizations.of(context).translate('a'),
+                        choice1: listOfItems[1],
+                        notifyParent: widget.refresh,
+                        username: widget.widget.username,
+                        title: widget.widget.snapQuestions[widget.index]
+                            ['title'],
+                        doc: widget.widget.doc,
+                      ),
+                      ChoiceContainer(
+                        number: widget.number,
+                        numberOfQuestions: widget.numberOfQuestions,
+                        index: AppLocalizations.of(context).translate('a'),
+                        choice1: listOfItems[2],
+                        notifyParent: widget.refresh,
+                        username: widget.widget.username,
+                        title: widget.widget.snapQuestions[widget.index]
+                            ['title'],
+                        doc: widget.widget.doc,
+                      ),
+                      ChoiceContainer(
+                        number: widget.number,
+                        numberOfQuestions: widget.numberOfQuestions,
+                        index: AppLocalizations.of(context).translate('a'),
+                        choice1: listOfItems[3],
+                        notifyParent: widget.refresh,
+                        username: widget.widget.username,
+                        title: widget.widget.snapQuestions[widget.index]
+                            ['title'],
+                        doc: widget.widget.doc,
+                      )
+                    ],
+                  )
+                //Reorderable List View ciji children su itme-i liste
+                : ReorderableListView(
       //Pozivanje metode za reordering
       onReorder: onReorder,
       children: listOfItems
