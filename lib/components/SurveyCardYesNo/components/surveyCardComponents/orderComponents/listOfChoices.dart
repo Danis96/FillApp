@@ -11,7 +11,9 @@ import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:reorderables/reorderables.dart';
 
 String userAnswer;
 bool fieldColor = false;
@@ -40,33 +42,114 @@ class ListOfChoices extends StatefulWidget {
 }
 
 class _ListOfChoicesState extends State<ListOfChoices> {
-  List<String> listOfItems;
-  int counter = 0;
+  List<Widget> listOfItems;
+  
   @override
-  void initState() {
+  void initState() { 
     super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) => populateList());
+  }
+
+  populateList() {
+    setState(() {});
     List<String> listOfItemsPreview;
     if (isSummary) {
       listOfItemsPreview = clickedAnswer.split(', ');
     }
     isSummary
-        ? listOfItems = listOfItemsPreview
+        ? listOfItems = [
+          ChoiceContainer(
+                number: widget.number,
+                numberOfQuestions: widget.numberOfQuestions,
+                index: AppLocalizations.of(context).translate('a'),
+                choice1: listOfItemsPreview[0],
+                notifyParent: widget.refresh,
+                username: widget.widget.username,
+                title: widget.widget.snapQuestions[widget.index]['title'],
+                doc: widget.widget.doc,
+              ),
+              ChoiceContainer(
+                number: widget.number,
+                numberOfQuestions: widget.numberOfQuestions,
+                index: AppLocalizations.of(context).translate('b'),
+                choice1: listOfItemsPreview[1],
+                notifyParent: widget.refresh,
+                username: widget.widget.username,
+                title: widget.widget.snapQuestions[widget.index]['title'],
+                doc: widget.widget.doc,
+              )
+              ChoiceContainer(
+                number: widget.number,
+                numberOfQuestions: widget.numberOfQuestions,
+                index: AppLocalizations.of(context).translate('c'),
+                choice1: listOfItemsPreview[2],
+                notifyParent: widget.refresh,
+                username: widget.widget.username,
+                title: widget.widget.snapQuestions[widget.index]['title'],
+                doc: widget.widget.doc,
+              )
+              ChoiceContainer(
+                number: widget.number,
+                numberOfQuestions: widget.numberOfQuestions,
+                index: AppLocalizations.of(context).translate('d'),
+                choice1: listOfItemsPreview[3],
+                notifyParent: widget.refresh,
+                username: widget.widget.username,
+                title: widget.widget.snapQuestions[widget.index]['title'],
+                doc: widget.widget.doc,
+              )
+        ]
         : listOfItems = [
-            widget.widget.snapQuestions[widget.index]['choices'][0]['text'],
-            widget.widget.snapQuestions[widget.index]['choices'][1]['text'],
-            widget.widget.snapQuestions[widget.index]['choices'][2]['text'],
-            widget.widget.snapQuestions[widget.index]['choices'][3]['text']
+          ChoiceContainer(
+                number: widget.number,
+                numberOfQuestions: widget.numberOfQuestions,
+                index: AppLocalizations.of(context).translate('a'),
+                choice1: widget.widget.snapQuestions[widget.index]['choices'][0]['text'],
+                notifyParent: widget.refresh,
+                username: widget.widget.username,
+                title: widget.widget.snapQuestions[widget.index]['title'],
+                doc: widget.widget.doc,
+              ),
+              ChoiceContainer(
+                number: widget.number,
+                numberOfQuestions: widget.numberOfQuestions,
+                index: AppLocalizations.of(context).translate('b'),
+                choice1: widget.widget.snapQuestions[widget.index]['choices'][1]['text'],
+                notifyParent: widget.refresh,
+                username: widget.widget.username,
+                title: widget.widget.snapQuestions[widget.index]['title'],
+                doc: widget.widget.doc,
+              ),
+              ChoiceContainer(
+                number: widget.number,
+                numberOfQuestions: widget.numberOfQuestions,
+                index: AppLocalizations.of(context).translate('c'),
+                choice1: widget.widget.snapQuestions[widget.index]['choices'][2]['text'],
+                notifyParent: widget.refresh,
+                username: widget.widget.username,
+                title: widget.widget.snapQuestions[widget.index]['title'],
+                doc: widget.widget.doc,
+              ),
+              ChoiceContainer(
+                number: widget.number,
+                numberOfQuestions: widget.numberOfQuestions,
+                index: AppLocalizations.of(context).translate('d'),
+                choice1: widget.widget.snapQuestions[widget.index]['choices'][3]['text'],
+                notifyParent: widget.refresh,
+                username: widget.widget.username,
+                title: widget.widget.snapQuestions[widget.index]['title'],
+                doc: widget.widget.doc,
+              )
           ];
   }
 
   @override
   Widget build(BuildContext context) {
-    counter = 0;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Container(
-            height: ScreenUtil.instance.setHeight(380.0), child: lista()),
+            height: ScreenUtil.instance.setHeight(400.0), child: lista()),
         isSummary
             ? EmptyContainer()
             : SubmitButton(
@@ -103,90 +186,35 @@ class _ListOfChoicesState extends State<ListOfChoices> {
   }
 
   //Metoda koja vrši ordering kada user drag-a neki choice
-  void onReorder(int oldIndex, int newIndex) {
-    setState(() {
-      if (newIndex > oldIndex) {
-        newIndex -= 1;
-      }
-      var item = listOfItems.removeAt(oldIndex);
-      listOfItems.insert(newIndex, item);
-    });
-  }
+  void _onReorder(int oldIndex, int newIndex) {
+      setState(() {
+        Widget row = listOfItems.removeAt(oldIndex);
+        listOfItems.insert(newIndex, row);
+      });
+    }
 
   Widget lista() {
-    counter++;
-    return isSummary
-        ? Column(
-            children: <Widget>[
-              ChoiceContainer(
-                number: widget.number,
-                numberOfQuestions: widget.numberOfQuestions,
-                index: AppLocalizations.of(context).translate('a'),
-                choice1: listOfItems[0],
-                notifyParent: widget.refresh,
-                username: widget.widget.username,
-                title: widget.widget.snapQuestions[widget.index]['title'],
-                doc: widget.widget.doc,
-              ),
-              ChoiceContainer(
-                number: widget.number,
-                numberOfQuestions: widget.numberOfQuestions,
-                index: AppLocalizations.of(context).translate('a'),
-                choice1: listOfItems[1],
-                notifyParent: widget.refresh,
-                username: widget.widget.username,
-                title: widget.widget.snapQuestions[widget.index]['title'],
-                doc: widget.widget.doc,
-              ),
-              ChoiceContainer(
-                number: widget.number,
-                numberOfQuestions: widget.numberOfQuestions,
-                index: AppLocalizations.of(context).translate('a'),
-                choice1: listOfItems[2],
-                notifyParent: widget.refresh,
-                username: widget.widget.username,
-                title: widget.widget.snapQuestions[widget.index]['title'],
-                doc: widget.widget.doc,
-              ),
-              ChoiceContainer(
-                number: widget.number,
-                numberOfQuestions: widget.numberOfQuestions,
-                index: AppLocalizations.of(context).translate('a'),
-                choice1: listOfItems[3],
-                notifyParent: widget.refresh,
-                username: widget.widget.username,
-                title: widget.widget.snapQuestions[widget.index]['title'],
-                doc: widget.widget.doc,
-              )
-            ],
-          )
-        //Reorderable List View ciji children su itme-i liste
-        : ReorderableListView(
-            padding: EdgeInsets.only(
-                top: ScreenUtil.instance.setWidth(25.0),
-                bottom: ScreenUtil.instance.setWidth(50.0)),
-            //Pozivanje metode za reordering
-            onReorder: onReorder,
-            children: listOfItems
-                .map((listIndex) => tileList(
-                    counter == 1
-                        ? AppLocalizations.of(context).translate('a')
-                        : counter == 2
-                            ? AppLocalizations.of(context).translate('b')
-                            : counter == 3
-                                ? AppLocalizations.of(context).translate('c')
-                                : counter == 4
-                                    ? AppLocalizations.of(context)
-                                        .translate('d')
-                                    : null,
-                    listIndex))
-                .toList(),
-          );
+    ScrollController _scrollController = PrimaryScrollController.of(context) ?? ScrollController();
+    return Padding(
+      padding: EdgeInsets.all(ScreenUtil.instance.setWidth(25.0)),
+      child: CustomScrollView(
+        controller: _scrollController,
+        slivers: <Widget>[
+          ReorderableSliverList(
+             delegate: ReorderableSliverChildBuilderDelegate(
+               (BuildContext context, int index) => listOfItems[index],
+               childCount: listOfItems.length
+             ),
+              onReorder: _onReorder,
+            ),
+        ],
+      ),
+    );
   }
 
   /// layout za draggable odgovore
   Widget tileList(String index, String choice1) {
-    counter++;
+    //counter++;
     return Column(
       key: UniqueKey(),
       mainAxisSize: MainAxisSize.min,
