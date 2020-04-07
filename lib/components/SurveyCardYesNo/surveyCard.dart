@@ -95,8 +95,9 @@ class _YesNoSurveyState extends State<SurveyCard>
             shrinkWrap: true,
             children: <Widget>[
               Container(
-                height: ScreenUtil.instance.setHeight(800.0),
+               height: ScreenUtil.instance.setHeight(800.0),
                 child: PageView.builder(
+                     
                     physics: NeverScrollableScrollPhysics(),
                     controller: _controller,
                     itemCount: widget.surveyDoc.questions.length,
@@ -112,6 +113,7 @@ class _YesNoSurveyState extends State<SurveyCard>
                       branchingChoice =
                           widget.snapQuestions[index]['choice_to_exit'];
                       return Column(
+                        mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           SurveyAppBar(
                             arguments: PasswordArguments(
@@ -171,7 +173,7 @@ class _YesNoSurveyState extends State<SurveyCard>
       Navigator.of(context).push(
         CardAnimationTween(
             widget: Summary(
-           arguments: PasswordArguments(
+          arguments: PasswordArguments(
             email: widget.arguments.email,
             password: widget.arguments.password,
             phone: widget.arguments.phone,
@@ -227,19 +229,19 @@ class _YesNoSurveyState extends State<SurveyCard>
             clickedAnswer = '';
             Navigator.of(context).push(CardAnimationTween(
                 widget: Summary(
-                      arguments: PasswordArguments(
-                        email: widget.arguments.email,
-                        password: widget.arguments.password,
-                        phone: widget.arguments.phone,
-                        username: widget.arguments.username,
-                      ),
-                      userLevel: widget.userLevel,
-                      surveyDoc: widget.surveyDoc,
-                      animateTo: summaryAnimateToPpage,
-                      questions: widget.snapQuestions,
-                      totalProgress: widget.surveyDoc.numberOfQuestions,
-                      totalSar: widget.sarSurvey,
-                    )));
+              arguments: PasswordArguments(
+                email: widget.arguments.email,
+                password: widget.arguments.password,
+                phone: widget.arguments.phone,
+                username: widget.arguments.username,
+              ),
+              userLevel: widget.userLevel,
+              surveyDoc: widget.surveyDoc,
+              animateTo: summaryAnimateToPpage,
+              questions: widget.snapQuestions,
+              totalProgress: widget.surveyDoc.numberOfQuestions,
+              totalSar: widget.sarSurvey,
+            )));
           }()
         : () {
             showDialog(
