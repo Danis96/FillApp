@@ -16,6 +16,7 @@ import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
@@ -129,6 +130,7 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: GestureDetector(
         onTap: () {
@@ -187,6 +189,7 @@ class _ProfileState extends State<Profile> {
               ),
               Form(
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Container(
                       width: ScreenUtil.instance.setWidth(316.0),
@@ -263,10 +266,10 @@ class _ProfileState extends State<Profile> {
                     ),
                     Container(
                       width: ScreenUtil.instance.setWidth(316.0),
-                      height: ScreenUtil.instance.setHeight(67.0),
+                      height: SizeConfig.blockSizeVertical * 8,
                       margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(47.0),
-                        top: ScreenUtil.instance.setWidth(22.0),
+                        top: SizeConfig.blockSizeVertical * 3,
                         right: ScreenUtil.instance.setWidth(47.0),
                       ),
                       child: GestureDetector(

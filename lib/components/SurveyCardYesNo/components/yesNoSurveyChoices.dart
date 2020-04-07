@@ -7,6 +7,7 @@ import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -43,11 +44,12 @@ class _YesNoSurveyChoicesState extends State<SurveyChoices> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Column(
       children: <Widget>[
         Container(
           key: ValueKey(widget.title),
-          margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
+          margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
           width: ScreenUtil.instance.setWidth(303.0),
           height: ScreenUtil.instance.setWidth(58.0),
           decoration: BoxDecoration(

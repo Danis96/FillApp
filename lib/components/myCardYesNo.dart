@@ -19,6 +19,7 @@ import 'package:fillproject/components/myCardYesChoice.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -55,6 +56,7 @@ class MyCardYesNo extends StatefulWidget {
 class _MyCardYesNoState extends State<MyCardYesNo> {
   @override
   Widget build(BuildContext context) {
+     SizeConfig().init(context);
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
     ScreenUtil.instance = ScreenUtil(
@@ -65,14 +67,15 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
     return Container(
        key: widget.key,
         width: ScreenUtil.instance.setWidth(340.0),
-        height: ScreenUtil.instance.setHeight(150.0),
-    margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(12.0), top: ScreenUtil.instance.setWidth(140.0), right: ScreenUtil.instance.setWidth(12.0)),
+        height:  SizeConfig.blockSizeVertical * 35,
+    margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(12.0), top:  SizeConfig.blockSizeVertical * 14, right: ScreenUtil.instance.setWidth(12.0)),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(30)),
             color: MyColor().black),
         child: Padding(
             padding: EdgeInsets.only(left: ScreenUtil.instance.setWidth(40.0), right: ScreenUtil.instance.setWidth(40.0), top: ScreenUtil.instance.setWidth(15.0)),          
             child: Column(
+              mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
             Container(
@@ -86,39 +89,42 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
                   question: widget.question,
                   containerHeight: ScreenUtil.instance.setHeight(90.0)),
               ),
-              Container(
-                margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-                  child: Row(
-                    children: <Widget>[
-                      MyYesChoice(
-                          choice: MyText().willYes,
-                          snapi: widget.snapi,
-                          usersSars: widget.usersSar,
-                          sar: widget.sar,
-                          isSar: widget.isSar,
-                          snap: widget.snap,
-                          index: widget.index,
-                          notifyParent: widget.notifyParent,
-                          target: widget.target,
-                          doc: widget.doc,
-                          marginRight: ScreenUtil.instance.setWidth(0.0),
-                          username: widget.username),
-                      MyNoChoice(
-                          choice: MyText().willNo,
-                          snapi: widget.snapi,
-                          usersSars: widget.usersSar,
-                          snap: widget.snap,
-                          isSar: widget.isSar,
-                          sar: widget.sar,
-                          index: widget.index,
-                          notifyParent: widget.notifyParent,
-                          target: widget.target,
-                          doc: widget.doc,
-                          marginRight: 35.0,
-                          username: widget.username)
-                    ],
+              Expanded(
+                              child: Container(
+                                
+                  margin: EdgeInsets.only(bottom: SizeConfig.blockSizeHorizontal * 9),
+                    child: Row(
+                      children: <Widget>[
+                        MyYesChoice(
+                            choice: MyText().willYes,
+                            snapi: widget.snapi,
+                            usersSars: widget.usersSar,
+                            sar: widget.sar,
+                            isSar: widget.isSar,
+                            snap: widget.snap,
+                            index: widget.index,
+                            notifyParent: widget.notifyParent,
+                            target: widget.target,
+                            doc: widget.doc,
+                            marginRight: ScreenUtil.instance.setWidth(0.0),
+                            username: widget.username),
+                        MyNoChoice(
+                            choice: MyText().willNo,
+                            snapi: widget.snapi,
+                            usersSars: widget.usersSar,
+                            snap: widget.snap,
+                            isSar: widget.isSar,
+                            sar: widget.sar,
+                            index: widget.index,
+                            notifyParent: widget.notifyParent,
+                            target: widget.target,
+                            doc: widget.doc,
+                            marginRight: 35.0,
+                            username: widget.username)
+                      ],
+                    ),
                   ),
-                )
+              )
               ]),
         ));
   }

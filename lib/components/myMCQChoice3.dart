@@ -18,6 +18,7 @@ import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/models/FlashQuestion/questionSkelet.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -68,9 +69,9 @@ class _MyMCQChoiceState3 extends State<MyMCQChoice3> {
   Widget build(BuildContext context) {
     return Container(
         key: UniqueKey(),
-        width: ScreenUtil.instance.setWidth(257.0),
-        height: ScreenUtil.instance.setHeight(60.0),
-        margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+       width: SizeConfig.blockSizeHorizontal * 65,
+        height: SizeConfig.blockSizeVertical * 7,
+        margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(10.0)),
         alignment: Alignment.center,
         child: Container(
           width: ScreenUtil.instance.setWidth(257.0),

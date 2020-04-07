@@ -28,6 +28,7 @@ import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:random_string/random_string.dart';
@@ -51,6 +52,7 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: MyColor().black,
       body: Builder(
@@ -58,7 +60,7 @@ class _SignUpState extends State<SignUp> {
           onWillPop: _onWillPop,
           child: Center(
             child: Container(
-              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(140.0)),
+              margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 20),
               child: Column(
                 children: <Widget>[
                   Center(
