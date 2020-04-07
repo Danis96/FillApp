@@ -31,7 +31,9 @@ class ChoiceContainer extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(33.5)),
             color: MyColor().white),
         width: ScreenUtil.instance.setWidth(350.0),
-        margin: isSummary ? EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)) : null,
+        margin: EdgeInsets.only(
+            top: ScreenUtil.instance.setWidth(5.0),
+            bottom: ScreenUtil.instance.setWidth(5.0)),
         child: ListTile(
             leading: Container(
               alignment: Alignment.center,
