@@ -2,7 +2,7 @@ class QuestionsForSurvey {
   final qSurvey = [
     {
       /// 1
-      "name": "OrderTest",
+      "name": "DateTest",
       "number_of_questions": 11,
       "sar_total": 80,
       "target": 1000,
@@ -12,93 +12,37 @@ class QuestionsForSurvey {
       "list_of_usernames_that_gave_answers": [],
       "questions": [
         {
-          "choice_to_exit": "",
-          "choices": [
-            {"value": "item1", "text": "Ronaldo"},
-            {"value": "item2", "text": "Messi"},
-            {"value": "item2", "text": "Danis"},
-            {"value": "item2", "text": "Jusuf"},
-          ],
-          "type": "order",
+          "title": "When is your birthday?",
+          "type": "date",
+          "subtype": "all",
           "sar": 35,
           "is_branching": "",
-          "is_single":0,
-          "title": "Order",
+          "choice_to_exit": "",
         },
         {
-           "choice_to_exit": "",
-          "choices": [
-            {"value": "item1", "text": "Ronaldo"},
-            {"value": "item2", "text": "Messi"},
-            {"value": "item2", "text": "Danis"},
-            {"value": "item2", "text": "Jusuf"},
-          ],
-          "type": "order",
+          "title": "What is your favourite day number?",
+          "type": "date",
+          "subtype": "day",
           "sar": 35,
           "is_branching": "",
-          "is_single":0,
-          "title": "Order",
+          "choice_to_exit": "",
         },
         {
-          "choice_to_exit": "",
-          "choices": [
-            {"value": "item1", "text": "Ronaldo"},
-            {"value": "item2", "text": "Messi"},
-            {"value": "item2", "text": "Danis"},
-            {"value": "item2", "text": "Jusuf"},
-          ],
-          "type": "order",
+          "title": "What is your favourite month?",
+          "type": "date",
+          "subtype": "month",
           "sar": 35,
           "is_branching": "",
-          "is_single":0,
-          "title": "Order",
+          "choice_to_exit": "",
         },
         {
-          "choice_to_exit": "",
-          "choices": [
-            {"value": "item1", "text": "Ronaldo"},
-            {"value": "item2", "text": "Messi"},
-            {"value": "item2", "text": "Danis"},
-            {"value": "item2", "text": "Jusuf"},
-          ],
-          "type": "order",
+          "title": "When is your birthday year?",
+          "type": "date",
+          "subtype": "year",
           "sar": 35,
           "is_branching": "",
-          "is_single":0,
-          "title": "Order",
+          "choice_to_exit": "",
         },
-        // {
-        //   "title": "When is your birthday?",
-        //   "type": "date",
-        //   "subtype": "all",
-        //   "sar": 35,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        // },
-        // {
-        //   "title": "What is your favourite day number?",
-        //   "type": "date",
-        //   "subtype": "day",
-        //   "sar": 35,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        // },
-        // {
-        //   "title": "What is your favourite month?",
-        //   "type": "date",
-        //   "subtype": "month",
-        //   "sar": 35,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        // },
-        // {
-        //   "title": "When is your birthday year?",
-        //   "type": "date",
-        //   "subtype": "year",
-        //   "sar": 35,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        // },
         // {
         //   "title": "Do you love football",
         //   "type": "yesno",
@@ -110,7 +54,7 @@ class QuestionsForSurvey {
         //     {"value": "item2", "text": "No"},
         //   ]
         // },
-        {
+          {
           "title": "Do you love basketball",
           "type": "yesno",
           "sar": 10,
@@ -517,7 +461,7 @@ class QuestionsForSurvey {
         //     {"value": "item3", "text": "PSG"},
         //   ]
         // },
-
+        
         {
           "title": "What is your favourite club?",
           "type": "mcq",
