@@ -22,6 +22,8 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
+import 'package:credit_card_validate/credit_card_validate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 FocusNode nameFocus;
 FocusNode dateFocus;
@@ -89,6 +91,10 @@ class _ProfileState extends State<Profile> {
       isDateChanged = false;
   DateTime dateOfBirth2 = DateTime.now();
   String usersName, usersEmail, usersDOB, usersCard, usersCardDate, usersCC;
+
+  /// credit card valdiation
+  String creditCardNumber = '';
+  IconData brandIcon;
 
   @override
   void initState() {
@@ -289,15 +295,13 @@ class _ProfileState extends State<Profile> {
                                   ScreenUtil.instance.setWidth(33.5)),
                             ),
                             child: Container(
-                              padding: EdgeInsets.all(15.0),
+                              padding: EdgeInsets.all(10.0),
                               margin: EdgeInsets.only(
-                                  top: ScreenUtil.instance.setWidth(9.0),
-                                  left: ScreenUtil.instance.setWidth(7.0)),
+                                  top: SizeConfig.blockSizeVertical * 1.3,
+                                  left: ScreenUtil.instance.setWidth(15.0)),
                               child: isClicked
                                   ? Text(
-                                      isDateChanged
-                                          ? dateOfBirth
-                                          : dateOfBirth,
+                                      isDateChanged ? dateOfBirth : dateOfBirth,
                                       style: TextStyle(
                                           fontSize:
                                               ScreenUtil.instance.setSp(14.0)),
@@ -405,7 +409,7 @@ class _ProfileState extends State<Profile> {
                         focusNode: creditFocus,
                         autofocus: false,
                         readOnly: isAnonymous == 1,
-                        inputFormatters: [maskTextInputFormatterCard],
+                        //  / inputFormatters: [maskTextInputFormatterCard],
                         keyboardType: TextInputType.number,
                         maxLength: 200,
                         enableSuggestions: false,
@@ -418,6 +422,16 @@ class _ProfileState extends State<Profile> {
                               vertical: 25.0, horizontal: 35.0),
                           labelText: AppLocalizations.of(context)
                               .translate('enterCardNumber'),
+                          suffixIcon: brandIcon != null
+                              ? FaIcon(
+                                  brandIcon,
+                                  color: isEmptyCard
+                                      ? MyColor().error
+                                      : MyColor().greenCircle,
+                                  size: 32,
+                                )
+                              : null,
+                          suffixStyle: TextStyle(),
                           labelStyle: TextStyle(
                               color: MyColor().black,
                               fontSize: ScreenUtil.instance.setSp(16.0)),
@@ -456,14 +470,45 @@ class _ProfileState extends State<Profile> {
                         onChanged: (input) {
                           setState(() {
                             creditCard = input;
+                            creditCardNumber = input;
                             isButtonCompleteCard = true;
                             isButtonComplete = true;
+                          });
+                          String brand =
+                              CreditCardValidator.identifyCardBrand(input);
+                          IconData ccBrandIcon;
+                          if (brand != null) {
+                            if (brand == 'visa') {
+                              ccBrandIcon = FontAwesomeIcons.ccVisa;
+                            } else if (brand == 'master_card') {
+                              ccBrandIcon = FontAwesomeIcons.ccMastercard;
+                            } else if (brand == 'american_express') {
+                              ccBrandIcon = FontAwesomeIcons.ccAmex;
+                            } else if (brand == 'discover') {
+                              ccBrandIcon = FontAwesomeIcons.ccDiscover;
+                            }
+                          }
+                          setState(() {
+                            brandIcon = ccBrandIcon;
                           });
                         },
                         onTap: () => onTapFieldAnonymous(),
                         obscureText: false,
                       ),
                     ),
+                    isEmptyCard
+                        ? Container(
+                            margin: EdgeInsets.only(
+                                top: ScreenUtil.instance.setWidth(10.0)),
+                            child: Text(
+                              'The credit card number is invalid.',
+                              style: TextStyle(color: Colors.red),
+                            ),
+                          )
+                        : Text(
+                            '',
+                            style: TextStyle(color: Colors.green),
+                          ),
                     Row(
                       children: <Widget>[
                         Container(
@@ -790,7 +835,10 @@ class _ProfileState extends State<Profile> {
             isEmptyBirth = false;
           });
         });
-      } else if (creditCard == '' || creditCard.length < 19) {
+      } else if (creditCard == '' ||
+          creditCardNumber.length < 13 ||
+          !CreditCardValidator.isCreditCardValid(
+              cardNumber: creditCardNumber)) {
         setState(() {
           isEmptyCard = true;
         });
@@ -833,8 +881,14 @@ class _ProfileState extends State<Profile> {
           });
         });
       } else if (isButtonCompleteCard
-          ? creditCard == '' || creditCard.length < 19
-          : usersCard == '' || usersCard.length < 19) {
+          ? creditCardNumber.length < 13 ||
+              !CreditCardValidator.isCreditCardValid(
+                  cardNumber: creditCardNumber)
+          : usersCard == '' ||
+              usersCard.length < 13 ||
+              !CreditCardValidator.isCreditCardValid(
+                  cardNumber: usersCard)
+              ) {
         setState(() {
           isEmptyCard = true;
         });
