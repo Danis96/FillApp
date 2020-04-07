@@ -101,7 +101,7 @@ class _DashboardPageState extends State<DashboardPage>
       onWillPop: _onWillPop,
       child: Center(
         child: ListView(
-          physics: NeverScrollableScrollPhysics(),
+          // physics: NeverScrollableScrollPhysics(),/
           children: <Widget>[
             /// [getUserUsername]
             ///
