@@ -1,14 +1,8 @@
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqComponents/MultipleMcqList.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqComponents/listMcqChoicesThree.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqComponents/multipleMcqAnswers.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqComponents/previewSingleMcqAnswer.dart';
-import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqComponents/singleMcqAnswer.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/orderComponents/listOfChoices.dart';
 import 'package:fillproject/components/answerLabelContainer.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class OrderWidget extends StatelessWidget {
   final widget;

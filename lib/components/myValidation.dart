@@ -47,7 +47,7 @@ class MyValidation {
   String validateUsernameLogin(
       String username, bool usernamePostoji, BuildContext context) {
     if (username == '') {
-      return AppLocalizations.of(context).translate('usernaneCantEmoty');
+      return AppLocalizations.of(context).translate('emailCantEmpty');
     } else if (regexSpace.hasMatch(username) == true) {
       return AppLocalizations.of(context).translate('usernameMustNotSpace');
     } else if (usernamePostoji) {

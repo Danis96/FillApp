@@ -27,9 +27,8 @@ import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/components/privacy.dart';
 import 'package:fillproject/register/components/terms.dart';
-import 'package:fillproject/register/emailPage.dart';
+import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
-import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -96,21 +95,15 @@ class _PasswordPageState extends State<PasswordPage> {
           onPressed: () {
             Navigator.of(context).push(
               CardAnimationTween(
-                widget: EmailPage(
+                widget: VerifyPinPage(
                     arguments: RegisterArguments(
-                  email: widget.arguments.email,
-                  phone: widget.arguments.phone,
-                  username: widget.arguments.username,
-                )),
+                      email: widget.arguments.email,
+                        verId: widget.arguments.verId,
+                        username: widget.arguments.username,
+                        usernameSecond: widget.arguments.usernameSecond,
+                        phone: widget.arguments.phone)),
               ),
             );
-            Navigator.of(context).pushNamed(Email,
-                arguments: RegisterArguments(
-                    email: widget.arguments.email,
-                    verId: widget.arguments.verId,
-                    username: widget.arguments.username,
-                    usernameSecond: widget.arguments.usernameSecond,
-                    phone: widget.arguments.phone));
           },
         ),
       ),
@@ -131,7 +124,9 @@ class _PasswordPageState extends State<PasswordPage> {
                     padding: EdgeInsets.only(
                         top: ScreenUtil.instance.setWidth(28.0),
                         bottom: ScreenUtil.instance.setWidth(35.0)),
-                    child: MyTextComponent(text: AppLocalizations.of(context).translate('setUpAPassword')),
+                    child: MyTextComponent(
+                        text: AppLocalizations.of(context)
+                            .translate('setUpAPassword')),
                   ),
                   Text(AppLocalizations.of(context).translate('fiveSAR'),
                       textAlign: TextAlign.center,
@@ -155,8 +150,11 @@ class _PasswordPageState extends State<PasswordPage> {
                             contentPadding: new EdgeInsets.symmetric(
                                 vertical: ScreenUtil.instance.setWidth(25.0),
                                 horizontal: ScreenUtil.instance.setWidth(35.0)),
-                            labelText: AppLocalizations.of(context).translate('password'),
-                            labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setSp(16.0)),
+                            labelText: AppLocalizations.of(context)
+                                .translate('password'),
+                            labelStyle: TextStyle(
+                                color: MyColor().white,
+                                fontSize: ScreenUtil.instance.setSp(16.0)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(33.5)),
@@ -184,8 +182,8 @@ class _PasswordPageState extends State<PasswordPage> {
                           ),
                           style: TextStyle(color: MyColor().white),
                           obscureText: true,
-                          validator: (password) =>
-                              MyValidation().validatePassword(password, context),
+                          validator: (password) => MyValidation()
+                              .validatePassword(password, context),
                         ),
                       )),
                   Container(
@@ -198,13 +196,15 @@ class _PasswordPageState extends State<PasswordPage> {
                       overflow: TextOverflow.visible,
                       text: new TextSpan(children: [
                         new TextSpan(
-                          text: AppLocalizations.of(context).translate('byTappingSignIn&Accept'),
+                          text: AppLocalizations.of(context)
+                              .translate('byTappingSignIn&Accept'),
                           style: new TextStyle(
                               color: Colors.white,
                               fontSize: ScreenUtil.instance.setSp(12)),
                         ),
                         new TextSpan(
-                            text: AppLocalizations.of(context).translate('privacy'),
+                            text: AppLocalizations.of(context)
+                                .translate('privacy'),
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -212,17 +212,19 @@ class _PasswordPageState extends State<PasswordPage> {
                             recognizer: new TapGestureRecognizer()
                               ..onTap = () {
                                 _save();
-                                Navigator.of(context)
-                                    .push(CardAnimationTween(widget: Privacy()));
+                                Navigator.of(context).push(
+                                    CardAnimationTween(widget: Privacy()));
                               }),
                         new TextSpan(
-                          text: AppLocalizations.of(context).translate('andAgree'),
+                          text: AppLocalizations.of(context)
+                              .translate('andAgree'),
                           style: new TextStyle(
                               color: Colors.white,
                               fontSize: ScreenUtil.instance.setSp(12)),
                         ),
                         new TextSpan(
-                            text: AppLocalizations.of(context).translate('terms'),
+                            text:
+                                AppLocalizations.of(context).translate('terms'),
                             style: new TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
@@ -254,12 +256,16 @@ class _PasswordPageState extends State<PasswordPage> {
                               }
                             } on SocketException catch (_) {
                               MySnackbar().showSnackbar(
-                                  AppLocalizations.of(context).translate('noIternent'),
+                                  AppLocalizations.of(context)
+                                      .translate('noIternent'),
                                   context,
-                                  AppLocalizations.of(context).translate('undo'));
+                                  AppLocalizations.of(context)
+                                      .translate('undo'));
                             }
                           },
-                          child: Text(AppLocalizations.of(context).translate('signUp&Accept'),
+                          child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('signUp&Accept'),
                               style: TextStyle(
                                   fontSize: ScreenUtil.instance.setSp(18))))),
                 ],

@@ -20,7 +20,7 @@ import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/localization/app_localizations.dart';
-import 'package:fillproject/register/emailPage.dart';
+import 'package:fillproject/register/passwordPage.dart';
 import 'package:fillproject/register/registerPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/screenUtils.dart';
@@ -57,8 +57,9 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
       FirebaseAuth.instance.signInWithCredential(credential).then((user) async {
         Navigator.of(context).push(
           CardAnimationTween(
-            widget: EmailPage(
+            widget: PasswordPage(
                 arguments: RegisterArguments(
+                    email: widget.arguments.email,
                     verId: widget.arguments.verId,
                     username: widget.arguments.username,
                     usernameSecond: widget.arguments.usernameSecond,
@@ -179,7 +180,9 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                       style: TextStyle(color: MyColor().error),
                     )
                   : codeError
-                      ? Text(AppLocalizations.of(context).translate('youEnteredInvalidCode'),
+                      ? Text(
+                          AppLocalizations.of(context)
+                              .translate('youEnteredInvalidCode'),
                           style: TextStyle(color: MyColor().error))
                       : Text(''),
             ),
@@ -214,7 +217,8 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                 child: RichText(
                     text: new TextSpan(children: [
                   new TextSpan(
-                      text: AppLocalizations.of(context).translate('didntRecievePIN'),
+                      text: AppLocalizations.of(context)
+                          .translate('didntRecievePIN'),
                       style: TextStyle(
                           color: MyColor().white,
                           fontSize: ScreenUtil.instance.setSp(15.0),

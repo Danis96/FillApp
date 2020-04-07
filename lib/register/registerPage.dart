@@ -32,6 +32,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+String email;
+int _btnCounter = 0;
+
 class RegisterPage extends StatefulWidget {
   final DidntRecievePinArguments arguments;
 
@@ -43,6 +46,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   String phoneNo, smsCode, verificationId, username, name;
+  bool emailPostoji = false;
 
   final DidntRecievePinArguments arguments;
 
@@ -86,13 +90,14 @@ class _RegisterPageState extends State<RegisterPage> {
       final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResend]) {
         this.verificationId = verId;
         Navigator.of(context).push(CardAnimationTween(
-          widget: VerifyPinPage(
-              arguments: RegisterArguments(
-                  verId: verificationId,
-                  username: usernameController.text,
-                  usernameSecond: widget.arguments.username,
-                  phone: phoneController.text)),
-        ));
+            widget: VerifyPinPage(
+          arguments: RegisterArguments(
+              verId: verificationId,
+              username: usernameController.text,
+              usernameSecond: widget.arguments.username,
+              phone: phoneController.text,
+              email: usernameController.text),
+        )));
       };
 
       final PhoneVerificationCompleted verificationSuccess =
@@ -113,7 +118,8 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     onFieldSubmitted1(BuildContext context) {
-      phoneNo = "+966" + phoneController.text;
+      phoneNo = '+' +  phoneController.text;
+      //phoneNo = "+966" + phoneController.text;
       final _formState = _formKey.currentState;
       if (_formState.validate()) {
         verifyPhone();
@@ -175,83 +181,68 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         )),
                         Container(
-                          width: ScreenUtil.instance.setWidth(320.0),
-                          height: ScreenUtil.instance.setHeight(92.0),
-                          margin: EdgeInsets.only(
-                              bottom: ScreenUtil.instance.setWidth(19.0),
-                              left: ScreenUtil.instance.setWidth(49.0),
-                              right: ScreenUtil.instance.setWidth(49.0)),
-                          child: TextFormField(
-                            enableSuggestions: false,
-                            textCapitalization: TextCapitalization.sentences,
-                            controller: usernameController,
-                            decoration: InputDecoration(
-                              hasFloatingPlaceholder: false,
-                              errorStyle: TextStyle(
-                                  inherit: true,
-                                  textBaseline: TextBaseline.ideographic),
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: ScreenUtil.instance.setWidth(25.0),
-                                  horizontal:
-                                      ScreenUtil.instance.setWidth(35.0)),
-                              labelText: AppLocalizations.of(context)
-                                  .translate('username'),
-                              labelStyle: TextStyle(
-                                  color: MyColor().white,
-                                  fontSize: ScreenUtil.instance.setSp(18)),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(color: MyColor().white),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(color: MyColor().white),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                  color: MyColor().error,
+                            margin: EdgeInsets.only(
+                                bottom: ScreenUtil.instance.setWidth(20.0),
+                                top: ScreenUtil.instance.setWidth(20.0)),
+                            child: Container(
+                              width: ScreenUtil.instance.setWidth(316.0),
+                              height: ScreenUtil.instance.setHeight(92.0),
+                              margin: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(20.0)),
+                              child: TextFormField(
+                                enableSuggestions: false,
+                                controller: usernameController,
+                                decoration: InputDecoration(
+                                  hasFloatingPlaceholder: false,
+                                  contentPadding: new EdgeInsets.symmetric(
+                                      vertical:
+                                          ScreenUtil.instance.setWidth(25.0),
+                                      horizontal:
+                                          ScreenUtil.instance.setWidth(35.0)),
+                                  labelText: AppLocalizations.of(context)
+                                      .translate('email'),
+                                  labelStyle: TextStyle(
+                                      color: MyColor().white,
+                                      fontSize:
+                                          ScreenUtil.instance.setSp(16.0)),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(33.5)),
+                                    borderSide:
+                                        BorderSide(color: MyColor().white),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(33.5)),
+                                    borderSide:
+                                        BorderSide(color: MyColor().white),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(33.5)),
+                                    borderSide: BorderSide(
+                                      color: MyColor().error,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(33.5)),
+                                    borderSide: BorderSide(
+                                      color: MyColor().error,
+                                    ),
+                                  ),
                                 ),
+                                style: TextStyle(color: MyColor().white),
+                                validator: (email) => MyValidation()
+                                    .validateEmail(email, _btnCounter,
+                                        usernamePostoji, context),
+                                onChanged: (input) {
+                                  setState(() {
+                                    email = input;
+                                  });
+                                },
                               ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                  color: MyColor().error,
-                                ),
-                              ),
-                            ),
-                            style: TextStyle(color: MyColor().white),
-                            validator: (username) => MyValidation()
-                                .validateUsername(
-                                    username, usernamePostoji, context),
-                            onChanged: (input) {
-                              setState(() {
-                                username = input;
-                              });
-                            },
-                            onFieldSubmitted: (value) async {
-                              try {
-                                final result =
-                                    await InternetAddress.lookup('google.com');
-                                if (result.isNotEmpty &&
-                                    result[0].rawAddress.isNotEmpty) {
-                                  onFieldSubmitted1(context);
-                                }
-                              } on SocketException catch (_) {
-                                MySnackbar().showSnackbar(
-                                    AppLocalizations.of(context)
-                                        .translate('noIternent'),
-                                    context,
-                                    AppLocalizations.of(context)
-                                        .translate('undo'));
-                              }
-                            },
-                          ),
-                        ),
+                            )),
                         Container(
                           width: ScreenUtil.instance.setWidth(316.0),
                           height: ScreenUtil.instance.setHeight(92.0),
@@ -269,8 +260,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   vertical: ScreenUtil.instance.setWidth(25.0),
                                   horizontal:
                                       ScreenUtil.instance.setWidth(35.0)),
-                              prefix: Text(
-                                "+966",
+                              prefix: Text('',
+                                //"+966",
                                 style: TextStyle(color: MyColor().white),
                               ),
                               labelText: AppLocalizations.of(context)
@@ -305,7 +296,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             onChanged: (input) {
                               setState(() {
-                                phoneNo = '966' + input;
+                                phoneNo = input;
+                                //phoneNo = '966' + input;
                               });
                             },
                             validator: (phone) => MyValidation()
@@ -403,6 +395,26 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ],
                         ),
+                        Column(
+                          children: <Widget>[
+                            FutureBuilder(
+                              future:
+                                  FirebaseCheck().doesEmailAlreadyExist(usernameController.text),
+                              builder: (context, AsyncSnapshot<bool> result) {
+                                if (!result.hasData) {
+                                  return EmptyContainer();
+                                }
+                                if (result.data) {
+                                  emailPostoji = true;
+                                  return EmptyContainer();
+                                } else {
+                                  emailPostoji = false;
+                                  return EmptyContainer();
+                                }
+                              },
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
