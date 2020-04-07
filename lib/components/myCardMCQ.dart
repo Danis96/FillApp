@@ -19,6 +19,7 @@ import 'package:fillproject/components/myMCQChoice3.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -67,6 +68,7 @@ class _MyCardMCQState extends State<MyCardMCQ> {
 
   @override
   Widget build(BuildContext context) {
+     SizeConfig().init(context);
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
     ScreenUtil.instance = ScreenUtil(
@@ -76,11 +78,9 @@ class _MyCardMCQState extends State<MyCardMCQ> {
     )..init(context);
     return Container(
         key: widget.key,
-        width: ScreenUtil.instance.setWidth(340.0),
-        height: ScreenUtil.instance.setHeight(250.0),
+        width: SizeConfig.blockSizeHorizontal * 85,
         margin: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(12.0),
-            top: ScreenUtil.instance.setWidth(0.0),
             right: ScreenUtil.instance.setWidth(12.0)),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -89,7 +89,7 @@ class _MyCardMCQState extends State<MyCardMCQ> {
           padding: EdgeInsets.only(
               left: ScreenUtil.instance.setWidth(40.0),
               right: ScreenUtil.instance.setWidth(40.0),
-              top: ScreenUtil.instance.setWidth(15.0)),
+              top: SizeConfig.blockSizeVertical * 3),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -108,14 +108,15 @@ class _MyCardMCQState extends State<MyCardMCQ> {
                   child: MyQuestion(
                       isCompleted: false,
                       question: widget.question,
-                      containerHeight: ScreenUtil.instance.setHeight(100.0)),
+                      containerHeight: SizeConfig.blockSizeVertical * 8),
                 ),
                 Container(
-                  height: ScreenUtil.instance.setWidth(240.0),
+                  height: SizeConfig.blockSizeVertical * 29,
                   width: ScreenUtil.instance.setWidth(260.0),
                   margin:
-                      EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
+                      EdgeInsets.only(top: ScreenUtil.instance.setWidth(1.0)),
                   child: Column(
+                     mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                            MyMCQChoice1(
                              choice: firstQ,

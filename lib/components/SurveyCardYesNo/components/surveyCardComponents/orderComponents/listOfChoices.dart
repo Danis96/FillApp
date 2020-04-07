@@ -10,6 +10,7 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -60,11 +61,12 @@ class _ListOfChoicesState extends State<ListOfChoices> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return ListView(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       children: <Widget>[
-        Container(height: ScreenUtil.instance.setHeight(380.0), child: lista()),
+        Container(height: SizeConfig.blockSizeVertical * 40, child: lista()),
         isSummary
             ? EmptyContainer()
             : SubmitButton(

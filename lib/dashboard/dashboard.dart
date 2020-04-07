@@ -30,6 +30,7 @@ import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/FlashQuestion/questionModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/screenUtils.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -96,12 +97,13 @@ class _DashboardPageState extends State<DashboardPage>
   @override
   Widget build(BuildContext context) {
     Constant().responsive(context);
+    SizeConfig().init(context);
     return Scaffold(
         body: WillPopScope(
       onWillPop: _onWillPop,
       child: Center(
         child: ListView(
-          // physics: NeverScrollableScrollPhysics(),/
+          physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             /// [getUserUsername]
             ///
@@ -146,7 +148,7 @@ class _DashboardPageState extends State<DashboardPage>
               children: <Widget>[
                 Expanded(
                   child: Container(
-                    height: ScreenUtil.instance.setWidth(433.0),
+                    height:  SizeConfig.blockSizeVertical * 51,
                     child: FutureBuilder(
                       /// [getQuestions]
                       ///

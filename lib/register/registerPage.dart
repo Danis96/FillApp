@@ -113,7 +113,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     onFieldSubmitted1(BuildContext context) {
-      phoneNo = "+966" + phoneController.text;
+      phoneNo = "+" + phoneController.text;
       final _formState = _formKey.currentState;
       if (_formState.validate()) {
         verifyPhone();

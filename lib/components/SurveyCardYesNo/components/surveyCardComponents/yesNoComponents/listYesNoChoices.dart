@@ -23,6 +23,7 @@ class ListYesNoChoices extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         SurveyChoices(
           complete: isCompleted,

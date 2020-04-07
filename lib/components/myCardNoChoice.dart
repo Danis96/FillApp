@@ -21,6 +21,7 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/FlashQuestion/questionSkelet.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -69,10 +70,11 @@ class _MyNoChoiceState extends State<MyNoChoice> {
 
   @override
   Widget build(BuildContext context) {
+     SizeConfig().init(context);
     return Container(
         key: UniqueKey(),
-        width: ScreenUtil.instance.setWidth(110.0),
-        height: ScreenUtil.instance.setHeight(60.0),
+        width:  SizeConfig.blockSizeHorizontal * 28,
+        height:  SizeConfig.blockSizeVertical * 7,
         alignment: Alignment.center,
         margin: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(widget.marginRight)),
