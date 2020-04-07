@@ -40,8 +40,10 @@ class ListOfChoices extends StatefulWidget {
 }
 
 class _ListOfChoicesState extends State<ListOfChoices> {
+  //Lista koja se koristi u Reorderable List View
   List<String> listOfItems;
 
+  //Metoda koja vrši ordering kada user drag-a neki choice
   void _onReorder(int oldIndex, int newIndex) {
     setState(() {
       if (newIndex > oldIndex) {
@@ -99,6 +101,8 @@ class _ListOfChoicesState extends State<ListOfChoices> {
       child: Column(
         children: <Widget>[
           Container(
+            //Ovaj height ako se ne stavi, onda nestane citava lista i kaze
+            //da mu fali height, tj. da je height infinite
             height: !isSummary ? ScreenUtil.instance.setHeight(380.0) : null,
             child: isSummary
                 ? Column(
@@ -149,10 +153,13 @@ class _ListOfChoicesState extends State<ListOfChoices> {
                       )
                     ],
                   )
+                //Reorderable List View ciji children su itme-i liste
                 : ReorderableListView(
+                    //Pozivanje metode za reordering
                     onReorder: _onReorder,
                     children: listOfItems
                         .map((listIndex) => ChoiceContainer(
+                              //Svaki child mora imati unique key
                               key: ValueKey(widget.index),
                               number: widget.number,
                               numberOfQuestions: widget.numberOfQuestions,
