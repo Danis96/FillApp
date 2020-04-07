@@ -85,7 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: SizedBox(
                           width: ScreenUtil.instance.setWidth(215.0),
                           height: ScreenUtil.instance.setHeight(60.0),
-                          child: Text(AppLocalizations.of(context).translate('login&startGenMoney'),
+                          child: Text(
+                              AppLocalizations.of(context)
+                                  .translate('login&startGenMoney'),
                               style: TextStyle(
                                   color: MyColor().white,
                                   fontWeight: FontWeight.w700,
@@ -113,7 +115,8 @@ class _LoginPageState extends State<LoginPage> {
                               textBaseline: TextBaseline.ideographic),
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 25.0, horizontal: 35.0),
-                          labelText: AppLocalizations.of(context).translate('username'),
+                          labelText:
+                              AppLocalizations.of(context).translate('email'),
                           labelStyle: TextStyle(
                             color: MyColor().white,
                             fontSize: ScreenUtil.instance.setSp(18.0),
@@ -168,7 +171,8 @@ class _LoginPageState extends State<LoginPage> {
                           hasFloatingPlaceholder: false,
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 25.0, horizontal: 35.0),
-                          labelText: AppLocalizations.of(context).translate('password'),
+                          labelText: AppLocalizations.of(context)
+                              .translate('password'),
                           labelStyle: TextStyle(
                               color: MyColor().white,
                               fontFamily: arabic,
@@ -201,7 +205,8 @@ class _LoginPageState extends State<LoginPage> {
                         style: TextStyle(color: MyColor().white),
                         obscureText: true,
                         validator: (password) => MyValidation()
-                            .validatePasswordLogin(password, passwordPostoji, context),
+                            .validatePasswordLogin(
+                                password, passwordPostoji, context),
                         onChanged: (input) {
                           setState(() {
                             password = input;
@@ -230,12 +235,15 @@ class _LoginPageState extends State<LoginPage> {
                               }
                             } on SocketException catch (_) {
                               MySnackbar().showSnackbar(
-                                  AppLocalizations.of(context).translate('noIternent'),
+                                  AppLocalizations.of(context)
+                                      .translate('noIternent'),
                                   context,
-                                  AppLocalizations.of(context).translate('undo'));
+                                  AppLocalizations.of(context)
+                                      .translate('undo'));
                             }
                           },
-                          child: Text(AppLocalizations.of(context).translate('login'),
+                          child: Text(
+                              AppLocalizations.of(context).translate('login'),
                               style: TextStyle(
                                   fontSize: ScreenUtil.instance.setSp(18.0))),
                         )),
@@ -245,7 +253,8 @@ class _LoginPageState extends State<LoginPage> {
                         child: RichText(
                             text: new TextSpan(children: [
                           new TextSpan(
-                              text: AppLocalizations.of(context).translate('forgetPass'),
+                              text: AppLocalizations.of(context)
+                                  .translate('forgetPass'),
                               style: TextStyle(
                                   color: MyColor().white,
                                   fontSize: ScreenUtil.instance.setSp(18.0),
