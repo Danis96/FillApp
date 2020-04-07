@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>798318671912-o9r98bqhp5ebstff45m3n15rgr0sq914.apps.googleusercontent.com</string>
+	<string>798318671912-dqpj8tcd56sjb26rpe0e5qsqs2o5e615.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.798318671912-o9r98bqhp5ebstff45m3n15rgr0sq914</string>
+	<string>com.googleusercontent.apps.798318671912-dqpj8tcd56sjb26rpe0e5qsqs2o5e615</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>798318671912-gekatinvpj9tdi5p5q9u8jb9rvqgi6je.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
@@ -15,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.fill.fillproject</string>
+	<string>com.tech387.fill.fillproject</string>
 	<key>PROJECT_ID</key>
 	<string>fill-c371b</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:798318671912:ios:7a378f6855891729ab5d1d</string>
+	<string>1:798318671912:ios:0330a4de544774f5ab5d1d</string>
 	<key>DATABASE_URL</key>
 	<string>https://fill-c371b.firebaseio.com</string>
 </dict>
