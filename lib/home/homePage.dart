@@ -124,9 +124,9 @@ class _SignUpState extends State<SignUp> {
                       child: Center(
                           child: FlatButton(
                               onPressed: () {
-                            // FirebaseJson().importSurveyJson();
+                            //  FirebaseJson().importSurveyJson();
                             // /  FirebaseJson().importJson();
-                                onPressed(context);
+                                 onPressed(context);
                               },
                               child: Text(
                                 AppLocalizations.of(context).translate("skip"),

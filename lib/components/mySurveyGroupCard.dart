@@ -163,6 +163,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                   right: ScreenUtil.instance.setWidth(37.0),
                   top: ScreenUtil.instance.setWidth(15.0)),
               child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                      Row(
