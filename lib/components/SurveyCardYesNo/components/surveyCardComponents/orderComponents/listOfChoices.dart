@@ -10,7 +10,6 @@ import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
-import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -42,6 +41,7 @@ class ListOfChoices extends StatefulWidget {
 
 class _ListOfChoicesState extends State<ListOfChoices> {
   List<String> listOfItems;
+  int counter = 0;
   @override
   void initState() {
     super.initState();
@@ -61,12 +61,12 @@ class _ListOfChoicesState extends State<ListOfChoices> {
 
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    return ListView(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+    counter = 0;
+    return Column(
+      mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(height: SizeConfig.blockSizeVertical * 40, child: lista()),
+        Container(
+            height: ScreenUtil.instance.setHeight(380.0), child: lista()),
         isSummary
             ? EmptyContainer()
             : SubmitButton(
@@ -114,6 +114,7 @@ class _ListOfChoicesState extends State<ListOfChoices> {
   }
 
   Widget lista() {
+    counter++;
     return isSummary
         ? Column(
             children: <Widget>[
@@ -161,17 +162,31 @@ class _ListOfChoicesState extends State<ListOfChoices> {
           )
         //Reorderable List View ciji children su itme-i liste
         : ReorderableListView(
+            padding: EdgeInsets.only(
+                top: ScreenUtil.instance.setWidth(25.0),
+                bottom: ScreenUtil.instance.setWidth(50.0)),
             //Pozivanje metode za reordering
             onReorder: onReorder,
             children: listOfItems
                 .map((listIndex) => tileList(
-                    AppLocalizations.of(context).translate('a'), listIndex))
+                    counter == 1
+                        ? AppLocalizations.of(context).translate('a')
+                        : counter == 2
+                            ? AppLocalizations.of(context).translate('b')
+                            : counter == 3
+                                ? AppLocalizations.of(context).translate('c')
+                                : counter == 4
+                                    ? AppLocalizations.of(context)
+                                        .translate('d')
+                                    : null,
+                    listIndex))
                 .toList(),
           );
   }
 
   /// layout za draggable odgovore
   Widget tileList(String index, String choice1) {
+    counter++;
     return Column(
       key: UniqueKey(),
       mainAxisSize: MainAxisSize.min,
@@ -182,35 +197,44 @@ class _ListOfChoicesState extends State<ListOfChoices> {
                 borderRadius: BorderRadius.all(Radius.circular(33.5)),
                 color: MyColor().white),
             width: ScreenUtil.instance.setWidth(350.0),
-            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
-            child: ListTile(
-              leading: Container(
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    border: Border.all(width: 1.0, color: MyColor().black),
-                    borderRadius: BorderRadius.all(Radius.circular(100)),
-                    color: MyColor().black),
-                height: ScreenUtil.instance.setHeight(58.0),
-                width: ScreenUtil.instance.setWidth(58.0),
-                child: Text(index,
-                    style: TextStyle(
-                        color: MyColor().white,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: arabic,
-                        fontStyle: FontStyle.normal,
-                        fontSize: ScreenUtil.instance.setSp(18.0))),
-              ),
-              title: Container(
-                alignment: Alignment.centerLeft,
-                child: Text(choice1,
-                    style: TextStyle(
-                        color: MyColor().black,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: arabic,
-                        fontStyle: FontStyle.normal,
-                        fontSize: ScreenUtil.instance.setSp(18.0))),
-              ),
-            )),
+            margin: EdgeInsets.only(
+                top: ScreenUtil.instance.setWidth(10.0),
+                bottom: ScreenUtil.instance.setWidth(10.0)),
+            child: Row(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 1.0, color: MyColor().black),
+                      borderRadius: BorderRadius.all(Radius.circular(100)),
+                      color: MyColor().black),
+                  height: ScreenUtil.instance.setHeight(58.0),
+                  width: ScreenUtil.instance.setWidth(58.0),
+                  child: Text(index,
+                      style: TextStyle(
+                          color: MyColor().white,
+                          fontWeight: FontWeight.w500,
+                          fontFamily: arabic,
+                          fontStyle: FontStyle.normal,
+                          fontSize: ScreenUtil.instance.setSp(18.0))),
+                ),
+                Container(
+                  width: ScreenUtil.instance.setWidth(40.0),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(33.5))),
+                  alignment: Alignment.centerLeft,
+                  child: Text(choice1,
+                      style: TextStyle(
+                          color: MyColor().black,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: arabic,
+                          fontStyle: FontStyle.normal,
+                          fontSize: ScreenUtil.instance.setSp(18.0))),
+                ),
+              ],
+            ))
       ],
     );
   }
