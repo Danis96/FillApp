@@ -66,7 +66,8 @@ class ContainerTypes extends StatelessWidget {
             number: number);
       case 'image':
         return ImageWidget(
-            widget: widget, index: index, refresh: refresh, isSingle: isSingle);
+            widget: widget, index: index, refresh: refresh, isSingle: isSingle, numberOfQuestions: numberOfQuestions,
+            number: number);
       case 'order':
         return OrderWidget(
             widget: widget,
