@@ -1,9 +1,8 @@
 class QuestionsForSurvey {
   final qSurvey = [
     {
-      /// 1
-      "name": "DateTest",
-      "number_of_questions": 11,
+      "name": "Review",
+      "number_of_questions": 12,
       "sar_total": 80,
       "target": 1000,
       "level": 1,
@@ -90,20 +89,20 @@ class QuestionsForSurvey {
             {"value": "item2", "text": "No"},
           ]
         },
-        // {
-        //   "title": "Who is/are your favourite player(s)?",
-        //   "type": "mcq",
-        //   "is_single": 1,
-        //   "sar": 15,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        //   "choices": [
-        //     {"value": "item1", "text": "Cristiano Ronaldo"},
-        //     {"value": "item2", "text": "Lionel Messi"},
-        //     {"value": "item3", "text": "Mohamed Salah"},
-        //     {"value": "item4", "text": "Edin Džeko"},
-        //   ]
-        // },
+        {
+          "title": "Order players!?",
+          "type": "order",
+          "is_single": 1,
+          "sar": 15,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": "Cristiano Ronaldo"},
+            {"value": "item2", "text": "Lionel Messi"},
+            {"value": "item3", "text": "Mohamed Salah"},
+            {"value": "item4", "text": "Edin Džeko"},
+          ]
+        },
         // {
         //   "title": "Do you love your job",
         //   "type": "input",
@@ -118,20 +117,20 @@ class QuestionsForSurvey {
         //   "is_branching": "",
         //   "choice_to_exit": "",
         // },
-        // {
-        //   "title": "Choose the appropriate image",
-        //   "type": "image",
-        //   "sar": 10,
-        //   "is_single": 1,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        //   "choices": [
-        //     {"value": "item1", "text": ""},
-        //     {"value": "item2", "text": ""},
-        //     {"value": "item3", "text": ""},
-        //     {"value": "item4", "text": ""},
-        //   ]
-        // },
+        {
+          "title": "Choose the appropriate image",
+          "type": "image",
+          "sar": 10,
+          "is_single": 1,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": ""},
+            {"value": "item2", "text": ""},
+            {"value": "item3", "text": ""},
+            {"value": "item4", "text": ""},
+          ]
+        },
         // {
         //   "title": "Do you love flutter",
         //   "type": "yesno",
@@ -223,20 +222,20 @@ class QuestionsForSurvey {
         //     {"value": "item2", "text": "No"},
         //   ]
         // },
-        // {
-        //   "title": "Select appropriate image",
-        //   "is_single": 0,
-        //   "type": "image",
-        //   "sar": 10,
-        //   "is_branching": "",
-        //   "choice_to_exit": "",
-        //   "choices": [
-        //     {"value": "item1", "text": ""},
-        //     {"value": "item2", "text": ""},
-        //     {"value": "item1", "text": ""},
-        //     {"value": "item2", "text": ""},
-        //   ]
-        // },
+        {
+          "title": "Select appropriate image",
+          "is_single": 0,
+          "type": "image",
+          "sar": 10,
+          "is_branching": "",
+          "choice_to_exit": "",
+          "choices": [
+            {"value": "item1", "text": ""},
+            {"value": "item2", "text": ""},
+            {"value": "item1", "text": ""},
+            {"value": "item2", "text": ""},
+          ]
+        },
         // {
         //   "title": "Do you love chocolate milk?",
         //   "type": "yesno",
@@ -419,17 +418,17 @@ class QuestionsForSurvey {
         //     {"value": "item4", "text": ""},
         //   ]
         // },
-        {
-          "title": "Do you love flutter",
-          "type": "yesno",
-          "sar": 10,
-          "is_branching": "",
-          "choice_to_exit": "",
-          "choices": [
-            {"value": "item1", "text": "Yes"},
-            {"value": "item2", "text": "No"},
-          ]
-        },
+        // {
+        //   "title": "Do you love flutter",
+        //   "type": "yesno",
+        //   "sar": 10,
+        //   "is_branching": "",
+        //   "choice_to_exit": "",
+        //   "choices": [
+        //     {"value": "item1", "text": "Yes"},
+        //     {"value": "item2", "text": "No"},
+        //   ]
+        // },
         //  {
         //   "title": "Do you love chinese food",
         //   "type": "yesno",
@@ -441,13 +440,13 @@ class QuestionsForSurvey {
         //     {"value": "item2", "text": "No"},
         //   ]
         // },
-        {
-          "title": "What is your favourite band?",
-          "type": "input",
-          "sar": 10,
-          "is_branching": "",
-          "choice_to_exit": "",
-        },
+        // {
+        //   "title": "What is your favourite band?",
+        //   "type": "input",
+        //   "sar": 10,
+        //   "is_branching": "",
+        //   "choice_to_exit": "",
+        // },
         // {
         //   "title": "What is your favourite club?",
         //   "type": "mcq",
@@ -465,7 +464,7 @@ class QuestionsForSurvey {
         {
           "title": "What is your favourite club?",
           "type": "mcq",
-          "is_single": 0,
+          "is_single": 1,
           "sar": 20,
           "is_branching": "",
           "choice_to_exit": "",

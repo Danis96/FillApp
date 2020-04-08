@@ -6,6 +6,7 @@ import 'package:fillproject/components/SurveyCardYesNo/surveyCard.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
+import 'package:fillproject/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -13,10 +14,12 @@ class ImageChoice extends StatefulWidget {
   final String username, title;
   final Function() notifyParent;
   final DocumentSnapshot doc;
-  final int isSingle;
+  final int isSingle, number, numberOfQuestions;
   final String choice1, choice2, choice3, choice4, text1, text2, text3, text4;
   ImageChoice({
     this.doc,
+    this.number,
+    this.numberOfQuestions,
     this.isSingle,
     this.title,
     this.notifyParent,
@@ -112,7 +115,12 @@ class _ImageChoiceState extends State<ImageChoice> {
               : widget.isSingle == 0
                   ? EmptyContainer()
                   : SubmitButton(
-                      onPressedFunction: multipleSubmit, isImage: true)
+                      onPressedFunction: multipleSubmit,
+                      isImage: true,
+                      text: (widget.number + 1) == widget.numberOfQuestions
+                          ? AppLocalizations.of(context).translate('submitLast')
+                          : AppLocalizations.of(context).translate('submit'),
+                    )
         ],
       ),
     );
@@ -259,7 +267,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text4, widget.title);
-  	offlineAnswers.add(widget.text4);
+    offlineAnswers.add(widget.text4);
     widget.notifyParent();
   }
 }

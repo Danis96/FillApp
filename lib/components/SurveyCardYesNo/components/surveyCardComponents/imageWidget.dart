@@ -7,9 +7,16 @@ import 'package:flutter/material.dart';
 
 class ImageWidget extends StatelessWidget {
   final widget;
-  final int index, isSingle;
+  final int index, isSingle, number, numberOfQuestions;
   final Function refresh;
-  ImageWidget({Key key, this.widget, this.index, this.isSingle, this.refresh})
+  ImageWidget(
+      {Key key,
+      this.widget,
+      this.index,
+      this.isSingle,
+      this.refresh,
+      this.numberOfQuestions,
+      this.number})
       : super(key: key);
 
   @override
@@ -23,6 +30,8 @@ class ImageWidget extends StatelessWidget {
         : Column(
             children: <Widget>[
               ImageChoice(
+                numberOfQuestions: numberOfQuestions,
+                number: number,
                 notifyParent: refresh,
                 isSingle: isSingle,
                 title: widget.snapQuestions[index]['title'],
