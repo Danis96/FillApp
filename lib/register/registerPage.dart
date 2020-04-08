@@ -27,6 +27,7 @@ import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -127,6 +128,8 @@ class _RegisterPageState extends State<RegisterPage> {
       print(phoneNo);
     }
 
+    SizeConfig().init(context);
+
     return Scaffold(
       appBar: new AppBar(
         title: new Text(""),
@@ -161,7 +164,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         Center(
                             child: Padding(
                           padding: EdgeInsets.only(
-                              top: ScreenUtil.instance.setWidth(28.0)),
+                              top: ScreenUtil.instance.setWidth(5.0)),
                           child: MyTextComponent(
                               text: AppLocalizations.of(context)
                                   .translate('registerAndStartMakingMoney')),
@@ -170,7 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             child: Padding(
                           padding: EdgeInsets.only(
                               top: ScreenUtil.instance.setWidth(61.0),
-                              bottom: ScreenUtil.instance.setWidth(59.0)),
+                              bottom: ScreenUtil.instance.setWidth(20.0)),
                           child: Text(
                             '3 \n SAR',
                             style: TextStyle(

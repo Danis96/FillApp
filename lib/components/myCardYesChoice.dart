@@ -74,7 +74,7 @@ class _MyYesChoiceState extends State<MyYesChoice> {
     return Container(
         key: UniqueKey(),
         width:  SizeConfig.blockSizeHorizontal * 28,
-        height:  SizeConfig.blockSizeVertical * 7,
+        height:  SizeConfig.blockSizeVertical * 8,
         alignment: Alignment.center,
         margin: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(widget.marginRight)),

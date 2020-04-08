@@ -11,6 +11,7 @@
 /// Feb, 2020
 
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fillproject/components/constants/fontsConstants.dart';
@@ -26,7 +27,7 @@ class MyQuestion extends StatelessWidget {
     return Container(
         alignment: Alignment.centerLeft,
         width: ScreenUtil.instance.setWidth(245.0),
-        height: ScreenUtil.instance.setHeight(containerHeight),
+        height: SizeConfig.blockSizeVertical * containerHeight,
         child: Text(question,
             style: TextStyle(
                 color: isCompleted ? MyColor().black : MyColor().white,
