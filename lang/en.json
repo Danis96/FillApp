@@ -46,7 +46,7 @@
     "register": "Register",
     "completeProfile": "Complete Profile",
     "transfer": "Transfer",
-    "enterCardNumber": "Enter card number",
+    "enterCardNumber": "Enter iban number",
     "date": "Date",
     "cc": "CC",
     "youMustRegisterFirst": "You must register first",
