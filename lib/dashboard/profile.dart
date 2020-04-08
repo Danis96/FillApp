@@ -475,14 +475,14 @@ class _ProfileState extends State<Profile> {
                           });
                           String brand =
                               CreditCardValidator.identifyCardBrand(input);
-                          var type = detectCCType(input);
+                          // var type = detectCCType(input);
                           IconData ccBrandIcon;
                           if (brand != null) {
                             if (brand == 'visa') {
                               ccBrandIcon = FontAwesomeIcons.ccVisa;
                             } else if (brand == 'master_card') {
                               ccBrandIcon = FontAwesomeIcons.ccMastercard;
-                            } else if (type == CreditCardType.amex) {
+                            } else if (brand == 'american_express') {
                               ccBrandIcon = FontAwesomeIcons.ccAmex;
                             } else if (brand == 'discover') {
                               ccBrandIcon = FontAwesomeIcons.ccDiscover;
