@@ -117,7 +117,7 @@ class _ListOfChoicesState extends State<ListOfChoices> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Container(
-            height: ScreenUtil.instance.setHeight(360.0),
+            height: ScreenUtil.instance.setHeight(340.0),
             child: isSummary
                 ? IgnorePointer(
                     child: lista(),

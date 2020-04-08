@@ -25,6 +25,7 @@ import 'package:fillproject/globals.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
@@ -99,6 +100,8 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
       height: defaultScreenHeight,
       allowFontScaling: true,
     )..init(context);
+
+    SizeConfig().init(context);
 
     surveyListOfAnswers() async {
       String listName;
@@ -192,7 +195,7 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
                       child: MyQuestion(
                           isCompleted: isCompleted,
                           question: widget.name,
-                          containerHeight: ScreenUtil.instance.setHeight(80.0)),
+                          containerHeight:  10),
                     ),
                     StatusSurvey(isCompleted: isCompleted, number: number, total: widget.total),
                   ]))),

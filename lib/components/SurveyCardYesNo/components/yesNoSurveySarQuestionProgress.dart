@@ -3,6 +3,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/myQuestion.dart';
 import 'package:fillproject/components/myQuestionSAR.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -32,28 +33,28 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
       case 'yesno':
         return {
           height = 100.0,
-          heightContainer = 300.0,
+          heightContainer = 47,
         };
       case 'input':
         return {
-          height = 30.0, 
-          heightContainer = 210.0};
+          height = 13, 
+          heightContainer = 38};
       case 'mcq':
         return {
-          height = 30.0, 
-          heightContainer = 210.0};
+          height = 10, 
+          heightContainer = 38};
       case 'date':
         return {
-          height = 33.0, 
-          heightContainer = 220.0};
+          height = 10, 
+          heightContainer = 40};
       case 'image':
         return {
-          height = 30.0, 
-          heightContainer = 210.0};
+          height = 10, 
+          heightContainer = 37};
       case 'order':
         return {
-          height = 30.0, 
-          heightContainer = 210.0};   
+          height = 10, 
+          heightContainer = 38};   
       default:
         return {
           height = 260.0,
@@ -64,8 +65,9 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
-        height: ScreenUtil.instance.setWidth(heightContainer),
+        height: SizeConfig.blockSizeVertical * heightContainer,
         width: ScreenUtil.instance.setWidth(416.0),
         child: Column(
           children: <Widget>[
@@ -75,7 +77,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
                     margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(57.0),
                         bottom: ScreenUtil.instance.setWidth(7.0),
-                        top: ScreenUtil.instance.setWidth(height)),
+                        top: SizeConfig.blockSizeVertical * 10), 
                     child: MyQuestionSAR(
                       isCompleted: false,
                       text: '+' + widget.sar.toString() + ' ' + AppLocalizations.of(context).translate('SAR'),
@@ -102,7 +104,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
               child: MyQuestion(
                 isCompleted: false,
                 question: widget.question,
-                containerHeight: ScreenUtil.instance.setHeight(120.0),
+                containerHeight: 20,
               ),
             ),
           ],

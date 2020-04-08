@@ -33,21 +33,21 @@ class MyCardYesNo extends StatefulWidget {
   final ValueKey key;
   final bool isSar;
 
-  MyCardYesNo(
-      {this.question,
-      this.key,
-      this.sar,
-      this.isSar,
-      this.usersSar,
-      this.index,
-      this.snapi,
-      this.snap,
-      this.notifyParent,
-      this.target,
-      this.doc,
-      this.username,
-      this.refreshNavbar,
-      });
+  MyCardYesNo({
+    this.question,
+    this.key,
+    this.sar,
+    this.isSar,
+    this.usersSar,
+    this.index,
+    this.snapi,
+    this.snap,
+    this.notifyParent,
+    this.target,
+    this.doc,
+    this.username,
+    this.refreshNavbar,
+  });
 
   @override
   _MyCardYesNoState createState() => _MyCardYesNoState();
@@ -56,7 +56,7 @@ class MyCardYesNo extends StatefulWidget {
 class _MyCardYesNoState extends State<MyCardYesNo> {
   @override
   Widget build(BuildContext context) {
-     SizeConfig().init(context);
+    SizeConfig().init(context);
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
     ScreenUtil.instance = ScreenUtil(
@@ -65,34 +65,45 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
       allowFontScaling: true,
     )..init(context);
     return Container(
-       key: widget.key,
+        key: widget.key,
         width: ScreenUtil.instance.setWidth(340.0),
-        height:  SizeConfig.blockSizeVertical * 35,
-    margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(12.0), top:  SizeConfig.blockSizeVertical * 14, right: ScreenUtil.instance.setWidth(12.0)),
+        height: SizeConfig.blockSizeVertical * 35,
+        margin: EdgeInsets.only(
+            left: ScreenUtil.instance.setWidth(12.0),
+            top: SizeConfig.blockSizeVertical * 14,
+            right: ScreenUtil.instance.setWidth(12.0)),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(30)),
             color: MyColor().black),
         child: Padding(
-            padding: EdgeInsets.only(left: ScreenUtil.instance.setWidth(40.0), right: ScreenUtil.instance.setWidth(40.0), top: ScreenUtil.instance.setWidth(15.0)),          
-            child: Column(
+          padding: EdgeInsets.only(
+              left: ScreenUtil.instance.setWidth(40.0),
+              right: ScreenUtil.instance.setWidth(40.0),
+              top: ScreenUtil.instance.setWidth(15.0)),
+          child: Column(
               mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-                child: MyQuestionSAR(text: widget.sar.toString() + ' ' + AppLocalizations.of(context).translate('SAR') , isCompleted: false,),
-              ),
-              Container(
-                margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
-                child: MyQuestion(
-                  isCompleted: false,
-                  question: widget.question,
-                  containerHeight: ScreenUtil.instance.setHeight(90.0)),
-              ),
-              Expanded(
-                              child: Container(
-                                
-                  margin: EdgeInsets.only(bottom: SizeConfig.blockSizeHorizontal * 9),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  margin:
+                      EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
+                  child: MyQuestionSAR(
+                    text: widget.sar.toString() +
+                        ' ' +
+                        AppLocalizations.of(context).translate('SAR'),
+                    isCompleted: false,
+                  ),
+                ),
+                Container(
+                  child: MyQuestion(
+                      isCompleted: false,
+                      question: widget.question,
+                      containerHeight: 11 ),
+                ),
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        bottom: SizeConfig.blockSizeHorizontal * 12),
                     child: Row(
                       children: <Widget>[
                         MyYesChoice(
@@ -124,7 +135,7 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
                       ],
                     ),
                   ),
-              )
+                )
               ]),
         ));
   }

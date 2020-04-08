@@ -199,8 +199,8 @@ class _ProfileState extends State<Profile> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Container(
-                      width: ScreenUtil.instance.setWidth(316.0),
-                      height: ScreenUtil.instance.setWidth(67.0),
+                      width: SizeConfig.blockSizeHorizontal * 78,
+                      height:SizeConfig.blockSizeVertical * 8,
                       margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(47.0),
                         top: ScreenUtil.instance.setWidth(22.0),
@@ -272,11 +272,11 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     Container(
-                      width: ScreenUtil.instance.setWidth(316.0),
-                      height: SizeConfig.blockSizeVertical * 8,
+                        width: SizeConfig.blockSizeHorizontal * 78,
+                      height:SizeConfig.blockSizeVertical * 8,
                       margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(47.0),
-                        top: SizeConfig.blockSizeVertical * 3,
+                        top: SizeConfig.blockSizeVertical * 2.5,
                         right: ScreenUtil.instance.setWidth(47.0),
                       ),
                       child: GestureDetector(
@@ -327,8 +327,8 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     Container(
-                      width: ScreenUtil.instance.setWidth(316.0),
-                      height: ScreenUtil.instance.setHeight(67.0),
+                         width: SizeConfig.blockSizeHorizontal * 78,
+                      height:SizeConfig.blockSizeVertical * 8,
                       margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(47.0),
                         top: ScreenUtil.instance.setWidth(22.0),
@@ -399,8 +399,8 @@ class _ProfileState extends State<Profile> {
                       child: LanguageChoose(refresh: widget.settingStates),
                     ),
                     Container(
-                      width: ScreenUtil.instance.setWidth(316.0),
-                      height: ScreenUtil.instance.setHeight(67.0),
+                         width: SizeConfig.blockSizeHorizontal * 78,
+                      height:SizeConfig.blockSizeVertical * 8,
                       margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(47.0),
                         top: ScreenUtil.instance.setWidth(22.0),

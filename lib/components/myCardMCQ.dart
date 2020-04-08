@@ -103,12 +103,10 @@ class _MyCardMCQState extends State<MyCardMCQ> {
                   ),
                 ),
                 Container(
-                  margin:
-                      EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
                   child: MyQuestion(
                       isCompleted: false,
                       question: widget.question,
-                      containerHeight: SizeConfig.blockSizeVertical * 8),
+                      containerHeight: 8),
                 ),
                 Container(
                   height: SizeConfig.blockSizeVertical * 29,
