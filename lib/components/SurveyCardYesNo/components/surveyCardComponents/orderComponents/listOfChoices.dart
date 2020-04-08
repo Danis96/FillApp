@@ -45,7 +45,7 @@ class _ListOfChoicesState extends State<ListOfChoices> {
   @override
   void initState() {
     super.initState();
-     SchedulerBinding.instance.addPostFrameCallback((_) => populateList());
+    SchedulerBinding.instance.addPostFrameCallback((_) => populateList());
   }
 
   populateList() {
@@ -116,7 +116,13 @@ class _ListOfChoicesState extends State<ListOfChoices> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(height: ScreenUtil.instance.setHeight(360.0), child: lista()),
+        Container(
+            height: ScreenUtil.instance.setHeight(360.0),
+            child: isSummary
+                ? IgnorePointer(
+                    child: lista(),
+                  )
+                : lista()),
         isSummary
             ? EmptyContainer()
             : SubmitButton(
