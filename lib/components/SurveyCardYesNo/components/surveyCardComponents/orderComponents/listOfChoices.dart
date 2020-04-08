@@ -116,7 +116,7 @@ class _ListOfChoicesState extends State<ListOfChoices> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(height: ScreenUtil.instance.setHeight(340.0), child: lista()),
+        Container(height: ScreenUtil.instance.setHeight(360.0), child: lista()),
         isSummary
             ? EmptyContainer()
             : SubmitButton(
