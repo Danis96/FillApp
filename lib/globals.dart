@@ -25,6 +25,7 @@ String btnText = '';
 String surveyGroupName = '', currentUsername = '';
 bool isFutureDone = false;
 String answersFromSummary;
+String urlsFromSummary;
 int userLevelForList;
 String usernameGlobal, passGlobal, emailGlobal, phoneGlobal;
 GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();

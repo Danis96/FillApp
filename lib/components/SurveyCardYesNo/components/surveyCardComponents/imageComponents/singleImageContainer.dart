@@ -24,7 +24,7 @@ class SingleImageContainer extends StatelessWidget {
     return GestureDetector(
       onTap: () => isSummary
           ? null
-          : isSingle == 0 ? onTapSingle() : saveMultiple1(text),
+          : isSingle == 0 ? onTapSingle() : saveMultiple1(text, choice),
       child: Stack(
         children: <Widget>[
           Container(

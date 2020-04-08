@@ -77,6 +77,7 @@ class _SummaryState extends State<Summary> {
     if (offlineAnswers.length > widget.totalProgress) {
       offlineAnswers.removeAt(0);
     }
+    print(offlineAnswers);
 
     double defaultScreenWidth = 400.0;
     double defaultScreenHeight = 810.0;
