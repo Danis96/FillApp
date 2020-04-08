@@ -1,6 +1,5 @@
 import 'package:fillproject/components/answerLabelContainer.dart';
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +9,10 @@ class PreviewSingleImageAnswer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<dynamic> list = clickedAnswer.split('(+)');
+    String text = list[0];
+    String url = list[1];
+
     return Column(
       children: <Widget>[
         AnswerLabel(),
@@ -35,7 +38,11 @@ class PreviewSingleImageAnswer extends StatelessWidget {
                 margin:
                     EdgeInsets.only(top: ScreenUtil.instance.setWidth(10.0)),
                 width: ScreenUtil.instance.setWidth(140.0),
-                child: EmptyContainer(),
+                child: Image.network(
+                                url,
+                                height: ScreenUtil.instance.setHeight(90.0),
+                                alignment: Alignment.center,
+                              ),
               ),
               Container(
                 decoration: BoxDecoration(
@@ -51,7 +58,7 @@ class PreviewSingleImageAnswer extends StatelessWidget {
                     top: ScreenUtil.instance.setWidth(113.0),
                     left: ScreenUtil.instance.setWidth(2.0)),
                 child: Center(
-                    child: Text(answersFromSummary,
+                    child: Text(text,
                         style: TextStyle(
                           color: MyColor().white,
                         ))),

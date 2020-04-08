@@ -1,5 +1,4 @@
 import 'package:fillproject/components/constants/myColor.dart';
-import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,19 +8,42 @@ class MultipleImagesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (answersFromSummary.substring(0, 1) == '[' &&
-        answersFromSummary.substring(
-                answersFromSummary.length - 1, answersFromSummary.length) ==
+    if (clickedAnswer.substring(0, 1) == '[' &&
+        clickedAnswer.substring(
+                clickedAnswer.length - 1, clickedAnswer.length) ==
             ']') {
-      answersFromSummary =
-          answersFromSummary.substring(1, answersFromSummary.length - 1);
+      clickedAnswer =
+          clickedAnswer.substring(1, clickedAnswer.length - 1);
     }
-    List<dynamic> listOfAnswers = answersFromSummary.split(', ');
+    //print(clickedAnswer);
+    List<dynamic> listOfAnswers = clickedAnswer.split(', ');
+    //print(listOfAnswers);
+    List<dynamic> listOfAnswersURL = listOfAnswers.toString().split('(+)');
+    //print(listOfAnswersURL);
+    String listOfAnswersURLString = listOfAnswersURL.toString();
+    listOfAnswersURLString = listOfAnswersURLString.substring(2, listOfAnswersURLString.length - 2);
+    //print(listOfAnswersURLString);
+    listOfAnswersURL = listOfAnswersURLString.split(', ');
+    //print(listOfAnswersURL);
+    List<dynamic> texts = [];
+    List<dynamic> urls = [];
+    for(int i = 0; i < listOfAnswersURL.length; i = i + 2) {
+      texts.add(listOfAnswersURL[i]);
+    }
+    for(int i = 1; i < listOfAnswersURL.length; i = i + 2) {
+      urls.add(listOfAnswersURL[i]);
+    }
+    print('AAAAAAAAAAAAAAAAA\n' + texts.toString());
+    print('BBBBBBBBBBBBBBBBB\n' + urls.toString());
     List<dynamic> listOfAnswers1 = [];
     List<dynamic> listOfAnswers2 = [];
+    List<dynamic> listOfAnswersURL1 = [];
+    List<dynamic> listOfAnswersURL2 = [];
     if (listOfAnswers.length > 2) {
-      listOfAnswers1 = listOfAnswers.sublist(0, 2);
-      listOfAnswers2 = listOfAnswers.sublist(2, listOfAnswers.length);
+      listOfAnswers1 = texts.sublist(0, 2);
+      listOfAnswers2 = texts.sublist(2, texts.length);
+      listOfAnswersURL1 = urls.sublist(0, 2);
+      listOfAnswersURL2 = urls.sublist(2, urls.length);
     }
 
     return Padding(
@@ -29,7 +51,7 @@ class MultipleImagesList extends StatelessWidget {
           left: ScreenUtil.instance.setWidth(20.0),
           right: ScreenUtil.instance.setWidth(20.0)),
       child: Container(
-        height: ScreenUtil.instance.setHeight(460.0),
+        height: ScreenUtil.instance.setHeight(440.0),
         child: Column(
           children: <Widget>[
             Container(
@@ -40,7 +62,7 @@ class MultipleImagesList extends StatelessWidget {
                   ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      itemCount: listOfAnswers.length > 2
+                      itemCount: texts.length > 2
                           ? listOfAnswers1.length
                           : listOfAnswers.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -70,7 +92,11 @@ class MultipleImagesList extends StatelessWidget {
                                   top: ScreenUtil.instance.setWidth(10.0),
                                   left: ScreenUtil.instance.setWidth(20.0)),
                               width: ScreenUtil.instance.setWidth(140.0),
-                              child: EmptyContainer(),
+                              child: Image.network(
+                                urls[index],
+                                height: ScreenUtil.instance.setHeight(90.0),
+                                alignment: Alignment.center,
+                              ),
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -87,7 +113,7 @@ class MultipleImagesList extends StatelessWidget {
                                   top: ScreenUtil.instance.setWidth(113.0),
                                   left: ScreenUtil.instance.setWidth(22.0)),
                               child: Center(
-                                  child: Text(listOfAnswers[index],
+                                  child: Text(texts[index],
                                       style: TextStyle(
                                         color: MyColor().white,
                                       ))),
@@ -135,7 +161,11 @@ class MultipleImagesList extends StatelessWidget {
                                   top: ScreenUtil.instance.setWidth(10.0),
                                   left: ScreenUtil.instance.setWidth(20.0)),
                               width: ScreenUtil.instance.setWidth(140.0),
-                              child: EmptyContainer(),
+                              child: Image.network(
+                                listOfAnswersURL2[index],
+                                height: ScreenUtil.instance.setHeight(90.0),
+                                alignment: Alignment.center,
+                              ),
                             ),
                             Container(
                               decoration: BoxDecoration(

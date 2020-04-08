@@ -166,55 +166,55 @@ class _ImageChoiceState extends State<ImageChoice> {
     onPressed(widget.multipleChoices.toString());
   }
 
-  saveMultiple1(String choice) {
+  saveMultiple1(String choice, String url) {
     setState(() {
       isTapped1 = !isTapped1;
     });
     if (isTapped1) {
-      if (!widget.multipleChoices.contains(choice)) {
-        widget.multipleChoices.add(choice);
+      if (!widget.multipleChoices.contains(choice + '(+)' + url)) {
+        widget.multipleChoices.add(choice + '(+)' + url);
       }
     } else {
-      widget.multipleChoices.remove(choice);
+      widget.multipleChoices.remove(choice + '(+)' + url);
     }
   }
 
-  saveMultiple2(String choice) {
+  saveMultiple2(String choice, String url) {
     setState(() {
       isTapped2 = !isTapped2;
     });
     if (isTapped2) {
-      if (!widget.multipleChoices.contains(choice)) {
-        widget.multipleChoices.add(choice);
+      if (!widget.multipleChoices.contains(choice + '(+)' + url)) {
+        widget.multipleChoices.add(choice + '(+)' + url);
       }
     } else {
-      widget.multipleChoices.remove(choice);
+      widget.multipleChoices.remove(choice + '(+)' + url);
     }
   }
 
-  saveMultiple3(String choice) {
+  saveMultiple3(String choice, String url) {
     setState(() {
       isTapped3 = !isTapped3;
     });
     if (isTapped3) {
-      if (!widget.multipleChoices.contains(choice)) {
-        widget.multipleChoices.add(choice);
+      if (!widget.multipleChoices.contains(choice + '(+)' + url)) {
+        widget.multipleChoices.add(choice + '(+)' + url);
       }
     } else {
-      widget.multipleChoices.remove(choice);
+      widget.multipleChoices.remove(choice + '(+)' + url);
     }
   }
 
-  saveMultiple4(String choice) {
+  saveMultiple4(String choice, String url) {
     setState(() {
       isTapped4 = !isTapped4;
     });
     if (isTapped4) {
-      if (!widget.multipleChoices.contains(choice)) {
-        widget.multipleChoices.add(choice);
+      if (!widget.multipleChoices.contains(choice + '(+)' + url)) {
+        widget.multipleChoices.add(choice + '(+)' + url);
       }
     } else {
-      widget.multipleChoices.remove(choice);
+      widget.multipleChoices.remove(choice + '(+)' + url);
     }
   }
 
@@ -237,7 +237,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text1, widget.title);
-    offlineAnswers.add(widget.text1);
+    offlineAnswers.add(widget.text1 + '(+)' + widget.choice1);
     widget.notifyParent();
   }
 
@@ -247,7 +247,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text2, widget.title);
-    offlineAnswers.add(widget.text2);
+    offlineAnswers.add(widget.text2 + '(+)' + widget.choice2);
     widget.notifyParent();
   }
 
@@ -257,7 +257,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text3, widget.title);
-    offlineAnswers.add(widget.text3);
+    offlineAnswers.add(widget.text3 + '(+)' + widget.choice3);
     widget.notifyParent();
   }
 
@@ -267,7 +267,7 @@ class _ImageChoiceState extends State<ImageChoice> {
     });
     FirebaseCrud().updateListOfUsernamesAnswersSurvey(
         widget.doc, context, widget.username, widget.text4, widget.title);
-    offlineAnswers.add(widget.text4);
+    offlineAnswers.add(widget.text4 + '(+)' + widget.choice4);
     widget.notifyParent();
   }
 }

@@ -24,7 +24,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:credit_card_validate/credit_card_validate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:credit_card_type_detector/credit_card_type_detector.dart';
 
 FocusNode nameFocus;
 FocusNode dateFocus;
