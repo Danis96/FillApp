@@ -42,7 +42,7 @@ class MultipleImagesList extends StatelessWidget {
           left: ScreenUtil.instance.setWidth(20.0),
           right: ScreenUtil.instance.setWidth(20.0)),
       child: Container(
-        height: ScreenUtil.instance.setHeight(440.0),
+        height: ScreenUtil.instance.setHeight(390.0),
         child: Column(
           children: <Widget>[
             Container(
