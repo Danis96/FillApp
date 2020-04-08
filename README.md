@@ -125,3 +125,17 @@ On back, user is asked with a Dialog Box if he is sure about exiting the survey.
 	Separate application, named Admin Console is created. From the console, admin can preview all transfers, pending and done transfers. On pending transfers tab, besides previewing the trasnfers, admin can check that he has made the transfer. When a transfer is checked, it is removed from pending transfers list and added to done transfers list. In addition to these two, admin has one more tab, Export tab from where he can export all transfers made so far. When he clicks the button, he will get JSON file on his email address, from where he can download the file, convert it to excel file and have all transfers in n excel sheet.<br/><br/>*
 	NOTES:<br/>
 	Today (06.04.2020.), the application will be released on Google Play and files will be sent to Enver for IOS release.<br/><br/>
+
+**•	V9 – Sprint 9 - (06.04.2020. - 08.04.2020.)<br/>** *
+	User story 1 - As a USER I want to have ORDER type question in Survey, so that I can order choices of Order type question<br/>
+	Tasks that were implemented are: Adding whole new type of questions, where user can drag and drop / reorder the answers. <br/><br/>*
+	User story 2 - Use email instead of username on Sign Up and Sign In<br/>
+	Tasks that were implemented are: Every field where username was, team replaced with email field, and on local storage, it remembers us by our email, that has to be unique.<br/><br/>*
+	User story 3 - Design layout responsive<br/>
+	3 types of tablets, 4 emulator devices, and 2 live devices where tested for responsivnes. Every screen is looking good and responsive.
+	<br/><br/>*
+	User story 4 - As INVESTOR I want to have credit card validation, so that I can know if a credit card is invalid<br/>
+	Our team has come up with gread idea, we are checking if the card number is valid, which type of card is it, and on all that, we are live recognizing the card type, and showing the card icon.
+	<br/><br/>*
+	NOTES:<br/>
+	Today (08.04.2020.), the application will be released on Google Play and files will be sent to Enver for IOS release.<br/><br/>

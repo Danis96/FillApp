@@ -199,7 +199,7 @@ class _YesNoSurveyState extends State<SurveyCard>
           widget.doc, context, widget.username);
     } else {
       _controller.nextPage(
-          duration: Duration(milliseconds: 350), curve: Curves.easeIn);
+          duration: Duration(milliseconds: 400), curve: Curves.easeIn);
     }
   }
 

@@ -38,14 +38,14 @@ class ListOfChoices extends StatefulWidget {
 }
 
 class _ListOfChoicesState extends State<ListOfChoices> {
-  List<Widget> listOfItems;
-  List<String> listOfItemsStrings;
-  List<String> listOfItemsPreview;
+  List<Widget> listOfItems = [];
+  List<String> listOfItemsStrings = [];
+  List<String> listOfItemsPreview = [];
 
   @override
   void initState() {
     super.initState();
-    SchedulerBinding.instance.addPostFrameCallback((_) => populateList());
+     SchedulerBinding.instance.addPostFrameCallback((_) => populateList());
   }
 
   populateList() {
@@ -116,7 +116,7 @@ class _ListOfChoicesState extends State<ListOfChoices> {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        Container(height: ScreenUtil.instance.setHeight(400.0), child: lista()),
+        Container(height: ScreenUtil.instance.setHeight(340.0), child: lista()),
         isSummary
             ? EmptyContainer()
             : SubmitButton(
