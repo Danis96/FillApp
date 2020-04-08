@@ -24,6 +24,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:credit_card_validate/credit_card_validate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:credit_card_type_detector/credit_card_type_detector.dart';
 
 FocusNode nameFocus;
 FocusNode dateFocus;
@@ -474,13 +475,14 @@ class _ProfileState extends State<Profile> {
                           });
                           String brand =
                               CreditCardValidator.identifyCardBrand(input);
+                          var type = detectCCType(input);
                           IconData ccBrandIcon;
                           if (brand != null) {
                             if (brand == 'visa') {
                               ccBrandIcon = FontAwesomeIcons.ccVisa;
                             } else if (brand == 'master_card') {
                               ccBrandIcon = FontAwesomeIcons.ccMastercard;
-                            } else if (brand == 'american_express') {
+                            } else if (type == CreditCardType.amex) {
                               ccBrandIcon = FontAwesomeIcons.ccAmex;
                             } else if (brand == 'discover') {
                               ccBrandIcon = FontAwesomeIcons.ccDiscover;
@@ -834,8 +836,10 @@ class _ProfileState extends State<Profile> {
           });
         });
       } else if (creditCard == '' ||
-          creditCardNumber.length < 13 ||
-          !CreditCardValidator.isCreditCardValid(
+              creditCardNumber.length < 13 ||
+              creditCardNumber.startsWith('3')
+          ? creditCardNumber.length < 15
+          : !CreditCardValidator.isCreditCardValid(
               cardNumber: creditCardNumber)) {
         setState(() {
           isEmptyCard = true;
@@ -879,9 +883,10 @@ class _ProfileState extends State<Profile> {
           });
         });
       } else if (isButtonCompleteCard
-          ? creditCardNumber.length < 13 ||
-              !CreditCardValidator.isCreditCardValid(
-                  cardNumber: creditCardNumber)
+          ? creditCardNumber.length < 13 || creditCardNumber.startsWith('3')
+          ? creditCardNumber.length < 15
+          : !CreditCardValidator.isCreditCardValid(
+              cardNumber: creditCardNumber)
           : usersCard == '' ||
               usersCard.length < 13 ||
               !CreditCardValidator.isCreditCardValid(cardNumber: usersCard)) {
