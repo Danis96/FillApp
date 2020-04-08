@@ -29,7 +29,7 @@ class MultipleMcqList extends StatelessWidget {
             child: Container(
                 width: ScreenUtil.instance.setWidth(350.0),
                 margin:
-                    EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+                    EdgeInsets.only(top: ScreenUtil.instance.setWidth(10.0)),
                 child: ListTile(
                     leading: Container(
                       alignment: Alignment.center,

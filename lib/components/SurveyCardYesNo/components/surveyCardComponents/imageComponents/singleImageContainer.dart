@@ -33,7 +33,7 @@ class SingleImageContainer extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(30.0)),
             ),
             width: ScreenUtil.instance.setWidth(145.0),
-            height: ScreenUtil.instance.setWidth(145.0),
+            height: ScreenUtil.instance.setWidth(135.0),
           ),
           Container(
             decoration: BoxDecoration(
@@ -63,10 +63,10 @@ class SingleImageContainer extends StatelessWidget {
                   bottomLeft: Radius.circular(30.0),
                   bottomRight: Radius.circular(30.0)),
             ),
-            height: 31.0,
+            height: 30.0,
             width: ScreenUtil.instance.setWidth(141.5),
             margin: EdgeInsets.only(
-                top: ScreenUtil.instance.setWidth(113.0),
+                top: ScreenUtil.instance.setWidth(100.0),
                 left: ScreenUtil.instance.setWidth(2.0)),
             child: Center(
                 child: Text(text,

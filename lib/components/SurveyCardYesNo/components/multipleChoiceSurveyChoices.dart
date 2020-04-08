@@ -59,7 +59,7 @@ class _MultipleChoiceSurveyChoices extends State<MultipleChoiceSurveyChoices> {
         Container(
             key: ValueKey(widget.choice1),
             width: ScreenUtil.instance.setWidth(350.0),
-            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+            margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(5.0)),
             child: ListTile(
                 leading: Container(
                   alignment: Alignment.center,

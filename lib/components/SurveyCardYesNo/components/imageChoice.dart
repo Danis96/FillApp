@@ -61,13 +61,13 @@ class _ImageChoiceState extends State<ImageChoice> {
   Widget build(BuildContext context) {
     return Container(
       key: ValueKey(widget.title),
-      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(15.0)),
+      margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(10.0)),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(15.0)),
+            margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(10.0)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,6 +90,7 @@ class _ImageChoiceState extends State<ImageChoice> {
             ),
           ),
           Container(
+            margin: EdgeInsets.only(bottom: ScreenUtil.instance.setWidth(10.0)),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
