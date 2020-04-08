@@ -118,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     onFieldSubmitted1(BuildContext context) {
-      phoneNo = '+' +  phoneController.text;
+      phoneNo = '+966' +  phoneController.text;
       //phoneNo = "+966" + phoneController.text;
       final _formState = _formKey.currentState;
       if (_formState.validate()) {
@@ -185,7 +185,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 bottom: ScreenUtil.instance.setWidth(20.0),
                                 top: ScreenUtil.instance.setWidth(20.0)),
                             child: Container(
-                              width: ScreenUtil.instance.setWidth(316.0),
+                              width: ScreenUtil.instance.setWidth(306.0),
                               height: ScreenUtil.instance.setHeight(92.0),
                               margin: EdgeInsets.only(
                                   top: ScreenUtil.instance.setWidth(20.0)),
@@ -260,8 +260,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   vertical: ScreenUtil.instance.setWidth(25.0),
                                   horizontal:
                                       ScreenUtil.instance.setWidth(35.0)),
-                              prefix: Text('',
-                                //"+966",
+                              prefix: Text(
+                                "+966",
                                 style: TextStyle(color: MyColor().white),
                               ),
                               labelText: AppLocalizations.of(context)

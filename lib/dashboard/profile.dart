@@ -409,7 +409,6 @@ class _ProfileState extends State<Profile> {
                         focusNode: creditFocus,
                         autofocus: false,
                         readOnly: isAnonymous == 1,
-                        //  / inputFormatters: [maskTextInputFormatterCard],
                         keyboardType: TextInputType.number,
                         maxLength: 200,
                         enableSuggestions: false,
@@ -420,18 +419,17 @@ class _ProfileState extends State<Profile> {
                           hasFloatingPlaceholder: false,
                           contentPadding: new EdgeInsets.symmetric(
                               vertical: 25.0, horizontal: 35.0),
-                          labelText: AppLocalizations.of(context)
-                              .translate('enterCardNumber'),
-                          suffixIcon: brandIcon != null
+                          icon: brandIcon != null
                               ? FaIcon(
                                   brandIcon,
                                   color: isEmptyCard
                                       ? MyColor().error
                                       : MyColor().greenCircle,
-                                  size: 32,
+                                  size: SizeConfig.blockSizeHorizontal * 9,
                                 )
                               : null,
-                          suffixStyle: TextStyle(),
+                          labelText: AppLocalizations.of(context)
+                              .translate('enterCardNumber'),
                           labelStyle: TextStyle(
                               color: MyColor().black,
                               fontSize: ScreenUtil.instance.setSp(16.0)),
@@ -886,9 +884,7 @@ class _ProfileState extends State<Profile> {
                   cardNumber: creditCardNumber)
           : usersCard == '' ||
               usersCard.length < 13 ||
-              !CreditCardValidator.isCreditCardValid(
-                  cardNumber: usersCard)
-              ) {
+              !CreditCardValidator.isCreditCardValid(cardNumber: usersCard)) {
         setState(() {
           isEmptyCard = true;
         });
