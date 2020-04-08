@@ -15,16 +15,11 @@ class MultipleImagesList extends StatelessWidget {
       clickedAnswer =
           clickedAnswer.substring(1, clickedAnswer.length - 1);
     }
-    //print(clickedAnswer);
     List<dynamic> listOfAnswers = clickedAnswer.split(', ');
-    //print(listOfAnswers);
     List<dynamic> listOfAnswersURL = listOfAnswers.toString().split('(+)');
-    //print(listOfAnswersURL);
     String listOfAnswersURLString = listOfAnswersURL.toString();
     listOfAnswersURLString = listOfAnswersURLString.substring(2, listOfAnswersURLString.length - 2);
-    //print(listOfAnswersURLString);
     listOfAnswersURL = listOfAnswersURLString.split(', ');
-    //print(listOfAnswersURL);
     List<dynamic> texts = [];
     List<dynamic> urls = [];
     for(int i = 0; i < listOfAnswersURL.length; i = i + 2) {
@@ -33,16 +28,12 @@ class MultipleImagesList extends StatelessWidget {
     for(int i = 1; i < listOfAnswersURL.length; i = i + 2) {
       urls.add(listOfAnswersURL[i]);
     }
-    print('AAAAAAAAAAAAAAAAA\n' + texts.toString());
-    print('BBBBBBBBBBBBBBBBB\n' + urls.toString());
     List<dynamic> listOfAnswers1 = [];
     List<dynamic> listOfAnswers2 = [];
-    List<dynamic> listOfAnswersURL1 = [];
     List<dynamic> listOfAnswersURL2 = [];
     if (listOfAnswers.length > 2) {
       listOfAnswers1 = texts.sublist(0, 2);
       listOfAnswers2 = texts.sublist(2, texts.length);
-      listOfAnswersURL1 = urls.sublist(0, 2);
       listOfAnswersURL2 = urls.sublist(2, urls.length);
     }
 
