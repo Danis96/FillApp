@@ -3,6 +3,7 @@ import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fillproject/utils/size_config.dart';
 
 class SingleImageContainer extends StatelessWidget {
   final Function onTapSingle, saveMultiple1;
@@ -21,6 +22,7 @@ class SingleImageContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context); 
     return GestureDetector(
       onTap: () => isSummary
           ? null
@@ -32,8 +34,8 @@ class SingleImageContainer extends StatelessWidget {
               border: Border.all(color: MyColor().black, width: 3.0),
               borderRadius: BorderRadius.all(Radius.circular(30.0)),
             ),
-            width: ScreenUtil.instance.setWidth(145.0),
-            height: ScreenUtil.instance.setWidth(135.0),
+            width: SizeConfig.blockSizeHorizontal * 35.5,
+            height: SizeConfig.blockSizeVertical * 16,
           ),
           Container(
             decoration: BoxDecoration(
@@ -63,11 +65,11 @@ class SingleImageContainer extends StatelessWidget {
                   bottomLeft: Radius.circular(30.0),
                   bottomRight: Radius.circular(30.0)),
             ),
-            height: 30.0,
-            width: ScreenUtil.instance.setWidth(141.5),
+            height: SizeConfig.blockSizeVertical * 3.3,
+            width: ScreenUtil.instance.setWidth(140.0),
             margin: EdgeInsets.only(
-                top: ScreenUtil.instance.setWidth(100.0),
-                left: ScreenUtil.instance.setWidth(2.0)),
+                top: SizeConfig.blockSizeVertical * 12.5,
+                left: ScreenUtil.instance.setWidth(1.0)),
             child: Center(
                 child: Text(text,
                     style: TextStyle(
