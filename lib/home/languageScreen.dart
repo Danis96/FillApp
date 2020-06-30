@@ -67,6 +67,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
             child: Container(
               margin: EdgeInsets.only(top:SizeConfig.blockSizeVertical * 20),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   Center(
                       child: Text(

@@ -199,10 +199,10 @@ class _ProfileState extends State<Profile> {
                   children: <Widget>[
                     Container(
                       width: SizeConfig.blockSizeHorizontal * 78,
-                      height:SizeConfig.blockSizeVertical * 8,
+                      height: SizeConfig.blockSizeVertical * 7,
                       margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(47.0),
-                        top: ScreenUtil.instance.setWidth(22.0),
+                        top: SizeConfig.blockSizeVertical * 2,
                         right: ScreenUtil.instance.setWidth(47.0),
                       ),
                       child: TextFormField(
@@ -272,7 +272,7 @@ class _ProfileState extends State<Profile> {
                     ),
                     Container(
                         width: SizeConfig.blockSizeHorizontal * 78,
-                      height:SizeConfig.blockSizeVertical * 8,
+                      height:SizeConfig.blockSizeVertical * 7,
                       margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(47.0),
                         top: SizeConfig.blockSizeVertical * 2.5,

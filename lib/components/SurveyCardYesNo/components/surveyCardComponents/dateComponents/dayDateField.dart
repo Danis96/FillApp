@@ -182,6 +182,7 @@ class _DayDateFieldState extends State<DayDateField> {
         selectedDay = items[index];
         widget.day = selectedDay;
       },
+      squeeze: 0.9,
       looping: true,
       useMagnifier: true,
       magnification: 1.2,

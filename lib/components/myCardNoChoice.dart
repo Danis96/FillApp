@@ -80,7 +80,7 @@ class _MyNoChoiceState extends State<MyNoChoice> {
         margin: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(widget.marginRight)),
         child: Container(
-          width: ScreenUtil.instance.setWidth(113.0),
+          width: SizeConfig.blockSizeHorizontal * 20,
           height: ScreenUtil.instance.setHeight(55.0),
           child: RaisedButton(
             shape: RoundedRectangleBorder(

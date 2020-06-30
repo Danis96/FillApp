@@ -359,7 +359,7 @@ class _DateChoiceState extends State<DateChoice> {
       }
     }
     return CupertinoPicker(
-      itemExtent: 45.0,
+      itemExtent: 48.0,
       onSelectedItemChanged: (index) {
         if (field == 'year') {
           selectedYear = items[index];
@@ -373,6 +373,7 @@ class _DateChoiceState extends State<DateChoice> {
         }
       },
       looping: true,
+      squeeze: 0.9,
       useMagnifier: true,
       magnification: 1.2,
       children: List<Widget>.generate(items.length, (index) {

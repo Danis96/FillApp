@@ -182,6 +182,7 @@ class _YearDateFieldState extends State<YearDateField> {
         selectedYear = items[index];
         widget.year = selectedYear;
       },
+      squeeze: 0.9,
       looping: true,
       useMagnifier: true,
       magnification: 1.2,

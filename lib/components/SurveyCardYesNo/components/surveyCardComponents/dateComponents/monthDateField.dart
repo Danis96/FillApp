@@ -182,6 +182,7 @@ class _MonthDateFieldState extends State<MonthDateField> {
         selectedMonth = items[index];
         widget.month = selectedMonth;
       },
+      squeeze: 0.9,
       looping: true,
       useMagnifier: true,
       magnification: 1.2,
