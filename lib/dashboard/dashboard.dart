@@ -148,7 +148,7 @@ class _DashboardPageState extends State<DashboardPage>
               children: <Widget>[
                 Expanded(
                   child: Container(
-                    height:  SizeConfig.blockSizeVertical * 51,
+                    height:  SizeConfig.blockSizeVertical * 52,
                     child: FutureBuilder(
                       /// [getQuestions]
                       ///
@@ -163,7 +163,7 @@ class _DashboardPageState extends State<DashboardPage>
 
                           /// punjenje lokalnog niza
                           ///
-                          /// nakon sto se jednom napuni nepuni se vise
+                          /// nakon sto se jednom napuni ne puni se vise
                           /// visible se seta na true
                           if (!visible) {
                             snapi = snapshot.data

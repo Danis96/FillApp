@@ -32,3 +32,5 @@ GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 String languageOfApp;
 List<dynamic> offlineAnswers = [];
 String clickedAnswer;
+
+int counterYesNo = 0;

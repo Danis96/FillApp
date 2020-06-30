@@ -1,5 +1,6 @@
 import 'package:fillproject/components/constants/imageConstants.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,6 +9,7 @@ class TransferWithIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -17,10 +19,13 @@ class TransferWithIcon extends StatelessWidget {
             child: Text(AppLocalizations.of(context).translate('transwerWith'), style: TextStyle(fontSize: ScreenUtil.instance.setSp(14.0)),),
           ),
           Container(
-            height: ScreenUtil.instance.setHeight(27.0),
-            width: ScreenUtil.instance.setWidth(81.0),
+//            height: ScreenUtil.instance.setHeight(27.0),
+//            width: ScreenUtil.instance.setWidth(81.0),
             margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(20.0)),
-            child: Image.asset(transferImage),
+            child: Image.asset(transferImage,
+            width: SizeConfig.safeBlockHorizontal * 12,
+            height: SizeConfig.safeBlockVertical * 7,
+            ),
           ),
         ],
       ),

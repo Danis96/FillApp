@@ -57,6 +57,7 @@ class MyNoChoice extends StatefulWidget {
 }
 
 class _MyNoChoiceState extends State<MyNoChoice> {
+
   @override
   void initState() {
     super.initState();
@@ -70,11 +71,11 @@ class _MyNoChoiceState extends State<MyNoChoice> {
 
   @override
   Widget build(BuildContext context) {
-     SizeConfig().init(context);
+    SizeConfig().init(context);
     return Container(
         key: UniqueKey(),
-        width:  SizeConfig.blockSizeHorizontal * 28,
-        height:  SizeConfig.blockSizeVertical * 8,
+        width: SizeConfig.blockSizeHorizontal * 28,
+        height: SizeConfig.blockSizeVertical * 8,
         alignment: Alignment.center,
         margin: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(widget.marginRight)),
@@ -89,12 +90,18 @@ class _MyNoChoiceState extends State<MyNoChoice> {
             elevation: 0,
             color: isTappedNoYesFlash ? MyColor().white : MyColor().black,
             onPressed: () {
-              setState(() {
-                isTappedNoYesFlash = true;
-              });
-              Timer(Duration(milliseconds: 300), () {
-                onPressed();
-              });
+              if (counterSurvey == 0) {
+                setState(() {
+                  isTappedNoYesFlash = true;
+                });
+                Timer(Duration(milliseconds: 500), () {
+                  onPressed();
+                });
+                counterSurvey = 1;
+                Timer(Duration(seconds: 2), () {
+                  counterSurvey = 0;
+                });
+              }
             },
             child: Text(widget.choice,
                 style: TextStyle(
@@ -115,6 +122,7 @@ class _MyNoChoiceState extends State<MyNoChoice> {
   onPressed() {
     widget.usersSars += widget.sar;
     saroviOffline += widget.sar;
+
     /// update sarova na osnovu da li je app online ili offlines
     ///
     /// online = [widget.usersSar]

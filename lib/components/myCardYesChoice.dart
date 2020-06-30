@@ -89,12 +89,19 @@ class _MyYesChoiceState extends State<MyYesChoice> {
             elevation: 0,
             color: isTappedYesNoFlash ? MyColor().white : MyColor().black,
             onPressed: () {
-              setState(() {
-                isTappedYesNoFlash = true;
-              });
-              Timer(Duration(milliseconds: 300), () {
-                onPressed();
-              });
+              if(counterSurvey == 0) {
+                setState(() {
+                  isTappedYesNoFlash = true;
+                });
+                Timer(Duration(milliseconds: 500), () {
+                  onPressed();
+                });
+                counterSurvey = 1;
+                Timer(Duration(seconds: 2), () {
+                  counterSurvey = 0;
+                });
+              }
+
             },
             child: Text(widget.choice,
                 style: TextStyle(

@@ -56,7 +56,7 @@ class _RegisterPageState extends State<RegisterPage> {
   });
 
   populateReg() async {
-    usernameController.text = widget.arguments.username;
+//    usernameController.text = widget.arguments.username;
     phoneController.text = widget.arguments.phone;
   }
 
@@ -119,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     onFieldSubmitted1(BuildContext context) {
-      phoneNo = '+966' +  phoneController.text;
+      phoneNo = '+' +  phoneController.text;
       final _formState = _formKey.currentState;
       if (_formState.validate()) {
         verifyPhone();

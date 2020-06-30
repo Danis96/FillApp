@@ -17,6 +17,7 @@ import 'package:mailer/smtp_server.dart';
 
 String email = "fillproject966@gmail.com";
 String password = "kjpu8vk6";
+String name = 'Fill App';
 
 class ResetPassword {
   String recipent;
@@ -28,7 +29,7 @@ class ResetPassword {
 
     // Create our email message.
     final message = Message()
-      ..from = Address(email)
+      ..from = Address(name)
       ..recipients.add(recipent) //recipent email
       ..subject = AppLocalizations.of(context).translate('resetPassword') //subject of the email
       ..text = AppLocalizations.of(context).translate('youReqPassReset') + '  \n \n$emailCode'; //body of the email

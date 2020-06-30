@@ -114,7 +114,13 @@ class _ImageChoiceState extends State<ImageChoice> {
           isSummary
               ? EmptyContainer()
               : widget.isSingle == 0
-                  ? EmptyContainer()
+                  ? SubmitButton(
+                      onPressedFunction: singleSubmit,
+                      isImage: true,
+                      text: (widget.number + 1) == widget.numberOfQuestions
+                          ? AppLocalizations.of(context).translate('submitLast')
+                          : AppLocalizations.of(context).translate('submit'),
+                    )
                   : SubmitButton(
                       onPressedFunction: multipleSubmit,
                       isImage: true,
@@ -127,40 +133,62 @@ class _ImageChoiceState extends State<ImageChoice> {
     );
   }
 
+  singleSubmit() {
+    isTapped1
+        ? saveImage1()
+        : isTapped2
+            ? saveImage2()
+            : isTapped3
+                ? saveImage3()
+                : isTapped4 ? saveImage4() : print('None');
+  }
+
   onTapSingle() {
     setState(() {
       isTapped1 = true;
+      isTapped2 = false;
+      isTapped3 = false;
+      isTapped4 = false;
     });
-    Timer(Duration(milliseconds: 200), () {
-      saveImage1();
-    });
+//    Timer(Duration(milliseconds: 200), () {
+//      saveImage1();
+//    });
   }
 
   onTapSingle1() {
     setState(() {
       isTapped2 = true;
+      isTapped1 = false;
+      isTapped3 = false;
+      isTapped4 = false;
     });
-    Timer(Duration(milliseconds: 200), () {
-      saveImage2();
-    });
+//    Timer(Duration(milliseconds: 200), () {
+//      saveImage2();
+//    });
   }
 
   onTapSingle2() {
     setState(() {
       isTapped3 = true;
+      isTapped1 = false;
+      isTapped2 = false;
+      isTapped4 = false;
     });
-    Timer(Duration(milliseconds: 200), () {
-      saveImage3();
-    });
+//    Timer(Duration(milliseconds: 200), () {
+//      saveImage3();
+//    });
   }
 
   onTapSingle3() {
     setState(() {
       isTapped4 = true;
+      isTapped1 = false;
+      isTapped2 = false;
+      isTapped3 = false;
     });
-    Timer(Duration(milliseconds: 200), () {
-      saveImage4();
-    });
+//    Timer(Duration(milliseconds: 200), () {
+//      saveImage4();
+//    });
   }
 
   multipleSubmit() {

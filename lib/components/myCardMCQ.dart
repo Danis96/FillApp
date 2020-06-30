@@ -69,16 +69,10 @@ class _MyCardMCQState extends State<MyCardMCQ> {
   @override
   Widget build(BuildContext context) {
      SizeConfig().init(context);
-    double defaultScreenWidth = 400.0;
-    double defaultScreenHeight = 810.0;
-    ScreenUtil.instance = ScreenUtil(
-      width: defaultScreenWidth,
-      height: defaultScreenHeight,
-      allowFontScaling: true,
-    )..init(context);
+
     return Container(
         key: widget.key,
-        width: SizeConfig.blockSizeHorizontal * 85,
+        width: SizeConfig.blockSizeHorizontal * 88,
         margin: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(12.0),
             right: ScreenUtil.instance.setWidth(12.0)),
@@ -106,7 +100,7 @@ class _MyCardMCQState extends State<MyCardMCQ> {
                   child: MyQuestion(
                       isCompleted: false,
                       question: widget.question,
-                      containerHeight: 8),
+                      containerHeight: 12),
                 ),
                 Container(
                   height: SizeConfig.blockSizeVertical * 29,

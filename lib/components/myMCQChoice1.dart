@@ -86,12 +86,19 @@ class _MyMCQChoiceState1 extends State<MyMCQChoice1> {
             elevation: 0,
             color: isTappedMCQFlash1 ? MyColor().white : MyColor().black,
             onPressed: () {
-              setState(() {
-                isTappedMCQFlash1 = true;
-              });
-              Timer(Duration(milliseconds: 300), () {
-                onPressed();
-              });
+              if(counterSurvey == 0) {
+                setState(() {
+                  isTappedMCQFlash1 = true;
+                });
+                Timer(Duration(milliseconds: 500), () {
+                  onPressed();
+                });
+                counterSurvey = 1;
+                Timer(Duration(seconds: 2), () {
+                    counterSurvey = 0;
+                });
+              }
+
             },
             child: Text(widget.choice,
                 overflow: TextOverflow.ellipsis,

@@ -153,6 +153,6 @@ class _SummaryState extends State<Summary> {
       isOnSummary = false;
       isFutureDone = false;
     });
-    return Navigator.of(context).pop() ?? true;
+    Navigator.of(context).pop();
   }
 }

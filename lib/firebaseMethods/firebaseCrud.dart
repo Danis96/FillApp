@@ -54,19 +54,19 @@ class FirebaseCrud {
       String date,
       String nameAndSurname,
       String dateOfBirth,
-      String email,
-      String cardNumber,
-      String expireDate,
-      String cc,
+//      String email,
+//      String cardNumber,
+//      String expireDate,
+//      String cc,
       int tSar) async {
     await db.collection('Transfers').add({
       'date': date,
       'name_and_surname': nameAndSurname,
       'date_of_birth': dateOfBirth,
-      'email': email,
-      'card_number': cardNumber,
-      'expipre_date': expireDate,
-      'cc': cc,
+//      'email': email,
+//      'card_number': cardNumber,
+//      'expipre_date': expireDate,
+//      'cc': cc,
       'transferSar': tSar,
       'dateOfAdminTransfer' : '',
       'isDone': 0
@@ -95,17 +95,18 @@ class FirebaseCrud {
       DocumentSnapshot doc,
       String nameSurname,
       String dateOfBirth,
-      String email,
-      String cardNumber,
-      String expireDate,
-      String cc) async {
+//      String email,
+//      String cardNumber,
+//      String expireDate,
+//      String cc
+      ) async {
     await db.collection('Users').document(doc.documentID).updateData({
-      'email_profile': email,
+//      'email_profile': email,
       'name_and_surname': nameSurname,
       'date_of_birth': dateOfBirth,
-      'card_number': cardNumber,
-      'expire_date': expireDate,
-      'cc': cc,
+//      'card_number': cardNumber,
+//      'expire_date': expireDate,
+//      'cc': cc,
     });
   }
 

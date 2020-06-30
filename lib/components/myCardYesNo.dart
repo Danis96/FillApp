@@ -57,20 +57,14 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    double defaultScreenWidth = 400.0;
-    double defaultScreenHeight = 810.0;
-    ScreenUtil.instance = ScreenUtil(
-      width: defaultScreenWidth,
-      height: defaultScreenHeight,
-      allowFontScaling: true,
-    )..init(context);
+
     return Container(
         key: widget.key,
-        width: ScreenUtil.instance.setWidth(340.0),
+        width: SizeConfig.safeBlockHorizontal * 88,
         height: SizeConfig.blockSizeVertical * 35,
         margin: EdgeInsets.only(
             left: ScreenUtil.instance.setWidth(12.0),
-            top: SizeConfig.blockSizeVertical * 14,
+            top: SizeConfig.blockSizeVertical * 10,
             right: ScreenUtil.instance.setWidth(12.0)),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(30)),
@@ -98,12 +92,12 @@ class _MyCardYesNoState extends State<MyCardYesNo> {
                   child: MyQuestion(
                       isCompleted: false,
                       question: widget.question,
-                      containerHeight: 11 ),
+                      containerHeight: 20 ),
                 ),
                 Expanded(
                   child: Container(
                     margin: EdgeInsets.only(
-                        bottom: SizeConfig.blockSizeHorizontal * 12),
+                        bottom: SizeConfig.blockSizeHorizontal * 10),
                     child: Row(
                       children: <Widget>[
                         MyYesChoice(

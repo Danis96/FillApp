@@ -54,6 +54,9 @@ class MyMCQChoice3 extends StatefulWidget {
 }
 
 class _MyMCQChoiceState3 extends State<MyMCQChoice3> {
+
+  int _counter = 0;
+
   @override
   void initState() {
     super.initState();
@@ -85,12 +88,19 @@ class _MyMCQChoiceState3 extends State<MyMCQChoice3> {
             elevation: 0,
             color: isTappedMCQFlash3 ? MyColor().white : MyColor().black,
             onPressed: () {
-              setState(() {
-                isTappedMCQFlash3 = true;
-              });
-              Timer(Duration(milliseconds: 300), () {
-                onPressed();
-              });
+              if(counterSurvey == 0) {
+                setState(() {
+                  isTappedMCQFlash3 = true;
+                });
+                Timer(Duration(milliseconds: 500), () {
+                  onPressed();
+                });
+                counterSurvey = 1;
+                Timer(Duration(seconds: 2), () {
+                  counterSurvey = 0;
+                });
+              }
+
             },
             child: Text(widget.choice,
                 overflow: TextOverflow.ellipsis,

@@ -325,335 +325,335 @@ class _ProfileState extends State<Profile> {
                         ),
                       ),
                     ),
-                    Container(
-                         width: SizeConfig.blockSizeHorizontal * 78,
-                      height:SizeConfig.blockSizeVertical * 8,
-                      margin: EdgeInsets.only(
-                        left: ScreenUtil.instance.setWidth(47.0),
-                        top: ScreenUtil.instance.setWidth(22.0),
-                        right: ScreenUtil.instance.setWidth(47.0),
-                      ),
-                      child: TextFormField(
-                        autofocus: false,
-                        focusNode: emailFocus,
-                        readOnly: isAnonymous == 1,
-                        maxLength: 200,
-                        enableSuggestions: false,
-                        style: TextStyle(color: Colors.black),
-                        initialValue: widget.snap2.data['email_profile'],
-                        decoration: InputDecoration(
-                          counterText: '',
-                          hasFloatingPlaceholder: false,
-                          contentPadding: new EdgeInsets.symmetric(
-                              vertical: 25.0, horizontal: 35.0),
-                          labelText: AppLocalizations.of(context)
-                              .translate('enterEmail'),
-                          labelStyle: TextStyle(
-                              color: MyColor().black,
-                              fontSize: ScreenUtil.instance.setSp(16.0)),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(33.5)),
-                            borderSide: BorderSide(
-                              color: isEmptyMail
-                                  ? MyColor().error
-                                  : MyColor().black,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(33.5)),
-                            borderSide: BorderSide(
-                                color: isEmptyMail
-                                    ? MyColor().error
-                                    : MyColor().black),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(33.5)),
-                            borderSide: BorderSide(
-                              color: MyColor().error,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(33.5)),
-                            borderSide: BorderSide(
-                              color: MyColor().error,
-                            ),
-                          ),
-                        ),
-                        onChanged: (input) {
-                          setState(() {
-                            email = input;
-                            isButtonCompleteEmail = true;
-                            isButtonComplete = true;
-                          });
-                        },
-                        onTap: () => onTapFieldAnonymous(),
-                        obscureText: false,
-                      ),
-                    ),
+//                    Container(
+//                         width: SizeConfig.blockSizeHorizontal * 78,
+//                      height:SizeConfig.blockSizeVertical * 8,
+//                      margin: EdgeInsets.only(
+//                        left: ScreenUtil.instance.setWidth(47.0),
+//                        top: ScreenUtil.instance.setWidth(22.0),
+//                        right: ScreenUtil.instance.setWidth(47.0),
+//                      ),
+//                      child: TextFormField(
+//                        autofocus: false,
+//                        focusNode: emailFocus,
+//                        readOnly: isAnonymous == 1,
+//                        maxLength: 200,
+//                        enableSuggestions: false,
+//                        style: TextStyle(color: Colors.black),
+//                        initialValue: widget.snap2.data['email_profile'],
+//                        decoration: InputDecoration(
+//                          counterText: '',
+//                          hasFloatingPlaceholder: false,
+//                          contentPadding: new EdgeInsets.symmetric(
+//                              vertical: 25.0, horizontal: 35.0),
+//                          labelText: AppLocalizations.of(context)
+//                              .translate('enterEmail'),
+//                          labelStyle: TextStyle(
+//                              color: MyColor().black,
+//                              fontSize: ScreenUtil.instance.setSp(16.0)),
+//                          enabledBorder: OutlineInputBorder(
+//                            borderRadius:
+//                                BorderRadius.all(Radius.circular(33.5)),
+//                            borderSide: BorderSide(
+//                              color: isEmptyMail
+//                                  ? MyColor().error
+//                                  : MyColor().black,
+//                            ),
+//                          ),
+//                          focusedBorder: OutlineInputBorder(
+//                            borderRadius:
+//                                BorderRadius.all(Radius.circular(33.5)),
+//                            borderSide: BorderSide(
+//                                color: isEmptyMail
+//                                    ? MyColor().error
+//                                    : MyColor().black),
+//                          ),
+//                          focusedErrorBorder: OutlineInputBorder(
+//                            borderRadius:
+//                                BorderRadius.all(Radius.circular(33.5)),
+//                            borderSide: BorderSide(
+//                              color: MyColor().error,
+//                            ),
+//                          ),
+//                          errorBorder: OutlineInputBorder(
+//                            borderRadius:
+//                                BorderRadius.all(Radius.circular(33.5)),
+//                            borderSide: BorderSide(
+//                              color: MyColor().error,
+//                            ),
+//                          ),
+//                        ),
+//                        onChanged: (input) {
+//                          setState(() {
+//                            email = input;
+//                            isButtonCompleteEmail = true;
+//                            isButtonComplete = true;
+//                          });
+//                        },
+//                        onTap: () => onTapFieldAnonymous(),
+//                        obscureText: false,
+//                      ),
+//                    ),
                     Container(
                       child: LanguageChoose(refresh: widget.settingStates),
                     ),
-                    Container(
-                         width: SizeConfig.blockSizeHorizontal * 78,
-                      height:SizeConfig.blockSizeVertical * 8,
-                      margin: EdgeInsets.only(
-                        left: ScreenUtil.instance.setWidth(47.0),
-                        top: ScreenUtil.instance.setWidth(22.0),
-                        right: ScreenUtil.instance.setWidth(47.0),
-                      ),
-                      child: TextFormField(
-                        focusNode: creditFocus,
-                        autofocus: false,
-                        readOnly: isAnonymous == 1,
-                        keyboardType: TextInputType.number,
-                        maxLength: 200,
-                        enableSuggestions: false,
-                        style: TextStyle(color: Colors.black),
-                        initialValue: widget.snap2.data['card_number'],
-                        decoration: InputDecoration(
-                          counterText: '',
-                          hasFloatingPlaceholder: false,
-                          contentPadding: new EdgeInsets.symmetric(
-                              vertical: 25.0, horizontal: 35.0),
-                          icon: brandIcon != null
-                              ? FaIcon(
-                                  brandIcon,
-                                  color: isEmptyCard
-                                      ? MyColor().error
-                                      : MyColor().greenCircle,
-                                  size: SizeConfig.blockSizeHorizontal * 9,
-                                )
-                              : null,
-                          labelText: AppLocalizations.of(context)
-                              .translate('enterCardNumber'),
-                          labelStyle: TextStyle(
-                              color: MyColor().black,
-                              fontSize: ScreenUtil.instance.setSp(16.0)),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(33.5)),
-                            borderSide: BorderSide(
-                              color: isEmptyCard
-                                  ? MyColor().error
-                                  : MyColor().black,
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(33.5)),
-                            borderSide: BorderSide(
-                                color: isEmptyCard
-                                    ? MyColor().error
-                                    : MyColor().black),
-                          ),
-                          focusedErrorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(33.5)),
-                            borderSide: BorderSide(
-                              color: MyColor().error,
-                            ),
-                          ),
-                          errorBorder: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(33.5)),
-                            borderSide: BorderSide(
-                              color: MyColor().error,
-                            ),
-                          ),
-                        ),
-                        onChanged: (input) {
-                          setState(() {
-                            creditCard = input;
-                            creditCardNumber = input;
-                            isButtonCompleteCard = true;
-                            isButtonComplete = true;
-                          });
-                          String brand =
-                              CreditCardValidator.identifyCardBrand(input);
-                          // var type = detectCCType(input);
-                          IconData ccBrandIcon;
-                          if (brand != null) {
-                            if (brand == 'visa') {
-                              ccBrandIcon = FontAwesomeIcons.ccVisa;
-                            } else if (brand == 'master_card') {
-                              ccBrandIcon = FontAwesomeIcons.ccMastercard;
-                            } else if (brand == 'american_express') {
-                              ccBrandIcon = FontAwesomeIcons.ccAmex;
-                            } else if (brand == 'discover') {
-                              ccBrandIcon = FontAwesomeIcons.ccDiscover;
-                            }
-                          }
-                          setState(() {
-                            brandIcon = ccBrandIcon;
-                          });
-                        },
-                        onTap: () => onTapFieldAnonymous(),
-                        obscureText: false,
-                      ),
-                    ),
-                    isEmptyCard
-                        ? Container(
-                            margin: EdgeInsets.only(
-                                top: ScreenUtil.instance.setWidth(10.0)),
-                            child: Text(
-                              'The credit card number is invalid.',
-                              style: TextStyle(color: Colors.red),
-                            ),
-                          )
-                        : Text(
-                            '',
-                            style: TextStyle(color: Colors.green),
-                          ),
-                    Row(
-                      children: <Widget>[
-                        Container(
-                          width: ScreenUtil.instance.setWidth(156.0),
-                          height: ScreenUtil.instance.setHeight(67.0),
-                          margin: EdgeInsets.only(
-                            left: ScreenUtil.instance.setWidth(47.0),
-                            top: ScreenUtil.instance.setWidth(22.0),
-                            right: ScreenUtil.instance.setWidth(0.0),
-                          ),
-                          child: TextFormField(
-                            focusNode: expireFocus,
-                            autofocus: false,
-                            readOnly: isAnonymous == 1,
-                            inputFormatters: [maskTextInputFormatterDate],
-                            keyboardType: TextInputType.number,
-                            maxLength: 200,
-                            enableSuggestions: false,
-                            initialValue: widget.snap2.data['expire_date'],
-                            style: TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
-                              counterText: '',
-                              hasFloatingPlaceholder: false,
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 25.0, horizontal: 35.0),
-                              labelText: AppLocalizations.of(context)
-                                  .translate('date'),
-                              labelStyle: TextStyle(
-                                  color: MyColor().black,
-                                  fontSize: ScreenUtil.instance.setSp(16.0)),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                  color: isEmptyDate
-                                      ? MyColor().error
-                                      : MyColor().black,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                    color: isEmptyDate
-                                        ? MyColor().error
-                                        : MyColor().black),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                  color: MyColor().error,
-                                ),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                  color: MyColor().error,
-                                ),
-                              ),
-                            ),
-                            onChanged: (input) {
-                              setState(() {
-                                date = input;
-                                isButtonCompleteDate = true;
-                                isButtonComplete = true;
-                              });
-                            },
-                            onTap: () => onTapFieldAnonymous(),
-                            obscureText: false,
-                          ),
-                        ),
-                        Container(
-                          width: ScreenUtil.instance.setWidth(156.0),
-                          height: ScreenUtil.instance.setHeight(67.0),
-                          margin: EdgeInsets.only(
-                            left: ScreenUtil.instance.setWidth(5.0),
-                            top: ScreenUtil.instance.setWidth(22.0),
-                            right: ScreenUtil.instance.setWidth(0.0),
-                          ),
-                          child: TextFormField(
-                            focusNode: ccFocus,
-                            autofocus: false,
-                            readOnly: isAnonymous == 1,
-                            keyboardType: TextInputType.number,
-                            inputFormatters: [maskTextInputFormatterCC],
-                            maxLength: 200,
-                            enableSuggestions: false,
-                            style: TextStyle(color: Colors.black),
-                            initialValue: widget.snap2.data['cc'],
-                            decoration: InputDecoration(
-                              counterText: '',
-                              hasFloatingPlaceholder: false,
-                              contentPadding: new EdgeInsets.symmetric(
-                                  vertical: 25.0, horizontal: 35.0),
-                              labelText:
-                                  AppLocalizations.of(context).translate('cc'),
-                              labelStyle: TextStyle(
-                                  color: MyColor().black,
-                                  fontSize: ScreenUtil.instance.setSp(16.0)),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                  color: isEmptyCC
-                                      ? MyColor().error
-                                      : MyColor().black,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                    color: isEmptyCC
-                                        ? MyColor().error
-                                        : MyColor().black),
-                              ),
-                              focusedErrorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                  color: MyColor().error,
-                                ),
-                              ),
-                              errorBorder: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
-                                borderSide: BorderSide(
-                                  color: MyColor().error,
-                                ),
-                              ),
-                            ),
-                            onChanged: (input) {
-                              setState(() {
-                                cc = input;
-                                isButtonCompleteCC = true;
-                                isButtonComplete = true;
-                              });
-                            },
-                            onTap: () => onTapFieldAnonymous(),
-                            obscureText: false,
-                          ),
-                        ),
-                      ],
-                    ),
+//                    Container(
+//                         width: SizeConfig.blockSizeHorizontal * 78,
+//                      height:SizeConfig.blockSizeVertical * 8,
+//                      margin: EdgeInsets.only(
+//                        left: ScreenUtil.instance.setWidth(47.0),
+//                        top: ScreenUtil.instance.setWidth(22.0),
+//                        right: ScreenUtil.instance.setWidth(47.0),
+//                      ),
+//                      child: TextFormField(
+//                        focusNode: creditFocus,
+//                        autofocus: false,
+//                        readOnly: isAnonymous == 1,
+//                        keyboardType: TextInputType.number,
+//                        maxLength: 200,
+//                        enableSuggestions: false,
+//                        style: TextStyle(color: Colors.black),
+//                        initialValue: widget.snap2.data['card_number'],
+//                        decoration: InputDecoration(
+//                          counterText: '',
+//                          hasFloatingPlaceholder: false,
+//                          contentPadding: new EdgeInsets.symmetric(
+//                              vertical: 25.0, horizontal: 35.0),
+//                          icon: brandIcon != null
+//                              ? FaIcon(
+//                                  brandIcon,
+//                                  color: isEmptyCard
+//                                      ? MyColor().error
+//                                      : MyColor().greenCircle,
+//                                  size: SizeConfig.blockSizeHorizontal * 9,
+//                                )
+//                              : null,
+//                          labelText: AppLocalizations.of(context)
+//                              .translate('enterCardNumber'),
+//                          labelStyle: TextStyle(
+//                              color: MyColor().black,
+//                              fontSize: ScreenUtil.instance.setSp(16.0)),
+//                          enabledBorder: OutlineInputBorder(
+//                            borderRadius:
+//                                BorderRadius.all(Radius.circular(33.5)),
+//                            borderSide: BorderSide(
+//                              color: isEmptyCard
+//                                  ? MyColor().error
+//                                  : MyColor().black,
+//                            ),
+//                          ),
+//                          focusedBorder: OutlineInputBorder(
+//                            borderRadius:
+//                                BorderRadius.all(Radius.circular(33.5)),
+//                            borderSide: BorderSide(
+//                                color: isEmptyCard
+//                                    ? MyColor().error
+//                                    : MyColor().black),
+//                          ),
+//                          focusedErrorBorder: OutlineInputBorder(
+//                            borderRadius:
+//                                BorderRadius.all(Radius.circular(33.5)),
+//                            borderSide: BorderSide(
+//                              color: MyColor().error,
+//                            ),
+//                          ),
+//                          errorBorder: OutlineInputBorder(
+//                            borderRadius:
+//                                BorderRadius.all(Radius.circular(33.5)),
+//                            borderSide: BorderSide(
+//                              color: MyColor().error,
+//                            ),
+//                          ),
+//                        ),
+//                        onChanged: (input) {
+//                          setState(() {
+//                            creditCard = input;
+//                            creditCardNumber = input;
+//                            isButtonCompleteCard = true;
+//                            isButtonComplete = true;
+//                          });
+//                          String brand =
+//                              CreditCardValidator.identifyCardBrand(input);
+//                          // var type = detectCCType(input);
+//                          IconData ccBrandIcon;
+//                          if (brand != null) {
+//                            if (brand == 'visa') {
+//                              ccBrandIcon = FontAwesomeIcons.ccVisa;
+//                            } else if (brand == 'master_card') {
+//                              ccBrandIcon = FontAwesomeIcons.ccMastercard;
+//                            } else if (brand == 'american_express') {
+//                              ccBrandIcon = FontAwesomeIcons.ccAmex;
+//                            } else if (brand == 'discover') {
+//                              ccBrandIcon = FontAwesomeIcons.ccDiscover;
+//                            }
+//                          }
+//                          setState(() {
+//                            brandIcon = ccBrandIcon;
+//                          });
+//                        },
+//                        onTap: () => onTapFieldAnonymous(),
+//                        obscureText: false,
+//                      ),
+//                    ),
+//                    isEmptyCard
+//                        ? Container(
+//                            margin: EdgeInsets.only(
+//                                top: ScreenUtil.instance.setWidth(10.0)),
+//                            child: Text(
+//                              'The credit card number is invalid.',
+//                              style: TextStyle(color: Colors.red),
+//                            ),
+//                          )
+//                        : Text(
+//                            '',
+//                            style: TextStyle(color: Colors.green),
+//                          ),
+//                    Row(
+//                      children: <Widget>[
+//                        Container(
+//                          width: ScreenUtil.instance.setWidth(156.0),
+//                          height: ScreenUtil.instance.setHeight(67.0),
+//                          margin: EdgeInsets.only(
+//                            left: ScreenUtil.instance.setWidth(47.0),
+//                            top: ScreenUtil.instance.setWidth(22.0),
+//                            right: ScreenUtil.instance.setWidth(0.0),
+//                          ),
+//                          child: TextFormField(
+//                            focusNode: expireFocus,
+//                            autofocus: false,
+//                            readOnly: isAnonymous == 1,
+//                            inputFormatters: [maskTextInputFormatterDate],
+//                            keyboardType: TextInputType.number,
+//                            maxLength: 200,
+//                            enableSuggestions: false,
+//                            initialValue: widget.snap2.data['expire_date'],
+//                            style: TextStyle(color: Colors.black),
+//                            decoration: InputDecoration(
+//                              counterText: '',
+//                              hasFloatingPlaceholder: false,
+//                              contentPadding: new EdgeInsets.symmetric(
+//                                  vertical: 25.0, horizontal: 35.0),
+//                              labelText: AppLocalizations.of(context)
+//                                  .translate('date'),
+//                              labelStyle: TextStyle(
+//                                  color: MyColor().black,
+//                                  fontSize: ScreenUtil.instance.setSp(16.0)),
+//                              enabledBorder: OutlineInputBorder(
+//                                borderRadius:
+//                                    BorderRadius.all(Radius.circular(33.5)),
+//                                borderSide: BorderSide(
+//                                  color: isEmptyDate
+//                                      ? MyColor().error
+//                                      : MyColor().black,
+//                                ),
+//                              ),
+//                              focusedBorder: OutlineInputBorder(
+//                                borderRadius:
+//                                    BorderRadius.all(Radius.circular(33.5)),
+//                                borderSide: BorderSide(
+//                                    color: isEmptyDate
+//                                        ? MyColor().error
+//                                        : MyColor().black),
+//                              ),
+//                              focusedErrorBorder: OutlineInputBorder(
+//                                borderRadius:
+//                                    BorderRadius.all(Radius.circular(33.5)),
+//                                borderSide: BorderSide(
+//                                  color: MyColor().error,
+//                                ),
+//                              ),
+//                              errorBorder: OutlineInputBorder(
+//                                borderRadius:
+//                                    BorderRadius.all(Radius.circular(33.5)),
+//                                borderSide: BorderSide(
+//                                  color: MyColor().error,
+//                                ),
+//                              ),
+//                            ),
+//                            onChanged: (input) {
+//                              setState(() {
+//                                date = input;
+//                                isButtonCompleteDate = true;
+//                                isButtonComplete = true;
+//                              });
+//                            },
+//                            onTap: () => onTapFieldAnonymous(),
+//                            obscureText: false,
+//                          ),
+//                        ),
+//                        Container(
+//                          width: ScreenUtil.instance.setWidth(156.0),
+//                          height: ScreenUtil.instance.setHeight(67.0),
+//                          margin: EdgeInsets.only(
+//                            left: ScreenUtil.instance.setWidth(5.0),
+//                            top: ScreenUtil.instance.setWidth(22.0),
+//                            right: ScreenUtil.instance.setWidth(0.0),
+//                          ),
+//                          child: TextFormField(
+//                            focusNode: ccFocus,
+//                            autofocus: false,
+//                            readOnly: isAnonymous == 1,
+//                            keyboardType: TextInputType.number,
+//                            inputFormatters: [maskTextInputFormatterCC],
+//                            maxLength: 200,
+//                            enableSuggestions: false,
+//                            style: TextStyle(color: Colors.black),
+//                            initialValue: widget.snap2.data['cc'],
+//                            decoration: InputDecoration(
+//                              counterText: '',
+//                              hasFloatingPlaceholder: false,
+//                              contentPadding: new EdgeInsets.symmetric(
+//                                  vertical: 25.0, horizontal: 35.0),
+//                              labelText:
+//                                  AppLocalizations.of(context).translate('cc'),
+//                              labelStyle: TextStyle(
+//                                  color: MyColor().black,
+//                                  fontSize: ScreenUtil.instance.setSp(16.0)),
+//                              enabledBorder: OutlineInputBorder(
+//                                borderRadius:
+//                                    BorderRadius.all(Radius.circular(33.5)),
+//                                borderSide: BorderSide(
+//                                  color: isEmptyCC
+//                                      ? MyColor().error
+//                                      : MyColor().black,
+//                                ),
+//                              ),
+//                              focusedBorder: OutlineInputBorder(
+//                                borderRadius:
+//                                    BorderRadius.all(Radius.circular(33.5)),
+//                                borderSide: BorderSide(
+//                                    color: isEmptyCC
+//                                        ? MyColor().error
+//                                        : MyColor().black),
+//                              ),
+//                              focusedErrorBorder: OutlineInputBorder(
+//                                borderRadius:
+//                                    BorderRadius.all(Radius.circular(33.5)),
+//                                borderSide: BorderSide(
+//                                  color: MyColor().error,
+//                                ),
+//                              ),
+//                              errorBorder: OutlineInputBorder(
+//                                borderRadius:
+//                                    BorderRadius.all(Radius.circular(33.5)),
+//                                borderSide: BorderSide(
+//                                  color: MyColor().error,
+//                                ),
+//                              ),
+//                            ),
+//                            onChanged: (input) {
+//                              setState(() {
+//                                cc = input;
+//                                isButtonCompleteCC = true;
+//                                isButtonComplete = true;
+//                              });
+//                            },
+//                            onTap: () => onTapFieldAnonymous(),
+//                            obscureText: false,
+//                          ),
+//                        ),
+//                      ],
+//                    ),
                   ],
                 ),
               ),
@@ -757,10 +757,10 @@ class _ProfileState extends State<Profile> {
       snap,
       isButtonCompleteName ? name : usersName,
       isButtonCompleteDOB ? dateOfBirth : usersDOB,
-      isButtonCompleteEmail ? email : usersEmail,
-      isButtonCompleteCard ? creditCard : usersCard,
-      isButtonCompleteDate ? date : usersCardDate,
-      isButtonCompleteCC ? cc : usersCC,
+//      isButtonCompleteEmail ? email : usersEmail,
+//      isButtonCompleteCard ? creditCard : usersCard,
+//      isButtonCompleteDate ? date : usersCardDate,
+//      isButtonCompleteCC ? cc : usersCC,
     );
     setState(() {
       btnText = isButtonComplete
@@ -776,19 +776,19 @@ class _ProfileState extends State<Profile> {
         DateTime.now().toString(),
         isButtonCompleteName ? name : usersName,
         isButtonCompleteDOB ? dateOfBirth : usersDOB,
-        isButtonCompleteEmail ? email : usersEmail,
-        isButtonCompleteCard ? creditCard : usersCard,
-        isButtonCompleteDate ? date : usersCardDate,
-        isButtonCompleteCC ? cc : usersCC,
+//        isButtonCompleteEmail ? email : usersEmail,
+//        isButtonCompleteCard ? creditCard : usersCard,
+//        isButtonCompleteDate ? date : usersCardDate,
+//        isButtonCompleteCC ? cc : usersCC,
         usersSarovi);
     FirebaseCrud().updateUserOnCompletePRofile(
       snap,
       isButtonCompleteName ? name : usersName,
       isButtonCompleteDOB ? dateOfBirth : usersDOB,
-      isButtonCompleteEmail ? email : usersEmail,
-      isButtonCompleteCard ? creditCard : usersCard,
-      isButtonCompleteDate ? date : usersCardDate,
-      isButtonCompleteCC ? cc : usersCC,
+//      isButtonCompleteEmail ? email : usersEmail,
+//      isButtonCompleteCard ? creditCard : usersCard,
+//      isButtonCompleteDate ? date : usersCardDate,
+//      isButtonCompleteCC ? cc : usersCC,
     );
     FirebaseCrud().updateSarOnTransfer(snap, 0, usersSarovi);
     setState(() {
@@ -816,16 +816,18 @@ class _ProfileState extends State<Profile> {
             isEmptyName = false;
           });
         });
-      } else if (email == '' || regexEmail.hasMatch(email) == false) {
-        setState(() {
-          isEmptyMail = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyMail = false;
-          });
-        });
-      } else if (dateOfBirth == '') {
+      }
+//      else if (email == '' || regexEmail.hasMatch(email) == false) {
+//        setState(() {
+//          isEmptyMail = true;
+//        });
+//        Timer(Duration(seconds: 2), () {
+//          setState(() {
+//            isEmptyMail = false;
+//          });
+//        });
+//      }
+      else if (dateOfBirth == '') {
         setState(() {
           isEmptyBirth = true;
         });
@@ -834,39 +836,41 @@ class _ProfileState extends State<Profile> {
             isEmptyBirth = false;
           });
         });
-      } else if (creditCard == '' ||
-              creditCardNumber.length < 13 ||
-              creditCardNumber.startsWith('3')
-          ? creditCardNumber.length < 15
-          : !CreditCardValidator.isCreditCardValid(
-              cardNumber: creditCardNumber)) {
-        setState(() {
-          isEmptyCard = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyCard = false;
-          });
-        });
-      } else if (date == '' || date.length < 5) {
-        setState(() {
-          isEmptyDate = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyDate = false;
-          });
-        });
-      } else if (cc == '' || cc.length < 3) {
-        setState(() {
-          isEmptyCC = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyCC = false;
-          });
-        });
-      } else {
+      }
+//      else if (creditCard == '' ||
+//              creditCardNumber.length < 13 ||
+//              creditCardNumber.startsWith('3')
+//          ? creditCardNumber.length < 15
+//          : !CreditCardValidator.isCreditCardValid(
+//              cardNumber: creditCardNumber)) {
+//        setState(() {
+//          isEmptyCard = true;
+//        });
+//        Timer(Duration(seconds: 2), () {
+//          setState(() {
+//            isEmptyCard = false;
+//          });
+//        });
+//      } else if (date == '' || date.length < 5) {
+//        setState(() {
+//          isEmptyDate = true;
+//        });
+//        Timer(Duration(seconds: 2), () {
+//          setState(() {
+//            isEmptyDate = false;
+//          });
+//        });
+//      } else if (cc == '' || cc.length < 3) {
+//        setState(() {
+//          isEmptyCC = true;
+//        });
+//        Timer(Duration(seconds: 2), () {
+//          setState(() {
+//            isEmptyCC = false;
+//          });
+//        });
+//      }
+    else {
         completeProfile();
       }
     } else if (btnText == 'Transfer' || btnText == 'تحويل') {
@@ -881,44 +885,45 @@ class _ProfileState extends State<Profile> {
             isEmptyName = false;
           });
         });
-      } else if (isButtonCompleteCard
-          ? creditCardNumber.length < 13 || creditCardNumber.startsWith('3')
-          ? creditCardNumber.length < 15
-          : !CreditCardValidator.isCreditCardValid(
-              cardNumber: creditCardNumber)
-          : usersCard == '' ||
-              usersCard.length < 13 ||
-              !CreditCardValidator.isCreditCardValid(cardNumber: usersCard)) {
-        setState(() {
-          isEmptyCard = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyCard = false;
-          });
-        });
-      } else if (isButtonCompleteDate
-          ? date == '' || date.length < 5
-          : usersCardDate == '' || usersCardDate.length < 5) {
-        setState(() {
-          isEmptyDate = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyDate = false;
-          });
-        });
-      } else if (isButtonCompleteCC
-          ? cc == '' || cc.length < 3
-          : usersCC == '' || usersCC.length < 3) {
-        setState(() {
-          isEmptyCC = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyCC = false;
-          });
-        });
+//      }
+//      else if (isButtonCompleteCard
+//          ? creditCardNumber.length < 13 || creditCardNumber.startsWith('3')
+//          ? creditCardNumber.length < 15
+//          : !CreditCardValidator.isCreditCardValid(
+//              cardNumber: creditCardNumber)
+//          : usersCard == '' ||
+//              usersCard.length < 13 ||
+//              !CreditCardValidator.isCreditCardValid(cardNumber: usersCard)) {
+//        setState(() {
+//          isEmptyCard = true;
+//        });
+//        Timer(Duration(seconds: 2), () {
+//          setState(() {
+//            isEmptyCard = false;
+//          });
+//        });
+//      } else if (isButtonCompleteDate
+//          ? date == '' || date.length < 5
+//          : usersCardDate == '' || usersCardDate.length < 5) {
+//        setState(() {
+//          isEmptyDate = true;
+//        });
+//        Timer(Duration(seconds: 2), () {
+//          setState(() {
+//            isEmptyDate = false;
+//          });
+//        });
+//      } else if (isButtonCompleteCC
+//          ? cc == '' || cc.length < 3
+//          : usersCC == '' || usersCC.length < 3) {
+//        setState(() {
+//          isEmptyCC = true;
+//        });
+//        Timer(Duration(seconds: 2), () {
+//          setState(() {
+//            isEmptyCC = false;
+//          });
+//        });
       } else {
         transferSar();
         successfullTransfer();
