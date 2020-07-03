@@ -58,126 +58,137 @@ class _LanguageScreenState extends State<LanguageScreen> {
     appLanguage = Provider.of<AppLanguage>(context);
     Constant().responsive(context);
     SizeConfig().init(context);
-    return Scaffold(
-      backgroundColor: MyColor().black,
-      body: Builder(
-        builder: (context) => WillPopScope(
-          onWillPop: _onWillPop,
-          child: Center(
-            child: Container(
-              margin: EdgeInsets.only(top:SizeConfig.blockSizeVertical * 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Center(
-                      child: Text(
-                    MyText().headline,
-                    style: TextStyle(
-                        fontSize: ScreenUtil.instance.setSp(70.0),
-                        color: MyColor().white,
-                        fontFamily: roboto),
-                  )),
-                  Container(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          tileMode: TileMode.clamp,
+          colors: [
+            Color.fromRGBO(42, 92, 157, 1.0),
+            Color.fromRGBO(47, 150, 126, 1.0),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Builder(
+          builder: (context) => WillPopScope(
+            onWillPop: _onWillPop,
+            child: Center(
+              child: Container(
+                margin: EdgeInsets.only(top:SizeConfig.blockSizeVertical * 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Center(
+                        child: Image(
+                         image: AssetImage('assets/images/fillLogoSmall.png'),
+                          fit: BoxFit.cover,
+                      ),
+                    ),
+                    Container(
+                        margin: EdgeInsets.only(
+                            top: ScreenUtil.instance.setWidth(85.0)),
+                        child: Text(
+                          AppLocalizations.of(context)
+                              .translate('register&get5SAR'),
+                          style: TextStyle(
+                              fontSize: ScreenUtil.instance.setSp(23.0),
+                              color: MyColor().white),
+                          textAlign: TextAlign.center,
+                        )),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: new BorderRadius.circular(33.5),
+                          border: Border.all(width: 1, color: MyColor().white),
+                          color: languageOfApp == 'Arabic'
+                              ? MyColor().white
+                              : Colors.transparent),
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setHeight(67.0),
                       margin: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(85.0)),
-                      child: Text(
-                        AppLocalizations.of(context)
-                            .translate('register&get5SAR'),
-                        style: TextStyle(
-                            fontSize: ScreenUtil.instance.setSp(23.0),
-                            color: MyColor().white),
-                        textAlign: TextAlign.center,
-                      )),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: new BorderRadius.circular(33.5),
-                        border: Border.all(width: 1, color: MyColor().white),
-                        color: languageOfApp == 'Arabic'
-                            ? MyColor().white
-                            : MyColor().black),
-                    width: ScreenUtil.instance.setWidth(316.0),
-                    height: ScreenUtil.instance.setHeight(67.0),
-                    margin: EdgeInsets.only(
-                        top: ScreenUtil.instance.setWidth(27.0),
-                        bottom: ScreenUtil.instance.setWidth(15.0),
-                        left: ScreenUtil.instance.setWidth(49.0),
-                        right: ScreenUtil.instance.setWidth(49.0)),
-                    child: RaisedButton(
-                        color: languageOfApp == 'Arabic'
-                            ? MyColor().white
-                            : MyColor().black,
-                        shape: RoundedRectangleBorder(
+                          top: ScreenUtil.instance.setWidth(27.0),
+                          bottom: ScreenUtil.instance.setWidth(15.0),
+                          left: ScreenUtil.instance.setWidth(49.0),
+                          right: ScreenUtil.instance.setWidth(49.0)),
+                      child: RaisedButton(
+                          color: languageOfApp == 'Arabic'
+                              ? MyColor().white
+                              : Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(33.5),
+                          ),
+                          onPressed: () async {
+                            setState(() {
+                              appLanguage.changeLanguage(Locale("ar"));
+                              selectedLanguage = AppLocalizations.of(context)
+                                  .translate('arabic');
+                              languageOfApp = 'Arabic';
+                            });
+                            var prefs = await SharedPreferences.getInstance();
+                            prefs.setString('language_code', 'ar');
+                            Navigator.of(context).push(
+                              CardAnimationTween(
+                                widget: SignUp(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppLocalizations.of(context).translate('arabic'),
+                            style: TextStyle(
+                                fontSize: ScreenUtil.instance.setSp(18.0),
+                                color: languageOfApp == 'Arabic'
+                                    ? MyColor().black
+                                    : MyColor().white),
+                          )),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
                           borderRadius: new BorderRadius.circular(33.5),
-                        ),
-                        onPressed: () async {
-                          setState(() {
-                            appLanguage.changeLanguage(Locale("ar"));
-                            selectedLanguage = AppLocalizations.of(context)
-                                .translate('arabic');
-                            languageOfApp = 'Arabic';
-                          });
-                          var prefs = await SharedPreferences.getInstance();
-                          prefs.setString('language_code', 'ar');
-                          Navigator.of(context).push(
-                            CardAnimationTween(
-                              widget: SignUp(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          AppLocalizations.of(context).translate('arabic'),
-                          style: TextStyle(
-                              fontSize: ScreenUtil.instance.setSp(18.0),
-                              color: languageOfApp == 'Arabic'
-                                  ? MyColor().black
-                                  : MyColor().white),
-                        )),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: new BorderRadius.circular(33.5),
-                        border: Border.all(width: 1, color: MyColor().white),
-                        color: languageOfApp == 'English'
-                            ? MyColor().white
-                            : MyColor().black),
-                    width: ScreenUtil.instance.setWidth(316.0),
-                    height: ScreenUtil.instance.setHeight(67.0),
-                    margin: EdgeInsets.only(
-                        bottom: ScreenUtil.instance.setWidth(33.0),
-                        left: ScreenUtil.instance.setWidth(49.0),
-                        right: ScreenUtil.instance.setWidth(49.0)),
-                    child: RaisedButton(
-                        color: languageOfApp == 'English'
-                            ? MyColor().white
-                            : MyColor().black,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(33.5),
-                        ),
-                        onPressed: () async {
-                          setState(() {
-                            appLanguage.changeLanguage(Locale("en"));
-                            selectedLanguage = AppLocalizations.of(context)
-                                .translate('english');
-                            languageOfApp = 'English';
-                          });
-                          var prefs = await SharedPreferences.getInstance();
-                          prefs.setString('language_code', 'en');
-                          Navigator.of(context).push(
-                            CardAnimationTween(
-                              widget: SignUp(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          AppLocalizations.of(context).translate('english'),
-                          style: TextStyle(
-                              fontSize: ScreenUtil.instance.setSp(18.0),
-                              color: languageOfApp == 'English'
-                                  ? MyColor().black
-                                  : MyColor().white),
-                        )),
-                  ),
-                ],
+                          border: Border.all(width: 1, color: MyColor().white),
+                          color: languageOfApp == 'English'
+                              ? MyColor().white
+                              : Colors.transparent,),
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setHeight(67.0),
+                      margin: EdgeInsets.only(
+                          bottom: ScreenUtil.instance.setWidth(33.0),
+                          left: ScreenUtil.instance.setWidth(49.0),
+                          right: ScreenUtil.instance.setWidth(49.0)),
+                      child: RaisedButton(
+                          color: languageOfApp == 'English'
+                              ? MyColor().white
+                              : Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(33.5),
+                          ),
+                          onPressed: () async {
+                            setState(() {
+                              appLanguage.changeLanguage(Locale("en"));
+                              selectedLanguage = AppLocalizations.of(context)
+                                  .translate('english');
+                              languageOfApp = 'English';
+                            });
+                            var prefs = await SharedPreferences.getInstance();
+                            prefs.setString('language_code', 'en');
+                            Navigator.of(context).push(
+                              CardAnimationTween(
+                                widget: SignUp(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            AppLocalizations.of(context).translate('english'),
+                            style: TextStyle(
+                                fontSize: ScreenUtil.instance.setSp(18.0),
+                                color: languageOfApp == 'English'
+                                    ? MyColor().black
+                                    : MyColor().white),
+                          )),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

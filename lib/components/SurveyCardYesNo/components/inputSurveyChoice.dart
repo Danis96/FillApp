@@ -68,18 +68,12 @@ class _InputChoiceState extends State<InputChoice> {
   onPressed(BuildContext context) {
     userAnswer = answerController.text;
     if (userAnswer.length == 0) {
-      setState(() {
         fieldColor = true;
-      });
       Timer(Duration(seconds: 3), () {
-        setState(() {
           fieldColor = false;
-        });
       });
     } else {
-      setState(() {
         fieldColor = false;
-      });
       FirebaseCrud().updateListOfUsernamesAnswersSurvey(
           widget.doc, context, widget.username, userAnswer, widget.title);
       offlineAnswers.add(userAnswer);

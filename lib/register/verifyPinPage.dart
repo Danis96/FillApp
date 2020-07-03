@@ -110,7 +110,7 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: MyColor().black,
+      backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
       body: Builder(
         builder: (context) => Center(
             child: Column(

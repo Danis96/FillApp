@@ -156,10 +156,10 @@ class _MySurveyGroupCard extends State<MySurveyGroupCard>
               bottom: ScreenUtil.instance.setWidth(50.0)),
           decoration: BoxDecoration(
               border: Border.all(
-                  color: isCompleted ? MyColor().black : MyColor().black,
+                  color: isCompleted ? Color.fromRGBO(74, 85, 98, 1.0) : Color.fromRGBO(74, 85, 98, 1.0),
                   width: 3.0),
               borderRadius: BorderRadius.all(Radius.circular(30)),
-              color: isCompleted ? MyColor().white : MyColor().black),
+              color: isCompleted ? MyColor().white : Color.fromRGBO(74, 85, 98, 1.0)),
           child: Padding(
               padding: EdgeInsets.only(
                   left: ScreenUtil.instance.setWidth(37.0),

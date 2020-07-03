@@ -29,7 +29,7 @@ class BigCircle extends StatelessWidget {
                 ? MyColor().white
                 : btnText == 'Transfer' || btnText == 'تحويل'
                     ? MyColor().white
-                    : MyColor().black,
+                    : Color.fromRGBO(74, 85, 98, 1.0),
             shape: BoxShape.circle,
           ),
         ),
@@ -50,3 +50,6 @@ class BigCircle extends StatelessWidget {
     );
   }
 }
+
+
+

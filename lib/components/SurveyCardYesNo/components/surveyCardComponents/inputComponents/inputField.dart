@@ -20,6 +20,10 @@ class InputField extends StatelessWidget {
       height: ScreenUtil.instance.setWidth(65.0),
       margin: EdgeInsets.only(top: ScreenUtil.instance.setWidth(20.0)),
       child: TextFormField(
+        onTap: () => null,
+        onFieldSubmitted: (input) {
+          print(input);
+        },
         readOnly: isSummary ? true : false,
         maxLength: 60,
         enableSuggestions: false,
@@ -27,7 +31,6 @@ class InputField extends StatelessWidget {
         controller: answerController,
         decoration: InputDecoration(
           counterText: '',
-          hasFloatingPlaceholder: false,
           contentPadding:
               new EdgeInsets.symmetric(vertical: 25.0, horizontal: 35.0),
           labelText: AppLocalizations.of(context).translate('typeTheAnswer'),

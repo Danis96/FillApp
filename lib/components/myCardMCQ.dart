@@ -78,7 +78,7 @@ class _MyCardMCQState extends State<MyCardMCQ> {
             right: ScreenUtil.instance.setWidth(12.0)),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(30)),
-            color: MyColor().black),
+            color: Color.fromRGBO(74, 85, 98, 1.0),),
         child: Padding(
           padding: EdgeInsets.only(
               left: ScreenUtil.instance.setWidth(40.0),

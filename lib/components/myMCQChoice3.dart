@@ -84,9 +84,9 @@ class _MyMCQChoiceState3 extends State<MyMCQChoice3> {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(28.0),
             ),
-            hoverColor: isTappedMCQFlash3 ? MyColor().white : MyColor().black,
+            hoverColor: isTappedMCQFlash3 ? MyColor().white : Color.fromRGBO(74, 85, 98, 1.0),
             elevation: 0,
-            color: isTappedMCQFlash3 ? MyColor().white : MyColor().black,
+            color: isTappedMCQFlash3 ? MyColor().white : Color.fromRGBO(74, 85, 98, 1.0),
             onPressed: () {
               if(counterSurvey == 0) {
                 setState(() {
@@ -113,7 +113,7 @@ class _MyMCQChoiceState3 extends State<MyMCQChoice3> {
           ),
         ),
         decoration: BoxDecoration(
-            color: isTappedMCQFlash3 ? MyColor().white : MyColor().black,
+            color: isTappedMCQFlash3 ? MyColor().white : Color.fromRGBO(74, 85, 98, 1.0),
             border: Border.all(color: MyColor().white),
             borderRadius: BorderRadius.all(Radius.circular(33.5))));
   }

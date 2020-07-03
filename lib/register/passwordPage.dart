@@ -86,8 +86,9 @@ class _PasswordPageState extends State<PasswordPage> {
     Constant().responsive(context);
     return Scaffold(
       appBar: new AppBar(
+        elevation: 0,
         title: new Text(""),
-        backgroundColor: MyColor().black,
+        backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
@@ -107,7 +108,7 @@ class _PasswordPageState extends State<PasswordPage> {
           },
         ),
       ),
-      backgroundColor: MyColor().black,
+      backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
       body: Builder(
         builder: (context) => new GestureDetector(
           onTap: () {

@@ -119,7 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     onFieldSubmitted1(BuildContext context) {
-      phoneNo = '+' +  phoneController.text;
+      phoneNo = '+966' +  phoneController.text;
       final _formState = _formKey.currentState;
       if (_formState.validate()) {
         verifyPhone();
@@ -132,7 +132,8 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: new AppBar(
         title: new Text(""),
-        backgroundColor: MyColor().black,
+        elevation: 0,
+        backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
@@ -145,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
           },
         ),
       ),
-      backgroundColor: MyColor().black,
+      backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
       body: Builder(
         builder: (context) => new GestureDetector(
           onTap: () {

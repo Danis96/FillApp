@@ -86,9 +86,9 @@ class _MyNoChoiceState extends State<MyNoChoice> {
             shape: RoundedRectangleBorder(
               borderRadius: new BorderRadius.circular(28.0),
             ),
-            hoverColor: isTappedNoYesFlash ? MyColor().white : MyColor().black,
+            hoverColor: isTappedNoYesFlash ? MyColor().white : Color.fromRGBO(74, 85, 98, 1.0),
             elevation: 0,
-            color: isTappedNoYesFlash ? MyColor().white : MyColor().black,
+            color: isTappedNoYesFlash ? MyColor().white : Color.fromRGBO(74, 85, 98, 1.0),
             onPressed: () {
               if (counterSurvey == 0) {
                 setState(() {
@@ -114,7 +114,7 @@ class _MyNoChoiceState extends State<MyNoChoice> {
           ),
         ),
         decoration: BoxDecoration(
-            color: isTappedNoYesFlash ? MyColor().white : MyColor().black,
+            color: isTappedNoYesFlash ? MyColor().white : Color.fromRGBO(74, 85, 98, 1.0),
             border: Border.all(color: MyColor().white),
             borderRadius: BorderRadius.all(Radius.circular(33.5))));
   }

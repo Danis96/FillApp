@@ -58,8 +58,9 @@ class _EmailPageState extends State<EmailPage> {
     Constant().responsive(context);
     return Scaffold(
       appBar: new AppBar(
+        elevation: 0,
         title: new Text(""),
-        backgroundColor: MyColor().black,
+        backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
@@ -78,7 +79,7 @@ class _EmailPageState extends State<EmailPage> {
           },
         ),
       ),
-      backgroundColor: MyColor().black,
+      backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
       body: Builder(
         builder: (context) => GestureDetector(
           onTap: () {

@@ -262,6 +262,7 @@ class _ProfileState extends State<Profile> {
                             name = input;
                             isButtonComplete = true;
                             isButtonCompleteName = true;
+                            print('isBTNCOMPLETE: ' + isButtonComplete.toString());
                           });
                           nameFocus.addListener(() {
                             print("Has focus: ${nameFocus.hasFocus}");
@@ -765,9 +766,10 @@ class _ProfileState extends State<Profile> {
     setState(() {
       btnText = isButtonComplete
           ? AppLocalizations.of(context).translate('transfer')
-          : AppLocalizations.of(context).translate('completeProfile');
+          : AppLocalizations.of(context).translate('complete');
     });
     widget.refreshNavbar();
+    print('COMPLETE PROFILE FN');
   }
 
   transferSar() {
@@ -806,7 +808,8 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressed() {
-    if (btnText == 'Complete Profile' || btnText == 'إكمال الملف الشخصي') {
+    print('BTN TEXT: ' + btnText);
+    if (btnText == 'Complete profile' || btnText == 'إكمال الملف الشخصي') {
       if (name == '' || regexSpace.hasMatch(name) == false) {
         setState(() {
           isEmptyName = true;

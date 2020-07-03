@@ -52,8 +52,9 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: new AppBar(
         title: new Text(""),
-        backgroundColor: MyColor().black,
+        backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
         centerTitle: true,
+        elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),
           color: MyColor().white,
@@ -62,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
           },
         ),
       ),
-      backgroundColor: MyColor().black,
+      backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
       body: Builder(
         builder: (context) => GestureDetector(
           onTap: () {

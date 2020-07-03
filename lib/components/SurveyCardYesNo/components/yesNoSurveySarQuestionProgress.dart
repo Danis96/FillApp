@@ -110,7 +110,7 @@ class _YesNoSurveySQPState extends State<YesNoSurveySQP> {
           ],
         ),
         decoration: new BoxDecoration(
-          color: Colors.black,
+          color: Color.fromRGBO(74, 85, 98, 1.0),
           borderRadius: new BorderRadius.only(
             bottomLeft: const Radius.circular(30.0),
             bottomRight: const Radius.circular(30.0),

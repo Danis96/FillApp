@@ -31,7 +31,7 @@ class ProfileButton extends StatelessWidget {
                 btnText == AppLocalizations.of(context).translate('transfer')
                     ? Text(AppLocalizations.of(context).translate('transfer'),
                         style: TextStyle(
-                            color: MyColor().white,
+                            color: MyColor().white, 
                             fontFamily: arabic,
                             fontStyle: FontStyle.normal,
                             fontSize: ScreenUtil.instance.setSp(18.0)),

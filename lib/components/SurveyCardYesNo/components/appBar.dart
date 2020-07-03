@@ -52,7 +52,7 @@ class SurveyAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: new BoxDecoration(
-        color: Colors.black,
+        color: isOnSummary ? Color.fromRGBO(42, 92, 157, 0.2) : Color.fromRGBO(74, 85, 98, 1.0),
       ),
       child: ListTile(
         leading: IconButton(
@@ -119,12 +119,21 @@ class SurveyAppBar extends StatelessWidget {
             width: ScreenUtil.instance.setWidth(170.0),
             lineHeight: 6.0,
             percent: percent,
-            progressColor: MyColor().white,
+            linearGradient:LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              tileMode: TileMode.clamp,
+              colors: [
+                Color.fromRGBO(42, 92, 157, 1.0),
+                Color.fromRGBO(47, 150, 126, 1.0),
+              ],
+            ) ,
             alignment: MainAxisAlignment.center,
           ),
         ),
         subtitle: isOnSummary
             ? Container(
+          color: Color.fromRGBO(42, 92, 157, 0.2),
                 margin: EdgeInsets.only(
                     top: ScreenUtil.instance.setWidth(12.0),
                     bottom: ScreenUtil.instance.setWidth(30.0)),

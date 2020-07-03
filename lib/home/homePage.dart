@@ -53,90 +53,101 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     Constant().responsive(context);
     SizeConfig().init(context);
-    return Scaffold(
-      backgroundColor: MyColor().black,
-      body: Builder(
-        builder: (context) => WillPopScope(
-          onWillPop: _onWillPop,
-          child: Center(
-            child: Container(
-              margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 20),
-              child: Column(
-                children: <Widget>[
-                  Center(
-                      child: Text(
-                    MyText().headline,
-                    style: TextStyle(
-                        fontSize: ScreenUtil.instance.setSp(70.0),
-                        color: MyColor().white,
-                        fontFamily: roboto),
-                  )),
-                  Padding(
-                      padding: EdgeInsets.only(
-                          top: ScreenUtil.instance.setWidth(85.0)),
-                      child: Text(
-                        AppLocalizations.of(context)
-                            .translate("register&get5SAR"),
-                        style: TextStyle(
-                            fontSize: ScreenUtil.instance.setSp(23.0),
-                            color: MyColor().white),
-                        textAlign: TextAlign.center,
-                      )),
-                  Container(
-                    width: ScreenUtil.instance.setWidth(316.0),
-                    height: ScreenUtil.instance.setHeight(67.0),
-                    margin: EdgeInsets.only(
-                        top: ScreenUtil.instance.setWidth(27.0),
-                        bottom: ScreenUtil.instance.setWidth(15.0),
-                        left: ScreenUtil.instance.setWidth(49.0),
-                        right: ScreenUtil.instance.setWidth(49.0)),
-                    child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(33.5),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed(Register,
-                              arguments: DidntRecievePinArguments(
-                                  phone: '', username: ''));
-                        },
-                        child: Text(AppLocalizations.of(context)
-                            .translate('newRegister'), style: TextStyle(fontSize: ScreenUtil.instance.setSp(16.0)), )),
-                  ),
-                  Container(
-                    width: ScreenUtil.instance.setWidth(316.0),
-                    height: ScreenUtil.instance.setHeight(67.0),
-                    margin: EdgeInsets.only(
-                        bottom: ScreenUtil.instance.setWidth(15.0),
-                        left: ScreenUtil.instance.setWidth(49.0),
-                        right: ScreenUtil.instance.setWidth(49.0)),
-                    child: RaisedButton(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(33.5),
-                        ),
-                        onPressed: () {
-                          Navigator.of(context)
-                              .pushNamed(Login); // go to Login Page
-                        },
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          tileMode: TileMode.clamp,
+          colors: [
+            Color.fromRGBO(42, 92, 157, 1.0),
+            Color.fromRGBO(47, 150, 126, 1.0),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Builder(
+          builder: (context) => WillPopScope(
+            onWillPop: _onWillPop,
+            child: Center(
+              child: Container(
+                margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 33),
+                child: Column(
+                  children: <Widget>[
+                    Center(
+                      child: Image(
+                        image: AssetImage('assets/images/fillLogoSmall.png'),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Padding(
+                        padding: EdgeInsets.only(
+                            top: ScreenUtil.instance.setWidth(85.0)),
                         child: Text(
-                            AppLocalizations.of(context).translate("signIn"), style: TextStyle(fontSize: ScreenUtil.instance.setSp(16.0)),)),
-                  ),
-                  Container(
-                      width: ScreenUtil.instance.setWidth(255.0),
+                          AppLocalizations.of(context)
+                              .translate("register&get5SAR"),
+                          style: TextStyle(
+                              fontSize: ScreenUtil.instance.setSp(23.0),
+                              color: MyColor().white),
+                          textAlign: TextAlign.center,
+                        )),
+                    Container(
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setHeight(67.0),
+                      margin: EdgeInsets.only(
+                          top: ScreenUtil.instance.setWidth(27.0),
+                          bottom: ScreenUtil.instance.setWidth(15.0),
+                          left: ScreenUtil.instance.setWidth(49.0),
+                          right: ScreenUtil.instance.setWidth(49.0)),
+                      child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(33.5),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed(Register,
+                                arguments: DidntRecievePinArguments(
+                                    phone: '', username: ''));
+                          },
+                          child: Text(AppLocalizations.of(context)
+                              .translate('newRegister'), style: TextStyle(fontSize: ScreenUtil.instance.setSp(16.0)), )),
+                    ),
+                    Container(
+                      width: ScreenUtil.instance.setWidth(316.0),
+                      height: ScreenUtil.instance.setHeight(67.0),
+                      margin: EdgeInsets.only(
+                          bottom: ScreenUtil.instance.setWidth(15.0),
+                          left: ScreenUtil.instance.setWidth(49.0),
+                          right: ScreenUtil.instance.setWidth(49.0)),
+                      child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(33.5),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .pushNamed(Login); // go to Login Page
+                          },
+                          child: Text(
+                              AppLocalizations.of(context).translate("signIn"), style: TextStyle(fontSize: ScreenUtil.instance.setSp(16.0)),)),
+                    ),
+                    Container(
+                        width: ScreenUtil.instance.setWidth(255.0),
 
-                      child: Center(
-                          child: FlatButton(
-                              onPressed: () {
-                              // FirebaseJson().importSurveyJson();
-                              // FirebaseJson().importJson();
-                                onPressed(context);
-                              },
-                              child: Text(
-                                AppLocalizations.of(context).translate("skip"),
-                                style: TextStyle(
-                                    color: MyColor().white,
-                                    fontSize: ScreenUtil.instance.setSp(23.0)),
-                              ))))
-                ],
+                        child: Center(
+                            child: FlatButton(
+                                onPressed: () {
+                                // FirebaseJson().importSurveyJson();
+                                // FirebaseJson().importJson();
+                                  onPressed(context);
+                                },
+                                child: Text(
+                                  AppLocalizations.of(context).translate("skip"),
+                                  style: TextStyle(
+                                      color: MyColor().white,
+                                      fontSize: ScreenUtil.instance.setSp(23.0)),
+                                ))))
+                  ],
+                ),
               ),
             ),
           ),

@@ -86,58 +86,71 @@ class _SummaryState extends State<Summary> {
       allowFontScaling: true,
     )..init(context);
 
-    return Scaffold(
-      backgroundColor: MyColor().black,
-      body: Builder(
-        builder: (context) => WillPopScope(
-            onWillPop: _onWillPop,
-            child: ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                SurveyAppBar(
-                  percent: 1,
-                  arguments: PasswordArguments(
-                      email: widget.arguments.email,
-                      password: widget.arguments.password,
-                      phone: widget.arguments.phone,
-                      username: widget.arguments.username),
-                  totalProgress: widget.totalProgress,
-                  surveyDoc: widget.surveyDoc,
-                  answersList: offlineAnswers,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: ScreenUtil.instance.setWidth(25.0),
-                      right: ScreenUtil.instance.setWidth(25.0)),
-                  child: Column(
-                    children: <Widget>[
-                      CongradulationsContainer(),
-                      TotalSar(sars: widget.totalSar.toString()),
-                      SummaryTitleContainer(),
-                      Container(
-                        margin: EdgeInsets.only(
-                            bottom: ScreenUtil.instance.setWidth(20.0)),
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: ClampingScrollPhysics(),
-                            itemCount: widget.questions.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              title = widget.questions[index]['title'];
-
-                              return SummaryAnswerContainer(
-                                surveyDoc: widget.surveyDoc,
-                                answersList: offlineAnswers,
-                                animateTo: widget.animateTo,
-                                index: index,
-                                question: title,
-                              );
-                            }),
-                      ),
-                    ],
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          tileMode: TileMode.clamp,
+          colors: [
+            Color.fromRGBO(42, 92, 157, 1.0),
+            Color.fromRGBO(47, 150, 126, 1.0),
+          ],
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Builder(
+          builder: (context) => WillPopScope(
+              onWillPop: _onWillPop,
+              child: ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  SurveyAppBar(
+                    percent: 1,
+                    arguments: PasswordArguments(
+                        email: widget.arguments.email,
+                        password: widget.arguments.password,
+                        phone: widget.arguments.phone,
+                        username: widget.arguments.username),
+                    totalProgress: widget.totalProgress,
+                    surveyDoc: widget.surveyDoc,
+                    answersList: offlineAnswers,
                   ),
-                ),
-              ],
-            )),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: ScreenUtil.instance.setWidth(25.0),
+                        right: ScreenUtil.instance.setWidth(25.0)),
+                    child: Column(
+                      children: <Widget>[
+                        CongradulationsContainer(),
+                        TotalSar(sars: widget.totalSar.toString()),
+                        SummaryTitleContainer(),
+                        Container(
+                          margin: EdgeInsets.only(
+                              bottom: ScreenUtil.instance.setWidth(20.0)),
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: ClampingScrollPhysics(),
+                              itemCount: widget.questions.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                title = widget.questions[index]['title'];
+
+                                return SummaryAnswerContainer(
+                                  surveyDoc: widget.surveyDoc,
+                                  answersList: offlineAnswers,
+                                  animateTo: widget.animateTo,
+                                  index: index,
+                                  question: title,
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
       ),
     );
   }
@@ -148,11 +161,11 @@ class _SummaryState extends State<Summary> {
     listName = widget.surveyDoc.name;
     var prefs = await SharedPreferences.getInstance();
     prefs.setStringList('$listName', []);
-    setState(() {
-      isSummary = false;
-      isOnSummary = false;
-      isFutureDone = false;
-    });
-    Navigator.of(context).pop();
+//    setState(() {
+//      isSummary = false;
+//      isOnSummary = false;
+//      isFutureDone = false;
+//    });
+    print('Dje ces');
   }
 }

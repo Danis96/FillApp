@@ -38,10 +38,11 @@ class EmailResetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: MyColor().black,
+      backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
       appBar: new AppBar(
         title: new Text(""),
-        backgroundColor: MyColor().black,
+        elevation: 0,
+        backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
         centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios),

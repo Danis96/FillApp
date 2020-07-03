@@ -52,7 +52,7 @@ class _SummaryAnswerContainerState extends State<SummaryAnswerContainer> {
               top: ScreenUtil.instance.setWidth(10.0),
               bottom: ScreenUtil.instance.setWidth(10.0)),
           decoration: BoxDecoration(
-            color: MyColor().black,
+            color: Colors.transparent,
             borderRadius: BorderRadius.all(Radius.circular(33.5)),
             border: Border.all(
               width: 1.0,
