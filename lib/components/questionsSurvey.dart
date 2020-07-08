@@ -1,8 +1,8 @@
 class QuestionsForSurvey {
   final qSurvey = [
     {
-      "name": "Review Test 10",
-      "number_of_questions": 12,
+      "name": "Dropdown Survey",
+      "number_of_questions": 14,
       "sar_total": 80,
       "target": 1000,
       "level": 5,
@@ -41,6 +41,32 @@ class QuestionsForSurvey {
           "sar": 35,
           "is_branching": "",
           "choice_to_exit": "",
+        },
+        {
+          "title": "Choose best Manchester United player",
+          "type": "dropdown",
+          "sar":20,
+          "is_branching":"",
+          "choice_to_exit":"",
+          "choices":[
+            {"value":"item1", "text":"Rashword"},
+            {"value":"item2", "text":"Matic"},
+            {"value":"item3", "text":"Pogba"},
+            {"value":"item4", "text":"Martial"},
+          ]
+        },
+        {
+          "title": "Choose best Juventus player",
+          "type": "dropdown",
+          "sar":20,
+          "is_branching":"",
+          "choice_to_exit":"",
+          "choices":[
+            {"value":"item1", "text":"Ronaldo"},
+            {"value":"item2", "text":"Buffon"},
+            {"value":"item3", "text":"Dybala"},
+            {"value":"item4", "text":"Costa"},
+          ]
         },
         // {
         //   "title": "Do you love football",

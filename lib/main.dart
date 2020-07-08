@@ -29,21 +29,16 @@ class FillApp extends StatelessWidget {
             Locale('en', 'US'),
             Locale('ar', ''),
           ],
-
           ///localization delegates
           localizationsDelegates: [
             /// our localization, load translates from JSON
             AppLocalizations.delegate,
-
             /// translates Material texts
             GlobalMaterialLocalizations.delegate,
-
             FallbackCupertinoLocalisationsDelegate(),
-
             /// translate Widget texts
           // /  GlobalWidgetsLocalizations.delegate,
           ],
-
           debugShowCheckedModeBanner: false,
           initialRoute: Home,
           onGenerateRoute: RouteGenerator.generateRoute,

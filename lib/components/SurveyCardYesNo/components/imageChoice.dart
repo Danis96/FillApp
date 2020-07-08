@@ -186,9 +186,6 @@ class _ImageChoiceState extends State<ImageChoice> {
       isTapped2 = false;
       isTapped3 = false;
     });
-//    Timer(Duration(milliseconds: 200), () {
-//      saveImage4();
-//    });
   }
 
   multipleSubmit() {

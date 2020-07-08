@@ -1,4 +1,5 @@
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/dateWidget.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/dropdownComponents/dropdownWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/imageWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/inputWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/mcqWidget.dart';
@@ -66,7 +67,11 @@ class ContainerTypes extends StatelessWidget {
             number: number);
       case 'image':
         return ImageWidget(
-            widget: widget, index: index, refresh: refresh, isSingle: isSingle, numberOfQuestions: numberOfQuestions,
+            widget: widget,
+            index: index,
+            refresh: refresh,
+            isSingle: isSingle,
+            numberOfQuestions: numberOfQuestions,
             number: number);
       case 'order':
         return OrderWidget(
@@ -75,6 +80,14 @@ class ContainerTypes extends StatelessWidget {
             refresh: refresh,
             numberOfQuestions: numberOfQuestions,
             number: number);
+      case 'dropdown':
+        return DropdownWidget(
+          widget: widget,
+          index: index,
+          number: number,
+          numberOfQuestions: numberOfQuestions,
+          refresh: refresh,
+        );
       default:
         return EmptyContainer();
     }
