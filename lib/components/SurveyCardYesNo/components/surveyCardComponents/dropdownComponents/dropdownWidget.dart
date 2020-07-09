@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_expanded_tile/tileController.dart';
 
 List<String> answers = ['Martial', 'Rashword', 'Pogba', 'Matic'];
 String _selectedAnswer;
+String textDropdown = 'Drop Down List';
 ExpandedTileController _controller;
 
 class DropdownWidget extends StatefulWidget {
@@ -48,11 +51,11 @@ class _DropdownWidgetState extends State<DropdownWidget> {
             color: Colors.white,
             alignment: Alignment.center,
             width: SizeConfig.blockSizeHorizontal * 100,
-            margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 4),
+            margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 3),
             child: Container(
               color: Colors.white,
               alignment: Alignment.center,
-              width: SizeConfig.blockSizeHorizontal * 70,
+              width: SizeConfig.blockSizeHorizontal * 72,
               child: ExpandedTile(
                 expandIcon: Icon(Icons.keyboard_arrow_up),
                 rotateExpandIcon: true,
@@ -60,65 +63,130 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                 checkable: false, // check box enabled or not
                 centerHeaderTitle: false,
                 title: Text(
-                  "Drop Down List",
+                  textDropdown,
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: SizeConfig.safeBlockHorizontal * 5),
+                      fontSize: SizeConfig.safeBlockHorizontal * 4.5),
                 ),
                 content: Container(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Stack(
                     children: <Widget>[
                       GestureDetector(
                         onTap: () => onTap1(),
                         child: Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              border: Border(
+                            bottom: BorderSide(color: Colors.black),
+                            right: BorderSide(color: Colors.black),
+                            left: BorderSide(color: Colors.black),
+                          )),
                           margin: EdgeInsets.only(
-                              left: SizeConfig.blockSizeHorizontal * 3),
+                              left: SizeConfig.blockSizeHorizontal * 3.7,
+                              right: SizeConfig.blockSizeHorizontal * 3.7),
                           height: SizeConfig.blockSizeVertical * 6,
-                          child: Text(
-                            widget.widget.snapQuestions[widget.index]['choices']
-                                [0]['text'],
-                            style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 5),
+                          width: SizeConfig.blockSizeHorizontal * 100,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                                left: SizeConfig.blockSizeHorizontal * 2,
+                            ),
+                            child: Text(
+                              widget.widget.snapQuestions[widget.index]['choices']
+                                  [0]['text'],
+                              style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 5, color:isDropTapped1 ?  Color.fromRGBO(42, 92, 157, 1.0) : Colors.black ),
+                            ),
                           ),
                         ),
-                      ),GestureDetector(
+                      ),
+                      GestureDetector(
                         onTap: () => onTap2(),
                         child: Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: Colors.black),
+                              right: BorderSide(color: Colors.black),
+                              left: BorderSide(color: Colors.black),
+                            )),
                           margin: EdgeInsets.only(
-                              left: SizeConfig.blockSizeHorizontal * 3),
+                              top: SizeConfig.blockSizeVertical * 6,
+                              left: SizeConfig.blockSizeHorizontal * 3.7,
+                              right: SizeConfig.blockSizeHorizontal * 3.7),
                           height: SizeConfig.blockSizeVertical * 6,
-                          child: Text(
-                            widget.widget.snapQuestions[widget.index]['choices']
-                                [1]['text'],
-                            style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 5),
+                          width: SizeConfig.blockSizeHorizontal * 100,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              left: SizeConfig.blockSizeHorizontal * 2,
+                            ),
+                            child: Text(
+                              widget.widget.snapQuestions[widget.index]['choices']
+                                  [1]['text'],
+                              style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                  color:isDropTapped2 ?  Color.fromRGBO(42, 92, 157, 1.0) : Colors.black),
+                            ),
                           ),
                         ),
-                      ),GestureDetector(
+                      ),
+                      GestureDetector(
                         onTap: () => onTap3(),
                         child: Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(color: Colors.black),
+                              right: BorderSide(color: Colors.black),
+                              left: BorderSide(color: Colors.black),
+                            ),),
                           margin: EdgeInsets.only(
-                              left: SizeConfig.blockSizeHorizontal * 3),
+                              top: SizeConfig.blockSizeVertical * 12,
+                              left: SizeConfig.blockSizeHorizontal * 3.7,
+                              right: SizeConfig.blockSizeHorizontal * 3.7),
                           height: SizeConfig.blockSizeVertical * 6,
-                          child: Text(
-                            widget.widget.snapQuestions[widget.index]['choices']
-                                [2]['text'],
-                            style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 5),
+                          width: SizeConfig.blockSizeHorizontal * 100,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              left: SizeConfig.blockSizeHorizontal * 2,
+                            ),
+                            child: Text(
+                              widget.widget.snapQuestions[widget.index]['choices']
+                                  [2]['text'],
+                              style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                  color:isDropTapped3 ?  Color.fromRGBO(42, 92, 157, 1.0) : Colors.black),
+                            ),
                           ),
                         ),
-                      ),GestureDetector(
+                      ),
+                      GestureDetector(
                         onTap: () => onTap4(),
                         child: Container(
+                          alignment: Alignment.centerLeft,
+                          decoration: BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(color: Colors.black),
+                                right: BorderSide(color: Colors.black),
+                                left: BorderSide(color: Colors.black),
+                              ),
+                          ),
                           margin: EdgeInsets.only(
-                              left: SizeConfig.blockSizeHorizontal * 3),
+                              top: SizeConfig.blockSizeVertical * 18,
+                              left: SizeConfig.blockSizeHorizontal * 3.7,
+                              right: SizeConfig.blockSizeHorizontal * 3.7),
                           height: SizeConfig.blockSizeVertical * 6,
-                          child: Text(
-                            widget.widget.snapQuestions[widget.index]['choices']
-                                [3]['text'],
-                            style: TextStyle(
-                                fontSize: SizeConfig.safeBlockHorizontal * 5),
+                          width: SizeConfig.blockSizeHorizontal * 100,
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              left: SizeConfig.blockSizeHorizontal * 2,
+                            ),
+                            child: Text(
+                              widget.widget.snapQuestions[widget.index]['choices']
+                                  [3]['text'],
+                              style: TextStyle(
+                                  fontSize: SizeConfig.safeBlockHorizontal * 5,
+                                  color:isDropTapped4 ?  Color.fromRGBO(42, 92, 157, 1.0) : Colors.black),
+                            ),
                           ),
                         ),
                       ),
@@ -126,6 +194,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
                   ),
                 ),
                 contentBackgroundColor: Colors.white,
+                contentPadding: EdgeInsets.all(0),
               ),
             ),
           ),
@@ -135,13 +204,20 @@ class _DropdownWidgetState extends State<DropdownWidget> {
     );
   }
 
+
   onTap1() {
     setState(() {
       isDropTapped1 = true;
       isDropTapped2 = false;
       isDropTapped3 = false;
       isDropTapped4 = false;
+      textDropdown = widget.widget.snapQuestions[widget.index]['choices']
+      [0]['text'];
     });
+    Timer(Duration(milliseconds: 200), () {
+      _controller.collapse();
+    });
+
   }
 
   onTap2() {
@@ -150,6 +226,11 @@ class _DropdownWidgetState extends State<DropdownWidget> {
       isDropTapped2 = true;
       isDropTapped3 = false;
       isDropTapped4 = false;
+      textDropdown = widget.widget.snapQuestions[widget.index]['choices']
+      [1]['text'];
+    });
+    Timer(Duration(milliseconds: 200), () {
+      _controller.collapse();
     });
   }
 
@@ -159,6 +240,11 @@ class _DropdownWidgetState extends State<DropdownWidget> {
       isDropTapped2 = false;
       isDropTapped3 = true;
       isDropTapped4 = false;
+      textDropdown = widget.widget.snapQuestions[widget.index]['choices']
+      [2]['text'];
+    });
+    Timer(Duration(milliseconds: 200), () {
+      _controller.collapse();
     });
   }
 
@@ -168,6 +254,11 @@ class _DropdownWidgetState extends State<DropdownWidget> {
       isDropTapped2 = false;
       isDropTapped3 = false;
       isDropTapped4 = true;
+      textDropdown = widget.widget.snapQuestions[widget.index]['choices']
+      [3]['text'];
+    });
+    Timer(Duration(milliseconds: 200), () {
+      _controller.collapse();
     });
   }
 
@@ -188,10 +279,6 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         widget.widget.username,
         widget.widget.snapQuestions[widget.index]['choices'][0]['text'],
         widget.widget.snapQuestions[widget.index]['title']);
-    offlineAnswers.add(widget.widget.snapQuestions[widget.index]['choices'][0]
-            ['text'] +
-        '(+)' +
-        widget.widget.snapQuestions[widget.index]['title']);
     widget.refresh();
   }
 
@@ -201,10 +288,6 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         context,
         widget.widget.username,
         widget.widget.snapQuestions[widget.index]['choices'][1]['text'],
-        widget.widget.snapQuestions[widget.index]['title']);
-    offlineAnswers.add(widget.widget.snapQuestions[widget.index]['choices'][1]
-            ['text'] +
-        '(+)' +
         widget.widget.snapQuestions[widget.index]['title']);
     widget.refresh();
   }
@@ -216,10 +299,6 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         widget.widget.username,
         widget.widget.snapQuestions[widget.index]['choices'][2]['text'],
         widget.widget.snapQuestions[widget.index]['title']);
-    offlineAnswers.add(widget.widget.snapQuestions[widget.index]['choices'][2]
-            ['text'] +
-        '(+)' +
-        widget.widget.snapQuestions[widget.index]['title']);
     widget.refresh();
   }
 
@@ -229,10 +308,6 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         context,
         widget.widget.username,
         widget.widget.snapQuestions[widget.index]['choices'][3]['text'],
-        widget.widget.snapQuestions[widget.index]['title']);
-    offlineAnswers.add(widget.widget.snapQuestions[widget.index]['choices'][3]
-            ['text'] +
-        '(+)' +
         widget.widget.snapQuestions[widget.index]['title']);
     widget.refresh();
   }
@@ -255,7 +330,8 @@ Widget expansionButton(Function onPressed) {
       child: Center(
           child: Text(
         'Next',
-        style: TextStyle(color: Colors.white),
+        style: TextStyle(
+            color: Colors.white, fontSize: SizeConfig.safeBlockHorizontal * 5),
       )),
     ),
   );
