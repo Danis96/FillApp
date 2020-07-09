@@ -9,6 +9,7 @@ class PreviewSingleImageAnswer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     List<dynamic> list = clickedAnswer.split('(+)');
     String text = list[0];
     String url = list[1];

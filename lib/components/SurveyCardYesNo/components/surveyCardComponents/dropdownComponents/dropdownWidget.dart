@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/dropdownComponents/previewDropdown.dart';
+import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/utils/size_config.dart';
@@ -44,10 +46,10 @@ class _DropdownWidgetState extends State<DropdownWidget> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Container(
+    return  Container(
       child: Stack(
         children: <Widget>[
-          Container(
+         isSummary ? PreviewDropdown() :  Container(
             color: Colors.white,
             alignment: Alignment.center,
             width: SizeConfig.blockSizeHorizontal * 100,
@@ -198,7 +200,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
               ),
             ),
           ),
-          expansionButton(submitDropdown),
+          isSummary ? EmptyContainer() : expansionButton(submitDropdown),
         ],
       ),
     );
@@ -263,6 +265,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
   }
 
   submitDropdown() {
+    textDropdown = 'Drop Down List';
     isDropTapped1
         ? saveDrop1()
         : isDropTapped2
@@ -279,6 +282,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         widget.widget.username,
         widget.widget.snapQuestions[widget.index]['choices'][0]['text'],
         widget.widget.snapQuestions[widget.index]['title']);
+       offlineAnswers.add(widget.widget.snapQuestions[widget.index]['choices'][0]['text']);
     widget.refresh();
   }
 
@@ -289,6 +293,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         widget.widget.username,
         widget.widget.snapQuestions[widget.index]['choices'][1]['text'],
         widget.widget.snapQuestions[widget.index]['title']);
+    offlineAnswers.add(widget.widget.snapQuestions[widget.index]['choices'][1]['text']);
     widget.refresh();
   }
 
@@ -299,6 +304,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         widget.widget.username,
         widget.widget.snapQuestions[widget.index]['choices'][2]['text'],
         widget.widget.snapQuestions[widget.index]['title']);
+    offlineAnswers.add(widget.widget.snapQuestions[widget.index]['choices'][2]['text']);
     widget.refresh();
   }
 
@@ -309,6 +315,7 @@ class _DropdownWidgetState extends State<DropdownWidget> {
         widget.widget.username,
         widget.widget.snapQuestions[widget.index]['choices'][3]['text'],
         widget.widget.snapQuestions[widget.index]['title']);
+    offlineAnswers.add(widget.widget.snapQuestions[widget.index]['choices'][3]['text']);
     widget.refresh();
   }
 }

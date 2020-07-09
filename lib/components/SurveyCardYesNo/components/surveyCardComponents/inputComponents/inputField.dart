@@ -14,7 +14,7 @@ class InputField extends StatelessWidget {
   Widget build(BuildContext context) {
     isSummary
         ? answerController.text = clickedAnswer
-        : answerController.text = '';
+        : answerController.text;
     return Container(
       width: ScreenUtil.instance.setWidth(327.0),
       height: ScreenUtil.instance.setWidth(65.0),
@@ -22,6 +22,7 @@ class InputField extends StatelessWidget {
       child: TextFormField(
         onTap: () => null,
         onFieldSubmitted: (input) {
+          answerController.text = input;
           print(input);
         },
         readOnly: isSummary ? true : false,

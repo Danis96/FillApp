@@ -21,6 +21,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/summaryContain
 import 'package:fillproject/components/SurveyCardYesNo/components/summaryTitleContainer.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/totalSar.dart';
 import 'package:fillproject/components/constants/myColor.dart';
+import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
@@ -68,6 +69,7 @@ class _SummaryState extends State<Summary> {
   void initState() {
     super.initState();
     isOnSummary = true;
+    isSummary = true;
   }
 
   @override
@@ -156,16 +158,54 @@ class _SummaryState extends State<Summary> {
   }
 
   Future<bool> _onWillPop() async {
-    offlineAnswers = [];
-    String listName;
-    listName = widget.surveyDoc.name;
-    var prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('$listName', []);
-//    setState(() {
-//      isSummary = false;
-//      isOnSummary = false;
-//      isFutureDone = false;
-//    });
-    print('Dje ces');
+    return showDialog(
+        context: context,
+        barrierDismissible: false, // user must tap button!
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Leave Summary?'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text('If you choose Confirm you will leave Summary'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              RaisedButton(
+                child: Text('Cancel'),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                },
+              ),
+              RaisedButton(
+                child: Text('Confirm'),
+                onPressed: () async {
+                  offlineAnswers = [];
+                  String listName;
+                  listName = widget.surveyDoc.name;
+                  var prefs = await SharedPreferences.getInstance();
+                  prefs.setStringList('$listName', []);
+                  setState(() {
+                    isSummary = false;
+                    isOnSummary = false;
+                    isFutureDone = false;
+                  });
+                  Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (_) => SurveyPage(
+                      arguments: PasswordArguments(
+                        email: widget.arguments.email,
+                        username: widget.arguments.username,
+                        password: widget.arguments.password,
+                        phone: widget.arguments.phone,
+                      ),
+                    )
+                  ));
+                },
+              ),
+            ],
+          );
+        },
+    );
   }
 }

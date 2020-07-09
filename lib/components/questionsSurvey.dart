@@ -5,7 +5,7 @@ class QuestionsForSurvey {
       "number_of_questions": 14,
       "sar_total": 80,
       "target": 1000,
-      "level": 5,
+      "level": 2,
       "users_completed": [],
       "list_of_username_answers": [],
       "list_of_usernames_that_gave_answers": [],
