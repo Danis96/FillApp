@@ -38,7 +38,7 @@ DocumentSnapshot snap;
 int isAnonymous, usersSars;
 bool isUserInDB = true, isReadOnly = false;
 Key key = UniqueKey();
-String cc;
+String cc, dob;
 
 class BottomNavigationBarController extends StatefulWidget {
   final PasswordArguments arguments;
@@ -87,6 +87,7 @@ class _BottomNavigationBarControllerState
                 phoneGlobal = snap.data['phone'];
                 usersSars = snap.data['sar'];
                 cc = snap.data['cc'];
+                dob = snap.data['date_of_birth'];
                 return EmptyContainer();
               });
         }
@@ -125,19 +126,19 @@ class _BottomNavigationBarControllerState
     /// user registered
     else if (isAnonymous == 0) {
       /// if user is registered + have sars + profile not completed
-      if ((usersSars >= 100 || saroviOffline >= 100) && cc == '') {
+      if ((usersSars >= 100 || saroviOffline >= 100) && dob == '') {
         setState(() {
           btnText = AppLocalizations.of(context).translate('completeProfile');
         });
 
         /// if user is registered + have sars + profile completed
-      } else if ((usersSars >= 100 || saroviOffline >= 100) && cc != '') {
+      } else if ((usersSars >= 100 || saroviOffline >= 100) && dob != '') {
         setState(() {
           btnText = AppLocalizations.of(context).translate('transfer');
         });
 
         /// if user is registered + no sars + not profile completed
-      } else if ((usersSars < 100 || saroviOffline < 100) && cc != '') {
+      } else if ((usersSars < 100 || saroviOffline < 100) && dob != '') {
         setState(() {
           btnText =
               AppLocalizations.of(context).translate('transferAfter100SAR');

@@ -27,34 +27,43 @@ class _MySplashScreenState extends State<MySplashScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return new SplashScreen(
-      seconds: 2,
-      navigateAfterSeconds: new LanguageScreen(),
-//      title: new Text(
-//        MyText().fill,
-//        style: new TextStyle(
-//            fontSize: 70.0, color: MyColor().white, fontFamily: roboto),
-//      ),
-    image: Image(
-        image: AssetImage('assets/images/fillSplashSlogo.png'),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          tileMode: TileMode.clamp,
+          colors: [
+            Color.fromRGBO(42, 92, 157, 1.0),
+            Color.fromRGBO(47, 150, 126, 1.0),
+          ],
+        ),
       ),
-      gradientBackground:LinearGradient(
-        begin: Alignment.topCenter,
-        end: Alignment.bottomCenter,
-        tileMode: TileMode.clamp,
-        colors: [
-          Color.fromRGBO(42, 92, 157, 1.0),
-          Color.fromRGBO(47, 150, 126, 1.0),
-        ],
-      ),
-      photoSize: SizeConfig.safeBlockHorizontal * 50,
-      styleTextUnderTheLoader: new TextStyle(),
-      onClick: () => new LanguageScreen(),
-      loaderColor: Colors.transparent,
-      loadingText: new Text(
-        MyText().builtBy,
-        style: new TextStyle(
-            fontSize: 23, color: MyColor().white, fontFamily: roboto),
+//      margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 15),
+      child: new SplashScreen(
+        seconds: 2,
+        navigateAfterSeconds: new LanguageScreen(),
+      image: Image(
+          image: AssetImage('assets/images/fillSplashSlogo.png'),
+        ),
+        gradientBackground:LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          tileMode: TileMode.clamp,
+          colors: [
+            Color.fromRGBO(42, 92, 157, 1.0),
+            Color.fromRGBO(47, 150, 126, 1.0),
+          ],
+        ),
+        photoSize: MediaQuery.of(context).size.width < 400 ? SizeConfig.safeBlockHorizontal * 40 : SizeConfig.safeBlockHorizontal * 30,
+        styleTextUnderTheLoader: new TextStyle(),
+        onClick: () => new LanguageScreen(),
+        loaderColor: Colors.transparent,
+        loadingText: new Text(
+          MyText().builtBy,
+          style: new TextStyle(
+              fontSize: 23, color: MyColor().white, fontFamily: roboto),
+        ),
       ),
     );
   }

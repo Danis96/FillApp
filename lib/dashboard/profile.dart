@@ -22,8 +22,6 @@ import 'package:flutter/material.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:credit_card_validate/credit_card_validate.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 FocusNode nameFocus;
 FocusNode dateFocus;
@@ -722,6 +720,8 @@ class _ProfileState extends State<Profile> {
                               key: UniqueKey(),
                               height: ScreenUtil.instance.setHeight(265.0),
                               child: CupertinoDatePicker(
+//                                maximumYear: DateTime.now().year,
+                                maximumDate: DateTime.now(),
                                 mode: CupertinoDatePickerMode.date,
                                 initialDateTime: dateOfBirth2,
                                 onDateTimeChanged: (date) {
@@ -808,6 +808,7 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressed() {
+    print('Name: ' + name + 'USERNAME: ' + usersName);
     print('BTN TEXT: ' + btnText);
     if (btnText == 'Complete profile' || btnText == 'إكمال الملف الشخصي') {
       if (name == '' || regexSpace.hasMatch(name) == false) {

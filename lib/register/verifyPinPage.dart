@@ -162,7 +162,7 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
                   selectedColor: fieldColor || codeError
                       ? MyColor().error
                       : MyColor().white,
-                  backgroundColor: MyColor().black,
+                  backgroundColor: Color.fromRGBO(74, 85, 98, 1.0),
                   borderWidth: ScreenUtil.instance.setWidth(1),
                   controller: codeController,
                   onChanged: (value) => {

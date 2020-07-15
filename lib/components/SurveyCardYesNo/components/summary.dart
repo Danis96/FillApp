@@ -25,6 +25,7 @@ import 'package:fillproject/dashboard/survey.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:fillproject/routes/routeArguments.dart';
+import 'package:fillproject/routes/routeConstants.dart';
 import 'package:fillproject/utils/screenUtils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -172,13 +173,13 @@ class _SummaryState extends State<Summary> {
               ),
             ),
             actions: <Widget>[
-              RaisedButton(
+              FlatButton(
                 child: Text('Cancel'),
                 onPressed: () async {
                   Navigator.of(context).pop();
                 },
               ),
-              RaisedButton(
+              FlatButton(
                 child: Text('Confirm'),
                 onPressed: () async {
                   offlineAnswers = [];
@@ -191,16 +192,12 @@ class _SummaryState extends State<Summary> {
                     isOnSummary = false;
                     isFutureDone = false;
                   });
-                  Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (_) => SurveyPage(
+                  Navigator.of(context).pushNamed(NavBar,
                       arguments: PasswordArguments(
-                        email: widget.arguments.email,
-                        username: widget.arguments.username,
-                        password: widget.arguments.password,
-                        phone: widget.arguments.phone,
-                      ),
-                    )
-                  ));
+                          email: widget.arguments.email,
+                          password: widget.arguments.password,
+                          phone: widget.arguments.phone,
+                          username: widget.arguments.username));
                 },
               ),
             ],
@@ -209,3 +206,15 @@ class _SummaryState extends State<Summary> {
     );
   }
 }
+
+
+///  String tags = 'audi,bmw,sasa,sasasa,sasasas,';
+///  tags.split(',');
+/// List<dynamic> tagsFromDB = [];
+/// String tag;
+
+
+
+
+
+
