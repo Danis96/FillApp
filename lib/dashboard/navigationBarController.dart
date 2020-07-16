@@ -38,7 +38,7 @@ DocumentSnapshot snap;
 int isAnonymous, usersSars;
 bool isUserInDB = true, isReadOnly = false;
 Key key = UniqueKey();
-String cc, dob;
+String cc, dob, nameAndS;
 
 class BottomNavigationBarController extends StatefulWidget {
   final PasswordArguments arguments;

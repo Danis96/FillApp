@@ -32,7 +32,7 @@ FocusNode ccFocus;
 
 class Profile extends StatefulWidget {
   final PasswordArguments arguments;
-  final String btnText;
+  final String btnText, nameAndS;
   final bool isReadOnly, showData;
   final Function refreshNavbar, settingStates;
   final DocumentSnapshot snap2;
@@ -47,6 +47,7 @@ class Profile extends StatefulWidget {
     this.refreshNavbar,
     this.snap2,
     this.isAnonymous,
+    this.nameAndS,
   }) : super(key: key);
 
   @override
@@ -63,7 +64,7 @@ var maskTextInputFormatterDate = MaskTextInputFormatter(mask: '##/##');
 var maskTextInputFormatterCC = MaskTextInputFormatter(mask: '###');
 var maskTextInputFormatterDOB = MaskTextInputFormatter(mask: '##.##.####.');
 
-String name, dateOfBirth, email, creditCard, date, cc;
+
 Key key = UniqueKey();
 bool isSar = false,
     onlyOnce = false,
@@ -79,6 +80,7 @@ DocumentSnapshot snap;
 
 class _ProfileState extends State<Profile> {
   int usersSarovi, profileAnonym, _btnCounter = 0;
+  String name, dateOfBirth, email, creditCard, date, cc;
   bool isButtonComplete = false,
       isButtonCompleteName = false,
       isButtonCompleteDOB = false,
@@ -110,10 +112,6 @@ class _ProfileState extends State<Profile> {
     creditFocus = new FocusNode();
     expireFocus = new FocusNode();
     ccFocus = new FocusNode();
-    if(usersName != '' || usersName != null) {
-      isButtonComplete = true;
-      isButtonCompleteName = true;
-    }
   }
 
   @override
@@ -164,6 +162,11 @@ class _ProfileState extends State<Profile> {
                               snapshot.data[index].data['is_anonymous'];
                           usersSarovi = snap.data['sar'];
                           usersName = snap.data['name_and_surname'];
+                          print('USERS NAME $usersName');
+                          if(usersName != null) {
+                            isButtonComplete = true;
+                          }
+                          print(isButtonComplete);
                           usersDOB = snap.data['date_of_birth'];
                           usersEmail = snap.data['email_profile'];
                           usersCard = snap.data['card_number'];
@@ -811,7 +814,7 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressed() {
-    print('Name: ' + name + 'USERNAME: ' + usersName);
+//    print('Name: ' + name + 'USERNAME: ' + usersName);
     print('BTN TEXT: ' + btnText);
     if (btnText == 'Complete profile' || btnText == 'إكمال الملف الشخصي') {
       if (name == '' || regexSpace.hasMatch(name) == false) {
