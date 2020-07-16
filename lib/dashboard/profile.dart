@@ -720,7 +720,6 @@ class _ProfileState extends State<Profile> {
                               key: UniqueKey(),
                               height: ScreenUtil.instance.setHeight(265.0),
                               child: CupertinoDatePicker(
-//                                maximumYear: DateTime.now().year,
                                 maximumDate: DateTime.now(),
                                 mode: CupertinoDatePickerMode.date,
                                 initialDateTime: dateOfBirth2,

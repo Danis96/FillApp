@@ -18,15 +18,15 @@ class TransferWithIcon extends StatelessWidget {
           Container(
             child: Text(AppLocalizations.of(context).translate('transwerWith'), style: TextStyle(fontSize: ScreenUtil.instance.setSp(14.0)),),
           ),
-          Container(
-//            height: ScreenUtil.instance.setHeight(27.0),
-//            width: ScreenUtil.instance.setWidth(81.0),
-            margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(20.0)),
-            child: Image.asset(transferImage,
-            width: SizeConfig.safeBlockHorizontal * 12,
-            height: SizeConfig.safeBlockVertical * 7,
-            ),
-          ),
+//          Container(
+////            height: ScreenUtil.instance.setHeight(27.0),
+////            width: ScreenUtil.instance.setWidth(81.0),
+//            margin: EdgeInsets.only(left: ScreenUtil.instance.setWidth(20.0)),
+//            child: Image.asset(transferImage,
+//            width: SizeConfig.safeBlockHorizontal * 12,
+//            height: SizeConfig.safeBlockVertical * 7,
+//            ),
+//          ),
         ],
       ),
     );
