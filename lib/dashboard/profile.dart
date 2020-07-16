@@ -110,6 +110,10 @@ class _ProfileState extends State<Profile> {
     creditFocus = new FocusNode();
     expireFocus = new FocusNode();
     ccFocus = new FocusNode();
+    if(usersName != '' || usersName != null) {
+      isButtonComplete = true;
+      isButtonCompleteName = true;
+    }
   }
 
   @override
