@@ -23,6 +23,7 @@ import 'package:fillproject/components/myValidation.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/dashboard/navigationBarController.dart';
 import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
+import 'package:fillproject/globals.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/login/sendEmailPage.dart';
@@ -59,7 +60,11 @@ class _LoginPageState extends State<LoginPage> {
           icon: Icon(Icons.arrow_back_ios),
           color: MyColor().white,
           onPressed: () {
-            Navigator.of(context).push(CardAnimationTween(widget: SignUp()));
+            isFromProfile
+                ? Navigator.of(context).pop()
+                : Navigator.of(context).push(CardAnimationTween(
+              widget: SignUp(),
+            ));
           },
         ),
       ),
@@ -115,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                               inherit: true,
                               textBaseline: TextBaseline.ideographic),
                           contentPadding: new EdgeInsets.symmetric(
-                              vertical: 25.0, horizontal: 35.0),
+                              vertical: 20.0, horizontal: 35.0),
                           labelText:
                               AppLocalizations.of(context).translate('email'),
                           labelStyle: TextStyle(
@@ -171,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: InputDecoration(
                           hasFloatingPlaceholder: false,
                           contentPadding: new EdgeInsets.symmetric(
-                              vertical: 25.0, horizontal: 35.0),
+                              vertical: 20.0, horizontal: 35.0),
                           labelText: AppLocalizations.of(context)
                               .translate('password'),
                           labelStyle: TextStyle(
@@ -348,7 +353,11 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<bool> _onWillPop() async {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) => SignUp()));
+    isFromProfile
+        ? Navigator.of(context).pop()
+        : Navigator.of(context).push(CardAnimationTween(
+      widget: SignUp(),
+    ));
     return EmptyContainer() ?? true;
   }
 }

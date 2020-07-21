@@ -149,7 +149,7 @@ class _PasswordPageState extends State<PasswordPage> {
                           decoration: InputDecoration(
                             hasFloatingPlaceholder: false,
                             contentPadding: new EdgeInsets.symmetric(
-                                vertical: ScreenUtil.instance.setWidth(25.0),
+                                vertical: ScreenUtil.instance.setWidth(20.0),
                                 horizontal: ScreenUtil.instance.setWidth(35.0)),
                             labelText: AppLocalizations.of(context)
                                 .translate('password'),

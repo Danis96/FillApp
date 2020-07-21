@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fillproject/components/bigCircle.dart';
+import 'package:fillproject/components/constants/fontsConstants.dart';
 import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/emptyCont.dart';
 import 'package:fillproject/components/mySnackbar.dart';
@@ -63,7 +64,6 @@ var maskTextInputFormatterCard =
 var maskTextInputFormatterDate = MaskTextInputFormatter(mask: '##/##');
 var maskTextInputFormatterCC = MaskTextInputFormatter(mask: '###');
 var maskTextInputFormatterDOB = MaskTextInputFormatter(mask: '##.##.####.');
-
 
 Key key = UniqueKey();
 bool isSar = false,
@@ -163,7 +163,7 @@ class _ProfileState extends State<Profile> {
                           usersSarovi = snap.data['sar'];
                           usersName = snap.data['name_and_surname'];
                           print('USERS NAME $usersName');
-                          if(usersName != null) {
+                          if (usersName != null) {
                             isButtonComplete = true;
                           }
                           print(isButtonComplete);
@@ -225,7 +225,7 @@ class _ProfileState extends State<Profile> {
                           counterText: '',
                           hasFloatingPlaceholder: false,
                           contentPadding: new EdgeInsets.symmetric(
-                              vertical: 25.0, horizontal: 35.0),
+                              vertical: 20.0, horizontal: 35.0),
                           labelStyle: TextStyle(
                               color: MyColor().black,
                               fontSize: ScreenUtil.instance.setSp(16.0)),
@@ -267,7 +267,8 @@ class _ProfileState extends State<Profile> {
                             name = input;
                             isButtonComplete = true;
                             isButtonCompleteName = true;
-                            print('isBTNCOMPLETE: ' + isButtonComplete.toString());
+                            print('isBTNCOMPLETE: ' +
+                                isButtonComplete.toString());
                           });
                           nameFocus.addListener(() {
                             print("Has focus: ${nameFocus.hasFocus}");
@@ -277,8 +278,8 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                     Container(
-                        width: SizeConfig.blockSizeHorizontal * 78,
-                      height:SizeConfig.blockSizeVertical * 7,
+                      width: SizeConfig.blockSizeHorizontal * 78,
+                      height: SizeConfig.blockSizeVertical * 7,
                       margin: EdgeInsets.only(
                         left: ScreenUtil.instance.setWidth(47.0),
                         top: SizeConfig.blockSizeVertical * 2.5,
@@ -673,11 +674,44 @@ class _ProfileState extends State<Profile> {
                     ? RegisterButtonProfile(onPressedRegister)
                     : EmptyContainer(),
               ),
+              Container(
+                child: Container(
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        top: SizeConfig.blockSizeVertical * 0,
+                        bottom: ScreenUtil.instance.setWidth(10.0)),
+                    width: ScreenUtil.instance.setWidth(303.0),
+                    height: ScreenUtil.instance.setWidth(58.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(29)),
+                        color: MyColor().white),
+                    child: RaisedButton(
+                        color: MyColor().black,
+                        elevation: 1,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(28.0),
+                        ),
+                        child: Text('Login',
+                            style: TextStyle(
+                                color: MyColor().white,
+                                fontFamily: arabic,
+                                fontStyle: FontStyle.normal,
+                                fontSize: ScreenUtil.instance.setSp(18.0)),
+                            textAlign: TextAlign.center),
+                        onPressed: () => onLogin()),
+                  ),
+                ),
+              ),
             ],
           )),
         ]),
       ),
     );
+  }
+
+  onLogin() {
+    isFromProfile = true;
+    FirebaseCrud().userLogin(context);
   }
 
   onTapFieldAnonymous() {
@@ -808,6 +842,7 @@ class _ProfileState extends State<Profile> {
     });
   }
 
+
   onPressedRegister() {
     isFromProfile = true;
     FirebaseCrud().userRegister(context, widget.arguments.username);
@@ -880,7 +915,7 @@ class _ProfileState extends State<Profile> {
 //          });
 //        });
 //      }
-    else {
+      else {
         completeProfile();
       }
     } else if (btnText == 'Transfer' || btnText == 'تحويل') {

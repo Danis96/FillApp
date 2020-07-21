@@ -213,4 +213,10 @@ class FirebaseCrud {
       ),
     );
   }
+  /// metoda koja se poziva na login btn na profilu
+  userLogin(BuildContext context) {
+    Navigator.of(context).push(CardAnimationTween(
+      widget: LoginPage(),
+    ));
+  }
 }

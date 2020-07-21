@@ -13,7 +13,7 @@ class RegisterButtonProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-                margin: EdgeInsets.only(bottom: 30.0, top: 30.0),
+                margin: EdgeInsets.only(bottom: 20.0, top: 30.0),
                 width: ScreenUtil.instance.setWidth(303.0),
                 height: ScreenUtil.instance.setWidth(58.0),
                 child: RaisedButton(

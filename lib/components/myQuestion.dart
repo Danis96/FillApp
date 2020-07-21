@@ -28,12 +28,16 @@ class MyQuestion extends StatelessWidget {
         alignment: Alignment.centerLeft,
         width: ScreenUtil.instance.setWidth(245.0),
         height: SizeConfig.blockSizeVertical * containerHeight,
-        child: Text(question,
-            style: TextStyle(
-                color: isCompleted ? MyColor().black : MyColor().white,
-                fontWeight: FontWeight.w700,
-                fontFamily: arabic,
-                fontStyle: FontStyle.normal,
-                fontSize: ScreenUtil.instance.setSp(20.0))));
+        child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+          Text(question,
+              style: TextStyle(
+                  color: isCompleted ? MyColor().black : MyColor().white,
+                  fontWeight: FontWeight.w700,
+                  fontFamily: arabic,
+                  fontStyle: FontStyle.normal,
+                  fontSize: ScreenUtil.instance.setSp(20.0))),
+        ]));
   }
 }

@@ -199,7 +199,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   hasFloatingPlaceholder: false,
                                   contentPadding: new EdgeInsets.symmetric(
                                       vertical:
-                                          ScreenUtil.instance.setWidth(25.0),
+                                          ScreenUtil.instance.setWidth(20.0),
                                       horizontal:
                                           ScreenUtil.instance.setWidth(35.0)),
                                   labelText: AppLocalizations.of(context)
@@ -260,7 +260,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             decoration: InputDecoration(
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
-                                  vertical: ScreenUtil.instance.setWidth(25.0),
+                                  vertical: ScreenUtil.instance.setWidth(20.0),
                                   horizontal:
                                       ScreenUtil.instance.setWidth(35.0)),
                               prefix: Text(

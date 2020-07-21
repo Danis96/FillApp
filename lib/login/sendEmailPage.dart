@@ -107,7 +107,7 @@ class EmailResetPage extends StatelessWidget {
                     decoration: InputDecoration(
                       hasFloatingPlaceholder: false,
                       contentPadding: new EdgeInsets.symmetric(
-                          vertical: 25.0, horizontal: 35.0),
+                          vertical: 20.0, horizontal: 35.0),
                       labelText: AppLocalizations.of(context).translate('email'),
                       labelStyle: TextStyle(color: MyColor().white, fontSize: ScreenUtil.instance.setWidth(17.0)),
                       enabledBorder: OutlineInputBorder(
