@@ -25,7 +25,6 @@ class MySplashScreen extends StatefulWidget {
 }
 
 class _MySplashScreenState extends State<MySplashScreen> {
-//  final PushNotification _pushNotification = PushNotification();
   final FirebaseMessaging _fcm = FirebaseMessaging();
 
   @override

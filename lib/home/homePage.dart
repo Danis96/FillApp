@@ -72,7 +72,7 @@ class _SignUpState extends State<SignUp> {
             onWillPop: _onWillPop,
             child: Center(
               child: Container(
-                margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 33),
+                margin: EdgeInsets.only(top: SizeConfig.blockSizeVertical * 30),
                 child: Column(
                   children: <Widget>[
                     Center(
