@@ -14,6 +14,7 @@ import 'package:fillproject/components/constants/myColor.dart';
 import 'package:fillproject/components/constants/myText.dart';
 import 'package:fillproject/home/languageScreen.dart';
 import 'package:fillproject/utils/size_config.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:splashscreen/splashscreen.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +25,35 @@ class MySplashScreen extends StatefulWidget {
 }
 
 class _MySplashScreenState extends State<MySplashScreen> {
+//  final PushNotification _pushNotification = PushNotification();
+  final FirebaseMessaging _fcm = FirebaseMessaging();
+
+  @override
+  void initState() {
+    super.initState();
+    _fcm.configure(
+      /// called when the app is in the foreground
+      onMessage: (Map<String,dynamic> message) async {
+        print('Message $message');
+      },
+        /// called when the app is closed completely
+      onLaunch: (Map<String,dynamic> message) async {
+      print('Message $message');
+      },
+        /// called when the app is in the bacgkround
+      onResume: (Map<String,dynamic> message) async {
+        print('Message $message');
+      }
+    );
+
+    _fcm.requestNotificationPermissions(const IosNotificationSettings(sound: true, alert: true, badge: true));
+    _fcm.onIosSettingsRegistered.listen((IosNotificationSettings settings) {
+       print('Settings registered: $settings');
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
