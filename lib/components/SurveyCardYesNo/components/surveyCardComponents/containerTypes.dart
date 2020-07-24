@@ -6,6 +6,7 @@ import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComp
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/orderWidget.dart';
 import 'package:fillproject/components/SurveyCardYesNo/components/surveyCardComponents/yesNoWidget.dart';
 import 'package:fillproject/components/emptyCont.dart';
+import 'package:fillproject/models/Survey/surveyModel.dart';
 import 'package:flutter/material.dart';
 
 class ContainerTypes extends StatelessWidget {
@@ -15,6 +16,7 @@ class ContainerTypes extends StatelessWidget {
   final String type, branching, branchingChoice;
   var user;
   final List<dynamic> answers;
+  final Survey surveyDoc;
   ContainerTypes(
       {Key key,
       this.isCompleted,
@@ -28,6 +30,7 @@ class ContainerTypes extends StatelessWidget {
       this.type,
       this.user,
       this.branchingChoice,
+        this.surveyDoc,
       this.branching})
       : super(key: key);
 
@@ -82,6 +85,7 @@ class ContainerTypes extends StatelessWidget {
             number: number);
       case 'dropdown':
         return DropdownWidget(
+          surveyDoc: surveyDoc,
           widget: widget,
           index: index,
           number: number,

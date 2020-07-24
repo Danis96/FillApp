@@ -139,6 +139,7 @@ class _YesNoSurveyState extends State<SurveyCard>
                             question: widget.snapQuestions[index]['title'],
                           ),
                           ContainerTypes(
+                              surveyDoc: widget.surveyDoc,
                               widget: widget,
                               numberOfQuestions:
                                   widget.surveyDoc.numberOfQuestions,
