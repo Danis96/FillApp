@@ -27,6 +27,7 @@ import 'package:fillproject/firebaseMethods/firebaseCrud.dart';
 import 'package:fillproject/localization/app_localizations.dart';
 import 'package:fillproject/register/components/privacy.dart';
 import 'package:fillproject/register/components/terms.dart';
+import 'package:fillproject/register/emailAndDOB.dart';
 import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/screenUtils.dart';
@@ -96,10 +97,12 @@ class _PasswordPageState extends State<PasswordPage> {
           onPressed: () {
             Navigator.of(context).push(
               CardAnimationTween(
-                widget: VerifyPinPage(
+                widget: NameAndDOB(
                     arguments: RegisterArguments(
                       email: widget.arguments.email,
                         verId: widget.arguments.verId,
+                        nameAndUsername: widget.arguments.nameAndUsername,
+                        dateBirth: widget.arguments.dateBirth,
                         username: widget.arguments.username,
                         usernameSecond: widget.arguments.usernameSecond,
                         phone: widget.arguments.phone)),
@@ -291,11 +294,15 @@ class _PasswordPageState extends State<PasswordPage> {
               widget.arguments.email,
               widget.arguments.phone,
               widget.arguments.username,
+              widget.arguments.nameAndUsername,
+              widget.arguments.dateBirth,
               widget.arguments.usernameSecond,
               password,
               oldSar);
         } else {
           FirebaseCrud().createUser(
+              widget.arguments.nameAndUsername,
+              widget.arguments.dateBirth,
               widget.arguments.email,
               widget.arguments.phone,
               widget.arguments.username,

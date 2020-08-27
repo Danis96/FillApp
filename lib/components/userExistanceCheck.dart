@@ -24,7 +24,7 @@ class UserExistanceCheck extends StatelessWidget {
             return EmptyContainer();
           } else {
             isUserInDB = false;
-            FirebaseCrud().createUser('', '', username, '', 0, 1);
+            FirebaseCrud().createUser('','','', '', username, '', 0, 1);
             isUserInDB = true;
             return EmptyContainer();
           }

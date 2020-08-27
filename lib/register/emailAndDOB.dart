@@ -25,6 +25,7 @@ import 'package:fillproject/firebaseMethods/firebaseCheck.dart';
 import 'package:fillproject/globals.dart';
 import 'package:fillproject/home/homePage.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/register/passwordPage.dart';
 import 'package:fillproject/register/verifyPinPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
 import 'package:fillproject/utils/size_config.dart';
@@ -36,42 +37,30 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 String email;
 int _btnCounter = 0;
 
-class RegisterPage extends StatefulWidget {
-  final DidntRecievePinArguments arguments;
+class NameAndDOB extends StatefulWidget {
+  final RegisterArguments arguments;
 
-  RegisterPage({this.arguments});
+  NameAndDOB({this.arguments});
 
   @override
-  _RegisterPageState createState() => _RegisterPageState(arguments: arguments);
+  _NameAndDOBState createState() => _NameAndDOBState(arguments: arguments);
 }
 
-class _RegisterPageState extends State<RegisterPage> {
-  String phoneNo, smsCode, verificationId, username, name;
-  bool emailPostoji = false;
+class _NameAndDOBState extends State<NameAndDOB> {
 
-  final DidntRecievePinArguments arguments;
+  String name, date;
+  final RegisterArguments arguments;
 
-  _RegisterPageState({
+  _NameAndDOBState({
     this.arguments,
   });
 
-  populateReg() async {
-//    usernameController.text = widget.arguments.username;
-    phoneController.text = widget.arguments.phone;
-  }
 
-  @override
-  void initState() {
-    super.initState();
-    populateReg();
-  }
+
+
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  bool isLoggedIn = false, brPostoji = false, usernamePostoji = false;
-
-  TextEditingController phoneController = new TextEditingController();
-  TextEditingController usernameController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -83,49 +72,6 @@ class _RegisterPageState extends State<RegisterPage> {
       allowFontScaling: true,
     )..init(context);
 
-    Future<void> verifyPhone() async {
-      final PhoneCodeAutoRetrievalTimeout autoRetrieve = (String verId) {
-        this.verificationId = verId;
-      };
-
-      final PhoneCodeSent smsCodeSent = (String verId, [int forceCodeResend]) {
-        this.verificationId = verId;
-        Navigator.of(context).push(CardAnimationTween(
-            widget: VerifyPinPage(
-          arguments: RegisterArguments(
-              verId: verificationId,
-              username: usernameController.text,
-              usernameSecond: widget.arguments.username,
-              phone: phoneController.text,
-              email: usernameController.text),
-        )));
-      };
-
-      final PhoneVerificationCompleted verificationSuccess =
-          (AuthCredential user) {};
-
-      final PhoneVerificationFailed verificationFailed =
-          (AuthException exception) {
-        print('${exception.message}');
-      };
-
-      await FirebaseAuth.instance.verifyPhoneNumber(
-          phoneNumber: this.phoneNo,
-          timeout: const Duration(seconds: 5),
-          verificationCompleted: verificationSuccess,
-          verificationFailed: verificationFailed,
-          codeSent: smsCodeSent,
-          codeAutoRetrievalTimeout: autoRetrieve);
-    }
-
-    onFieldSubmitted1(BuildContext context) {
-      phoneNo = '+' +  phoneController.text;
-      final _formState = _formKey.currentState;
-      if (_formState.validate()) {
-        verifyPhone();
-      }
-      print(phoneNo);
-    }
 
     SizeConfig().init(context);
 
@@ -142,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
             isFromProfile
                 ? Navigator.of(context).pop()
                 : Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (_) => SignUp()));
+                .push(MaterialPageRoute(builder: (_) => SignUp()));
           },
         ),
       ),
@@ -163,26 +109,25 @@ class _RegisterPageState extends State<RegisterPage> {
                       children: <Widget>[
                         Center(
                             child: Padding(
-                          padding: EdgeInsets.only(
-                              top: ScreenUtil.instance.setWidth(5.0)),
-                          child: MyTextComponent(
-                              text: AppLocalizations.of(context)
-                                  .translate('registerAndStartMakingMoney')),
-                        )),
+                              padding: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(5.0)),
+                              child: MyTextComponent(
+                                  text: AppLocalizations.of(context)
+                                      .translate('registerAndStartMakingMoney')),
+                            )),
                         Center(
                             child: Padding(
-                          padding: EdgeInsets.only(
-                              top: ScreenUtil.instance.setWidth(61.0),
-                              bottom: ScreenUtil.instance.setWidth(20.0)),
-                          child: Text(
-                            '3 \n SAR',
-                            style: TextStyle(
-                                color: MyColor().white,
-                                fontWeight: FontWeight.w600,
-                                fontSize: ScreenUtil.instance.setSp(34)),
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
+                              padding: EdgeInsets.only(
+                                  top: ScreenUtil.instance.setWidth(61.0),
+                                  bottom: ScreenUtil.instance.setWidth(20.0)),
+                              child: Text(
+                                'Enter your name and date of birth',
+                                style: TextStyle(
+                                    color: MyColor().white,
+                                    fontSize: ScreenUtil.instance.setSp(20)),
+                                textAlign: TextAlign.center,
+                              ),
+                            )),
                         Container(
                             margin: EdgeInsets.only(
                                 bottom: ScreenUtil.instance.setWidth(20.0),
@@ -194,31 +139,30 @@ class _RegisterPageState extends State<RegisterPage> {
                                   top: ScreenUtil.instance.setWidth(20.0)),
                               child: TextFormField(
                                 enableSuggestions: false,
-                                controller: usernameController,
                                 decoration: InputDecoration(
                                   hasFloatingPlaceholder: false,
                                   contentPadding: new EdgeInsets.symmetric(
                                       vertical:
-                                          ScreenUtil.instance.setWidth(20.0),
+                                      ScreenUtil.instance.setWidth(20.0),
                                       horizontal:
-                                          ScreenUtil.instance.setWidth(35.0)),
+                                      ScreenUtil.instance.setWidth(35.0)),
                                   labelText: AppLocalizations.of(context)
-                                      .translate('email'),
+                                      .translate('name&surname'),
                                   labelStyle: TextStyle(
                                       color: MyColor().white,
                                       fontSize:
-                                          ScreenUtil.instance.setSp(16.0)),
+                                      ScreenUtil.instance.setSp(16.0)),
                                   enabledBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(33.5)),
                                     borderSide:
-                                        BorderSide(color: MyColor().white),
+                                    BorderSide(color: MyColor().white),
                                   ),
                                   focusedBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(33.5)),
                                     borderSide:
-                                        BorderSide(color: MyColor().white),
+                                    BorderSide(color: MyColor().white),
                                   ),
                                   focusedErrorBorder: OutlineInputBorder(
                                     borderRadius: BorderRadius.all(
@@ -236,12 +180,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                   ),
                                 ),
                                 style: TextStyle(color: MyColor().white),
-                                validator: (email) => MyValidation()
-                                    .validateEmail(email, _btnCounter,
-                                        usernamePostoji, context),
                                 onChanged: (input) {
                                   setState(() {
-                                    email = input;
+                                    name = input;
                                   });
                                 },
                               ),
@@ -256,42 +197,37 @@ class _RegisterPageState extends State<RegisterPage> {
                           child: TextFormField(
                             enableSuggestions: false,
                             keyboardType: TextInputType.number,
-                            controller: phoneController,
                             decoration: InputDecoration(
                               hasFloatingPlaceholder: false,
                               contentPadding: new EdgeInsets.symmetric(
                                   vertical: ScreenUtil.instance.setWidth(20.0),
                                   horizontal:
-                                      ScreenUtil.instance.setWidth(35.0)),
-                              prefix: Text(
-                                "+966",
-                                style: TextStyle(color: MyColor().white),
-                              ),
+                                  ScreenUtil.instance.setWidth(35.0)),
                               labelText: AppLocalizations.of(context)
-                                  .translate('966phoneNumber'),
+                                  .translate('dateOfBirth'),
                               labelStyle: TextStyle(
                                   color: MyColor().white,
                                   fontSize: ScreenUtil.instance.setSp(16.0)),
                               enabledBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
+                                BorderRadius.all(Radius.circular(33.5)),
                                 borderSide: BorderSide(color: MyColor().white),
                               ),
                               focusedBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
+                                BorderRadius.all(Radius.circular(33.5)),
                                 borderSide: BorderSide(color: MyColor().white),
                               ),
                               focusedErrorBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
+                                BorderRadius.all(Radius.circular(33.5)),
                                 borderSide: BorderSide(
                                   color: MyColor().error,
                                 ),
                               ),
                               errorBorder: OutlineInputBorder(
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(33.5)),
+                                BorderRadius.all(Radius.circular(33.5)),
                                 borderSide: BorderSide(
                                   color: MyColor().error,
                                 ),
@@ -299,28 +235,8 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                             onChanged: (input) {
                               setState(() {
-                                phoneNo = input;
-                                //phoneNo = '966' + input;
+                                date = input;
                               });
-                            },
-                            validator: (phone) => MyValidation()
-                                .validatePhone(phone, brPostoji, context),
-                            onFieldSubmitted: (value) async {
-                              try {
-                                final result =
-                                    await InternetAddress.lookup('google.com');
-                                if (result.isNotEmpty &&
-                                    result[0].rawAddress.isNotEmpty) {
-                                  onFieldSubmitted1(context);
-                                }
-                              } on SocketException catch (_) {
-                                MySnackbar().showSnackbar(
-                                    AppLocalizations.of(context)
-                                        .translate('noIternent'),
-                                    context,
-                                    AppLocalizations.of(context)
-                                        .translate('undo'));
-                              }
                             },
                             style: TextStyle(color: MyColor().white),
                           ),
@@ -339,7 +255,19 @@ class _RegisterPageState extends State<RegisterPage> {
                                       'google.com');
                                   if (result.isNotEmpty &&
                                       result[0].rawAddress.isNotEmpty) {
-                                    onFieldSubmitted1(context);
+                                    Navigator.of(context).push(
+                                      CardAnimationTween(
+                                        widget: PasswordPage(
+                                            arguments: RegisterArguments(
+                                                email: widget.arguments.email,
+                                                verId: widget.arguments.verId,
+                                                nameAndUsername: name,
+                                                dateBirth: date,
+                                                username: widget.arguments.username,
+                                                usernameSecond: widget.arguments.usernameSecond,
+                                                phone: widget.arguments.phone)),
+                                      ),
+                                    );
                                   }
                                 } on SocketException catch (_) {
                                   MySnackbar().showSnackbar(
@@ -356,68 +284,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                   style: TextStyle(
                                       fontSize: ScreenUtil.instance.setSp(18))),
                             )),
-
-                        /// PROVJERA DA LI POSTOJI USERNAME ILI NUMBER
-                        Column(
-                          children: <Widget>[
-                            FutureBuilder(
-                              future: FirebaseCheck()
-                                  .doesNumberAlreadyExist(phoneController.text),
-                              builder: (context, AsyncSnapshot<bool> result) {
-                                if (!result.hasData) {
-                                  return EmptyContainer();
-                                }
-                                if (result.data) {
-                                  brPostoji = true;
-                                  return EmptyContainer();
-                                } else {
-                                  brPostoji = false;
-                                  return EmptyContainer();
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            FutureBuilder(
-                              future: FirebaseCheck().doesNameAlreadyExist(
-                                  usernameController.text),
-                              builder: (context, AsyncSnapshot<bool> result) {
-                                if (!result.hasData) {
-                                  return EmptyContainer();
-                                }
-                                if (result.data) {
-                                  usernamePostoji = true;
-                                  return EmptyContainer();
-                                } else {
-                                  usernamePostoji = false;
-                                  return EmptyContainer();
-                                }
-                              },
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            FutureBuilder(
-                              future:
-                                  FirebaseCheck().doesEmailAlreadyExist(usernameController.text),
-                              builder: (context, AsyncSnapshot<bool> result) {
-                                if (!result.hasData) {
-                                  return EmptyContainer();
-                                }
-                                if (result.data) {
-                                  emailPostoji = true;
-                                  return EmptyContainer();
-                                } else {
-                                  emailPostoji = false;
-                                  return EmptyContainer();
-                                }
-                              },
-                            ),
-                          ],
-                        )
                       ],
                     ),
                   ),
@@ -434,8 +300,8 @@ class _RegisterPageState extends State<RegisterPage> {
     isFromProfile
         ? Navigator.of(context).pop()
         : Navigator.of(context).push(CardAnimationTween(
-            widget: SignUp(),
-          ));
+      widget: VerifyPinPage(),
+    ));
     return EmptyContainer() ?? true;
   }
 }

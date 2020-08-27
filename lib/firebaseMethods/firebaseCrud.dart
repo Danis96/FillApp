@@ -25,7 +25,7 @@ class FirebaseCrud {
   /// create function
   ///
   /// upis u firestore collection
-  createUser(String email, String phone, String username, String password,
+  createUser(String name, String date, String email, String phone, String username, String password,
       int sar, int isAnonymous) async {
     await db.collection('Users').add({
       'email': email,
@@ -38,8 +38,8 @@ class FirebaseCrud {
       'level': 1,
       'sar': sar,
       'transferSar': [],
-      'name_and_surname': '',
-      'date_of_birth': '',
+      'name_and_surname': name,
+      'date_of_birth': date,
       'card_number': '',
       'expire_date': '',
       'cc': '',
@@ -78,12 +78,14 @@ class FirebaseCrud {
   /// we only need to update specific fields,
   /// we don't need to update user_id,
   /// (ako vidis jos koju stvar da je viska izbaci)
-  updateUser(DocumentSnapshot doc, String email, String phone, String username,
+  updateUser(DocumentSnapshot doc, String email, String phone, String username, String name, String date,
       String usernameSecond, String password, int sar) async {
     await db.collection('Users').document(doc.documentID).updateData({
       'email': email,
       'username': username,
       'username_second': usernameSecond,
+      'name_and_surname': name,
+      'date_of_birth': date,
       'password': password,
       'phone':  phone,
       'is_anonymous': 0,

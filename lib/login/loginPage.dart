@@ -165,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     Container(
                       width: ScreenUtil.instance.setWidth(316.0),
-                      height: ScreenUtil.instance.setHeight(92.0),
+                      height: ScreenUtil.instance.setHeight(100.0),
                       margin: EdgeInsets.only(
                           top: ScreenUtil.instance.setWidth(10.0),
                           left: ScreenUtil.instance.setWidth(54.0),
@@ -224,7 +224,7 @@ class _LoginPageState extends State<LoginPage> {
                         width: ScreenUtil.instance.setWidth(316.0),
                         height: ScreenUtil.instance.setHeight(67.0),
                         margin: EdgeInsets.only(
-                            top: ScreenUtil.instance.setWidth(10.0),
+                            top: ScreenUtil.instance.setWidth(35.0),
                             left: ScreenUtil.instance.setWidth(54.0),
                             right: ScreenUtil.instance.setWidth(55.0)),
                         child: RaisedButton(

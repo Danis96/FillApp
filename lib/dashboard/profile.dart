@@ -193,11 +193,11 @@ class _ProfileState extends State<Profile> {
                 child:
                     BigCircle(usersSarovi: isSar ? saroviOffline : usersSarovi),
               ),
-              Container(
-                margin:
-                    EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
-                child: TransferWithIcon(),
-              ),
+              // Container(
+              //   margin:
+              //       EdgeInsets.only(top: ScreenUtil.instance.setWidth(30.0)),
+              //   child: TransferWithIcon(),
+              // ),
               Form(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -213,7 +213,7 @@ class _ProfileState extends State<Profile> {
                       child: TextFormField(
                         autofocus: false,
                         focusNode: nameFocus,
-                        readOnly: isAnonymous == 1,
+                        readOnly: true,
                         maxLength: 200,
                         enableSuggestions: false,
                         textCapitalization: TextCapitalization.sentences,
@@ -261,19 +261,20 @@ class _ProfileState extends State<Profile> {
                             ),
                           ),
                         ),
-                        onTap: () => onTapFieldAnonymous(),
-                        onChanged: (input) {
-                          setState(() {
-                            name = input;
-                            isButtonComplete = true;
-                            isButtonCompleteName = true;
-                            print('isBTNCOMPLETE: ' +
-                                isButtonComplete.toString());
-                          });
-                          nameFocus.addListener(() {
-                            print("Has focus: ${nameFocus.hasFocus}");
-                          });
-                        },
+
+//                        onTap: () => onTapFieldAnonymous(),
+//                        onChanged: (input) {
+//                          setState(() {
+//                            name = input;
+//                            isButtonComplete = true;
+//                            isButtonCompleteName = true;
+//                            print('isBTNCOMPLETE: ' +
+//                                isButtonComplete.toString());
+//                          });
+//                          nameFocus.addListener(() {
+//                            print("Has focus: ${nameFocus.hasFocus}");
+//                          });
+//                        },
                         obscureText: false,
                       ),
                     ),
@@ -287,7 +288,7 @@ class _ProfileState extends State<Profile> {
                       ),
                       child: GestureDetector(
                         onTap: () {
-                          onTapFieldAnonymousDate();
+//                          onTapFieldAnonymousDate();
                         },
                         child: Focus(
                           autofocus: false,
@@ -674,34 +675,34 @@ class _ProfileState extends State<Profile> {
                     ? RegisterButtonProfile(onPressedRegister)
                     : EmptyContainer(),
               ),
-              Container(
-                child: Container(
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        top: SizeConfig.blockSizeVertical * 0,
-                        bottom: ScreenUtil.instance.setWidth(10.0)),
-                    width: ScreenUtil.instance.setWidth(303.0),
-                    height: ScreenUtil.instance.setWidth(58.0),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(29)),
-                        color: MyColor().white),
-                    child: RaisedButton(
-                        color: MyColor().black,
-                        elevation: 1,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(28.0),
-                        ),
-                        child: Text('Login',
-                            style: TextStyle(
-                                color: MyColor().white,
-                                fontFamily: arabic,
-                                fontStyle: FontStyle.normal,
-                                fontSize: ScreenUtil.instance.setSp(18.0)),
-                            textAlign: TextAlign.center),
-                        onPressed: () => onLogin()),
-                  ),
-                ),
-              ),
+//              Container(
+//                child: Container(
+//                  child: Container(
+//                    margin: EdgeInsets.only(
+//                        top: SizeConfig.blockSizeVertical * 0,
+//                        bottom: ScreenUtil.instance.setWidth(10.0)),
+//                    width: ScreenUtil.instance.setWidth(303.0),
+//                    height: ScreenUtil.instance.setWidth(58.0),
+//                    decoration: BoxDecoration(
+//                        borderRadius: BorderRadius.all(Radius.circular(29)),
+//                        color: MyColor().white),
+//                    child: RaisedButton(
+//                        color: MyColor().black,
+//                        elevation: 1,
+//                        shape: RoundedRectangleBorder(
+//                          borderRadius: new BorderRadius.circular(28.0),
+//                        ),
+//                        child: Text(AppLocalizations.of(context).translate("signIn"),
+//                            style: TextStyle(
+//                                color: MyColor().white,
+//                                fontFamily: arabic,
+//                                fontStyle: FontStyle.normal,
+//                                fontSize: ScreenUtil.instance.setSp(18.0)),
+//                            textAlign: TextAlign.center),
+//                        onPressed: () => onLogin()),
+//                  ),
+//                ),
+//              ),
             ],
           )),
         ]),
@@ -709,10 +710,10 @@ class _ProfileState extends State<Profile> {
     );
   }
 
-  onLogin() {
-    isFromProfile = true;
-    FirebaseCrud().userLogin(context);
-  }
+//  onLogin() {
+//    isFromProfile = true;
+//    FirebaseCrud().userLogin(context);
+//  }
 
   onTapFieldAnonymous() {
     if (_btnCounter == 0) {
@@ -849,76 +850,7 @@ class _ProfileState extends State<Profile> {
   }
 
   onPressed() {
-//    print('Name: ' + name + 'USERNAME: ' + usersName);
-    print('BTN TEXT: ' + btnText);
-    if (btnText == 'Complete profile' || btnText == 'إكمال الملف الشخصي') {
-      if (name == '' || regexSpace.hasMatch(name) == false) {
-        setState(() {
-          isEmptyName = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyName = false;
-          });
-        });
-      }
-//      else if (email == '' || regexEmail.hasMatch(email) == false) {
-//        setState(() {
-//          isEmptyMail = true;
-//        });
-//        Timer(Duration(seconds: 2), () {
-//          setState(() {
-//            isEmptyMail = false;
-//          });
-//        });
-//      }
-      else if (dateOfBirth == '') {
-        setState(() {
-          isEmptyBirth = true;
-        });
-        Timer(Duration(seconds: 2), () {
-          setState(() {
-            isEmptyBirth = false;
-          });
-        });
-      }
-//      else if (creditCard == '' ||
-//              creditCardNumber.length < 13 ||
-//              creditCardNumber.startsWith('3')
-//          ? creditCardNumber.length < 15
-//          : !CreditCardValidator.isCreditCardValid(
-//              cardNumber: creditCardNumber)) {
-//        setState(() {
-//          isEmptyCard = true;
-//        });
-//        Timer(Duration(seconds: 2), () {
-//          setState(() {
-//            isEmptyCard = false;
-//          });
-//        });
-//      } else if (date == '' || date.length < 5) {
-//        setState(() {
-//          isEmptyDate = true;
-//        });
-//        Timer(Duration(seconds: 2), () {
-//          setState(() {
-//            isEmptyDate = false;
-//          });
-//        });
-//      } else if (cc == '' || cc.length < 3) {
-//        setState(() {
-//          isEmptyCC = true;
-//        });
-//        Timer(Duration(seconds: 2), () {
-//          setState(() {
-//            isEmptyCC = false;
-//          });
-//        });
-//      }
-      else {
-        completeProfile();
-      }
-    } else if (btnText == 'Transfer' || btnText == 'تحويل') {
+ if (btnText == 'Transfer' || btnText == 'تحويل') {
       if (isButtonCompleteName
           ? name == '' || regexSpace.hasMatch(name) == false
           : usersName == '' || regexSpace.hasMatch(usersName) == false) {

@@ -20,6 +20,7 @@ import 'package:fillproject/components/mySnackbar.dart';
 import 'package:fillproject/components/myTextComponent.dart';
 import 'package:fillproject/components/pageRouteBuilderAnimation.dart';
 import 'package:fillproject/localization/app_localizations.dart';
+import 'package:fillproject/register/emailAndDOB.dart';
 import 'package:fillproject/register/passwordPage.dart';
 import 'package:fillproject/register/registerPage.dart';
 import 'package:fillproject/routes/routeArguments.dart';
@@ -57,7 +58,7 @@ class _VerifyPinPageState extends State<VerifyPinPage> {
       FirebaseAuth.instance.signInWithCredential(credential).then((user) async {
         Navigator.of(context).push(
           CardAnimationTween(
-            widget: PasswordPage(
+            widget: NameAndDOB(
                 arguments: RegisterArguments(
                     email: widget.arguments.email,
                     verId: widget.arguments.verId,

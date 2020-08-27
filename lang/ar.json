@@ -32,7 +32,7 @@
     "status": "الحالة",
     "statusCompleted": "مكتمل",
     "statusOpen": "مفتوح",
-    "statusClosed":"مغلق ",
+    "statusClosed":" غير مكتمل",
     "newLineSAR": "\nSAR",
     "profile": "الملف الشخصي",
     "transwerWith": "التحويل عن طريق",

@@ -161,7 +161,7 @@ class _SignUpState extends State<SignUp> {
       final result = await InternetAddress.lookup('google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         username = randomAlphaNumeric(5);
-        FirebaseCrud().createUser('', '', username, '', 0, 1);
+        FirebaseCrud().createUser('','','', '', username, '', 0, 1);
         loginUser();
         FirebaseSignIn().signInAnonymously(username);
         Timer(Duration(milliseconds: 800), () {

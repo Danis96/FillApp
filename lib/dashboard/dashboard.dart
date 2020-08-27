@@ -89,7 +89,7 @@ class _DashboardPageState extends State<DashboardPage>
     /// vsync - frame ticking & duration
     animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 400),
+      duration: Duration(milliseconds: 100),
     );
     animationController.forward();
   }
